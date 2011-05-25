@@ -1,0 +1,45 @@
+#: apps/userprofiles/views.py:84 apps/userprofiles/views.py:100
+#: apps/userprofiles/views.py:175 apps/userprofiles/views.py:191
+msgid "Let's be friends!"
+msgstr "Let's Connect!"
+
+msgid "Friend Updated Avatar"
+msgstr "Connection Updated Avatar"
+
+msgid "a friend has updated his avatar"
+msgstr "a connection has updated their avatar"
+
+msgid "New Tribe Member"
+msgstr "New Group Member"
+
+msgid "a tribe you are a member of has a new member"
+msgstr "a group you are a member of has a new member"
+
+
+        
+msgid "New Member Of Tribe You Created"         
+msgstr "New Member Of Group You Created"
+
+msgid "a tribe you created has a new member" 
+msgstr "a group you created has a new member" 
+
+msgid "New Tribe Created"        
+msgstr "New Group Created"
+
+msgid "a new tribe has been created"
+msgstr "a new group has been created"
+        
+msgid "one of your friends has a new connection"
+msgstr "one of your connections has a new connection" 
+
+msgid "Accepted friendship request from %(from_user)s"
+msgstr "Accepted connection request from %(from_user)s"
+
+msgid "Declined friendship request from %(from_user)s"
+msgstr "Declined connection request from %(from_user)s"
+
+msgid "New Dataset By Friend"
+msgstr "New Dataset By Connection"
+
+msgid "a friend uploaded a dataset"
+msgstr "a connection uploaded a dataset"

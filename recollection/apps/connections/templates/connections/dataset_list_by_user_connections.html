@@ -1,0 +1,39 @@
+{% extends "dataset/base.html" %}
+
+{% load i18n %}
+{% load dataset_tags %}
+{% load freemix_helpers %}
+
+{% block head_title %}{{other_user|nicename}}{% blocktrans %}'s Connections' Data Sets{% endblocktrans %}{% endblock %}
+
+{# set appropriate tabs #}
+
+{% block rtab_id %}id="data_tab"{% endblock %}
+{% block data-tab-selected %} ui-tabs-selected ui-state-active{% endblock %}
+{% block myfriendsdata-tab-selected %} ui-tabs-selected ui-state-active{% endblock %}
+
+{% block body %}
+
+<h1>{% ifequal user.username username %}
+    {% blocktrans %}Your Connections' Data Sets{% endblocktrans %}
+    {% else %}
+    {{other_user|nicename}}{% blocktrans %}'s Connections' Data Sets{% endblocktrans %}
+    {% endifequal %}
+</h1>
+
+<div class="data_details">
+  <p>
+    {% ifequal user.username username %}
+    {% blocktrans %}Your connections have{% endblocktrans %}
+    {% else %}
+    {{ other_user|nicename }}{% blocktrans %}'s connections have{% endblocktrans %}
+    {% endifequal %}
+    {{queryset.count}} {% trans "data set" %}{{ queryset.count|pluralize }}.
+  </p>
+
+  {% dataset_list queryset %}
+</div>
+
+
+
+{% endblock %}

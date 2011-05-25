@@ -1,0 +1,48 @@
+.ui-widget-content input[type="submit"].disabled, 
+.ui-widget-content input[type="button"].disabled,
+.ui-widget-content form button.disabled,
+.ui-widget-content a.button_link.disabled {
+    background: #333;
+    opacity: 0.5;
+}
+
+.ui-widget-content input[type="submit"],
+.ui-widget-content input[type="button"],
+.ui-widget-content input[type="reset"],
+.ui-widget-content form button,
+.ui-widget-content a.button_link {
+    border: 0;
+    background: url(/static/images/button-main.png) center center repeat-x;
+    color: #fff;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-weight: bold;
+    font-size: 1.0em;
+    line-height: 1.3em;
+    padding: 0.25em 1em;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+
+.ui-widget-content a.button_link {
+    padding: 0.35em 1.1em;
+}
+
+.ui-widget-content input[type="submit"].sub-button,
+.ui-widget-content input[type="button"].sub-button,
+.ui-widget-content form button.sub-button,
+.ui-widget-content a.sub-button {
+    background: url(/static/images/button-options.png) center center repeat-x;
+}
+
+.ui-widget-content input[type="submit"].negative-button,
+.ui-widget-content input[type="button"].negative-button,
+.ui-widget-content input[type="reset"],
+.ui-widget-content form button[type="cancel"],
+.ui-widget-content form button.negative-button,
+.ui-widget-content a.negative-button {
+    background: url(/static/images/button-negative.png) center center repeat-x;
+}
+
+.ui-dialog.ui-widget-content { border: 1px solid #ddd; background: #fff; }
+.qtip-content { background: #fff; }
+

@@ -1,0 +1,56 @@
+{% extends "dataset/base.html" %}
+
+{% load i18n %}
+{% load dataset_tags %}
+{% load freemix_helpers %}
+
+{% block head_title %}{{other_user|nicename}}{% blocktrans %}'s Data Sets{% endblocktrans %}{% endblock %}
+
+{% block rtab_id %}id="data_tab"{% endblock %}
+
+{% block data-tab-selected %} ui-tabs-selected ui-state-active{% endblock %}
+
+{# check to see if the user being inspected is user logged in #}
+{# note: need to do logic this way due to template processing pipeline #}
+
+{% block mydata-tab-selected %}
+  {% ifequal user.username username %} ui-tabs-selected ui-state-active{% endifequal %}
+{% endblock %}
+
+{# if user being inspected is not the one logged in, create a hierarchical tab-group for display #}
+
+{% block extra_subnav %}
+{% ifnotequal user.username username %}
+<li>
+  <ul class="tab-group">
+    <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="">{{ other_user|nicename }}</a></li>
+  </ul>
+</li>
+{% endifnotequal %}
+{% endblock %}
+
+{% block body %}
+
+<h1>{{other_user|nicename}}{% blocktrans %}'s Data Sets{% endblocktrans %}</h1>
+
+{% ifequal user.username username %}
+<div class="priority-area">
+<a href="{% url upload_dataset %}" class="button_link">{% trans "Upload Data" %}</a>
+</div>
+{% endifequal %}
+
+<div class="data_details">
+  {% if queryset.count %}
+  <p>
+  {% ifequal user.username username %}
+    {% trans "You have" %}
+  {% else %}
+    {{ other_user|nicename }} {% trans "has" %}
+  {% endifequal %}
+  {{queryset.count}} {% trans "data set" %}{{ queryset.count|pluralize }}.
+  </p>
+  {% endif %}
+  {% dataset_list queryset %}
+</div>
+
+{% endblock %}

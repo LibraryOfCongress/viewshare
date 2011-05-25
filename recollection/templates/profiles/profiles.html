@@ -1,0 +1,86 @@
+{% extends "profiles/base.html" %}
+
+{% load i18n %}
+{% load pagination_tags %}
+{% load avatar_tags %}
+{% load humanize %}
+{% load profile_tags %}
+{% load sorting_tags %}
+{% load compress %}
+{% block head_title %}{% blocktrans %}All Users{% endblocktrans %}{% endblock %}
+
+{% block head_css %}
+{{ block.super }}
+{% compress css %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}pinax/css/avatar.css"/>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}pinax/css/pagination.css"/>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}stylesheets/avatar.css"/>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}stylesheets/profile_users.css"/>
+{% endcompress %}
+{% endblock %}
+
+{% block allprofiles-tab-selected %} ui-tabs-selected ui-state-active{% endblock %}
+
+{% block body %}
+<h1>{% trans "All Users" %}</h1>
+
+  <div class="priority-area">
+   <form method="GET" action="">
+   <p>
+   <label for="search">
+   <img src="{{ STATIC_URL }}images/search.png" style="vertical-align: middle;" alt="" />
+   <strong>{% trans "Find a user" %}</strong>
+   </label>
+   <input type="text" name="search" id="search" value="{{ search_terms }}" />
+   <input type="submit" value="{% trans "Find" %}" />
+   {% if search_terms %}
+   <a href="{% clear_search_url request %}" class="button_link negative-button">{% trans "Clear" %}</a>
+   {% endif %}
+   </p>
+   </form>
+  </div>
+    
+{% if users %}
+<p>
+  <span class="sort-label">{% trans "Sort by:" %}</span>
+   {% ifequal order "name" %}
+   <strong>{% trans "Name" %} &uarr;</strong>
+   {% else %}
+   <a href="{% url profile_list %}?order=name">{% trans "Name" %}</a>
+   {% endifequal %}
+   <span class="divider">|</span>
+   {% ifequal order "date" %}
+   <strong>{% trans "Joined" %} &darr;</strong>
+   {% else %}
+   <a href="{% url profile_list %}?order=date">{% trans "Joined" %}</a>
+   {% endifequal %}
+</p>
+
+{% autopaginate users%}
+
+{% ifequal order 'date'  %}
+{% regroup users by date_joined.date as users_by_date_joined %}
+
+  {% for date in users_by_date_joined %}
+  <h2 class="ui-widget-header join_date">{{ date.grouper|naturalday:_("MONTH_DAY_FORMAT")|capfirst }}</h2>
+    <ul class="profile_list">
+    {% for user in date.list %}
+      {% show_profile user %}
+    {% endfor %}
+    </ul>
+  {% endfor %}
+{% else %}
+  <ul class="profile_list">
+  {% for user in users %}
+    {% show_profile user %}
+  {% endfor %}
+  </ul>
+{% endifequal %}
+
+{% paginate %}
+
+{% else %}
+<p class="center">{% blocktrans %}No profiles were found.{% endblocktrans %}</p>
+{% endif %}
+
+{% endblock %}

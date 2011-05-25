@@ -1,0 +1,30 @@
+{ 
+    "types" :      
+	{
+	    "Collection" :      
+		{
+		"label" :       "Resource",
+	        "uri" : "http://simile.mit.edu/2006/11/bibtex#PR",
+		"pluralLabel": "Resources"
+		},
+		"Project" : 
+		{
+		"label" :       "Project",
+        	 "uri" :         "http://simile.mit.edu/2006/11/bibtex#Project",
+		 "pluralLabel" : "Projects"
+	        }
+	},
+	"properties" : {
+	    "collection" :        {
+		    "reverseLabel" :         "collection of",
+		    "label" :                "collection",
+		    "groupingLabel" :        "their collections",
+		    "uri" :                  "http://simile.mit.edu/2006/11/bibtex#pr",
+		    "reverseGroupingLabel" : "what they are part of",
+		    "reversePluralLabel" :   "collections of",
+		    "valueType" :            "item",
+		    "pluralLabel" :          "collections"
+		    }
+	}
+
+}

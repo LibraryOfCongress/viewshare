@@ -1,0 +1,67 @@
+/* css used to render friends or a user list linked off the profile page */
+
+ul.connection_list {
+ margin-left: 0px;
+}
+
+div.user_profile_entry {
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 5px;
+  padding-top: 5px;
+  line-height: 130%;
+  font-size: 100%;
+}
+
+div.user_avatar {
+}
+
+div.user_data_entry {
+}
+
+div.user_data_entry .user_name .value {
+font-weight: bold;
+font-size: 120%;
+}
+
+div.user_data_entry .user_location {
+ padding-right: 10px;
+}
+
+div.user_data_entry .user_counts {
+float: right;
+}
+
+
+div.user_data_entry .user_description {
+}
+
+div.user_data_entry .user_joined {
+font-style: italic;
+font-size: 100%;
+padding-right:20px;
+color: grey;
+}
+
+div.user_data_entry .user_active  {
+font-style: italic;
+font-size: 100%;
+color: grey;
+}
+
+.profile_left_panel {
+float: left;
+}
+
+.profile_right_panel {
+  float: right;
+  width: 88%;
+}
+
+/* 
+div.user_avatar_entry img {
+  border: 5px solid #ddd;
+  padding: 5px; /*Inner border size*/
+  background: #fff; /*Inner border color*/
+}
+*/

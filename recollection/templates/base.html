@@ -1,0 +1,84 @@
+{% load i18n %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}" xml:lang="{{ LANGUAGE_CODE }}" lang="{{ LANGUAGE_CODE }}">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    {% block rss_feeds %}{% endblock %}
+
+    <title>
+      {% if site_name %}{{ site_name }} : {% endif %}{% block head_title %}{% endblock %}</title>
+    <!--[if IE]><style>
+        div {
+        zoom: 1; /* trigger hasLayout */
+        }
+        </style><![endif]-->
+
+    {% block head_css %}{% endblock %}
+    {% block head_data %}{% endblock %}
+    {% block head_scripts %}{% endblock %}
+    {% block extra_head %}{% endblock %}
+
+  </head>
+
+  <body class="{% block body_class %}{% endblock %}">
+    <div class="container_12">
+
+      {% if site_wide_announcements %}
+      <div id="site_wide_announcements">
+        <ul>
+          {% for announcement in site_wide_announcements %}
+          <li>
+            <a href="{{ announcement.get_absolute_url }}">{{ announcement }}</a> -
+            <a href="{% url announcement_hide announcement.pk %}?next={{ request.path }}">{% trans "Hide announcement" %}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+      
+      <div id="tabhead" class="ui-helper-clearfix">
+        <div id="header">
+          <a href="/"><span id="application-logo"></span><span id="application-status">{{ SITE_NAME_STATUS }}</span></a>
+        </div>
+        <div class="login">{% block login %}{% endblock %}</div>
+        <div class="right_tab" {% block rtab_id %}{% endblock %}>{% block right_tab %}{% endblock %}</div>
+      </div>
+
+          <div id="compatibility-warning" class="ui-state-highlight ui-corner-all">
+             <a href="#" class="ui-icon ui-icon-closethick close-message">&#160;</a>
+             <p><strong>Your browser version is not supported in {{ SITE_NAME }}.</strong>  Some portions of the site may not function as intended.  A list of supported browsers is available in the <a href="/about/userguide/#s1.1">user guide</a>.</p>
+            <p>You may continue to attempt using the site with your current browser.</p>
+          </div>
+
+          
+          {% if messages %}
+            <ul id="system_messages" class="messages" >
+              {% for message in messages %}
+              <li id="message_{{ forloop.counter }}" class="info">{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+
+      <div id="subnav" class="ui-helper-clearfix">{% block subnav %}&nbsp;{% endblock %}</div>
+
+      <div id="body" class='freemix-themeable'>
+
+        <div id="inner-body" class='ui-widget-content ui-helper-clearfix'>
+          {% block body %}
+          {% endblock %}
+        </div>
+      </div>
+
+      <div id="footer">
+        {% block footer %}
+        {% endblock %}
+      </div>
+      
+
+      {% block extra_body %}{% endblock %}
+    </div>
+
+    {% block final %}
+    {% endblock %}
+  </body>
+</html>

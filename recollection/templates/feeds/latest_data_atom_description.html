@@ -1,0 +1,6 @@
+{% load freemix_helpers %}
+
+{{ obj.description }}
+<br>
+created by <a href="{% url profile_detail username=obj.user %}">{{ obj.user|nicename }}</a>
+<br>

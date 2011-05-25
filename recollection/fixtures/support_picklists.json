@@ -1,0 +1,90 @@
+[
+    {
+        "fields": {
+            "key": "microsoft-internet-explorer-v6x-or-earlier", 
+            "value": "Microsoft Internet Explorer v.6.x or earlier"
+        }, 
+        "model": "support.browserpicklistitem", 
+        "pk": 1
+    }, 
+    {
+        "fields": {
+            "key": "microsoft-internet-explorer-v7x", 
+            "value": "Microsoft Internet Explorer v.7.x"
+        }, 
+        "model": "support.browserpicklistitem", 
+        "pk": 2
+    }, 
+    {
+        "fields": {
+            "key": "microsoft-internet-explorer-v8x", 
+            "value": "Microsoft Internet Explorer v.8.x"
+        }, 
+        "model": "support.browserpicklistitem", 
+        "pk": 3
+    }, 
+    {
+        "fields": {
+            "key": "firefox-v2x-or-earlier", 
+            "value": "Firefox v.2.x or earlier"
+        }, 
+        "model": "support.browserpicklistitem", 
+        "pk": 4
+    }, 
+    {
+        "fields": {
+            "key": "firefox-v3x", 
+            "value": "Firefox v.3.x"
+        }, 
+        "model": "support.browserpicklistitem", 
+        "pk": 5
+    }, 
+    {
+        "fields": {
+            "key": "safari-v2x-or-earlier", 
+            "value": "Safari v.2.x or earlier"
+        }, 
+        "model": "support.browserpicklistitem", 
+        "pk": 6
+    }, 
+    {
+        "fields": {
+            "key": "safari-v3x", 
+            "value": "Safari v.3.x"
+        }, 
+        "model": "support.browserpicklistitem", 
+        "pk": 7
+    }, 
+    {
+        "fields": {
+            "key": "safari-v4x", 
+            "value": "Safari v.4.x"
+        }, 
+        "model": "support.browserpicklistitem", 
+        "pk": 8
+    }, 
+    {
+        "fields": {
+            "key": "simple-rectangular-spreadsheet-in-ms-excel-format", 
+            "value": "Simple rectangular spreadsheet in MS Excel format"
+        }, 
+        "model": "support.fileformatpicklistitem", 
+        "pk": 1
+    }, 
+    {
+        "fields": {
+            "key": "xml-mods", 
+            "value": "XML MODS"
+        }, 
+        "model": "support.fileformatpicklistitem", 
+        "pk": 2
+    }, 
+    {
+        "fields": {
+            "key": "data-does-not-load", 
+            "value": "Data does not load"
+        }, 
+        "model": "support.dataloadreasonpicklistitem", 
+        "pk": 1
+    }
+]

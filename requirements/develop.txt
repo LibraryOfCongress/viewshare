@@ -1,0 +1,5 @@
+-e git://github.com/zepheira/freemix.git#egg=freemix
+# -e git://github.com/zepheira/django-redmine.git#egg=django_redmine
+Werkzeug
+-r requirements.txt
+

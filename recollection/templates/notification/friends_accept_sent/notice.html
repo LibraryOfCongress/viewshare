@@ -1,0 +1,2 @@
+{% load i18n %}{% load freemix_helpers %}{% with invitation.from_user.get_profile.get_absolute_url as user_url %}
+{% blocktrans %}You are now connected with {% endblocktrans %} <a href="{{ user_url }}">{{ invitation.from_user|nicename }}</a>.{% endwith %}

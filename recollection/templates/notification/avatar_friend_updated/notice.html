@@ -1,0 +1,2 @@
+{% load i18n %}{% load freemix_helpers %}{% with user.get_profile.get_absolute_url as user_url %}
+<a href="{{ user_url }}">{{ user|nicename }}</a> {% blocktrans %}has updated their avatar.{% endblocktrans %}{% endwith %}

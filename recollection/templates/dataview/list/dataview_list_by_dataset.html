@@ -1,0 +1,35 @@
+{% extends "dataview/list/base.html" %}
+
+{% load i18n %}
+{% load dataview_tags %}
+
+{% block head_title %}{% trans "Views of" %} {{dataset.title}}{% endblock %}
+{% block head_scripts %}
+{{block.super}}
+{% include "js_include/jquery_ui.html" %}
+
+{% endblock %}
+
+{% block rtab_id %}id="view_tab"{% endblock %}
+
+{% block view-tab-selected %} ui-tabs-selected ui-state-active{% endblock %}
+
+<!-- note: conditional logic for triggering tag group requires work  -->
+
+{% block extra_subnav %}
+<li>
+  <ul class="tab-group">
+    <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="">{{ dataset.title|truncatewords:3 }}</a></li>
+  </ul>
+</li>
+{% endblock %}
+
+{% block body %}
+<h1>{% trans "Views of" %} {{dataset.title}}</h1>
+
+<p>There {{queryset.count|pluralize:"is,are"}} {{queryset.count}} view{{queryset.count|pluralize}} based on <a href="{{ dataset.get_url_path }}">this data set</a>.</p>
+
+<div class="view_details">
+  {% dataview_list queryset %}
+</div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "account/base.html" %}
+
+{% load humanize i18n %}
+{% load timezone_filters %}
+
+{% block head_title %}{% trans "E-Mail Notices Settings" %}{% endblock %}
+
+{% block notification-settings-tab-selected %} ui-tabs-selected ui-state-active{% endblock %}
+
+{% block body %}
+<h1>{% trans "E-Mail Notices Settings" %}</h1>
+
+      <div class="setting_account">
+
+        <p class="center">{% blocktrans %}These settings control how notices are sent to your email address but do not affect their display in your{% endblocktrans %} <a href="{% url notification_notices %}">{% trans "notices pane" %}</a>.</p>
+        <p class="center">
+
+      {% url acct_email as email_url %}
+      {% if user.email %}
+
+	{% trans "Primary email" %}: <strong>{{ user.email }}</strong> <span class="setting_account_msg">({% blocktrans %}Use your account <a href="{{ email_url }}">settings</a> to change your email address{% endblocktrans %}.)</span>
+
+      {% else %}
+
+	<strong>{% trans "Note:" %}</strong> <span class="setting_account_msg">{% blocktrans %}You do not have a verified email address to which notices can be sent. Please update your <a href="{{ email_url }}">email account settings</a> accordingly.{% endblocktrans %}</span>
+
+      {% endif %}
+        </p>
+        <br />
+      </div>
+            
+      <form method="POST" action="">	
+
+	  {% for row in notice_settings.rows %}
+
+	  <div class="notice_option">
+	    <span class="notice_type_title">{% trans row.notice_type.display %}</span>
+	    
+	    {% for cell in row.cells %}
+	    <span class="notice_setting">
+	      <input type="checkbox" name="{{ cell.0 }}" {% if cell.1 %}checked="yes"{% endif %}/>
+	    </span>
+	    {% endfor %}
+	    <br/>
+
+	    <span class="notice_type_description">{% trans row.notice_type.description %}</span>
+	  </div>
+
+	  {% endfor %}
+
+	  
+	  <div class="ui-helper-clearfix"></div>
+
+          <input type="submit" value="{% trans "Save changes" %}" />
+
+      </form>
+
+{% endblock %}

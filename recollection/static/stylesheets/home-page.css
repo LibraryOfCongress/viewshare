@@ -1,0 +1,92 @@
+/* -- superceding whatever is below 'front page recollection skin' -- */
+/* -- from redesign of front page by Chili                         -- */
+
+h2 {
+    font-size: 1.3em;
+    font-weight: normal;
+    line-height: 1.5em;
+    text-align: center;
+}
+
+h3.grid_title {
+    background-color: #122349;
+    color: #fff;
+    font-size: 1.0em;
+    margin: 0;
+    padding: 0.75em 0.75em 0.75em 1.5em;
+}
+
+.action-set {
+    background: #fff url('/static/images/content-bg-gradient.png') center center repeat-x;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    width: 33%;
+    display: inline;
+    float: left;
+    position: relative;
+    margin: 2em 0 0 0;
+}
+
+.first-action-set {
+    clear: left;
+    border-left: 1px solid #ccc;
+}
+
+.action-set ul {
+    list-style: none;
+    margin: 1.5em 0 0;
+    padding-left: 1.5em;
+}
+
+.action-set ul li {
+    min-height: 3em;
+    padding-bottom: 1em;
+}
+
+.action-set .action-item-more {
+    font-size: 0.8em;
+    padding-left: 1em;
+}
+
+.action-set li a img {
+    border: none;
+    vertical-align: middle;
+    width: 24px;
+    height: 24px;
+    padding-right: 0.5em;
+}
+
+.showcased {
+    float: left;
+    width: 28%;
+    text-align: center;
+}
+
+.first-showcased {
+    margin-left: 8%;
+}
+
+.image {
+    float: left;
+    clear: both;
+    background: url(../images/shadowAlpha.png) no-repeat bottom right !important;
+    background: url(../images/shadow.gif) no-repeat bottom right;
+    margin: 10px 10px 10px 22px !important;
+}
+
+.image img {
+    display: block;
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #a9a9a9;
+    margin: -6px 6px 6px -6px;
+    padding: 4px;
+}
+
+.thumbnailimage img {
+    width: 200px;
+}
+
+.showcased a {
+    color: #117011;
+}

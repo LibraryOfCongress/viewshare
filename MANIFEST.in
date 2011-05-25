@@ -1,0 +1,19 @@
+include setup.py README MANIFEST.in
+global-include fixtures/*
+
+graft recollection/templates
+graft recollection/static
+graft requirements
+graft recollection/locale
+graft test
+graft docs
+graft akara
+
+recursive-include recollection/*/templates *
+recursive-include recollection/*/static *
+
+recursive-include recollection/apps/*/templates *
+recursive-include recollection/apps/*/static *
+
+prune recollection/site_media
+prune docs/_build

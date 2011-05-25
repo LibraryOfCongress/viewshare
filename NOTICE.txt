@@ -1,0 +1,80 @@
+Acknowledgements
+----------------
+
+This software uses code from the following projects:
+
+ * BeautifulSoup (http://www.crummy.com/software/BeautifulSoup/)
+ * creole.js (http://www.wikicreole.org/wiki/Creole1.0)
+ * diff-match-patch (http://code.google.com/p/google-diff-match-patch/)
+ * Django (http://www.djangoproject.com/)
+ * django-ajax-validation (http://github.com/alex/django-ajax-validation/tree/master)
+ * django-announcements (http://code.google.com/p/django-announcements)
+ * django-atompub (http://code.google.com/p/django-atompub/)
+ * django-avatar (http://github.com/ericflo/django-avatar/)
+ * django-classy-tags (https://github.com/ojii/django-classy-tags)
+ * django-cms (http://github.com/divio/django-cms/)
+ * django-compressor (http://github.com/mintchaos/django_compressor)
+ * django-email-confirmation (http://code.google.com/p/django-email-confirmation/)
+ * django-extensions (http://code.google.com/p/django-command-extensions/)
+ * django-filter (http://github.com/alex/django-filter/tree/master)
+ * django-friends (http://github.com/jtauber/django-friends/)
+ * django-gravatar (http://django-gravatar.googlecode.com)
+ * django-mailer (http://code.google.com/p/django-mailer/)
+ * django-messages (http://code.google.com/p/django-messages/)
+ * django-notification (http://code.google.com/p/django-notification/)
+ * django-openid (http://code.google.com/p/django-openid/)
+ * django-pagination (http://django-pagination.googlecode.com/)
+ * django-piston (http://bitbucket.org/jespern/django-piston/wiki/Home)
+ * django-redmine (https://github.com/zepheira/django-redmine)
+ * django-reversion (http://code.google.com/p/django-reversion/)
+ * django-robots (http://bitbucket.org/jezdez/django-robots/)
+ * django-sorting (http://github.com/directeur/django-sorting/tree/master)
+ * django-staticfiles (http://bitbucket.org/jezdez/django-staticfiles/)
+ * django-template-utils (http://code.google.com/p/django-template-utils/)
+ * django-timezones (http://github.com/brosner/django-timezones/)
+ * django-uni-form (http://github.com/pydanny/django-uni-form/tree/master)
+ * elementtree (http://effbot.org/zone/element-index.htm)
+ * freemix (http://github.com/zepheira/freemix)
+ * hoverIntent.js (http://cherne.net/brian/resources/jquery.hoverIntent.html)
+ * html5lib (http://code.google.com/p/html5lib/)
+ * httplib2 (http://code.google.com/p/httplib2/)
+ * jquery.autocomplete.js (http://docs.jquery.com/Plugins/Autocomplete)
+ * jquery.bgiframe.min.js (http://brandonaaron.net)
+ * jquery.dataTables.js (http://www.datatables.net)
+ * jquery.form.js (http://malsup.com/jquery/form/)
+ * jquery.highlight.js (http://johannburkard.de/blog/programming/javascript/highlight-javascript-text-higlighting-jquery-plugin.html)
+ * jquery.jeditable.js (http://www.appelsiini.net/projects/jeditable)
+ * jquery.json.js (http://code.google.com/p/jquery-json/)
+ * jquery.machineTag.js (http://tagaholic.me/2009/04/14/i-am-machine-tag-and-so-can-you.html)
+ * jquery.qtip.1.0.0-rc3.js (http://craigsworks.com/projects/qtip/)
+ * jquery (http://jquery.com/)
+ * jquery UI (http://jqueryui.com/)
+ * lightbox.js (http://www.huddletogether.com/projects/lightbox/)
+ * PIL (http://www.pythonware.com/products/pil)
+ * Pinax (http://pinaxproject.com/)
+ * python-openid (http://openidenabled.com/python-openid/)
+ * pytz (http://pytz.sourceforge.net)
+ * simplejson (http://undefined.org/python/#simplejson)
+ * South (http://south.aeracode.org/)
+ * ui.multiselect.js (http://www.quasipartikel.at/multiselect/)
+
+
+Please see LICENSE.txt for the licenses that apply to these dependencies.
+
+
+
+Notices for software licensed under Apache 2.0
+----------------------------------------------
+
+Python OpenID may be obtained from
+http://github.com/openid/python-openid
+and we'd like to hear about how you're using this software.
+Write to us at openid@janrain.com.
+
+
+Google Diff Match and Patch
+Copyright 2006 Google Inc.
+http://code.google.com/p/google-diff-match-patch/
+
+
+

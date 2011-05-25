@@ -1,0 +1,15 @@
+body {
+    background: #fff top left repeat-x url(images/background.gif);
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 10pt;
+    color: #000;
+}
+
+a {
+    color: rgb(0, 176, 216);
+}
+
+#header #application-logo {
+    background-image: url(images/recollection-logo-sm.png);
+    width: 272px;
+}

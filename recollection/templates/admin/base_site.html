@@ -1,0 +1,13 @@
+{% extends "admin/base.html" %}
+{% load i18n %}
+{% load cms_tags %}
+
+{% block title %}{{ title }} | {{ SITE_NAME }} {% trans 'administration' %}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">{{ SITE_NAME }} {% trans 'administration' %}</h1>
+{% endblock %}
+
+{% block nav-global %}
+<a href="{% url user_home %}">Home</a>&nbsp;|&nbsp;<a href="{% page_url "home" %}">Front Page</a>
+{% endblock %}

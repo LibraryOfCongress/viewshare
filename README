@@ -1,0 +1,87 @@
+Recollection Base README for versions 1.4
+
+For UNIX-like systems, including Mac OS X and Linux:
+
+Requires:
+* Python 2.6/2.7
+* virtualenv 1.4.3+ (easy_install2.6 virtualenv)
+
+To build:
+> virtualenv --no-site-packages --distribute recollection
+> cd recollection
+> source bin/activate
+> pip install -e hg+http://foundry.zepheira.com/hg/recollection#egg=recollection
+> pip install -r src/recollection/requirements/develop.txt
+
+To create the database:
+> cd src/recollection/example_project/
+> manage.py syncdb
+> manage.py migrate
+
+To run the server on port 8000
+> manage.py runserver_plus
+
+The following should be run at a regular interval:
+> manage.py send_mail
+
+Production deployment has been tested in conjunction with the libraries,
+detailed in requirements/deploy.txt.  Gunicorn in conjunction with the meinheld worker is
+recommended for deployment on Linux.  The eventlet worker can be substituted on other platforms,
+but this configuration has not been tested.  There are currently issues with Gevent's patching
+of DNS in httplib.
+
+For Windows:
+
+Download and run the latest Python 2.6 installer from
+    http://www.python.org/download/
+
+Download and run the latest setuptools installer from
+    http://pypi.python.org/pypi/setuptools#files
+
+Download and run the latest Mercurial and TortoiseHg installer from
+    http://tortoisehg.bitbucket.org/download/index.html
+
+Download and run the latest MinGW installer from
+    http://sourceforge.net/projects/mingw/files/
+The most user-friendly download is labelled "Automated MinGW Installer".
+Make sure to select both g++ and MinGW Make from the options.
+
+Some packages will require C/C++ compilation, which is what MinGW is for.
+In your Windows home directory, create a file called pydistutils.cfg and
+save it with the contents:
+
+[build]
+compiler=mingw32
+
+Set PYTHON_PATH to C:\Python26\ (or wherever you choose to install it),
+and add ";%PYTHON_PATH%\Scripts\;C:\MinGW\bin\" to the Windows PATH
+variable (again depending on where you installed MinGW).
+
+You should now be able to open up the DOS Prompt and run gcc and
+easy_install from the command line (getting normal errors about arguments
+as opposed to unknown commands).
+
+At the prompt, run:
+> easy_install virtualenv
+> virtualenv --no-site-packages --distribute recollection
+> cd recollection/Scripts
+> activate.bat
+> cd ..
+> pip install -e hg+http://foundry.zepheira.com/hg/recollection#egg=recollection
+> pip install -r src/recollection/requirements/develop.txt
+
+To create the database:
+> cd src/recollection/example_project/
+> python manage.py syncdb
+> python manage.py migrate
+
+You may get notice of pywin32 not being installed.  This won't get
+in the way of functioning.  It is difficult to overcome as pywin32
+is not currently available in a form easily compatiable with
+virtualenv.
+
+To run the server on port 8000
+> python manage.py runserver_plus
+
+The following should be run at a regular interval:
+> python manage.py send_mail

@@ -1,0 +1,1 @@
+{% load i18n %}{% load freemix_helpers %}{% blocktrans %}you have invited{% endblocktrans %} {{ invitation.to_user|nicename }} {% blocktrans %}to connect with you.{% endblocktrans %}

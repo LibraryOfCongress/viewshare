@@ -1,0 +1,114 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load uni_form_tags %}
+{% load ifsetting_tag %}
+{% load freemix_helpers %}
+{% load cms_tags %}
+
+{% block head_title %}{% trans "Login" %}{% endblock %}
+
+{% block head_scripts %}
+{{ block.super }}
+<script type="text/javascript" src="{{STATIC_URL}}scripts/login.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    loginForms.init();
+    $("#id_username").focus();
+});
+</script>
+{% endblock %}
+
+{% block body %}
+
+{% if openid and not user.is_authenticated %}
+<p><span class="warning">It appears you have started to login using OpenID. Want to <a href="/openid/register/">finish logging in</a>?</span></p>
+{% endif %}
+
+<h1>{% trans "Log In" %}</h1>
+
+{% if user.is_authenticated %}
+<p>
+  <span class="warning">{% trans "Note" %}</span>: {% blocktrans %}you are already logged in as{% endblocktrans %} {{ user|nicename }}.
+</p>
+<br />
+{% else %}
+{% ifsetting ACCOUNT_OPEN_SIGNUP %}
+{% page_url "acct_signup" as signup_url %}
+<p>{% blocktrans %}Don't have an account? <a href="{{ signup_url }}">Sign up</a>!{% endblocktrans %}</p>
+<br />
+{% endifsetting %}
+{% endif %}
+
+<div class="login_options">	
+
+  <div class="left_half">
+
+    <fieldset class="window inlineLabels loginTypeUP">
+
+      <legend>{% trans "Enter your username and password" %}:</legend>
+
+      <br />
+
+      <form class="login uniForm user_pass" method="POST" action="{% url acct_login %}">
+	
+          {{ form|as_uni_form }}
+          <div class="form_block">
+            <input type="submit" value="{% trans "Log in" %}" />
+            <input type="reset" value="{% trans "Cancel" %}" />
+          </div>
+
+          <div class="form_block">
+            <a href="{% url acct_passwd_reset %}">{% trans "Forgot password?" %}</a>
+          </div>
+      </form>
+
+    </fieldset>
+  </div>
+    
+
+  <div class="right_half">
+
+    <fieldset class="window inlineLabels loginTypeOpenID">
+      
+      <legend>{% trans "Or sign in with your OpenID" %}:</legend>
+
+      <p>Not OpenID enabled?  <a href="http://openid.net/get/" target="_blank">Get started now.</a></p>
+
+      <br />
+      {# @@@ why isn't this just does as a form object ? #}
+      <form class="login uniForm openid" action="/openid/register/" method="POST">
+	
+        {% if url_required %}
+        <div class="ctrlHolder error">
+          <p class="errorField">
+            This field is required.
+          </p>
+          <label for="id_username">OpenID Identifier *</label>
+          <input class="openid" type="text" name="openid_url" />
+        </div>
+        {% else %}
+        <div class="ctrlHolder">
+          <label for="id_username">OpenID Identifier *</label>
+          <input class="openid" type="text" name="openid_url" />
+        </div>
+        {% endif %}
+        <div class="form_block">
+          <input type="submit" value="{% trans "OpenID Log in" %}" />
+            <input type="reset" value="{% trans "Cancel" %}" />
+        </div>
+      </form>
+
+    </fieldset>
+      
+</div>
+
+</div>
+
+<div class="clearfix"></div>
+
+<div>
+  <p class="center">{% blocktrans %}If you have any trouble logging in to your account, contact us at <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>.{% endblocktrans %}</p>
+</div>
+
+{% endblock %}

@@ -1,0 +1,60 @@
+/*
+ol {
+    list-style-type: none;
+    counter-reset:item;
+}
+ol li:before {
+    content: counters(item, ".") " aa   ";
+    counter-increment: item;
+}
+*/
+
+#body h2#toc {
+    margin-top: 1em;
+}
+
+ol dt {
+    font-weight: normal;
+}
+
+p, li, dt, dd {
+    line-height: 1.5;
+}
+
+#body h2, #body h3, #body h4 {
+    padding: 0 1em;
+}
+
+#body h2 {
+    margin: 1.5em 0 1.5em;
+}
+
+#body h3 {
+    margin: 0.5em 0 0.5em;
+}
+
+#body h4 {
+    margin: 2em 0 1.5em;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+#body p, #body ul, #body ol {
+    margin: 1em 0;
+    padding: 0 3em;
+}
+
+#body ul, #body ol {
+    margin-left: 1.5em;
+}
+
+hr {
+    display: none;
+}
+
+div .contents {
+    display: block;
+    margin: 0 0 0.83em;
+    background-color:#eee;
+    padding: 2em 0;
+}

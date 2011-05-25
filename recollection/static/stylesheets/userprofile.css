@@ -1,0 +1,111 @@
+td.profile_user {
+    line-height: 1.0;
+}
+
+table.profile_user td {
+    padding: 5px;
+}
+
+.profile_info_details p {
+    padding: -10px 0;
+    margin: -1px -2px;
+}
+
+.profile_info_website {
+    padding: 3px 5px;
+    max-width: 120px;
+    overflow: hidden;
+}
+
+.profile_info_about {
+    padding-top: 5px;
+    padding-left: 2px;
+    padding-bottom: 10px;
+}
+
+/* Why is this commented out? - ryan
+div#user_sections {
+	  font-size:90%;
+	  padding-top: 15px;
+	  padding-bottom: 10px;
+	  border-top: thin solid lightgrey;
+	  border-bottom: thin solid lightgrey;
+
+}
+*/
+
+h3.user_section_header {
+    font-size: 1.0em;
+    font-weight: bold;
+    margin: 0.5em 0 0 !important;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+}
+
+.profile_what_next {
+    font-size: 90%;
+    margin: 0 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 00px;
+}
+
+/* user tribes accordian */
+ul.tribe_list {
+     margin-left: -5px;
+}
+
+li.tribe_item{
+    list-style-type: square;
+    color: rgb(247,152,40);    
+}
+
+div.rs_title {
+    font-size: 140%;
+    padding-bottom: 5px;
+    line-height: 1.3;
+}
+
+div.rs_subtitletitle {
+    font-size: 120%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+div.rs_author {
+    padding-bottom: 5px;
+}
+
+div.actions {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+div.actions a {
+    text-decoration: none;
+}
+
+/* dialog boxes */
+div.user-dialog-message {
+    background-image: url('/static/images/dialog-warning.png');
+    background-position: top center;
+    background-repeat: no-repeat;
+    padding-top: 35px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;        
+    line-height: 1.3;
+}
+
+div.user-dialog-message ul li {
+    list-style-type: square;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+div.user-dialog-message button {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+}

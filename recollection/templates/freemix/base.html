@@ -1,0 +1,28 @@
+{% extends "site_base.html" %}
+{# Overriding templates should extend #}
+
+{% block head_data %}
+    {{ block.super }}
+    {% block freemix_meta %}{% endblock %}
+{% endblock %}
+
+{% block head_title %}
+    {{ block.super }}
+    {% block freemix_title %}{% endblock %}
+{% endblock %}
+
+{% block head_css %}
+    {{ block.super }}
+    {% block freemix_css %}{% endblock %}
+{% endblock %}
+
+{% block head_scripts %}
+    {{ block.super }}
+    {% block freemix_js %}{% endblock %}
+{% endblock %}
+
+{% block body%}
+    {{ block.super }}
+    {% block freemix_body %}{% endblock freemix_body %}
+{% endblock %}
+

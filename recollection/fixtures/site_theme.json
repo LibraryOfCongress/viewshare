@@ -1,0 +1,24 @@
+[
+
+    {
+        "pk": 2,
+        "model": "site_theme.sitetheme",
+        "fields": {
+            "slug": "solid",
+            "name": "Solid",
+            "description": "Solid background and serif font",
+            "url": "/static/site_theme/css/solid/base.css"
+        }
+    },
+
+    {
+        "fields": {
+            "description": "The default theme with some additions for the homepage",
+            "name": "Homepage",
+            "slug": "homepage",
+            "url": "/static/site_theme/css/homepage/base.css"
+        },
+        "model": "site_theme.sitetheme",
+        "pk": 3
+    }
+]

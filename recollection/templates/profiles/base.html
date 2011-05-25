@@ -1,0 +1,32 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load connection_helpers %}
+
+{% block rtab_id %}id="profile_tab"{% endblock %}
+
+{% block profile-tab-selected %} ui-tabs-selected ui-state-active{% endblock %}
+
+{% block rss_feeds %}
+{{block.super}}
+
+<link href="/feeds/views/{{ other_user }}/" type="application/rss+xml" rel="alternate" title="Latest Data View News Feed for {{ other_user }}" />
+<link href="/feeds/data/{{ other_user }}/" type="application/rss+xml" rel="alternate" title="Latest Data News Feed for {{ other_user }}" />
+
+
+{% endblock %}
+
+{% block subnav %}
+{% if user.is_authenticated %}
+<div class="ui-tabs ui-widget ui-corner-all">
+  <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-corner-all">
+    <li class="ui-state-default ui-corner-top {% block yourprofile-tab-selected %}{% endblock %}"><a href="{% url profile_detail user.username %}">{% trans "Your Details" %}</a></li>
+    <li class="ui-state-default ui-corner-top {% block yourfriendsprofile-tab-selected %}{% endblock %}"><a href="{% url connection_list_by_user user.username %}">{% blocktrans %}Your Connections{% endblocktrans %}</a></li>
+    <li class="ui-state-default ui-corner-top {% block allprofiles-tab-selected %}{% endblock %}"><a href="{% url profile_list %}">{% blocktrans %}All Users{% endblocktrans %}</a></li>
+    {% block extra_subnav %}{% endblock %}
+  </ul>
+</div>
+{% else %}
+&nbsp;
+{% endif %}
+{% endblock %}

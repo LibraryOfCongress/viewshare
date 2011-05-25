@@ -1,0 +1,167 @@
+/* Where is this rule used? - ryanlee */
+div.actions {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/* discussion topics */
+/* hard-code some of this due to pinax overrides */
+.topic {
+    border-bottom: 1px solid #ddd;
+    padding: 5px;
+}
+
+.topic .task-meta {
+    float: left;
+    font-size: 85%;
+    padding: 3px; /*Inner border size*/
+    width: 80px;
+}
+
+.topic .task-meta .avatar {
+    padding: 3px;
+}
+
+.topic .task-meta .details,
+.topic .task-meta .created {
+    padding: 0 0 3px 3px;
+}
+
+.topic .bulk {
+    float: left;
+}
+
+.topic .bulk .comment_stats {
+    font-style: italic;
+    color: #999;
+}
+
+.responses .bulk {
+    text-align: right;
+}
+
+.responses .bulk .body,
+.responses .bulk h1 {
+    text-align: left;
+}
+
+/* Result sets specific to tribes */
+ul.result_set {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li.tribe_item {
+    background: #fff url(../images/header-background.png) bottom center repeat-x;
+    list-style-type: none;
+}
+
+.tribe_item {
+    border: 1px solid #ddd;
+    clear: left;
+    float: left;
+    margin: 1em 0;
+    text-align: left;
+    width: 100%;
+}
+
+.tribe_user_member {
+    border: 1px solid #ddf;
+}
+
+.tribe_item p {
+    margin: 0.2em 0;
+}
+
+.tribe_name_essentials {
+    border-right: 1px solid #ddd;
+    clear: left;
+    float: left;
+    padding: 0.5em 2%;
+    width: 23%;
+}
+
+.tribe_user_member .tribe_name_essentials {
+    border-right: 1px solid #ddf;
+}
+
+.tribe_description {
+    border-left: 1px solid #ddd;
+    float: left;
+    margin-left: -1px;
+    padding: 0.5em 2%;
+    width: 57%;
+}
+
+.tribe_name {
+    font-weight: bold;
+}
+
+.tribe_prop, .tribe_value {
+    color: #333;
+    font-size: 0.9em;
+    line-height: 1.0em;
+}
+
+.form-dialog {
+    display: none;
+}
+
+.tribe_actions {
+    float: right;
+    padding: 1em 1em 0 0;
+    text-align: right;
+    width: 8%;
+}
+
+/* individual group display */
+div.members {
+    background: transparent !important; /* undo pinax */
+    padding: 8px;
+    margin-bottom: 20px;
+}
+
+div.members h2 {
+    margin: 0 0 5px 0;
+    padding: 0;
+}
+
+div.member_avatar_entry {
+    position: relative;
+    display: inline-block;
+    height: 56px;
+    width: 56px;
+    margin: 3px 1px 3px 1px;
+}
+
+div.member_avatar_entry cite {
+    background: #111;
+    filter :alpha(opacity=75);
+    opacity: .75;
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 55px; /* 64 (gravatar - 1 margin-left) */
+    margin-top: 1px;
+    margin-bottom: 1px;
+    margin-left: 1px;
+    font-size: 90%;
+    border-top: 1px solid #999;
+}
+
+.discussions_summary li {
+    list-style-type: none;
+    margin-bottom: 1.5em;
+}
+
+.discussions_summary li h3,
+.discussions_summary li p {
+    margin: 0;
+}
+
+.discussions_summary .comment_stats {
+    font-size: 85%;
+    color: #444;
+}

@@ -1,0 +1,12 @@
+{% load frontendadmin_tags %}
+{% load thumbnail %}
+
+<h1>{{ object.title }}</h1>
+
+{% if user.is_staff %}
+{% frontendadmin_change object "Edit this page" %}
+ <a href="{% url admin:gblocks_titleandtext_history object.id %}">history</a> 
+{%endif %}
+{{ object.text|safe }}
+
+{% frontendadmin_change object "Edit this page" %}

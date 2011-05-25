@@ -1,0 +1,11 @@
+{% load frontendadmin_tags %}
+{% load thumbnail %}
+
+<div>
+    
+{% if user.is_staff %}
+{% frontendadmin_change object "Edit this text" %} <a href="{% url admin:gblocks_text_history object.id %}">history</a>    
+{%endif %}
+
+{{ object.text|safe }}
+</div>

@@ -1,0 +1,62 @@
+{% load i18n %}
+{% load pagination_tags %}
+{% load humanize %}
+{% load avatar_tags %}
+{% load timezone_filters %}
+{% load freemix_helpers %}
+
+<li class="user_profile_entry clearfix result_set_item">
+
+  <div class="user_avatar_entry profile_left_panel">
+    <a href="{% url profile_detail user.username %}" title="{{ user|nicename }}">
+      <img src="{% avatar_url user.username 56 %}" alt="{% trans "Avatar for" %} {{ user|nicename }}" /> 
+    </a>
+  </div>
+  
+  <div class="user_data_entry profile_right_panel">
+    <div class="user_top">
+      <a href="{% url profile_detail user.username %}" title="{{ user|nicename }}" class="user_name">
+         <span class="value">{{ user|nicename }}</span>
+      </a>
+      
+      {% if user.get_profile.location %}
+      <span class="user_location">
+	<span class="value">{{ user.get_profile.location }}</span>
+      </span>
+      {% endif %}
+    </div>
+    
+    <div class="user_counts">
+        {% if user.data_sets.count %}
+	<p class="user_datasets"><a href="{% url user_datasets user.username %}">{{user.data_sets.count}} {% trans "Data" %}</a></p>
+	{% if user.data_views.count %}
+	<span class="divider">&middot;</span> <p class="user_dataviews"><a href="{% url freemix_root user.username %}">{{user.data_views.count}} {% trans "View" %}{{ user.data_views.count|pluralize }}</a></p>
+	{% endif %}
+        {% else %}
+        <span class="no_data">{% trans "No data" %}</span>
+	{% endif %}
+    </div>    
+
+    {% if user.get_profile.about %}
+    <div class="user_middle">
+      <div class="user_description">{{ user.get_profile.about|truncatewords:50|linebreaks }}</div>
+    </div>
+    {% endif %}
+
+    <div class="user_bottom">
+      {% if user.date_joined %}
+      <p class="user_joined">
+	<span class="property">{% trans "Joined" %}</span> <span class="value">{{ user.date_joined|date }}</span>
+      </p>
+      {% endif %}
+
+      {% if user.last_login %}
+      <p class="user_active">
+	<span class="property">{% trans "Last visited" %}</span> <span class="value">{{ user.last_login|date }}</span>
+      </p>
+      {% endif %}
+    </div>
+
+  </div>
+  
+</li>

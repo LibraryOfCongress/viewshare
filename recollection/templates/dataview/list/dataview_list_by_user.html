@@ -1,0 +1,58 @@
+{% extends "dataview/list/base.html" %}
+
+{% load i18n %}
+{% load dataview_tags %}
+{% load freemix_helpers %}
+
+{% block head_title %}{{other_user|nicename}}{% blocktrans %}'s Data Views{% endblocktrans %}{% endblock %}
+{% block head_scripts %}
+{{block.super}}
+{% include "js_include/jquery_ui.html" %}
+
+{% endblock %}
+
+{% block rtab_id %}id="view_tab"{% endblock %}
+
+{% block view-tab-selected %} ui-tabs-selected ui-state-active{% endblock %}
+
+{% comment %}
+<!-- check to see if the user being inspected is user logged in -->
+<!-- note: need to do logic this way due to template processing pipeline -->
+{% endcomment %}
+
+{% block myview-tab-selected %}
+  {% ifequal user.username username %} ui-tabs-selected ui-state-active{% endifequal %}
+{% endblock %}
+
+{% comment %}
+<!-- if user being inspected is not the one logged in, create a hierarchical tab-group for display -->    
+{% endcomment %}
+
+{% block extra_subnav %}
+{% ifnotequal user.username username %}
+<li>
+  <ul class="tab-group">
+    <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="">{{ other_user|nicename }}</a></li>
+  </ul>
+</li>
+{% endifnotequal %}
+{% endblock %}
+
+{% block body %}
+
+<h1>{{other_user|nicename}}{% blocktrans %}'s Data Views{% endblocktrans %}</h1>
+
+  <p>
+  {% ifequal user.username username %}
+    {% trans "You have" %}
+  {% else %}
+    {{ other_user|nicename }} {% trans "has" %}
+  {% endifequal %}
+  {{queryset.count}} {% trans "data view" %}{{ queryset.count|pluralize }}.
+  </p>
+
+
+<div class="view_details">
+    {% dataview_list queryset %}
+</div>
+{% endblock %}

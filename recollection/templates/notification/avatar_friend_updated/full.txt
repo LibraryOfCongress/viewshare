@@ -1,0 +1,4 @@
+{% load i18n %}{% load freemix_helpers %}{{ user|nicename }} {% blocktrans with user.get_profile.get_absolute_url as user_url %} has updated their avatar.
+
+http://{{ current_site }}{{ user_url }}
+{% endblocktrans %}

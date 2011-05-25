@@ -1,0 +1,18 @@
+{% extends "site_base.html" %}
+{% load i18n %}
+{% load uni_form_tags %}
+
+{% block body %}
+<div id="issue_create_content">
+    <h1>{% trans "Report a Data Loading Problem" %}</h1>
+    <form action="{{request.path}}" method="post" class="uniForm">
+        <fieldset class="inlineLabels">
+            {{ form|as_uni_form }}
+        </fieldset>
+        <input type="submit" value="Send Report"/>
+        <input type="button" class="cancel-button negative-button" value="{% trans "Cancel" %}"/>
+    </form>
+</div>
+{% endblock %}
+
+

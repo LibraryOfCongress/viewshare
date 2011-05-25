@@ -1,0 +1,59 @@
+{% extends "messages/base.html" %}
+
+{% load humanize i18n %}
+{% load pagination_tags %}
+{% load timezone_filters %}
+
+{% block head_title %}{% trans "Notices" %}{% endblock %}
+
+{% block extra_head %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}pinax/css/pagination.css"/>
+<link rel="alternate" type="application/atom+xml" title="Notices Feed" href="{% url notification_feed_for_user %}" />
+{% endblock %}
+
+{% block notices-tab-selected %} ui-tabs-selected ui-state-active{% endblock %}
+
+{% block body %}
+<h1>{% trans "Notices" %}</h1>
+
+  <div class="priority-area">
+    <p>
+     <span class="notice_setting_msg"><a href="{% url notification_settings %}" class="button_link">{% trans "Configure E-Mail Notices" %}</a></span>
+     {% if notices %}
+     <span class="notice_clear"><a href="{% url notification_mark_all_seen %}" class="button_link">{% trans "Mark unseen notices as seen" %}</a></span>
+     {% endif %}
+    </p>
+  </div>
+
+    {% autopaginate notices %}
+  
+  {% if notices %}
+  
+  {# TODO: get timezone support working with regroup #}
+  {% regroup notices by added.date as notices_by_date %}
+  
+  {% for date in notices_by_date %}
+  <h2 class="ui-widget-header notice_date">{{ date.grouper|naturalday:_("MONTH_DAY_FORMAT")|capfirst }}</h2>
+  <div class="notice_set">
+  
+  {% for notice in date.list %}
+  {% if notice.is_unseen %}
+  <div class="unseen_notice">
+    {% else %}
+    <div class="notice">
+      {% endif %}
+      <span class="notice_type">[{% trans notice.notice_type.display %}]</span>
+      <span class="notice_message">{{ notice.message|safe }}</span>
+      <span class="notice_time">{{ notice.added|localtime:account.timezone|time:"P" }}</span>
+    </div>
+    {% endfor %}
+    </div>
+    {% endfor %}
+    
+    {% paginate %}
+    
+    {% else %}
+    <p>{% trans "No notices." %}</p>
+    {% endif %}
+{% endblock %}

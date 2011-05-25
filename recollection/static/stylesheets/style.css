@@ -1,0 +1,560 @@
+/* This file is for styles that apply across the entire site (e.g.,
+ * navigation tabs).  Styles that only apply in certain sections or
+ * pages should be broken into their own files and included where
+ * appropriate.
+ */
+
+.container_12 {
+    margin-left: auto;
+    margin-right: auto;
+    width: 960px;
+}
+
+#header {
+    background-color: #fff;
+    height: 75px;
+    width: 100%;
+}
+
+#header #application-logo {
+    position: absolute;
+    left: 20px;
+    top: 5px;
+    height: 72px;
+    background-repeat: no-repeat;
+}
+
+#header #application-status {
+    position: absolute;
+    font-family: courier;
+    font-size: 120%;
+    font-weight: 100;
+    color: red;
+    top: 53px;
+    left: 250px;
+}
+
+#footer {
+    width: 100%;
+    text-align: center;
+    font-size: 115%;
+}
+
+#templates {
+    display: none;
+}
+
+/** major structural helpers **/
+.left_half {
+    clear: left;
+    float: left;
+    padding: 0 1%;
+    width: 47%;
+}
+
+.right_half {
+    border-left: 1px solid #ddd;
+    clear: right;
+    float: right;
+    padding: 0 1%;
+    width: 47%;
+}
+
+/* buttons */
+.button {
+    outline: 0; 
+    margin:0 4px 0 0; 
+    padding: .4em 1em; 
+    text-decoration:none !important; 
+    cursor:pointer; 
+    position: relative; 
+}
+
+.button .ui-icon {
+    position: absolute;
+    top: 50%;
+    margin-top: -8px;
+    left: 50%;
+    margin-left: -8px;
+}
+
+.button-icon-left {
+    padding-left: 2.1em;
+}
+
+.button-icon-right {
+    padding-right: 2.1em;
+}
+
+.button-icon-left .ui-icon {
+    right: auto;
+    left: .2em;
+    margin-left: 0;
+}
+
+.button-icon-right .ui-icon {
+    left: auto;
+    right: .2em;
+    margin-left: 0;
+}
+
+.chooser ul {
+    margin: 0;
+    padding: 0;
+    list-style-type:none;
+}
+
+.chooser li {
+    float: left;
+    width: 96px;
+    color: #fff;
+    font-size: 1em;
+    margin: .8em 5px .8em 0;
+    min-height: 100px;
+    list-style: none;
+}
+
+.chooser li a {
+    text-decoration: none;
+    position: relative;
+}
+
+.chooser li img {
+    width: 90px;
+    height: auto;
+    display: block;
+    padding-top:3px;
+    border: 0;
+    border-top: 2px solid #000;
+    position: relative;
+}
+
+.chooser li a:hover img {
+    border-top: 2px solid #ccc;
+}
+
+.chooser li a:active img {
+    border-top: 2px solid #f58809;
+}
+
+.chooser li span {
+    display: block;
+    margin: .1em 4px;
+}
+
+/* for Exhibits */
+/* Maybe move to a profiles.css? */
+
+.exhibit-collectionView-group-count {
+    display: none;
+}
+
+ol.exhibit-tileView-body li {
+    list-style: none;
+}
+
+ol.exhibit-tileView-body {
+    margin: 0;
+    padding: 0;
+}
+
+div.exhibit-collectionView-header-sortControls {
+    display: none;
+}
+
+.movie {
+    float:left;
+    clear:left;
+    background: url(../images/shadowAlpha.png) no-repeat bottom right !important;
+    background: url(../images/shadow.gif) no-repeat bottom right;
+    margin: 10px !important;
+    margin: 10px;
+}
+
+.movie img {
+    display: block;
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #a9a9a9;
+    margin: -6px 6px 6px -6px;
+    padding: 4px;
+}
+
+div#body.freemix-themeable > div > h1,
+.dataprofile .tab-contents h1,
+.dataprofile-viewer h1 {
+    background: #fff url(../images/header-background.png) bottom center repeat-x;
+    border-bottom: 1px solid #ddd;
+    font-size: 1.5em;
+    padding: 0.5em 0.5em;
+    margin: 0 0 1.5em;
+}
+
+.attraction #identify h1 {
+    padding: 0.5em 0.5em;
+    margin: 0 0 0.5em;
+}
+
+div#body.freemix-themeable > div > h1,
+.dataprofile .tab-contents h1,
+.dataprofile-viewer h1 {
+    margin: -0.66em -26.5px 1.5em;
+}
+
+.freemix-themeable > div .priority-area {
+    background: #fff url(../images/header-background.png) bottom center repeat-x;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #ddd;
+    padding: 0.5em 1.5em;
+    margin: -2.3em -26.5px 1em;
+    text-align: right;
+}
+
+h2.help {
+    font-size: 1.5em;
+    padding: .4em 30px .4em 0;
+    margin: 0 0 1em 0;
+    border-bottom: 1px solid #e3f5f7;
+    color: darkslategrey;
+}
+
+h2 img {
+    text-align: right;
+    vertical-align: top;
+    height: 40px;
+    width: 40px;
+    margin-top: -25px;
+}
+
+/* Theme switcher */
+#toolbar {
+    width: 99%;
+    min-height: 1em;
+    padding: 8px 0 0;
+}
+
+#theme {
+    float: right;
+}
+
+/* Groups */
+
+.tribe_left {
+    display: inline;
+    float: left;
+    position: relative;
+    margin-left: 9px; /* changed from 10 ??? */
+    margin-right: 9px; /* changed from 10 ??? */
+    width: 65%;
+}
+
+.tribe_right {
+    display:inline;
+    float: left;
+    position: relative;
+    margin-left: 9px; /* changed from 10 ??? */
+    margin-right: 9px; /* changed from 10 ??? */
+    width: 30%;
+}
+
+/* data views and sets */
+.dataview_list {
+    margin-top: 1.5em;
+}
+
+.dataset_list_items, .dataview_list_items {
+    margin: 0;
+    padding: 0;
+}
+
+li.dataset_summary, li.dataview_summary {
+    background: #fff url(../images/header-background.png) bottom center repeat-x;
+    border: 1px solid #ddd;
+    list-style-type: none;
+    margin: 1em 0;
+    padding: 5px 10px;
+    text-align: left;
+}
+
+.dataset-name, .dataview-name {
+    font-size: 115%;
+    font-weight: bold;
+    padding-bottom: 0.25em;
+    padding-left: 30px;
+}
+
+.dataset-name {
+    background: transparent url(../images/data-icon.png) top left no-repeat;
+}
+
+.dataview-name {
+    background: transparent url(../images/collection-icon.png) top left no-repeat;
+}
+
+.dataview-left, .dataset-left {
+    float: left;
+    font-size: 0.9em;
+}
+
+.dataview-right, .dataset-right {
+    background: #fff url(../images/header-background.png) bottom left repeat-x;
+    border: 1px solid #ddd;
+    float: right;
+    margin: 0.5em 0 0;
+    padding: 0.75em 1.25em;
+}
+
+/* see all / see more */
+.see_all {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: bold;
+}
+
+.editForm #id_body {
+    width: 98%;
+    height: 200px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* threaded */
+ul.responses li.odd:nth-child(1) {
+    border: solid lightgrey 1px;
+    margin-bottom: 20px;
+}
+
+ul.responses li.thread-0 {
+    border-top: solid lightgrey 1px;
+    border-bottom: solid lightgrey 1px;
+    margin-bottom: 10px;
+}
+
+ul.responses li.thread-1,
+ul.responses li.thread-2,
+ul.responses li.thread-3,
+ul.responses li.thread-4,
+ul.responses li.thread-5,
+ul.responses li.thread-6,
+ul.responses li.thread-7,
+ul.responses li.thread-8 {
+    border-top: solid lightgrey 1px;
+    border-bottom: solid lightgrey 1px;
+    padding-left: 20px;
+    margin-bottom: 10px;
+}
+
+/* pinax entry forms (e.g. create a group, ..) */
+.ctrlHolder {
+    padding: 5px;
+}
+
+.ctrlHolder label {
+    display: block;
+    font-weight: bold;
+    padding-top: 5px;
+}
+
+.checkbox label {
+    display: inline;
+}
+
+.ctrlHolder .formHint {
+    color: grey;
+    padding-left: 1%;
+}
+
+/* profiles */
+.info-section {
+    border: 1px solid #eee;
+    margin-bottom: 1.5em;
+}
+
+.profile h2 {
+    background-color: #5582A1;
+    color: #fff;
+    font-size: 1.0em;
+    margin: 0;
+    padding: 0.25em;
+}
+
+.about_profile {
+    background-color: #072146;
+    width: 100%;
+}
+
+.about_profile .profile_info {
+    background-color: #1C3C62;
+    color: #fff;
+    padding: 10px;
+}
+
+table.about_profile td {
+    padding: 5px;
+    text-align: left;
+}
+
+img.photo {
+    border: 5px solid #1C3C62;
+    padding: 5px;
+}
+
+.about_edit {
+    padding: 1em;
+    text-align: right;
+}
+
+#about-box {
+    background: #fff url(../images/profile-background.png) top left repeat-y;
+}
+
+div.profile_info div.about_description {
+    padding: 1em 1.5em;
+}
+
+.see_all {
+    text-align: center;
+    font-weight: normal;
+}
+
+.left_panel,
+.right_panel {
+    padding-top: 1px;
+}
+
+.left_panel {
+    float: left;
+    padding-right: 5px;
+}
+
+.right_panel {
+    float: right;
+    padding-left: 5px;
+}
+
+.user_panel {
+    /* width: 315px; ... 1/3 of 960gs (-5 for space) */
+    width: 37%; /* moving to percentages */
+}
+
+.data_panel {
+    /* width: 635px; ... 2/3 of 960gs (-5 for space) */
+    width: 60%; /* moving to percentages */
+}
+
+/* user avatar views */
+
+/* profile avatar */
+#profile_avatar_container {
+    width: 116px;
+}
+
+div#profile_avatar {
+    position: relative;
+}
+
+div#profile_avatar a {
+    background: #111;
+    filter: alpha(opacity=75);
+    opacity: .75;
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 55px; /* 64 (gravatar - 1 margin-left) */
+    margin-top: 1px;
+    margin-bottom: 15px;
+    margin-left: 25px;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 90%;
+    border: 1px solid #999;
+}
+
+/* Friends list */
+ul.connection_list {
+    margin-left: 0px;
+    list-style-type: none;
+}
+
+/* Activities */
+div.notices h2 {
+    display: none;
+}
+
+.notice {
+    line-height: 1.3em;
+}
+
+/* groups */
+.user_groups_list {
+    margin: 0;
+    padding: 0;
+}
+
+.user_groups_list li {
+    list-style-type: none;
+    padding: 0.5em;
+}
+
+/* factor the following out (later) into task based stylesheet files */
+/* account */
+.login_options {
+    padding-left: 10px;
+}
+
+/* common structural elements */
+#subnav-extra {
+    float: right;
+    padding-top: 0.65em;
+}
+
+.sort-label {
+    padding-right: 0.75em;
+}
+
+.start-matter {
+    margin: 2em 0;
+}
+
+.button_link {
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+.button_group {
+    padding: 1em 0;
+    text-align: center;
+}
+
+.project {
+    margin: 1em 0;
+}
+
+.community_logo {
+    clear: left;
+    float: left;
+    width: 25%;
+}
+
+.project_description {
+    clear: right;
+    float: right;
+    width: 72%;
+}
+
+/* loading bar */
+.loading {
+    background: transparent url(../images/bar-animated.gif) top center no-repeat;
+    margin: 1em auto;
+    min-width: 180px;
+    padding: 20px 0 0;
+    text-align: center;
+}
+
+/* Django CMS */
+#cms_toolbar_logo,
+#cms_toolbar_logoutbutton {
+    display: none;
+}

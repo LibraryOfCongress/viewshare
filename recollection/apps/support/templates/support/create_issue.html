@@ -1,0 +1,38 @@
+{% extends "site_base.html" %}
+
+{% block head_css %}
+{{ block.super }}
+<style type="text/css">
+    form ul { list-style: none; margin: 0; padding-left: 0; }
+</style>
+{% endblock %}
+
+{% block body %}
+<h1>Report a Data Upload Problem</h1>
+
+<form action="" method="post" class="uniForm">
+ <table>
+  <tr>
+   <td><label for="id_contact_type">{{ form.contact_type.label }}:</label>
+       {{ form.contact_type.errors }}</td>
+   <td>{{ form.contact_type }}</td>
+  </tr>
+  <tr>
+   <td><label for="id_contact_email">{{ form.contact_email.label }}:</label>
+       {{ form.contact_email.errors }}</td>
+   <td>{{ form.contact_email }}</td>
+  </tr>
+  <tr>
+   <td><label for="id_contact_phone">{{ form.contact_phone.label }}:</label>
+       {{ form.contact_phone.errors }}</td>
+   <td>{{ form.contact_phone }}</td>
+  </tr>
+  <tr>
+   <td><label for="id_comments">{{ form.comments.label }}:</label>
+       {{ form.comments.errors }}</td>
+   <td>{{ form.comments }}</td>
+  </tr>
+ </table>
+ <input type="submit" value="Send Report"/>
+</form>
+{% endblock %}

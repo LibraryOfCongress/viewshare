@@ -1,0 +1,38 @@
+body {
+    background: #fff top left repeat-x url(images/background.gif);
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 10pt;
+    color: #000;
+}
+
+a {
+    color: rgb(0, 176, 216);
+}
+
+#header #application-logo {
+    background-image: url(images/recollection-logo-sm.png);
+    width: 272px;
+}
+
+.homeimage {
+    float: left;
+}
+
+.primarydisc {float: left; margin-left:20px;}
+
+.primarydisc p{width: 280px; margin-top: 0px; font-size: 150%;}
+
+.linkblock {
+text-decoration: none; font-size:1.1em;font-weight:bold;width:245px;list-style:none;padding:1em; margin-top:.5em;}
+
+#first
+{background-color:#00993D;color:white; }
+
+#second
+{background-color:#5582A1;color:black;}
+
+#third
+ {background-color:#405777;color:white}
+
+.stepblock
+{height:110px; margin-top:10px; padding-left:1.5em; padding-right:1.5em; line-height:1.1em}

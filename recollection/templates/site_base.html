@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load openid_tags %}
+{% load ifsetting_tag %}
+{% load freemix_helpers %}
+{% load site_theme %}
+{% load compress %}
+{% load transform_helpers %}
+{% load cms_tags %}
+
+{% block rss_feeds %}
+    <link href="/feeds/latest_views/" type="application/rss+xml" rel="alternate" title="Latest Data View RSS News Feed" />
+    <link href="/feeds/latest_views_atom/" type="application/atom+xml" rel="alternate" title="Latest Data View ATOM News Feed" />
+    <link href="/feeds/latest_data/" type="application/rss+xml" rel="alternate" title="Latest Data RSS News Feed" />
+    <link href="/feeds/latest_data_atom/" type="application/atom+xml" rel="alternate" title="Latest Data ATOM News Feed" />
+{% endblock rss_feeds %}
+
+{% block head_css %}
+    {% compress css %}
+    <link href="{{STATIC_URL}}stylesheets/reset.css" rel="stylesheet" type="text/css" media="screen,projection" />
+    <link href="{{STATIC_URL}}stylesheets/base.css" rel="stylesheet" type="text/css" media="screen,projection" />
+    <link href="{% site_skin %}" rel="stylesheet" type="text/css" media="screen,projection" />
+    <link href="{{STATIC_URL}}uni_form/uni-form.css" rel="stylesheet" type="text/css" media="screen,projection" />
+    <link href="{{STATIC_URL}}stylesheets/style.css" rel="stylesheet" type="text/css" media="screen,projection" />
+    <link href="{{STATIC_URL}}stylesheets/lc.css" rel="stylesheet" type="text/css" media="screen,projection" />
+    <link href="{{STATIC_URL}}{{THEME_FRAGMENT_URL}}" rel="stylesheet" type="text/css" media="screen,projection" />
+    <link href="{{STATIC_URL}}{{THEME_DIR_URL}}/adjunct.css" rel="stylesheet" type="text/css" media="screen,projection" />
+    {%endcompress %}
+{% endblock head_css %}
+
+{% block head_scripts %}
+    {% compress js %}
+    <script type="text/javascript" src="{{STATIC_URL}}utils/js/lib/jquery-1.5.2.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}utils/js/lib/jquery.highlight.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}scripts/ui.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}scripts/jquery.cookie.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}scripts/compatible.js"></script>
+    {% comment %}<script src="{{ STATIC_URL }}uni_form/uni-form.jquery.js" type="text/javascript"></script> {%endcomment%}
+    {% endcompress %}
+{% endblock %}
+
+{% block login %}
+    {% if user.is_authenticated %}
+        <a href="{% url profile_detail user.username %}">{% trans "Home" %}</a> <span class="divider">|</span> <a href="{% url acct_email %}">{% trans "Settings" %}</a> <span class="divider">|</span> {% if user.is_staff %}<a href="/admin/" target="_blank">{% trans "Admin" %}</a> <span class="divider">|</span> {% endif %}<span class="helplink"><a href="{% page_url "help" %}" target="_blank">{% trans "Help" %}</a></span> <span class="divider">|</span> <a href="/openid/logout/?next={% url acct_logout %}">{% trans "Logout" %}</a>
+    {% else %}
+        <a href="{% url acct_login %}">{% trans "Login" %}</a> {% ifsetting ACCOUNT_OPEN_SIGNUP %}{% trans "or" %} <a href="{% page_url "acct_signup" %}"><b>{% trans "Sign up" %}</b></a>{% endifsetting %}
+    {% endif %}
+        
+    {% if user.is_authenticated %}
+        <p class="login-welcome"><strong>{% trans "Welcome" %}, {{ user|nicename }}</strong> {% block headerprofile %}{% endblock %}</p>
+    {% endif %}
+{% endblock %}
+
+
+{% block logo_link_image %}{% endblock %}
+
+{% block tabs %}{% endblock %}
+
+{% block right_tab %}
+    {% if user.is_authenticated %}
+    <div id="tabs" class="ui-tabs ui-widget ui-corner-all">
+        <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-corner-all">
+            <li class="ui-state-default ui-corner-top{% block profile-tab-selected %}{% endblock %}"><a href="{% url profile_detail user %}">{% trans "Users" %}</a></li>
+            <li class="ui-state-default ui-corner-top{% block data-tab-selected %}{% endblock %}"><a href="{% url user_datasets user %}">{% trans "Data" %}</a></li>
+            <li class="ui-state-default ui-corner-top{% block view-tab-selected %}{% endblock %}"><a href="{% url freemix_root user %}">{% trans "Views" %}</a></li>
+            <li class="ui-state-default ui-corner-top{% block messages-tab-selected %}{% endblock %}"><a href="{% url notification.views.notices %}">{% trans "Messages" %}{% if notice_unseen_count %} ({{ notice_unseen_count }}){% endif %}</a></li>
+        </ul>
+    </div>
+    {% endif %}
+{% endblock %}
+
+{% block footer %}
+
+<p class="center">
+    <span class="aboutlink"><a href="{% page_url "community" %}">{% trans "About" %} {{ SITE_NAME }}</a></span> <span class="divider">|</span>
+    <span class="helplink"><a href="{% page_url "help" %}" target="_blank">{% trans "Help" %}</a></span>
+</p>
+<div class="clear">&nbsp;</div>
+
+{% endblock %}
+
+{% block final %}
+  <p id="versions">
+        {{ request.META.HTTP_HOST }} <span class="divider">:</span>
+        {{ SITE_NAME }} {{RECOLLECTION_VERSION}} <span class="divider">&middot;</span>
+        Freemix {% freemix_version %} <span class="divider">&middot;</span>
+        Akara {% akara_version %} <span class="divider">&middot;</span>
+        Akara Root {% akara_prefix_url %}
+  </p>
+{% endblock %}

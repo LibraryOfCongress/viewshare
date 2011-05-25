@@ -1,0 +1,227 @@
+{% extends "profiles/base.html" %}
+
+{% load i18n %}
+{% load avatar_tags %}
+{% load uni_form_tags %}
+{% load notification_utils %}
+{% load connection_helpers %}
+{% load freemix_helpers %}
+{% load compress %}
+{% load cms_tags %}
+
+{% block head_title %}{{ other_user|nicename }}{% endblock %}
+
+{% block head_css %}
+{{ block.super }}
+{% compress css %}
+<!-- style users as friends -->
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}pinax/css/avatar.css"/>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}stylesheets/avatar.css"/>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}stylesheets/profile_friends.css"/>
+{% endcompress %}
+{% endblock %}
+
+{% block head_scripts %}
+{{block.super}}
+{% include "js_include/jquery_ui.html" %}
+{% compress js %}
+<script src="{{ STATIC_URL }}pinax/js/avatar.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#edit_profile_form').load('{% url profile_edit %}', function() {
+        var q = $('form.uniForm');
+        if (q.length) {
+            q.uniform();
+        }
+    });
+    var opts = {
+        title: "{% trans "Edit Profile" %}",
+        modal: true,
+        autoOpen: false,
+        width: "50%"
+    };
+    $('#edit_profile_form').dialog(opts);
+    $('#edit-profile-button').click(function() {
+        $('#edit_profile_form').dialog('open');
+        return false;
+    });
+});
+</script>
+{% endcompress %}
+{% endblock %}
+
+{# check to see if the user being inspected is user logged in #}
+
+{% block yourprofile-tab-selected %}
+{% if is_me %} ui-tabs-selected ui-state-active{% endif %}
+{% endblock %}
+
+{# if user being inspected is not the one logged in, create a hierarchical tab-group for display #}
+
+{% block extra_subnav %}
+{% ifnotequal user other_user %}
+{% if other_user %}
+<li>
+  <ul class="tab-group">
+    <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="">{{ other_user|nicename }}</a></li>
+  </ul>
+</li>
+{% endif %}
+{% endifnotequal %}
+{% endblock %}
+
+{% block body_class %}profile{% endblock %}
+{% block body %}
+<h1>{{ other_user|nicename }}</h1>
+{% if is_me %}
+<div class="priority-area">
+ <p>
+  <a href="{% page_url "home" %}">{{ SITE_NAME }} Home</a> <span class="divider">|</span>
+  <a href="{% page_url "userguide" %}">User's Guide</a> <span class="divider">|</span>
+  <a href="{% page_url "faq" %}">FAQ</a> <span class="divider">|</span>
+  <a href="{% url profile_detail 'Guide' %}">Ask the Guide</a> <span class="divider">|</span>
+  <a href="{% url upload_dataset %}" class="button_link">{% trans "Upload Data" %}</a>
+ </p>
+</div>
+{% endif %}
+
+<div class="right_panel data_panel">
+ {% include "profiles/profile_right_panel.html" %}
+</div>
+
+<div class="left_panel user_panel">
+ <div id="about-box" class="info-section">
+  <table class="about_profile">
+   <tbody>
+    <tr>
+     <td id="profile_avatar_container">
+      <div id="profile_avatar">
+       <div>
+        <img src="{% avatar_url other_user 96 %}" alt="{% trans "Photo of" %} {{ other_user|nicename }}" class="photo" />
+       </div>
+       {% if is_me %}
+       <a href="{% url avatar_change %}" id="avatar_replace">({% trans "replace" %})</a>
+       {% endif %}
+      </div>
+     </td>
+     <td>
+      <div class="profile_info">
+       {% if other_user.get_profile.website %}
+       <p class="about_name"><a class="url" href="{{ other_user.get_profile.website }}" title="{{ other_user.get_profile.website }}">{{ other_user|nicename }}</a></p>
+       {% else %}
+       <p class="about_name">{{ other_user|nicename }}</p>
+       {% endif %}
+       {% if other_user.get_profile.location %}
+       <p class="about_location">{{ other_user.get_profile.location }}</p>
+       {% endif %}
+      </div>
+     </td>
+    </tr>
+   </tbody>
+  </table>
+
+  {% if other_user.get_profile.about %}
+  <div class="profile_info">
+   <div class="about_description">{{ other_user.get_profile.about|linebreaks }}</div>
+  </div>
+  {% endif %}
+
+  {% if is_me %}
+  <p class="about_edit"><a href="#edit_profile_form" id="edit-profile-button" class="button_link sub-button">{% trans "Edit" %}</a></p>
+  {% endif %}
+
+  {# @@@ this entire invitation mechanism should be an inclusion tag #}
+  {% if user.is_authenticated %}
+   {% if is_me %}
+   {% else %}     
+   {% if is_friend %}
+   <p class="center connection_extra">
+   {% blocktrans %}You are connected to {% endblocktrans %}{{ other_user|nicename }}.
+   </p>
+    <form method="POST" action="">
+     <input type="hidden" name="action" value="remove" />
+     <p class="center"><input type="submit" class="negative-button" value="{% trans "Remove Connection" %}"/></p>
+    </form>
+   {% else %}
+   {% if previous_invitations_from %}
+   <div class="invitation connection_extra">
+   {% for invitation in previous_invitations_from %}
+    <p>{{ other_user|nicename }} {% blocktrans %}requested a connection on{% endblocktrans %} {{ invitation.sent|date }}:</p>
+    <p class="invitation_message">{{ invitation.message }}</p>
+    <form method="post" action="">
+     <input type="hidden" name="invitation" value="{{ invitation.id }}"/>
+     <input type="hidden" name="action" value="accept"/>
+     <input type="submit" value="{% trans 'Accept' %}" />
+    </form>
+    <form method="post" action="">
+     <input type="hidden" name="invitation" value="{{ invitation.id }}"/>
+     <input type="hidden" name="action" value="decline"/>
+     <input type="submit" value="{% trans 'Decline' %}" class="negative-button" />
+    </form>
+   </div>
+   {% endfor %}
+   {% else %}
+    {% if previous_invitations_to %}
+    <p class="center">{% trans "Connection request sent." %}</p>
+    {% else %}
+    <h2>{% trans "Add Connection" %}</h2>
+    <form class="uniForm" method="POST" action="">
+      <fieldset class="inlineLabels">
+        {{ invite_form|as_uni_form }}
+        <div class="form_block">
+         <input type="hidden" name="action" value="invite" />
+         <p class="center"><input type="submit" value="{% trans "Invite" %}"/>
+          {{ other_user|nicename }} {% blocktrans %}to connect.{%  endblocktrans %}
+         </p>
+        </div>
+      </fieldset>
+    </form>
+    {% endif %} {# previous_invitations_to #}
+   {% endif %} {# previous_invitations_from #}
+   {% endif %} {# is_friend #}
+   {% endif %} {# is me #}
+  {% else %} {# not user.is_authenticated #}
+  {% page_url "acct_signup" as signup_url %}
+  {% url acct_login as login_url %}
+  <p class="center">{% blocktrans %}<a href="{{ login_url }}">Log in</a> to add this person as a connection.{% endblocktrans %}</p>
+    {% endif %}
+ </div>
+
+  <!-- my news -->
+
+ {% if is_me %}
+ <div class="info-section">
+  <h2>{% blocktrans %}Notices{% endblocktrans %}</h2>
+  <div class="notices">
+  {% notification_summary_list other_user %}
+  </div>
+ </div>
+ {% endif %}
+ {%  if user.is_authenticated %}
+ <div class="info-section">
+  <h2>{% blocktrans %}Connections{% endblocktrans %}</h2>
+  <div class="user_friends">
+  {% if other_friends %}
+   {% connection_list other_friends 3 0 %} 
+   <div class="see_all">
+    <a href="{% url connection_list_by_user other_user.username %}">{% trans "See all" %}</a>
+   </div> 
+  {% else %}
+   {% if is_me %}
+   {% url profile_list as profile_list_url %}
+   <p class="center">{% blocktrans %}Look at all of the <a href="{{ profile_list_url }}">profiles</a> and see if there's anyone you know.{% endblocktrans %}</p>
+   {% else %}
+   <p class="center">{% trans "Invite" %} {{ other_user|nicename }} {% blocktrans %}to connect.{% endblocktrans %}</p>
+   {% endif %}
+  {% endif %}
+  </div>
+ </div>
+{% endif %}
+</div>
+
+<div id="edit_profile_form" class="form-dialog">
+</div>
+
+{% endblock %}
+

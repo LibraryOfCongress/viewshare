@@ -1,0 +1,26 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% block rtab_id %}id="account_tab"{% endblock %}
+
+{% block body_class %}account{% endblock %}
+
+{% block subnav %}
+    {% if user.is_authenticated %}
+	<div class="ui-tabs ui-widget ui-corner-all">
+    	<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-corner-all">
+            <li class="ui-state-default ui-corner-top{% block acctemail-tab-selected %}{% endblock %}"><a href="{% url acct_email %}">{% trans "E-Mail Addresses" %}</a></li>
+            <li class="ui-state-default ui-corner-top{% block openidassoc-tab-selected %}{% endblock %}"><a href="/openid/associations/">{% trans "OpenID Associations" %}</a></li>
+            <li class="ui-state-default ui-corner-top{% block acctpasswd-tab-selected %}{% endblock %}"><a href="{% url acct_passwd %}">{% trans "Change Password" %}</a></li>
+            {% comment %}<li class="ui-state-default ui-corner-top{% block acctlanguage-tab-selected %}{% endblock %}"><a href="{% url acct_language_change %}">{% trans "Language" %}</a></li>{% endcomment %}
+            <li class="ui-state-default ui-corner-top{% block accttimezone-tab-selected %}{% endblock %}"><a href="{% url acct_timezone_change %}">{% trans "Timezone" %}</a></li>
+            <li class="ui-state-default ui-corner-top{% block notification-settings-tab-selected %}{% endblock %}"><a href="{% url notification_settings %}">{% trans "Notices" %}</a></li>
+            <li class="ui-state-default ui-corner-top{% block avatar-tab-selected %}{% endblock %}"><a href="{% url avatar_change %}">{% trans "Avatar" %}</a></li>
+        </ul>
+	</div>
+{% else %}
+        &nbsp; {# need this to give subnav some height when empty #}
+        
+    {% endif %}
+{% endblock %}
