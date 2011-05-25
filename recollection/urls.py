@@ -46,7 +46,7 @@ urlpatterns = patterns('',
      {"feed_dict": feed_dict}),
 
 
-    (r'^mix/', include('freemix_mixer.urls')),
+    url(r'mix/', 'recollection.mixer.mix_data', name='mixer_receiving_endpoint'),
     (r'^catalog/', include('recollection.apps.collection_catalog.urls')),
     (r'^userhome/', include('recollection.apps.userhome.urls')),
     (r'^userupload/', include('recollection.apps.userupload.urls')),

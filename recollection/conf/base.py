@@ -138,7 +138,6 @@ INSTALLED_APPS = (
     'freemix.dataprofile',
     'freemix.freemixprofile',
     'freemix.canvas',
-    'freemix_mixer',
     'freemix.augment',
     'recollection.apps.notices',
     'recollection.apps.site_theme',
