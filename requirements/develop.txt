@@ -1,4 +1,4 @@
--e git://github.com/zepheira/freemix.git@1.X#egg=freemix
--e git://github.com/zepheira/django-redmine.git#egg=django_redmine
--r requirements.txt
+-e git+ssh://git@github.com/zepheira/freemix.git@1.X#egg=freemix
+-e git+ssh://git@github.com/zepheira/django-redmine.git#egg=django_redmine
+-r external.txt
 
