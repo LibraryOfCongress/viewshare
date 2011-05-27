@@ -8,7 +8,6 @@
 
 {% block extra_head %}
 {{ block.super }}
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}pinax/css/pagination.css"/>
 <link rel="alternate" type="application/atom+xml" title="Notices Feed" href="{% url notification_feed_for_user %}" />
 {% endblock %}
 

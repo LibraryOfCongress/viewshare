@@ -79,7 +79,7 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
                 is_friend = False
                 invite_form = InviteFriendForm(request.user, {
                     'to_user': username,
-                    'message': ugettext("Let's be friends!"),
+                    'message': ugettext("Let's Connect!"),
                 })
 
     else:
@@ -99,7 +99,7 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
                         invitation = FriendshipInvitation.objects.get(id=invitation_id)
                         if invitation.to_user == request.user:
                             invitation.accept()
-                            request.user.message_set.create(message=_("You have accepted the friendship request from %(from_user)s") % {'from_user': invitation.from_user})
+                            request.user.message_set.create(message=_("You have accepted the connection request from %(from_user)s") % {'from_user': invitation.from_user})
                             is_friend = True
                             other_friends = Friendship.objects.friends_for_user(other_user)
                     except FriendshipInvitation.DoesNotExist:
@@ -109,14 +109,14 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
                         invitation = FriendshipInvitation.objects.get(id=invitation_id)
                         if invitation.to_user == request.user:
                             invitation.decline()
-                            request.user.message_set.create(message=_("You have declined the friendship request from %(from_user)s") % {'from_user': invitation.from_user})
+                            request.user.message_set.create(message=_("You have declined the connection request from %(from_user)s") % {'from_user': invitation.from_user})
                             other_friends = Friendship.objects.friends_for_user(other_user)
                     except FriendshipInvitation.DoesNotExist:
                         pass
         else:
             invite_form = InviteFriendForm(request.user, {
                 'to_user': username,
-                'message': ugettext("Let's be friends!"),
+                'message': ugettext("Let's Connect!"),
             })
 
     return render_to_response(template_name, dict({

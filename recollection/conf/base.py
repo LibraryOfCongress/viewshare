@@ -97,7 +97,7 @@ INSTALLED_APPS = (
 
 
     # external
-    'notification', # must be first
+    'notification',
     'django_openid',
     'emailconfirmation',
     'django_extensions',
@@ -139,31 +139,33 @@ INSTALLED_APPS = (
     'freemix.freemixprofile',
     'freemix.canvas',
     'freemix.augment',
+
+    # Recollection specific
     'recollection.apps.notices',
     'recollection.apps.site_theme',
     'recollection.apps.collection_catalog',
-    'recollection.apps.support',
     'recollection.utils',
-
     'recollection.apps.connections',
     'recollection.conf.recollection_defaults',
-    #'recollection.datasources.cdm',
-    #'recollection.datasources.oai',
+
+    # Support pipeline
+    'recollection.apps.support',
     'django_redmine',
 
+    # deprecated app migrations
     'freemix.legacy.view_theme'
 
     )
 
+module_path = lambda m: os.path.abspath(find_module(m)[1])
 
 STATICFILES_DIRS = (
     ('', os.path.join(RECOLLECTION_ROOT, 'static')),
     ('', os.path.join(PINAX_ROOT, 'media', 'default')),
-    ('', os.path.join(os.path.abspath(os.path.dirname(__import__("uni_form").__file__)), 'media')),
-    ('', os.path.join(os.path.abspath(os.path.dirname(__import__("ajax_validation").__file__)), 'media')),
-    ('', os.path.join(os.path.abspath(os.path.dirname(__import__("pinax.apps.account").__file__)), 'media')),
-    ('', os.path.join(os.path.abspath(os.path.dirname(__import__("django_extensions").__file__)), 'media')),
-    ('', os.path.join(os.path.abspath(find_module('cms')[1]), 'media')),
+    ('', os.path.join(module_path('uni_form'), 'media')),
+    ('', os.path.join(module_path('ajax_validation'), 'media')),
+    ('', os.path.join(module_path('django_extensions'), 'media')),
+    ('', os.path.join(module_path('cms'), 'media')),
 )
 
 ABSOLUTE_URL_OVERRIDES = {

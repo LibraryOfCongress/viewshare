@@ -8,17 +8,7 @@
 {% block head_css %}
 {{block.super}}
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}stylesheets/home-page.css"/>
-{% if user.is_staff %}
-<link href="{{ STATIC_URL }}frontendadmin/css/frontendadmin.css" rel="stylesheet" type="text/css" />
-{% endif %}
 {% endblock %}
-
-{% if user.is_staff %}
-{% block head_scripts %}
-{{ block.super }}
-<script type="text/javascript" src="{{ STATIC_URL }}frontendadmin/js/frontendadmin.js"></script>
-{% endblock %}
-{% endif %}
 
 {% block tab_id %}id="home_tab"{% endblock %}
 

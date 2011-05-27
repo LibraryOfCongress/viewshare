@@ -26,7 +26,6 @@ feed_dict = {
 }
 
 urlpatterns = patterns('',
-    url(r'^admin/invite_user/$', 'signup_codes.views.admin_invite_user', name="admin_invite_user"),
 
     (r'^account/', include('pinax.apps.account.urls')),
     (r'^openid/(.*)', PinaxConsumer()),
@@ -40,36 +39,34 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
 
     (r'^avatar/', include('avatar.urls')),
+    (r'^feeds/(.*)/$', 'django.contrib.syndication.views.feed', {"feed_dict": feed_dict}),
 
-    (r'^feeds/(.*)/$',
-     'django.contrib.syndication.views.feed',
-     {"feed_dict": feed_dict}),
-
-
-    url(r'mix/', 'recollection.mixer.mix_data', name='mixer_receiving_endpoint'),
     (r'^catalog/', include('recollection.apps.collection_catalog.urls')),
     (r'^userhome/', include('recollection.apps.userhome.urls')),
     (r'^userupload/', include('recollection.apps.userupload.urls')),
     (r'^support/', include('recollection.apps.support.urls')),
 
-    url(r'^profiles/profile/(?P<username>[\w\._-]+)/connections/$', 'recollection.apps.connections.views.connection_list_by_user', name='connection_list_by_user') ,
+    url(r'^profiles/profile/(?P<username>[\w\._-]+)/connections/$',
+        'recollection.apps.connections.views.connection_list_by_user',
+        name='connection_list_by_user') ,
 
     # Lists of connections datasets and views
     url(r'data/(?P<username>[a-zA-Z0-9_.-]+)/connections/$',
         'recollection.apps.connections.views.datasets_by_user_connections',
         name='datasets_by_user_connections'),
 
-
     url(r'views/(?P<username>[a-zA-Z0-9_.-]+)/connections/$',
         'recollection.apps.connections.views.dataviews_by_user_connections',
         name='dataviews_by_user_connections'),
-
 
     (r'^transform-proxy/', include('freemix.transform.urls')),
     (r'^data/', include('freemix.dataprofile.urls')),
     (r'^views/', include('freemix.freemixprofile.urls')),
     (r'^canvas/', include('freemix.canvas.urls')),
     (r'^augment/', include('freemix.augment.urls')),
+    url(r'mix/', 'recollection.mixer.mix_data', name='mixer_receiving_endpoint'),
+
+    # CMS url definition should come after all others
     (r'^', include('cms.urls')),
 
 ) + staticfiles_urlpatterns()

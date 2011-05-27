@@ -6,13 +6,16 @@ from django.template import loader, Context, RequestContext
 
 from django_redmine.utils import RedmineClient, RedmineIssue
 from django_redmine.consts import *
+
 from freemix.transform.views import get_akara_version
 from freemix.transform.conf import AKARA_URL_PREFIX
 from freemix import __version__ as freemix_version
-from recollection.apps.support import forms
 from freemix.utils import get_user, get_site_url
 from freemix.dataprofile.models import create_dataset
-from . import models
+
+from recollection import __version__ as recollection_version
+from recollection.apps.support import forms
+from recollection.apps.support import models
 
 def redmine_create_issue(project_id, subject, description, tracker, author,
                          status = None,
@@ -106,7 +109,7 @@ class RedmineIssueView(object):
             'system_link': get_site_url(),
             'system_info': '%s %s - Freemix %s - Akara %s - Akara Root %s' %
             (settings.SITE_NAME,
-             settings.RECOLLECTION_VERSION,
+             recollection_version,
              freemix_version,
              get_akara_version(),
              AKARA_URL_PREFIX,)

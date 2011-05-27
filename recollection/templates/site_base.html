@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
 {% load i18n %}
-{% load openid_tags %}
 {% load ifsetting_tag %}
 {% load freemix_helpers %}
+{% load recollection_helpers %}
 {% load site_theme %}
 {% load compress %}
 {% load transform_helpers %}
@@ -83,7 +83,7 @@
 {% block final %}
   <p id="versions">
         {{ request.META.HTTP_HOST }} <span class="divider">:</span>
-        {{ SITE_NAME }} {{RECOLLECTION_VERSION}} <span class="divider">&middot;</span>
+        {{ SITE_NAME }} {% recollection_version %} <span class="divider">&middot;</span>
         Freemix {% freemix_version %} <span class="divider">&middot;</span>
         Akara {% akara_version %} <span class="divider">&middot;</span>
         Akara Root {% akara_prefix_url %}

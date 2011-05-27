@@ -1,15 +1,1 @@
 {% extends "site_base.html" %}
-
-{% if user.is_staff %}
-{% block head_css %}
-{{block.super}}
-<link href="{{ STATIC_URL }}frontendadmin/css/frontendadmin.css" rel="stylesheet" type="text/css" />
-{% endblock %}
-{% endif %}
-
-{% if user.is_staff %}
-{% block head_scripts %}
-{{ block.super }}
-<script type="text/javascript" src="{{ STATIC_URL }}frontendadmin/js/frontendadmin.js"></script>
-{% endblock %}
-{% endif %}
