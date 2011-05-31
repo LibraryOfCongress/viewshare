@@ -1,12 +1,10 @@
 {% extends "base.html" %}
 
 {% load i18n %}
-{% load ifsetting_tag %}
 {% load freemix_helpers %}
 {% load recollection_helpers %}
 {% load site_theme %}
 {% load compress %}
-{% load transform_helpers %}
 {% load cms_tags %}
 
 {% block rss_feeds %}
@@ -44,7 +42,7 @@
     {% if user.is_authenticated %}
         <a href="{% url profile_detail user.username %}">{% trans "Home" %}</a> <span class="divider">|</span> <a href="{% url acct_email %}">{% trans "Settings" %}</a> <span class="divider">|</span> {% if user.is_staff %}<a href="/admin/" target="_blank">{% trans "Admin" %}</a> <span class="divider">|</span> {% endif %}<span class="helplink"><a href="{% page_url "help" %}" target="_blank">{% trans "Help" %}</a></span> <span class="divider">|</span> <a href="/openid/logout/?next={% url acct_logout %}">{% trans "Logout" %}</a>
     {% else %}
-        <a href="{% url acct_login %}">{% trans "Login" %}</a> {% ifsetting ACCOUNT_OPEN_SIGNUP %}{% trans "or" %} <a href="{% page_url "acct_signup" %}"><b>{% trans "Sign up" %}</b></a>{% endifsetting %}
+        <a href="{% url acct_login %}">{% trans "Login" %}</a> {% if ACCOUNT_OPEN_SIGNUP %}{% trans "or" %} <a href="{% page_url "acct_signup" %}"><b>{% trans "Sign up" %}</b></a>{% endif %}
     {% endif %}
         
     {% if user.is_authenticated %}

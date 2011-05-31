@@ -15,7 +15,6 @@
 {{ block.super }}
 {% compress css %}
 <!-- style users as friends -->
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}pinax/css/avatar.css"/>
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}stylesheets/avatar.css"/>
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}stylesheets/profile_friends.css"/>
 {% endcompress %}
@@ -25,7 +24,6 @@
 {{block.super}}
 {% include "js_include/jquery_ui.html" %}
 {% compress js %}
-<script src="{{ STATIC_URL }}pinax/js/avatar.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {

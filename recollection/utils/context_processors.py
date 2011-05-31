@@ -4,12 +4,14 @@ from django.conf import settings
 from template_utils.context_processors import settings_processor
 
 recollection_settings = settings_processor(
-    'RECOLLECTION_VERSION',
     'SITE_NAME_STATUS',
     'THEME_DIR_URL',
     'FEEDBACKLINK',
     'THEME_URL',
     'THEME_FRAGMENT_URL',
+    'CONTACT_EMAIL',
+    'SITE_NAME',
+    'ACCOUNT_OPEN_SIGNUP',
 )
 
 from django.core.exceptions import ImproperlyConfigured

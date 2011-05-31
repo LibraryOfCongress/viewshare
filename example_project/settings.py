@@ -1,14 +1,15 @@
 # Django settings for site_config project.
 from recollection.conf.base import *
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
 )
-MEDIA_ROOT = os.path.join(os.path.dirname(__file__), "media")
+MEDIA_ROOT = path.join(path.dirname(__file__), "media")
 
-STATIC_ROOT = os.path.join(os.path.dirname(__file__),  "static")
+STATIC_ROOT = path.join(path.dirname(__file__),  "static")
 
 COMPRESS_ROOT = STATIC_ROOT
 COMPRESS_URL = STATIC_URL

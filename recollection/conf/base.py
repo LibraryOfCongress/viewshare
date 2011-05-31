@@ -1,31 +1,26 @@
-import os.path
-import posixpath
-import recollection
-import pinax
+from os import path
+from posixpath import join as url_join
 from imp import find_module
 from recollection.migrations import SOUTH_MIGRATION_MODULES
 
-PINAX_ROOT=os.path.abspath(os.path.dirname(pinax.__file__))
+module_path = lambda m: path.abspath(find_module(m)[1])
 
-RECOLLECTION_VERSION = recollection.__version__
-RECOLLECTION_ROOT=os.path.abspath(os.path.dirname(recollection.__file__))
-
-MEDIA_ROOT = os.path.join(RECOLLECTION_ROOT, "site_media", "media")
+MEDIA_ROOT = path.join(module_path("recollection"), "site_media", "media")
 MEDIA_URL = '/media/'
 
-STATIC_ROOT = os.path.join(RECOLLECTION_ROOT, "site_media", 'static')
+STATIC_ROOT = path.join(module_path("recollection"), "site_media", 'static')
 STATIC_URL = '/static/'
 
 COMPRESS_ROOT = STATIC_ROOT
 COMPRESS_URL = STATIC_URL
 
-CMS_MEDIA_ROOT = os.path.join(STATIC_ROOT, 'cms/')
-CMS_MEDIA_URL = os.path.join(STATIC_URL, 'cms/')
+CMS_MEDIA_ROOT = path.join(STATIC_ROOT, 'cms/')
+CMS_MEDIA_URL = path.join(STATIC_URL, 'cms/')
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = posixpath.join(STATIC_URL, "admin/")
+ADMIN_MEDIA_PREFIX = url_join(STATIC_URL, "admin/")
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'changeme'
@@ -64,7 +59,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.media",
     "django.core.context_processors.request",
     "django.core.context_processors.static",
-    "pinax.core.context_processors.pinax_settings",
     "recollection.utils.context_processors.recollection_settings",
     "notification.context_processors.notification",
     "announcements.context_processors.site_wide_announcements",
@@ -93,7 +87,6 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'django.contrib.markup',
     'django.contrib.admin',
-    'pinax.templatetags',
 
 
     # external
@@ -157,15 +150,13 @@ INSTALLED_APPS = (
 
     )
 
-module_path = lambda m: os.path.abspath(find_module(m)[1])
-
 STATICFILES_DIRS = (
-    ('', os.path.join(RECOLLECTION_ROOT, 'static')),
-    ('', os.path.join(PINAX_ROOT, 'media', 'default')),
-    ('', os.path.join(module_path('uni_form'), 'media')),
-    ('', os.path.join(module_path('ajax_validation'), 'media')),
-    ('', os.path.join(module_path('django_extensions'), 'media')),
-    ('', os.path.join(module_path('cms'), 'media')),
+    ('', path.join(module_path('recollection'), 'static')),
+    ('', path.join(module_path('pinax'), 'media', 'default')),
+    ('', path.join(module_path('uni_form'), 'media')),
+    ('', path.join(module_path('ajax_validation'), 'media')),
+    ('', path.join(module_path('django_extensions'), 'media')),
+    ('', path.join(module_path('cms'), 'media')),
 )
 
 ABSOLUTE_URL_OVERRIDES = {
@@ -179,8 +170,8 @@ THEME_FRAGMENT_URL = "%s/chili.css"%THEME_DIR_URL
 THEME_URL = '%s%s'%(STATIC_URL,THEME_FRAGMENT_URL)
 
 TEMPLATE_DIRS = (
-    os.path.join(os.path.dirname(recollection.__file__), "templates"),
-    os.path.join(os.path.dirname(pinax.__file__), "templates", "default"),
+    path.join(module_path("recollection"), "templates"),
+    path.join(module_path("pinax"), "templates", "default"),
 )
 
 # Set to describe the site, properties and the names
@@ -202,11 +193,11 @@ ACCOUNT_REQUIRED_EMAIL = False
 ACCOUNT_EMAIL_VERIFICATION = False
 
 FIXTURE_DIRS=(
-    os.path.join(os.path.dirname(recollection.__file__), "fixtures"),
+    path.join(module_path("recollection"), "fixtures"),
 )
 
 LOCALE_PATHS=(
-    os.path.join(os.path.dirname(recollection.__file__), "locale"),
+    path.join(module_path("recollection"), "locale"),
 )
 
 # Javascript and CSS compression

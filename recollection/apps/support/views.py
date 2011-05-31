@@ -7,7 +7,7 @@ from django.template import loader, Context, RequestContext
 from django_redmine.utils import RedmineClient, RedmineIssue
 from django_redmine.consts import *
 
-from freemix.transform.views import get_akara_version
+from recollection.utils.views import get_akara_version
 from freemix.transform.conf import AKARA_URL_PREFIX
 from freemix import __version__ as freemix_version
 from freemix.utils import get_user, get_site_url
