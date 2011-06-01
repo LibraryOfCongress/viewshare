@@ -1,0 +1,35 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load compress %}
+{% load uni_form_tags %}
+
+{% block head_css %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}upload/css/upload.css"/>
+{% endblock %}
+
+{% block rtab_id %}id="data_tab"{% endblock %}
+
+{% block data-tab-selected %} ui-tabs-selected ui-state-active{% endblock %}
+{% block subnav %}
+{% endblock %}
+
+{% block body %}
+
+          <fieldset>
+
+            <legend>{% trans "Load ContentDM"%}</legend>
+
+                <form action="" method="post" class="uniForm">
+                        {{ form|as_uni_form }}
+                      <div class="buttons">
+                          <input type="submit" value="{% trans "Upload" %}" class="submit" />
+                          <a href="{% url upload_dataset %}"><input type="button" value="{% trans "Cancel" %}" class="load-form-cancel negative-button" /></a>
+                      </div>
+                </form>
+
+          </fieldset>
+
+
+{% endblock %}

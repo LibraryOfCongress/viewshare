@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
-from django.views.generic.simple import direct_to_template
+from django.views.generic.base import RedirectView
 from django.contrib import admin
 
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
@@ -43,7 +43,6 @@ urlpatterns = patterns('',
 
     (r'^catalog/', include('recollection.apps.collection_catalog.urls')),
     (r'^userhome/', include('recollection.apps.userhome.urls')),
-    (r'^userupload/', include('recollection.apps.userupload.urls')),
     (r'^support/', include('recollection.apps.support.urls')),
 
     url(r'^profiles/profile/(?P<username>[\w\._-]+)/connections/$',
@@ -59,12 +58,17 @@ urlpatterns = patterns('',
         'recollection.apps.connections.views.dataviews_by_user_connections',
         name='dataviews_by_user_connections'),
 
-    (r'^transform-proxy/', include('freemix.transform.urls')),
+    (r'^upload/', include('recollection.upload.urls')),
+    (r'^data/', include('freemix.dataset.urls')),
+
     (r'^data/', include('freemix.dataprofile.urls')),
     (r'^views/', include('freemix.freemixprofile.urls')),
     (r'^canvas/', include('freemix.canvas.urls')),
     (r'^augment/', include('freemix.augment.urls')),
     url(r'mix/', 'recollection.mixer.mix_data', name='mixer_receiving_endpoint'),
+
+    # For legacy purposes
+    url(r'^userupload/$', RedirectView.as_view(url="/upload"), name="user_upload"),
 
     # CMS url definition should come after all others
     (r'^', include('cms.urls')),

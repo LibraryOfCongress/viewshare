@@ -10,7 +10,7 @@
   
 {% if is_me %}
 
-{% ifequal other_user.data_sets.count 0 %}
+{% ifequal other_user.datasets.count 0 %}
 
 <div class="user_data_upload">
   <p class="hyper-upload">
@@ -21,18 +21,18 @@
 
 {% endifequal %}
 
-{% ifnotequal other_user.data_sets.count 0 %}
+{% ifnotequal other_user.datasets.count 0 %}
 
 <div class="dataset_list">
   <h2>{% blocktrans %}Data Sets{% endblocktrans %}</h2>
-  {% dataset_list other_user.data_sets.all 3 0 %}
+  {% dataset_list other_user.datasets.all 3 0 %}
 
-  {% ifnotequal other_user.data_sets.count 0 %}
-  {% ifnotequal other_user.data_sets.count 1 %}
-  {% ifnotequal other_user.data_sets.count 2 %}
-  {% ifnotequal other_user.data_sets.count 3 %}
+  {% ifnotequal other_user.datasets.count 0 %}
+  {% ifnotequal other_user.datasets.count 1 %}
+  {% ifnotequal other_user.datasets.count 2 %}
+  {% ifnotequal other_user.datasets.count 3 %}
   <div class="see_all">
-    <a href="{% url user_datasets other_user.username %}">{% trans "See all" %}  {{other_user.data_sets.count}} set{{ other_user.data_sets.count|pluralize }}</a>
+    <a href="{% url user_datasets other_user.username %}">{% trans "See all" %}  {{other_user.datasets.count}} set{{ other_user.datasets.count|pluralize }}</a>
   </div>
   {% endifnotequal %}
   {% endifnotequal %}
@@ -62,17 +62,17 @@
 
 {% else %}
 
-{% ifnotequal other_user.data_sets.count 0 %}
+{% ifnotequal other_user.datasets.count 0 %}
 
 <div class="dataset_list">
   <h2>{% blocktrans %}Data Sets{% endblocktrans %}</h2>
-  {% dataset_list other_user.data_sets.all 3 0 %}
-  {% ifnotequal other_user.data_sets.count 0 %}
-  {% ifnotequal other_user.data_sets.count 1 %}
-  {% ifnotequal other_user.data_sets.count 2 %}
-  {% ifnotequal other_user.data_sets.count 3 %}
+  {% dataset_list other_user.datasets.all 3 0 %}
+  {% ifnotequal other_user.datasets.count 0 %}
+  {% ifnotequal other_user.datasets.count 1 %}
+  {% ifnotequal other_user.datasets.count 2 %}
+  {% ifnotequal other_user.datasets.count 3 %}
   <div class="see_all">
-    <a href="{% url user_datasets other_user.username %}">{% trans "See all" %} {{other_user.data_sets.count}} set{{ other_user.data_sets.count|pluralize }}</a>
+    <a href="{% url user_datasets other_user.username %}">{% trans "See all" %} {{other_user.datasets.count}} set{{ other_user.datasets.count|pluralize }}</a>
   </div>
   {% endifnotequal %}
   {% endifnotequal %}
