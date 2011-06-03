@@ -52,7 +52,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'recollection.urls'
 
 AUTHENTICATION_BACKENDS  = (
-    'freemix.permissions.FreemixPermissionsBackend',
+    'freemix.permissions.RegistryBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 
