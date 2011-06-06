@@ -1,3 +1,4 @@
+import logging
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
@@ -14,6 +15,8 @@ from freemix.dataprofile.models import create_dataset
 
 from recollection import __version__ as recollection_version
 from recollection.apps.support import forms
+
+logger = logging.getLogger(__name__)
 
 def redmine_create_issue(project_id, subject, description, tracker, author,
                          status = None,
@@ -122,14 +125,19 @@ class RedmineIssueView(object):
         c = RequestContext(request, self.generate_context(request, form, *args, **kwargs))
         subject = self.issue_subject(c)
         description = t.render(c)
-        issue_id = redmine_create_issue(settings.REDMINE_PROJECT_ID,
+        proj_id = getattr(settings, "REDMINE_PROJECT_ID", None)
+        if proj_id:
+            issue_id = redmine_create_issue(settings.REDMINE_PROJECT_ID,
                                   subject,
                                   description,
                                   REDMINE_CONSTS['TRACKER']['SUPPORT'],
                                   settings.REDMINE_USER_ID)
+        else:
+            logger.debug("Creating redmine issue: %s\n%s"%(subject, description))
+            issue_id=0
         return render_to_response(self.response_template,
                                   {'issue_id': issue_id,
-                                   'issue_link':  '%s/issues/%s' % (settings.REDMINE_URL, issue_id) },
+                                   'issue_link':  '%s/issues/%s' % (getattr(settings, "REDMINE_URL", "http://example.com"), issue_id) },
                                  context_instance=RequestContext(request))
 
 class AugmentationIssueView(RedmineIssueView):
@@ -152,8 +160,6 @@ class AugmentationIssueView(RedmineIssueView):
 class DataLoadIssueView(RedmineIssueView):
 
     def generate_context(self, request, form, *args, **kwargs):
-        support = get_user(settings.SUPPORT_USER)
-
         tx_id = kwargs["tx_id"]
         c = super(DataLoadIssueView, self).generate_context(request, form)
         return dict(c, **{"tx_id": tx_id})

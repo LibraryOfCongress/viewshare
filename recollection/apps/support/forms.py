@@ -74,8 +74,6 @@ class SupportIssueForm(forms.Form):
 
 class DataLoadUploadIssueForm(SupportIssueForm):
 
-    tx_id = forms.CharField(required=True, widget=widgets.HiddenInput)
-        
     issue_reason = forms.ChoiceField(required=True, label=_("Reason"),
                                     help_text="Please select the issue you are experiencing, or 'Other' if it isn't listed")
     issue_reason_text = forms.CharField(required=False, label=_("Description"))
@@ -113,7 +111,6 @@ class DataLoadIgnoredFieldsIssueForm(SupportIssueForm):
     """
     Form for reporting ignored data in transformation
     """
-    tx_id = forms.CharField(required=True, widget=widgets.HiddenInput)
     elements = forms.CharField(required=True, widget=widgets.Textarea, help_text=_("Please edit this list to highlight the elements or attributes for which you would like support"))
 
     comments = forms.CharField(required=False, widget=widgets.Textarea,

@@ -79,8 +79,9 @@
                            $(".messages>li.error", $(this)).addClass("ui-corner-all").addClass("ui-state-error");
                            $(".messages>li", $(this)).prepend("<a href='#' class='ui-icon ui-icon-closethick close-message'>&#160;</a> ");
                            $("#support-spinner").hide();
-                           $("#support").show();
                            dialog.find(".messages").remove().end().prepend(this);
+
+                           $("#load-error").show();
                        });
 
                    },
