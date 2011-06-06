@@ -1,16 +1,23 @@
+from django.core.files.storage import FileSystemStorage
 from django.db import models
-from freemix.dataset.models import DataSource, URLDataSourceMixin, FileDataSourceMixin
+import os
+from freemix.dataset.models import DataSource, URLDataSourceMixin, make_file_data_source_mixin
 from django.utils.translation import ugettext_lazy as _
 from freemix.transform.views import AkaraTransformClient
 from recollection.upload import conf
 
+def source_upload_path(instance, filename):
+    return os.path.join(instance.uuid, filename)
 
+fs = FileSystemStorage(location=conf.FILE_UPLOAD_PATH)
+
+file_datasource_mixin = make_file_data_source_mixin(storage=fs, upload_to=source_upload_path)
 
 class URLDataSource(URLDataSourceMixin, DataSource):
     """Generic URL data source
     """
 
-class FileDataSource(FileDataSourceMixin, DataSource):
+class FileDataSource(file_datasource_mixin, DataSource):
     """Generic File data source
     """
 
@@ -74,6 +81,6 @@ class ModsURLDataSource(ModsMixin, URLDataSourceMixin, DataSource):
     """Load XMLMODS from a URL
     """
 
-class ModsFileDataSource(ModsMixin, FileDataSourceMixin, DataSource):
+class ModsFileDataSource(ModsMixin, file_datasource_mixin, DataSource):
     """Load XMLMODS from an uploaded file
     """

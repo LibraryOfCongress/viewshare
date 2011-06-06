@@ -19,9 +19,11 @@
 
           <fieldset>
 
-            <legend>{% trans "Load ContentDM"%}</legend>
+            <legend>
+                {% block upload_form_title %}{% trans "Load Data"%}{% endblock %}
+            </legend>
 
-                <form action="" method="post" class="uniForm">
+                <form action="" method="post" class="uniForm" {% block uploadform_enctype %}{% endblock %}>
                         {{ form|as_uni_form }}
                       <div class="buttons">
                           <input type="submit" value="{% trans "Upload" %}" class="submit" />

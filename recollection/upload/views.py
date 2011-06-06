@@ -27,24 +27,24 @@ class CreateDataSourceView(CreateView):
     
 create_cdm_view = CreateDataSourceView.as_view(model_class=models.ContentDMDataSource,
                                                form_class=forms.ContentDMDataSourceForm,
-                                               template_name="recollection/upload/datasource_form.html")
+                                               template_name="recollection/upload/cdm_datasource_form.html")
 
 
 create_url_view = CreateDataSourceView.as_view(model_class=models.URLDataSource,
                                                form_class=forms.URLDataSourceForm,
-                                               template_name="recollection/upload/datasource_form.html")
+                                               template_name="recollection/upload/url_datasource_form.html")
 
 
 create_file_view = CreateDataSourceView.as_view(model_class=models.FileDataSource,
                                                form_class=forms.FileDataSourceForm,
-                                               template_name="recollection/upload/datasource_form.html")
+                                               template_name="recollection/upload/file_datasource_form.html")
 
 
 create_mods_url_view = CreateDataSourceView.as_view(model_class=models.ModsURLDataSource,
                                                form_class=forms.ModsURLDataSourceForm,
-                                               template_name="recollection/upload/datasource_form.html")
+                                               template_name="recollection/upload/modsurl_datasource_form.html")
 
 
 create_mods_file_view = CreateDataSourceView.as_view(model_class=models.ModsFileDataSource,
                                                form_class=forms.ModsFileDataSourceForm,
-                                               template_name="recollection/upload/datasource_form.html")
+                                               template_name="recollection/upload/modsfile_datasource_form.html")

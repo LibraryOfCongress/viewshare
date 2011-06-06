@@ -10,6 +10,13 @@
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}upload/css/upload.css"/>
 {% endblock %}
 
+{%  block head_scripts %}
+    {{ block.super }}
+    {% include "js_include/jquery_ui.html" %}
+
+    <script type="text/javascript" src="{{ STATIC_URL }}upload/js/upload.js"></script>
+{% endblock %}
+
 {% block rtab_id %}id="data_tab"{% endblock %}
 
 {% block data-tab-selected %} ui-tabs-selected ui-state-active{% endblock %}
