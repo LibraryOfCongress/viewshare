@@ -1,8 +1,7 @@
 (function($) {
 
-
     function getFormUrl() {
-        return "/support/issue/dataload-" + $("#contents").data("data-load-transaction").source + "-ignored-fields/";
+        return $("link[rel='support/ignored-fields']").attr("href");
     }
 
 
@@ -32,26 +31,13 @@
             }
         };
 
-        var datasource_visibility = function() {
-            if ($("#id_upload_type").val() == "url") {
-                $("#div_id_file").hide();
-                $("#div_id_url").show().effect("highlight");
-            } else {
-                $("#div_id_url").hide();
-                $("#div_id_file").show().effect("highlight");
-            }
 
-        };
         $("#id_contact_type").change(function() {
             contact_visibility();
         });
 
         $("#id_browser").change(function() {
             browser_visibility();
-        });
-
-        $("#id_upload_type").change(function() {
-            datasource_visibility();
         });
 
         form.ajaxForm({
@@ -63,11 +49,6 @@
 
                      },
             beforeSubmit: function(formData, jqForm, options) {
-                              var form = jqForm[0];
-                              if (!form.file.value) {
-                                  $("#support #div_id_file").addClass("error").prepend("<p class='errorField'>Please select the file to be uploaded</p>");
-                                  return false;
-                              }
                               $("#support").hide();
                               $("#support-spinner").show();
                           },
@@ -84,7 +65,6 @@
         });
         contact_visibility();
         browser_visibility();
-        datasource_visibility();
         return form;
     }
 

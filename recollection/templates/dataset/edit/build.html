@@ -4,12 +4,13 @@
 
 {% block head_scripts %}
     {{block.super}}
+    <script src="{{ STATIC_URL }}uni_form/uni-form.jquery.js" type="text/javascript"></script>
+
     <script type="text/javascript" src="{{STATIC_URL}}utils/js/lib/ui.multiselect.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}freemix/augment/js/augment.js"></script>   
 
     <script type="text/javascript" src="{{STATIC_URL}}support/js/base.js"></script>   
-    <script type="text/javascript" src="{{STATIC_URL}}support/js/augment.js"></script>   
-    <script type="text/javascript" src="{{STATIC_URL}}support/js/load.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}support/js/augment.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}support/js/ignored_fields.js"></script>
 {% endblock head_scripts %}
 
@@ -17,6 +18,13 @@
     <button class="data-property-add">{% trans "Augment Data" %}</button>
     <button class="data-refresh">{% trans "Refresh Augmented Data" %}</button>
     {{ block.super }}
+{% endblock %}
+
+{% block head_data %}
+    {{ block.super }}
+    <link rel="support/ignored_fields" href="{% url ignored_fields_issue tx_id=transaction.tx_id %}"/>
+    <link rel="support/augment" href="{% url create_augmentation_issue %}"/>
+
 {% endblock %}
 
 {% block describe_messages %}

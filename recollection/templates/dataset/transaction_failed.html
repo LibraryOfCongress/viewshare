@@ -1,0 +1,78 @@
+{% extends "site_base.html" %}
+{% load i18n %}
+{% load compress %}
+{% load uni_form_tags %}
+
+{% block head_scripts %}
+    {{ block.super }}
+    {% include "js_include/jquery_ui.html" %}
+    <script src="{{ STATIC_URL }}uni_form/uni-form.jquery.js" type="text/javascript"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}utils/js/lib/jquery.form.js"></script>
+
+    <script type="text/javascript" src="{{STATIC_URL}}support/js/base.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}support/js/load.js"></script>
+
+{% endblock %}
+
+{% block head_css %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}upload/css/upload.css"/>
+{% endblock %}
+
+{% block head_data %}
+
+    {{ block.super }}
+    <link rel="recollection/support" href="{% url upload_issue tx_id=transaction.tx_id %}">
+{% endblock %}
+
+{% block rtab_id %}id="data_tab"{% endblock %}
+
+{% block data-tab-selected %} ui-tabs-selected ui-state-active{% endblock %}
+{% block subnav %}
+{% endblock %}
+
+{% block body %}
+    <div id="load-error">
+  <ul id="load-messages" class="messages">
+      <li id="load-failure-general" class="error">
+          {% blocktrans %}
+          <p>We're sorry that you've encountered a problem uploading your file. Please use the following troubleshooting tips to try to correct the problem.</p>
+
+          <p>For XML MODS:</p>
+
+          <ul>
+              <li>XML MODS files must be valid XML. Try the validator at <a href = "http://www.validome.org/xml/">validome</a>.</li>
+              <li>Check that they follow the Metadata Object Description Schema (MODS) schema. For more information about the MODS schema can be found at the <a href = "http://www.loc.gov/standards/mods/">MODS home page</a>.</li>
+          </ul>
+
+          <p>For CONTENTdm:</p>
+          <ul>
+              <li>Check to see whether the site uses CONTENTdm v4. This is the only version of CONTENTdm currently supported by Recollection. Please also ensure that the target site is hosted reliably enough to support the heavy level of access required by the CONTENTdm adapter.</li>
+          </ul>
+
+          <p>For OAI-PMH:</p>
+          <ul>
+              <li>Check to make sure the target OAI-PMH installation is compatible with MIT DSpace.</li>
+          </ul>
+
+          <p>For spreadsheets:</p>
+
+          <ul>
+              <li>Remove any data that is not in a solid rectangular area. This includes white space, page titles, scattered cells, and additional worksheets.</li>
+              <li>Check that your formatting is consistent throughout each column (e.g. column is all in date format, currency format, etc. as appropriate).</li>
+              <li>Make sure that data of the same type but in different columns is formatted consistently (e.g. dates in different columns are in the same date format).</li>
+          </ul>
+
+          <p>If you have a file that you think should work after troubleshooting please <strong><a href="" class="support-link">Click here to create a support ticket</a></strong>.
+
+          {% endblocktrans %}
+          </li>
+
+      </ul>
+    <a href="{% url upload_dataset %}"><input type="button" value="{% trans "Back to Upload" %}" class="load-form-cancel negative-button" /></a>
+    </div>
+    <div id="support" class="ui-helper-hidden"></div>
+    <div id="support-spinner" class="ui-helper-hidden loading">
+        <p>{% blocktrans %}Requesting ticket, please be patient.{% endblocktrans %}</p>
+    </div>
+{% endblock %}

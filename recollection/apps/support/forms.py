@@ -74,6 +74,8 @@ class SupportIssueForm(forms.Form):
 
 class DataLoadUploadIssueForm(SupportIssueForm):
 
+    tx_id = forms.CharField(required=True, widget=widgets.HiddenInput)
+        
     issue_reason = forms.ChoiceField(required=True, label=_("Reason"),
                                     help_text="Please select the issue you are experiencing, or 'Other' if it isn't listed")
     issue_reason_text = forms.CharField(required=False, label=_("Description"))
@@ -81,8 +83,6 @@ class DataLoadUploadIssueForm(SupportIssueForm):
     file_format=forms.ChoiceField(required=True, label=_("Format"),
                                   help_text="Please select the format of the file you are attempting to load, or 'Other' to enter another format")
     file_format_text=forms.CharField(required=False, label=_("File Format Description"), help_text=_("Please describe your file format"))
-
-
 
     def __init__(self, *args, **kwargs):
         super(DataLoadUploadIssueForm, self).__init__(*args, **kwargs)
@@ -108,28 +108,17 @@ class DataLoadUploadIssueForm(SupportIssueForm):
             raise forms.ValidationError(_("Please describe your data loading issue"))
         return issue_reason_text
 
-class URLDataLoadUploadIssueForm(DataLoadUploadIssueForm):
-    url = forms.URLField(label=_("Source URL"))
-
-class FileDataLoadUploadIssueForm(DataLoadUploadIssueForm):
-    file = forms.FileField(label=_("Source File"), required=False)
 
 class DataLoadIgnoredFieldsIssueForm(SupportIssueForm):
     """
     Form for reporting ignored data in transformation
     """
-
+    tx_id = forms.CharField(required=True, widget=widgets.HiddenInput)
     elements = forms.CharField(required=True, widget=widgets.Textarea, help_text=_("Please edit this list to highlight the elements or attributes for which you would like support"))
 
     comments = forms.CharField(required=False, widget=widgets.Textarea,
                                label=_("Additional Comments"),
                                help_text=_("Any additional information about your data or the issue you are experiencing that could be helpful"))
-
-class URLDataLoadIgnoredFieldsIssueForm(DataLoadIgnoredFieldsIssueForm):
-    url = forms.URLField(label=_("Source URL"))
-
-class FileDataLoadIgnoredFieldsIssueForm(DataLoadIgnoredFieldsIssueForm):
-    file = forms.FileField(label=_("Source File"), required=False)
 
 
 

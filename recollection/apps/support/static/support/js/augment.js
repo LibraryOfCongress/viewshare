@@ -1,5 +1,10 @@
 (function($, Freemix) {
 
+
+    function getFormUrl() {
+        return $("link[rel='support/augment']").attr("href");
+    }
+
     function resetForm() {
         var dialog = $("div#support");
         var form = $("form", dialog);
@@ -64,7 +69,7 @@
         var root = $("div#support");
         $("a#augment-support-link").click(function(e) {
             e.preventDefault();
-            root.empty().load("/support/issue/augmentation/ #issue_create_content", function() {
+            root.empty().load(getFormUrl() + " #issue_create_content", function() {
                 var form = resetForm();
 
                 var p = $("#augment-failure-picker").data("property");

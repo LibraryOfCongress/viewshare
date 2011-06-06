@@ -1,8 +1,7 @@
 from django.conf import settings
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
-from django.template import loader, Context, RequestContext
+from django.template import loader, RequestContext
 
 from django_redmine.utils import RedmineClient, RedmineIssue
 from django_redmine.consts import *
@@ -15,7 +14,6 @@ from freemix.dataprofile.models import create_dataset
 
 from recollection import __version__ as recollection_version
 from recollection.apps.support import forms
-from recollection.apps.support import models
 
 def redmine_create_issue(project_id, subject, description, tracker, author,
                          status = None,
@@ -99,7 +97,7 @@ class RedmineIssueView(object):
         return render_to_response(self.create_template, {'form': form},
                                   context_instance=RequestContext(request))
 
-    def generate_context(self, request, form):
+    def generate_context(self, request, form, *args, **kwargs):
         return dict(form.cleaned_data, **{
             'submitting_user_name': request.user.get_profile().name or request.user.username,
             'submitting_user_profile': get_site_url(reverse('profile_detail',
@@ -121,7 +119,7 @@ class RedmineIssueView(object):
     def create_issue(self, request, form, *args, **kwargs):
         t = loader.get_template(self.issue_template)
 
-        c = RequestContext(request, self.generate_context(request, form))
+        c = RequestContext(request, self.generate_context(request, form, *args, **kwargs))
         subject = self.issue_subject(c)
         description = t.render(c)
         issue_id = redmine_create_issue(settings.REDMINE_PROJECT_ID,
@@ -145,7 +143,7 @@ class AugmentationIssueView(RedmineIssueView):
             context.get("dataset")
         )
 
-    def generate_context(self, request, form):
+    def generate_context(self, request, form, *args, **kwargs):
         support = get_user(settings.SUPPORT_USER)
         profile = create_dataset(support, form.cleaned_data.get("profile_json"))
         c = super(AugmentationIssueView, self).generate_context(request, form)
@@ -153,29 +151,15 @@ class AugmentationIssueView(RedmineIssueView):
 
 class DataLoadIssueView(RedmineIssueView):
 
-    def __init__(self, *args, **kwargs):
-        super(DataLoadIssueView, self).__init__(*args, **kwargs)
-        self.source_type = kwargs.get("source_type", "url")
-
-
-    def generate_context(self, request, form):
+    def generate_context(self, request, form, *args, **kwargs):
         support = get_user(settings.SUPPORT_USER)
-        if self.source_type == "url":
-            url = form.cleaned_data.get("url")
-        else:
-            ds = models.SupportFileDataSource(user = request.user, file=request.FILES['file'])
-            ds.save()
-            url = get_site_url(ds.file.url)
 
+        tx_id = kwargs["tx_id"]
         c = super(DataLoadIssueView, self).generate_context(request, form)
-        return dict(c, **{"url": url})
+        return dict(c, **{"tx_id": tx_id})
 
 
 class DataLoadIgnoredFieldsIssueView(DataLoadIssueView):
-
-    def __init__(self, *args, **kwargs):
-        super(DataLoadIgnoredFieldsIssueView, self).__init__(*args, **kwargs)
-
 
     create_template="support/ignored_field_issue.html"
     issue_template = "support/ignored_field_description.html"
@@ -183,19 +167,15 @@ class DataLoadIgnoredFieldsIssueView(DataLoadIssueView):
     def issue_subject(self, context):
         return "%s requests data transformation support"%(context.get("submitting_user_name"),)
 
-url_ignored_fields_issue_view = DataLoadIgnoredFieldsIssueView(source_type="url", form_class=forms.URLDataLoadIgnoredFieldsIssueForm)
-file_ignored_fields_issue_view = DataLoadIgnoredFieldsIssueView(source_type="file", form_class=forms.FileDataLoadIgnoredFieldsIssueForm)
+ignored_fields_issue_view = DataLoadIgnoredFieldsIssueView(form_class=forms.DataLoadIgnoredFieldsIssueForm)
+
 
 
 class DataLoadUploadIssueView(DataLoadIssueView):
-
-    def __init__(self, *args, **kwargs):
-        super(DataLoadUploadIssueView, self).__init__(*args, **kwargs)
 
     create_template="support/upload_issue.html"
     issue_template="support/upload_description.html"
 
     def issue_subject(self, context):
         return "%s requests data upload support"%(context.get("submitting_user_name"),)
-url_upload_issue_view = DataLoadUploadIssueView(source_type="url", form_class=forms.URLDataLoadUploadIssueForm)
-file_upload_issue_view = DataLoadUploadIssueView(source_type="file", form_class=forms.FileDataLoadUploadIssueForm)
+upload_issue_view = DataLoadUploadIssueView(form_class=forms.DataLoadUploadIssueForm)
