@@ -189,7 +189,8 @@ $(document).ready(function() {
    {% endif %} {# is_friend #}
    {% endif %} {# is me #}
   {% else %} {# not user.is_authenticated #}
-  <p class="center">{% blocktrans %}<a href="{% url acct_login %}">Log in</a> to add this person as a connection.{% endblocktrans %}</p>
+  {% url acct_login as login_url %}
+  <p class="center">{% blocktrans %}<a href="{{login_url}}">Log in</a> to add this person as a connection.{% endblocktrans %}</p>
     {% endif %}
  </div>
 
