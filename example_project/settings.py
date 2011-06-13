@@ -46,5 +46,8 @@ USE_I18N = True
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'iskr$jxwhx2=nue7un*m5#kceyf)@!r#5_q4jrf-8-#jygjy+v'
-
+USERVOICE_SETTINGS = {
+   'API_KEY': '5247118fbbe88bd5d74e15b1257a2a80',
+   'ACCOUNT_KEY': 'recollection',
+}
 
