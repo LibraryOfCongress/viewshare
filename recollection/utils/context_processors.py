@@ -43,7 +43,7 @@ recollection_settings = settings_processor(
     'CONTACT_EMAIL',
     'SITE_NAME',
     'ACCOUNT_OPEN_SIGNUP',
-    'USERVOICE_API_KEY'
+    'USERVOICE_SETTINGS'
 )
 
 from django.core.exceptions import ImproperlyConfigured

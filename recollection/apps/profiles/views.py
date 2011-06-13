@@ -192,20 +192,19 @@ def uservoice_token(request, **kwargs):
     block_size = 16
     mode = AES.MODE_CBC
 
-    if 'USERVOICE_API_KEY' in dir(settings):
-        api_key = settings.USERVOICE_API_KEY
+    invalid_key = 'invalid-key'
+    if 'USERVOICE_SETTINGS' in dir(settings):
+        api_key = settings.USERVOICE_SETTINGS.get('API_KEY',invalid_key)
+        account_key = settings.USERVOICE_SETTINGS.get('ACCOUNT_KEY',invalid_key)
     else:
         # Disable SSO by using a garbage key. Will result in logged auth
         # failures in the Uservoice admin console.
-        api_key = "invalid-key"
+        api_key = invalid_key
+        account_key = invalid_key
 
-    account_key = 'recollection'
     iv = "OpenSSL for Ruby"
 
     json = simplejson.dumps(sso_data, separators=(',',':'))
-    f = open("/tmp/sso_token.json","w")
-    f.write(json)
-    f.close()
 
     salted = api_key+account_key
     saltedHash = hashlib.sha1(salted).digest()[:16]
