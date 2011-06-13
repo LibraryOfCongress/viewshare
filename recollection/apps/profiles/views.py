@@ -13,10 +13,20 @@ from django.utils.translation import ugettext
 from friends.forms import InviteFriendForm
 from friends.models import FriendshipInvitation, Friendship
 
-from .models import Profile
+from .models import Profile, nice_username
 from .forms import ProfileForm
 
 from avatar.templatetags.avatar_tags import avatar
+
+from Crypto.Cipher import AES
+import base64
+import hashlib
+import urllib
+import operator
+import array
+import simplejson
+import time
+from datetime import datetime
 
 
 if "notification" in settings.INSTALLED_APPS:
@@ -157,3 +167,60 @@ def profile_edit(request, form_class=ProfileForm, **kwargs):
         "profile": profile,
         "profile_form": profile_form,
     }, context_instance=RequestContext(request))
+
+@login_required
+def uservoice_token(request, **kwargs):
+    """
+    Return a UserVoice single-sign-on (SSO) token
+
+    Code derived from http://developer.uservoice.com/docs/single-sign-on-how-to
+    """
+
+    # Calc expiry time. UV needs it in GMT
+    dt=time.mktime(request.session.get_expiry_date().timetuple())
+    utc_dt = datetime.fromtimestamp(dt)
+    expires = utc_dt.strftime("%Y-%m-%d %H:%M:%S")
+
+    sso_data = {
+        'guid': request.user.username,
+        'expires': expires,
+        'email': request.user.email,
+        'display_name': nice_username(request.user),
+        'admin': 'accept' if request.user.is_staff else 'deny',
+    }
+
+    block_size = 16
+    mode = AES.MODE_CBC
+
+    invalid_key = 'invalid-key'
+    if 'USERVOICE_SETTINGS' in dir(settings):
+        api_key = settings.USERVOICE_SETTINGS.get('API_KEY',invalid_key)
+        account_key = settings.USERVOICE_SETTINGS.get('ACCOUNT_KEY',invalid_key)
+    else:
+        # Disable SSO by using a garbage key. Will result in logged auth
+        # failures in the Uservoice admin console.
+        api_key = invalid_key
+        account_key = invalid_key
+
+    iv = "OpenSSL for Ruby"
+
+    json = simplejson.dumps(sso_data, separators=(',',':'))
+
+    salted = api_key+account_key
+    saltedHash = hashlib.sha1(salted).digest()[:16]
+
+    json_bytes = array.array('b', json[0 : len(json)])
+    iv_bytes = array.array('b', iv[0 : len(iv)])
+
+    # # xor the iv into the first 16 bytes.
+    for i in range(0, 16):
+        json_bytes[i] = operator.xor(json_bytes[i], iv_bytes[i])
+
+    pad = block_size - len(json_bytes.tostring()) % block_size
+    data = json_bytes.tostring() + pad * chr(pad)
+    aes = AES.new(saltedHash, mode, iv)
+    encrypted_bytes = aes.encrypt(data)
+
+    param_for_uservoice_sso = urllib.quote(base64.b64encode(encrypted_bytes))
+
+    return HttpResponse(param_for_uservoice_sso,mimetype='text/plain')
