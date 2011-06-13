@@ -14,13 +14,13 @@
 {# note: need to do logic this way due to template processing pipeline #}
 
 {% block mydata-tab-selected %}
-  {% ifequal user.username username %} ui-tabs-selected ui-state-active{% endifequal %}
+  {% ifequal user owner  %} ui-tabs-selected ui-state-active{% endifequal %}
 {% endblock %}
 
 {# if user being inspected is not the one logged in, create a hierarchical tab-group for display #}
 
 {% block extra_subnav %}
-{% ifnotequal user.username username %}
+{% ifnotequal user owner %}
 <li>
   <ul class="tab-group">
     <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="">{{ owner|nicename }}</a></li>
@@ -33,7 +33,7 @@
 
 <h1>{{owner|nicename}}{% blocktrans %}'s Data Sets{% endblocktrans %}</h1>
 
-{% ifequal user.username username %}
+{% ifequal user owner  %}
 <div class="priority-area">
 <a href="{% url upload_dataset %}" class="button_link">{% trans "Upload Data" %}</a>
 </div>
@@ -42,7 +42,7 @@
 <div class="data_details">
   {% if object_list.count %}
   <p>
-  {% ifequal user.username username %}
+  {% ifequal user owner  %}
     {% trans "You have" %}
   {% else %}
     {{ owner|nicename }} {% trans "has" %}
