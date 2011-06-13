@@ -108,7 +108,7 @@ $(document).ready(function() {
         <img src="{% avatar_url other_user 96 %}" alt="{% trans "Photo of" %} {{ other_user|nicename }}" class="photo" />
        </div>
        {% if is_me %}
-       <a href="{% url avatar_change %}" id="avatar_replace">({% trans "replace" %})</a>
+       <a class="ui-helper-hidden" href="{% url avatar_change %}" id="avatar_replace">({% trans "replace" %})</a>
        {% endif %}
       </div>
      </td>

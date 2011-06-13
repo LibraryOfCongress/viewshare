@@ -60,7 +60,7 @@
     <div id="tabs" class="ui-tabs ui-widget ui-corner-all">
         <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-corner-all">
             <li class="ui-state-default ui-corner-top{% block profile-tab-selected %}{% endblock %}"><a href="{% url profile_detail user %}">{% trans "Users" %}</a></li>
-            <li class="ui-state-default ui-corner-top{% block data-tab-selected %}{% endblock %}"><a href="{% url user_datasets user %}">{% trans "Data" %}</a></li>
+            <li class="ui-state-default ui-corner-top{% block data-tab-selected %}{% endblock %}"><a href="{% url dataset_list_by_owner owner=user %}">{% trans "Data" %}</a></li>
             <li class="ui-state-default ui-corner-top{% block view-tab-selected %}{% endblock %}"><a href="{% url freemix_root user %}">{% trans "Views" %}</a></li>
             <li class="ui-state-default ui-corner-top{% block messages-tab-selected %}{% endblock %}"><a href="{% url notification.views.notices %}">{% trans "Messages" %}{% if notice_unseen_count %} ({{ notice_unseen_count }}){% endif %}</a></li>
         </ul>

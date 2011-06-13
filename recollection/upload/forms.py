@@ -11,13 +11,13 @@ class DataSourceForm(forms.ModelForm):
 
     def save(self, commit=True):
         instance = super(DataSourceForm, self).save(commit=False)
-        instance.user = self.user
+        instance.owner = self.user
         instance.save()
         return instance
 
     class Meta:
         model = DataSource
-        exclude= ('user', 'uuid')
+        exclude= ('owner', 'uuid')
 
 
 class FileDataSourceForm(DataSourceForm):

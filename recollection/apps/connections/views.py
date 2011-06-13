@@ -1,15 +1,15 @@
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
-from django.conf import settings
 from django.contrib.auth.decorators import login_required
 
 from django.utils.translation import ugettext_lazy as _
 
 from friends.models import *
-from freemix.utils.views import ListView
+from freemix.dataset.models import Dataset
+from freemix.permissions import PermissionsRegistry
+from freemix.utils.views import LegacyListView
+from django.views.generic.list import ListView
 from freemix.utils import get_user
-from freemix.dataprofile.models import DataProfile
-from freemix.dataprofile.views import DatasetListView
 from freemix.freemixprofile.models import Freemix
 
 
@@ -47,7 +47,7 @@ def connections(request, template_name="connections/invitations.html"):
     }, context_instance=RequestContext(request))
 connections = login_required(connections)
 
-class ConnectionListByUserView(ListView):
+class ConnectionListByUserView(LegacyListView):
     template = "connections/connection_list_by_user.html"
 
     def get_queryset(self, request, username, other_user):
@@ -58,19 +58,30 @@ class ConnectionListByUserView(ListView):
 connection_list_by_user = ConnectionListByUserView()
 
 
-class DatasetListConnectionsView(DatasetListView):
+
+class DatasetListConnectionsView(ListView):
     """
-    Returns a list of datasets for a particular user on GET.
+    Returns a list of datasets belonging to the connections of a particular user.
     """
-    template = "connections/dataset_list_by_user_connections.html"
-    def get_queryset(self, request, username, other_user):
+
+    template_name="connections/dataset_list_by_user_connections.html"
+    def get_queryset(self):
+        user = get_object_or_404(User, username=self.kwargs.get("username"))
         pre_friend_ids = [i['friend'].id for i in
-                          Friendship.objects.friends_for_user(get_user(username))]
-        return DataProfile.objects.filter(user__pk__in=pre_friend_ids)
-datasets_by_user_connections = DatasetListConnectionsView()
+                          Friendship.objects.friends_for_user(user)]
+        list = Dataset.objects.filter(owner__pk__in=pre_friend_ids)
+        list = list.filter(PermissionsRegistry.get_filter("dataset.can_view", self.request.user))
+        return list
+
+    def get_context_data(self, **kwargs):
+        kwargs["other_user"] = get_object_or_404(User,
+                                            username=self.kwargs.get("username"))
+        return kwargs
+
+datasets_by_user_connections = DatasetListConnectionsView.as_view()
 
 
-class DataViewListConnectionsView(ListView):
+class DataViewListConnectionsView(LegacyListView):
     """
     Returns a list of datasets for a particular user on GET.
     """

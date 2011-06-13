@@ -4,9 +4,7 @@ from django.db import models
 from freemix.freemixprofile.models import Freemix
 from django.utils.translation import ugettext_lazy as _
 
-from freemix.utils import UrlMixin
-
-class CatalogModel(models.Model, UrlMixin):
+class CatalogModel(models.Model):
     "The base set of properties for catalog models"
 
     name = models.CharField(_('name'),
@@ -23,7 +21,7 @@ class CatalogModel(models.Model, UrlMixin):
             blank=True)
 
     @models.permalink
-    def get_url_path(self):
+    def get_absolute_url(self):
         "URL's should reverse to '<class>_resource'"
         reverse_url = "%s_resource" % self.__class__.__name__.lower()
         return (reverse_url, (), {'slug': self.slug})

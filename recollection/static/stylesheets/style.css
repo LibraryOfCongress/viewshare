@@ -283,6 +283,22 @@ li.dataset_summary, li.dataview_summary {
     padding-left: 30px;
 }
 
+.public .dataset-name {
+    background: transparent url(../images/data-icon.png) top left no-repeat;
+}
+
+.private .dataset-name {
+    background: transparent url(../images/lock.png) top left no-repeat;
+
+}
+li.private {
+    background: #fffcdf;
+}
+
+.dataset-description, .dataview-description {
+    padding-left: 30px;
+}
+
 .dataset-name {
     background: transparent url(../images/data-icon.png) top left no-repeat;
 }

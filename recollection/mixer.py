@@ -29,7 +29,7 @@ def extract_content(request):
 
 def create_mixed_dataset(use, contents):
     set = create_dataset(use, contents)
-    url = reverse("edit_data_set",
+    url = reverse("dataset_edit",
                   args=[use.username, set.slug])
     return HttpResponseRedirect(url)
 

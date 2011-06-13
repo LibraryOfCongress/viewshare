@@ -4,7 +4,7 @@
 {% load dataset_tags %}
 {% load freemix_helpers %}
 
-{% block head_title %}{{other_user|nicename}}{% blocktrans %}'s Data Sets{% endblocktrans %}{% endblock %}
+{% block head_title %}{{owner|nicename}}{% blocktrans %}'s Data Sets{% endblocktrans %}{% endblock %}
 
 {% block rtab_id %}id="data_tab"{% endblock %}
 
@@ -23,7 +23,7 @@
 {% ifnotequal user.username username %}
 <li>
   <ul class="tab-group">
-    <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="">{{ other_user|nicename }}</a></li>
+    <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="">{{ owner|nicename }}</a></li>
   </ul>
 </li>
 {% endifnotequal %}
@@ -31,7 +31,7 @@
 
 {% block body %}
 
-<h1>{{other_user|nicename}}{% blocktrans %}'s Data Sets{% endblocktrans %}</h1>
+<h1>{{owner|nicename}}{% blocktrans %}'s Data Sets{% endblocktrans %}</h1>
 
 {% ifequal user.username username %}
 <div class="priority-area">
@@ -40,17 +40,17 @@
 {% endifequal %}
 
 <div class="data_details">
-  {% if queryset.count %}
+  {% if object_list.count %}
   <p>
   {% ifequal user.username username %}
     {% trans "You have" %}
   {% else %}
-    {{ other_user|nicename }} {% trans "has" %}
+    {{ owner|nicename }} {% trans "has" %}
   {% endifequal %}
-  {{queryset.count}} {% trans "data set" %}{{ queryset.count|pluralize }}.
+  {{object_list.count}} {% trans "data set" %}{{ object_list.count|pluralize }}.
   </p>
   {% endif %}
-  {% dataset_list queryset %}
+  {% dataset_list object_list %}
 </div>
 
 {% endblock %}

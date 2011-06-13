@@ -1,7 +1,6 @@
 from django.db import models
 from django_extensions.db.fields import AutoSlugField
 from django.contrib.auth.models import User
-from freemix.utils import UrlMixin
 import os
 
 class SupportPickListItem(models.Model):

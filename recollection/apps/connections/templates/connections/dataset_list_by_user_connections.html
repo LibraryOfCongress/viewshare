@@ -28,10 +28,10 @@
     {% else %}
     {{ other_user|nicename }}{% blocktrans %}'s connections have{% endblocktrans %}
     {% endifequal %}
-    {{queryset.count}} {% trans "data set" %}{{ queryset.count|pluralize }}.
+    {{object_list.count}} {% trans "data set" %}{{ object_list.count|pluralize }}.
   </p>
 
-  {% dataset_list queryset %}
+  {% dataset_list object_list %}
 </div>
 
 

@@ -155,7 +155,7 @@ class AugmentationIssueView(RedmineIssueView):
         support = get_user(settings.SUPPORT_USER)
         profile = create_dataset(support, form.cleaned_data.get("profile_json"))
         c = super(AugmentationIssueView, self).generate_context(request, form)
-        return dict(c, **{"dataset": profile.get_site_url()})
+        return dict(c, **{"dataset": get_site_url(profile.get_absolute_url())})
 
 class DataLoadIssueView(RedmineIssueView):
 

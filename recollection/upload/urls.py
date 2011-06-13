@@ -5,7 +5,7 @@ from recollection.upload import views
 
 
 urlpatterns = patterns('',
-    url(r'^$', login_required(TemplateView.as_view(template_name="recollection/upload/upload.html")), name="upload_dataset"),
+    url(r'^$', TemplateView.as_view(template_name="recollection/upload/upload.html"), name="upload_dataset"),
     url(r'^file/$', login_required(views.create_file_view), name="file_transform"),
     url(r'^url/$', login_required(views.create_url_view), name="url_transform"),
     url(r'^modsfile/$', login_required(views.create_mods_file_view), name="mods_file_transform"),
