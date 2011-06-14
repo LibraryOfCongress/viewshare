@@ -46,9 +46,6 @@ SITE_ID = 1
 # to load the internationalization machinery.
 USE_I18N = True
 
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = 'iskr$jxwhx2=nue7un*m5#kceyf)@!r#5_q4jrf-8-#jygjy+v'
-
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
