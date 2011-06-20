@@ -1,4 +1,4 @@
-{% extends "embed/base.js" %}
+{% extends "exhibit/embed/base.js" %}
 {% load freemix_helpers %}
 
 {% block scripts %}
