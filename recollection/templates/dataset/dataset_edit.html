@@ -22,7 +22,9 @@
 
 {% block head_data %}
     {{ block.super }}
+    {%  if transaction %}
     <link rel="support/ignored_fields" href="{% url ignored_fields_issue tx_id=transaction.tx_id %}"/>
+    {% endif %}
     <link rel="support/augment" href="{% url create_augmentation_issue %}"/>
 
 {% endblock %}

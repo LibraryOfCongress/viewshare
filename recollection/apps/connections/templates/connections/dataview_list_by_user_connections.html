@@ -27,9 +27,9 @@
 <div class="view_details">
   <p>
     {% ifequal user.username username %}
-    {% blocktrans %}Your {{ friends }} have{% endblocktrans %}
+    {% blocktrans %}Your connections have{% endblocktrans %}
     {% else %}
-    {{ other_user|nicename }}{% blocktrans %}'s {{ friends }} have{% endblocktrans %}
+    {{ other_user|nicename }}{% blocktrans %}'s connections have{% endblocktrans %}
     {% endifequal %}
     {{queryset.count}} {% trans "data view" %}{{ queryset.count|pluralize }}.
   </p>

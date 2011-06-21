@@ -89,7 +89,9 @@ class DataViewListConnectionsView(LegacyListView):
     def get_queryset(self, request, username, other_user):
         pre_friend_ids = [i['friend'].id for i in
                           Friendship.objects.friends_for_user(get_user(username))]
-        return Freemix.objects.filter(user__pk__in=pre_friend_ids)
+        perm_filter = PermissionsRegistry.get_filter("exhibit.can_view", request.user)
+        return Freemix.objects.filter(user__pk__in=pre_friend_ids).filter(perm_filter)
+
     def extra_context(self, request, username):
         return { "other_user": get_user(username)}
 dataviews_by_user_connections = DataViewListConnectionsView()
