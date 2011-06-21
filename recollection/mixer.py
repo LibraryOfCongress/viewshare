@@ -8,12 +8,11 @@ from django.contrib.csrf.middleware import csrf_exempt
 from django.core.urlresolvers import reverse
 from django.http import *
 
-from freemix.dataprofile.models import create_dataset
+from freemix.dataset.models import parse_profile_json
 from freemix.transform import conf as transform_conf
 from freemix.transform.views import AkaraTransformClient
 
 import json
-from . import conf
 from django.conf import settings
 from urlparse import urljoin
 
@@ -28,7 +27,7 @@ def extract_content(request):
     return request.POST["mixdata"]
 
 def create_mixed_dataset(use, contents):
-    set = create_dataset(use, contents)
+    set = parse_profile_json(use, contents)
     url = reverse("dataset_edit",
                   args=[use.username, set.slug])
     return HttpResponseRedirect(url)

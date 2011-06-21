@@ -6,12 +6,12 @@ from django.template import loader, RequestContext
 
 from django_redmine.utils import RedmineClient, RedmineIssue
 from django_redmine.consts import *
+from freemix.dataset.models import parse_profile_json
 
 from recollection.utils.views import get_akara_version
 from freemix.transform.conf import AKARA_URL_PREFIX
 from freemix import __version__ as freemix_version
 from freemix.utils import get_user, get_site_url
-from freemix.dataprofile.models import create_dataset
 
 from recollection import __version__ as recollection_version
 from recollection.apps.support import forms
@@ -151,11 +151,13 @@ class AugmentationIssueView(RedmineIssueView):
             context.get("dataset")
         )
 
+
     def generate_context(self, request, form, *args, **kwargs):
         support = get_user(settings.SUPPORT_USER)
-        profile = create_dataset(support, form.cleaned_data.get("profile_json"))
+        profile = parse_profile_json(support, form.cleaned_data.get("profile_json"))
         c = super(AugmentationIssueView, self).generate_context(request, form)
         return dict(c, **{"dataset": get_site_url(profile.get_absolute_url())})
+
 
 class DataLoadIssueView(RedmineIssueView):
 
