@@ -17,7 +17,7 @@
 
         <ul class="dataset_list_items">
         {% for dataset in object_list %}
-            {% dataset_summary dataset %}
+            {% dataset_list_item dataset %}
         {% endfor %}
         </ul>
         {% if pageable %}
