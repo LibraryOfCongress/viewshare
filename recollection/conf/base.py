@@ -131,7 +131,6 @@ INSTALLED_APPS = (
 
     # Freemix specific
     'freemix.utils',
-    'freemix.dataprofile',
     'freemix.dataset',
     'freemix.freemixprofile',
     'freemix.canvas',
@@ -151,7 +150,8 @@ INSTALLED_APPS = (
     'django_redmine',
 
     # deprecated app migrations
-    'freemix.legacy.view_theme'
+    'freemix.legacy.view_theme',
+    'freemix.legacy.dataprofile',
 
     )
 
