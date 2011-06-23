@@ -38,3 +38,6 @@ django-openid==0.2.3.dev1
 django-timezones==0.2.dev2
 Pinax==0.7.3
 diff-match-patch==20090804
+
+# Uncomment for uservoice integration
+# pycrypto==2.3
