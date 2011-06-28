@@ -69,7 +69,7 @@
   {% dataview_list exhibits.all 3 0 %}
   {% if exhibits.count > 3 %}
   <div class="see_all">
-    <a href="{% url freemix_root username %}">{% trans "See all" %} {{exhibits.count}} view{{ exhibits.count|pluralize }}</a>
+    <a href="{% url freemix_root other_user.username %}">{% trans "See all" %} {{exhibits.count}} view{{ exhibits.count|pluralize }}</a>
   </div>
   {% endif %}
 </div>
