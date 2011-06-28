@@ -15,7 +15,7 @@
 {% endblock head_scripts %}
 
 {% block record_controls %}
-    <button class="data-property-add">{% trans "Augment Data" %}</button>
+    <button class="data-property-add">{% trans "Add a Field" %}</button>
     <button class="data-refresh">{% trans "Refresh Augmented Data" %}</button>
     {{ block.super }}
 {% endblock %}
@@ -39,7 +39,7 @@
                 lat/long information modify the type for this field to "location".  
                 If you do not have lat/long data, you can augment your data by specifying 
                 which fields (e.g. city, state, zip) to generate such information 
-                (see "Augment Data" feature at bottom of this page).
+                (see "Add a Field" feature at bottom of this page).
             {% endblocktrans %}
         </p>
     </li>
