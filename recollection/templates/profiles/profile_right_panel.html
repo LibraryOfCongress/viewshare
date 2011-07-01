@@ -4,13 +4,13 @@
 {% load timezone_filters %}
 {% load avatar_tags %}
 {% load dataset_tags %}
-{% load dataview_tags %}
+{% load exhibit_tags %}
 
 <div id="user_sections">
   
 {% if is_me %}
 
-{% ifequal other_user.data_sets.count 0 %}
+{% ifequal datasets.count 0 %}
 
 <div class="user_data_upload">
   <p class="hyper-upload">
@@ -21,80 +21,57 @@
 
 {% endifequal %}
 
-{% ifnotequal other_user.data_sets.count 0 %}
+{% ifnotequal datasets.count 0 %}
 
 <div class="dataset_list">
   <h2>{% blocktrans %}Data Sets{% endblocktrans %}</h2>
-  {% dataset_list other_user.data_sets.all 3 0 %}
+  {% dataset_list datasets.all 3 0 %}
 
-  {% ifnotequal other_user.data_sets.count 0 %}
-  {% ifnotequal other_user.data_sets.count 1 %}
-  {% ifnotequal other_user.data_sets.count 2 %}
-  {% ifnotequal other_user.data_sets.count 3 %}
+  {% if datasets.count > 3 %}
   <div class="see_all">
-    <a href="{% url user_datasets other_user.username %}">{% trans "See all" %}  {{other_user.data_sets.count}} set{{ other_user.data_sets.count|pluralize }}</a>
+    <a href="{% url dataset_list_by_owner owner=other_user.username %}">{% trans "See all" %}  {{datasets.count}} set{{ datasets.count|pluralize }}</a>
   </div>
-  {% endifnotequal %}
-  {% endifnotequal %}
-  {% endifnotequal %}
-  {% endifnotequal %}
+  {% endif%}
 </div>
 
 
 <div class="dataview_list">
   <h2>{% blocktrans %}Data Views{% endblocktrans %}</h2>
-  {% dataview_list other_user.data_views.all 3 0 %}
+  {% dataview_list exhibits.all 3 0 %}
 
-  {% ifnotequal other_user.data_views.count 0 %}
-  {% ifnotequal other_user.data_views.count 1 %}
-  {% ifnotequal other_user.data_views.count 2 %}
-  {% ifnotequal other_user.data_views.count 3 %}
+  {% if other_user.exhibits.count > 3 %}
   <div class="see_all">
-    <a href="{% url freemix_root other_user.username %}">{% trans "See all" %}  {{other_user.data_views.count}} view{{ other_user.data_views.count|pluralize }}</a>
+    <a href="{% url freemix_root other_user.username %}">{% trans "See all" %}  {{exhibits.count}} view{{ exhibits.count|pluralize }}</a>
   </div>
-  {% endifnotequal %}
-  {% endifnotequal %}
-  {% endifnotequal %}
-  {% endifnotequal %}
+
+  {% endif %}
 </div>
 
 {% endifnotequal %}
 
 {% else %}
 
-{% ifnotequal other_user.data_sets.count 0 %}
+{% ifnotequal datasets.count 0 %}
 
 <div class="dataset_list">
   <h2>{% blocktrans %}Data Sets{% endblocktrans %}</h2>
-  {% dataset_list other_user.data_sets.all 3 0 %}
-  {% ifnotequal other_user.data_sets.count 0 %}
-  {% ifnotequal other_user.data_sets.count 1 %}
-  {% ifnotequal other_user.data_sets.count 2 %}
-  {% ifnotequal other_user.data_sets.count 3 %}
+  {% dataset_list datasets.all 3 0 %}
+  {% if datasets.count > 3 %}
   <div class="see_all">
-    <a href="{% url user_datasets other_user.username %}">{% trans "See all" %} {{other_user.data_sets.count}} set{{ other_user.data_sets.count|pluralize }}</a>
+    <a href="{% url dataset_list_by_owner owner=other_user.username %}">{% trans "See all" %} {{datasets.count}} set{{ datasets.count|pluralize }}</a>
   </div>
-  {% endifnotequal %}
-  {% endifnotequal %}
-  {% endifnotequal %}
-  {% endifnotequal %}
+  {% endif %}
 </div>
 
 
 <div class="dataview_list">
   <h2>{% blocktrans %}Data Views{% endblocktrans %}</h2>
-  {% dataview_list other_user.data_views.all 3 0 %}
-  {% ifnotequal other_user.data_views.count 0 %}
-  {% ifnotequal other_user.data_views.count 1 %}
-  {% ifnotequal other_user.data_views.count 2 %}
-  {% ifnotequal other_user.data_views.count 3 %}
+  {% dataview_list exhibits.all 3 0 %}
+  {% if exhibits.count > 3 %}
   <div class="see_all">
-    <a href="{% url freemix_root other_user.username %}">{% trans "See all" %} {{other_user.data_views.count}} view{{ other_user.data_views.count|pluralize }}</a>
+    <a href="{% url freemix_root other_user.username %}">{% trans "See all" %} {{exhibits.count}} view{{ exhibits.count|pluralize }}</a>
   </div>
-  {% endifnotequal %}
-  {% endifnotequal %}
-  {% endifnotequal %}
-  {% endifnotequal %}
+  {% endif %}
 </div>
 
 {% endifnotequal %}

@@ -1,7 +1,7 @@
 from django.contrib.syndication.feeds import Feed
 from django.utils.feedgenerator import Atom1Feed
 from freemix.utils import get_user
-from freemix.dataprofile.models import DataProfile
+from freemix.dataset.models import Dataset
 from freemix.freemixprofile.models import Freemix
 from freemix.utils import get_site_url
 from django.conf import settings
@@ -59,7 +59,7 @@ class LatestDatasets(Feed):
     link = get_site_url()
 
     def items(self):
-        return DataProfile.objects.order_by('-created')[:10]
+        return Dataset.objects.order_by('-created')[:10]
 
 
 class AtomLatestDatasets(LatestDatasets):
@@ -88,7 +88,7 @@ class UserDatasets(Feed):
 
     # Return only this user's data.
     def items(self, obj):
-        return DataProfile.objects.filter(user=obj).order_by('-created')[:10]
+        return Dataset.objects.filter(owner=obj).order_by('-created')[:10]
 
 
 class AtomUserDatasets(UserDatasets):

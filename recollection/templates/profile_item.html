@@ -27,10 +27,10 @@
     </div>
     
     <div class="user_counts">
-        {% if user.data_sets.count %}
-	<p class="user_datasets"><a href="{% url user_datasets user.username %}">{{user.data_sets.count}} {% trans "Data" %}</a></p>
-	{% if user.data_views.count %}
-	<span class="divider">&middot;</span> <p class="user_dataviews"><a href="{% url freemix_root user.username %}">{{user.data_views.count}} {% trans "View" %}{{ user.data_views.count|pluralize }}</a></p>
+        {% if user.datasets.count %}
+	<p class="user_datasets"><a href="{% url dataset_list_by_owner owner=user.username %}">{{user.datasets.count}} {% trans "Data" %}</a></p>
+	{% if user.exhibits.count %}
+	<span class="divider">&middot;</span> <p class="user_dataviews"><a href="{% url freemix_root user.username %}">{{user.exhibits.count}} {% trans "View" %}{{ user.exhibits.count|pluralize }}</a></p>
 	{% endif %}
         {% else %}
         <span class="no_data">{% trans "No data" %}</span>

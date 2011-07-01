@@ -1,7 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, render, get_object_or_404
 from django.template import RequestContext
-from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.conf import settings
 
 from django.contrib.auth.decorators import login_required
@@ -12,13 +12,14 @@ from django.utils.translation import ugettext
 
 from friends.forms import InviteFriendForm
 from friends.models import FriendshipInvitation, Friendship
+from freemix.permissions import PermissionsRegistry
 
 from .models import Profile, nice_username
 from .forms import ProfileForm
 
 from avatar.templatetags.avatar_tags import avatar, avatar_url
 
-from Crypto.Cipher import AES
+
 import base64
 import hashlib
 import urllib
@@ -27,7 +28,6 @@ import array
 import simplejson
 import time
 from datetime import datetime
-
 
 if "notification" in settings.INSTALLED_APPS:
     from notification import models as notification
@@ -101,7 +101,7 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
             else:
                 invite_form = InviteFriendForm(request.user, {
                     'to_user': username,
-                    'message': ugettext("Let's be friends!"),
+                    'message': ugettext("Let's be Connect!"),
                 })
                 invitation_id = request.POST.get("invitation", None)
                 if request.POST.get("action") == "accept": # @@@ perhaps the form should just post to friends and be redirected here
@@ -133,6 +133,8 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
         "is_me": is_me,
         "is_friend": is_friend,
         "other_user": other_user,
+        "datasets": other_user.datasets.filter(PermissionsRegistry.get_filter("dataset.can_view", request.user)),
+        "exhibits": other_user.exhibits.filter(PermissionsRegistry.get_filter("exhibit.can_view", request.user)),
         "other_friends": other_friends,
         "invite_form": invite_form,
         "previous_invitations_to": previous_invitations_to,
@@ -174,6 +176,7 @@ def uservoice_options(request, **kwargs):
 
     Code derived from http://developer.uservoice.com/docs/single-sign-on-how-to
     """
+    from Crypto.Cipher import AES
 
     # Calc expiry time. UV needs it in GMT
     dt=time.mktime(request.session.get_expiry_date().timetuple())

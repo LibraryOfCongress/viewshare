@@ -2,5 +2,5 @@
 
 {{ obj.description }}
 <br>
-created by <a href="{% url profile_detail username=obj.user %}">{{ obj.user|nicename }}</a>
+created by <a href="{% url profile_detail username=obj.owner %}">{{ obj.owner|nicename }}</a>
 <br>

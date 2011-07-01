@@ -1,7 +1,7 @@
-{% extends "dataview/list/base.html" %}
+{% extends "exhibit/list/base.html" %}
 
 {% load i18n %}
-{% load dataview_tags %}
+{% load exhibit_tags %}
 
 {% block head_title %}{% trans "Views of" %} {{dataset.title}}{% endblock %}
 {% block head_scripts %}
@@ -27,7 +27,7 @@
 {% block body %}
 <h1>{% trans "Views of" %} {{dataset.title}}</h1>
 
-<p>There {{queryset.count|pluralize:"is,are"}} {{queryset.count}} view{{queryset.count|pluralize}} based on <a href="{{ dataset.get_url_path }}">this data set</a>.</p>
+<p>There {{queryset.count|pluralize:"is,are"}} {{queryset.count}} view{{queryset.count|pluralize}} based on <a href="{{ dataset.get_absolute_url }}">this data set</a>.</p>
 
 <div class="view_details">
   {% dataview_list queryset %}

@@ -11,6 +11,8 @@ MEDIA_ROOT = path.join(path.dirname(__file__), "media")
 
 STATIC_ROOT = path.join(path.dirname(__file__),  "static")
 
+FILE_UPLOAD_PATH = path.join(path.dirname(__file__), "upload")
+
 COMPRESS_ROOT = STATIC_ROOT
 COMPRESS_URL = STATIC_URL
 
@@ -45,3 +47,32 @@ SITE_ID = 1
 USE_I18N = True
 
 
+# A sample logging configuration. The only tangible logging
+# performed by this configuration is to send an email to
+# the site admins on every HTTP 500 error.
+# See http://docs.djangoproject.com/en/dev/topics/logging for
+# more details on how to customize your logging configuration.
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'null': {
+            'level':'DEBUG',
+            'class':'django.utils.log.NullHandler',
+        },
+        'console':{
+            'level':'DEBUG',
+            'class':'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'freemix': {
+            'handlers': ['console'],
+            'level': 'DEBUG'
+        },
+        'recollection': {
+            'handlers': ['console'],
+            'level': 'DEBUG'
+        }
+    }
+}

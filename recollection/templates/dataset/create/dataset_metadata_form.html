@@ -1,0 +1,9 @@
+{%  load i18n %}
+{% load uni_form_tags %}
+<form action="{% url dataset_create_form tx_id %}" method="post" class="uniForm">
+        {{ form|as_uni_form }}
+      <div class="buttons">
+          <input type="submit" value="{% trans "Save" %}" class="submit" />
+          <input type="button" value="{% trans "Cancel" %}" class="dataset-create-form-cancel negative-button" />
+      </div>
+</form>

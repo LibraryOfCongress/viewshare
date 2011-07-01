@@ -1,7 +1,7 @@
 (function($) {
 
     function getFormUrl() {
-        return "/support/issue/dataload-" + $("#contents").data("data-load-transaction").source + "-upload/";
+        return $("link[rel='recollection/support']").attr("href");
     }
 
     function resetForm() {
@@ -71,11 +71,6 @@
                          $("#support").show();
                      },
             beforeSubmit: function(formData, jqForm, options) {
-                              var form = jqForm[0];
-                              if (!form.file.value) {
-                                  $("#support #div_id_file").addClass("error").prepend("<p class='errorField'>Please select the file to be uploaded</p>");
-                                  return false;
-                              }
                               $("#support").hide();
                               $("#support-spinner").show();
                           },
@@ -84,8 +79,9 @@
                            $(".messages>li.error", $(this)).addClass("ui-corner-all").addClass("ui-state-error");
                            $(".messages>li", $(this)).prepend("<a href='#' class='ui-icon ui-icon-closethick close-message'>&#160;</a> ");
                            $("#support-spinner").hide();
-                           $("#support").show();
                            dialog.find(".messages").remove().end().prepend(this);
+
+                           $("#load-error").show();
                        });
 
                    },
@@ -101,23 +97,29 @@
 
     function setup() {
         var root = $("div#support");
-        $("#load-failure-general a.support-link").click(function(e) {
+        $("a.support-link").click(function(e) {
 
             e.preventDefault();
 
-            var tx = $("#contents").data("data-load-transaction");
             root.empty().load(getFormUrl() + " #issue_create_content", function() {
                 var form = resetForm();
-                root.data("from", "#load");
-                $("#load, #subnav").hide();
-                if (tx.source == "url") {
-                    $("#id_url", root).val(tx.data);
-                }
+                $("#load-error").hide();
 
                 root.show();
             });
 
         });
+
+        $("div#support .cancel-button").live('click', function() {
+            root.hide();
+            $("#load-error").fadeIn();
+        });
+
+        $("div#support .ticket-created").live('click', function() {
+            root.hide();
+            $("#load-error").fadeIn();
+        });
+
 
     }
 

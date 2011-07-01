@@ -1,0 +1,32 @@
+{% load i18n %}
+{% load sorting_tags %}
+{% load pagination_tags %}
+{% load exhibit_tags %}
+{% load dataset_tags %}
+
+    {% autosort object_list %}
+    {% autopaginate object_list max_count %}
+    {% if object_list %}
+        {% if pageable %}
+        <p><span class="sort-label">{% trans "Sort by:" %}</span>
+            {% anchor title Title %} <span class="divider">|</span>
+            {% anchor created Creation %} <span class="divider">|</span>
+            {% anchor modified Modified %}
+        </p>
+        {% endif %}
+
+        <ul class="dataset_list_items">
+        {% for dataset in object_list %}
+            {% dataset_list_item dataset %}
+        {% endfor %}
+        </ul>
+        {% if pageable %}
+            {% paginate %}
+        {% endif %}
+
+        {% new_dataview %}
+        {% include "dataset/dataset_confirm_delete.html" %}
+    {% else %}
+
+    <p class="center">{% blocktrans %}No data here.{% endblocktrans %}</p>
+    {% endif %}

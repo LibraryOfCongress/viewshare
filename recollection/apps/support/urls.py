@@ -11,19 +11,13 @@ urlpatterns = patterns('',
     url(r'issue/create_error/$',
         direct_to_template, {'template': 'support/issue_create_error.html'}),
 
-    url(r'issue/dataload-url-ignored-fields/$',
-       views.url_ignored_fields_issue_view,
-       name='url_ignored_fields_issue'),
-    url(r'issue/dataload-file-ignored-fields/$',
-       views.file_ignored_fields_issue_view,
-       name='file_ignored_fields_issue'),
+    url(r'issue/dataload-ignored-fields/(?P<tx_id>[a-f0-9-]+)$',
+       views.ignored_fields_issue_view,
+       name='ignored_fields_issue'),
 
 
-    url(r'issue/dataload-url-upload/$',
-       views.url_upload_issue_view,
-       name='url_upload_issue'),
-    url(r'issue/dataload-file-upload/$',
-       views.file_upload_issue_view,
-       name='file_upload_issue'),
+    url(r'issue/dataload-upload/(?P<tx_id>[a-f0-9-]+)$',
+       views.upload_issue_view,
+       name='upload_issue'),
 
 )

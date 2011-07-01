@@ -1,0 +1,58 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load compress %}
+
+{% load i18n %}
+
+{% block head_css %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}upload/css/upload.css"/>
+{% endblock %}
+
+{%  block head_scripts %}
+    {{ block.super }}
+    {% include "js_include/jquery_ui.html" %}
+
+    <script type="text/javascript" src="{{ STATIC_URL }}upload/js/upload.js"></script>
+{% endblock %}
+
+{% block rtab_id %}id="data_tab"{% endblock %}
+
+{% block data-tab-selected %} ui-tabs-selected ui-state-active{% endblock %}
+{% block subnav %}
+{% endblock %}
+
+{% block body %}
+
+
+<div id="load">
+  <h1 id="upload-label">{% trans "Upload Your Data" %}</h1>
+    <h2>{% trans "Pick the format of the data source you wish to load" %}</h2>
+    <ul>
+        <li>
+            <a href="{% url cdm_transform %}">ContentDM</a>
+        </li>
+        <li>
+            XML MODS
+            <ul>
+                <li><a href="{% url mods_url_transform %}">From the web</a></li>
+                <li><a href="{% url mods_file_transform %}">From a file on your computer</a></li>
+            </ul>
+        </li>
+    </ul>
+    <p>
+    If you don't know or don't see the format you are trying to load, you may load one of the
+    <a class="supported-file-types" href="#supported-file-types">Supported Data Source Types</a>
+    <ul>
+        <li><a href="{% url url_transform %}">From the web</a></li>
+        <li><a href="{% url file_transform %}">From a file on your computer</a></li>
+    </ul>
+    
+    <div id="supported-file-types" class="ui-helper-hidden" title="{% trans "Supported Data Source Types" %}">
+        {% include "recollection/upload/supported.html" %}
+    </div>
+
+</div>
+
+{% endblock body %}

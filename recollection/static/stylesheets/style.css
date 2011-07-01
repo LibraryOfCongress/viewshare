@@ -267,7 +267,7 @@ h2 img {
     padding: 0;
 }
 
-li.dataset_summary, li.dataview_summary {
+.dataset_list_item, li.dataview_summary {
     background: #fff url(../images/header-background.png) bottom center repeat-x;
     border: 1px solid #ddd;
     list-style-type: none;
@@ -276,14 +276,30 @@ li.dataset_summary, li.dataview_summary {
     text-align: left;
 }
 
-.dataset-name, .dataview-name {
+.dataset-title, .dataview-name {
     font-size: 115%;
     font-weight: bold;
     padding-bottom: 0.25em;
     padding-left: 30px;
 }
 
-.dataset-name {
+.public .dataset-title {
+    background: transparent url(../images/data-icon.png) top left no-repeat;
+}
+
+.private .dataset-title {
+    background: transparent url(../images/lock.png) top left no-repeat;
+
+}
+.private {
+    background: #fffcdf;
+}
+
+.dataset-description, .dataview-description {
+    padding-left: 30px;
+}
+
+.dataset-title {
     background: transparent url(../images/data-icon.png) top left no-repeat;
 }
 

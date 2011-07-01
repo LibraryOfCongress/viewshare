@@ -23,7 +23,7 @@ class AbstractCatalogHandler(BaseHandler):
     @classmethod
     def id(cls, instance):
         " For exhibit, we want the unique ID for a resource to be it's URL."
-        return instance.get_url()
+        return get_site_url(instance.get_absolute_url())
 
     @classmethod
     def label(cls, instance):
@@ -60,12 +60,12 @@ class CollectionHandler(AbstractCatalogHandler):
     @classmethod
     def project(cls, instance):
         "URL for the collection's project"
-        return instance.project.get_url()
+        return get_site_url(instance.project.get_absolute_url())
 
     @classmethod
     def topics(cls, instance):
         "URLs for all topic resources"
-        return [t.get_url() for t in instance.topics.iterator()]
+        return [get_site_url(t.get_absolute_url()) for t in instance.topics.iterator()]
 
     @classmethod
     def views(cls, instance):
@@ -91,7 +91,7 @@ class CollectionHandler(AbstractCatalogHandler):
     @classmethod
     def organizations(cls, instance):
         "URLs for organization resources"
-        return [o.get_url() for o in instance.organizations.iterator()]
+        return [get_site_url(o.get_absolute_url()) for o in instance.organizations.iterator()]
 
 class ProjectHandler(AbstractCatalogHandler):
     "Handler for collection catalog projects"

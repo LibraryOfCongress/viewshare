@@ -51,6 +51,10 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'recollection.urls'
 
+AUTHENTICATION_BACKENDS  = (
+    'freemix.permissions.RegistryBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.auth",
@@ -127,8 +131,7 @@ INSTALLED_APPS = (
 
     # Freemix specific
     'freemix.utils',
-    'freemix.transform',
-    'freemix.dataprofile',
+    'freemix.dataset',
     'freemix.freemixprofile',
     'freemix.canvas',
     'freemix.augment',
@@ -140,13 +143,15 @@ INSTALLED_APPS = (
     'recollection.utils',
     'recollection.apps.connections',
     'recollection.conf.recollection_defaults',
+    'recollection.upload',
 
     # Support pipeline
     'recollection.apps.support',
     'django_redmine',
 
     # deprecated app migrations
-    'freemix.legacy.view_theme'
+    'freemix.legacy.view_theme',
+    'freemix.legacy.dataprofile',
 
     )
 
