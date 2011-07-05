@@ -7,9 +7,9 @@ var uservoiceOptions = {
 ,    showTab: true
     /* optional */
 ,    alignment: 'right'
-,    background_color:'#f00'
+,    background_color:'#3EA43D'
 ,    text_color: 'white'
-,    hover_color: '#06C'
+,    hover_color: '#1591AD'
 ,    lang: 'en'
 {% if token %}
 ,    params: {sso: "{{token}}" }
