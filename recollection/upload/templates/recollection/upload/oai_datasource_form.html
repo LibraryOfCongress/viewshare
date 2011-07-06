@@ -1,0 +1,15 @@
+{% extends "recollection/upload/datasource_form.html" %}
+{% load i18n %}
+
+{% block head_scripts %}
+{{ block.super }}
+    <script type="text/javascript" src="{{ STATIC_URL }}/upload/js/oai_form.js"></script>
+{% endblock %}
+
+{% block head_data %}
+{{ block.super }}
+    <link type="recollection/oai_set_list" rel="{%  url oai_set_list %}"/>
+{% endblock %}
+
+{% block upload_form_title %}{% trans "Load OAI (Beta)"%}{% endblock %}
+

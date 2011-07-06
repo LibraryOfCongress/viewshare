@@ -61,6 +61,35 @@ class ContentDMDataSource(URLDataSourceMixin, DataSource):
         return None
 
 
+class OAIDataSource(URLDataSourceMixin, DataSource):
+    """Data source for loading an OAI set.
+    """
+
+    set = models.CharField(_("Set"), max_length=255)
+
+    title = models.CharField(_("Title"), max_length=255)
+
+    limit = models.IntegerField(_("Limit"),
+                            help_text=_("The maximum number of records to load"),
+                            default="100",
+                            choices=((100, "100"),
+                                     (200, "200"),
+                                     (300, "300"),
+                                     (400, "400")))
+
+    # Data transform
+    transform = AkaraTransformClient(conf.AKARA_OAIPMH_URL)
+
+    def get_transform_params(self):
+        p =  {'endpoint': self.url,
+                'limit': self.limit,
+                'oaiset': self.set}
+        return p
+
+    def get_transform_body(self):
+        return None
+
+
 class ModsMixin(models.Model):
     """Data source for loading XMLMODS data.
     """

@@ -11,4 +11,7 @@ urlpatterns = patterns('',
     url(r'^modsfile/$', login_required(views.create_mods_file_view), name="mods_file_transform"),
     url(r'^modsurl/$', login_required(views.create_mods_url_view), name="mods_url_transform"),
     url(r'^contentdm/', login_required(views.create_cdm_view), name="cdm_transform"),
+
+    url(r'^oai/', login_required(views.create_oai_view), name="oai_transform"),
+    url(r'^oailist.json', views.OAISetListView.as_view(), name="oai_set_list")
 )

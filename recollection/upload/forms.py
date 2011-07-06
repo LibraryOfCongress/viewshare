@@ -1,4 +1,5 @@
 from django import forms
+from django.forms.widgets import Select
 from django.utils.translation import ugettext_lazy as _
 from freemix.dataset.models import DataSource
 from recollection.upload import models
@@ -51,6 +52,25 @@ class ContentDMDataSourceForm(DataSourceForm):
         return cleaned
 
 
+class OAIDataSourceForm(DataSourceForm):
+    set_choice = forms.CharField(label=_("Set"), widget=Select)
+
+    def clean_set_choice(self):
+        print self.cleaned_data
+        if not self.cleaned_data.get("title") or not self.cleaned_data.get("set"):
+            raise forms.ValidationError(_("Set is required"))
+        return self.cleaned_data.get("set")
+
+    class Meta(DataSourceForm.Meta):
+        model = models.OAIDataSource
+        fields=("url",  "title", "set","set_choice", "limit",)
+        widgets= {
+            "title": forms.HiddenInput(),
+            "set": forms.HiddenInput()
+        }
+
+    
+
 class ModsURLDataSourceForm(DataSourceForm):
 
     class Meta(DataSourceForm.Meta):
@@ -60,3 +80,4 @@ class ModsFileDataSourceForm(DataSourceForm):
 
     class Meta(DataSourceForm.Meta):
         model = models.ModsFileDataSource
+

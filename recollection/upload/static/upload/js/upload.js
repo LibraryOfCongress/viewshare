@@ -1,4 +1,4 @@
-(function($, Freemix) {
+(function($) {
     $(document).ready(function() {
 
         $("#supported-file-types").dialog({
@@ -16,4 +16,4 @@
             $("#supported-file-types").dialog("open");
         });
     });
-})(jQuery, jQuery.freemix);
+})(jQuery);

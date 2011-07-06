@@ -33,7 +33,7 @@ setup(
     version = VERSION,
     description = "Recollection",
     url = "https://sourceforge.net/projects/loc-recollect/",
-    packages = find_packages(exclude='example_project'),
+    packages = find_packages(exclude=('example_project',)),
     include_package_data=True,
 
     cmdclass = {'sdist': sdist_version, 'build': build_version}
