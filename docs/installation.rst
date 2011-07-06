@@ -17,7 +17,7 @@ To build::
    $ virtualenv --no-site-packages --distribute recollection
    $ cd recollection
    $ source bin/activate
-   $ pip install -e git+git://loc-recollect.git.sourceforge.net/gitroot/loc-recollect/loc-recollect#egg=recollection
+   $ pip install git+git://loc-recollect.git.sourceforge.net/gitroot/loc-recollect/loc-recollect#egg=recollection
    $ pip install -r src/recollection/requirements/develop.txt
 
 The "example_project" directory provides the starting point for the
