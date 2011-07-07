@@ -27,8 +27,8 @@
 
 
 <div id="load">
-  <h1 id="upload-label">{% trans "Upload Your Data" %}</h1>
-    <h2>{% trans "Pick the format of the data source you wish to load" %}</h2>
+  <h1 id="upload-label">{% trans "Load Your Data" %}</h1>
+    <h2>{% trans "Pick a Data Format" %}</h2>
     <ul>
         <li>
             <a href="{% url cdm_transform %}">ContentDM (Beta)</a>
@@ -43,14 +43,17 @@
                 <li><a href="{% url mods_file_transform %}">From a file on your computer</a></li>
             </ul>
         </li>
+        <li>
+            {% trans "Simple rectangular spreadsheets in MS Excel format (Note: the proprietary data format makes them impossible to fully support some Excel functionality)" %}
+            <ul>
+                <li><a href="{% url url_transform %}">From the web</a></li>
+                <li><a href="{% url file_transform %}">From a file on your computer</a></li>
+            </ul>
+        </li>
     </ul>
     <p>
     If you don't know or don't see the format you are trying to load, you may load one of the
     <a class="supported-file-types" href="#supported-file-types">Supported Data Source Types</a>
-    <ul>
-        <li><a href="{% url url_transform %}">From the web</a></li>
-        <li><a href="{% url file_transform %}">From a file on your computer</a></li>
-    </ul>
     
     <div id="supported-file-types" class="ui-helper-hidden" title="{% trans "Supported Data Source Types" %}">
         {% include "recollection/upload/supported.html" %}
