@@ -14,6 +14,7 @@
     
     <form method="POST" action="" class="uniForm">
         <fieldset class="inlineLabels">
+            {% csrf_token %}
             {{ form|as_uni_form }}
              <div class = "form_block">
                  <input type="submit" value="{% trans "Change my language" %}" />

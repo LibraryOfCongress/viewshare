@@ -37,6 +37,7 @@
       {% endif %}
       {% render_avatar avatar 80 %}
           <form method="post" action="">
+              {%csrf_token %}
               <input type="hidden" name="choice" value="{{ avatar.id }}" />
               {% if avatar.primary %}
               <input type="submit" value="{% trans "Default Avatar" %}" disabled="true" style="opacity: 0.7; color: #aaa;" />
@@ -45,6 +46,7 @@
 	      {% endif %}
           </form>
           <form method="post" action="{% url avatar_delete %}">
+              {%csrf_token %}
               <input type="hidden" name="choices" value="{{ avatar.id }}" />
               <input type="hidden" name="next" value="{% url avatar_change %}" />
               <input type="submit" value="{% trans "Delete" %}" class="negative-button" />
@@ -64,6 +66,7 @@
 <p>{% blocktrans %}We support JPEG, GIF, BMP, and PNG images. The maximum size of an image is 400KB.{% endblocktrans %}</p>
 
 <form enctype="multipart/form-data" method="POST" action="">
+  {%csrf_token %}
   <input type="file" name="avatar" value="{% trans "Avatar Image" %}" />
   <input type="submit" value="{% trans "Upload Avatar" %}" />
 </form>

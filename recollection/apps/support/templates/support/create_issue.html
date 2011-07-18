@@ -11,6 +11,7 @@
 <h1>Report a Data Upload Problem</h1>
 
 <form action="" method="post" class="uniForm">
+    {% csrf_token %}
  <table>
   <tr>
    <td><label for="id_contact_type">{{ form.contact_type.label }}:</label>

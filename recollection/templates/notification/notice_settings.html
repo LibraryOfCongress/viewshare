@@ -30,6 +30,7 @@
       </div>
             
       <form method="POST" action="">	
+          {%csrf_token %}
 
 	  {% for row in notice_settings.rows %}
 

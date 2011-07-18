@@ -23,6 +23,7 @@
                                 ({{ invitation.sent }}):</p>
                             <p class="invitation_message">{{ invitation.message }}</p>
                             <form method="post" action="">
+                                {% csrf_token %}
                                 <input type="hidden" name="invitation" value="{{ invitation.id }}"/>
                                 <input type="hidden" name="action" value="accept"/>
                                 <input type="submit" value="{% trans 'Accept' %}" />

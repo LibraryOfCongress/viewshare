@@ -147,6 +147,7 @@ $(document).ready(function() {
    {% blocktrans %}You are connected to {% endblocktrans %}{{ other_user|nicename }}.
    </p>
     <form method="POST" action="">
+        {%csrf_token %}
      <input type="hidden" name="action" value="remove" />
      <p class="center"><input type="submit" class="negative-button" value="{% trans "Remove Connection" %}"/></p>
     </form>
@@ -157,14 +158,16 @@ $(document).ready(function() {
     <p>{{ other_user|nicename }} {% blocktrans %}requested a connection on{% endblocktrans %} {{ invitation.sent|date }}:</p>
     <p class="invitation_message">{{ invitation.message }}</p>
     <form method="post" action="">
-     <input type="hidden" name="invitation" value="{{ invitation.id }}"/>
-     <input type="hidden" name="action" value="accept"/>
-     <input type="submit" value="{% trans 'Accept' %}" />
+        {%csrf_token %}
+        <input type="hidden" name="invitation" value="{{ invitation.id }}"/>
+        <input type="hidden" name="action" value="accept"/>
+        <input type="submit" value="{% trans 'Accept' %}" />
     </form>
     <form method="post" action="">
-     <input type="hidden" name="invitation" value="{{ invitation.id }}"/>
-     <input type="hidden" name="action" value="decline"/>
-     <input type="submit" value="{% trans 'Decline' %}" class="negative-button" />
+        {%csrf_token %}
+        <input type="hidden" name="invitation" value="{{ invitation.id }}"/>
+        <input type="hidden" name="action" value="decline"/>
+        <input type="submit" value="{% trans 'Decline' %}" class="negative-button" />
     </form>
    </div>
    {% endfor %}
@@ -174,7 +177,9 @@ $(document).ready(function() {
     {% else %}
     <h2>{% trans "Add Connection" %}</h2>
     <form class="uniForm" method="POST" action="">
+        {% csrf_token %}
       <fieldset class="inlineLabels">
+
         {{ invite_form|as_uni_form }}
         <div class="form_block">
          <input type="hidden" name="action" value="invite" />

@@ -3,6 +3,7 @@
 
 <form class="uniForm" method="POST" action="{% url profile_edit %}">
     <fieldset>
+        {% csrf_token %}
         {{ profile_form|as_uni_form }}
         <div class="form_block">
             <input type="submit" value="{% trans "Update" %}" />

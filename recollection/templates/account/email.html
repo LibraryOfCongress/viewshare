@@ -22,6 +22,7 @@
                                 - <span class="primary">{% trans "primary" %}</span>
                             {% else %}
                                 <form style="display: none;" id="primary_{{ forloop.counter }}" method="post" action="">
+                                    {%csrf_token %}
                                     <input type="hidden" name="email" value="{{ emailaddress.email }}"/>
                                     <input type="hidden" name="action" value="primary"/>
                                 </form>
@@ -33,6 +34,8 @@
                         <td>
                             <span class="unverified">{% trans "unverified" %}</span>
                             <form style="display: none;" id="send_{{ forloop.counter }}" method="post" action="">
+                                    {%csrf_token %}
+                                
                                 <input type="hidden" name="email" value="{{ emailaddress.email }}"/>
                                 <input type="hidden" name="action" value="send"/>
                             </form>
@@ -43,7 +46,9 @@
                     <td>
                         {% if emailaddress.primary %}
                         {% else %}
-                            <form style="display: none;" id="remove_{{ forloop.counter }}" method="post" action="">
+                        <form style="display: none;" id="remove_{{ forloop.counter }}" method="post" action="">
+                                    {%csrf_token %}
+                            
                                 <input type="hidden" name="email" value="{{ emailaddress.email }}"/>
                                 <input type="hidden" name="action" value="remove"/>
                             </form>
@@ -61,6 +66,7 @@
     
     <form method="post" action="" class="uniForm">
         <fieldset class="inlineLabels">
+            {%csrf_token%}
             {{ add_email_form|as_uni_form }}
              <div class = "form_block">
                  <input type="hidden" name="action" value="add"/>

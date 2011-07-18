@@ -50,6 +50,7 @@ $(document).ready(function() {
       <br />
 
       <form class="login uniForm user_pass" method="POST" action="{% url acct_login %}">
+          {% csrf_token %}	
 	
           {{ form|as_uni_form }}
           <div class="form_block">
@@ -77,7 +78,7 @@ $(document).ready(function() {
       <br />
       {# @@@ why isn't this just does as a form object ? #}
       <form class="login uniForm openid" action="/openid/register/" method="POST">
-	
+        {% csrf_token %}	
         {% if url_required %}
         <div class="ctrlHolder error">
           <p class="errorField">
