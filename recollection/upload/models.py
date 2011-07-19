@@ -89,6 +89,9 @@ class OAIDataSource(URLDataSourceMixin, DataSource):
     def get_transform_body(self):
         return None
 
+    def __unicode__(self):
+        return "%s (%s, %s)"%(self.title, self.url, self.set)
+
 
 class ModsMixin(models.Model):
     """Data source for loading XMLMODS data.
