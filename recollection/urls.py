@@ -1,5 +1,6 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 from django.views.generic.base import RedirectView
 from django.contrib import admin
 
@@ -7,6 +8,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from pinax.apps.account.openid_consumer import PinaxConsumer
 
 from recollection import feeds
+from recollection.utils.views import UserHomeView
 
 admin.autodiscover()
 
@@ -42,7 +44,6 @@ urlpatterns = patterns('',
     (r'^feeds/(.*)/$', 'django.contrib.syndication.views.feed', {"feed_dict": feed_dict}),
 
     (r'^catalog/', include('recollection.apps.collection_catalog.urls')),
-    (r'^userhome/', include('recollection.apps.userhome.urls')),
     (r'^support/', include('recollection.apps.support.urls')),
 
     url(r'^profiles/profile/(?P<username>[\w\._-]+)/connections/$',
@@ -62,12 +63,14 @@ urlpatterns = patterns('',
     (r'^data/', include('freemix.dataset.urls')),
 
     (r'^views/', include('freemix.freemixprofile.urls')),
-    (r'^canvas/', include('freemix.canvas.urls')),
+    # (r'^canvas/', include('freemix.canvas.urls')),
     (r'^augment/', include('freemix.augment.urls')),
     url(r'mix/', 'recollection.mixer.mix_data', name='mixer_receiving_endpoint'),
 
+    url(r'^userhome/$', login_required(UserHomeView.as_view()), name="user_home"),
+
     # For legacy purposes
-    url(r'^userupload/$', RedirectView.as_view(url="/upload"), name="user_upload"),
+    url(r'^userupload/$', login_required(RedirectView.as_view(url="/upload")), name="user_upload"),
 
     # CMS url definition should come after all others
     (r'^', include('cms.urls')),

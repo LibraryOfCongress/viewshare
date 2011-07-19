@@ -52,6 +52,7 @@ class AtomUserDataViews(UserDataViews):
     feed_type = Atom1Feed
     subtitle = UserDataViews.description
 
+
 class LatestDatasets(Feed):
     title = "Datasets"
     description = "Latest Datasets"
