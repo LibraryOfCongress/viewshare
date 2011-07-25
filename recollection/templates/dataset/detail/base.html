@@ -1,0 +1,57 @@
+{% extends "dataset/base.html" %}
+
+{% load i18n %}
+{% load freemix_helpers %}
+{% load exhibit_tags %}
+{% load compress %}
+{% load exhibit_tags %}
+{% block freemix_title %}{% blocktrans %}Data Profile{% endblocktrans %}: {{ object.title }}{% endblock %}
+
+{% block freemix_css %}
+{{ block.super }}
+{% compress css %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}utils/css/layout.css"/>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}utils/css/views.css"/>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}utils/css/editor.css"/>
+{% endcompress %}
+{% endblock %}
+
+{% block freemix_js %}
+    {{ block.super }}
+    <script type="text/javascript" src="{{ STATIC_URL }}utils/js/lib/jquery.form.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}dataset/js/detail.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}canvas/js/new_view_dialog.js"></script>
+
+{% endblock %}
+
+{% block body %}
+
+    <h1>{{ object.title }}</h1>
+    
+    <div class="priority-area">
+      <p>
+	{% if can_build_view %}
+	<a href="{% url exhibit_canvas_chooser owner=object.owner.username slug=object.slug %}" id="create_exhibit_button" class="button_link">{% trans "Create a New View" %}</a>
+	{% endif %}
+      </p>
+    </div>
+    
+    <div id="dataset_metadata">
+      {% include "dataset/detail/dataset_metadata.html" %}
+    </div>
+    
+    <div class="right_panel data_panel">
+      <div class="exhibit_list">
+	<h2>{% blocktrans %}Data Views{% endblocktrans %}</h2>
+ 	{% exhibit_list exhibits.all 10 0 %}
+	
+	{% if exhibits.count > 10 %}
+	<div class="see_all">
+	  <a href="{% url exhibits_by_dataset owner=object.owner.username slug=object.slug %}">{% trans "See all" %}  {{exhibits.count}} views</a>
+	</div>
+	
+	{% endif %}
+      </div>
+    </div>
+
+{% endblock %}

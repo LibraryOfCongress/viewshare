@@ -257,64 +257,77 @@ h2 img {
     width: 30%;
 }
 
+
+
+
 /* data views and sets */
-.exhibit_list {
-    margin-top: 1.5em;
+
+.dataset_list, .exhibit_list {
+   margin-bottom: 1.5em;
 }
 
 .dataset_list_items, .exhibit_list_items {
-    margin: 0;
-    padding: 0;
+   margin: 0;
+   padding: 0;
 }
 
 .dataset_list_item, .exhibit_list_item {
-    background: #fff url(../images/header-background.png) bottom center repeat-x;
-    border: 1px solid #ddd;
-    list-style-type: none;
-    margin: 1em 0;
-    padding: 5px 10px;
-    text-align: left;
+   background: #fff url(../images/header-background.png) bottom center repeat-x;
+   border: 1px solid #ddd;
+   list-style-type: none;
+   margin: 1em 0;
+   padding: 5px 10px;
+   text-align: left;
 }
 
 .dataset-title, .exhibit-title {
-    font-size: 115%;
-    font-weight: bold;
-    padding-bottom: 0.25em;
-    padding-left: 30px;
+   font-size: 115%;
+   font-weight: bold;
+   padding-bottom: 0.25em;
+   padding-left: 30px;
 }
 
+/* policy */
+
 .public .dataset-title {
-    background: transparent url(../images/data-icon.png) top left no-repeat;
+   background: transparent url(../images/data-icon.png) top left no-repeat;
 }
 
 .public .exhibit-title {
-    background: transparent url(../images/collection-icon.png) top left no-repeat;
+   background: transparent url(../images/collection-icon.png) top left no-repeat;
 }
 
 .private .dataset-title, .private .exhibit-title {
-    background: transparent url(../images/lock.png) top left no-repeat;
+   background: transparent url(../images/lock.png) top left no-repeat;
 
 }
+.private {
+   background: #fffcdf;
+}
+
+.dataset-visibility .private {
+    background: transparent url(../images/lock.png) top left no-repeat;
+}
+
 .private {
     background: #fffcdf;
 }
 
 .dataset-description, .exhibit-description {
-    padding-left: 30px;
+   padding-left: 30px;
 }
 
-
 .exhibit-left, .dataset-left {
-    float: left;
-    font-size: 0.9em;
+   float: left;
+   font-size: 0.9em;
 }
 
 .exhibit-right, .dataset-right {
-    background: #fff url(../images/header-background.png) bottom left repeat-x;
-    border: 1px solid #ddd;
-    float: right;
-    margin: 0.5em 0 0;
-    padding: 0.75em 1.25em;
+   background: #fff url(../images/header-background.png) bottom left repeat-x;
+   border: 1px solid #ddd;
+   float: right;
+   margin: 0.5em 0 0;
+   padding: 0.75em 1.25em;
 }
 
 /* see all / see more */
@@ -383,7 +396,7 @@ ul.responses li.thread-8 {
     margin-bottom: 1.5em;
 }
 
-.profile h2 {
+.profile h2, .exhibit_list h2 {
     background-color: #5582A1;
     color: #fff;
     font-size: 1.0em;
@@ -396,7 +409,7 @@ ul.responses li.thread-8 {
     width: 100%;
 }
 
-.about_profile .profile_info {
+.about_profile .profile_info, .about_profile .dataset_info {
     background-color: #1C3C62;
     color: #fff;
     padding: 10px;
@@ -421,8 +434,9 @@ img.photo {
     background: #fff url(../images/profile-background.png) top left repeat-y;
 }
 
-div.profile_info div.about_description {
-    padding: 1em 1.5em;
+div.profile_info, div.dataset_info {
+    padding: 1em 1em;
+    line-height: 1.3em;
 }
 
 .see_all {
@@ -455,14 +469,14 @@ div.profile_info div.about_description {
     width: 60%; /* moving to percentages */
 }
 
-/* user avatar views */
+/* avatar views */
 
 /* profile avatar */
-#profile_avatar_container {
+#profile_avatar_container, #inspector_container {
     width: 116px;
 }
 
-div#profile_avatar {
+div#profile_avatar, div#dataset_avatar {
     position: relative;
 }
 
