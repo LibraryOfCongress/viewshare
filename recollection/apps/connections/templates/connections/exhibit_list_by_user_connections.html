@@ -7,7 +7,7 @@
 {% block head_title %}{{other_user|nicename}}{% blocktrans %}'s Connections' Data Views{% endblocktrans %}{% endblock %}
 {% block head_scripts %}
 {{block.super}}
-{% include "js_include/jquery_ui.html" %}
+{% include "freemix/js_include/jquery_ui.html" %}
 {% endblock %}
 {# set appropriate tabs #}
 
@@ -31,10 +31,10 @@
     {% else %}
     {{ other_user|nicename }}{% blocktrans %}'s connections have{% endblocktrans %}
     {% endifequal %}
-    {{queryset.count}} {% trans "data view" %}{{ queryset.count|pluralize }}.
+    {{object_list.count}} {% trans "data view" %}{{ object_list.count|pluralize }}.
   </p>
 
-  {% dataview_list queryset %}
+  {% exhibit_list object_list %}
 </div>
 
 {% endblock %}

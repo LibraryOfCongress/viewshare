@@ -2,7 +2,7 @@ from django.contrib.syndication.feeds import Feed
 from django.utils.feedgenerator import Atom1Feed
 from freemix.utils import get_user
 from freemix.dataset.models import Dataset
-from freemix.freemixprofile.models import Freemix
+from freemix.exhibit.models import Exhibit
 from freemix.utils import get_site_url
 from django.conf import settings
 from django.http import Http404
@@ -17,7 +17,7 @@ class LatestDataViews(Feed):
     link = get_site_url()
 
     def items(self):
-        return Freemix.objects.order_by('-created')[:10]
+        return Exhibit.objects.order_by('-created')[:10]
 
 
 class AtomLatestDataViews(LatestDataViews):
@@ -45,7 +45,7 @@ class UserDataViews(Feed):
                     obj.username}))
     # Return only this user's Freemixes.
     def items(self, obj):
-        return Freemix.objects.filter(user=obj).order_by('-created')[:10]
+        return Exhibit.objects.filter(user=obj).order_by('-created')[:10]
 
 
 class AtomUserDataViews(UserDataViews):

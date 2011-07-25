@@ -56,14 +56,13 @@ urlpatterns = patterns('',
         name='datasets_by_user_connections'),
 
     url(r'views/(?P<username>[a-zA-Z0-9_.-]+)/connections/$',
-        'recollection.apps.connections.views.dataviews_by_user_connections',
-        name='dataviews_by_user_connections'),
+        'recollection.apps.connections.views.exhibit_list_by_user_connections',
+        name='exhibit_list_by_user_connections'),
 
     (r'^upload/', include('recollection.upload.urls')),
     (r'^data/', include('freemix.dataset.urls')),
 
-    (r'^views/', include('freemix.freemixprofile.urls')),
-    # (r'^canvas/', include('freemix.canvas.urls')),
+    (r'^views/', include('freemix.exhibit.urls')),
     (r'^augment/', include('freemix.augment.urls')),
     url(r'mix/', 'recollection.mixer.mix_data', name='mixer_receiving_endpoint'),
 

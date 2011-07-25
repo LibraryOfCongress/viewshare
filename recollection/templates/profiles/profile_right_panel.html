@@ -35,13 +35,13 @@
 </div>
 
 
-<div class="dataview_list">
+<div class="exhibit_list">
   <h2>{% blocktrans %}Data Views{% endblocktrans %}</h2>
-  {% dataview_list exhibits.all 3 0 %}
+  {% exhibit_list exhibits.all 3 0 %}
 
   {% if other_user.exhibits.count > 3 %}
   <div class="see_all">
-    <a href="{% url freemix_root other_user.username %}">{% trans "See all" %}  {{exhibits.count}} view{{ exhibits.count|pluralize }}</a>
+    <a href="{% url exhibit_list_by_owner other_user.username %}">{% trans "See all" %}  {{exhibits.count}} view{{ exhibits.count|pluralize }}</a>
   </div>
 
   {% endif %}
@@ -64,12 +64,12 @@
 </div>
 
 
-<div class="dataview_list">
+<div class="exhibit_list">
   <h2>{% blocktrans %}Data Views{% endblocktrans %}</h2>
-  {% dataview_list exhibits.all 3 0 %}
+  {% exhibit_list exhibits.all 3 0 %}
   {% if exhibits.count > 3 %}
   <div class="see_all">
-    <a href="{% url freemix_root other_user.username %}">{% trans "See all" %} {{exhibits.count}} view{{ exhibits.count|pluralize }}</a>
+    <a href="{% url exhibit_list_by_owner other_user.username %}">{% trans "See all" %} {{exhibits.count}} view{{ exhibits.count|pluralize }}</a>
   </div>
   {% endif %}
 </div>

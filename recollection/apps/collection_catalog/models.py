@@ -1,8 +1,8 @@
 "Models for building the Recollection collection catalog"
 
 from django.db import models
-from freemix.freemixprofile.models import Freemix
 from django.utils.translation import ugettext_lazy as _
+from freemix.exhibit.models import Exhibit
 
 class CatalogModel(models.Model):
     "The base set of properties for catalog models"
@@ -24,7 +24,7 @@ class CatalogModel(models.Model):
     def get_absolute_url(self):
         "URL's should reverse to '<class>_resource'"
         reverse_url = "%s_resource" % self.__class__.__name__.lower()
-        return (reverse_url, (), {'slug': self.slug})
+        return reverse_url, (), {'slug': self.slug}
 
     def __unicode__(self):
         return self.name
@@ -75,8 +75,8 @@ class Collection(CatalogModel):
             null=False,
             default=True)
 
-    views = models.ManyToManyField(Freemix,
-            verbose_name="Views",
+    exhibits = models.ManyToManyField(Exhibit,
+            verbose_name="Exhibits",
             null=False,
             blank=True)
 

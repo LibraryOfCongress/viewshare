@@ -10,8 +10,8 @@
 {% if user.is_authenticated %}
 <div class="ui-tabs ui-widget ui-corner-all">
   <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-corner-all">
-    <li class="ui-state-default ui-corner-top {% block myview-tab-selected %}{% endblock %}"><a href="{% url freemix_root user.username %}">{% trans "Your Views" %}</a></li>
-    <li class="ui-state-default ui-corner-top {% block myfriendsview-tab-selected %}{% endblock %}"><a href="{% url dataviews_by_user_connections user.username %}">{% blocktrans %}Your Connections' Views{% endblocktrans %}</a></li> 
+    <li class="ui-state-default ui-corner-top {% block myview-tab-selected %}{% endblock %}"><a href="{% url exhibit_list_by_owner user.username %}">{% trans "Your Views" %}</a></li>
+    <li class="ui-state-default ui-corner-top {% block myfriendsview-tab-selected %}{% endblock %}"><a href="{% url exhibit_list_by_user_connections user.username %}">{% blocktrans %}Your Connections' Views{% endblocktrans %}</a></li>
     {% comment %} set by instance policy 
     <li class="ui-state-default ui-corner-top {% block everyoneview-tab-selected %}{% endblock %}"><a href="{% url profile_list %}">{% blocktrans %}All Views{% endblocktrans %}</a></li> {% endcomment %}
     {% block extra_subnav %}{% endblock %}

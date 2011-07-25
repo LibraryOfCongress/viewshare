@@ -5,7 +5,7 @@ from django.views.decorators.cache import cache_page
 from django.views.generic.base import View
 from django.views.generic.edit import CreateView
 from freemix.transform.views import AkaraTransformClient
-from freemix.utils.views import JSONResponse
+from freemix.views import JSONResponse
 
 from recollection.upload import forms, conf
 from recollection.upload import models

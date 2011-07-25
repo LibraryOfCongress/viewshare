@@ -19,7 +19,7 @@ div.user_data_entry .user_counts {
 }
 
 div.user_data_entry .user_counts .user_datasets,
-div.user_data_entry .user_counts .user_dataviews {
+div.user_data_entry .user_counts .user_exhibits {
     display: inline;
 }
 

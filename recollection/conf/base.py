@@ -134,8 +134,7 @@ INSTALLED_APPS = (
     # Freemix specific
     'freemix.utils',
     'freemix.dataset',
-    'freemix.freemixprofile',
-    'freemix.canvas',
+    'freemix.exhibit',
     'freemix.augment',
 
     # Recollection specific
@@ -154,6 +153,9 @@ INSTALLED_APPS = (
     # deprecated app migrations
     'freemix.legacy.view_theme',
     'freemix.legacy.dataprofile',
+    'freemix.legacy.canvas',
+    'freemix.legacy.freemixprofile',
+
 
     )
 

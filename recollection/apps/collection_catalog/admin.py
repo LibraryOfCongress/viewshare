@@ -31,7 +31,7 @@ class CollectionAdmin(AutocompleteAdmin, CatalogAdmin):
     "Admin interface for Collections"
 
     related_search_fields = {
-        'views': ('name',),
+        'exhibit': ('title',),
         'organizations': ('name',),
         'project': ('name',),
     }
@@ -44,7 +44,7 @@ class CollectionAdmin(AutocompleteAdmin, CatalogAdmin):
     list_filter = ('project', 'organizations', 'topics', )
     filter_horizontal = ('topics',)
     fields = ('name', 'slug', 'description', 'project', 'home_page',
-        'thumbnail', 'enabled', 'topics', 'organizations', 'views',
+        'thumbnail', 'enabled', 'topics', 'organizations', 'exhibits',
         'external_view', )
 admin.site.register(Collection, CollectionAdmin)
 

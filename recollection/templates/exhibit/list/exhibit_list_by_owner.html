@@ -4,10 +4,10 @@
 {% load exhibit_tags %}
 {% load freemix_helpers %}
 
-{% block head_title %}{{other_user|nicename}}{% blocktrans %}'s Data Views{% endblocktrans %}{% endblock %}
+{% block head_title %}{{owner|nicename}}{% blocktrans %}'s Data Views{% endblocktrans %}{% endblock %}
 {% block head_scripts %}
 {{block.super}}
-{% include "js_include/jquery_ui.html" %}
+{% include "freemix/js_include/jquery_ui.html" %}
 
 {% endblock %}
 
@@ -32,7 +32,7 @@
 {% ifnotequal user.username username %}
 <li>
   <ul class="tab-group">
-    <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="">{{ other_user|nicename }}</a></li>
+    <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="">{{ owner|nicename }}</a></li>
   </ul>
 </li>
 {% endifnotequal %}
@@ -40,19 +40,19 @@
 
 {% block body %}
 
-<h1>{{other_user|nicename}}{% blocktrans %}'s Data Views{% endblocktrans %}</h1>
+<h1>{{owner|nicename}}{% blocktrans %}'s Data Views{% endblocktrans %}</h1>
 
   <p>
   {% ifequal user.username username %}
     {% trans "You have" %}
   {% else %}
-    {{ other_user|nicename }} {% trans "has" %}
+    {{ owner|nicename }} {% trans "has" %}
   {% endifequal %}
-  {{queryset.count}} {% trans "data view" %}{{ queryset.count|pluralize }}.
+  {{object_list.count}} {% trans "data view" %}{{ object_list.count|pluralize }}.
   </p>
 
 
 <div class="view_details">
-    {% dataview_list queryset %}
+    {% exhibit_list object_list %}
 </div>
 {% endblock %}

@@ -7,10 +7,9 @@ from django.utils.translation import ugettext_lazy as _
 from friends.models import *
 from freemix.dataset.models import Dataset
 from freemix.permissions import PermissionsRegistry
-from freemix.utils.views import LegacyListView
 from django.views.generic.list import ListView
 from freemix.utils import get_user
-from freemix.freemixprofile.models import Freemix
+from freemix.exhibit.models import Exhibit
 
 
 def connections(request, template_name="connections/invitations.html"):
@@ -47,15 +46,19 @@ def connections(request, template_name="connections/invitations.html"):
     }, context_instance=RequestContext(request))
 connections = login_required(connections)
 
-class ConnectionListByUserView(LegacyListView):
-    template = "connections/connection_list_by_user.html"
+class ConnectionListByUserView(ListView):
+    template_name = "connections/connection_list_by_user.html"
 
-    def get_queryset(self, request, username, other_user):
-        return Friendship.objects.friends_for_user(user=get_user(username))
+    def get_queryset(self):
+        return Friendship.objects.friends_for_user(get_user(self.kwargs.get("username")))
 
-    def extra_context(self, request, username):
-        return {"other_user": get_user(username)}
-connection_list_by_user = ConnectionListByUserView()
+    def get_context_data(self,**kwargs):
+        kwargs = super(ConnectionListByUserView, self).get_context_data(**kwargs)
+
+        kwargs["other_user"] = get_user(self.kwargs.get("username"))
+        return kwargs
+
+connection_list_by_user = ConnectionListByUserView.as_view()
 
 
 
@@ -74,6 +77,8 @@ class DatasetListConnectionsView(ListView):
         return list
 
     def get_context_data(self, **kwargs):
+        kwargs = super(DatasetListConnectionsView, self).get_context_data(**kwargs)
+
         kwargs["other_user"] = get_object_or_404(User,
                                             username=self.kwargs.get("username"))
         return kwargs
@@ -81,17 +86,22 @@ class DatasetListConnectionsView(ListView):
 datasets_by_user_connections = DatasetListConnectionsView.as_view()
 
 
-class DataViewListConnectionsView(LegacyListView):
+class ExhibitListConnectionsView(ListView):
     """
     Returns a list of datasets for a particular user on GET.
     """
-    template = "connections/dataview_list_by_user_connections.html"
-    def get_queryset(self, request, username, other_user):
-        pre_friend_ids = [i['friend'].id for i in
-                          Friendship.objects.friends_for_user(get_user(username))]
-        perm_filter = PermissionsRegistry.get_filter("exhibit.can_view", request.user)
-        return Freemix.objects.filter(user__pk__in=pre_friend_ids).filter(perm_filter)
+    template_name = "connections/exhibit_list_by_user_connections.html"
+    def get_queryset(self):
+        user = get_object_or_404(User, username=self.kwargs.get("username"))
 
-    def extra_context(self, request, username):
-        return { "other_user": get_user(username)}
-dataviews_by_user_connections = DataViewListConnectionsView()
+        pre_friend_ids = [i['friend'].id for i in
+                          Friendship.objects.friends_for_user(user)]
+        perm_filter = PermissionsRegistry.get_filter("exhibit.can_view", self.request.user)
+        return Exhibit.objects.filter(owner__pk__in=pre_friend_ids).filter(perm_filter)
+
+    def get_context_data(self, **kwargs):
+        kwargs["other_user"] = get_object_or_404(User,
+                                            username=self.kwargs.get("username"))
+        return kwargs
+
+exhibit_list_by_user_connections = ExhibitListConnectionsView.as_view()

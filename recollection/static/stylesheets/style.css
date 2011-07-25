@@ -258,16 +258,16 @@ h2 img {
 }
 
 /* data views and sets */
-.dataview_list {
+.exhibit_list {
     margin-top: 1.5em;
 }
 
-.dataset_list_items, .dataview_list_items {
+.dataset_list_items, .exhibit_list_items {
     margin: 0;
     padding: 0;
 }
 
-.dataset_list_item, li.dataview_summary {
+.dataset_list_item, .exhibit_list_item {
     background: #fff url(../images/header-background.png) bottom center repeat-x;
     border: 1px solid #ddd;
     list-style-type: none;
@@ -276,7 +276,7 @@ h2 img {
     text-align: left;
 }
 
-.dataset-title, .dataview-name {
+.dataset-title, .exhibit-title {
     font-size: 115%;
     font-weight: bold;
     padding-bottom: 0.25em;
@@ -287,7 +287,11 @@ h2 img {
     background: transparent url(../images/data-icon.png) top left no-repeat;
 }
 
-.private .dataset-title {
+.public .exhibit-title {
+    background: transparent url(../images/collection-icon.png) top left no-repeat;
+}
+
+.private .dataset-title, .private .exhibit-title {
     background: transparent url(../images/lock.png) top left no-repeat;
 
 }
@@ -295,24 +299,17 @@ h2 img {
     background: #fffcdf;
 }
 
-.dataset-description, .dataview-description {
+.dataset-description, .exhibit-description {
     padding-left: 30px;
 }
 
-.dataset-title {
-    background: transparent url(../images/data-icon.png) top left no-repeat;
-}
 
-.dataview-name {
-    background: transparent url(../images/collection-icon.png) top left no-repeat;
-}
-
-.dataview-left, .dataset-left {
+.exhibit-left, .dataset-left {
     float: left;
     font-size: 0.9em;
 }
 
-.dataview-right, .dataset-right {
+.exhibit-right, .dataset-right {
     background: #fff url(../images/header-background.png) bottom left repeat-x;
     border: 1px solid #ddd;
     float: right;
