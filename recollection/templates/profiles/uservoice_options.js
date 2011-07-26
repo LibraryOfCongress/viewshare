@@ -23,5 +23,3 @@ function _loadUserVoice() {
 }
 _loadSuper = window.onload;
 window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
-
-
