@@ -309,6 +309,10 @@ ul.messages li ul li {
     margin: 2px;
 }
 
+ul.edit-message {
+    list-style: none;
+    margin: 4.5em 1em 0em 1em;
+}
 a.close-message {
     float: right;
 }

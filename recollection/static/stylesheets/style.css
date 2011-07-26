@@ -61,6 +61,10 @@
 }
 
 /* buttons */
+
+.buttonset {
+}
+
 .button {
     outline: 0; 
     margin:0 4px 0 0; 
@@ -215,6 +219,13 @@ h2.help {
     padding: .4em 30px .4em 0;
     margin: 0 0 1em 0;
     border-bottom: 1px solid #e3f5f7;
+    color: darkslategrey;
+}
+
+h3.help {
+    font-size: 1.25em;
+    padding: .4em 0px .4em 0;
+    margin: 0 0 -3em 0;
     color: darkslategrey;
 }
 
@@ -545,9 +556,13 @@ div.notices h2 {
     margin: 2em 0;
 }
 
+.buttonset {
+   margin-top: -10cm;	   
+   margin-right:2cm;
+}
+
 .button_link {
     text-decoration: none;
-    vertical-align: middle;
 }
 
 .button_group {
