@@ -162,7 +162,6 @@ INSTALLED_APPS = (
 STATICFILES_DIRS = (
     ('', path.join(module_path('recollection'), 'static')),
     ('', path.join(module_path('pinax'), 'media', 'default')),
-    ('', path.join(module_path('uni_form'), 'media')),
     ('', path.join(module_path('ajax_validation'), 'media')),
     ('', path.join(module_path('django_extensions'), 'media')),
     ('', path.join(module_path('cms'), 'media')),
