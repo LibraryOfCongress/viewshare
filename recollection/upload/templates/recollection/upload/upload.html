@@ -28,21 +28,9 @@
 
 <div id="load">
   <h1 id="upload-label">{% trans "Load Your Data" %}</h1>
-    <h2>{% trans "Pick a Data Format" %}</h2>
+    <h2>{% trans "Choose a Format" %}</h2>
+    <p>
     <ul>
-        <li>
-            <a href="{% url cdm_transform %}">ContentDM (Beta)</a>
-        </li>
-        <li>
-            <a href="{% url oai_transform %}">OAI (Beta)</a>
-        </li>
-        <li>
-            XML MODS
-            <ul>
-                <li><a href="{% url mods_url_transform %}">From the web</a></li>
-                <li><a href="{% url mods_file_transform %}">From a file on your computer</a></li>
-            </ul>
-        </li>
         <li>
             {% trans "Simple rectangular spreadsheets in MS Excel format (Note: the proprietary data format makes them impossible to fully support some Excel functionality)" %}
             <ul>
@@ -51,6 +39,33 @@
             </ul>
         </li>
     </ul>
+    </p>
+    <p>
+    <ul>
+        <li>
+            XML MODS
+            <ul>
+                <li><a href="{% url mods_url_transform %}">From the web</a></li>
+                <li><a href="{% url mods_file_transform %}">From a file on your computer</a></li>
+            </ul>
+        </li>
+    </ul>
+    </p>
+    <p>
+    <ul>
+         <li>
+            <a href="{% url oai_transform %}">OAI (Beta)</a>
+        </li>
+    </ul>
+    </p>
+    <p>
+    <ul>
+        <li>
+            <a href="{% url cdm_transform %}">ContentDM (Beta)</a>
+        </li>
+    </ul>
+    </p>
+
     <p>
     If you don't know or don't see the format you are trying to load, you may load one of the
     <a class="supported-file-types" href="#supported-file-types">Supported Data Source Types</a>
