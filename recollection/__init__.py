@@ -1,7 +1,7 @@
 import os
 import sys
 
-target_version = "2.0.0a2"
+target_version = "2.0.0a3"
 
 def build_version():
     distance ="0"
