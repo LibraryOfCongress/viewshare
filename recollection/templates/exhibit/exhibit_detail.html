@@ -1,0 +1,48 @@
+{% extends "exhibit/detail/base.html" %}
+{% load freemix_helpers %}
+
+{% block rtab_id %}id="builder_tab"{% endblock %}
+{% block body_class %}dataprofile-viewer{% endblock %}
+
+
+{% block extra_subnav %}
+    {% ifnotequal user object.owner %}
+    <li>
+        <ul class="tab-group">
+        <li class="ui-state-default ui-corner-top">
+            <a href="{% url exhibit_list_by_owner owner=object.owner.username %}">{{ object.owner|nicename }}</a>
+    </li>
+    {% endifnotequal %}
+    <li>
+        <ul class="tab-group">
+            <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
+                <a href="">{{ object.title|truncatewords:3 }}</a>
+            </li>
+            <li>
+                <ul class="tab-group">
+                </ul>
+            </li>
+        </ul>
+    </li>
+    {% ifnotequal user object.owner %}
+        </ul>
+        </li>
+    {% endifnotequal %}
+{% endblock %}
+
+{% block unauthenticated_subnav %}
+    <div class="ui-tabs ui-widget ui-corner-all">
+        <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-corner-all">
+            <li class="ui-state-default ui-corner-top">
+                <a href="{% url exhibit_list_by_owner owner=object.owner.username %}">{{ object.owner|nicename }}</a>
+            </li>
+            <li>
+                <ul class="tab-group">
+                    <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
+                        <a href="">{{ object.title|truncatewords:3 }}</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+{% endblock %}

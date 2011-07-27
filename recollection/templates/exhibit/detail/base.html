@@ -1,0 +1,46 @@
+{% extends "exhibit/base.html" %}
+
+{% load i18n %}
+{% load freemix_helpers %}
+{% load exhibit_tags %}
+{% load compress %}
+{% load exhibit_tags %}
+{% block freemix_title %}{% blocktrans %}Data View{% endblocktrans %}: {{ object.title }}{% endblock %}
+
+{% block freemix_css %}
+{{ block.super }}
+{% compress css %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/layout.css"/>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/views.css"/>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/editor.css"/>
+{% endcompress %}
+{% endblock %}
+
+{% block freemix_js %}
+    {{ block.super }}
+    <script type="text/javascript" src="{{ STATIC_URL }}freemix/js/lib/jquery.form.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}exhibit/js/detail.js"></script>
+
+{% endblock %}
+
+{% block body %}
+
+    <h1>{{ object.title }}</h1>
+
+    <div class="priority-area">
+      <p>
+
+        {%  if can_delete %}
+        <span class="action action_edit_exhibit">
+            <a class="exhibit_delete" href="{{ exhibit.get_absolute_url }}">{% trans "Delete" %}</a>
+        </span>
+        {% endif %}
+      </p>
+    </div>
+
+    <div id="exhibit_metadata">
+      {% include "exhibit/detail/exhibit_metadata.html" %}
+    </div>
+    {% include "exhibit/exhibit_delete_dialog.html" %}
+
+{% endblock %}

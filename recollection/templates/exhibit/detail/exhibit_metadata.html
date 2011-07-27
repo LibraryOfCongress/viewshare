@@ -1,0 +1,58 @@
+{% load i18n %}
+{% load freemix_helpers %}
+
+<div class="left_panel user_panel inspector_panel">
+
+ <div id="about-box" class="info-section">
+
+   <table class="about_profile">
+     <tbody>
+       <tr>
+	 <td id="inspector_container">
+	   <div id="exhibit_avatar">
+	     <div>
+               <img src="{{ STATIC_URL }}/images/data-icon-large.png" alt="{% trans "Thumbnail of data view" %}" class="photo" />
+	     </div>
+	   </div>
+	 </td>
+	 <td>
+	   <div class="exhibit_info">
+	     <div class="exhibit-title">{{ object.title }}</div>
+
+	     <div class="exhibit-creator">
+	       <span class="property-label">{% trans "Created by:" %} </span> <a href="{% url profile_detail object.owner.username %}">{{ object.owner|nicename }}</a>
+	     </div>
+	     <div class="exhibit-created-data"><span class="property-label">{% trans "Created on:" %} </span>{{ object.created|date:"N j, Y" }}</div>
+	     <div class="exhibit-modified-data"><span class="property-label">{% trans "Last Modified:" %} </span>{{ object.modified|date:"N j, Y" }}</div>
+	   </div>
+	 </td>
+       </tr>
+     </tbody>
+   </table>
+
+   <div class="exhibit_info">
+
+     <div class="exhibit_description">{{ object.description }}</div>
+
+     <div class="exhibit-visibility">
+       {% if object.published %}
+       <span class="public">{% trans "This view is publicly available." %}</span>
+       {% else %}
+       <span class="private">{% trans "This view is private." %}</span>
+       {% endif %}
+     </div>
+
+     {% if can_edit %}
+     <p class="about_edit">
+       {% if is_saved %}
+       <span class="inline_save_message">{% trans "Saved" %}</span>
+       {% endif %}
+       <a href="{% url exhibit_edit_form owner=object.owner slug=object.slug %}" id="detail_edit_button" class="button_link">{% trans "Edit" %}</a>
+     </p>
+     {% endif %}
+
+   </div>
+
+ </div> <!-- end about-box -->
+
+</div>
