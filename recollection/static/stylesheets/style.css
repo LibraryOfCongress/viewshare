@@ -309,6 +309,13 @@ h2 img {
    padding-left: 30px;
 }
 
+.about_profile .dataset-title, .about_profile .exhibit-title {
+   font-size: 115%;
+   font-weight: bold;
+   padding-bottom: 0.25em;
+   padding-left: 0px;
+}
+
 /* policy */
 
 .public .dataset-title {
@@ -418,7 +425,7 @@ ul.responses li.thread-8 {
     margin-bottom: 1.5em;
 }
 
-.profile h2, .exhibit_list h2 {
+.profile h2, .dataset_list h2, .exhibit_list h2 {
     background-color: #5582A1;
     color: #fff;
     font-size: 1.0em;
@@ -431,7 +438,7 @@ ul.responses li.thread-8 {
     width: 100%;
 }
 
-.about_profile .profile_info, .about_profile .dataset_info {
+.about_profile .profile_info, .about_profile .dataset_info, .about_profile .exhibit_info {
     background-color: #1C3C62;
     color: #fff;
     padding: 10px;
@@ -456,7 +463,7 @@ img.photo {
     background: #fff url(../images/profile-background.png) top left repeat-y;
 }
 
-div.profile_info, div.dataset_info {
+div.profile_info, div.dataset_info, div.exhibit_info {
     padding: 1em 1em;
     line-height: 1.3em;
 }

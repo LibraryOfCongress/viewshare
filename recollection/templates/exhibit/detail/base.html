@@ -5,6 +5,7 @@
 {% load exhibit_tags %}
 {% load compress %}
 {% load exhibit_tags %}
+{% load dataset_tags %}
 {% block freemix_title %}{% blocktrans %}Data View{% endblocktrans %}: {{ object.title }}{% endblock %}
 
 {% block freemix_css %}
@@ -29,8 +30,25 @@
 
     <div class="priority-area">
       <p>
+        <span class="action action_share_exhibit">
+          <a class="exhibit_share">{% trans "Share" %}</a>
+        </span>
+
+        <span class="divider">|</span>
+
+        <span class="action action_embed_exhibit">
+          <a class="exhibit_embed">{% trans "Embed" %}</a>
+        </span>
+
+        {%  if can_view %}
+        <span class="divider">|</span>
+        <span class="action action_view_exhibit">
+            <a class="exhibit_view" href="{{ exhibit.get_absolute_url }}">{% trans "View" %}</a>
+        </span>
+        {% endif %}
 
         {%  if can_delete %}
+        <span class="divider">|</span>
         <span class="action action_edit_exhibit">
             <a class="exhibit_delete" href="{{ exhibit.get_absolute_url }}">{% trans "Delete" %}</a>
         </span>
@@ -41,6 +59,18 @@
     <div id="exhibit_metadata">
       {% include "exhibit/detail/exhibit_metadata.html" %}
     </div>
+
+    <div class="right_panel data_panel">
+      <div class="dataset_list">
+	<h2>{% blocktrans %}Data Set{% endblocktrans %}</h2>
+
+        <ul class="dataset_list_items">
+          {% dataset_list_item exhibit.dataset %}
+	</ul>
+
+      </div>
+    </div>
+
     {% include "exhibit/exhibit_delete_dialog.html" %}
 
 {% endblock %}
