@@ -30,23 +30,27 @@
     
     <div class="priority-area">
       <p>
-
+        {%  if can_edit %}
         <span class="action action_refresh_dataset">
 	  Refresh
         </span>
 
         <span class="divider">|</span>
+        {% endif %}
 
+        {% if can_view %}
         <span class="action action_create_dataset">
           <a class="dataset_export" href="{% url dataset_data_json owner=dataset.owner.username slug=dataset.slug %}">{% trans "Export" %}</a>
         </span>
+        {% endif %}
 
         <span class="divider">|</span>
 
+        {%  if can_delete %}
         <span class="action action_edit_dataset">
             <a class="dataset_delete" href="{{ dataset.get_absolute_url }}">{% trans "Delete" %}</a>
         </span>
-
+        {% endif %}
       </p>
     </div>
     
@@ -68,7 +72,7 @@
       </div>
 
       <div class="about_edit">
-	{% if can_build_view %}
+	{% if can_build %}
 	<a href="{% url exhibit_canvas_chooser owner=object.owner.username slug=object.slug %}" id="create_exhibit_button" class="button_link">{% trans "Create a New View" %}</a>
 	{% endif %}
       </div>
