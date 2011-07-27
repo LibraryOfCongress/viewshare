@@ -102,6 +102,17 @@
     margin-left: 0;
 }
 
+.button_link {
+    text-decoration: none;
+}
+
+.button_group {
+    padding: 1em 0;
+    text-align: center;
+}
+
+/* end button */
+
 .chooser ul {
     margin: 0;
     padding: 0;
@@ -556,19 +567,6 @@ div.notices h2 {
     margin: 2em 0;
 }
 
-/*.buttonset {
-   margin-top: -10em;
-   margin-right:2em;
-}
-*/
-.button_link {
-    text-decoration: none;
-}
-
-.button_group {
-    padding: 1em 0;
-    text-align: center;
-}
 
 .project {
     margin: 1em 0;
