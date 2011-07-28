@@ -10,13 +10,17 @@
                 if (data.length == 0) {
                     setUrlError("No OAI sets found for this URL");
 
-                }
-                for (var inx = 0 ; inx < data.length ; inx++) {
-                    $("#id_set_choice").append("<option value='" + data[inx][0] + "'>" + data[inx][1] + "</option>");
-                }
-                var selected = $("#id_set").val();
-                if (selected.trim()) {
-                    $("#div_id_set_choice").val(selected);
+                } else {
+                    var initial = data[0][0];
+
+                    for (var inx = 0 ; inx < data.length ; inx++) {
+                        $("#id_set_choice").append("<option value='" + data[inx][0] + "'>" + data[inx][1] + "</option>");
+                    }
+                    var selected = $("#id_set").val();
+                    if (selected.trim()) {
+                        $("#div_id_set_choice").val(selected);
+                    }
+                    updateDatasetSelection();
                 }
                 $(".loading_message").remove();
             }, "json");
@@ -36,13 +40,15 @@
 
     }
 
+    function updateDatasetSelection() {
+        var set_id=$("#id_set_choice option:selected").val();
+        var title=$("#id_set_choice option:selected").text();
+        $("#id_set").val(set_id);
+        $("#id_title").val(title);
+    }
+
     function setupSetChoiceSelect() {
-        $("#id_set_choice").change(function() {
-            var set_id=$("#id_set_choice option:selected").val();
-            var title=$("#id_set_choice option:selected").text();
-            $("#id_set").val(set_id);
-            $("#id_title").val(title);
-        });
+        $("#id_set_choice").change(updateDatasetSelection);
     }
 
     function clearUrlError() {
