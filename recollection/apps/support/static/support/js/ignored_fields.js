@@ -1,7 +1,7 @@
 (function($) {
 
     function getFormUrl() {
-        return $("link[rel='support/ignored-fields']").attr("href");
+        return $("link[rel='support/ignored_fields']").attr("href");
     }
 
 
@@ -75,7 +75,7 @@
                 var values = [];
                 $.each(data.diagnostics, function() {
                     if (this.unknown_top_level_elements) {
-                        for (inx = 0 ; inx < this.unknown_top_level_elements.length ; inx++) {
+                        for (var inx = 0 ; inx < this.unknown_top_level_elements.length ; inx++) {
                             if (values.indexOf(this.unknown_top_level_elements[inx]) < 0) {
                                 values.push(this.unknown_top_level_elements[inx]);
                             }

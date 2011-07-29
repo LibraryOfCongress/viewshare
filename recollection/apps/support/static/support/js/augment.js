@@ -74,7 +74,7 @@
 
                 var p = $("#augment-failure-picker").data("property");
                 $("#id_field_name", form).val(p.name());
-                $("#id_profile_json", form).val($.toJSON($.extend({},  Freemix.exhibit.exportDatabase(Freemix.exhibit.database), {"data_profile": Freemix.data_profile})));
+                $("#id_profile_json", form).val($.toJSON($.extend({},  Freemix.exhibit.exportDatabase(Freemix.exhibit.database), {"data_profile": Freemix.profile})));
                 root.data("from", "#augment-failure-picker");
                 $("#augment-failure-picker, #identify #editor, #subnav").hide();
                 root.show();
