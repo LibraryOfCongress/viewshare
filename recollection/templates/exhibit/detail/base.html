@@ -14,6 +14,24 @@
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/layout.css"/>
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/views.css"/>
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/editor.css"/>
+<style>
+    #embedding-code {
+        display: block;
+        line-height: 2.5em;
+        width: 75%;
+        overflow-y: none;
+        overflow-x: auto;
+        margin: 0.5em auto;
+        border: 1px solid #c6c6c6;
+        color: #000;
+        background: #F3F3F3 url({{ STATIC_URL }}exhibit/img/form-shadow.png)
+        repeat-x scroll left top;
+        text-align: left;
+        font-family: monospace;
+        padding: 0.5em;
+        white-space: nowrap;
+    }
+</style>
 {% endcompress %}
 {% endblock %}
 
@@ -25,25 +43,31 @@
 {% endblock %}
 
 {% block body %}
+    
+
 
     <h1>{{ object.title }}</h1>
 
     <div class="priority-area">
       <p>
+        {%  if can_view %}
+        <span class="action action_view_exhibit">
+            <a class="exhibit_view" href="{{ exhibit.get_absolute_url }}">{% trans "View" %}</a>
+        </span>
+        {% endif %}
+        {% if can_share %}
+        <span class="divider">|</span>
+
         <span class="action action_share_exhibit">
           <a class="exhibit_share">{% trans "Share" %}</a>
         </span>
+        {% endif %}
 
+          {% if can_embed %}
         <span class="divider">|</span>
 
         <span class="action action_embed_exhibit">
-          <a class="exhibit_embed">{% trans "Embed" %}</a>
-        </span>
-
-        {%  if can_view %}
-        <span class="divider">|</span>
-        <span class="action action_view_exhibit">
-            <a class="exhibit_view" href="{{ exhibit.get_absolute_url }}">{% trans "View" %}</a>
+          <a class="exhibit_embed" href="">{% trans "Embed" %}</a>
         </span>
         {% endif %}
 
@@ -55,7 +79,19 @@
         {% endif %}
       </p>
     </div>
-
+    {% if can_embed %}
+    <div id="embed">
+      <div id="embed-info" class="ui-helper-hidden ui-widget-content ui-corner-all">
+        <p><strong>{% blocktrans %}Copy the following and paste it into your page where you'd like your data view to be placed.{% endblocktrans %}</strong></p>
+        <p id="embedding-code">&lt;script id="freemix-embed" src="{{ exhibit_embed_url }}" type="text/javascript"&gt;&lt;/script&gt;</p>
+        <p class="buttons">
+            <a id="embed-info-close" class="ui-state-default ui-corner-all button button-icon-left">
+                <span class="ui-icon ui-icon-close"></span>{% trans "Close" %}
+            </a>
+        </p>
+      </div>
+    </div>
+    {% endif %}
     <div id="exhibit_metadata">
       {% include "exhibit/detail/exhibit_metadata.html" %}
     </div>
