@@ -554,5 +554,5 @@ p.tip {
     margin: 0 0 1em;
 }
 
-.ui-dialog-content .uniForm,.ui-dialog-content.uniForm {z-index: 1002;}
+/*.ui-dialog-content .uniForm,.ui-dialog-content.uniForm {z-index: 10000;}*/
 

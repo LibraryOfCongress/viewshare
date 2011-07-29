@@ -27,7 +27,7 @@
 /* #############################   GENERALS   ################################### */
 /* ------------------------------------------------------------------------------ */
 
-.uniForm{ margin: 0; padding: 0; position: relative; z-index: 1; } /* reset stuff */
+.uniForm{ margin: 0; padding: 0; position: relative;  } /* reset stuff */
   
   /* Some generals and more resets */
   .uniForm fieldset{ border: none; margin: 0; padding: 0; }
@@ -170,4 +170,3 @@ YOU CAN VERY EASILY REVERT TO A GENERIC STYLE OF UNI-FORM. BEST OF LUCK...
 */
 
 /* ------------------------------------------------------------------------------ */
-.ui-dialog-content .uniForm,.ui-dialog-content.uniForm {z-index: 1002;}
