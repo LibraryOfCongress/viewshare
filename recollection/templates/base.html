@@ -28,8 +28,8 @@
         <ul>
           {% for announcement in site_wide_announcements %}
           <li>
-            <a href="{{ announcement.get_absolute_url }}">{{ announcement }}</a> -
-            <a href="{% url announcement_hide announcement.pk %}?next={{ request.path }}">{% trans "Hide announcement" %}</a>
+            <a href="{{ announcement.get_absolute_url }}">{{ announcement }}</a>
+            <a href="{% url announcement_hide announcement.pk %}?next={{ request.path }}">{% trans "(hide announcement)" %}</a>
           </li>
           {% endfor %}
         </ul>
@@ -45,18 +45,25 @@
       </div>
 
           <div id="compatibility-warning" class="ui-state-highlight ui-corner-all">
-             <a href="#" class="ui-icon ui-icon-closethick close-message">&#160;</a>
-             <p><strong>Your browser version is not supported in {{ SITE_NAME }}.</strong>  Some portions of the site may not function as intended.  A list of supported browsers is available in the <a href="/about/userguide/#s1.1">user guide</a>.</p>
-            <p>You may continue to attempt using the site with your current browser.</p>
+	    <ul>
+	      <li>
+		<a href="#" class="ui-icon ui-icon-closethick close-message">&#160;</a>
+
+		<p><strong>Your browser version is not supported in {{ SITE_NAME }}.</strong>  You may continue to attempt using the site with your current browser, however some portions of the site may not function as intended.  A list of supported browsers is available in the <a href="/about/userguide/#s1.1">user guide</a>.</p>
+
+	      </li>
+	    </ul>
           </div>
 
           
           {% if messages %}
-            <ul id="system_messages" class="messages" >
-              {% for message in messages %}
-              <li id="message_{{ forloop.counter }}" class="info">{{ message }}</li>
-              {% endfor %}
-            </ul>
+	   <div id="systemMsg">
+             <ul id="system_messages" class="messages">
+               {% for message in messages %}
+               <li id="message_{{ forloop.counter }}" class="infoMsg">{{ message }}</li>
+               {% endfor %}
+             </ul>
+	   </div>
           {% endif %}
 
       <div id="subnav" class="ui-helper-clearfix">{% block subnav %}&nbsp;{% endblock %}</div>
