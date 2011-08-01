@@ -121,16 +121,6 @@ code {
     background: #fff url(../images/footer-border.png) bottom left no-repeat;
 }
 
-#site_wide_announcements {
-    background: yellow;
-    padding: 10px;
-    text-align: center;
-}
-
-#site_wide_announcements ul {
-    padding: 0;
-    margin: 0;
-}
 
 /* subnav tabs */
 #subnav {
@@ -295,23 +285,11 @@ div#loading {
     margin: 5px 6px 0 9px;
 }
 
-ul.messages {
-    list-style: none;
-    margin: 0.75em 1em;
-}
-ul.messages li {
-    padding: 5px 10px;
-    margin: 5px;
-}
-
-ul.messages li ul li {
-    padding: 1px 1px;
-    margin: 2px;
-}
 
 ul.edit-message {
     list-style: none;
 }
+
 a.close-message {
     float: right;
 }
@@ -556,3 +534,126 @@ p.tip {
 
 .ui-dialog-content .uniForm,.ui-dialog-content.uniForm {z-index: 1002;}
 
+/* notification display */
+/* handling message consistency at this point in style... in future introduce a simpler normalized class/div construct to key from */
+/* ul.messages li construct is introduced to harmonize jquery message overrides */
+
+
+/* user login .. managing consitent display of uni_form/templates/uni_form/errors.html */
+
+div#errorMsg ul {
+border: 1px solid;
+margin: 10px 0px;
+padding:15px 10px 15px 50px;
+background-repeat: no-repeat;
+background-position: 10px center;
+list-style: none;
+color: #D8000C;
+background-color: #FFBABA;
+background-image: url('../images/error.png');
+}
+
+div#warningMsg ul, div#compatibility-warning ul {
+border: 1px solid;
+margin: 10px 0px;
+padding:15px 10px 15px 50px;
+background-repeat: no-repeat;
+background-position: 10px center;
+list-style: none;
+color: #9F6000;
+background-color: #FEEFB3;
+background-image: url('../images/warning.png');
+}
+
+div#systemMsg ul.messages li.errorMsg {
+border: 1px solid;
+margin: 10px 0px;
+padding:15px 10px 15px 50px;
+background-repeat: no-repeat;
+background-position: 10px center;
+list-style: none;
+color: #D8000C;
+background-color: #FFBABA;
+background-image: url('../images/error.png');
+}
+
+/* system messages (data profile editor, user panel page, etc.) */
+
+div#systemMsg ul.messages li.infoMsg,
+div#systemMsg ul.messages li.errorMsg, 
+div#systemMsg ul.messages li.successMsg,
+div#systemMsg ul.messages li.warningMsg {
+  border: 1px solid;
+  margin: 10px 10px;
+  padding:15px 10px 15px 50px;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  list-style: none;
+}
+ 
+div#systemMsg ul.messages li.infoMsg {
+  color: #00529B;
+  background-color: #BDE5F8;
+  background-image: url('../images/info.png');
+}
+
+div#systemMsg ul.messages li.successMsg {
+  color: #4F8A10;
+  background-color: #DFF2BF;
+  background-image:url('../images/success.png');
+}
+
+div#systemMsg ul.messages li.warningMsg {
+  color: #9F6000;
+  background-color: #FEEFB3;
+  background-image: url('../images/warning.png');
+}
+
+div#systemMsg ul.messages li.errorMsg {
+  color: #D8000C;
+  background-color: #FFBABA;
+  background-image: url('../images/error.png');
+}
+
+/* Delete dialogs */
+
+div.delete_dataset_form, div.delete_exhibit_form {
+border: 1px solid;
+margin: 10px 0px;
+padding:15px 10px 15px 50px;
+background-repeat: no-repeat;
+background-position: 10px center;
+color: #9F6000;
+background-color: #FEEFB3;
+background-image: url('../images/warning.png');
+}
+
+
+/* announcements */
+
+div#site_wide_announcements ul {
+border: 1px solid;
+margin: 10px 20px;
+padding:15px 10px 15px 50px;
+background-repeat: no-repeat;
+background-position: 10px center;
+list-style: none;
+color: #9F6000;
+background-color: #FEEFB3;
+background-image: url('../images/warning.png');
+}
+
+
+/* missing field */
+
+.errorField {
+border: 1px solid;
+margin: 10px 10px;
+padding:15px 10px 15px 50px;
+background-repeat: no-repeat;
+background-position: 10px center;
+color: #D8000C;
+background-color: #FFBABA;
+background-image: url('../images/error.png');
+width: 200px;
+}

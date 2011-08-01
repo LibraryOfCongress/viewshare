@@ -31,49 +31,45 @@
 
 {% block describe_messages %}
     {{block.super}}
-    <li id="augment-location-tip" class="info">
-        <p>
-            {% blocktrans %}
-            <strong>Tip:</strong> If you want to view your data on a 
-                Map you need latitude, longitude information. If your data includes 
-                lat/long information modify the type for this field to "location".  
-                If you do not have lat/long data, you can augment your data by specifying 
-                which fields (e.g. city, state, zip) to generate such information 
-                (see "Add a Field" feature at bottom of this page).
-            {% endblocktrans %}
-        </p>
-    </li>
-    <li id="augmentation-failure-server" class="error ui-helper-hidden">
-        <p>
-        {% blocktrans %}
-        <strong>Attention:</strong>There was a server communication failure while attempting to augment your data. 
-        Please try again. If this problem persists, please report the problem by sending a 
-        message to <a href="mailto:ndippaccess@loc.gov">ndippaccess@loc.gov</a>.
-        {% endblocktrans %} 
-        </p>
-    </li>
-    <li id="augmentation-failure" class="error ui-helper-hidden">
-        <p>
-            {% blocktrans %}
-            <strong>Attention:</strong>Some or all of your data did not augment properly. 
-            Please review augmented fields below for more information.
-            {% endblocktrans %}
-        </p>
-    </li>
-    <li id="augmentation-success" class="info ui-helper-hidden">
-        <p>
-            {% blocktrans %}
-            Success! All of your fields were successfully augmented.
-            {% endblocktrans %}
-        </p>
-    </li>
-    <li id="load-info-unknown-elements" class="info ui-helper-hidden">
-            {% blocktrans %}
-            <p><strong>Warning:</strong>&nbsp;It appears that some elements or attributes in your file were not successfully loaded. </p>
-            <p><strong><a class="support-link" href="">Click here</a> to review or to request support.</strong></p>
-            {% endblocktrans %}
 
-    </li>
+<li id="augment-location-tip" class="info infoMsg">
+  {% blocktrans %}
+  <strong>Tip:</strong> If you want to view your data on a 
+  Map you need latitude, longitude information. If your data includes 
+  lat/long information modify the type for this field to "location".  
+  If you do not have lat/long data, you can augment your data by specifying 
+  which fields (e.g. city, state, zip) to generate such information 
+  (see "Add a Field" feature at bottom of this page).
+  {% endblocktrans %}
+</li>
+
+<li id="augmentation-failure-server" class="error ui-helper-hidden errorMsg">
+  {% blocktrans %}
+  <strong>Attention:</strong>There was a server communication failure while attempting to augment your data. 
+  Please try again. If this problem persists, please report the problem by sending a 
+  message to <a href="mailto:ndippaccess@loc.gov">ndippaccess@loc.gov</a>.
+  {% endblocktrans %} 
+</li>
+
+<li id="augmentation-failure" class="error ui-helper-hidden warningMsg">
+  {% blocktrans %}
+  <strong>Attention:</strong>Some or all of your data did not augment properly. 
+  Please review augmented fields below for more information.
+  {% endblocktrans %}
+</li>
+
+<li id="augmentation-success" class="info ui-helper-hidden successMsg">
+  {% blocktrans %}
+  Success! All of your fields were successfully augmented.
+  {% endblocktrans %}
+</li>
+
+<li id="load-info-unknown-elements" class="info ui-helper-hidden warningMsg">
+  {% blocktrans %}
+  <strong>Warning:</strong>&nbsp;It appears that some elements or attributes in your file were not successfully loaded. <strong><a class="support-link" href="">Click here</a> to review or to request support.</strong>
+  {% endblocktrans %}
+</li>
+
 {% endblock describe_messages %}
 
 {% block describe %}
