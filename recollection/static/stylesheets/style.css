@@ -305,14 +305,14 @@ h2 img {
 .dataset-title, .exhibit-title {
    font-size: 115%;
    font-weight: bold;
-   padding-bottom: 0.25em;
+   padding-bottom: 0.4em;
    padding-left: 30px;
 }
 
 .about_profile .dataset-title, .about_profile .exhibit-title {
    font-size: 115%;
    font-weight: bold;
-   padding-bottom: 0.25em;
+   padding-bottom: 0.4em;
    padding-left: 0px;
 }
 
