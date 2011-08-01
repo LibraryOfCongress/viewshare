@@ -319,11 +319,11 @@ h2 img {
 /* policy */
 
 .public .dataset-title {
-   background: transparent url(../images/data-icon.png) top left no-repeat;
+   background: transparent url(../images/dataset-24.png) top left no-repeat;
 }
 
 .public .exhibit-title {
-   background: transparent url(../images/collection-icon.png) top left no-repeat;
+   background: transparent url(../images/palette-24.png) top left no-repeat;
 }
 
 .private .dataset-title, .private .exhibit-title {
@@ -343,6 +343,10 @@ h2 img {
 }
 
 .dataset-description, .exhibit-description {
+   padding-left: 30px;
+}
+
+.exhibit-short-description, .exhibit-long-description {
    padding-left: 30px;
 }
 
