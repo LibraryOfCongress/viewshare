@@ -1,6 +1,6 @@
 {%  load i18n %}
 {% load uni_form_tags %}
-<form action="{% url exhibit_create_form owner=owner slug=slug %}" method="post" class="uniForm">
+<form action="{% url exhibit_create_form owner=owner slug=slug canvas=canvas %}" method="post" class="uniForm">
         {% csrf_token %}
         {{ form|as_uni_form }}
       <div class="buttons">
