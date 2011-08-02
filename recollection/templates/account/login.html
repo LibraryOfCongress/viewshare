@@ -27,7 +27,7 @@ $(document).ready(function() {
 
 {% if user.is_authenticated %}
 <p>
-  <span class="warning">{% trans "Note" %}</span>: {% blocktrans %}you are already logged in as{% endblocktrans %} {{ user|nicename }}.
+  <span class="warning">{% blocktrans %}You are already logged in as{% endblocktrans %} {{ user|nicename }}.</span>
 </p>
 <br />
 {% else %}

@@ -648,23 +648,32 @@ background-color: #FEEFB3;
 background-image: url('../images/warning.png');
 }
 
-
-
-/* announcements */
+/* site wide announcements */
 
 div#site_wide_announcements ul {
-border: 1px solid;
-margin: 10px 20px;
-padding:15px 10px 15px 50px;
-background-repeat: no-repeat;
-background-position: 10px center;
-list-style: none;
-color: #9F6000;
-background-color: #FEEFB3;
-background-image: url('../images/warning.png');
+  border: 1px solid;
+  margin: 10px 20px;
+  padding:15px 10px 15px 50px;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  list-style: none;
+  color: #9F6000; 
+  background-color: #FEEFB3;
+  background-image: url('../images/warning.png');
 }
 
+/* misc warning */
 
+span.warning {
+  border: 1px solid;
+  padding:15px 10px 15px 50px;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  color: #9F6000; 
+  background-color: #FEEFB3;
+  background-image: url('../images/warning.png');
+}
+  
 /* missing field - treat as Validation messages */
 
 .errorField {
