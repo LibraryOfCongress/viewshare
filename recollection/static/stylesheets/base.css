@@ -548,9 +548,9 @@ padding:15px 10px 15px 50px;
 background-repeat: no-repeat;
 background-position: 10px center;
 list-style: none;
-color: #D8000C;
-background-color: #FFBABA;
-background-image: url('../images/error.png');
+color: #D63301;
+background-color: #FFCCBA;
+background-image: url('../images/validation.png');
 }
 
 div#warningMsg ul, div#compatibility-warning ul {
@@ -582,7 +582,8 @@ background-image: url('../images/error.png');
 div#systemMsg ul.messages li.infoMsg,
 div#systemMsg ul.messages li.errorMsg, 
 div#systemMsg ul.messages li.successMsg,
-div#systemMsg ul.messages li.warningMsg {
+div#systemMsg ul.messages li.warningMsg,
+div#systemMsg ul.messages li.validationgMsg {
   border: 1px solid;
   margin: 10px 10px;
   padding:15px 10px 15px 50px;
@@ -615,6 +616,12 @@ div#systemMsg ul.messages li.errorMsg {
   background-image: url('../images/error.png');
 }
 
+div#systemMsg ul.messages li.validationMsg {
+  color: #D63301;
+  background-color: #FFCCBA;
+  background-image: url('../images/validation.png');
+}
+
 /* Delete dialogs */
 
 div.delete_dataset_form, div.delete_exhibit_form {
@@ -627,6 +634,18 @@ color: #9F6000;
 background-color: #FEEFB3;
 background-image: url('../images/warning.png');
 }
+
+div#delete-record-dialog, div#delete-property-dialog {
+border: 1px solid;
+margin: 10px 10px;
+padding:15px 10px 15px 50px;
+background-repeat: no-repeat;
+background-position: 10px center;
+color: #9F6000;
+background-color: #FEEFB3;
+background-image: url('../images/warning.png');
+}
+
 
 
 /* announcements */
@@ -644,7 +663,7 @@ background-image: url('../images/warning.png');
 }
 
 
-/* missing field */
+/* missing field - treat as Validation messages */
 
 .errorField {
 border: 1px solid;
@@ -652,8 +671,8 @@ margin: 10px 10px;
 padding:15px 10px 15px 50px;
 background-repeat: no-repeat;
 background-position: 10px center;
-color: #D8000C;
-background-color: #FFBABA;
-background-image: url('../images/error.png');
+color: #D63301;
+background-color: #FFCCBA;
+background-image: url('../images/validation.png');
 width: 200px;
 }

@@ -255,6 +255,11 @@ h2 img {
     padding: 8px 0 0;
 }
 
+
+.toolbar-divider {
+    margin: 5px 5px;
+}
+
 #theme {
     float: right;
 }
