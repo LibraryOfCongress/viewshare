@@ -541,10 +541,12 @@ p.tip {
 
 /* user login .. managing consitent display of uni_form/templates/uni_form/errors.html */
 
-div#errorMsg ul {
+.login_options div#errorMsg ul {
 border: 1px solid;
-margin: 10px 0px;
 padding:15px 10px 15px 50px;
+margin-left: 330px;
+width: 240px;
+position: absolute; 
 background-repeat: no-repeat;
 background-position: 10px center;
 list-style: none;
