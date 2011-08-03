@@ -379,6 +379,10 @@ h2 img {
     padding-bottom: 10px;
 }
 
+.inspector_panel .dataset_description, .inspector_panel .exhibit-description {
+    padding-bottom: 20px;
+}
+
 .exhibit-short-description, .exhibit-long-description {
 }
 
@@ -397,12 +401,24 @@ h2 img {
    background: #fffcdf url(../images/lock.png) 99% 5% no-repeat;
 }
 
-.private {
-   background: #fffcdf;
+.exhibit-visibility .private {
+   background: #fffcdf url(../images/lock.png) 5% 50% no-repeat;
+   padding: 15px 30px;
 }
 
-.private {
-    background: #fffcdf;
+.dataset-visibility .private {
+   background: #fffcdf url(../images/lock.png) 5% 50% no-repeat;
+   padding: 15px 30px;
+}
+
+.exhibit-visibility .public {
+   background: #ffcccc url(../images/unlock.png) 2% 50% no-repeat;
+   padding: 15px 30px;
+}
+
+.dataset-visibility .public {
+   background: #ffcccc url(../images/unlock.png) 2% 50% no-repeat;
+   padding: 15px 30px;
 }
 
 
@@ -567,7 +583,7 @@ img.photo {
 }
 
 .about_edit {
-    padding: 1em;
+    padding-top: 2em;
     text-align: right;
 }
 

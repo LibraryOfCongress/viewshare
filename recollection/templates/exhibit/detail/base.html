@@ -14,6 +14,12 @@
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/layout.css"/>
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/views.css"/>
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/editor.css"/>
+
+{% block head_css %}
+{{ block.super }}
+<link href="{{STATIC_URL}}stylesheets/inspector.css" rel="stylesheet" type="text/css" media="screen,projection" />
+{% endblock %}
+
 <style>
     #embedding-code {
         display: block;
@@ -73,7 +79,7 @@
 
         {%  if can_delete %}
         <span class="divider">|</span>
-        <span class="action action_edit_exhibit">
+        <span class="action action_delete_exhibit">
             <a class="exhibit_delete" href="{{ exhibit.get_absolute_url }}">{% trans "Delete" %}</a>
         </span>
         {% endif %}
