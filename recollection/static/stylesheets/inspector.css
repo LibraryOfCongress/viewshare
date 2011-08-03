@@ -1,0 +1,12 @@
+/* Inspector style
+ * This file eventually will include all of the inspector display css
+ */
+
+/* trim down functionality associated with resources related to the one being inspected */
+
+.exhibit-actions .action_delete_exhibit, .dataset-actions .action_delete_dataset {
+  display: none;
+}
+
+
+
