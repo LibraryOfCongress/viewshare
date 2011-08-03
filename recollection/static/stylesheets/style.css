@@ -380,7 +380,7 @@ h2 img {
 }
 
 .inspector_panel .dataset_description, .inspector_panel .exhibit-description {
-    padding-bottom: 20px;
+    padding-bottom: 30px;
 }
 
 .exhibit-short-description, .exhibit-long-description {
@@ -399,28 +399,51 @@ h2 img {
 
 .exhibit_display .private, .exhibit_edit .private, .dataset_edit .private, .dataset_summary .private, .dataset_list_items .private, .exhibit_list_items .private  {
    background: #fffcdf url(../images/lock.png) 99% 5% no-repeat;
-}
+  }
 
 .exhibit-visibility .private {
-   background: #fffcdf url(../images/lock.png) 5% 50% no-repeat;
-   padding: 15px 30px;
+   background-image: url(../images/lock.png);
+   color: #9F6000;
+   background-color: #fffcdf;
+   margin: 20px 50px;
+   padding:15px 15px 15px 40px;
+   background-repeat: no-repeat;
+   background-position: 15px center;
+   border: 1px solid;
 }
 
 .dataset-visibility .private {
-   background: #fffcdf url(../images/lock.png) 5% 50% no-repeat;
-   padding: 15px 30px;
+   background-image: url(../images/lock.png);
+   color: #9F6000;
+   background-color: #FEEFB3;
+   margin: 20px 50px;
+   padding:15px 15px 15px 40px;
+   background-repeat: no-repeat;
+   background-position: 15px center;
+   border: 1px solid;
 }
 
 .exhibit-visibility .public {
-   background: #ffcccc url(../images/unlock.png) 2% 50% no-repeat;
-   padding: 15px 30px;
+   background-image: url(../images/unlock.png);
+   color: #00529B;
+   background-color: #BDE5F8;
+   margin: 20px 20px;
+   padding:15px 15px 15px 40px;
+   background-repeat: no-repeat;
+   background-position: 15px center;
+   border: 1px solid;
 }
 
 .dataset-visibility .public {
-   background: #ffcccc url(../images/unlock.png) 2% 50% no-repeat;
-   padding: 15px 30px;
+   background-image: url(../images/unlock.png);
+   color: #00529B;
+   background-color: #BDE5F8;
+   margin: 20px 20px;
+   padding:15px 15px 15px 40px;
+   background-repeat: no-repeat;
+   background-position: 15px center;
+   border: 1px solid;
 }
-
 
 .exhibit-left, .dataset-left {
    float: left;
