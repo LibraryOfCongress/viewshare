@@ -5,7 +5,6 @@ from django.views.generic.base import RedirectView
 from django.contrib import admin
 
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from pinax.apps.account.openid_consumer import PinaxConsumer
 
 from recollection import feeds
 from recollection.utils.views import UserHomeView
@@ -30,7 +29,6 @@ feed_dict = {
 urlpatterns = patterns('',
 
     (r'^account/', include('pinax.apps.account.urls')),
-    (r'^openid/(.*)', PinaxConsumer()),
     (r'^profiles/', include('recollection.apps.profiles.urls')),
 
     (r'^invitations/', include('recollection.apps.connections.urls')),
@@ -40,7 +38,6 @@ urlpatterns = patterns('',
     (r'^robots.txt$', include('robots.urls')),
     (r'^admin/', include(admin.site.urls)),
 
-    (r'^avatar/', include('avatar.urls')),
     (r'^feeds/(.*)/$', 'django.contrib.syndication.views.feed', {"feed_dict": feed_dict}),
 
     (r'^catalog/', include('recollection.apps.collection_catalog.urls')),

@@ -11,17 +11,12 @@
 {{ block.super }}
 <script type="text/javascript">
 $(document).ready(function() {
-    loginForms.init();
     $("#id_username").focus();
 });
 </script>
 {% endblock %}
 
 {% block body %}
-
-{% if openid and not user.is_authenticated %}
-<p><span class="warning">It appears you have started to login using OpenID. Want to <a href="/openid/register/">finish logging in</a>?</span></p>
-{% endif %}
 
 <h1>{% trans "Log In" %}</h1>
 
@@ -42,7 +37,7 @@ $(document).ready(function() {
    <div class="login_text">
     <fieldset class="window inlineLabels loginTypeUP">
 
-      <form class="login uniForm user_pass" method="POST" action="{% url acct_login %}">
+      <form class="login uniForm user_pass" method="POST">
           {% csrf_token %}	
 	
           {{ form|as_uni_form }}

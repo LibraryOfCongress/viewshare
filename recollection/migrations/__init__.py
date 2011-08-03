@@ -7,6 +7,5 @@ SOUTH_MIGRATION_MODULES = {
     'gravatar': 'recollection.migrations.gravatar',
     'avatar': 'recollection.migrations.avatar',
     'piston': 'recollection.migrations.piston',
-    'django_openid': 'recollection.migrations.django_openid',
 }
 

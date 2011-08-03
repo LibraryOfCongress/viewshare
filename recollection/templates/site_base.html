@@ -43,7 +43,7 @@
 
 {% block login %}
     {% if user.is_authenticated %}
-        <a href="{% url profile_detail user.username %}">{% trans "Home" %}</a> <span class="divider">|</span> <a href="{% url acct_email %}">{% trans "Settings" %}</a> <span class="divider">|</span> {% if user.is_staff %}<a href="/admin/" target="_blank">{% trans "Admin" %}</a> <span class="divider">|</span> {% endif %}<span class="helplink"><a href="{% page_url "help" %}" target="_blank">{% trans "Help" %}</a></span> <span class="divider">|</span> <a href="/openid/logout/?next={% url acct_logout %}">{% trans "Logout" %}</a>
+        <a href="{% url profile_detail user.username %}">{% trans "Home" %}</a> <span class="divider">|</span> <a href="{% url acct_email %}">{% trans "Settings" %}</a> <span class="divider">|</span> {% if user.is_staff %}<a href="/admin/" target="_blank">{% trans "Admin" %}</a> <span class="divider">|</span> {% endif %}<span class="helplink"><a href="{% page_url "help" %}" target="_blank">{% trans "Help" %}</a></span> <span class="divider">|</span> <a href="{% url acct_logout %}?next={% url acct_login %}">{% trans "Logout" %}</a>
     {% else %}
         <a href="{% url acct_login %}">{% trans "Login" %}</a> {% if ACCOUNT_OPEN_SIGNUP %}{% trans "or" %} <a href="{% page_url "acct_signup" %}"><b>{% trans "Sign up" %}</b></a>{% endif %}
     {% endif %}

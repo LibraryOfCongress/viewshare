@@ -37,7 +37,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
 
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django_openid.consumer.SessionConsumer',
     'django.middleware.doc.XViewMiddleware',
     'pagination.middleware.PaginationMiddleware',
     'django_sorting.middleware.SortingMiddleware',
@@ -68,7 +67,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "recollection.utils.context_processors.recollection_settings",
     "notification.context_processors.notification",
     "announcements.context_processors.site_wide_announcements",
-    "pinax.apps.account.context_processors.openid",
     "pinax.apps.account.context_processors.account",
     #"messages.context_processors.inbox",
     "recollection.apps.connections.context_processors.invitations",
@@ -97,7 +95,6 @@ INSTALLED_APPS = (
 
     # external
     'notification',
-    'django_openid',
     'emailconfirmation',
     'django_extensions',
     'robots',
@@ -161,7 +158,7 @@ INSTALLED_APPS = (
 
 STATICFILES_DIRS = (
     ('', path.join(module_path('recollection'), 'static')),
-    ('', path.join(module_path('pinax'), 'media', 'default')),
+#    ('', path.join(module_path('pinax'), 'media', 'default')),
     ('', path.join(module_path('ajax_validation'), 'media')),
     ('', path.join(module_path('django_extensions'), 'media')),
     ('', path.join(module_path('cms'), 'media')),
@@ -179,7 +176,7 @@ THEME_URL = '%s%s'%(STATIC_URL,THEME_FRAGMENT_URL)
 
 TEMPLATE_DIRS = (
     path.join(module_path("recollection"), "templates"),
-    path.join(module_path("pinax"), "templates", "default"),
+#    path.join(module_path("pinax"), "templates", "default"),
 )
 
 # Set to describe the site, properties and the names

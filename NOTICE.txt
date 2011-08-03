@@ -22,7 +22,6 @@ This software uses code from the following projects:
  * django-mailer (http://code.google.com/p/django-mailer/)
  * django-messages (http://code.google.com/p/django-messages/)
  * django-notification (http://code.google.com/p/django-notification/)
- * django-openid (http://code.google.com/p/django-openid/)
  * django-pagination (http://django-pagination.googlecode.com/)
  * django-piston (http://bitbucket.org/jespern/django-piston/wiki/Home)
  * django-redmine (https://github.com/zepheira/django-redmine)
@@ -52,7 +51,6 @@ This software uses code from the following projects:
  * lightbox.js (http://www.huddletogether.com/projects/lightbox/)
  * PIL (http://www.pythonware.com/products/pil)
  * Pinax (http://pinaxproject.com/)
- * python-openid (http://openidenabled.com/python-openid/)
  * pytz (http://pytz.sourceforge.net)
  * simplejson (http://undefined.org/python/#simplejson)
  * South (http://south.aeracode.org/)
@@ -65,12 +63,6 @@ Please see LICENSE.txt for the licenses that apply to these dependencies.
 
 Notices for software licensed under Apache 2.0
 ----------------------------------------------
-
-Python OpenID may be obtained from
-http://github.com/openid/python-openid
-and we'd like to hear about how you're using this software.
-Write to us at openid@janrain.com.
-
 
 Google Diff Match and Patch
 Copyright 2006 Google Inc.
