@@ -687,3 +687,15 @@ background-color: #FFCCBA;
 background-image: url('../images/validation.png');
 width: 200px;
 }
+
+/* misc deletes - treat as warning */
+
+.delete_exhibit_form {
+  border: 1px solid;
+  padding:15px 10px 15px 50px;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  color: #9F6000; 
+  background-color: #FEEFB3;
+  background-image: url('../images/warning.png');
+}

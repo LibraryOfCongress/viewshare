@@ -64,15 +64,14 @@ ul.profile_list li {
 }
 
 .user_data_entry .user_datasets {
-    background: url(../images/data-icon.png) top left no-repeat;
+    background: url(../images/dataset-24.png) top left no-repeat;
     padding: 0.25em 0 0.25em 30px;
-    min-height: 17px;
 }
 
 .user_data_entry .user_exhibits {
-    background: url(../images/collection-icon.png) top left no-repeat;
+    background: url(../images/palette-24.png) top left no-repeat;
     padding-left: 30px;
-    min-height: 17px;
+    padding-bottom: 5px;
 }
 
 .profile_left_panel {

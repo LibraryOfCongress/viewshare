@@ -291,7 +291,7 @@ h2 img {
 
 /* data views and sets */
 
-.dataset_list, .exhibit_list {
+.dataset_list, .exhibit_list, .data_details, .exhibit_details {
    margin-bottom: 1.5em;
 }
 
@@ -309,12 +309,43 @@ h2 img {
    text-align: left;
 }
 
-.dataset-title, .exhibit-title {
+.dataset_list_item .dataset-title {
+   background: transparent url(../images/dataset-24.png) top left no-repeat;
    font-size: 115%;
    font-weight: bold;
    padding-bottom: 0.4em;
    padding-left: 30px;
 }
+
+.exhibit_list_item .exhibit-title {
+   background: transparent url(../images/palette-24.png) top left no-repeat;
+   font-size: 115%;
+   font-weight: bold;
+   padding-bottom: 0.4em;
+   padding-left: 30px;
+}
+
+.dataset_edit .dataset-title, .dataset_summary .dataset-title {
+   background: transparent url(../images/dataset-32.png) top left no-repeat;
+   font-size: 140%;
+   font-weight: bold;
+   padding-top: 0.5em;
+   padding-bottom: 0.5em;
+   padding-left: 40px;
+   vertical-align:middle;
+}
+
+.exhibit_edit .exhibit-title, .exhibit_display .exhibit-title {
+   background: transparent url(../images/palette-32.png) top left no-repeat;
+   font-size: 140%;
+   font-weight: bold;
+   padding-bottom: 0.5em;
+   padding-top: 0.5em;
+   padding-left: 40px;
+}
+
+
+
 
 .about_profile .dataset-title, .about_profile .exhibit-title {
    font-size: 115%;
@@ -323,39 +354,57 @@ h2 img {
    padding-left: 0px;
 }
 
+.dataset-metadata, .exhibit-metadata {
+    font-size: 90%;
+    padding-left: 0px;
+}
+
+
+
+
+/* set width accordingly for appropriate page display */
+
+.dataset_list .dataset_list_items .dataset-metadata, .exhibit_list .exhibit_list_items .exhibit-metadata  {
+    width: 45%;
+}
+
+.data_details .dataset_list_items .dataset-metadata, .exhibit_details .exhibit_list_items .exhibit-metadata {
+    width: 75%;
+}
+
+.dataset-actions, .exhibit-actions {
+}
+	       
+.dataset-description, .exhibit-description {
+    padding-bottom: 10px;
+}
+
+.exhibit-short-description, .exhibit-long-description {
+}
+
+
+
+
 /* policy */
 
 .public .dataset-title {
-   background: transparent url(../images/dataset-24.png) top left no-repeat;
 }
 
 .public .exhibit-title {
-   background: transparent url(../images/palette-24.png) top left no-repeat;
 }
 
-.private .dataset-title, .private .exhibit-title {
-   background: transparent url(../images/lock.png) top left no-repeat;
-
+.exhibit_display .private, .exhibit_edit .private, .dataset_edit .private, .dataset_summary .private, .dataset_list_items .private, .exhibit_list_items .private  {
+   background: #fffcdf url(../images/lock.png) 99% 5% no-repeat;
 }
+
 .private {
    background: #fffcdf;
-}
-
-.dataset-visibility .private {
-    background: transparent url(../images/lock.png) top left no-repeat;
 }
 
 .private {
     background: #fffcdf;
 }
 
-.dataset-description, .exhibit-description {
-   padding-left: 30px;
-}
-
-.exhibit-short-description, .exhibit-long-description {
-   padding-left: 30px;
-}
 
 .exhibit-left, .dataset-left {
    float: left;
@@ -367,7 +416,7 @@ h2 img {
    border: 1px solid #ddd;
    float: right;
    margin: 0.5em 0 0;
-   padding: 0.75em 1.25em;
+   padding: .75em 1.25em;
 }
 
 /* see all / see more */
