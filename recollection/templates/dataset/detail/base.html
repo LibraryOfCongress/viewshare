@@ -16,6 +16,11 @@
 {% endcompress %}
 {% endblock %}
 
+{% block head_css %}
+{{ block.super }}
+<link href="{{STATIC_URL}}stylesheets/inspector.css" rel="stylesheet" type="text/css" media="screen,projection" />
+{% endblock %}
+
 {% block freemix_js %}
     {{ block.super }}
     <script type="text/javascript" src="{{ STATIC_URL }}freemix/js/lib/jquery.form.js"></script>
