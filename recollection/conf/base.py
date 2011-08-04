@@ -142,6 +142,7 @@ INSTALLED_APPS = (
     'recollection.apps.connections',
     'recollection.conf.recollection_defaults',
     'recollection.upload',
+    'recollection.share',
 
     # Support pipeline
     'recollection.apps.support',
