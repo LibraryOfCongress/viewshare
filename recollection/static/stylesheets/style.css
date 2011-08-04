@@ -500,7 +500,6 @@ ul.responses li.thread-8 {
 
 /* login style (skining pinax entry forms) */
 
-
 .login_wrapper {
   background-image:url(../images/login_bg.png);
   background-repeat:no-repeat;
@@ -570,7 +569,57 @@ ul.responses li.thread-8 {
     text-align:center;
 }
 
+
+/* edit panes (more pinax styling) */
+
+.uniForm .ctrlHolder label {
+    padding-top: 10px;
+    padding-bottom: 0px;
+    font-size: 120%;
+    color: slategrey;
+}
+
+.uniForm .ctrlHolder label span {
+    display: none;
+}
+
+.uniForm .ctrlHolder input.textinput {
+   width: 98%;
+   margin: 1px;
+}
+
+.uniForm .textarea {
+   width: 99%;
+}
+
+.uniForm .ctrlHolder ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+.uniForm .ctrlHolder ul li {
+ display:inline;
+}
+
+.uniForm .ctrlHolder ul li label {
+ display:inline;
+ float: left;
+ padding-right: 1em;
+ font-size: 110%;
+}
+
+.uniForm .buttons {
+  padding-top: 20px;
+}
+
+.uniForm .form_block {
+  padding-top: 20px;
+}
+
+
 /* profiles */
+
 .info-section {
     border: 1px solid #eee;
     margin-bottom: 1.5em;
