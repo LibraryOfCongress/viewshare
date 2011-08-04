@@ -1,0 +1,117 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load exhibit_tags %}
+{% load freemix_helpers %}
+{% load compress %}
+
+{% block head_title %}{{ object.title|safe }}{% endblock %}
+
+{% block rtab_id %}id="builder_tab"{% endblock %}
+{% block body_class %}main-attraction{% endblock %}
+
+{% block head_data %}
+    {{ block.super }}
+    <link rel="exhibit/data" href="{% url shared_dataset_data_json slug=object.slug %}"/>
+    <link rel="freemix/dataprofile" href="{% url shared_dataset_profile_json slug=object.slug %}"/>
+    <link rel="freemix/exhibit_profile" href="{% url shared_exhibit_profile_json slug=object.slug %}"/>
+
+{% endblock %}
+
+{% block head_scripts %}
+    {% include "freemix/js_include/exhibit.html" %}
+    {{ block.super }}
+    {% include "freemix/js_include/jquery_ui.html" %}
+    {% include "freemix/js_include/viewer.html" %}
+    {% compress js %}
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/freemix.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/exhibit.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/property.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/identify.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/widget.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/facet.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/view.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/views/map-view.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.highlight.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/display.js"></script>
+    {% endcompress %}
+    {% include "exhibit/lens_js.html" %}
+    {% include "exhibit/facet_js.html" %}
+    {% autoescape off %}
+    <script type="text/javascript">
+        (function($, Freemix) {
+
+            $(document).ready(function() {
+                Freemix.initialize();
+            });
+
+         })(window.Freemix.jQuery, window.Freemix);
+    </script>
+    <script type="text/javascript" src="{{STATIC_URL}}scripts/hide_items.js"></script>
+
+    {% endautoescape %}
+{% endblock head_scripts %}
+
+
+{% block head_css %}
+{{block.super}}
+{% compress css %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/layout.css"/>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/views.css"/>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}exhibit/css/canvas.css"/>
+
+{% endcompress %}
+<link rel="stylesheet" type="text/css" href="http://api.simile.zepheira.com/exhibit/2.2.0/extensions/chart/chart-extension-bundle.css" />
+<link rel="stylesheet" type="text/css" href="{{ exhibit.theme.url }}" />
+
+{% endblock %}
+
+{% block body %}
+
+<div class="exhibit_display">
+  <ul class="exhibit_list_items">
+    <li class="exhibit_list_item result_set_item clearfix public">
+
+      <div class="exhibit-title"><a href="{{  exhibit.get_absolute_url }}">{{exhibit.title}}</a></div>
+
+      {% if exhibit.description %}
+      {% ifnotequal exhibit.description exhibit.description|truncatewords:20 %}
+      <div class="exhibit-description exhibit-short-description">
+        {{ exhibit.description|safe|truncatewords:20 }}
+        <a class="readmore" href="{{ exhibit.get_absolute_url }}">read more</a>
+      </div>
+      <div class="exhibit-description exhibit-long-description ui-helper-hidden">
+        {{ exhibit.description|safe }}
+      </div>
+      {%  else %}
+      <div class="exhibit-description">
+	{{ exhibit.description|safe }}
+      </div>
+      {% endifnotequal %}
+      {% endif %}
+
+      <div class="exhibit-left exhibit-metadata">
+        {% trans "This view was created by"%} <span class="exhibit-creator"><a href="{% url profile_detail exhibit.owner.username %}">{{exhibit.owner|nicename}}</a></span> {% trans "on"%} <span class="exhibit-created-data">{{exhibit.created|date:"N j, Y"}}</span>{% if exhibit.created|date == exhibit.modified|date %}{% trans ". " %}{% else %}{% trans "and last modified"%}<span class="exhibit-modified-data">{{exhibit.modified|date:"N j, Y"}}</span>{% trans ". " %}{% endif %}{% trans "This view was built from the " %}<span class="exhibit-dataset-title"><a href="{{exhibit.dataset.get_absolute_url }}" title="{{exhibit.dataset.title}}">{{exhibit.dataset.title}}</a></span> {% trans "data set." %}
+      </div>
+
+    </li>
+  </ul>
+</div>
+
+<div id="contents" class="freemix-themeable">
+
+  <div id="canvas">
+      {% include exhibit.canvas.location %}
+  </div>
+
+</div>
+
+<div class="ui-helper-hidden">
+  <div id="templates">
+  </div>
+</div>
+
+{% endblock %}
+
+
+
