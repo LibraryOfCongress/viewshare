@@ -344,11 +344,12 @@ h2 img {
    padding-left: 40px;
 }
 
-/* handle this style due to base override */
+/* handle this style due to jquery uithemer base override */
 
 .exhibit_edit ul.exhibit_list_items, .exhibit_display ul.exhibit_list_items {
   margin-left: 20px;
   margin-right: 20px;
+  color: black;
 }
 
 .exhibit_edit ul.exhibit_list_items a, .exhibit_display ul.exhibit_list_items a {
