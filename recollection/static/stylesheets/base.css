@@ -167,8 +167,14 @@ body.attraction #subnav {
     margin-right: 0;
 }
 
-body.main-attraction #body,
-body.attraction #body {
+body.main-attraction #body, body.attraction #body {
+    border: none;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0 0;
+}
+
+body.main-attraction #body, body.attraction #body {
     border: none;
     margin-left: 0;
     margin-right: 0;
@@ -554,6 +560,27 @@ color: #D63301;
 background-color: #FFCCBA;
 background-image: url('../images/validation.png');
 }
+
+.login_options div.error p {
+border: 1px solid;
+padding:6px 10px 6px 50px;
+margin-top: -5px;
+maring-bottom: 10px;
+margin-left: 330px;
+width: 240px;
+position: absolute; 
+background-repeat: no-repeat;
+background-position: 10px center;
+color: #D63301;
+background-color: #FFCCBA;
+background-image: url('../images/validation.png');
+}
+
+
+
+
+
+/* general warning messages */
 
 div#warningMsg ul, div#compatibility-warning ul {
 border: 1px solid;

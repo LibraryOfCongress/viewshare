@@ -344,8 +344,16 @@ h2 img {
    padding-left: 40px;
 }
 
+/* handle this style due to base override */
 
+.exhibit_edit ul.exhibit_list_items, .exhibit_display ul.exhibit_list_items {
+  margin-left: 20px;
+  margin-right: 20px;
+}
 
+.exhibit_edit ul.exhibit_list_items a, .exhibit_display ul.exhibit_list_items a {
+    color: rgb(0, 176, 216);
+}
 
 .about_profile .dataset-title, .about_profile .exhibit-title {
    font-size: 115%;
@@ -405,7 +413,7 @@ h2 img {
    background-image: url(../images/lock.png);
    color: #9F6000;
    background-color: #fffcdf;
-   margin: 20px 50px;
+   margin: 20px 0px;
    padding:15px 15px 15px 40px;
    background-repeat: no-repeat;
    background-position: 15px center;
@@ -415,8 +423,8 @@ h2 img {
 .dataset-visibility .private {
    background-image: url(../images/lock.png);
    color: #9F6000;
-   background-color: #FEEFB3;
-   margin: 20px 50px;
+   background-color: #fffcdf;
+   margin: 20px 0px;
    padding:15px 15px 15px 40px;
    background-repeat: no-repeat;
    background-position: 15px center;
@@ -427,7 +435,7 @@ h2 img {
    background-image: url(../images/unlock.png);
    color: #00529B;
    background-color: #BDE5F8;
-   margin: 20px 20px;
+   margin: 20px 0px;
    padding:15px 15px 15px 40px;
    background-repeat: no-repeat;
    background-position: 15px center;
@@ -438,7 +446,7 @@ h2 img {
    background-image: url(../images/unlock.png);
    color: #00529B;
    background-color: #BDE5F8;
-   margin: 20px 20px;
+   margin: 20px 0px;
    padding:15px 15px 15px 40px;
    background-repeat: no-repeat;
    background-position: 15px center;
@@ -512,7 +520,7 @@ ul.responses li.thread-8 {
 
 .login_text {
   padding: 25px 25px;
-  background: url(../images/login_icon.png) 90% 60% no-repeat;
+  background: url(../images/login_icon.png) 90% 65% no-repeat;
 }
 
 .login_text .ctrlHolder label {
@@ -538,11 +546,22 @@ ul.responses li.thread-8 {
     margin-left: 10em;
 }
 
+.login_text #div_id_username, .login_text #div_id_passwd {
+  padding-bottom: 5px;
+}
+
 .login_text .ctrlHolder input.textinput, login_text .ctrlHolder input.textInput {
   margin: 0 0 0 0;
   padding: 0 0 0 0;
   margin-left: 10em;
-  width: 150px;
+  width: 25%;
+}
+
+.login_text .ctrlHolder .passwordinput {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  margin-left: 10em;
+  width: 25%;
 }
 
 .login_text .checkbox {
