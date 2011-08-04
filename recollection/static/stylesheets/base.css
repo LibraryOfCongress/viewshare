@@ -167,8 +167,14 @@ body.attraction #subnav {
     margin-right: 0;
 }
 
-body.main-attraction #body,
-body.attraction #body {
+body.main-attraction #body, body.attraction #body {
+    border: none;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0 0;
+}
+
+body.main-attraction #body, body.attraction #body {
     border: none;
     margin-left: 0;
     margin-right: 0;
