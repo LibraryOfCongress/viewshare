@@ -686,3 +686,10 @@ width: 200px;
   background-color: #FEEFB3;
   background-image: url('../images/warning.png');
 }
+
+/* special formating for required-setting */
+
+ul.required-setting {
+margin-left: -10px;
+padding-top: 5px;
+}
