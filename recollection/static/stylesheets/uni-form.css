@@ -259,6 +259,7 @@ YOU CAN VERY EASILY REVERT TO A GENERIC STYLE OF UNI-FORM. BEST OF LUCK...
   color:#333;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 30px;
 }
 
 .login_text {
@@ -309,6 +310,7 @@ YOU CAN VERY EASILY REVERT TO A GENERIC STYLE OF UNI-FORM. BEST OF LUCK...
 
 .login_text .checkbox {
   font-size: 80%;
+  padding-top: 10px;
   padding-bottom: 10px;
 }
 
@@ -317,6 +319,8 @@ YOU CAN VERY EASILY REVERT TO A GENERIC STYLE OF UNI-FORM. BEST OF LUCK...
     color: grey;
     position: absolute;
     padding-left: 10px;
+    padding-top: 5px;
+    font-size: 110%;
 }
 
 .login_text .form_block {
@@ -325,7 +329,7 @@ YOU CAN VERY EASILY REVERT TO A GENERIC STYLE OF UNI-FORM. BEST OF LUCK...
 }
 
 .login_text .contact {
-    padding-top: 50px;
+    padding-top: 30px;
     margin-left: auto;
     margin-right: auto;
     text-align:center;
