@@ -18,8 +18,6 @@ $(document).ready(function() {
 
 {% block body %}
 
-<h1>{% trans "Log In" %}</h1>
-
 {% if user.is_authenticated %}
 <p>
   <span class="warning">{% blocktrans %}You are already logged in as{% endblocktrans %} {{ user|nicename }}.</span>
