@@ -37,7 +37,8 @@ $(document).ready(function() {
         title: "{% trans "Edit Profile" %}",
         modal: true,
         autoOpen: false,
-        width: "50%"
+        position: ["top","center"],
+        width: 400
     };
     $('#edit_profile_form').dialog(opts);
     $('#edit-profile-button').click(function() {
@@ -133,8 +134,9 @@ $(document).ready(function() {
   {% endif %}
 
   {% if is_me %}
-  <p class="about_edit"><a href="#edit_profile_form" id="edit-profile-button" class="button_link sub-button">{% trans "Edit" %}</a></p>
+  <p class="about_edit"><a href="#edit_profile_form" id="edit-profile-button" class="button_link">{% trans "Edit" %}</a></p>
   {% endif %}
+
 
   {# @@@ this entire invitation mechanism should be an inclusion tag #}
   {% if user.is_authenticated %}

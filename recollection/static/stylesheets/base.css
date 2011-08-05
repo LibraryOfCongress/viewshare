@@ -540,46 +540,6 @@ p.tip {
 
 /*.ui-dialog-content .uniForm,.ui-dialog-content.uniForm {z-index: 10000;}*/
 
-/* notification display */
-/* handling message consistency at this point in style... in future introduce a simpler normalized class/div construct to key from */
-/* ul.messages li construct is introduced to harmonize jquery message overrides */
-
-
-/* user login .. managing consitent display of uni_form/templates/uni_form/errors.html */
-
-.login_options div#errorMsg ul {
-border: 1px solid;
-padding:15px 10px 15px 50px;
-margin-left: 330px;
-width: 240px;
-position: absolute; 
-background-repeat: no-repeat;
-background-position: 10px center;
-list-style: none;
-color: #D63301;
-background-color: #FFCCBA;
-background-image: url('../images/validation.png');
-}
-
-.login_options div.error p {
-border: 1px solid;
-padding:6px 10px 6px 50px;
-margin-top: -5px;
-maring-bottom: 10px;
-margin-left: 330px;
-width: 240px;
-position: absolute; 
-background-repeat: no-repeat;
-background-position: 10px center;
-color: #D63301;
-background-color: #FFCCBA;
-background-image: url('../images/validation.png');
-}
-
-
-
-
-
 /* general warning messages */
 
 div#warningMsg ul, div#compatibility-warning ul {

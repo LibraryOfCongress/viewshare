@@ -344,11 +344,12 @@ h2 img {
    padding-left: 40px;
 }
 
-/* handle this style due to base override */
+/* handle this style due to jquery uithemer base override */
 
 .exhibit_edit ul.exhibit_list_items, .exhibit_display ul.exhibit_list_items {
   margin-left: 20px;
   margin-right: 20px;
+  color: black;
 }
 
 .exhibit_edit ul.exhibit_list_items a, .exhibit_display ul.exhibit_list_items a {
@@ -506,134 +507,6 @@ ul.responses li.thread-8 {
     margin-bottom: 10px;
 }
 
-/* login style (skining pinax entry forms) */
-
-.login_wrapper {
-  background-image:url(../images/login_bg.png);
-  background-repeat:no-repeat;
-  width:680px;
-  height:400px;
-  color:#333;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.login_text {
-  padding: 25px 25px;
-  background: url(../images/login_icon.png) 90% 65% no-repeat;
-}
-
-.login_text .ctrlHolder label {
-    padding-top: 5px;
-    padding-bottom: 15px;
-    font-size: 120%;
-    color: grey;
-}
-
-.login_text .ctrlHolder label span {
-    display: none;
-}
-
-.login_text .ctrlHolder label {
-    left: 10px;
-    position: absolute;
-    align: left;
-    display: inline;
-}
-
-.login_text .ctrlHolder input {
-    display: inline;
-    margin-left: 10em;
-}
-
-.login_text #div_id_username, .login_text #div_id_passwd {
-  padding-bottom: 5px;
-}
-
-.login_text .ctrlHolder input.textinput, login_text .ctrlHolder input.textInput {
-  margin: 0 0 0 0;
-  padding: 0 0 0 0;
-  margin-left: 10em;
-  width: 25%;
-}
-
-.login_text .ctrlHolder .passwordinput {
-  margin: 0 0 0 0;
-  padding: 0 0 0 0;
-  margin-left: 10em;
-  width: 25%;
-}
-
-.login_text .checkbox {
-  font-size: 80%;
-  padding-bottom: 10px;
-}
-
-.login_text .ctrlHolder .formHint {
-    display: block;
-    color: grey;
-    position: absolute;
-    padding-left: 10px;
-}
-
-.login_text .form_block {
-    padding-left: 10px;
-    padding-top: 10px;
-}
-
-.login_text .contact {
-    padding-top: 50px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align:center;
-}
-
-/* edit panes (more pinax styling) */
-
-.ui-dialog .uniForm .ctrlHolder label {
-    padding-top: 10px;
-    padding-bottom: 0px;
-    font-size: 120%;
-    color: slategrey;
-}
-
-.ui-dialog .uniForm .ctrlHolder label span {
-    display: none;
-}
-
-.ui-dialog .uniForm .ctrlHolder input.textinput {
-   width: 98%;
-   margin: 1px;
-}
-
-.ui-dialog .uniForm .textarea {
-   width: 99%;
-}
-
-.ui-dialog .uniForm .ctrlHolder ul {
-  padding: 0;
-  margin: 0;
-  list-style-type: none;
-}
-
-.ui-dialog .uniForm .ctrlHolder ul li {
- display:inline;
-}
-
-.ui-dialog .uniForm .ctrlHolder ul li label {
- display:inline;
- float: left;
- padding-right: 1em;
- font-size: 110%;
-}
-
-.ui-dialog .uniForm .buttons {
-  padding-top: 20px;
-}
-
-.ui-dialog .uniForm .form_block {
-  padding-top: 20px;
-}
 
 
 /* profiles */
