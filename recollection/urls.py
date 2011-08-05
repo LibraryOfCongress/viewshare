@@ -61,6 +61,7 @@ urlpatterns = patterns('',
 
     (r'^views/', include('freemix.exhibit.urls')),
     (r'^augment/', include('freemix.augment.urls')),
+    (r'^share/', include('recollection.share.urls')),
     url(r'mix/', 'recollection.mixer.mix_data', name='mixer_receiving_endpoint'),
 
     url(r'^userhome/$', login_required(UserHomeView.as_view()), name="user_home"),
