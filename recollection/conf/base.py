@@ -133,6 +133,7 @@ INSTALLED_APPS = (
     'freemix.dataset',
     'freemix.exhibit',
     'freemix.augment',
+    'freemix.exhibit.share',
 
     # Recollection specific
     'recollection.apps.notices',
@@ -142,7 +143,6 @@ INSTALLED_APPS = (
     'recollection.apps.connections',
     'recollection.conf.recollection_defaults',
     'recollection.upload',
-    'recollection.share',
 
     # Support pipeline
     'recollection.apps.support',

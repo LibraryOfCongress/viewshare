@@ -45,6 +45,8 @@
     {{ block.super }}
     <script type="text/javascript" src="{{ STATIC_URL }}freemix/js/lib/jquery.form.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}exhibit/js/detail.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}share/js/share_dialog.js"></script>
+
 
 {% endblock %}
 
@@ -65,7 +67,7 @@
         <span class="divider">|</span>
 
         <span class="action action_share_exhibit">
-          <a class="exhibit_share">{% trans "Share" %}</a>
+          <a class="exhibit_share" href="{% url shared_key_create_form owner=exhibit.owner slug=exhibit.slug %}">{% trans "Share" %}</a>
         </span>
         {% endif %}
 
@@ -104,15 +106,31 @@
 
     <div class="right_panel data_panel">
       <div class="dataset_list">
-	<h2>{% blocktrans %}Data Set{% endblocktrans %}</h2>
+        <h2>{% blocktrans %}Data Set{% endblocktrans %}</h2>
 
         <ul class="dataset_list_items">
           {% dataset_list_item exhibit.dataset %}
-	</ul>
+        </ul>
 
       </div>
+    {% if can_share %}
+      <div class="shared_key_list">
+        <h2>{% blocktrans %}Shared Keys{% endblocktrans %}</h2>
+        <ul class="shared_key_list_items">
+            {% for key in exhibit.shared_keys.all %}
+                {% include "share/shared_key_metadata.html" %}
+            {% endfor %}
+        </ul>
+      </div>
     </div>
+   {% endif %}
 
+    {% if can_delete %}
     {% include "exhibit/exhibit_delete_dialog.html" %}
+    {% endif %}
+
+    {% if can_share %}
+    {% include "share/shared_key_delete_dialog.html" %}
+    {% endif %}
     {% new_exhibit %}
 {% endblock %}
