@@ -1,5 +1,7 @@
 {% load i18n %}
 {% load freemix_helpers %}
+{% load connection_helpers %}
+{% load avatar_tags %}
 
 <div class="left_panel user_panel inspector_panel">
 
@@ -54,5 +56,57 @@
    </div>
 
  </div> <!-- end about-box -->
+
+ <div class="info-section">
+  <h2>{% blocktrans %}Connections{% endblocktrans %}</h2>
+
+  <div class="dataset_connections">
+    <ul class="connection_list">
+      <li class="user_profile_entry">
+	
+	<div class="profile_left_panel">
+	  <div class="user_avatar_entry">
+	    <a href="{% url profile_detail object.owner.username %}" title="{{ object.owner|nicename }}">
+	      <img src="{% avatar_url object.owner.username 56 %}" alt="{% trans "Avatar for" %} {{ user|nicename }}" /> 
+	    </a>
+	  </div>
+	</div>
+
+
+	<div class="profile_right_panel">
+
+	  <div class="user_data_entry">
+	    <span class="user_name">
+	      <a href="{% url profile_detail object.owner.username %}" title="{{ user|nicename }}">
+		<span class="value">{{ user|nicename }}</span>
+	      </a>
+	    </span>
+	      
+	    {% if object.owner.get_profile.location %}
+	    <span class="user_location">
+	      <span class="value">{{ object.owner.get_profile.location }}</span>
+	    </span>
+	    {% endif %}
+	  </div>
+
+	  <div class="user_stats">
+	    <div class="user_counts">
+              {% if object.owner.datasets.count %}
+	      <span class="user_datasets"><a href="{% url dataset_list_by_owner owner=object.owner.username %}">{{object.owner.datasets.count}} {% trans "Data" %}</a></span>
+	      {% if object.owner.exhibits.count %}
+	      <span class="user_exhibits"><a href="{% url exhibit_list_by_owner object.owner.username %}">{{object.owner.exhibits.count}} {% trans "View" %}{{ object.owner.exhibits.count|pluralize }}</a></span>
+	      {% endif %}
+              {% else %}
+              <span class="no_data">{% trans "No data" %}</span>
+	      {% endif %}
+	    </div>    
+	  </div>
+	</div>
+	
+      </li>
+    </ul>
+  </div>
+
+ </div>
 
 </div>

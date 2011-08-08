@@ -379,6 +379,8 @@ h2 img {
 }
 
 .dataset-actions, .exhibit-actions {
+   position: relative;
+   padding: 10px 10px;
 }
 	       
 .dataset-description, .exhibit-description {
@@ -460,9 +462,8 @@ h2 img {
    background: #fff url(../images/header-background.png) bottom left repeat-x;
    border: 1px solid #ddd;
    float: right;
-   margin: 0.5em 0 0;
-   padding: .75em 1.25em;
 }
+
 
 /* see all / see more */
 .see_all {
@@ -513,7 +514,7 @@ ul.responses li.thread-8 {
     margin-bottom: 1.5em;
 }
 
-.profile h2, .dataset_list h2, .exhibit_list h2 {
+.profile h2, .dataset_list h2, .exhibit_list h2, .info-section h2 {
     background-color: #5582A1;
     color: #fff;
     font-size: 1.0em;

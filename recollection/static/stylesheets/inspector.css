@@ -9,4 +9,66 @@
 }
 
 
+ul.connection_list {
+    margin-left: 0px;
+    padding: 5px 10px;
+}
 
+ul.connection_list li {
+    list-style-type: none;
+
+}
+
+.user_avatar_entry img {
+align:left;
+}
+
+.user_data_entry {
+display: block;
+padding-left: 10px;
+padding-top: 5px;
+}
+
+.user_data_entry .user_name .value {
+    font-weight: bold;
+    font-size: 120%;
+}
+
+.user_data_entry .user_location {
+    font-size: 0.9em;
+    padding-left: 10px;
+}
+
+.user_stats {
+  padding-top: 5px;
+  padding-left: 10px;
+}
+
+.user_counts .divider {
+    display: none;
+}
+
+.user_counts .no_data {
+    color: #666;
+}
+
+.user_stats .user_datasets {
+    background: url(../images/dataset-24.png) top left no-repeat;
+    padding-left: 30px;
+    padding-bottom:5px;
+}
+
+.user_stats .user_exhibits {
+    background: url(../images/palette-24.png) top left no-repeat;
+    padding-left: 30px;
+    padding-bottom:5px;
+}
+
+.profile_left_panel {
+    float: left;
+    width: 20%;
+}
+
+.profile_right_panel {
+    float: left;
+}
