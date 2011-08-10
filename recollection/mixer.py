@@ -9,8 +9,7 @@ from django.core.urlresolvers import reverse
 from django.http import *
 
 from freemix.dataset.models import parse_profile_json
-from freemix import transform
-from freemix.dataset.transform import AkaraTransformClient
+from freemix.dataset import transform
 
 import json
 from django.conf import settings
@@ -20,8 +19,8 @@ AKARA_MIX_URL = getattr(settings, "AKARA_MIX_URL",
                         urljoin(transform.AKARA_URL_PREFIX,
                                 "mix.freemix.json"))
 
-mixer = AkaraTransformClient(AKARA_MIX_URL)
-akara = AkaraTransformClient(transform.AKARA_TRANSFORM_URL)
+mixer = transform.AkaraTransformClient(AKARA_MIX_URL)
+akara = transform.AkaraTransformClient(transform.AKARA_TRANSFORM_URL)
 
 def extract_content(request):
     return request.POST["mixdata"]

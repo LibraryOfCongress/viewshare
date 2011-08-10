@@ -1,6 +1,6 @@
 [{
     "pk": 1,
-    "model": "freemix_augment.augmentationerrorcode",
+    "model": "augment.augmentationerrorcode",
     "fields": {
         "url": "http://recollection.zepheira.com/about/userguide/#s3.2.5.1",
         "error": "Unable to parse date"
@@ -8,7 +8,7 @@
 },
 {
     "pk": 2,
-    "model": "freemix_augment.augmentationerrorcode",
+    "model": "augment.augmentationerrorcode",
     "fields": {
         "url": "http://recollection.zepheira.com/about/userguide/#s3.2.5.1",
         "error": "No date information found"
@@ -16,7 +16,7 @@
 },
 {
     "pk": 3,
-    "model": "freemix_augment.augmentationerrorcode",
+    "model": "augment.augmentationerrorcode",
     "fields": {
         "url": "http://recollection.zepheira.com/about/userguide/#s3.2.5.2",
         "error": "No address information found"
@@ -24,7 +24,7 @@
 },
 {
     "pk": 4,
-    "model": "freemix_augment.augmentationerrorcode",
+    "model": "augment.augmentationerrorcode",
     "fields": {
         "url": "http://recollection.zepheira.com/about/userguide/#s3.2.5.2",
         "error": "No geolocation possible for address"

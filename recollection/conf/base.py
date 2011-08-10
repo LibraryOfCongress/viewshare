@@ -132,7 +132,7 @@ INSTALLED_APPS = (
     'freemix.utils',
     'freemix.dataset',
     'freemix.exhibit',
-    'freemix.augment',
+    'freemix.dataset.augment',
     'freemix.exhibit.share',
 
     # Recollection specific

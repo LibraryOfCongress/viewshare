@@ -104,7 +104,6 @@ The license below applies to the following dependencies:
  * South
  * diff-match-patch
  * freemix
- * freemix-augment
 
                                  Apache License
                            Version 2.0, January 2004

@@ -60,7 +60,7 @@ urlpatterns = patterns('',
     (r'^data/', include('freemix.dataset.urls')),
 
     (r'^views/', include('freemix.exhibit.urls')),
-    (r'^augment/', include('freemix.augment.urls')),
+    (r'^augment/', include('freemix.dataset.augment.urls')),
     (r'^share/', include('freemix.exhibit.share.urls')),
     url(r'mix/', 'recollection.mixer.mix_data', name='mixer_receiving_endpoint'),
 
