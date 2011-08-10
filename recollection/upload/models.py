@@ -3,7 +3,7 @@ from django.db import models
 import os
 from freemix.dataset.models import DataSource, URLDataSourceMixin, make_file_data_source_mixin
 from django.utils.translation import ugettext_lazy as _
-from freemix.transform.views import AkaraTransformClient
+from freemix.dataset.transform import AkaraTransformClient
 from recollection.upload import conf
 
 def source_upload_path(instance, filename):

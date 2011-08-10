@@ -9,7 +9,7 @@ from django_redmine.consts import *
 from freemix.dataset.models import parse_profile_json
 
 from recollection.utils.views import get_akara_version
-from freemix.transform.conf import AKARA_URL_PREFIX
+from freemix.dataset.transform import AKARA_URL_PREFIX
 from freemix import __version__ as freemix_version
 from freemix.utils import get_user, get_site_url
 

@@ -9,7 +9,7 @@ from django.core.cache import cache
 from django.conf import settings
 from urlparse import urljoin
 from django.views.generic.base import RedirectView
-from freemix.transform.conf import AKARA_URL_PREFIX
+from freemix.dataset.transform import AKARA_URL_PREFIX
 
 AKARA_VERSION_URL = getattr(settings, "AKARA_VERSION_URL", urljoin(AKARA_URL_PREFIX, "freemix.loader.revision"))
 
