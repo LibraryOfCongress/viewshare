@@ -288,16 +288,17 @@ h2 img {
 
 /* data views and sets */
 
-.dataset_list, .exhibit_list, .data_details, .exhibit_details {
+.dataset_list, .exhibit_list, .data_details, .exhibit_details, .shared_key_list {
    margin-bottom: 1.5em;
 }
 
-.dataset_list_items, .exhibit_list_items {
+.dataset_list_items, .exhibit_list_items, .shared_key_list_items {
    margin: 0;
    padding: 0;
+   list-style-type: none;
 }
 
-.dataset_list_item, .exhibit_list_item {
+.dataset_list_item, .exhibit_list_item, .shared_key_list_item {
    background: #fff url(../images/header-background.png) bottom center repeat-x;
    border: 1px solid #ddd;
    list-style-type: none;
@@ -305,6 +306,11 @@ h2 img {
    padding: 5px 10px;
    text-align: left;
 }
+
+.shared_key_list_item .shared-key-url {
+  display: none;
+}
+
 
 .dataset_list_item .dataset-title {
    background: transparent url(../images/dataset-24.png) top left no-repeat;
@@ -321,6 +327,15 @@ h2 img {
    padding-bottom: 0.4em;
    padding-left: 30px;
 }
+
+.shared_key_list_item .shared-key-label {
+   background: transparent url(../images/key-24.png) top left no-repeat;
+   font-size: 115%;
+   font-weight: bold;
+   padding-bottom: 0.4em;
+   padding-left: 30px;
+}
+
 
 .dataset_edit .dataset-title, .dataset_summary .dataset-title {
    background: transparent url(../images/dataset-32.png) top left no-repeat;
@@ -340,6 +355,19 @@ h2 img {
    padding-top: 0.5em;
    padding-left: 40px;
 }
+
+.exhibit_display .shared-key .exhibit-title {
+   background: transparent url(../images/key-32.png) 0% 25% no-repeat;
+   font-size: 140%;
+   font-weight: bold;
+   padding-bottom: 0.5em;
+   padding-top: 0.5em;
+   padding-left: 40px;
+}
+
+
+
+
 
 /* handle this style due to jquery uithemer base override */
 
@@ -378,7 +406,7 @@ h2 img {
     width: 75%;
 }
 
-.dataset-actions, .exhibit-actions {
+.dataset-actions, .exhibit-actions, .shared-key-actions {
    position: relative;
    padding: 10px 10px;
 }
@@ -408,6 +436,7 @@ h2 img {
 .exhibit_display .private, .exhibit_edit .private, .dataset_edit .private, .dataset_summary .private, .dataset_list_items .private, .exhibit_list_items .private  {
    background: #fffcdf url(../images/lock.png) 99% 5% no-repeat;
   }
+
 
 .exhibit-visibility .private {
    background-image: url(../images/lock.png);
@@ -453,12 +482,12 @@ h2 img {
    border: 1px solid;
 }
 
-.exhibit-left, .dataset-left {
+.exhibit-left, .dataset-left, .shared-key-left {
    float: left;
    font-size: 0.9em;
 }
 
-.exhibit-right, .dataset-right {
+.exhibit-right, .dataset-right, .shared-key-right {
    background: #fff url(../images/header-background.png) bottom left repeat-x;
    border: 1px solid #ddd;
    float: right;
@@ -514,7 +543,7 @@ ul.responses li.thread-8 {
     margin-bottom: 1.5em;
 }
 
-.profile h2, .dataset_list h2, .exhibit_list h2, .info-section h2 {
+.profile h2, .dataset_list h2, .exhibit_list h2, .info-section h2, .shared_key_list h2 {
     background-color: #5582A1;
     color: #fff;
     font-size: 1.0em;

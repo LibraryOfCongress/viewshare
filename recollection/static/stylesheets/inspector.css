@@ -4,9 +4,10 @@
 
 /* trim down functionality associated with resources related to the one being inspected */
 
-.exhibit-actions .action_delete_exhibit, .dataset-actions .action_delete_dataset {
+.exhibit-actions .action_delete_exhibit, .dataset-actions .action_create_dataset, .dataset-actions .action_delete_dataset {
   display: none;
 }
+
 
 
 ul.connection_list {
@@ -72,3 +73,5 @@ padding-top: 5px;
 .profile_right_panel {
     float: left;
 }
+
+/* shared keys */
