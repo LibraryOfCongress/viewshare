@@ -4,9 +4,9 @@ creation based on Akara output.
 """
 
 from django.contrib.auth.decorators import login_required
-from django.contrib.csrf.middleware import csrf_exempt
 from django.core.urlresolvers import reverse
 from django.http import *
+from django.views.decorators.csrf import csrf_exempt
 
 from freemix.dataset.models import parse_profile_json
 from freemix.dataset import transform
