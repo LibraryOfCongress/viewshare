@@ -8,6 +8,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from recollection import feeds
 from recollection.utils.views import UserHomeView
+from recollection.upload import views
+
 
 admin.autodiscover()
 

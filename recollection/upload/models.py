@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from freemix.dataset.transform import AkaraTransformClient
 from recollection.upload import conf
 
+
 def source_upload_path(instance, filename):
     return os.path.join(instance.uuid, filename)
 

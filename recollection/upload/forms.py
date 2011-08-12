@@ -7,18 +7,21 @@ from recollection.upload import models
 
 class DataSourceForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user')
+        self.user = None
+        if kwargs.has_key('user'):
+            self.user = kwargs.pop('user')
         super(DataSourceForm, self).__init__(*args, **kwargs)
 
     def save(self, commit=True):
         instance = super(DataSourceForm, self).save(commit=False)
-        instance.owner = self.user
+        if self.user:
+            instance.owner = self.user
         instance.save()
         return instance
 
     class Meta:
         model = DataSource
-        exclude= ('owner', 'uuid')
+        exclude= ('owner', 'uuid', 'dataset')
 
 
 class FileDataSourceForm(DataSourceForm):

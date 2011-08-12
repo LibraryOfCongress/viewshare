@@ -36,9 +36,10 @@
     
     <div class="priority-area">
       <p>
-        {%  if can_edit %}
+        {%  if can_refresh %}
         <span class="action action_refresh_dataset">
-	  Refresh
+            <a class="dataset_refresh" href="{% url datasource_update owner=dataset.owner.username slug=dataset.slug %}">{% trans "Refresh" %}</a>
+
         </span>
 
         <span class="divider">|</span>
