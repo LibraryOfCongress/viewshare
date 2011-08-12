@@ -14,12 +14,6 @@
     <script type="text/javascript" src="{{STATIC_URL}}support/js/ignored_fields.js"></script>
 {% endblock head_scripts %}
 
-{% block record_controls %}
-    <button class="data-property-add">{% trans "Add a Field" %}</button>
-    <button class="data-refresh">{% trans "Refresh Augmented Data" %}</button>
-    {{ block.super }}
-{% endblock %}
-
 {% block head_data %}
     {{ block.super }}
     {%  if transaction %}
@@ -39,7 +33,7 @@
   lat/long information modify the type for this field to "location".  
   If you do not have lat/long data, you can augment your data by specifying 
   which fields (e.g. city, state, zip) to generate such information 
-  (see "Add a Field" feature at bottom of this page).
+  (click "Add+" button next to the Field Name in the top banner).
   {% endblocktrans %}
 </li>
 
