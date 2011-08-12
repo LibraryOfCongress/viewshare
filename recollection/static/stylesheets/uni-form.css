@@ -338,7 +338,7 @@ YOU CAN VERY EASILY REVERT TO A GENERIC STYLE OF UNI-FORM. BEST OF LUCK...
 /* edit dialog boxes */
 
 form.uniForm .ctrlHolder label {
-   font-size: 120%;
+   font-size: 110%;
    color: darkslategrey;
    font-weight: bold; 
    padding-top: 5px;
@@ -369,3 +369,5 @@ padding-right: 10px;
 form.uniForm .ctrlHolder ul li label {
 font-weight: normal;
 }
+
+
