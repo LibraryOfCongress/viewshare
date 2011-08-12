@@ -722,3 +722,38 @@ div.notices h2 {
 #cms_toolbar_logoutbutton {
     display: none;
 }
+
+
+/* jquery button override */
+
+button.data-record-delete .ui-button-text {
+  background: transparent url(../images/button-delete.png) center left no-repeat;
+  padding-left: 30px;
+  font-weight: bold;
+  font-size: 110%;
+}
+
+button.data-property-add .ui-button-text {
+  background: transparent url(../images/button-add.png) center left no-repeat;
+  padding-left: 30px;
+  font-weight: bold;
+  font-size: 130%;
+}
+
+button.data-refresh .ui-button-text {
+  background: transparent url(../images/button-augment.png) center left no-repeat;
+  padding-left: 30px;
+  font-weight: bold;
+  font-size: 110%;
+}
+
+button.left-record-button .ui-button-text {
+  background: transparent url(../images/button-back.png) center right no-repeat;
+  font-size: 110%;
+}
+
+button.right-record-button .ui-button-text {
+  background: transparent url(../images/button-forward.png) center left no-repeat;
+  font-size: 110%;
+}
+
