@@ -1,0 +1,16 @@
+#embedding-code {
+        display: block;
+        line-height: 2.5em;
+        width: 75%;
+        overflow-y: none;
+        overflow-x: auto;
+        margin: 0.5em auto;
+        border: 1px solid #c6c6c6;
+        color: #000;
+        background: #F3F3F3 url({{ STATIC_URL }}exhibit/img/form-shadow.png)
+        repeat-x scroll left top;
+        text-align: left;
+        font-family: monospace;
+        padding: 0.5em;
+        white-space: nowrap;
+}

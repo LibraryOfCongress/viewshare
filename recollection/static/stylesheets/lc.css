@@ -50,25 +50,39 @@ h1 {
     padding-left: 0px;
 }
 
+
 /* embed-code widget */
 #embed {
     position: relative;
     text-align: right;
-    padding: 0.8em 0.5em 0;
-    z-index: 10000;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+    padding-bottom: 1em;
 }
 
 #embed-info {
-    padding: 1em;
-    border: 1px solid #aaa;
+  border: 1px solid #aaa;
+  color: #00529B;
+  background-color: #BDE5F8;
+  background-image: url('../images/info.png');
+  background-repeat: no-repeat;
+  background-position: 10px center;
+}
+
+#embedding-code {
+  background-color: white;
 }
 
 #embed-info p {
     text-align: center;
 }
 
-#embed-info p.buttons {
-    text-align: right;
+#embed-info .buttons {
+padding-right: 0.5em;
+padding-bottom: 0.5em;
+position:absolute;
+top:5px;
+right:15px;
 }
 
 #subnav ul.step-menu li a.step-completed {
