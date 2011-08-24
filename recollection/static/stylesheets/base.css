@@ -415,23 +415,6 @@ div.profile_info p {
     margin: 0;
 }
 
-ul.avatar_choices li {
-    border: 1px solid #eee;
-    float: left;
-    list-style-type: none;
-    margin: 0.5em;
-    padding: 1em 2em;
-    text-align: center;
-}
-
-ul.avatar_choices li form input {
-    margin: 0.25em 0;
-}
-
-ul.avatar_choices li.current_default {
-    background: #fff;
-    border: 1px solid #333;
-}
 
 .invitation_5, .invitation_7, .invitation_2 {
     font-weight: bold;

@@ -1,7 +1,6 @@
 {% extends "profiles/base.html" %}
 
 {% load i18n %}
-{% load avatar_tags %}
 {% load uni_form_tags %}
 {% load notification_utils %}
 {% load connection_helpers %}
@@ -15,7 +14,6 @@
 {{ block.super }}
 {% compress css %}
 <!-- style users as friends -->
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}stylesheets/avatar.css"/>
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}stylesheets/profile_friends.css"/>
 {% endcompress %}
 {% endblock %}
@@ -46,14 +44,6 @@ $(document).ready(function() {
         return false;
     });
 
-    var profile_avatar = $('#profile_avatar');
-    if(profile_avatar) {
-        profile_avatar.bind('mouseenter', function() {
-            $('#avatar_replace').css('display', 'block');
-        }).bind('mouseleave', function() {
-            $('#avatar_replace').css('display', 'none');
-        });
-    }
 });
 </script>
 {% endcompress %}
@@ -103,14 +93,7 @@ $(document).ready(function() {
   <table class="about_profile">
    <tbody>
     <tr>
-     <td id="profile_avatar_container">
-      <div id="profile_avatar">
-       <div>
-        <img src="{% avatar_url other_user 96 %}" alt="{% trans "Photo of" %} {{ other_user|nicename }}" class="photo" />
-       </div>
 
-      </div>
-     </td>
      <td>
       <div class="profile_info">
        {% if other_user.get_profile.website %}

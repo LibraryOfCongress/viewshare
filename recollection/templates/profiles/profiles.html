@@ -2,7 +2,6 @@
 
 {% load i18n %}
 {% load pagination_tags %}
-{% load avatar_tags %}
 {% load humanize %}
 {% load profile_tags %}
 {% load sorting_tags %}
@@ -12,7 +11,6 @@
 {% block head_css %}
 {{ block.super }}
 {% compress css %}
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}stylesheets/avatar.css"/>
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}stylesheets/profile_users.css"/>
 {% endcompress %}
 {% endblock %}

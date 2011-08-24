@@ -17,7 +17,6 @@ from freemix.permissions import PermissionsRegistry
 from .models import Profile, nice_username
 from .forms import ProfileForm
 
-from avatar.templatetags.avatar_tags import avatar, avatar_url
 
 
 import base64
@@ -189,7 +188,6 @@ def uservoice_options(request, **kwargs):
             'expires': expires,
             'display_name': nice_username(request.user),
             'admin': 'accept' if request.user.is_staff else 'deny',
-            'avatar_url':avatar_url(request.user)
         }
         email = request.user.email
         if email:

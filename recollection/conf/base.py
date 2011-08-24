@@ -102,10 +102,8 @@ INSTALLED_APPS = (
     'mailer',
     'announcements',
     'pagination',
-    'gravatar',
     'timezones',
     'ajax_validation',
-    'avatar',
     'uni_form',
     'django_sorting',
 

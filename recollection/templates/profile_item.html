@@ -1,19 +1,13 @@
 {% load i18n %}
 {% load pagination_tags %}
 {% load humanize %}
-{% load avatar_tags %}
 {% load timezone_filters %}
 {% load freemix_helpers %}
 
 <li class="user_profile_entry clearfix result_set_item">
 
-  <div class="user_avatar_entry profile_left_panel">
-    <a href="{% url profile_detail user.username %}" title="{{ user|nicename }}">
-      <img src="{% avatar_url user.username 56 %}" alt="{% trans "Avatar for" %} {{ user|nicename }}" /> 
-    </a>
-  </div>
   
-  <div class="user_data_entry profile_right_panel">
+  <div class="user_data_entry">
     <div class="user_top">
       <a href="{% url profile_detail user.username %}" title="{{ user|nicename }}" class="user_name">
          <span class="value">{{ user|nicename }}</span>
@@ -35,7 +29,7 @@
         {% else %}
         <span class="no_data">{% trans "No data" %}</span>
 	{% endif %}
-    </div>    
+    </div>
 
     {% if user.get_profile.about %}
     <div class="user_middle">

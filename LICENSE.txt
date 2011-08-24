@@ -330,7 +330,6 @@ http://huddletogether.com/projects/lightbox/
 The license below applies to the following bundled dependencies:
 
  * Django:  Copyright (c) Django Software Foundation and individual contributors.
- * django-avatar:  Copyright (c) 2008, Eric Florenzano
  * django-filter:  Copyright (c) 2009, Alex Gaynor
  * django-messages:  Copyright (c) 2008-2010, Arne Brodowski
  * django-piston:  Jesper Noehr (jesper@noehr.org)
@@ -338,7 +337,6 @@ The license below applies to the following bundled dependencies:
  * django-sorting:  Copyright (c) 2009, Karim A. (aka Directeur)
  * django-staticfiles:  Copyright (c) 2009-2011, Jannis Leidel
  * django-timezones:  Brian Rosner (brosner@gmail.com)
- * django-gravatar:  Copyright (c) 2008, James Tauber
  * django-pagination:  Copyright (c) 2008, Eric Florenzano
  * django-template-utils:  Copyright (c) 2007, James Bennett
  * django-classy-tags: Copyright (c) 2010, Jonas Obrist

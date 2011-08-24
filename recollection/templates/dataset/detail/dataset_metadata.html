@@ -1,7 +1,6 @@
 {% load i18n %}
 {% load freemix_helpers %}
 {% load connection_helpers %}
-{% load avatar_tags %}
 
 <div class="left_panel user_panel inspector_panel">
 
@@ -64,17 +63,8 @@
   <div class="dataset_connections">
     <ul class="connection_list">
       <li class="user_profile_entry">
-	
-	<div class="profile_left_panel">
-	  <div class="user_avatar_entry">
-	    <a href="{% url profile_detail object.owner.username %}" title="{{ object.owner|nicename }}">
-	      <img src="{% avatar_url object.owner.username 56 %}" alt="{% trans "Avatar for" %} {{ user|nicename }}" /> 
-	    </a>
-	  </div>
-	</div>
 
-
-	<div class="profile_right_panel">
+	<div>
 
 	  <div class="user_data_entry">
 	    <span class="user_name">

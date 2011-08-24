@@ -1,9 +1,4 @@
-msgid "Friend Updated Avatar"
-msgstr "Connection Updated Avatar"
 
-msgid "a friend has updated his avatar"
-msgstr "a connection has updated their avatar"
-        
 msgid "one of your friends has a new connection"
 msgstr "one of your connections has a new connection" 
 
