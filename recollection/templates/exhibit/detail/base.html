@@ -27,8 +27,10 @@
     {{ block.super }}
     <script type="text/javascript" src="{{ STATIC_URL }}freemix/js/lib/jquery.form.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}exhibit/js/detail.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}share/js/share_dialog.js"></script>
 
+    {% if can_share %}
+    {% compress js %}<script type="text/javascript" src="{{ STATIC_URL }}share/js/share_dialog.js"></script>{% endcompress %}
+    {% endif %}
 
 {% endblock %}
 
@@ -97,7 +99,7 @@
       </div>
     {% if can_share %}
       <div class="shared_key_list">
-        <h2>{% blocktrans %}Shared Keys{% endblocktrans %}</h2>
+        <h2>{% blocktrans %}Shared Links{% endblocktrans %}</h2>
         <ul class="shared_key_list_items">
             {% for key in exhibit.shared_keys.all %}
                 {% include "share/shared_key_metadata.html" %}
