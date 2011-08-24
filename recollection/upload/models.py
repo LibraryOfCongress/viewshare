@@ -1,4 +1,6 @@
+from django.conf import settings
 from django.core.files.storage import FileSystemStorage
+from django.core.urlresolvers import reverse
 from django.db import models
 import os
 from freemix.dataset.models import DataSource, URLDataSourceMixin, make_file_data_source_mixin
@@ -10,7 +12,14 @@ from recollection.upload import conf
 def source_upload_path(instance, filename):
     return os.path.join(instance.uuid, filename)
 
-fs = FileSystemStorage(location=conf.FILE_UPLOAD_PATH)
+class RecollectionFileStorage(FileSystemStorage):
+
+    def url(self, name):
+        uuid,filename = name.split(os.path.sep)
+        return reverse("file_datasource_file_url", kwargs={"uuid": uuid, "filename": filename})
+
+
+fs = RecollectionFileStorage(location=conf.FILE_UPLOAD_PATH)
 
 file_datasource_mixin = make_file_data_source_mixin(storage=fs, upload_to=source_upload_path)
 
@@ -93,12 +102,19 @@ class OAIDataSource(URLDataSourceMixin, DataSource):
     def __unicode__(self):
         return "%s (%s, %s)"%(self.title, self.url, self.set)
 
+cdm_help_text = """
+<p>For XML MODS files, Recollection recognizes the most commonly used elements and attributes.
+Some XML MODS files include local extension elements or elements not already tested.
+If you suspect that some of the elements are not loading, click "Verify Data" to run diagnostics
+to identify elements in the file that are not recognized by Recollection.</p>
+<p>Note: Diagnostics operation will slow the upload process slightly.</p>
+"""
 
 class ModsMixin(models.Model):
     """Data source for loading XMLMODS data.
     """
     diagnostics = models.BooleanField(_("Verify Data"),
-                                      help_text=_("<a class='verify_data_help' href='#load-info-verify-data'>What's This?</a>"))
+                                      help_text=_(cdm_help_text))
 
     class Meta:
         abstract=True

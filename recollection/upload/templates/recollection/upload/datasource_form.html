@@ -15,24 +15,63 @@
 {% block subnav %}
 {% endblock %}
 
+
+{% block head_data %}
+
+    {{ block.super }}
+    {% if show_error %}
+    <link rel="recollection/support" href="{% url upload_issue tx_id=transaction.tx_id %}">
+    {% endif %}
+{% endblock %}
+
+{% block head_scripts %}
+    {{ block.super }}
+    {% if show_error %}
+    {% include "freemix/js_include/jquery_ui.html" %}
+    <script src="{{ STATIC_URL }}uni_form/uni-form.jquery.js" type="text/javascript"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.form.js"></script>
+
+    <script type="text/javascript" src="{{STATIC_URL}}support/js/base.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}support/js/load.js"></script>
+    {% endif %}
+{% endblock %}
+
 {% block body %}
+    {% if show_error %}
+     <div id="systemMsg">
+      <ul id="load-messages" class="messages">
+        <li id="load-failure-general" class="errorMsg">
+          <p>{% trans "We're sorry that you've encountered a problem uploading your file. Please use the following troubleshooting tips to try to correct the problem." %}</p>
+          {% block format_error %}{% endblock %}
+          <p>{% trans "If you have a file that you think should work after troubleshooting please <strong><a href='' class='support-link'>Click here to create a support ticket</a></strong>." %}</p>
+        </li>
+      </ul>
+    </div>
+    {% endif %}
+  <fieldset>
 
-          <fieldset>
-
-            <legend>
-                {% block upload_form_title %}{% trans "Load Data"%}{% endblock %}
-            </legend>
-
-                <form action="" method="post" class="uniForm" {% block uploadform_enctype %}{% endblock %}>
-                        {%csrf_token %}
-                        {{ form|as_uni_form }}
-                      <div class="buttons">
-                          <input type="submit" value="{% trans "Upload" %}" class="submit" />
-                          <a href="{% url upload_dataset %}"><input type="button" value="{% trans "Cancel" %}" class="load-form-cancel negative-button" /></a>
-                      </div>
-                </form>
-
-          </fieldset>
+    <legend>
+        {% block upload_form_title %}{% trans "Load Data"%}{% endblock %}
+    </legend>
 
 
+    <form action="{{ form_url }}" method="post" class="uniForm" {% block uploadform_enctype %}{% endblock %}>
+        {%csrf_token %}
+
+
+         {{ form|as_uni_form }}
+          <div class="buttons">
+              <input type="submit" value="{% trans "Upload" %}" class="submit" />
+              <a href="{% url upload_dataset %}"><input type="button" value="{% trans "Cancel" %}" class="load-form-cancel negative-button" /></a>
+          </div>
+    </form>
+
+  </fieldset>
+
+    {%  if show_error %}
+        <div id="support" class="ui-helper-hidden"></div>
+        <div id="support-spinner" class="ui-helper-hidden loading">
+            <p>{% blocktrans %}Requesting ticket, please be patient.{% endblocktrans %}</p>
+        </div>
+    {% endif %}
 {% endblock %}

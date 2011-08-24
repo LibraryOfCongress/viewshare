@@ -5,3 +5,13 @@
 {% block upload_form_title %}{% trans "Upload an XML MODS File"%}{% endblock %}
 
 {% block uploadform_enctype %}enctype="multipart/form-data"{% endblock %}
+
+{% block format_error %}
+
+<h3>For XML MODS:</h3>
+
+<ul>
+    <li>XML MODS files must be valid XML. Try the validator at <a href = "http://www.validome.org/xml/">validome</a>.</li>
+    <li>Check that they follow the Metadata Object Description Schema (MODS) schema. For more information about the MODS schema can be found at the <a href = "http://www.loc.gov/standards/mods/">MODS home page</a>.</li>
+</ul>
+{% endblock %}

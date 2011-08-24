@@ -3,3 +3,15 @@
 {% load i18n %}
 
 {% block upload_form_title %}{% trans "Load Data From a URL"%}{% endblock %}
+
+
+{% block format_error %}
+
+<h3>For spreadsheets:</h3>
+
+<ul>
+    <li>Remove any data that is not in a solid rectangular area. This includes white space, page titles, scattered cells, and additional worksheets.</li>
+    <li>Check that your formatting is consistent throughout each column (e.g. column is all in date format, currency format, etc. as appropriate).</li>
+    <li>Make sure that data of the same type but in different columns is formatted consistently (e.g. dates in different columns are in the same date format).</li>
+</ul>
+{% endblock %}

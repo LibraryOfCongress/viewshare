@@ -38,7 +38,7 @@
       <p>
         {%  if can_refresh %}
         <span class="action action_refresh_dataset">
-            <a class="dataset_refresh" href="{% url datasource_update owner=dataset.owner.username slug=dataset.slug %}">{% trans "Refresh" %}</a>
+            <a class="dataset_refresh" href="{% url dataset_source_update owner=dataset.owner.username slug=dataset.slug %}">{% trans "Refresh" %}</a>
 
         </span>
 

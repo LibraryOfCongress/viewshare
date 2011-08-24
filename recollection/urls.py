@@ -60,6 +60,7 @@ urlpatterns = patterns('',
 
     (r'^upload/', include('recollection.upload.urls')),
     (r'^data/', include('freemix.dataset.urls')),
+    (r'^source/', include('freemix.dataset.urls.datasource')),
 
     (r'^views/', include('freemix.exhibit.urls')),
     (r'^augment/', include('freemix.dataset.augment.urls')),

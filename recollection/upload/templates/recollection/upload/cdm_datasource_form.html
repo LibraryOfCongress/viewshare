@@ -2,3 +2,13 @@
 {% load i18n %}
 
 {% block upload_form_title %}{% trans "Load ContentDM (Beta)"%}{% endblock %}
+
+{% block format_error %}
+
+  <h3>For CONTENTdm:</h3>
+    <p>Loading CONTENTdm data works with version 4. While it may work with other versions, this is the only version of currently supported by Recollection. Collections that contain compound documents (multiple page items) will load full and partial records due to the CONTENTdm data structure.</p>
+
+    <p>Please also ensure that the target site is hosted reliably enough to support the heavy level of access required by the CONTENTdm adapter.</p>
+
+
+{% endblock %}

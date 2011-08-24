@@ -11,7 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 from freemix.dataset.models import parse_profile_json
 from freemix.dataset import transform
 
-import json
+from django.utils import simplejson as json
 from django.conf import settings
 from urlparse import urljoin
 
