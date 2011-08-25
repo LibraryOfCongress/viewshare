@@ -283,8 +283,53 @@ h2 img {
     width: 30%;
 }
 
+/* loading */
 
+ul.upload-options {
+    margin: 0;
+    padding: 0;
+    list-style-type:none;
+}
 
+ul.upload-options li.option {
+   padding-left: 80px;
+   padding-bottom: 20px;
+   min-height: 80px;
+}
+
+ul.upload-options li.option .title {
+   font-size: 130%;
+   font-weight: bold;
+   padding-bottom: 0.4em;
+}
+
+ul.upload-options li#upload-ss {
+   background: transparent url(../images/spreadsheet.png) top left no-repeat;
+}
+
+ul.upload-options li#upload-mods {
+   background: transparent url(../images/xml-file.png) top left no-repeat;
+}
+
+ul.upload-options li#upload-oai {
+   background: transparent url(../images/oai.png) top left no-repeat;
+}
+
+ul.upload-options li#upload-contentdm {
+   background: transparent url(../images/contentdm.png) top left no-repeat;
+}
+
+li.option ul.sources {
+    list-style-type:none;
+    margin: auto;
+    padding-top: 5px;
+}
+
+li.option ul.sources li {
+    font-weight: bold;
+    float: left;
+    padding-right: 10px;
+}
 
 /* data views and sets */
 
