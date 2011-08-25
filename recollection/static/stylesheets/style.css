@@ -307,8 +307,8 @@ h2 img {
    text-align: left;
 }
 
-.shared_key_list_item .shared-key-url {
-  display: none;
+.shared-key-url {
+  width: 98%;
 }
 
 
