@@ -1,0 +1,18 @@
+{% load i18n %}
+
+<div class="user_stats">
+<div class="user_counts">
+    {% if dataset_count > 0 or exhibit_count > 0 %}
+        {% if dataset_count %}
+            <span class="user_datasets"><a
+                    href="{% url dataset_list_by_owner owner=target_user %}">{{ dataset_count }} {% trans "Data" %}</a></span>
+        {% endif %}
+        {% if exhibit_count %}
+            <span class="user_exhibits"><a
+                    href="{% url exhibit_list_by_owner target_user %}">{{ exhibit_count }} {% trans "View" %}{{ exhibit_count|pluralize }}</a></span>
+        {% endif %}
+    {% else %}
+        <span class="no_data">{% trans "No data" %}</span>
+    {% endif %}
+</div>
+</div>

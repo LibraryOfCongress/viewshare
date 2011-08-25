@@ -68,8 +68,8 @@
 
 	  <div class="user_data_entry">
 	    <span class="user_name">
-	      <a href="{% url profile_detail object.owner.username %}" title="{{ user|nicename }}">
-		<span class="value">{{ user|nicename }}</span>
+	      <a href="{% url profile_detail object.owner.username %}" title="{{ object.owner|nicename }}">
+		<span class="value">{{ object.owner|nicename }}</span>
 	      </a>
 	    </span>
 	      
@@ -79,19 +79,7 @@
 	    </span>
 	    {% endif %}
 	  </div>
-
-	  <div class="user_stats">
-	    <div class="user_counts">
-              {% if object.owner.datasets.count %}
-	      <span class="user_datasets"><a href="{% url dataset_list_by_owner owner=object.owner.username %}">{{object.owner.datasets.count}} {% trans "Data" %}</a></span>
-	      {% if object.owner.exhibits.count %}
-	      <span class="user_exhibits"><a href="{% url exhibit_list_by_owner object.owner.username %}">{{object.owner.exhibits.count}} {% trans "View" %}{{ object.owner.exhibits.count|pluralize }}</a></span>
-	      {% endif %}
-              {% else %}
-              <span class="no_data">{% trans "No data" %}</span>
-	      {% endif %}
-	    </div>    
-	  </div>
+      {% user_counts object.owner %}
 	</div>
 	
       </li>

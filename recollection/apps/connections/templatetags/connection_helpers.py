@@ -1,8 +1,6 @@
 from django import template
-from django.conf import settings
-from django.template.loader import render_to_string
-from django.template import Variable
 from friends.models import Friendship
+from freemix.permissions import PermissionsRegistry
 
 
 register = template.Library()
@@ -17,3 +15,15 @@ def connection_list(context, queryset, max_count=10, pageable=True):
     return {"queryset": queryset, "max_count": max_count, "pageable": pageable,
             "request": context['request']}
 
+
+@register.inclusion_tag("profiles/user_counts.html", takes_context=True)
+def user_counts(context, target_user):
+    request = context["request"]
+    exhibit_count = target_user.exhibits.filter(PermissionsRegistry.get_filter("exhibit.can_view", request.user)).count()
+    dataset_count = target_user.datasets.filter(PermissionsRegistry.get_filter("dataset.can_view", request.user)).count()
+
+    return {
+        "target_user": target_user,
+        "exhibit_count": exhibit_count,
+        "dataset_count": dataset_count
+    }

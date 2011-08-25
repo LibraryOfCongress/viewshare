@@ -3,6 +3,7 @@
 {% load humanize %}
 {% load timezone_filters %}
 {% load freemix_helpers %}
+{% load connection_helpers %}
 
 <li class="user_profile_entry clearfix result_set_item">
 
@@ -20,17 +21,7 @@
       {% endif %}
     </div>
     
-    <div class="user_counts">
-        {% if user.datasets.count %}
-	<p class="user_datasets"><a href="{% url dataset_list_by_owner owner=user.username %}">{{user.datasets.count}} {% trans "Data" %}</a></p>
-	{% if user.exhibits.count %}
-	<span class="divider">&middot;</span> <p class="user_exhibits"><a href="{% url exhibit_list_by_owner user.username %}">{{user.exhibits.count}} {% trans "View" %}{{ user.exhibits.count|pluralize }}</a></p>
-	{% endif %}
-        {% else %}
-        <span class="no_data">{% trans "No data" %}</span>
-	{% endif %}
-    </div>
-
+    {% user_counts user %}
     {% if user.get_profile.about %}
     <div class="user_middle">
       <div class="user_description">{{ user.get_profile.about|truncatewords:50|linebreaks }}</div>

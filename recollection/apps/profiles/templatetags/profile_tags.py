@@ -2,9 +2,9 @@ from django import template
 
 register = template.Library()
 
-def show_profile(user):
-    return {"user": user}
-register.inclusion_tag("profile_item.html")(show_profile)
+def show_profile(context, user):
+    return {"user": user, "request": context["request"]}
+register.inclusion_tag("profile_item.html", takes_context=True)(show_profile)
 
 def clear_search_url(request):
     getvars = request.GET.copy()
