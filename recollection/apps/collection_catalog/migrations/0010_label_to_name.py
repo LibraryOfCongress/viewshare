@@ -72,7 +72,7 @@ class Migration:
             'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '100', 'db_index': 'True'}),
             'thumbnail': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
             'topics': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['collection_catalog.Topic']"}),
-            'views': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['freemixprofile.Freemix']", 'blank': 'True'})
+#            'views': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['freemixprofile.Freemix']", 'blank': 'True'})
         },
         'collection_catalog.organization': {
             'description': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
@@ -100,24 +100,24 @@ class Migration:
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        'dataprofile.dataprofile': {
-            'created': ('django_extensions.db.fields.CreationDateTimeField', [], {'default': 'datetime.datetime.now', 'blank': 'True'}),
-            'file': ('django.db.models.fields.files.FileField', [], {'max_length': '512'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'label': ('django.db.models.fields.SlugField', [], {'max_length': '200', 'db_index': 'True'}),
-            'modified': ('django_extensions.db.fields.ModificationDateTimeField', [], {'default': 'datetime.datetime.now', 'blank': 'True'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']", 'null': 'True'})
-        },
-        'freemixprofile.freemix': {
-            'canvas': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['canvas.Canvas']"}),
-            'created': ('django_extensions.db.fields.CreationDateTimeField', [], {'default': 'datetime.datetime.now', 'blank': 'True'}),
-            'data_profile': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['dataprofile.DataProfile']"}),
-            'file': ('django.db.models.fields.files.FileField', [], {'max_length': '512'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'label': ('django.db.models.fields.SlugField', [], {'max_length': '200', 'db_index': 'True'}),
-            'modified': ('django_extensions.db.fields.ModificationDateTimeField', [], {'default': 'datetime.datetime.now', 'blank': 'True'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']", 'null': 'True'})
-        }
+#        'dataprofile.dataprofile': {
+#            'created': ('django_extensions.db.fields.CreationDateTimeField', [], {'default': 'datetime.datetime.now', 'blank': 'True'}),
+#            'file': ('django.db.models.fields.files.FileField', [], {'max_length': '512'}),
+#            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+#            'label': ('django.db.models.fields.SlugField', [], {'max_length': '200', 'db_index': 'True'}),
+#            'modified': ('django_extensions.db.fields.ModificationDateTimeField', [], {'default': 'datetime.datetime.now', 'blank': 'True'}),
+#            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']", 'null': 'True'})
+#        },
+#        'freemixprofile.freemix': {
+#            'canvas': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['canvas.Canvas']"}),
+#            'created': ('django_extensions.db.fields.CreationDateTimeField', [], {'default': 'datetime.datetime.now', 'blank': 'True'}),
+#            'data_profile': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['dataprofile.DataProfile']"}),
+#            'file': ('django.db.models.fields.files.FileField', [], {'max_length': '512'}),
+#            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+#            'label': ('django.db.models.fields.SlugField', [], {'max_length': '200', 'db_index': 'True'}),
+#            'modified': ('django_extensions.db.fields.ModificationDateTimeField', [], {'default': 'datetime.datetime.now', 'blank': 'True'}),
+#            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']", 'null': 'True'})
+#        }
     }
     
     complete_apps = ['collection_catalog']

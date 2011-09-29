@@ -146,12 +146,6 @@ INSTALLED_APPS = (
     'recollection.apps.support',
     'django_redmine',
 
-    # deprecated app migrations
-    'freemix.legacy.view_theme',
-    'freemix.legacy.dataprofile',
-    'freemix.legacy.canvas',
-    'freemix.legacy.freemixprofile',
-
 
     )
 

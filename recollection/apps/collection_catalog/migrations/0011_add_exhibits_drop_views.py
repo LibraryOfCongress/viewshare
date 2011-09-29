@@ -9,7 +9,7 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         
         # Removing M2M table for field views on 'collection'
-        db.delete_table('collection_catalog_collection_views')
+#        db.delete_table('collection_catalog_collection_views')
 
         # Adding M2M table for field exhibits on 'Collection'
         db.create_table('collection_catalog_collection_exhibits', (
@@ -23,12 +23,12 @@ class Migration(SchemaMigration):
     def backwards(self, orm):
         
         # Adding M2M table for field views on 'collection'
-        db.create_table('collection_catalog_collection_views', (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('collection', models.ForeignKey(orm['collection_catalog.collection'], null=False)),
-            ('freemix', models.ForeignKey(orm['freemixprofile.freemix'], null=False))
-        ))
-        db.create_unique('collection_catalog_collection_views', ['collection_id', 'freemix_id'])
+#        db.create_table('collection_catalog_collection_views', (
+#            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+#            ('collection', models.ForeignKey(orm['collection_catalog.collection'], null=False)),
+#            ('freemix', models.ForeignKey(orm['freemixprofile.freemix'], null=False))
+#        ))
+#        db.create_unique('collection_catalog_collection_views', ['collection_id', 'freemix_id'])
 
         # Removing M2M table for field exhibits on 'Collection'
         db.delete_table('collection_catalog_collection_exhibits')

@@ -9,25 +9,25 @@ class Migration:
         
         # Adding field 'Collection.external_view'
         db.add_column('collection_catalog_collection', 'external_view', orm['collection_catalog.collection:external_view'])
-        
-        # Adding ManyToManyField 'Collection.views'
-        db.create_table('collection_catalog_collection_views', (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('collection', models.ForeignKey(orm.Collection, null=False)),
-            ('freemix', models.ForeignKey(orm['freemixprofile.Freemix'], null=False))
-        ))
-        
+#
+#        # Adding ManyToManyField 'Collection.views'
+#        db.create_table('collection_catalog_collection_views', (
+#            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+#            ('collection', models.ForeignKey(orm.Collection, null=False)),
+#            ('freemix', models.ForeignKey(orm['freemixprofile.Freemix'], null=False))
+#        ))
+#
     
     
     def backwards(self, orm):
         
         # Deleting field 'Collection.external_view'
         db.delete_column('collection_catalog_collection', 'external_view')
-        
-        # Dropping ManyToManyField 'Collection.views'
-        db.delete_table('collection_catalog_collection_views')
-        
-    
+#
+#        # Dropping ManyToManyField 'Collection.views'
+#        db.delete_table('collection_catalog_collection_views')
+#
+#
     
     models = {
         'auth.group': {
@@ -67,7 +67,6 @@ class Migration:
             'thumbnail': ('django.db.models.fields.files.ImageField', [], {'default': "'images/thumbnails/three-column/smoothness.png'", 'max_length': '100'})
         },
         'collection_catalog.collection': {
-            'data_sets': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['dataprofile.DataProfile']", 'blank': 'True'}),
             'description': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'enabled': ('django.db.models.fields.BooleanField', [], {'default': 'True', 'blank': 'True'}),
             'external_view': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True'}),
@@ -79,7 +78,6 @@ class Migration:
             'thumbnail': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
             'topics': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['collection_catalog.Topic']"}),
             'url': ('django.db.models.fields.URLField', [], {'max_length': '200'}),
-            'views': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['freemixprofile.Freemix']", 'blank': 'True'})
         },
         'collection_catalog.organization': {
             'description': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
@@ -106,25 +104,6 @@ class Migration:
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
-        },
-        'dataprofile.dataprofile': {
-            'Meta': {'unique_together': "(('label', 'user'),)"},
-            'created': ('django_extensions.db.fields.CreationDateTimeField', [], {'default': 'datetime.datetime.now', 'blank': 'True'}),
-            'file': ('django.db.models.fields.files.FileField', [], {'max_length': '512'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'label': ('django.db.models.fields.SlugField', [], {'max_length': '200', 'db_index': 'True'}),
-            'modified': ('django_extensions.db.fields.ModificationDateTimeField', [], {'default': 'datetime.datetime.now', 'blank': 'True'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']", 'null': 'True'})
-        },
-        'freemixprofile.freemix': {
-            'canvas': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['canvas.Canvas']"}),
-            'created': ('django_extensions.db.fields.CreationDateTimeField', [], {'default': 'datetime.datetime.now', 'blank': 'True'}),
-            'data_profile': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['dataprofile.DataProfile']"}),
-            'file': ('django.db.models.fields.files.FileField', [], {'max_length': '512'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'label': ('django.db.models.fields.SlugField', [], {'max_length': '200', 'db_index': 'True'}),
-            'modified': ('django_extensions.db.fields.ModificationDateTimeField', [], {'default': 'datetime.datetime.now', 'blank': 'True'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']", 'null': 'True'})
         }
     }
     

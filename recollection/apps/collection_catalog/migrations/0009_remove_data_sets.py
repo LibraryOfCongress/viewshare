@@ -18,7 +18,7 @@ class Migration:
         db.create_table('collection_catalog_collection_data_sets', (
             ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
             ('collection', models.ForeignKey(orm.Collection, null=False)),
-            ('dataprofile', models.ForeignKey(orm['dataprofile.dataprofile'], null=False))
+#            ('dataprofile', models.ForeignKey(orm['dataprofile.dataprofile'], null=False))
         ))
         
     
@@ -72,7 +72,7 @@ class Migration:
             'thumbnail': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
             'topics': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['collection_catalog.Topic']"}),
             'url': ('django.db.models.fields.URLField', [], {'max_length': '200'}),
-            'views': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['freemixprofile.Freemix']", 'blank': 'True'})
+#            'views': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['freemixprofile.Freemix']", 'blank': 'True'})
         },
         'collection_catalog.organization': {
             'description': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
@@ -99,25 +99,6 @@ class Migration:
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
-        },
-        'dataprofile.dataprofile': {
-            'Meta': {'unique_together': "(('label', 'user'),)"},
-            'created': ('django_extensions.db.fields.CreationDateTimeField', [], {'default': 'datetime.datetime.now', 'blank': 'True'}),
-            'file': ('django.db.models.fields.files.FileField', [], {'max_length': '512'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'label': ('django.db.models.fields.SlugField', [], {'max_length': '200', 'db_index': 'True'}),
-            'modified': ('django_extensions.db.fields.ModificationDateTimeField', [], {'default': 'datetime.datetime.now', 'blank': 'True'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']", 'null': 'True'})
-        },
-        'freemixprofile.freemix': {
-            'canvas': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['canvas.Canvas']"}),
-            'created': ('django_extensions.db.fields.CreationDateTimeField', [], {'default': 'datetime.datetime.now', 'blank': 'True'}),
-            'data_profile': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['dataprofile.DataProfile']"}),
-            'file': ('django.db.models.fields.files.FileField', [], {'max_length': '512'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'label': ('django.db.models.fields.SlugField', [], {'max_length': '200', 'db_index': 'True'}),
-            'modified': ('django_extensions.db.fields.ModificationDateTimeField', [], {'default': 'datetime.datetime.now', 'blank': 'True'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']", 'null': 'True'})
         }
     }
     
