@@ -624,7 +624,7 @@ img.photo {
 }
 
 #about-box {
-    background: #fff url(../images/profile-background.png) top left repeat-y;
+    background: #fff url(../images/header-background.png) bottom center repeat-x;
 }
 
 div.profile_info, div.dataset_info, div.exhibit_info {
