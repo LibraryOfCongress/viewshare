@@ -584,6 +584,7 @@ ul.responses li.thread-8 {
 /* profiles */
 
 .info-section {
+    background: #fff url(../images/header-background.png) bottom center repeat-x;
     border: 1px solid #eee;
     margin-bottom: 1.5em;
 }
