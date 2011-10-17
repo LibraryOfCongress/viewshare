@@ -48,30 +48,34 @@
       </ul>
     </div>
     {% endif %}
-  <fieldset>
 
-    <legend>
-        {% block upload_form_title %}{% trans "Load Data"%}{% endblock %}
-    </legend>
+     {% block upload_form_type %}{% endblock %}
 
-
-    <form action="{{ form_url }}" method="post" class="uniForm" {% block uploadform_enctype %}{% endblock %}>
-        {%csrf_token %}
-
+     <fieldset class="upload-form">
+       
+       <legend>
+         {% block upload_form_title %}{% trans "Load Data"%}{% endblock %}
+       </legend>
+       
+       <form action="{{ form_url }}" method="post" class="uniForm" {% block uploadform_enctype %}{% endblock %}>
+         {%csrf_token %}
 
          {{ form|as_uni_form }}
           <div class="buttons">
               <input type="submit" value="{% trans "Upload" %}" class="submit" />
               <a href="{% url upload_dataset %}"><input type="button" value="{% trans "Cancel" %}" class="load-form-cancel negative-button" /></a>
           </div>
-    </form>
+       </form>
 
-  </fieldset>
+     </fieldset>
 
-    {%  if show_error %}
-        <div id="support" class="ui-helper-hidden"></div>
-        <div id="support-spinner" class="ui-helper-hidden loading">
-            <p>{% blocktrans %}Requesting ticket, please be patient.{% endblocktrans %}</p>
-        </div>
-    {% endif %}
+     </div> <!-- end upload_form_type -->
+
+{%  if show_error %}
+<div id="support" class="ui-helper-hidden"></div>
+<div id="support-spinner" class="ui-helper-hidden loading">
+  <p>{% blocktrans %}Requesting ticket, please be patient.{% endblocktrans %}</p>
+</div>
+{% endif %}
+
 {% endblock %}

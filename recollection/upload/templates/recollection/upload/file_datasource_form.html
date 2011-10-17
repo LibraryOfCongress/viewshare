@@ -2,7 +2,9 @@
 
 {% load i18n %}
 
-{% block upload_form_title %}{% trans "Upload a File"%}{% endblock %}
+{% block upload_form_type %}<div class="upload-file">{% endblock %}
+
+{% block upload_form_title %}<h1 id="upload-label">{% trans "Upload a File"%}</h1>{% endblock %}
 
 {% block uploadform_enctype %}enctype="multipart/form-data"{% endblock %}
 
