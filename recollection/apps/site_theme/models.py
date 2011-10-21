@@ -23,11 +23,8 @@ class SiteTheme(models.Model):
         verbose_name_plural = "Site Themes"
 
 class Skin(models.Model):
-    site = models.ForeignKey(Site)
-    theme = models.ForeignKey(SiteTheme)
-
-    class Meta:
-        unique_together = (("site", "theme",),)
+    site = models.ForeignKey(Site, unique=True, blank=False, null=False)
+    theme = models.ForeignKey(SiteTheme, blank=False, null=False)
 
     def __unicode__(self):
         return '%s using skin %s' % (self.site.name, self.theme.name)
