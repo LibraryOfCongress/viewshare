@@ -27,3 +27,4 @@ def user_counts(context, target_user):
         "exhibit_count": exhibit_count,
         "dataset_count": dataset_count
     }
+

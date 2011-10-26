@@ -73,10 +73,16 @@
 
 {% block footer %}
 
-<p class="center">
+<span class="footernav left">
     <span class="aboutlink"><a href="{% page_url "community" %}">{% trans "About" %} {{ SITE_NAME }}</a></span> <span class="divider">|</span>
-    <span class="helplink"><a href="{% page_url "help" %}" target="_blank">{% trans "Help" %}</a></span>
-</p>
+    <span class="helplink"><a href="{% page_url "help" %}" target="_blank">{% trans "Help" %}</a></span> <span class="divider">|</span>
+    <span class="tos"><a href="{% page_url "tos" %}" target="_blank">{% trans "Terms of Service" %}</a></span>
+</span>
+
+<span class="sponsornav right">
+    <span class="sponsor">{{ SITE_NAME }} is a service provided by <a href="http://loc.gov/" title="Library of Congress"><span id="lc-logo"></span></a> and <a href = "http://zepheira.com/" title="Zepheira"><span id="z-logo"></span></a></span>
+</span>
+
 <div class="clear">&nbsp;</div>
 
 {% endblock %}

@@ -10,13 +10,24 @@ a {
 }
 
 #header #application-logo {
-    background-image: url(images/recollection-logo-sm.png);
+    background-image: url(images/viewshare-logo.png);
     width: 272px;
 }
 
 .homeimage {
     float: left;
 }
+
+#footer #lc-logo {
+    background-image: url(images/lc-logo.png);
+    width: 189px;
+}
+
+#footer #z-logo {
+    background-image: url(images/z-logo.png);
+    width: 89px;
+}
+
 
 .primarydisc {float: left; margin-left:20px;}
 
