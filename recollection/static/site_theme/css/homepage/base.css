@@ -19,35 +19,29 @@ a {
 }
 
 #footer {
-margin-top: 10px;
+color: grey;
+}
+
+#footer .footernav {
 }
 
 #footer #lc-logo {
-    background-image: url(images/lc-logo.png);
-    background-repeat: no-repeat;
-    background-position:left bottom;
     width: 158px;
-    height: 20px;
-    padding-left: 158px;
-    padding-top: 10px;
-    padding-bottom: 4px;
-    margin-left: 3px;
-    margin-right: 5px;
+    vertical-align:middle;
+    padding-right: 3px;
 }
 
 #footer #z-logo {
-    background-image: url(images/z-logo.png);
-    background-repeat: no-repeat;
-    background-position:left center;
     width: 72px;
-    height: 24px;
-    padding-left: 72px;
-    padding-top: 10px;
-    padding-bottom: 2px;
-    margin-left: 3px;
+    vertical-align:bottom;
+    padding-bottom: 3px;
 }
 
-#footer .sponspornav a {
+#footer .linknav {
+padding-top: 7px;
+}
+
+#footer .sponspornav {
 text-decoration:none;
 }
 
