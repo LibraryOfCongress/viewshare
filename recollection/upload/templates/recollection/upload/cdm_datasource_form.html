@@ -1,7 +1,9 @@
 {% extends "recollection/upload/datasource_form.html" %}
 {% load i18n %}
 
-{% block upload_form_title %}{% trans "Load ContentDM (Beta)"%}{% endblock %}
+{% block upload_form_type %}<div class="upload-cdm">{% endblock %}
+
+{% block upload_form_title %}<h1 id="upload-label">{% trans "Load ContentDM (Beta)"%}</h1>{% endblock %}
 
 {% block format_error %}
 

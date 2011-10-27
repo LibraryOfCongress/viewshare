@@ -81,7 +81,7 @@
 </span>
 
 <span class="sponsornav right">
-    <span class="sponsor">{{ SITE_NAME }} is a service provided by <a href="http://loc.gov/" title="Library of Congress"><img id="lc-logo" src="{{ STATIC_URL }}images/lc-logo.png" /></a> and <a href = "http://zepheira.com/" title="Zepheira"><img id="z-logo" src = "{{STATIC_URL}}images/z-logo.png" /></a></span>
+    <span class="sponsor">{{ SITE_NAME }} is a service provided by <a href="http://loc.gov/" title="Library of Congress"><img id="lc-logo" src="{{ STATIC_URL }}images/lc-logo.png" /></a></span>
 </div>
 
 <div class="clear">&nbsp;</div>
@@ -90,11 +90,11 @@
 
 {% block final %}
   <p id="versions">
-        {{ request.META.HTTP_HOST }} <span class="divider">:</span>
+        {{ request.META.HTTP_HOST }} <span class="divider">&middot;</span>
         {{ SITE_NAME }} {% recollection_version %} <span class="divider">&middot;</span>
         Freemix {% freemix_version %} <span class="divider">&middot;</span>
         Akara {% akara_version %} <span class="divider">&middot;</span>
-        Akara Root {% akara_prefix_url %}
+        Zepheira translator {% akara_prefix_url %}
   </p>
     {% if USERVOICE_SETTINGS %}
         <script type="text/javascript" src="{% url uservoice_options %}"></script>

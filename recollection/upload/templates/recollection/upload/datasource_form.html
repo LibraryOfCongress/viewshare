@@ -54,7 +54,7 @@
      <fieldset class="upload-form">
        
        <legend>
-         {% block upload_form_title %}{% trans "Load Data"%}{% endblock %}
+         {% block upload_form_title %}<h1 id="upload-label">{% trans "Load Data"%}</h1>{% endblock %}
        </legend>
        
        <form action="{{ form_url }}" method="post" class="uniForm" {% block uploadform_enctype %}{% endblock %}>

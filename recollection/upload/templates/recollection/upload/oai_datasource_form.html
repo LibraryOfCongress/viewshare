@@ -11,7 +11,9 @@
     <link type="recollection/oai_set_list" rel="{%  url oai_set_list %}"/>
 {% endblock %}
 
-{% block upload_form_title %}{% trans "Load OAI (Beta)"%}{% endblock %}
+{% block upload_form_type %}<div class="upload-oaiurl">{% endblock %}
+
+{% block upload_form_title %}<h1 id="upload-label">{% trans "Load OAI (Beta)"%}</h1>{% endblock %}
 
 {% block format_error %}
 

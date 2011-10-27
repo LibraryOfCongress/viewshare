@@ -207,6 +207,30 @@ div#body.freemix-themeable > div > h1,
     margin: 0 0 1.5em;
 }
 
+
+/* upload .. dealing with silly pinax fieldset */
+
+.upload-form h1 {
+    background: #fff url(/static/images/header-background.png) bottom center repeat-x;
+    border-bottom: 1px solid #ddd;
+    font-size: 125%;
+    position: absolute;
+    width: 899px;
+    padding-top: 7px;
+    padding-bottom: 10px;
+    padding-left: 9px;
+    margin-left: -25px;
+    margin-top: -11px;
+}
+
+.upload-form label {
+display: none;
+}
+
+.upload-form form {
+padding-top: 40px;
+}
+
 .attraction #identify h1 {
     padding: 0.5em 0.5em;
     margin: 0 0 0.5em;
