@@ -18,16 +18,53 @@ a {
     float: left;
 }
 
+#footer {
+margin-top: 10px;
+}
+
 #footer #lc-logo {
     background-image: url(images/lc-logo.png);
-    width: 189px;
+    background-repeat: no-repeat;
+    background-position:left bottom;
+    width: 158px;
+    height: 20px;
+    padding-left: 158px;
+    padding-top: 10px;
+    padding-bottom: 4px;
+    margin-left: 3px;
+    margin-right: 5px;
 }
 
 #footer #z-logo {
     background-image: url(images/z-logo.png);
-    width: 89px;
+    background-repeat: no-repeat;
+    background-position:left center;
+    width: 72px;
+    height: 24px;
+    padding-left: 72px;
+    padding-top: 10px;
+    padding-bottom: 2px;
+    margin-left: 3px;
 }
 
+#footer .sponspornav a {
+text-decoration:none;
+}
+
+#footer .left {
+float: left;
+padding-left: 25px;
+}
+
+#footer .right {
+float: right;
+padding-right: 20px;
+}
+
+#versions {
+opacity:0.0;
+filter: alpha(opacity=0);
+}
 
 .primarydisc {float: left; margin-left:20px;}
 
