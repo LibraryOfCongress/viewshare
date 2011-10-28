@@ -462,6 +462,52 @@ li.option ul.sources li {
     padding-left: 0px;
 }
 
+.inspector_info {
+height: 100%;
+}
+
+.about_profile .profile_icon {
+background: url(../images/person-96.png) center center no-repeat;
+width:106px;
+height:106px;
+}
+
+.about_profile .dataset_icon {
+background: url(../images/dataset-96.png) center center no-repeat;
+width:106px;
+height:106px;
+}
+
+.about_profile .exhibit_icon {
+background: url(../images/palette-96.png) center center no-repeat;
+width:106px;
+height:106px;
+}
+
+#about-box .about_edit {
+ padding-right: 5px;
+ padding-bottom: 5px;
+}
+
+#about-box .about_name {
+ font-weight: bold;
+ font-size: 130%;
+}
+
+#about-box .about_homepage {
+  background: url(../images/home.png) bottom left no-repeat;
+  width: 24px;
+  height: 24px;
+  margin-left: 15px;
+  padding-left: 30px;
+  
+}
+
+#about-box .user_counts {
+  padding-top: 5px;
+  font-size: 95%;
+}
+
 
 
 

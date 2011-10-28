@@ -23,7 +23,7 @@
 {% ifnotequal datasets.count 0 %}
 
 <div class="dataset_list">
-  <h2>{% blocktrans %}Data Sets{% endblocktrans %}</h2>
+  <h2>{% blocktrans %}Data{% endblocktrans %}</h2>
   {% dataset_list datasets.all 3 0 %}
 
   {% if datasets.count > 3 %}
@@ -35,7 +35,7 @@
 
 
 <div class="exhibit_list">
-  <h2>{% blocktrans %}Data Views{% endblocktrans %}</h2>
+  <h2>{% blocktrans %}Views{% endblocktrans %}</h2>
   {% exhibit_list exhibits.all 3 0 %}
 
   {% if other_user.exhibits.count > 3 %}
@@ -53,7 +53,7 @@
 {% ifnotequal datasets.count 0 %}
 
 <div class="dataset_list">
-  <h2>{% blocktrans %}Data Sets{% endblocktrans %}</h2>
+  <h2>{% blocktrans %}Data{% endblocktrans %}</h2>
   {% dataset_list datasets.all 3 0 %}
   {% if datasets.count > 3 %}
   <div class="see_all">
@@ -64,7 +64,7 @@
 
 
 <div class="exhibit_list">
-  <h2>{% blocktrans %}Data Views{% endblocktrans %}</h2>
+  <h2>{% blocktrans %}Views{% endblocktrans %}</h2>
   {% exhibit_list exhibits.all 3 0 %}
   {% if exhibits.count > 3 %}
   <div class="see_all">

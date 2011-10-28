@@ -9,22 +9,20 @@
    <table class="about_profile">
      <tbody>
        <tr>
-	 <td id="inspector_container">
-	   <div id="dataset_avatar">
-	     <div>
-               <img src="{{ STATIC_URL }}images/dataset-96.png" alt="{% trans "Thumbnail of dataset" %}" class="photo" /> 
-	     </div>
-	   </div>
+	 <td class="inspector_icon dataset_icon">
+	   <div class="dataset_avatar"></div>
 	 </td>
 	 <td>
-	   <div class="dataset_info">
+	   <div class="inspector_info dataset_info">
 	     <div class="dataset-title">{{ object.title }}</div>
 	     
 	     <div class="dataset-creator">
 	       <span class="property-label">{% trans "Loaded by:" %} </span> <a href="{% url profile_detail object.owner.username %}">{{ object.owner|nicename }}</a>
 	     </div>
-	     <div class="dataset-created-data"><span class="property-label">{% trans "Loaded on:" %} </span>{{ object.created|date:"N j, Y" }}</div>
-	     <div class="dataset-modified-data"><span class="property-label">{% trans "Last Modified:" %} </span>{{ object.modified|date:"N j, Y" }}</div>
+	     <div class="dataset-metadata">
+	       <div class="dataset-created-data"><span class="property-label">{% trans "Loaded on:" %} </span>{{ object.created|date:"N j, Y" }}</div>
+	       <div class="dataset-modified-data"><span class="property-label">{% trans "Last Modified:" %} </span>{{ object.modified|date:"N j, Y" }}</div>
+	     </div>
 	   </div>
 	 </td>
        </tr>

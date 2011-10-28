@@ -9,22 +9,20 @@
    <table class="about_profile">
      <tbody>
        <tr>
-	 <td id="inspector_container">
-	   <div id="exhibit_avatar">
-	     <div>
-               <img src="{{ STATIC_URL }}images/palette-96.png" width="96" alt="{% trans "Thumbnail of data view" %}" class="photo" />
-	     </div>
-	   </div>
+	 <td class="inspector_icon exhibit_icon">
+	   <div class="exhibit_avatar"></div>
 	 </td>
 	 <td>
-	   <div class="exhibit_info">
+	   <div class="inspector_info exhibit_info">
 	     <div class="exhibit-title">{{ object.title }}</div>
 
 	     <div class="exhibit-creator">
 	       <span class="property-label">{% trans "Created by:" %} </span> <a href="{% url profile_detail object.owner.username %}">{{ object.owner|nicename }}</a>
 	     </div>
-	     <div class="exhibit-created-data"><span class="property-label">{% trans "Created on:" %} </span>{{ object.created|date:"N j, Y" }}</div>
-	     <div class="exhibit-modified-data"><span class="property-label">{% trans "Last Modified:" %} </span>{{ object.modified|date:"N j, Y" }}</div>
+	     <div class="exhibit-metadata">
+	       <div class="exhibit-created-data"><span class="property-label">{% trans "Created on:" %} </span>{{ object.created|date:"N j, Y" }}</div>
+	       <div class="exhibit-modified-data"><span class="property-label">{% trans "Last Modified:" %} </span>{{ object.modified|date:"N j, Y" }}</div>
+	     </div>
 	   </div>
 	 </td>
        </tr>
