@@ -4,7 +4,7 @@
 {% load dataset_tags %}
 {% load freemix_helpers %}
 
-{% block head_title %}{{owner|nicename}}{% blocktrans %}'s Data Sets{% endblocktrans %}{% endblock %}
+{% block head_title %}{{owner|nicename}}{% blocktrans %}'s Data{% endblocktrans %}{% endblock %}
 
 {% block rtab_id %}id="data_tab"{% endblock %}
 
@@ -31,7 +31,7 @@
 
 {% block body %}
 
-<h1>{{owner|nicename}}{% blocktrans %}'s Data Sets{% endblocktrans %}</h1>
+<h1>{{owner|nicename}}{% blocktrans %}'s Data{% endblocktrans %}</h1>
 
 {% ifequal user owner  %}
 <div class="priority-area">
