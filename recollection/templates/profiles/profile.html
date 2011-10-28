@@ -108,23 +108,9 @@ $(document).ready(function() {
        {% endif %}
 
        <!-- user stats -->
-       <div class="user_counts dataset-links">
-	 {% if other_user.datasets.count > 0 or other_user.exhibits.count > 0 %}
-         {% if other_user.datasets.count %}
-         <span class="action user_datasets">
-	   <a href="{% url dataset_list_by_owner owner=other_user %}">{{ other_user.datasets.count }} {% trans "Data" %}</a>
-	 </span>
-         {% endif %}
-         {% if other_user.exhibits.count %}
-	 <span class="divider">|</span>
-	 <span class="action user_exhibits">
-	   <a href="{% url exhibit_list_by_owner other_user %}">{{ other_user.exhibits.count }} {% trans "View" %}{{ other_user.exhibits.count|pluralize }}</a>
-	 </span>
-         {% endif %}
-	 {% else %}
-         <span class="no_data">{% trans "No data" %}</span>
-	 {% endif %}
-       </div>
+      <div class="dataset-links">
+          {% user_counts other_user %}
+      </div>
      </td>
     </tr>
    </tbody>
