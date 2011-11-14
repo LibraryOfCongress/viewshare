@@ -54,7 +54,7 @@ class CollectionHandler(AbstractCatalogHandler):
 
     model = Collection
     fields = ("id", "slug", "label", "type", "project", "description",
-            "topics", "views", "home_page", "thumbnail","organizations", )
+            "topics", "exhibits", "home_page", "thumbnail","organizations", )
 
 
     @classmethod
@@ -68,10 +68,10 @@ class CollectionHandler(AbstractCatalogHandler):
         return [get_site_url(t.get_absolute_url()) for t in instance.topics.iterator()]
 
     @classmethod
-    def views(cls, instance):
+    def exhibits(cls, instance):
         "URLs for all collection views with the temporary external_view field."
-        result = [get_site_url(views.get_absolute_url()) for views in
-                instance.views.iterator()]
+        result = [get_site_url(exhibits.get_absolute_url()) for exhibits in
+                instance.exhibits.iterator()]
         if instance.external_view:
             result.append(instance.external_view)
         return result
