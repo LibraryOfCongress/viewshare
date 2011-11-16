@@ -1,21 +1,8 @@
 {% load i18n %}
-{% load sorting_tags %}
 {% load pagination_tags %}
 {% load profile_tags %}
-    {% autosort queryset %}
     {% autopaginate queryset max_count %}
     {% if queryset %}
-        {% if pageable %} 
-            
-<!--        <p>{% trans "Order by:" %}-->
-            <!--{% ifequal order 'date' %}-->
-                <!--{% anchor name Name %}-->
-            <!--{% else %}-->
-                <!--{% anchor date_joined "Date" %}-->
-            <!--{% endifequal %}-->
-        <!--</p>-->
-
-        {% endif %}
         <ul class="connection_list">
         {% for friend in queryset %}
             {% show_profile friend.friend %}

@@ -39,7 +39,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'pagination.middleware.PaginationMiddleware',
-    'django_sorting.middleware.SortingMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
     'reversion.middleware.RevisionMiddleware',
     'cms.middleware.page.CurrentPageMiddleware',

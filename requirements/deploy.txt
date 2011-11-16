@@ -1,8 +1,7 @@
 -i http://pypi.zepheira.com/simple/
 
-gunicorn==0.12.0
+gunicorn==0.13.4
 greenlet==0.3.1
-meinheld==0.4.10
-mysql-python==1.2.3c1
-django-sentry==1.5.5
+eventlet==0.9.16
+mysql-python==1.2.3
 -r requirements.txt

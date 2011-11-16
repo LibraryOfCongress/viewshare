@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
@@ -69,11 +70,23 @@ class DatasetListConnectionsView(ListView):
 
     template_name="connections/dataset_list_by_user_connections.html"
     def get_queryset(self):
+        vars = self.request.GET
+        sort = vars.get('sort', None)
+        if sort:
+            if sort not in Dataset._meta.get_all_field_names():
+                raise Http404("%s is not a valid sorting field"%sort)
+
         user = get_object_or_404(User, username=self.kwargs.get("username"))
         pre_friend_ids = [i['friend'].id for i in
                           Friendship.objects.friends_for_user(user)]
         list = Dataset.objects.filter(owner__pk__in=pre_friend_ids)
         list = list.filter(PermissionsRegistry.get_filter("dataset.can_view", self.request.user))
+
+        if sort:
+            dir = vars.get('dir', "desc")
+            order_by = (dir=="desc" and "-" or "") + sort
+            list = list.order_by(order_by)
+
         return list
 
     def get_context_data(self, **kwargs):
@@ -92,12 +105,24 @@ class ExhibitListConnectionsView(ListView):
     """
     template_name = "connections/exhibit_list_by_user_connections.html"
     def get_queryset(self):
+        vars = self.request.GET
+        sort = vars.get('sort', None)
+        if sort:
+            if sort not in Exhibit._meta.get_all_field_names():
+                raise Http404("%s is not a valid sorting field"%sort)
+
         user = get_object_or_404(User, username=self.kwargs.get("username"))
 
         pre_friend_ids = [i['friend'].id for i in
                           Friendship.objects.friends_for_user(user)]
         perm_filter = PermissionsRegistry.get_filter("exhibit.can_view", self.request.user)
-        return Exhibit.objects.filter(owner__pk__in=pre_friend_ids).filter(perm_filter)
+        list = Exhibit.objects.filter(owner__pk__in=pre_friend_ids).filter(perm_filter)
+        if sort:
+            dir = vars.get('dir', "desc")
+            order_by = (dir=="desc" and "-" or "") + sort
+            list = list.order_by(order_by)
+
+        return list
 
     def get_context_data(self, **kwargs):
         kwargs["other_user"] = get_object_or_404(User,
