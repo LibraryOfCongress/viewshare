@@ -8,25 +8,12 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from recollection import feeds
 from recollection.utils.views import UserHomeView
-from recollection.upload import views
 
 
 admin.autodiscover()
 
 # override context-less 500
 handler500 = 'recollection.utils.views.server_error'
-
-feed_dict = {
-    'latest_views': feeds.LatestDataViews,
-    'latest_views_atom': feeds.AtomLatestDataViews,
-    'views': feeds.UserDataViews,
-    'views_atom': feeds.AtomUserDataViews,
-
-    'latest_data': feeds.LatestDatasets,
-    'latest_data_atom': feeds.AtomLatestDatasets,
-    'data': feeds.UserDatasets,
-    'data_atom': feeds.AtomUserDatasets,
-}
 
 urlpatterns = patterns('',
 
@@ -39,8 +26,6 @@ urlpatterns = patterns('',
     (r'^announcements/', include('announcements.urls')),
     (r'^robots.txt$', include('robots.urls')),
     (r'^admin/', include(admin.site.urls)),
-
-    (r'^feeds/(.*)/$', 'django.contrib.syndication.views.feed', {"feed_dict": feed_dict}),
 
     (r'^catalog/', include('recollection.apps.collection_catalog.urls')),
     (r'^support/', include('recollection.apps.support.urls')),
@@ -69,11 +54,22 @@ urlpatterns = patterns('',
 
     url(r'^userhome/$', login_required(UserHomeView.as_view()), name="user_home"),
 
+    (r'^feeds/latest_views/$', feeds.LatestDataViews()),
+    (r'^feeds/latest_views_atom/$', feeds.AtomLatestDataViews()),
+    (r'^feeds/views/(?P<owner>[a-zA-Z0-9_.-]+)/$', feeds.UserDataViews()),
+    (r'^feeds/views_atom/(?P<owner>[a-zA-Z0-9_.-]+)/$', feeds.AtomUserDataViews()),
+    (r'^feeds/latest_data/$', feeds.LatestDatasets()),
+    (r'^feeds/latest_data_atom/$', feeds.AtomLatestDatasets()),
+    (r'^feeds/data/(?P<owner>[a-zA-Z0-9_.-]+)/$', feeds.UserDatasets()),
+    (r'^feeds/data_atom/(?P<owner>[a-zA-Z0-9_.-]+)/$', feeds.AtomUserDatasets()),
+
+
     # For legacy purposes
     url(r'^userupload/$', login_required(RedirectView.as_view(url="/upload")), name="user_upload"),
 
     # CMS url definition should come after all others
     (r'^', include('cms.urls')),
+
 
 ) + staticfiles_urlpatterns()
 
