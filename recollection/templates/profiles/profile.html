@@ -7,6 +7,7 @@
 {% load freemix_helpers %}
 {% load compress %}
 {% load cms_tags %}
+{% load cache %}
 
 {% block head_title %}{{ other_user|nicename }}{% endblock %}
 
@@ -74,6 +75,7 @@ $(document).ready(function() {
 <h1>{{ other_user|nicename }}</h1>
 {% if is_me %}
 <div class="priority-area">
+{% cache 3600 profile_pages %}
  <p>
   <a href="{% page_url "home" %}">{{ SITE_NAME }} Home</a> <span class="divider">|</span>
   <a href="{% page_url "userguide" %}">User's Guide</a> <span class="divider">|</span>
@@ -82,6 +84,7 @@ $(document).ready(function() {
   <a href="{% url upload_dataset %}" class="button_link">{% trans "Upload Data" %}</a>
  </p>
 </div>
+{% endcache %}
 {% endif %}
 
 <div class="right_panel data_panel">

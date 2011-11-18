@@ -35,17 +35,14 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.middleware.doc.XViewMiddleware',
     'pagination.middleware.PaginationMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
     'reversion.middleware.RevisionMiddleware',
     'cms.middleware.page.CurrentPageMiddleware',
     'cms.middleware.user.CurrentUserMiddleware',
-    'recollection.utils.middleware.CMSToolbarPatchMiddleware',
     'cms.middleware.toolbar.ToolbarMiddleware',
-    'cms.middleware.media.PlaceholderMediaMiddleware',
+
 )
 
 
@@ -71,6 +68,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "recollection.apps.connections.context_processors.invitations",
     "recollection.utils.context_processors.combined_inbox_count",
     "cms.context_processors.media",
+    'sekizai.context_processors.sekizai',
+
 )
 
 COMBINED_INBOX_COUNT_SOURCES = (
@@ -117,7 +116,7 @@ INSTALLED_APPS = (
     'cms',
     'mptt',
     'menus',
-    'publisher',
+    'sekizai',
     'reversion',
     'cms.plugins.text',
     'cms.plugins.picture',
@@ -153,7 +152,6 @@ STATICFILES_DIRS = (
 #    ('', path.join(module_path('pinax'), 'media', 'default')),
     ('', path.join(module_path('ajax_validation'), 'media')),
     ('', path.join(module_path('django_extensions'), 'media')),
-    ('', path.join(module_path('cms'), 'media')),
 )
 
 ABSOLUTE_URL_OVERRIDES = {
@@ -208,6 +206,12 @@ CMS_TEMPLATES = (
     ('template.html', 'Front Page Template'),
     ('about/template.html', 'About Page Template'),
 )
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    }
+}
 
 import logging
 logging.basicConfig(

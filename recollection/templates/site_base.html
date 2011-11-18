@@ -6,6 +6,7 @@
 {% load site_theme %}
 {% load compress %}
 {% load cms_tags %}
+{% load cache %}
 
 {% block rss_feeds %}
     <link href="/feeds/latest_views/" type="application/rss+xml" rel="alternate" title="Latest Data View RSS News Feed" />
@@ -72,6 +73,7 @@
 
 {% block footer %}
 
+{% cache 3600 footer %}
 <div class="footernav">
 <span class="linknav left">
     <span class="aboutlink"><a href="{% page_url "community" %}">{% trans "About" %} {{ SITE_NAME }}</a></span> <span class="divider">|</span>
@@ -84,10 +86,12 @@
 </div>
 
 <div class="clear">&nbsp;</div>
+{% endcache %}
 
 {% endblock %}
 
 {% block final %}
+    {% cache 600 footer_final %}
   <p id="versions">
         {{ request.META.HTTP_HOST }} <span class="divider">&middot;</span>
         {{ SITE_NAME }} {% recollection_version %} <span class="divider">&middot;</span>
@@ -99,4 +103,5 @@
         <script type="text/javascript" src="{% url uservoice_options %}"></script>
         <!--<script type="text/javascript" src="https://cdn.uservoice.com/javascripts/widgets/tab.js"></script>-->
     {% endif %}
+    {% endcache %}
 {% endblock %}
