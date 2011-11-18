@@ -9,8 +9,11 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         
         # Removing unique constraint on 'Skin', fields ['theme', 'site']
-        db.delete_unique('site_theme_skin', ['theme_id', 'site_id'])
-
+        try:
+            db.delete_unique('site_theme_skin', ['theme_id', 'site_id'])
+        except:
+            pass # Dropping this constraint sometimes fails on Mysql, but it's less restrictive than the
+                 # next restriction, so that's ok
         # Adding unique constraint on 'Skin', fields ['site']
         db.create_unique('site_theme_skin', ['site_id'])
 
