@@ -76,7 +76,7 @@ LOGGING = {
         }
     }
 }
-LOCAL_INSTALLED_APPS = []
+LOCAL_INSTALLED_APPS = ()
 
 try:
     from local_settings import *
