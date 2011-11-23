@@ -159,6 +159,11 @@
     margin: .1em 4px;
 }
 
+.chooser li.disabled img {
+    opacity: 0.5;
+}
+
+
 /* for Exhibits */
 /* Maybe move to a profiles.css? */
 
