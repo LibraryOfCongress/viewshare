@@ -124,11 +124,14 @@
 .chooser li {
     float: left;
     width: 96px;
-    color: #fff;
     font-size: 1em;
     margin: .8em 5px .8em 0;
     min-height: 100px;
     list-style: none;
+}
+
+.chooser li.disabled {
+    opacity: 0.3;
 }
 
 .chooser li a {
@@ -144,12 +147,17 @@
     /*border: 0;*/
     /*border: 2px solid #000;*/
     position: relative;
-    opacity: 0.8;
+    border: lightgrey 1px solid;
 }
 
 .chooser li a:hover img {
     /*border: 2px solid #ccc;*/
     opacity: 1.0;
+ -moz-box-shadow: 3px 3px 4px #999; /* Firefox */
+ -webkit-box-shadow: 3px 3px 4px #999; /* Safari/Chrome */
+ box-shadow: 3px 3px 4px #999; /* Opera and other CSS3 supporting browsers */
+ -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#999999')";/* IE 8 */
+ : progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#999999');/* IE 5.5 - 7 */ 
 }
 
 .chooser li a:active img {
@@ -163,10 +171,8 @@
 }
 
 .chooser li.disabled img {
-    opacity: 0.3;
-    /*border: 2px solid #aaaaaa;*/
+    border: none;
 }
-
 
 /* for Exhibits */
 /* Maybe move to a profiles.css? */
