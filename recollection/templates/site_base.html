@@ -93,11 +93,9 @@
 {% block final %}
     {% cache 600 footer_final %}
   <p id="versions">
-        {{ request.META.HTTP_HOST }} <span class="divider">&middot;</span>
         {{ SITE_NAME }} {% recollection_version %} <span class="divider">&middot;</span>
         Freemix {% freemix_version %} <span class="divider">&middot;</span>
-        Akara {% akara_version %} <span class="divider">&middot;</span>
-        Zepheira translator {% akara_prefix_url %}
+        Zepheira Akara translator {% akara_prefix_url %}
   </p>
     {% if USERVOICE_SETTINGS %}
         <script type="text/javascript" src="{% url uservoice_options %}"></script>
