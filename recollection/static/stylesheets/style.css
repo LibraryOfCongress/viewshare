@@ -141,17 +141,20 @@
     height: auto;
     display: block;
     padding-top:3px;
-    border: 0;
-    border-top: 2px solid #000;
+    /*border: 0;*/
+    /*border: 2px solid #000;*/
     position: relative;
+    opacity: 0.8;
 }
 
 .chooser li a:hover img {
-    border-top: 2px solid #ccc;
+    /*border: 2px solid #ccc;*/
+    opacity: 1.0;
 }
 
 .chooser li a:active img {
-    border-top: 2px solid #f58809;
+    /*border: 2px solid #f58809;*/
+    opacity: 1.0;
 }
 
 .chooser li span {
@@ -160,7 +163,8 @@
 }
 
 .chooser li.disabled img {
-    opacity: 0.5;
+    opacity: 0.3;
+    /*border: 2px solid #aaaaaa;*/
 }
 
 
