@@ -686,7 +686,7 @@ ul.responses li.thread-8 {
 .about_profile .profile_info, .about_profile .dataset_info, .about_profile .exhibit_info {
     background-color: #1C3C62;
     color: #fff;
-    padding: 10px;
+    height: 72%;
 }
 
 table.about_profile td {
