@@ -125,7 +125,7 @@ INSTALLED_APPS = (
     'cms.plugins.snippet',
 
     # Freemix specific
-    'freemix.utils',
+    'freemix',
     'freemix.dataset',
     'freemix.exhibit',
     'freemix.dataset.augment',
