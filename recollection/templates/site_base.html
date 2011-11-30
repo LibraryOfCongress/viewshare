@@ -19,14 +19,15 @@
     {% compress css %}
     <link href="{{STATIC_URL}}stylesheets/reset.css" rel="stylesheet" type="text/css" media="screen,projection" />
     <link href="{{STATIC_URL}}stylesheets/base.css" rel="stylesheet" type="text/css" media="screen,projection" />
-    <link href="{% site_skin %}" rel="stylesheet" type="text/css" media="screen,projection" />
     <link href="{{STATIC_URL}}uni_form/default.uni-form.css" rel="stylesheet" type="text/css" media="screen,projection" />
     <link href="{{STATIC_URL}}stylesheets/uni-form.css" rel="stylesheet" type="text/css" media="screen,projection" />
     <link href="{{STATIC_URL}}stylesheets/style.css" rel="stylesheet" type="text/css" media="screen,projection" />
     <link href="{{STATIC_URL}}stylesheets/lc.css" rel="stylesheet" type="text/css" media="screen,projection" />
-    <link href="{{STATIC_URL}}{{THEME_FRAGMENT_URL}}" rel="stylesheet" type="text/css" media="screen,projection" />
-    <link href="{{STATIC_URL}}{{THEME_DIR_URL}}/adjunct.css" rel="stylesheet" type="text/css" media="screen,projection" />
+    <link href="{{STATIC_URL}}themes/chili/chili.css" rel="stylesheet" type="text/css" media="screen,projection" />
+    <link href="{{STATIC_URL}}themes/chili/adjunct.css" rel="stylesheet" type="text/css" media="screen,projection" />
     {%endcompress %}
+    <link href="{% site_skin %}" rel="stylesheet" type="text/css" media="screen,projection" />
+
 {% endblock head_css %}
 
 {% block head_scripts %}

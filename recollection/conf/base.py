@@ -196,10 +196,13 @@ LOCALE_PATHS=(
 )
 
 # Javascript and CSS compression
-COMPRESS = False
+COMPRESS_ENABLED = False
 
-# storage engine to be used during compression
-COMPRESS_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
 
 # django-cms
 CMS_TEMPLATES = (
