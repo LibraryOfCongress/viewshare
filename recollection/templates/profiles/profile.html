@@ -22,14 +22,13 @@
 {% block head_scripts %}
 {{block.super}}
 {% include "freemix/js_include/jquery_ui.html" %}
-{% compress js %}
 
 <script type="text/javascript">
 $(document).ready(function() {
     $('#edit_profile_form').load('{% url profile_edit %}', function() {
         var q = $('form.uniForm');
         if (q.length) {
-            q.uniform();
+//            q.uniform();
         }
     });
     var opts = {
@@ -47,7 +46,6 @@ $(document).ready(function() {
 
 });
 </script>
-{% endcompress %}
 {% endblock %}
 
 {# check to see if the user being inspected is user logged in #}

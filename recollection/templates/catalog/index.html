@@ -6,7 +6,8 @@
 {% block head_title %}{% trans "Content Access Portal" %}{% endblock %}
 
 {% block head_scripts %}
-<script type="text/javascript" src="http://api.simile.zepheira.com/exhibit/2.2.0/exhibit-api.js"></script>
+{% include "simile/js/exhibit.html" %}
+
 <script type="text/javascript" src="http://extensions.simile.zepheira.com/map/map-extension.js?service=openlayers"></script>
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 {{ block.super }}
@@ -25,8 +26,10 @@
 {% compress css %}
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/layout.css"/>
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}stylesheets/catalog.css"/>
+{% include "simile/css/exhibit.html" %}
+{% include "simile/css/exhibit_extensions.html" %}
 {% endcompress %}
-<link rel="stylesheet" type="text/css" href="http://api.simile.zepheira.com/exhibit/2.2.0/extensions/chart/chart-extension-bundle.css" />
+
 {% endblock %}
 
 {% block body_class %}main-attraction{% endblock %}

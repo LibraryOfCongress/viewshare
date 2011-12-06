@@ -1,9 +1,10 @@
 {% extends "dataset/edit/base.html" %}
 {% load i18n %}
 {% load augment_tags %}
-
+{% load compress %}
 {% block head_scripts %}
     {{block.super}}
+    {% compress js %}
     <script src="{{ STATIC_URL }}uni_form/uni-form.jquery.js" type="text/javascript"></script>
 
     <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/ui.multiselect.js"></script>
@@ -12,6 +13,7 @@
     <script type="text/javascript" src="{{STATIC_URL}}support/js/base.js"></script>   
     <script type="text/javascript" src="{{STATIC_URL}}support/js/augment.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}support/js/ignored_fields.js"></script>
+    {% endcompress %}
 {% endblock head_scripts %}
 
 {% block head_data %}

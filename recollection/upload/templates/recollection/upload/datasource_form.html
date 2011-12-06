@@ -6,7 +6,9 @@
 
 {% block head_css %}
     {{ block.super }}
+    {% compress css %}
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}upload/css/upload.css"/>
+    {% endcompress %}
 {% endblock %}
 
 {% block rtab_id %}id="data_tab"{% endblock %}
@@ -28,11 +30,13 @@
     {{ block.super }}
     {% if show_error %}
     {% include "freemix/js_include/jquery_ui.html" %}
+     {% compress js %}
     <script src="{{ STATIC_URL }}uni_form/uni-form.jquery.js" type="text/javascript"></script>
     <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.form.js"></script>
 
     <script type="text/javascript" src="{{STATIC_URL}}support/js/base.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}support/js/load.js"></script>
+    {% endcompress %}
     {% endif %}
 {% endblock %}
 

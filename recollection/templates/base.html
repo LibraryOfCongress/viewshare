@@ -1,5 +1,8 @@
 {% load i18n %}
+{% load compress %}
 {% load sekizai_tags %}
+<!DOCTYPE html>
+
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -7,17 +10,23 @@
 
     <title>
       {% if site_name %}{{ site_name }} : {% endif %}{% block head_title %}{% endblock %}</title>
-    <!--[if IE]><style>
-        div {
-        zoom: 1; /* trigger hasLayout */
-        }
-        </style><![endif]-->
+
 
     {% block head_css %}{% endblock %}
     {% block head_data %}{% endblock %}
-    {% block head_scripts %}{% endblock %}
     {% block extra_head %}{% endblock %}
     {% render_block "css" %}
+
+    {% compress js %}
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.highlight.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}scripts/ui.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}scripts/jquery.cookie.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}scripts/compatible.js"></script>
+    {% endcompress %}
+    {% block head_scripts %}{% endblock %}
+
+
 
   </head>
 
@@ -89,6 +98,7 @@
 
     {% block final %}
     {% endblock %}
+
     {% render_block "js" %}
 
   </body>

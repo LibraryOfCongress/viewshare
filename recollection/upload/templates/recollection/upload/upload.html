@@ -7,7 +7,9 @@
 
 {% block head_css %}
     {{ block.super }}
+    {% compress css %}
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}upload/css/upload.css"/>
+    {% endcompress %}
 {% endblock %}
 
 {%  block head_scripts %}

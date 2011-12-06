@@ -1,6 +1,4 @@
--i http://pypi.zepheira.com/releases/index/
---extra-index-url http://pypi.zepheira.com/public/index/
-
-freemix
-django-redmine==1.0.1
+git+ssh://git@github.com/zepheira/freemix.git
+git+ssh://git@github.com/zepheira/django-simile.git
+git+ssh://git@github.com/zepheira/django-redmine.git
 -r external.txt
