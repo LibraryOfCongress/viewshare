@@ -69,160 +69,181 @@ $(document).ready(function() {
 {% endblock %}
 
 {% block body_class %}profile{% endblock %}
+
 {% block body %}
+
 <h1>{{ other_user|nicename }}</h1>
 {% if is_me %}
 <div class="priority-area">
-{% cache 3600 profile_pages %}
- <p>
-  <a href="{% page_url "home" %}">{{ SITE_NAME }} Home</a> <span class="divider">|</span>
-  <a href="{% page_url "userguide" %}">User's Guide</a> <span class="divider">|</span>
-  <a href="{% page_url "faq" %}">FAQ</a> <span class="divider">|</span>
-  <a href="{% url profile_detail 'Guide' %}">Ask the Guide</a> <span class="divider">|</span>
-  <a href="{% url upload_dataset %}" class="button_link">{% trans "Upload Data" %}</a>
- </p>
+  {% cache 3600 profile_pages %}
+  <p>
+    <a href="{% page_url "home" %}">{{ SITE_NAME }} Home</a> <span class="divider">|</span>
+    <a href="{% page_url "userguide" %}">User's Guide</a> <span class="divider">|</span>
+    <a href="{% page_url "faq" %}">FAQ</a> <span class="divider">|</span>
+    <a href="{% url profile_detail 'Guide' %}">Ask the Guide</a> <span class="divider">|</span>
+    <a href="{% url upload_dataset %}" class="button_link">{% trans "Upload Data" %}</a>
+  </p>
 </div>
 {% endcache %}
 {% endif %}
 
 <div class="right_panel data_panel">
- {% include "profiles/profile_right_panel.html" %}
+  {% include "profiles/profile_right_panel.html" %}
 </div>
 
 <div class="left_panel user_panel">
- <div id="about-box" class="info-section">
-  <table class="about_profile">
-   <tbody>
-    <tr>
-      <td class="inspector_icon profile_icon">
-	<div class="user_avatar"></div>
-      </td>
-     <td>
-      <div class="inspector_info profile_info">
-       {% if other_user.get_profile.website %}
-       <p class="about_name">{{ other_user|nicename }}<a class="url about_homepage" href="{{ other_user.get_profile.website }}" title="{{ other_user.get_profile.website }}"></a></p>
-       {% else %}
-       <p class="about_name">{{ other_user|nicename }}</p>
-       {% endif %}
-       {% if other_user.get_profile.location %}
-       <p class="about_location">{{ other_user.get_profile.location }}</p>
-       {% endif %}
+  <div id="about-box" class="info-section">
+    <table class="about_profile">
+      <tbody>
+	<tr>
+	  <td class="inspector_icon profile_icon">
+	    <div class="user_avatar"></div>
+	  </td>
+	  <td>
+	    <div class="inspector_info profile_info">
+	      {% if other_user.get_profile.website %}
+	      <p class="about_name">{{ other_user|nicename }}<a class="url about_homepage" href="{{ other_user.get_profile.website }}" title="{{ other_user.get_profile.website }}"></a></p>
+	      {% else %}
+	      <p class="about_name">{{ other_user|nicename }}</p>
+	      {% endif %}
+	      {% if other_user.get_profile.location %}
+	      <p class="about_location">{{ other_user.get_profile.location }}</p>
+	      {% endif %}
 
-       <!-- user stats -->
-      <div class="dataset-links">
-          {% user_counts other_user %}
-      </div>
-     </td>
-    </tr>
-   </tbody>
-  </table>
+	      <!-- user stats -->
+	      <div class="dataset-links">
+		{% user_counts other_user %}
+	      </div>
+	  </td>
+	</tr>
+      </tbody>
+    </table>
 
-  {% if other_user.get_profile.about %}
-  <div class="profile_info">
-   <div class="about_description">{{ other_user.get_profile.about|linebreaks }}</div>
-  </div>
-  {% endif %}
+    {% if other_user.get_profile.about %}
+    <div class="profile_info">
+      <div class="about_description">{{ other_user.get_profile.about|linebreaks }}</div>
+    </div>
+    {% endif %}
 
-  {% if is_me %}
-  <p class="about_edit"><a href="#edit_profile_form" id="edit-profile-button" class="button_link">{% trans "Edit" %}</a></p>
-  {% endif %}
+    {% if is_me %}
+    <p class="about_edit"><a href="#edit_profile_form" id="edit-profile-button" class="button_link">{% trans "Edit" %}</a></p>
+    {% endif %}
 
+    {% if user.is_authenticated %}
 
-  {# @@@ this entire invitation mechanism should be an inclusion tag #}
-  {% if user.is_authenticated %}
-   {% if is_me %}
-   {% else %}     
-   {% if is_friend %}
-   <p class="center connection_extra">
-   {% blocktrans %}You are connected to {% endblocktrans %}{{ other_user|nicename }}.
-   </p>
+    {% if not is_me %}
+
+    {% if is_friend %}
+    <p class="center connection_extra">
+      {% blocktrans %}You are connected to {% endblocktrans %}{{ other_user|nicename }}.
+    </p>
     <form method="POST" action="">
-        {%csrf_token %}
-     <input type="hidden" name="action" value="remove" />
-     <p class="center"><input type="submit" class="negative-button" value="{% trans "Remove Connection" %}"/></p>
+      {%csrf_token %}
+      <input type="hidden" name="action" value="remove" />
+      <p class="center"><input type="submit" class="negative-button" value="{% trans "Remove Connection" %}"/></p>
     </form>
-   {% else %}
-   {% if previous_invitations_from %}
-   <div class="invitation connection_extra">
-   {% for invitation in previous_invitations_from %}
-    <p>{{ other_user|nicename }} {% blocktrans %}requested a connection on{% endblocktrans %} {{ invitation.sent|date }}:</p>
-    <p class="invitation_message">{{ invitation.message }}</p>
-    <form method="post" action="">
+    {% else %}
+    
+    {% if previous_invitations_from %}
+    <div class="invitation connection_extra">
+
+      {% for invitation in previous_invitations_from %}
+      <p>{{ other_user|nicename }} {% blocktrans %}requested a connection on{% endblocktrans %} {{ invitation.sent|date }}:</p>
+      <p class="invitation_message">{{ invitation.message }}</p>
+      <form method="post" action="">
         {%csrf_token %}
         <input type="hidden" name="invitation" value="{{ invitation.id }}"/>
         <input type="hidden" name="action" value="accept"/>
         <input type="submit" value="{% trans 'Accept' %}" />
-    </form>
-    <form method="post" action="">
+      </form>
+      <form method="post" action="">
         {%csrf_token %}
         <input type="hidden" name="invitation" value="{{ invitation.id }}"/>
         <input type="hidden" name="action" value="decline"/>
         <input type="submit" value="{% trans 'Decline' %}" class="negative-button" />
-    </form>
-   </div>
-   {% endfor %}
-   {% else %}
-    {% if previous_invitations_to %}
-    <p class="center">{% trans "Connection request sent." %}</p>
+      </form>
+      {% endfor %}
+    </div>
+
     {% else %}
+
+    {% if previous_invitations_to %}
+    
+    <p class="center">{% trans "Connection request sent." %}</p>
+
+    {% else %}
+
     <h2>{% trans "Add Connection" %}</h2>
+
     <form class="uniForm" method="POST" action="">
-        {% csrf_token %}
+      {% csrf_token %}
       <fieldset class="inlineLabels">
 
         {{ invite_form|as_uni_form }}
         <div class="form_block">
-         <input type="hidden" name="action" value="invite" />
-         <p class="center"><input type="submit" value="{% trans "Invite" %}"/>
-          {{ other_user|nicename }} {% blocktrans %}to connect.{%  endblocktrans %}
-         </p>
+          <input type="hidden" name="action" value="invite" />
+          <p class="center"><input type="submit" value="{% trans "Invite" %}"/>
+            {{ other_user|nicename }} {% blocktrans %}to connect.{%  endblocktrans %}
+          </p>
         </div>
       </fieldset>
     </form>
+
     {% endif %} {# previous_invitations_to #}
-   {% endif %} {# previous_invitations_from #}
-   {% endif %} {# is_friend #}
-   {% endif %} {# is me #}
-  {% else %} {# not user.is_authenticated #}
-  {% url acct_login as login_url %}
-  <p class="center">{% blocktrans %}<a href="{{login_url}}">Log in</a> to add this person as a connection.{% endblocktrans %}</p>
+
+    {% endif %} {# previous_invitations_from #}
+
+    {% endif %} {# is_friend #}
+
+    {% endif %} {# is me #}
+
+    {% else %} {# not user.is_authenticated #}
+
+    {% url acct_login as login_url %}
+    <p class="center">{% blocktrans %}<a href="{{login_url}}">Log in</a> to add this person as a connection.{% endblocktrans %}</p>
+
     {% endif %}
- </div>
+    </div>
+    
+    <!-- my news -->
+    
+    {%  if user.is_authenticated %}
+    <div class="info-section">
+      <h2 class="ui-widget-header">{% blocktrans %}Connections{% endblocktrans %}</h2>
+      <div class="user_friends">
+	{% if other_friends %}
+	{% connection_list other_friends 3 0 %} 
+	<div class="see_all">
+	  <a href="{% url connection_list_by_user other_user.username %}">{% trans "See all" %}</a>
+	</div> 
+	{% else %}
 
-  <!-- my news -->
+	{% if is_me %}
+	{% url profile_list as profile_list_url %}
+	<p class="center">{% blocktrans %}Look at all of the <a href="{{ profile_list_url }}">profiles</a> and see if there's anyone you know.{% endblocktrans %}</p>
+	{% else %}
+	<p class="center">{% trans "Invite" %} {{ other_user|nicename }} {% blocktrans %}to connect.{% endblocktrans %}</p>
+	{% endif %}
 
- {% if is_me %}
- <div class="info-section">
-  <h2>{% blocktrans %}Notices{% endblocktrans %}</h2>
-  <div class="notices">
-  {% notification_summary_list other_user %}
+	{% endif %}
+      </div>
+    </div>
+
+    {% if is_me %}
+    <div class="info-section">
+      <h2 class="ui-widget-header">{% blocktrans %}Notices{% endblocktrans %}</h2>
+      <div class="notices">
+	{% notification_summary_list other_user %}
+      </div>
+    </div>
+    {% endif %}
+    
+    {% endif %}
+    
+    <div id="edit_profile_form" class="form-dialog">
+    </div>
+    
   </div>
- </div>
- {% endif %}
- {%  if user.is_authenticated %}
- <div class="info-section">
-  <h2>{% blocktrans %}Connections{% endblocktrans %}</h2>
-  <div class="user_friends">
-  {% if other_friends %}
-   {% connection_list other_friends 3 0 %} 
-   <div class="see_all">
-    <a href="{% url connection_list_by_user other_user.username %}">{% trans "See all" %}</a>
-   </div> 
-  {% else %}
-   {% if is_me %}
-   {% url profile_list as profile_list_url %}
-   <p class="center">{% blocktrans %}Look at all of the <a href="{{ profile_list_url }}">profiles</a> and see if there's anyone you know.{% endblocktrans %}</p>
-   {% else %}
-   <p class="center">{% trans "Invite" %} {{ other_user|nicename }} {% blocktrans %}to connect.{% endblocktrans %}</p>
-   {% endif %}
-  {% endif %}
-  </div>
- </div>
-{% endif %}
-</div>
-
-<div id="edit_profile_form" class="form-dialog">
-</div>
-
-{% endblock %}
+  
+  {% endblock %}
 
