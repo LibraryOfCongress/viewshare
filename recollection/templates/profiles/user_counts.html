@@ -6,6 +6,7 @@
         {% if dataset_count %}
             <span class="user_datasets"><a
                     href="{% url dataset_list_by_owner owner=target_user %}">{{ dataset_count }} {% trans "Data" %}</a></span>
+        <span class="divider">|</span>
         {% endif %}
         {% if exhibit_count %}
             <span class="user_exhibits"><a
