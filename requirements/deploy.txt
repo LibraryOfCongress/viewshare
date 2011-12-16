@@ -4,4 +4,6 @@ gunicorn==0.13.4
 greenlet==0.3.1
 eventlet==0.9.16
 mysql-python==1.2.3
+python-memcached==1.48
+
 -r requirements.txt
