@@ -87,24 +87,27 @@
 
     <div class="right_panel data_panel">
       <div class="dataset_list">
-        <h2>{% blocktrans %}Data{% endblocktrans %}</h2>
+        <h2 class="ui-widget-header">{% blocktrans %}Data{% endblocktrans %}</h2>
 
         <ul class="dataset_list_items">
           {% dataset_list_item exhibit.dataset %}
         </ul>
 
       </div>
-    {% if can_share %}
+
+      {% if can_share and exhibit.shared_keys.all %}
       <div class="shared_key_list">
-        <h2>{% blocktrans %}Shared Links{% endblocktrans %}</h2>
+        <h2 class="ui-widget-header">{% blocktrans %}Shared Links{% endblocktrans %}</h2>
+
         <ul class="shared_key_list_items">
-            {% for key in exhibit.shared_keys.all %}
-                {% include "share/shared_key_metadata.html" %}
-            {% endfor %}
+          {% for key in exhibit.shared_keys.all %}
+          {% include "share/shared_key_metadata.html" %}
+          {% endfor %}
         </ul>
       </div>
+      {% endif %}
+
     </div>
-   {% endif %}
 
     {% if can_delete %}
     {% include "exhibit/exhibit_delete_dialog.html" %}

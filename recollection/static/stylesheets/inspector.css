@@ -20,65 +20,36 @@ ul.connection_list li {
 
 }
 
-.user_avatar_entry img {
-align:left;
+/* styling connections */
+
+.user_profile_entry .user_data_entry {
 }
 
-.user_data_entry {
-display: block;
-padding-left: 10px;
+.user_profile_entry .user_stats {
+ font-size: 95%;
+}
+
+.user_profile_entry .user_data_entry {
 padding-top: 5px;
 }
 
-.user_data_entry .user_name .value {
-    font-weight: bold;
-    font-size: 120%;
+.user_profile_entry .user_data_entry .user_name {
+  background: transparent url(../images/person-24.png) top left no-repeat;
+   font-size: 115%;
+   font-weight: bold;
+   padding-bottom: 10px;
+   padding-left: 30px;
 }
 
-.user_data_entry .user_location {
-    font-size: 0.9em;
-    padding-left: 10px;
+.user_profile_entry .user_data_entry .user_location {
+ display: none;
 }
 
-.user_stats {
-  padding-top: 5px;
-  padding-left: 10px;
-}
-
-.user_counts .divider {
-    display: none;
-}
-
-.user_counts .no_data {
-    color: #666;
-}
-
-.user_data_entry .user_counts {
-    background: #fff url(../images/header-background.png) bottom left repeat-x;
-    border: 1px solid #ddd;
-    float: right;
-    margin: 0.5em 0 0.5em 1em;
-    padding: 0.75em;
-}
-
-.user_counts .divider {
-    display: none;
-}
-
-.user_counts .no_data {
-    color: #666;
-}
-
-.user_datasets {
-    background: url(../images/dataset-24.png) top left no-repeat;
-    padding-left: 30px;
-    padding-bottom:5px;
-}
-
-.user_exhibits {
-    background: url(../images/palette-24.png) top left no-repeat;
-    padding-left: 30px;
-    padding-bottom:5px;
+.user_profile_entry .user_stats {
+ border: 1px solid lightgrey;
+ float: right;
+ margin-top: -20px;
+padding: 5px 10px 5px 10px;
 }
 
 .profile_left_panel {

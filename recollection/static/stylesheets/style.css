@@ -416,6 +416,15 @@ li.option ul.sources li {
    padding-left: 30px;
 }
 
+.shared-link-notice {
+   background: transparent url(../images/key-24.png) top left no-repeat;
+   font-size: 100%;
+   line-height: 140%;
+   font-weight: bold;
+   padding-bottom: 0.5em;
+   padding-left: 30px;
+}
+
 
 .dataset_edit .dataset-title, .dataset_summary .dataset-title {
    background: transparent url(../images/dataset-32.png) top left no-repeat;
@@ -784,9 +793,27 @@ div.notices h2 {
     display: none;
 }
 
-.notice {
-    line-height: 1.3em;
+
+/* notices */
+
+.notice, .unseen_notice {
+ line-height: 130%;
 }
+
+.notice .notice_type, .unseen_notice .notice_type {
+ display: none;
+}
+
+.notice .notice_message {
+  background: #fff url(../images/bullet.png) center left no-repeat;
+  padding-left: 20px;
+}
+
+.unseen_notice .notice_message {
+  background: #fff url(../images/new-bullet.png) center left no-repeat;
+  padding-left: 20px;
+}
+
 
 /* groups */
 .user_groups_list {
