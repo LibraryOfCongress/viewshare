@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ugettext
-from django.utils import simplejson as json
+from django.utils import simplejson
 
 from friends.forms import InviteFriendForm
 from friends.models import FriendshipInvitation, Friendship
@@ -207,7 +207,7 @@ def uservoice_options(request, **kwargs):
 
         iv = "OpenSSL for Ruby"
 
-        json = json.dumps(sso_data, separators=(',',':'))
+        json = simplejson.dumps(sso_data, separators=(',',':'))
 
         salted = api_key+account_key
         saltedHash = hashlib.sha1(salted).digest()[:16]
