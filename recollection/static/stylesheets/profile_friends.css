@@ -62,7 +62,7 @@ padding-top: 5px;
 
 .user_friends .user_profile_entry .user_data_entry .user_name {
    background: transparent url(../images/person-24.png) top left no-repeat;
-   font-size: 115%;
+   font-size: 105%;
    font-weight: bold;
    padding-bottom: 10px;
    padding-left: 30px;
@@ -73,6 +73,7 @@ padding-top: 5px;
 }
 
 .user_friends .user_profile_entry .user_data_entry .user_stats {
+ font-size: 90%;
  border: 1px solid lightgrey;
  float: right;
  margin-top: -20px;
