@@ -42,6 +42,11 @@ Then create the database::
    $ ./manage.py migrate
    $ ./manage.py createsuperuser
 
+And load the default data::
+
+   $ ./manage.py loaddata exhibit_themes
+   $ ./manage.py loaddata canvases
+
 At this point, you can run the site using the included lightweight Web server::
 
    $ ./manage.py runserver

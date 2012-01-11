@@ -18,6 +18,10 @@ To create the database:
 > manage.py syncdb
 > manage.py migrate
 
+Load default view themes and canvases
+> manage.py loaddata exhibit_themes
+> manage.py loaddata canvases
+
 To run the server on port 8000
 > manage.py runserver
 
