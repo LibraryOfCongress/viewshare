@@ -17,7 +17,7 @@ handler500 = 'recollection.utils.views.server_error'
 
 urlpatterns = patterns('',
 
-    (r'^account/', include('pinax.apps.account.urls')),
+    (r'^account/', include('recollection.apps.account.urls')),
     (r'^profiles/', include('recollection.apps.profiles.urls')),
 
     (r'^invitations/', include('recollection.apps.connections.urls')),

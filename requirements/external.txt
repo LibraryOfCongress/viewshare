@@ -32,9 +32,8 @@ django-sekizai==0.5
 django-mptt==0.5.1
 html5lib==0.90
 django-piston==0.2.3rc1
-django-timezones==0.2.dev2
-Pinax==0.7.3
-diff-match-patch==20090804
+django-timezones==0.2
+diff-match-patch==20110725.1
 
 # Uncomment for uservoice integration
 # pycrypto==2.3

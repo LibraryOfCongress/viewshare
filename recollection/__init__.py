@@ -24,12 +24,3 @@ try:
     from .version import __version__
 except ImportError:
     __version__=build_version()
-
-
-# pinax 0.7.3 expects pinax.apps in the sys.path
-try:
-    import pinax
-    sys.path.append(os.path.join(os.path.dirname(pinax.__file__), "apps"))
-except:
-    pass
-

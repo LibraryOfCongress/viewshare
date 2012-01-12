@@ -63,7 +63,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "recollection.utils.context_processors.recollection_settings",
     "notification.context_processors.notification",
     "announcements.context_processors.site_wide_announcements",
-    "pinax.apps.account.context_processors.account",
+    "recollection.apps.account.context_processors.account",
     #"messages.context_processors.inbox",
     "recollection.apps.connections.context_processors.invitations",
     "recollection.utils.context_processors.combined_inbox_count",
@@ -105,7 +105,7 @@ INSTALLED_APPS = (
     'uni_form',
     'django_sorting',
 
-    'pinax.apps.account',
+    'recollection.apps.account',
     'recollection.apps.profiles',
 
     'compressor',
@@ -150,7 +150,6 @@ INSTALLED_APPS = (
 
 STATICFILES_DIRS = (
     ('', path.join(module_path('recollection'), 'static')),
-#    ('', path.join(module_path('pinax'), 'media', 'default')),
     ('', path.join(module_path('ajax_validation'), 'media')),
     ('', path.join(module_path('django_extensions'), 'media')),
 )
@@ -167,7 +166,6 @@ THEME_URL = '%s%s'%(STATIC_URL,THEME_FRAGMENT_URL)
 
 TEMPLATE_DIRS = (
     path.join(module_path("recollection"), "templates"),
-#    path.join(module_path("pinax"), "templates", "default"),
 )
 
 # Set to describe the site, properties and the names
