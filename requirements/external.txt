@@ -1,6 +1,3 @@
--i http://pypi.zepheira.com/simple/
---extra-index-url http://pypi.zepheira.com/public/index/
-
 South>=0.7.3
 Django==1.3.1
 PIL>=1.1.7
@@ -31,7 +28,7 @@ django-cms==2.2
 django-sekizai==0.5
 django-mptt==0.5.1
 html5lib==0.90
-django-piston==0.2.3rc1
+django-piston==0.2.3
 django-timezones==0.2
 diff-match-patch==20110725.1
 

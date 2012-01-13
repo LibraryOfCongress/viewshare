@@ -110,7 +110,7 @@ INSTALLED_APPS = (
 
     'compressor',
     'south',
-    'piston',
+    #'piston',
 
     # CMS stuff
     'cms',
