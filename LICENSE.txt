@@ -70,7 +70,6 @@ The license below applies to the following dependencies:
  * jquery.jeditable.js:  Copyright (c) 2006-2009 Mika Tuupola, Dylan Verheul
  * jquery.json.js:  Brantley Harris (2009-08-14)
  * jquery.machineTag.js:  Copyright (c) 2009 Gabriel Horner
- * jquery.qtip.1.0.0-rc3.js:  Copyright (c) 2009 Craig Thompson
  * jquery-1.4.2.js:  Copyright (c) 2011 John Resig, http://jquery.com/
  * jquery-ui-1.8.min.js:  Copyright (c) 2011 Paul Bakaus, http://jqueryui.com/
  * Pinax:  Copyright (c) 2008-2010 James Tauber and contributors
