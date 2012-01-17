@@ -143,9 +143,6 @@ INSTALLED_APPS = (
 
     # Support pipeline
     'recollection.apps.support',
-    'django_redmine',
-
-
     )
 
 STATICFILES_DIRS = (

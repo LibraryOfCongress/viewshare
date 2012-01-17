@@ -4,8 +4,8 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
 from django.template import loader, RequestContext
 
-from django_redmine.utils import RedmineClient, RedmineIssue
-from django_redmine.consts import *
+from recollection.apps.support.redmine.utils import RedmineClient, RedmineIssue
+from recollection.apps.support.redmine.consts import *
 from freemix.dataset.models import parse_profile_json
 
 from recollection.utils.views import get_akara_version
@@ -38,7 +38,7 @@ def redmine_create_issue(project_id, subject, description, tracker, author,
                       settings.REDMINE_PASSWORD,
                       settings.REDMINE_KEY)
 
-    issue = RedmineIssue(None)
+    issue = RedmineIssue()
     issue.set_project(project_id)
     issue.add_element('subject', value = subject)
     issue.add_element('description', value = description)
