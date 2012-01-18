@@ -8,12 +8,28 @@ graft recollection/locale
 graft test
 graft docs
 graft akara
+graft freemix/templates
+graft freemix/static
+
+graft simile/static
+graft simile/templates
 
 recursive-include recollection/*/templates *
 recursive-include recollection/*/static *
 
 recursive-include recollection/apps/*/templates *
 recursive-include recollection/apps/*/static *
+
+recursive-include freemix/*/static *
+recursive-include freemix/*/templates *
+
+recursive-include freemix/dataset/*/static *
+recursive-include freemix/dataset/*/templates *
+
+
+recursive-include freemix/exhibit/*/static *
+recursive-include freemix/exhibit/*/templates *
+
 
 prune recollection/site_media
 prune docs/_build

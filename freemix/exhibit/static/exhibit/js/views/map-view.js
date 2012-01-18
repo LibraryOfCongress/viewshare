@@ -34,7 +34,7 @@
         latlng.change();
 
         var color = content.find("#color_property");
-        this._setupPropertySelect(color, "color", Freemix.property.enabledPropertiesArray(), true);
+        this._setupPropertySelect(color, "colorKey", Freemix.property.enabledPropertiesArray(), true);
         color.change();
 
         var zoom = content.find("#zoom_level");
