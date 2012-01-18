@@ -1,0 +1,248 @@
+{% extends "dataset/base.html" %}
+
+{% load i18n %}
+{% load exhibit_tags %}
+{% load compress %}
+{% load freemix_helpers %}
+
+{% block freemix_title %}{% blocktrans %}Data Profile Editor{% endblocktrans %}{% endblock %}
+
+{% block rtab_id %}id="builder_tab"{% endblock %}
+{% block body_class %}dataprofile{% endblock %}
+
+{% block subnav %}
+
+  <p id="subnav-extra">
+
+
+  </p>
+
+{% endblock %}
+
+{% block freemix_meta %}
+{{block.super}}
+<link rel="freemix/dataprofile" href="{{ profileurl }}"/>
+<link rel="exhibit/data" href="{{ dataurl }}"/>
+
+{% endblock %}
+
+{% block freemix_js %}
+    {{block.super}}
+    {% include "simile/js/exhibit.html" %}
+
+    {% include "freemix/js_include/viewer.html" %}
+    {% compress js %}
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.form.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.jeditable.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.uuid.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.cookie.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/csrf.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/freemix.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/exhibit.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/property.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/identify.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/identify-edit.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/new_exhibit_dialog.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}dataset/js/editor.js"></script>
+
+    {% endcompress %}
+{% endblock freemix_js%}
+
+    
+{% block freemix_css %}
+{{ block.super }}
+{% compress css %}
+
+{% include "simile/css/exhibit.html" %}
+{% include "simile/css/exhibit_extensions.html" %}
+
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/layout.css"/>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/views.css"/>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/editor.css"/>
+{% endcompress %}
+{% endblock %}
+
+{% block freemix_body %}
+
+<div id="contents" class="ui-helper-hidden">
+{% block contents %}
+
+<div id="identify" class="ui-helper-clearfix ui-helper-hidden builder-tab">
+  
+  {%  if dataset %}
+  
+    <div class="dataset_edit">
+      <ul class="dataset_list_items">
+	<li class="dataset_list_item result_set_item clearfix {% if dataset.published %}public{% else %}private{% endif %}">
+	  
+	  <div class="dataset-title">{{ dataset.title }}</div>
+
+	  <div class="dataset-description">
+            {% if dataset.description %}
+            {% ifnotequal dataset.description dataset.description|truncatewords:100 %}
+            <span class="short-description">
+              {{ dataset.description|truncatewords:100 }}
+              <a class="readmore" href="{{ dataset.get_absolute_url }}">read more</a>
+            </span>
+            <span class="long-description ui-helper-hidden">
+              {{ dataset.description }}
+            </span>
+            {%  else %}
+            {{ dataset.description }}
+            {% endifnotequal %}
+	    {% endif %}
+	  </div>
+
+	  <div class="dataset-metadata dataset-left">
+	    {% trans "Originally loaded by" %} <span class="dataset-owner"><a href="{% url profile_detail dataset.owner.username %}">{{ dataset.owner|nicename }}</a></span> {% trans "on" %} <span class="dataset-created-data">{{ dataset.created|date:"N j, Y" }}</span>
+	    {% ifnotequal exhibits.count 0 %}
+	    {% trans "and is the basis for" %} <span class="view-count"><a href="{% url exhibits_by_dataset owner=dataset.owner.username slug=dataset.slug %}">{{ exhibits.count }} {% trans "View" %}{{ exhibits.count|pluralize }}</a></span>
+	    {% endifnotequal %}
+	    .
+	  </div>
+	  
+	  {% if request.user.is_authenticated %}
+	  
+	  <div class="dataset-actions dataset-right">
+	    
+	    <div class="dataset-links">
+	      	      
+              <span class="action action_save_dataset">
+		<span id="save_message"></span>
+		<a href="{{ save_url }}" id="save_button">{% trans "Save" %}</a>
+	      </span>
+	      
+              <span class="divider">|</span>
+
+              <span class="action action_cancel_dataset">
+		<a href="{{ cancel_url }}" id="cancel_button">{% trans "Cancel" %}</a>
+	      </span>
+	      
+	    </div>
+	  </div>
+	  {% endif %}
+	  
+	</li>
+      </ul>
+    </div>  
+    {% else %}
+    <div class="dataset_edit">
+      <ul class="dataset_list_items">
+	<li class="dataset_list_item result_set_item clearfix public">
+
+	  <div class="dataset-title">New Recollection Dataset</div>
+
+	  <div class="dataset-right">
+	    <div class="dataset-links">
+	      
+              <span class="action action_save_exhibit">
+		<span id="save_message"></span>
+		<a href="{{ save_url }}" id="save_button">{% trans "Save" %}</a>
+	      </span>
+	      
+              <span class="divider">|</span>
+              <span class="action action_cancel_exhibit">
+		<a href="{{ cancel_url }}" id="cancel_button">{% trans "Cancel" %}</a>
+	      </span>
+	      
+	    </div>
+	</li>
+      </ul>
+      </div>
+      {% endif %}
+
+    {% block describe %}
+    <div id="editor">
+    {% block editor %} 
+
+    <div id="systemMsg">
+      <ul id="describe_messages" class="messages edit-message">
+        {% block describe_messages %}
+	{% endblock describe_messages %}
+      </ul>
+    </div>
+
+    <table id="identify-table" class="property-list-table">
+
+      <thead class="facet-header ui-widget-header">
+        <tr>
+          <th class="header-enabled">
+              <span class="col-header">{% trans "Enabled" %}</span>
+          </th>
+          <th class="header-name">
+            <span class="col-header">{% trans "Field Name" %}</span>
+              <button class="data-property-add" title="Add a Field">{% trans "Add" %}</button>
+          </th>
+          <th class="header-types">
+              <span class="col-header">{% trans "Type"%}</span>
+          </th>
+          <th class="header-value" colspan="2">
+             <span class="col-header">{% trans "Value" %}</span>
+
+             <div class="record-pager">
+	       <span id="current-record">#p</span> of <span id="record-count">#t</span>&#160;
+               <button class="left-record-button" title="Previous Record">&nbsp;</button>
+               <button class="right-record-button" title="Next Record">&nbsp;</button>
+	       &nbsp;
+               <button class="data-record-delete ui-corner-bottom ui-corner-top" title="Delete this Record">{% trans "Delete Record" %}</button>
+	       &nbsp;
+               <button class="data-refresh ui-corner-bottom ui-corner-top" title="Augment Data">{% trans "Augment" %}</button>
+             </div>
+          </th> 
+        </tr>
+      </thead>
+
+      <tbody>
+        
+        <tr class='table-footer'>
+            <td colspan="5">
+            <div class="record-controls ui-helper-clearfix ui-widget-header ui-corner-bottom">            
+            </div>
+          </td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+    </div>
+        &nbsp;
+
+    {% endblock editor %}
+    {% endblock describe %}
+    <div class="clear">&nbsp;</div>
+  </div>
+
+  {% endblock contents %}
+</div>
+
+
+<div class="ui-helper-hidden">
+  {% block dataset_edit_hidden %}
+
+  <div id="delete-record-dialog" title="{% trans "Delete This Record" %}">
+      <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+      {% blocktrans %}
+      You will not be able to recover this record after saving this dataset.
+      Really delete it?
+      {% endblocktrans %}
+  </div>
+
+  <div id="delete-property-dialog" title="Delete Property">
+      <p>
+          <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+          {% blocktrans %}
+          This property will be permanently deleted and cannot be recovered. Are you sure?
+          {% endblocktrans %}
+      </p>
+  </div>
+  
+  <div id="record-picker-dialog">
+
+  </div>
+
+  {% endblock dataset_edit_hidden %}
+</div>
+{% endblock %}
+

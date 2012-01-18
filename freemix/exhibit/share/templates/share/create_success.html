@@ -1,0 +1,10 @@
+{% load i18n %}
+{% load freemix_helpers %}
+{% url shared_exhibit_display slug=params.slug as display_url %}
+{%  blocktrans %}
+<div class="shared-link-notice">Your <a href="{{ display_url }}">shared link</a> has been successfully created. Copy the following link to share with others.</div>
+{% endblocktrans %}
+<div>
+<input type="text" value="{% site_url display_url %}" class="shared-key-url" readonly="readonly"/>
+</div>
+

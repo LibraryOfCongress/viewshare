@@ -1,0 +1,15 @@
+Simile Exhibit PieChart Extension
+
+by Eric Abouaf <eric.abouaf at gmail.com>
+http://javascript.neyric.com/blog
+
+
+version 0.2 (April 15th, 2009)
+
+	- background-color parameter
+	- fix bug on locale/en
+
+
+version 0.1 (February 9th, 2009)
+
+	- initial release

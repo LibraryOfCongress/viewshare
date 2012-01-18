@@ -1,0 +1,89 @@
+{% load i18n %}
+<div class="record-view" id="list-view-template">
+
+    <div class="list-view-editor">
+
+        <div class="view-properties ui-state-highlight">
+            <label class="view-editor-pane-title">{% trans "List View Settings" %}</label>
+
+            <div class="view-edit-body">
+                <form class="uniForm">
+                    <fieldset>
+                        <div id="view_label" class="ctrlHolder text-entry">
+                            <label for="view_label_input">{% trans "Label" %}</label>
+                            <input type="text" id="view_label_input"/>
+                        </div>
+
+                        <div class="ctrlHolder pull-down">
+                            <label for="sort_property">{% trans "Sort By" %}</label>
+                            <select id="sort_property"></select>
+                        </div>
+                        <div class="ctrlHolder pull-down">
+                            <label for="sort_order">{% trans "Sort Order" %}</label>
+                            <select id="sort_order" name="sort_order" class="sort-order">
+                                <option value="ascending">{% trans "Ascending" %}</option>
+                                <option value="descending">{% trans "Descending" %}</option>
+                            </select>
+                        </div>
+
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+
+        <div class="record-box view-lens-properties ui-state-hightlight">
+            <label class="view-editor-pane-title">{% trans "List Lens Settings" %}</label>
+
+            <div class="view-edit-body">
+                <form class="uniForm">
+                    <fieldset>
+                        <div class="ctrlHolder pull-down">
+                            <label for="title_property">{% trans "Title" %}</label>
+                            <select id="title_property"></select>
+                        </div>
+                        <div class="ctrlHolder pull-down">
+                            <label for="title_link_property">{% trans "Link" %}</label>
+                            <select id="title_link_property"></select>
+                        </div>
+
+                    </fieldset>
+                </form>
+
+                <table class="property-list-table">
+                    <thead class="ui-widget-header ui-corner-top">
+                    <tr>
+                        <th class="visible">{% trans "Show" %}</th>
+                        <th class="property">{% trans "Property" %}</th>
+                        <th class="value">{% trans "Value" %}
+                            <span class="record-pager">
+                              <button class="left-record-button" title="{% trans "Previous Record" %}">
+                                  &nbsp;</button>
+                              <button class="right-record-button" title="{% trans "Next Record" %}">
+                                  &nbsp;</button>
+                            </span>
+                            <span id="current-record">#p</span> of <span id="record-count">#t</span>
+
+                        </th>
+                    </tr>
+
+                    </thead>
+                    <tbody></tbody>
+                    <tfoot>
+                    <tr class='table-footer'>
+
+                        <td></td>
+                        <td colspan="2">
+                            <div class="record-controls ui-helper-clearfix ui-widget-header ui-corner-bottom">
+                            </div>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        <!-- end view-lens-property -->
+
+    </div>
+    <!-- end list-view-editor -->
+
+</div>

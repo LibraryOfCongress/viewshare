@@ -1,0 +1,29 @@
+{% load compress %}
+
+{% compress js %}
+<script type="text/javascript">
+    window.Timeline = new Object();
+    window.Timeline.DateTime = window.SimileAjax.DateTime; // for backward compatibility
+    window.Timeline.urlPrefix = "{{ STATIC_URL }}simile/timeline/";
+    window.Timeline.clientLocale="en";
+    window.Timeline.serverLocale="en";
+</script>
+
+<script type="text/javascript" src="{{STATIC_URL}}simile/timeline/scripts/timeline.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/timeline/scripts/band.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/timeline/scripts/themes.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/timeline/scripts/ethers.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/timeline/scripts/ether-painters.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/timeline/scripts/event-utils.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/timeline/scripts/labellers.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/timeline/scripts/sources.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/timeline/scripts/original-painter.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/timeline/scripts/detailed-painter.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/timeline/scripts/overview-painter.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/timeline/scripts/compact-painter.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/timeline/scripts/decorators.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/timeline/scripts/l10n/en/timeline.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/timeline/scripts/l10n/en/labellers.js"></script>
+
+
+{% endcompress %}

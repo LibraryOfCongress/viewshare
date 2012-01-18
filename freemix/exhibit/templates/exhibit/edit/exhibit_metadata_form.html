@@ -1,0 +1,10 @@
+{%  load i18n %}
+<form action="{% url exhibit_edit_form owner=form.object.owner slug=form.object.slug %}" method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {{ form.as_p }}
+      <div class="buttons">
+          <input type="submit" value="{% trans "Save" %}" class="submit" />
+          <input type="button" value="{% trans "Cancel" %}" class="exhibit-edit-form-cancel" />
+      </div>
+</form>

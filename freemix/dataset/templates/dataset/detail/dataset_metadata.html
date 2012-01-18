@@ -1,0 +1,21 @@
+{% load i18n %}
+<div class="dataset_list_item {% if object.published %}public{% else %}private{% endif %}">
+  <div class="dataset-title">{{ object.title }}</div>
+  <div class="dataset-description">{{ object.description }}</div>
+  <div class="dataset-visibility">
+      {% if object.published %}
+        <span class="public">{% trans "This dataset is publicly available." %}</span>
+      {% else %}
+        <span class="private">{% trans "This dataset is private." %}</span>
+      {% endif %}
+
+  </div>
+  {% if can_edit %}
+    <div class="dataset-right">
+    {% if is_saved %}
+        <span class="inline_save_message">{% trans "Saved" %}</span>
+    {% endif %}
+    <a href="{% url dataset_edit_form owner=object.owner slug=object.slug %}" id="detail_edit_button" class="button_link">{% trans "Edit Details" %}</a>
+    </div>
+  {% endif %}
+</div>

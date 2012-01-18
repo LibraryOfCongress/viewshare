@@ -1,0 +1,86 @@
+{% load i18n %}
+
+    <form id="edit_field_dialog" class="uniForm">
+        
+              <fieldset class="inlineLabels">
+                <div id="div_id_name" class="ctrlHolder">
+                    <p class='errorField ui-helper-hidden'>Enter a valid name.</p>
+                    <label for="id_name">{% blocktrans %}New Field Name:{% endblocktrans %}</label>
+                    <input id="id_name" class="textinput sluggable" type="text" maxlength="80" name="name"/>
+                </div>
+                <div id="div_id_type"class="ctrlHolder">
+                    <p class='errorField ui-helper-hidden'>Select a type.</p>
+                    <label for="id_type">{% blocktrans %}View for Field:{% endblocktrans %}</label>
+                    <ul class="field_options">
+                        <li class="field_type_item">
+                          <a href='' id="date" class="field_type">
+                            <span class="field_type_logo"><img class="ui-state-default" src="{{ STATIC_URL }}exhibit/img/timeline-icon.png" /></span>
+                            <span class="field_type_text">{% trans "Timeline" %}</span>
+                          </a>
+                        </li>
+                        <li class="field_type_item">
+                          <a href='' id="location" class="field_type">
+                            <span class="field_type_logo"><img class="ui-state-default" src="{{ STATIC_URL }}exhibit/img/map-icon.png" /></span>
+                            <span class="field_type_text">{% trans "Map" %}</span>
+                          </a>
+                        </li>
+                        <li class="field_type_item">
+                          <a href='' id="pattern" class="field_type">
+                            <span class="field_type_logo"><img class="ui-state-default" src="{{ STATIC_URL }}exhibit/img/cloud-facet.png" /></span>
+                            <span class="field_type_text">{% trans "List" %}</span>
+                          </a>
+                        </li>
+                    </ul>
+                    <p class="formHint">{% blocktrans %}Select which type of view this field will be used to create.{% endblocktrans %}</p>
+                </div>
+                <div id="div_id_fields">
+                    <div class="composite_form ui-helper-hidden">
+                    <p class='errorField ui-helper-hidden'>Select one or more fields.</p>
+                    <label for="edit_field_dialog_fields" style="float: none; margin-bottom: 0.2em;">{% blocktrans %}Based on:{% endblocktrans %}</label>
+                    <select class='multiselect' multiple='multiple' id='edit_field_dialog_fields'>
+                    </select>
+                    <p class="formHint">{% blocktrans %}Base the new field on the existing ones above.{% endblocktrans %}</p>
+                    </div>
+                    <div class="pattern_form ui-helper-hidden">
+                        <div id="div_id_pattern_source_select" class="ctrlHolder">
+                            <p class="errorField ui-helper-hidden">Select a field to extract.</p>
+                            <label for="edit_field_pattern_source_select">{% blocktrans %}Select a source property:{%endblocktrans%}</label>
+                            <select id="edit_field_pattern_source_select"></select>
+                            <p class="formHint">{% blocktrans %}This is the field that the new list field should be extracted from.{% endblocktrans %}</p>
+                        </div>
+                        <div id="div_id_pattern_select" class="ctrlHolder">
+                            <label for="edit_field_pattern_select">{% blocktrans %}Select a pre-populated pattern:{%endblocktrans%}</label>
+                            <select id="edit_field_pattern_select">
+                            <option value=""></option>
+                            {% for pattern in patterns  %}
+                            <option value="{{pattern.slug}}">{{pattern.title}}</option>
+                            {% endfor %}
+                            </select>
+                            <p class="formHint">{% blocktrans %}You can <a href="#" id="advanced_pattern_open">build a pattern</a> to match your data if none of the above suffice.{% endblocktrans %}</p>
+                        </div>
+                        <div id="div_id_pattern" class="ctrlHolder advanced_pattern ui-helper-hidden">
+                            <p class="errorField ui-helper-hidden">Please enter a valid pattern</p>
+                            <label for="edit_field_pattern_text_user_input">{% blocktrans %}Enter a pattern {% endblocktrans%}</label>
+                            <input type="hidden" id="edit_field_pattern_text" />
+                            <textarea id="edit_field_pattern_text_user_input"></textarea>
+                            <p class="formHint">{% blocktrans %}Valid patterns are described <a href="http://community.zepheira.com/wiki/loc/ValidPatternsList" target="_blank">here</a>.{% endblocktrans %}
+                        </div>
+                        <div id="div_id_pattern_type_toggle" class="ctrlHolder advanced_pattern ui-helper-hidden">
+                            <label for="edit_field_pattern_type_select">{% blocktrans %}Pattern type:{%endblocktrans%}</label>
+                            <select id="edit_field_pattern_type_select">
+                                <option id="pattern" value="pattern">pattern</option>
+                                <option id="delimiter" value="delimiter">delimiter</option>
+                            </select>
+                            <p class="formHint">{% blocktrans %}This indicates whether the pattern is a delimiter or a full regular expression.{% endblocktrans %}</p>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form_block">
+                    <button id="edit_field_dialog_create" class="ui-helper-hidden" type="submit">{% trans "Create" %}</button>
+                </div>
+            </fieldset>
+        
+        </form>
+        
+

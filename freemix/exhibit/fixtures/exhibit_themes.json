@@ -1,0 +1,69 @@
+[
+
+        {
+            "pk": 1,
+            "model": "exhibit.theme",
+            "fields": {
+                "slug": "darkness",
+                "title": "Darkness",
+                "url": "/static/exhibit/css/darkness/darkness.css",
+                "thumbnail": "/static/exhibit/css/darkness/images/theme_30_ui_dark.png"
+            }
+        },
+        {
+            "pk": 2,
+            "model": "exhibit.theme",
+            "fields": 
+            {
+                "slug": "pepper-grinder",
+                "title": "Pepper Grinder",
+                "url": "/static/exhibit/css/pepper-grinder/pepper-grinder.css",
+                "thumbnail": "/static/exhibit/css/pepper-grinder/images/theme_30_pepper_grinder.png"
+            }
+        },
+        {
+    
+            "pk": 3,
+            "model": "exhibit.theme",
+            "fields": 
+            {
+                "slug": "smoothness",
+                "title": "Smoothness",
+                "url": "/static/exhibit/css/smoothness/smoothness.css",
+                "thumbnail": "/static/exhibit/css/smoothness/images/theme_30_smoothness.png"
+            }
+        },
+        {
+            "pk": 4,
+            "model": "exhibit.theme",
+            "fields": 
+            {
+                "slug": "sunny",
+                "title": "Sunny",
+                "url": "/static/exhibit/css/sunny/sunny.css",
+                "thumbnail": "/static/exhibit/css/sunny/images/theme_30_sunny.png"
+            }
+        },
+        {
+            "pk": 5,
+            "model": "exhibit.theme",
+            "fields": 
+            {
+                "slug": "trontastic",
+                "title": "Trontastic",
+                "url": "/static/exhibit/css/trontastic/trontastic.css",
+                "thumbnail": "/static/exhibit/css/trontastic/images/theme_30_trontastic.png"
+            }
+        },
+        {
+            "pk": 6,
+            "model": "exhibit.theme",
+            "fields": {
+                "slug": "humanity",
+                "title": "Humanity",
+                "url": "/static/view_theme/css/humanity/humanity.css",
+                "thumbnail": "/static/exhibit/css/humanity/images/theme_30_humanity.png"
+            }
+        }
+    
+]

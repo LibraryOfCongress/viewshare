@@ -18,7 +18,7 @@ To build::
    $ cd recollection
    $ source bin/activate
    $ pip install git+git://loc-recollect.git.sourceforge.net/gitroot/loc-recollect/loc-recollect#egg=recollection
-   $ pip install -r src/recollection/requirements/develop.txt
+   $ pip install -r src/recollection/requirements/requirements.txt
 
 The "example_project" directory provides the starting point for the
 initial configuration

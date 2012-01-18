@@ -1,0 +1,25 @@
+{% load i18n %}
+<div id="text-facet-editor">
+
+  <div class="colmask doublepage widget-edit-dialog text-facet-editor">
+    <div class="colleft">
+      
+      <div class="col1 facet-properties ui-state-highlight">
+        <label class="facet-editor-pane-title">{% trans "Markup" %}</label>
+	<div class="facet-edit-body">
+          <textarea id="text-facet-textarea" class="ui-widget-content ui-corner-all"></textarea>
+          <p><a href="http://www.wikicreole.org/wiki/CheatSheet" target="_blank">{% trans "Formatting Help" %}</a></p>
+	</div>
+      </div>
+
+      <div class="col2 facet-preview">
+        <label class="facet-editor-pane-title">{% trans "Preview" %}</label>
+	<div class="facet-edit-body">
+          <div class="ui-widget-content ui-corner-all" id="text-facet-preview"></div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

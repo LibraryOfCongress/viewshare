@@ -1,0 +1,7 @@
+<div id="canvas-templates">
+    {% for canvas in canvases %}
+        <div id="{{canvas.slug}}">
+            {% include canvas.location %}
+        </div>
+    {% endfor %}
+</div>

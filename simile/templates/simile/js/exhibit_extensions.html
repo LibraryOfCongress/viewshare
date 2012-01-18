@@ -1,0 +1,26 @@
+{% load compress %}
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+
+<script type="text/javascript" src="http://www.openlayers.org/api/OpenLayers.js"></script>
+<script type="text/javascript" src="http://www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
+
+{% compress js %}
+{% include "simile/js/timeline.html" %}
+
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/extensions/time/scripts/timeline-view.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/extensions/time/locales/en/time-locale.js"></script>
+
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/extensions/chart/scripts/scatter-plot-view.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/extensions/chart/scripts/bar-chart-view.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/extensions/chart/scripts/pivot-table-view.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/extensions/chart/locales/en/chart-locale.js"></script>
+
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/extensions/piechart/scripts/piechart-view.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/extensions/piechart/locales/en/piechart-locale.js"></script>
+
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/extensions/map/scripts/olmap-view.js"></script>
+{#<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/extensions/map/locales/en/map-locale.js"></script>#}
+
+
+{% endcompress %}
+

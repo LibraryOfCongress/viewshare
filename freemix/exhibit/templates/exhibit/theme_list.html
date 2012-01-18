@@ -1,0 +1,12 @@
+{% load i18n %}
+<ul>
+    {% for theme in theme_list %}
+    <li id='{{theme.slug}}'>
+        <a href='{{theme.url}}'>
+            <img src='{{ theme.thumbnail }}' 
+                alt='{{theme.title}}' title='{{theme.title}}'/>
+                <span class='themeName'>{{theme.title}}</span>
+        </a>
+    </li>
+    {%endfor%}
+</ul>

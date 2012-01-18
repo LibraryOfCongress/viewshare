@@ -1,0 +1,55 @@
+[
+{
+    "pk": 1,
+     "model": "exhibit.canvas",
+     "fields": 
+    {
+        "description": "A large view container with facet containers on the top, left and right",
+         "location": "exhibit/canvas/three-column.html",
+         "slug": "three-column",
+         "title": "Three Columns",
+         "enabled": true,
+         "thumbnail": "exhibit/img/facet-both-s.png"
+    }
+},
+
+{
+    "pk": 2,
+     "model": "exhibit.canvas",
+     "fields": 
+    {
+        "description": "A view container with a facet container to the left",
+         "location": "exhibit/canvas/two-column-left.html",
+         "slug": "two-column-left",
+         "title": "Two Columns Left",
+         "enabled": true,
+         "thumbnail": "exhibit/img/facet-left-s.png"
+    }
+},
+{
+    "pk": 3,
+     "model": "exhibit.canvas",
+     "fields": 
+    {
+        "description": "A view container with a facet container to the right",
+         "location": "exhibit/canvas/two-column-right.html",
+         "slug": "two-column-right",
+         "title": "Two Columns Right",
+         "enabled": true,
+         "thumbnail": "exhibit/img/facet-right-s.png"
+    }
+},    
+{
+    "pk": 4,
+     "model": "exhibit.canvas",
+     "fields": 
+    {
+        "description": "A view container with a facet container above it",
+         "location": "exhibit/canvas/one-column-top.html",
+         "slug": "one-column",
+         "title": "One Column",
+         "enabled": true,
+         "thumbnail": "exhibit/img/facet-top-s.png"
+    }
+}
+]

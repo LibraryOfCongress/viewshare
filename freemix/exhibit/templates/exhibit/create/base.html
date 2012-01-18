@@ -1,0 +1,11 @@
+{% extends "exhibit/edit/base.html" %}
+
+{% block head_data %}
+    {{ block.super }}
+    <link rel="freemix/saveform" href="{{ save_form_url }}"/>
+{% endblock %}
+
+{% block head_scripts %}
+    {{ block.super }}
+    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/exhibit_create_dialog.js"></script>
+{% endblock %}

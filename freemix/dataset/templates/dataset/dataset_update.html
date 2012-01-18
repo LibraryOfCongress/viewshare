@@ -1,0 +1,9 @@
+{% extends "dataset/dataset_profile_editor.html" %}
+{% load compress %}
+
+{% block freemix_js %}
+    {{ block.super }}
+    {% compress js %}
+    <script type="text/javascript" src="{{ STATIC_URL }}dataset/js/profile_update.js"></script>
+    {% endcompress %}
+{% endblock %}

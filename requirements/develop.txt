@@ -1,4 +1,0 @@
--e git+ssh://git@github.com/zepheira/freemix.git#egg=freemix
--e git+ssh://git@github.com/zepheira/django-simile.git#egg=django_simile
--r external.txt
-

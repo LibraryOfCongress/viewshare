@@ -1,0 +1,71 @@
+{% extends "dataset/base.html" %}
+
+{% load i18n %}
+{% load freemix_helpers %}
+{% load exhibit_tags %}
+{% load compress %}
+
+{% block freemix_title %}{% blocktrans %}Data Profile{% endblocktrans %}: {{ object.title }}{% endblock %}
+
+{% block freemix_css %}
+{{ block.super }}
+{% compress css %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/layout.css"/>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/views.css"/>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/editor.css"/>
+{% endcompress %}
+{% endblock %}
+
+{% block freemix_js %}
+    {{ block.super }}
+    <script type="text/javascript" src="{{ STATIC_URL }}freemix/js/lib/jquery.form.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}dataset/js/detail.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/new_exhibit_dialog.js"></script>
+
+{% endblock %}
+
+{% block body %}
+
+  <div class="ui-helper-clearfix">
+      <div class="priority-area">
+
+      </div>
+    <h1>{% trans "Dataset Detail" %}</h1>
+    <div id="dataset_metadata">
+        {% include "dataset/detail/dataset_metadata.html" %}
+    </div>
+  </div>
+    <div class="dataset-left">
+        <div class="dataset-creator">
+          <span class="property-label">{% trans "Loaded by:" %} </span> <a href="{% url profile_detail object.owner.username %}">{{ object.owner|nicename }}</a>
+        </div>
+        <div class="dataset-created-data"><span class="property-label">{% trans "Loaded on:" %} </span>{{ object.created|date:"N j, Y" }}</div>
+        <div class="dataset-modified-data"><span class="property-label">{% trans "Last Modified:" %} </span>{{ object.modified|date:"N j, Y" }}</div>
+
+        {% ifnotequal dataset.exhibits.count 0 %}
+        <div class="dataset-usedin">
+          <span class="property-label">{% trans "Basis for:" %}</span>
+          <span class="view-count"><a href="{% url exhibits_by_dataset owner=object.owner.username slug=object.slug %}">{{ object.exhibits.count }} {% trans "Data View" %}{{ object.exhibits.count|pluralize }}</a></span>
+        </div>
+        {% endifnotequal %}
+
+    </div>
+    <div class="dataset-right">
+    <div class="exhibit_list">
+  <h2>{% blocktrans %}Data Views{% endblocktrans %}</h2>
+  {% exhibit_list exhibits.all 3 0 %}
+
+  {% if exhibits.count > 3 %}
+  <div class="see_all">
+    <a href="{% url exhibits_by_dataset owner=object.owner.username slug=object.slug %}">{% trans "See all" %}  {{exhibits.count}} views</a>
+  </div>
+
+  {% endif %}
+  {% if can_build %}
+     <a href="{% url exhibit_canvas_chooser owner=object.owner.username slug=object.slug %}" id="create_exhibit_button" class="button_link">{% trans "Create a New View" %}</a>
+  {% endif %}
+    </div>
+
+</div>
+
+{% endblock %}

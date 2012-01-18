@@ -1,0 +1,10 @@
+{%  load i18n %}
+<form action="{% url dataset_create_form tx_id %}" method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {{ form.as_p }}
+      <div class="buttons">
+          <input type="submit" value="{% trans "Save" %}" class="submit" />
+          <input type="button" value="{% trans "Cancel" %}" class="dataset-create-form-cancel" />
+      </div>
+</form>

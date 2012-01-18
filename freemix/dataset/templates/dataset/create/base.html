@@ -1,0 +1,11 @@
+{% extends "dataset/dataset_profile_editor.html" %}
+
+{% block freemix_js %}
+    {{ block.super }}
+    <script type="text/javascript" src="{{ STATIC_URL }}dataset/js/dataset_create_dialog.js"></script>
+{% endblock %}
+
+{% block freemix_meta %}
+    {{ block.super }}
+    <link rel="freemix/saveform" href="{% url dataset_create_form transaction.tx_id %}"/>
+{% endblock %}

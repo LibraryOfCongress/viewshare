@@ -1,0 +1,13 @@
+{% load compress %}
+
+{% compress css %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}simile/exhibit/extensions/time/styles/timeline-view.css"/>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}simile/exhibit/extensions/chart/styles/bar-chart-view.css"/>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}simile/exhibit/extensions/chart/styles/pivot-table-view.css"/>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}simile/exhibit/extensions/chart/styles/scatter-plot-view.css"/>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}simile/exhibit/extensions/map/styles/map-view.css"/>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}simile/exhibit/extensions/map/styles/olmap-view.css"/>
+
+{% include "simile/css/timeline.html" %}
+
+{% endcompress %}

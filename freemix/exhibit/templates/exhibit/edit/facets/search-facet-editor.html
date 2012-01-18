@@ -1,0 +1,32 @@
+{% load i18n %}
+<div id="search-facet-editor">
+
+    <div class="colmask doublepage widget-edit-dialog search-facet-editor">
+      <div class="colleft">
+
+        <div class="col1 facet-properties ui-state-highlight">
+          <label class="facet-editor-pane-title">{% trans "Settings" %}</label>
+	  <div class="facet-edit-body">
+            <form class="uniForm">
+              <fieldset>
+		<div class="ctrlHolder text-entry">
+                  <label for="facet_name">{% trans "Title" %}:</label>
+                  <input id="facet_name" class="textinput" type="text"  name="facet_name"/>
+		</div>
+              </fieldset>
+            </form>
+	  </div>
+        </div>
+
+        <div class="col2 facet-preview">
+          <label class="facet-editor-pane-title">{% trans "Preview" %}</label>
+	  <div class="facet-edit-body">
+            <div class="ui-widget-content ui-corner-all" id="facet-preview"></div>
+          </div>
+	</div>
+
+      </div>
+    </div>
+
+
+ </div>

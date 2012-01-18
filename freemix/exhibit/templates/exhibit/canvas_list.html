@@ -1,0 +1,12 @@
+{% load i18n %}
+<div id="create_view_dialog" >
+    <div class="chooser">
+        <ul id="canvas_chooser">
+            {% for canvas in object_list %}
+            <li>
+                <a id='{{canvas.slug}}' href='{{ base_url }}?canvas={{ canvas.slug }}' title='{{ canvas.title }}'><img src='{{ STATIC_URL }}{{ canvas.thumbnail }}' alt='{{ canvas.title }}' title='{{ canvas.title }}'/><span class='chooser-canvas-name'>{{ canvas.title }}</span></a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

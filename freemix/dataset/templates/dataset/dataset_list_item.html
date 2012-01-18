@@ -1,0 +1,77 @@
+{% load i18n %}
+{% load freemix_helpers %}
+
+<li class="dataset_list_item result_set_item clearfix {% if dataset.published %}public{% else %}private{% endif %}">
+
+    <div class="dataset-title">
+        {% if dataset_url %}
+        <a href="{{ dataset_url }}">{{ dataset.title }}</a>
+        {% else %}
+        {{ dataset.title }}
+        {% endif %}
+    </div>
+    <div class="dataset-description">
+      {% if dataset.description %}
+      {% ifnotequal dataset.description dataset.description|truncatewords:20 %}
+      <div class="short-description">
+        {{ dataset.description|truncatewords:20 }}
+        <a class="readmore" href="{{ dataset.get_absolute_url }}">read more</a>
+      </div>
+      <div class="long-description ui-helper-hidden">
+        {{ dataset.description }}
+      </div>
+      {%  else %}
+      <div class="dataset-description">
+	{{ dataset.description }}
+      </div>
+      {% endifnotequal %}
+      {% endif %}
+    </div>
+
+    <div class="dataset-metadata dataset-left">
+      {% trans "Originally loaded by" %} <span class="dataset-owner"><a href="{% url profile_detail dataset.owner.username %}">{{ dataset.owner|nicename }}</a></span> {% trans "on" %} <span class="dataset-created-data">{{ dataset.created|date:"N j, Y" }}</span>
+      {% ifnotequal exhibits.count 0 %}
+      {% trans "and is the basis for" %} <span class="view-count"><a href="{% url exhibits_by_dataset owner=dataset.owner.username slug=dataset.slug %}">{{ exhibits.count }} {% trans "View" %}{{ exhibits.count|pluralize }}</a></span>
+      {% endifnotequal %}
+      .
+    </div>
+
+    {% if can_view %}
+
+    <div class="dataset-actions dataset-right">
+
+      <div class="dataset-links">
+	
+        <span class="action action_inspect_dataset">
+          <a class="dataset_inspect" href="{% url dataset_detail owner=dataset.owner.username slug=dataset.slug %}">{% trans "Inspect" %}</a>
+        </span>
+
+      {% if can_build %}
+        <span class="divider action_create_dataset">|</span>
+
+        <span class="action action_create_dataset">
+          <a class="dataset_create" href="{% url exhibit_canvas_chooser owner=dataset.owner.username slug=dataset.slug %}">{% trans "Build" %}</a>
+        </span>
+       {% endif %}
+
+        {% if can_edit %}
+        <span class="divider action_edit_dataset">|</span>
+
+        <span class="action action_edit_dataset">
+          <a class="dataset_edit" href="{% url dataset_edit owner=dataset.owner.username slug=dataset.slug %}">{% trans "Edit" %}</a>
+        </span>
+         {% endif %}
+
+        {% if can_delete %}
+        <span class="divider action_delete_dataset">|</span>
+
+        <span class="action action_delete_dataset">
+            <a class="dataset_delete" href="{{ dataset.get_absolute_url }}">{% trans "Delete" %}</a>
+        </span>
+        {% endif %}
+
+      </div>
+    </div>
+   {% endif %}
+
+</li>
