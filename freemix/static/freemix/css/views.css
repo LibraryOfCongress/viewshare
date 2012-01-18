@@ -21,7 +21,7 @@
 
 
 /* Tile view */
-ol.exhibit-tileView-body li {
+ol.exhibit-tileView-body > li {
     margin-bottom: 1.0em;
 }
 

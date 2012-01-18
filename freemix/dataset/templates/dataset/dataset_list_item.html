@@ -10,8 +10,8 @@
         {{ dataset.title }}
         {% endif %}
     </div>
+    {% if dataset.description %}
     <div class="dataset-description">
-      {% if dataset.description %}
       {% ifnotequal dataset.description dataset.description|truncatewords:20 %}
       <div class="short-description">
         {{ dataset.description|truncatewords:20 }}
@@ -25,8 +25,8 @@
 	{{ dataset.description }}
       </div>
       {% endifnotequal %}
-      {% endif %}
     </div>
+    {% endif %}
 
     <div class="dataset-metadata dataset-left">
       {% trans "Originally loaded by" %} <span class="dataset-owner"><a href="{% url profile_detail dataset.owner.username %}">{{ dataset.owner|nicename }}</a></span> {% trans "on" %} <span class="dataset-created-data">{{ dataset.created|date:"N j, Y" }}</span>

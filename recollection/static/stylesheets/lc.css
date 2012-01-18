@@ -15,7 +15,7 @@
     color: #333;
 }
 
-ol.exhibit-tileView-body li {
+ol.exhibit-tileView-body > li {
     margin-left: 5px;
     margin-right: 5px;
     padding-left: 5px;
