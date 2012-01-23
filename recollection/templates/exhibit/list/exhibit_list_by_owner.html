@@ -48,7 +48,9 @@
   {% else %}
     {{ owner|nicename }} {% trans "has" %}
   {% endifequal %}
-  {{object_list.count}} {% trans "data view" %}{{ object_list.count|pluralize }}.
+  {% with object_list.count as object_list_count %}
+  {{object_list_count}} {% trans "data view" %}{{ object_list_count|pluralize }}.
+  {% endwith %}
   </p>
 
 

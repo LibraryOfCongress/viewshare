@@ -1,4 +1,5 @@
 from django import template
+from django.core.cache import cache
 from freemix.permissions import PermissionsRegistry
 from freemix.utils import get_site_url
 from freemix import __version__
@@ -6,10 +7,15 @@ from freemix import __version__
 register = template.Library()
 
 def _nicename(u):
-    if u.get_profile().name:
-        return u.get_profile().name
-    else:
-        return u.username
+    result = cache.get("nicename%s"%u.id)
+    if result is None:
+
+        if u.get_profile().name:
+            result = u.get_profile().name
+        else:
+            result = u.username
+        cache.set("nicename%s"%u.id, result)
+    return result
 
 "Outputs a string representing the user"
 @register.filter

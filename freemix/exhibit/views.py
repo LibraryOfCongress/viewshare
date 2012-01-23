@@ -367,6 +367,9 @@ class ExhibitListView(OwnerListView):
 
     model = models.Exhibit
 
+    related = ("dataset__title", "dataset__owner", "dataset__slug", "owner__username", "owner__profile")
+
+    defer = ("dataset__data", "dataset__properties_cache", "dataset__profile")
 
 class ExhibitsByDatasetListView(ListView):
     template_name = "exhibit/list/exhibit_list_by_dataset.html"

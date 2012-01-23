@@ -3,7 +3,7 @@
 {% load pagination_tags %}
 {% load exhibit_tags %}
     {% autopaginate object_list max_count %}
-    {% if object_list %}            
+    {% if object_list %}
         {% if pageable %} 
         <p><span class="sort-label">{% trans "Sort by:" %}</span>
             {% anchor title Title %} <span class="divider">|</span>

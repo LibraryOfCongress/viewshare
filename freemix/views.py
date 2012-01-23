@@ -14,6 +14,10 @@ class OwnerListView(ListView):
 
     permission = None
 
+    related= None
+
+    defer = None
+
     def sort_filter(self):
 
         return
@@ -26,13 +30,19 @@ class OwnerListView(ListView):
                 raise Http404("%s is not a valid sorting field"%sort)
 
 
-        owner = get_object_or_404(User, username=self.kwargs.get("owner"))
-        list = self.model.objects.filter(owner=owner)
+        self.owner = get_object_or_404(User, username=self.kwargs.get("owner"))
+
+        list = self.model.objects.filter(owner=self.owner)
 
 
         if self.permission:
             list = list.filter(PermissionsRegistry.get_filter(self.permission, self.request.user))
 
+        if self.related:
+            list = list.select_related(*self.related)
+
+        if self.defer:
+            list = list.defer(*self.defer)
         if sort:
             dir = vars.get('dir', "desc")
             order_by = (dir=="desc" and "-" or "") + sort
@@ -42,8 +52,7 @@ class OwnerListView(ListView):
 
     def get_context_data(self, **kwargs):
         kwargs = super(OwnerListView, self).get_context_data(**kwargs)
-        kwargs["owner"] = get_object_or_404(User,
-                                            username=self.kwargs.get("owner"))
+        kwargs["owner"] = self.owner
         kwargs["user"] = self.request.user
         return kwargs
 

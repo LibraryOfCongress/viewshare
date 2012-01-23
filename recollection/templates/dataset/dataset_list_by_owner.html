@@ -41,18 +41,20 @@
 </div>
 {% endifequal %}
 
+    {% with object_list.count as object_list_count %}
 <div class="data_details">
-  {% if object_list.count %}
+  {% if object_list_count %}
   <p>
   {% ifequal user owner  %}
     {% trans "You have" %}
   {% else %}
     {{ owner|nicename }} {% trans "has" %}
   {% endifequal %}
-  {{object_list.count}} {% trans "data set" %}{{ object_list.count|pluralize }}.
+  {{object_list_count}} {% trans "data set" %}{{ object_list_count|pluralize }}.
   </p>
   {% endif %}
   {% dataset_list object_list %}
 </div>
 
+    {% endwith %}
 {% endblock %}

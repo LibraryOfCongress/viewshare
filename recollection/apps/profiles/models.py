@@ -8,7 +8,7 @@ from timezones.fields import TimeZoneField
 
 class Profile(models.Model):
 
-    user = models.ForeignKey(User, unique=True, verbose_name=_('user'))
+    user = models.ForeignKey(User, unique=True, verbose_name=_('user'), related_name="profile")
     name = models.CharField(_('name'), max_length=50, null=True, blank=True)
     about = models.TextField(_('about'), null=True, blank=True)
     location = models.CharField(_('location'), max_length=40, null=True, blank=True)

@@ -1,6 +1,6 @@
 {% load i18n %}
 {% load freemix_helpers %}
-
+{%  with exhibit.owner.username as exhibit_owner_username %}
 <li class="exhibit_list_item result_set_item clearfix {% if exhibit.published %}public{% else %}private{% endif %}">
 
     {% if not visible %}
@@ -9,7 +9,7 @@
         <div class="exhibit-left">
             {% blocktrans %}The dataset is no longer available.{% endblocktrans %}
         </div>
-        {% if request.user.is_authenticated and request.user.username == exhibit.owner.username %}
+        {% if request.user.is_authenticated and request.user.username == exhibit_owner_username %}
         <div class="exhibit-right">
 
           <div class="exhibit-links">
@@ -39,7 +39,7 @@
     {% endif %}
 
     <div class="exhibit-metadata exhibit-left">
-      {% trans "Created by"%} <span class="exhibit-creator"><a href="{% url profile_detail exhibit.owner.username %}">{{exhibit.owner|nicename}}</a></span> {% trans "on" %} <span class="exhibit-created-data">{{exhibit.created|date:"N j, Y"}}</span> {% trans "and based on the" %} <span class="exhibit-dataset-title"><a href="{{exhibit.dataset.get_absolute_url }}" title="{{exhibit.dataset.title}}">{{exhibit.dataset.title}}</a></span> {% trans "data set" %}.
+      {% trans "Created by"%} <span class="exhibit-creator"><a href="{% url profile_detail exhibit_owner_username %}">{{exhibit.owner|nicename}}</a></span> {% trans "on" %} <span class="exhibit-created-data">{{exhibit.created|date:"N j, Y"}}</span> {% trans "and based on the" %} <span class="exhibit-dataset-title"><a href="{{exhibit.dataset.get_absolute_url }}" title="{{exhibit.dataset.title}}">{{exhibit.dataset.title}}</a></span> {% trans "data set" %}.
     </div>
 
     {% if can_inspect %}
@@ -49,14 +49,14 @@
       <div class="exhibit-links">
 
         <span class="action action_inspect_exhibit">
-          <a class="exhibit_inspect" href="{% url exhibit_detail owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Inspect" %}</a>
+          <a class="exhibit_inspect" href="{% url exhibit_detail owner=exhibit_owner_username slug=exhibit.slug %}">{% trans "Inspect" %}</a>
         </span>
 
         {% if can_edit %}
         <span class="divider action_edit_exhibit">|</span>
 
         <span class="action action_edit_exhibit">
-          <a class="exhibit_edit" href="{% url exhibit_edit owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Edit" %}</a>
+          <a class="exhibit_edit" href="{% url exhibit_edit owner=exhibit_owner_username slug=exhibit.slug %}">{% trans "Edit" %}</a>
         </span>
 	{% endif %}
 
@@ -74,3 +74,4 @@
     {% endif %}
     {% endif %}
 </li>
+{% endwith %}

@@ -66,18 +66,10 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "recollection.apps.account.context_processors.account",
     #"messages.context_processors.inbox",
     "recollection.apps.connections.context_processors.invitations",
-    "recollection.utils.context_processors.combined_inbox_count",
     "cms.context_processors.media",
     'sekizai.context_processors.sekizai',
 
 )
-
-COMBINED_INBOX_COUNT_SOURCES = (
-    #"messages.context_processors.inbox",
-    "recollection.apps.connections.context_processors.invitations",
-    "notification.context_processors.notification",
-)
-
 
 INSTALLED_APPS = (
     'django.contrib.staticfiles',

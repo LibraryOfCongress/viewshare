@@ -1,4 +1,5 @@
 from django.core.urlresolvers import reverse
+from django.db.models import Count
 from django.shortcuts import render_to_response, render, get_object_or_404
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
@@ -38,6 +39,15 @@ def profiles(request, template_name="profiles/profiles.html", extra_context=None
     if extra_context is None:
         extra_context = {}
     users = User.objects.all().order_by("-date_joined")
+
+#    f = PermissionsRegistry.get_filter("exhibit.can_view", request.user, "exhibits")
+
+#    users = users.filter(f)
+#
+#    users = users.annotate(exhibit_count=Count("exhibits", distinct=True), dataset_count=Count("datasets", distinct=True))
+#    users = users.select_related("profile", "exhibit_count")
+
+    users = users.select_related("profile")
     search_terms = request.GET.get('search', '')
     order = request.GET.get('order')
     if not order:
@@ -128,12 +138,18 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
                 'message': ugettext("Let's Connect!"),
             })
 
+    datasets = other_user.datasets.filter(PermissionsRegistry.get_filter("dataset.can_view", request.user))
+    datasets = datasets.select_related("owner")
+    datasets = datasets.defer("properties_cache", "data", "profile")
+    exhibits = other_user.exhibits.filter(PermissionsRegistry.get_filter("exhibit.can_view", request.user))
+    exhibits = exhibits.defer("dataset__properties_cache", "dataset__data", "dataset__profile")
+    exhibits = exhibits.select_related("owner", "dataset__owner", "dataset")
     return render_to_response(template_name, dict({
         "is_me": is_me,
         "is_friend": is_friend,
         "other_user": other_user,
-        "datasets": other_user.datasets.filter(PermissionsRegistry.get_filter("dataset.can_view", request.user)),
-        "exhibits": other_user.exhibits.filter(PermissionsRegistry.get_filter("exhibit.can_view", request.user)),
+        "datasets": datasets,
+        "exhibits":exhibits,
         "other_friends": other_friends,
         "invite_form": invite_form,
         "previous_invitations_to": previous_invitations_to,

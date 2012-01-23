@@ -1,7 +1,12 @@
+from django.conf import settings
+from django.core.cache import cache
 from django.db import models
+from django.dispatch.dispatcher import receiver
 from django.utils.translation import get_language_from_request, ugettext_lazy as _
 from django.template.loader import render_to_string
 from django.contrib.sites.models import Site
+
+from django.db.models.signals import post_save
 
 # Platforms built on Freemix should put their own media/site_theme/css/default/ theme
 # in the way of the Freemix one to override the default theme distributed with Freemix.
@@ -28,3 +33,9 @@ class Skin(models.Model):
 
     def __unicode__(self):
         return '%s using skin %s' % (self.site.name, self.theme.name)
+
+
+@receiver(post_save, sender=Skin)
+def cache_skin(sender, instance, **kwargs):
+
+    cache.set("site_skin_%s"%settings.SITE_ID, instance.theme.url)

@@ -28,7 +28,9 @@
     {% else %}
     {{ other_user|nicename }}{% blocktrans %}'s connections have{% endblocktrans %}
     {% endifequal %}
-    {{object_list.count}} {% trans "data set" %}{{ object_list.count|pluralize }}.
+  {% with object_list.count as object_list_count %}
+    {{object_list_count}} {% trans "data set" %}{{ object_list_count|pluralize }}.
+  {% endwith %}
   </p>
 
   {% dataset_list object_list %}

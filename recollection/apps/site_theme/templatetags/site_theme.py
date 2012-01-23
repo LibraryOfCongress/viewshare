@@ -1,5 +1,6 @@
 from django import template
 from django.conf import settings
+from django.core.cache import cache
 from recollection.apps.site_theme.models import SiteTheme, Skin
 from django.template.loader import render_to_string
 from django.template import Variable
@@ -9,13 +10,20 @@ register = template.Library()
 @register.simple_tag
 def site_skin():
     """Return the URL (not including the path to static files) to the site's current skin"""
-    try:
-        skin = Skin.objects.get(site__id__exact=settings.SITE_ID)
-        return skin.theme.url
-    except Skin.DoesNotExist:
-        # This should be an impossible condition to reach, but just in case
-        theme = SiteTheme.objects.get(id__exact=1)
-        return theme.url
+
+    skin_url = cache.get("site_skin_%s"%settings.SITE_ID)
+
+    if skin_url is None:
+
+        try:
+            skin = Skin.objects.get(site__id__exact=settings.SITE_ID)
+            skin_url = skin.theme.url
+        except Skin.DoesNotExist:
+            # This should be an impossible condition to reach, but just in case
+            theme = SiteTheme.objects.get(id__exact=1)
+            skin_url = theme.url
+        cache.set("site_skin_%s"%settings.SITE_ID, skin_url)
+    return skin_url
 
 @register.tag
 def site_theme_css_link(parser, token):

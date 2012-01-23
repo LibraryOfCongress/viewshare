@@ -48,7 +48,9 @@ class DataPropertiesCacheJSONView(DataProfileJSONView):
 
 dataset_list_by_owner = OwnerListView.as_view(template_name="dataset/dataset_list_by_owner.html",
                                                model=models.Dataset,
-                                               permission = "dataset.can_view")
+                                               permission = "dataset.can_view",
+                                               related=("exhibits","owner"),
+                                               defer=("properties_cache","profile","data"))
 
 #----------------------------------------------------------------------------------------------------------------------#
 # Dataset views
