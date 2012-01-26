@@ -1,0 +1,10 @@
+{%load freemix_helpers%}
+Name: {{profile.user.get_profile.name}}
+Email: {{profile.user.email}}
+Organization: {{profile.user.get_profile.organization}}
+Organization Type: {{profile.user.get_profile.org_type}}
+Location: {{profile.user.get_profile.location}}
+Reason: {{profile.user.get_profile.about}}
+{% url admin:moderated_registration_viewshareregistrationprofile_change profile.id as change_url%}
+To approve or reject: {% site_url change_url %}
+To bulk moderate: {% url admin:moderated_registration_viewshareregistrationprofile_changelist as bulk_url %}{% site_url bulk_url %}

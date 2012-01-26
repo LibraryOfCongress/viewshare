@@ -3,7 +3,6 @@ import hashlib
 from django.conf import settings
 from django.contrib.auth.models import User
 
-from django.contrib.localflavor.us.models import USStateField
 from django.contrib.sites.models import Site
 from django.db import models, transaction
 from django.template.loader import render_to_string
@@ -11,6 +10,13 @@ from django_extensions.db.fields import AutoSlugField
 from registration.models import RegistrationProfile, RegistrationManager
 from django.utils.translation import ugettext_lazy as _
 
+if not settings.DEBUG:
+    try:
+        from mailer import send_mail
+    except:
+        from django.core.mail import send_mail
+else:
+    from django.core.mail import send_mail
 
 class OrganizationType(models.Model):
     value = models.CharField(max_length=100, unique=True)
@@ -26,16 +32,27 @@ class ModeratedRegistrationManager(RegistrationManager):
 
         new_user = User.objects.create_user(username, email, password)
         new_user.is_active = False
+        new_user.first_name=kwargs["first_name"]
+        new_user.last_name=kwargs["last_name"]
         new_user.save()
 
-        profile = self.create(user=new_user,
-                    activation_key=ModeratedRegistrationProfile.PENDING,
-                    organization=kwargs["organization"],
-                    org_type=kwargs["org_text"],
-                    org_state=kwargs["org_state"],
-                    reason=kwargs["reason"]
+        profile = new_user.get_profile()
+
+        profile.name  = "%s %s"%(kwargs["first_name"], kwargs["last_name"])
+
+        profile.location = kwargs["org_state"]
+        if profile.location == "":
+            profile.location = "Non-US"
+
+        profile.organization = kwargs["organization"]
+        profile.org_type = kwargs["org_type"]
+        profile.about = kwargs["reason"]
+        profile.save()
+
+        registration_profile = self.create(user=new_user,
+                    activation_key=ModeratedRegistrationProfile.PENDING
                     )
-        profile.send_approval_email(kwargs["site"])
+        registration_profile.send_approval_email(kwargs["site"])
         return new_user
     create_moderated_user = transaction.commit_on_success(create_moderated_user)
 
@@ -89,8 +106,8 @@ class ModeratedRegistrationProfile(RegistrationProfile,models.Model):
 
         message = render_to_string('registration/approval_email.txt',
                                    ctx_dict)
-
-        self.user.email_user(subject, message, settings.DEFAULT_FROM_EMAIL)
+        to = getattr(settings, "USER_APPROVAL_EMAIL", settings.CONTACT_EMAIL)
+        send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [to])
 
 
 class ViewShareRegistrationProfile(ModeratedRegistrationProfile):
@@ -98,17 +115,3 @@ class ViewShareRegistrationProfile(ModeratedRegistrationProfile):
 
     class Meta:
         abstract=False
-
-    organization = models.CharField(_("Organization"),
-                                    max_length=100,
-                                    null=False,
-                                    blank=False)
-
-    org_type = models.CharField(_("Organization Type"),
-                                    max_length=100,
-                                    null=False,
-                                    blank=False)
-
-    org_state = USStateField(_("Organization State"), blank=True)
-
-    reason = models.TextField(_("Reason for joining"))

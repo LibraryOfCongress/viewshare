@@ -5,7 +5,7 @@
             $("#div_id_org_text").show();
         } else {
             $("#div_id_org_text").hide();
-            $("#id_org_text").val($("#id_org_type").val());
+            $("#id_org_text").val($("#id_org_type option:selected").text());
         }
     }
 

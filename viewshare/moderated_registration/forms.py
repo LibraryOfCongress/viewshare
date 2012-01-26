@@ -7,6 +7,10 @@ from django.utils.translation import ugettext_lazy as _
 
 class ViewShareRegistrationForm(RegistrationForm):
 
+    first_name = forms.CharField(required=True,max_length=30, label=_("First Name"))
+
+    last_name = forms.CharField(required=True,max_length=30, label=_("Last Name"))
+
     organization = forms.CharField(required=True, max_length=100, label=_("Organization"))
 
     org_type = forms.ChoiceField(label=_("Organization Type"),
