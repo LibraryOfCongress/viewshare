@@ -45,7 +45,7 @@ class ModeratedRegistrationManager(RegistrationManager):
             profile.location = "Non-US"
 
         profile.organization = kwargs["organization"]
-        profile.org_type = kwargs["org_type"]
+        profile.org_type = kwargs["org_text"]
         profile.about = kwargs["reason"]
         profile.save()
 
@@ -106,8 +106,8 @@ class ModeratedRegistrationProfile(RegistrationProfile,models.Model):
 
         message = render_to_string('registration/approval_email.txt',
                                    ctx_dict)
-        to = getattr(settings, "USER_APPROVAL_EMAIL", settings.CONTACT_EMAIL)
-        send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [to])
+        to = getattr(settings, "USER_APPROVAL_EMAIL_LIST", [settings.CONTACT_EMAIL])
+        send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, to)
 
 
 class ViewShareRegistrationProfile(ModeratedRegistrationProfile):

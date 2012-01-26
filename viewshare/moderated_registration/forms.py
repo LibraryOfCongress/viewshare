@@ -16,7 +16,7 @@ class ViewShareRegistrationForm(RegistrationForm):
     org_type = forms.ChoiceField(label=_("Organization Type"),
                                  help_text=_("Please select the type of your organization, or 'Other' to enter an alternative"))
 
-    org_text = forms.CharField(label=" ", max_length=100)
+    org_text = forms.CharField(label=" ", max_length=100, required=False)
 
     org_state = forms.ChoiceField(label=_("Organization State"), choices = (('', 'Non-US'),) + US_STATES, required=False )
 

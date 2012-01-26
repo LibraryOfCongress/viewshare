@@ -2,10 +2,11 @@
 
     function orgtype_visibility() {
         if ($("#id_org_type").val() == "other") {
+
             $("#div_id_org_text").show();
         } else {
             $("#div_id_org_text").hide();
-            $("#id_org_text").val($("#id_org_type option:selected").text());
+            $("#id_org_text").val("");
         }
     }
 
