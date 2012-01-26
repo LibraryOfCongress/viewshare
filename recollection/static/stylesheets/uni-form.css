@@ -282,6 +282,16 @@ YOU CAN VERY EASILY REVERT TO A GENERIC STYLE OF UNI-FORM. BEST OF LUCK...
   padding: 25px 25px;
 }
 
+.login_request_text .fieldtext {
+   font-size: 110%;
+   color: darkslategrey;
+   font-weight: bold; 
+}
+
+.login_request_text .fieldtext p {
+  padding-top: 20px;		    
+}
+
 .login_text .ctrlHolder label {
     padding-top: 5px;
     padding-bottom: 15px;

@@ -7,22 +7,23 @@
 {% block body %}
 
 
-<h1>{% trans "Sign Up" %}</h1>
+<h1>{% trans "Pending Moderator Approval" %}</h1>
 
 <div class="clearfix">
 
-  <fieldset>
+  <div class="login_options login_wrapper">	
+    <div class="login_request_text">
+      <fieldset>
+	<div class="fieldtext">
+	  
+	  <p>{% blocktrans %}Thank you for your interest in {{ SITE_NAME }}!{% endblocktrans %}</p>
+	  
+	  <p>{% blocktrans %}Your account is pending moderator approval.  Our systems team will respond by email within 24 hours with your account
+	    activation information.{% endblocktrans %}</p>
+	</div>
+     </fieldset>
+    </div>
+  </div>
 
-      <div class="fieldtext">
-
-    <p>{% blocktrans %}Thank you for your interest in {{ SITE_NAME }}!{% endblocktrans %}</p>
-
-    <p>{% blocktrans %}Your account is pending moderator approval.  Our systems team will respond by email within 24 hours with your account
-      activation information.{% endblocktrans %}</p>
-      </div>
-  </fieldset>
-
-<br />
-<br />
 </div>
 {% endblock %}

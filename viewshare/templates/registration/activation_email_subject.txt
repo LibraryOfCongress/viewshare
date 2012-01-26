@@ -1,1 +1,1 @@
-Activate your Viewshare account
+Activate your {{ SITE_NAME }} account!

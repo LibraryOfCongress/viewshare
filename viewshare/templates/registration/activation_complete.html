@@ -5,5 +5,18 @@
 {% block body %}
 <h1>{% trans "Activation Successful" %}</h1>
     
-<a href="{% url acct_login %}">{% trans "Click here to log in" %}</a>
+<div class="login_options login_wrapper">	
+  <div class="login_request_text">
+    <fieldset>
+      <div class="fieldtext">
+
+	<p>{% blocktrans %}Thank you for your interest in {{ SITE_NAME }}!{% endblocktrans %}</p>
+
+	<p>{% blocktrans %}Your account is now active.{% endblocktrans %} <a href="{% url acct_login %}">{% trans "Click here to log in" %}</a></p>
+
+      </div>
+    </fieldset>
+  </div>
+</div>
+  
 {% endblock %}
