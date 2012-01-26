@@ -262,9 +262,24 @@ YOU CAN VERY EASILY REVERT TO A GENERIC STYLE OF UNI-FORM. BEST OF LUCK...
   margin-top: 30px;
 }
 
+.login_request_wrapper {
+  background-image:url(../images/login_request_bg.png);
+  background-repeat:no-repeat;
+  width:680px;
+  height:600px;
+  color:#333;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+}
+
 .login_text {
   padding: 25px 25px;
   background: url(../images/login_icon.png) 90% 65% no-repeat;
+}
+
+.login_request_text {
+  padding: 25px 25px;
 }
 
 .login_text .ctrlHolder label {

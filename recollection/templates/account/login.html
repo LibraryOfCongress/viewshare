@@ -25,7 +25,7 @@ $(document).ready(function() {
 <br />
 {% else %}
 {% url registration_register as signup_url %}
-<p>{% blocktrans %}Don't have an account? <a href="{{ signup_url }}">Sign up</a>!{% endblocktrans %}</p>
+<p>{% blocktrans %}Don't yet have an account? <a href="{{ signup_url }}">Sign up</a>!{% endblocktrans %}</p>
 <br />
 {% endif %}
 
