@@ -70,7 +70,6 @@ The following settings should be customized on a per-site basis:
 * FEEDBACKLINK: an URL to be used by the user to provide feedback
 * SUPPORT_USER: the user name of the support user
 * ANONYMOUS_USERNAME: the user name used by anonymous users, e.g. "guest"
-* ACCOUNT_OPEN_SIGNUP: allow anybody to register for a new account
 * ACCOUNT_REQUIRED_EMAIL: require email addresses for new accounts
 * ACCOUNT_EMAIL_VERIFICATION: require an email address verification step for new accounts
 * THEME_DIR_URL: the path to the theme directory, by default "themes/chili"

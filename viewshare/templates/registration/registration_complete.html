@@ -1,0 +1,28 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Sign Up" %}{% endblock %}
+
+{% block body %}
+
+
+<h1>{% trans "Sign Up" %}</h1>
+
+<div class="clearfix">
+
+  <fieldset>
+
+      <div class="fieldtext">
+
+    <p>{% blocktrans %}Thank you for your interest in {{ SITE_NAME }}!{% endblocktrans %}</p>
+
+    <p>{% blocktrans %}Your account is pending moderator approval.  Our systems team will respond by email within 24 hours with your account
+      activation information.{% endblocktrans %}</p>
+      </div>
+  </fieldset>
+
+<br />
+<br />
+</div>
+{% endblock %}

@@ -42,7 +42,6 @@ recollection_settings = settings_processor(
     'THEME_FRAGMENT_URL',
     'CONTACT_EMAIL',
     'SITE_NAME',
-    'ACCOUNT_OPEN_SIGNUP',
     'USERVOICE_SETTINGS'
 )
 

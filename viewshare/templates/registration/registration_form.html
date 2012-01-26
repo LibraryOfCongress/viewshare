@@ -1,0 +1,24 @@
+{% extends "site_base.html" %}
+{% load uni_form_tags %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Sign Up" %}{% endblock %}
+
+{% block head_scripts %}
+    {{ block.super }}
+    <script src="{{ STATIC_URL }}uni_form/uni-form.jquery.js" type="text/javascript"></script>
+
+    <script type="text/javascript" src="{{ STATIC_URL }}registration/js/registration_form.js"></script>
+{% endblock %}
+
+{% block body %}
+<h1>{% trans "Sign Up" %}</h1>
+
+    <form action="{{request.path}}" method="post" class="uniForm">
+        <fieldset class="inlineLabels">
+            {%csrf_token%}
+            {{ form|as_uni_form }}
+        </fieldset>
+        <input type="submit" value="Sign Up"/>
+    </form>
+{% endblock body %}

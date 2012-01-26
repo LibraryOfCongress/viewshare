@@ -1,8 +1,7 @@
 from django.contrib import admin
-from recollection.apps.account.models import Account, OtherServiceInfo, PasswordReset
+from recollection.apps.account.models import Account, PasswordReset
 
 admin.site.register(Account)
-admin.site.register(OtherServiceInfo)
 
 class PasswordResetAdmin(admin.ModelAdmin):
     list_display = ('user', 'temp_key', 'timestamp', 'reset')

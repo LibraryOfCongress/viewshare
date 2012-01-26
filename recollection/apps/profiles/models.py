@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.utils.translation import ugettext_lazy as _
 
-from timezones.fields import TimeZoneField
 
 class Profile(models.Model):
 
@@ -13,6 +12,16 @@ class Profile(models.Model):
     about = models.TextField(_('about'), null=True, blank=True)
     location = models.CharField(_('location'), max_length=40, null=True, blank=True)
     website = models.URLField(_('website'), null=True, blank=True, verify_exists=False)
+
+    organization = models.CharField(_("Organization"),
+                                    max_length=100,
+                                    null=True,
+                                    blank=True)
+
+    org_type = models.CharField(_("Organization Type"),
+                                    max_length=100,
+                                    null=True,
+                                    blank=True)
 
     def __unicode__(self):
         return self.user.username
@@ -38,5 +47,16 @@ def nice_username(u):
     else:
         return u.username
 
+# Disable the creation of the superuser account on initial syncdb, as the profile model is managed by South
+
+from django.contrib.auth import models as auth_app
+from django.contrib.auth.management import create_superuser
+
+from django.db.models import signals
 
 
+signals.post_syncdb.disconnect(
+        create_superuser,
+        sender=auth_app,
+        dispatch_uid='django.contrib.auth.management.create_superuser'
+    )

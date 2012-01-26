@@ -135,9 +135,15 @@ INSTALLED_APPS = (
 
     # Support pipeline
     'recollection.apps.support',
+
+    # Site registration
+    'registration',
+    'viewshare.moderated_registration',
     )
 
 STATICFILES_DIRS = (
+    ('', path.join(module_path('viewshare'), 'static')),
+
     ('', path.join(module_path('recollection'), 'static')),
     ('', path.join(module_path('ajax_validation'), 'media')),
     ('', path.join(module_path('django_extensions'), 'media')),
@@ -154,6 +160,7 @@ THEME_FRAGMENT_URL = "%s/chili.css"%THEME_DIR_URL
 THEME_URL = '%s%s'%(STATIC_URL,THEME_FRAGMENT_URL)
 
 TEMPLATE_DIRS = (
+    path.join(module_path("viewshare"), "templates"),
     path.join(module_path("recollection"), "templates"),
 )
 
@@ -170,12 +177,13 @@ LOGIN_REDIRECT_URLNAME = "user_home"
 
 ANONYMOUS_USERNAME='guest'
 
-ACCOUNT_OPEN_SIGNUP=False
-
 ACCOUNT_REQUIRED_EMAIL = False
 ACCOUNT_EMAIL_VERIFICATION = False
 
+ACCOUNT_ACTIVATION_DAYS=14
+
 FIXTURE_DIRS=(
+    path.join(module_path("viewshare"), "fixtures"),
     path.join(module_path("recollection"), "fixtures"),
 )
 

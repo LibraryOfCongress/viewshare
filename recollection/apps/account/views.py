@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.db import models
 
 from recollection.apps.account.utils import get_default_redirect
-from recollection.apps.account.forms import SignupForm, AddEmailForm, LoginForm, \
+from recollection.apps.account.forms import AddEmailForm, LoginForm, \
     ChangePasswordForm, SetPasswordForm, ResetPasswordForm, \
     ChangeTimezoneForm, ChangeLanguageForm, ResetPasswordKeyForm
 from emailconfirmation.models import EmailAddress, EmailConfirmation
@@ -39,31 +39,6 @@ def login(request, form_class=LoginForm, template_name="account/login.html",
         context_instance = RequestContext(request)
     )
 
-def signup(request, form_class=SignupForm,
-        template_name="account/signup.html", success_url=None):
-    if success_url is None:
-        success_url = get_default_redirect(request)
-    if request.method == "POST":
-        form = form_class(request.POST)
-        if form.is_valid():
-            username, password = form.save()
-            if settings.ACCOUNT_EMAIL_VERIFICATION:
-                return render_to_response("account/verification_sent.html", {
-                    "email": form.cleaned_data["email"],
-                }, context_instance=RequestContext(request))
-            else:
-                user = authenticate(username=username, password=password)
-                auth_login(request, user)
-                request.user.message_set.create(
-                    message=_("Successfully logged in as %(username)s.") % {
-                    'username': user.username
-                })
-                return HttpResponseRedirect(success_url)
-    else:
-        form = form_class()
-    return render_to_response(template_name, {
-        "form": form,
-    }, context_instance=RequestContext(request))
 
 @login_required
 def email(request, form_class=AddEmailForm,
@@ -152,9 +127,7 @@ def password_set(request, form_class=SetPasswordForm,
 @login_required
 def password_delete(request, template_name="account/password_delete.html"):
     # prevent this view when openids is not present or it is empty.
-    if not request.user.password or \
-        (not hasattr(request, "openids") or \
-            not getattr(request, "openids", None)):
+    if not request.user.password:
         return HttpResponseForbidden()
     if request.method == "POST":
         request.user.password = u""

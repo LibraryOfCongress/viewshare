@@ -1,0 +1,9 @@
+{% extends "site_base.html" %}
+{% load i18n %}
+
+
+{% block body %}
+<h1>{% trans "Activation Successful" %}</h1>
+    
+<a href="{% url acct_login %}">{% trans "Click here to log in" %}</a>
+{% endblock %}

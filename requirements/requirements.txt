@@ -32,5 +32,7 @@ django-piston==0.2.3
 django-timezones==0.2
 diff-match-patch==20110725.1
 
+https://bitbucket.org/ubernostrum/django-registration/get/fad7080fe769.tar.gz#egg=django-registration
+
 # Uncomment for uservoice integration
 # pycrypto==2.3

@@ -18,6 +18,8 @@ handler500 = 'recollection.utils.views.server_error'
 urlpatterns = patterns('',
 
     (r'^account/', include('recollection.apps.account.urls')),
+    (r'^registration/', include('viewshare.moderated_registration.urls')),
+
     (r'^profiles/', include('recollection.apps.profiles.urls')),
 
     (r'^invitations/', include('recollection.apps.connections.urls')),
@@ -66,6 +68,7 @@ urlpatterns = patterns('',
 
     # For legacy purposes
     url(r'^userupload/$', login_required(RedirectView.as_view(url="/upload")), name="user_upload"),
+
 
     # CMS url definition should come after all others
     (r'^', include('cms.urls')),
