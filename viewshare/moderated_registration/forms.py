@@ -23,7 +23,7 @@ class ViewShareRegistrationForm(RegistrationForm):
     reason =  forms.CharField(label=_("Reason"),
                                 required=True,
                                 widget=forms.Textarea,
-                                help_text=_("In one or two sentences tell us what you are thinking about using Viewshare for"))
+                                help_text=_("Please let us know your interest in Viewshare!"))
 
     def __init__(self, *args, **kwargs):
         super(ViewShareRegistrationForm, self).__init__(*args, **kwargs)

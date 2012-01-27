@@ -199,6 +199,10 @@ body.attraction #footer {
     right: 10px;
 }
 
+#tabhead .login a {
+    font-weight: bold;
+}
+
 #tabhead .login img {
     vertical-align: bottom;   
 }

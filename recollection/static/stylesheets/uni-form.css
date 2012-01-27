@@ -279,7 +279,9 @@ YOU CAN VERY EASILY REVERT TO A GENERIC STYLE OF UNI-FORM. BEST OF LUCK...
 }
 
 .login_request_text {
-  padding: 25px 25px;
+  padding-left: 70px;
+  padding-right: 70px;
+  padding-top: 30px;
 }
 
 .login_request_text .fieldtext {
@@ -288,8 +290,51 @@ YOU CAN VERY EASILY REVERT TO A GENERIC STYLE OF UNI-FORM. BEST OF LUCK...
    font-weight: bold; 
 }
 
+/* handle error messages differently from rest of application due to size constraints */
+
+.login_request_text .uniForm .ctrlHolder.error p, .login_request_text .uniForm .ctrlHolder.focused.error p { 
+     background-image: none;
+     display:inline;
+     position: absolute;
+     right: 1px; 
+     padding-left: 10px;
+     padding-right: 1px;
+     margin-top: -3px;
+     font-size: 80%;
+     width: 20%;
+}
+
+
+.login_request_text .uniForm #div_id_org_text { 
+     background-image: none;
+     display:inline;
+     position: absolute;
+     right: 1px; 
+     padding-left: 10px;
+     padding-right: 1px;
+     margin-top: -20px;
+     font-size: 80%;
+     width: 20%;
+}
+
 .login_request_text .fieldtext p {
   padding-top: 20px;		    
+}
+
+
+.login_request_text .ctrlHolder .textarea {
+  float: left;
+  width: 64%;
+  max-height: 80px;
+  margin: 0; 
+  margin-top: 10px;
+}
+
+.login_request_text .ctrlHolder .select {
+  float: left;
+  width: 30%;
+  margin: 0; 
+  margin-top: 10px;
 }
 
 .login_text .ctrlHolder label {
@@ -298,6 +343,7 @@ YOU CAN VERY EASILY REVERT TO A GENERIC STYLE OF UNI-FORM. BEST OF LUCK...
     font-size: 120%;
     color: grey;
 }
+
 
 .login_text .ctrlHolder label span {
     display: none;
