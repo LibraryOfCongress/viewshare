@@ -14,6 +14,9 @@ graft freemix/static
 graft simile/static
 graft simile/templates
 
+graft viewshare/static
+graft viewshare/templates
+
 recursive-include recollection/*/templates *
 recursive-include recollection/*/static *
 
@@ -29,6 +32,10 @@ recursive-include freemix/dataset/*/templates *
 
 recursive-include freemix/exhibit/*/static *
 recursive-include freemix/exhibit/*/templates *
+
+
+recursive-include viewshare/*/static *
+recursive-include viewshare/*/templates *
 
 
 prune recollection/site_media
