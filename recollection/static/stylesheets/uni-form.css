@@ -318,7 +318,7 @@ YOU CAN VERY EASILY REVERT TO A GENERIC STYLE OF UNI-FORM. BEST OF LUCK...
 }
 
 .login_request_text .fieldtext p {
-  padding-top: 20px;		    
+  padding-top: 20px;
 }
 
 
@@ -335,6 +335,18 @@ YOU CAN VERY EASILY REVERT TO A GENERIC STYLE OF UNI-FORM. BEST OF LUCK...
   width: 30%;
   margin: 0; 
   margin-top: 10px;
+}
+
+.login_request_text fieldset {
+    margin-bottom: 30px;
+}
+
+.login_request_text .buttonHolder {
+    background: none;
+}
+
+.login_request_text .textInput.ui-autocomplete-input {
+    width: 50%;
 }
 
 .login_text .ctrlHolder label {

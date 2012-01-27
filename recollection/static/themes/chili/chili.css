@@ -94,6 +94,11 @@
 	margin: 0;
 	display:block;
 	float: left;
+    border: 1px solid #aaaaa;
+    background: #ffffff;
+    color: #222222;
+}
+
 }
 .ui-menu .ui-menu {
 	margin-top: -3px;

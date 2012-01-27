@@ -45,7 +45,7 @@ class ModeratedRegistrationManager(RegistrationManager):
             profile.location = "Non-US"
 
         profile.organization = kwargs["organization"]
-        profile.org_type = kwargs["org_text"]
+        profile.org_type = kwargs["org_type"]
         profile.about = kwargs["reason"]
         profile.save()
 
