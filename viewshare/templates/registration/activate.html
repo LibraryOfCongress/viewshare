@@ -1,0 +1,20 @@
+{% extends "site_base.html" %}
+{% load i18n %}
+
+
+{% block body %}
+<h1>{% trans "Account already active" %}</h1>
+
+<div class="login_options login_wrapper">
+  <div class="login_request_text">
+    <fieldset>
+      <div class="fieldtext">
+
+	<p>{% blocktrans %}This activation key is invalid.{% endblocktrans %} <a href="{% url acct_login %}">{% trans "Click here to log in" %}</a></p>
+
+      </div>
+    </fieldset>
+  </div>
+</div>
+
+{% endblock %}
