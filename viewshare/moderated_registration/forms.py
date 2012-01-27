@@ -20,10 +20,9 @@ class ViewShareRegistrationForm(RegistrationForm):
 
     org_state = forms.ChoiceField(label=_("Organization State"), choices = (('', 'Non-US'),) + US_STATES, required=False )
 
-    reason =  forms.CharField(label=_("Reason"),
+    reason =  forms.CharField(label=_("How do you plan to use Viewshare?"),
                                 required=True,
-                                widget=forms.Textarea,
-                                help_text=_("Please let us know your interest in Viewshare!"))
+                                widget=forms.Textarea)
 
     def __init__(self, *args, **kwargs):
         super(ViewShareRegistrationForm, self).__init__(*args, **kwargs)
