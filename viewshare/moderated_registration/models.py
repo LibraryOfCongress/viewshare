@@ -63,7 +63,6 @@ class ModeratedRegistrationManager(RegistrationManager):
     def reject_profile(self, profile):
 
         profile.user.delete()
-        profile.delete()
         return False
 
     def send_activation(self, profile):

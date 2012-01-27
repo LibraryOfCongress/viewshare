@@ -1,13 +1,17 @@
+from django.conf.urls.defaults import patterns, url
 from django.contrib import admin
 from . import models
-from django.conf import settings
+
+from django.shortcuts import get_object_or_404, render
 from registration.admin import RegistrationAdmin
 from django.utils.translation import ugettext_lazy as _
 
-
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
 import csv
 from django.http import HttpResponse
 from registration.models import RegistrationProfile
+from viewshare.moderated_registration.models import ModeratedRegistrationManager, ModeratedRegistrationProfile
 
 
 class OrganizationTypeAdmin(admin.ModelAdmin):
@@ -86,6 +90,35 @@ class ModeratedRegistrationAdmin(RegistrationAdmin):
             writer.writerow(row)
         return response
     export_as_csv.short_description = "Export User Registration Profiles as CSV"
+
+    def approval_view(self, request, id, template_name="registration/admin_approval.html"):
+        registration_profile = get_object_or_404(self.model.objects.select_related('user', 'user__profile'), id=id)
+
+        if (request.method == "POST" and "reject" in request.POST) or "reject" in request.GET:
+            ModeratedRegistrationProfile.objects.reject_profile(registration_profile)
+            return HttpResponseRedirect("../../")
+        elif (request.method =="POST" and "approve" in request.POST) or "approve" in request.GET:
+
+                ModeratedRegistrationProfile.objects.approve_profile(registration_profile)
+
+        return render(request,
+                      template_name,
+                      {'profile': registration_profile})
+
+    def change_view(self, request, object_id, extra_context=None):
+
+        return HttpResponseRedirect(reverse('admin:approve_users', kwargs={"id": object_id}))
+
+    def get_urls(self):
+        urls = super(ModeratedRegistrationAdmin, self).get_urls()
+
+        return  patterns('',
+            url(r'^(?P<id>[\d]+)/moderate/$$',
+                self.admin_site.admin_view(self.approval_view),
+                name="approve_users"),
+        ) + urls
+
+
 
 admin.site.unregister(RegistrationProfile)
 admin.site.register(models.ViewShareRegistrationProfile, ModeratedRegistrationAdmin)

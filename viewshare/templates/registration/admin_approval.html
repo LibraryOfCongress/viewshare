@@ -1,0 +1,79 @@
+{% extends "admin/base_site.html" %}
+
+{%load freemix_helpers%}
+{% load i18n %}
+
+{% if not is_popup %}
+  {% block breadcrumbs %}
+    <div class="breadcrumbs">
+      <a href="../../../../">
+        {% trans "Home" %}
+      </a>
+       &rsaquo;
+        <a href="../../../">
+        {% trans "Moderated_registration" %}
+      </a>
+       &rsaquo;
+       <a href="../../">
+         Viewshare registration profiles
+      </a>
+      &rsaquo;
+      Moderate {{ profile.user.username }}
+    </div>
+  {% endblock %}
+{% endif %}
+
+
+{% block content %}
+<fieldset class=".module">
+    <legend>User Information</legend>
+    <div id="div_id_name">
+        <label for="id_name">Name:</label> 
+        <span id="id_name">{{profile.user.get_profile.name}}</span>
+    </div>
+    
+    <div id="div_id_email">
+        <label for="id_email"> Email:</label>
+        <span id="id_email">{{profile.user.email}}</span>
+    </div>
+
+    <div id="div_id_username">
+        <label for="id_username"> Username:</label>
+        <span id="id_username">{{profile.user.username}}</span>
+    </div>
+    <a href="{% url admin:auth_user_change profile.user.id %}">Edit User</a>&nbsp;|&nbsp;
+    <a href="{% url admin:profiles_profile_change profile.user.get_profile.id %}">Edit User Profile</a>
+
+</fieldset>
+
+<fieldset>
+    <legend>Organization</legend>
+
+    <div>
+        <label for="id_organization">Name:</label>
+        <span id="id_organization">{{profile.user.get_profile.organization}}</span>
+    </div>
+    <div>
+        <label for="id_org_type">Organization Type:</label>
+        <span id="id_org_type">{{profile.user.get_profile.org_type}}</span>
+    </div>
+    <div>
+        <label for="id_org_state">Location:</label
+        <span id="id_org_state">{{profile.user.get_profile.location}}</span>
+    </div>
+    <div>
+        <label for="id_reason">Reason for requesting an account:</label>
+        <span id="id_reason">{{profile.user.get_profile.about}}</span>
+    </div>
+
+</fieldset>
+    {% if not profile.is_approved %}
+    <form action="." method="POST">
+        {% csrf_token %}
+        <input type="submit" id="approve" name="approve" value="Approve" />
+        <input type="submit" id="reject" name="reject" value="Reject"/>
+    </form>
+    {% else %}
+        <em>{{ profile.user.username }} has been approved.</em>
+    {% endif %}
+{% endblock %}
