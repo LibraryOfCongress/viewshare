@@ -14,6 +14,16 @@
 {% block body %}
     <h1>{% trans "Sign Up" %}</h1>
 
+    <fieldset>
+      <div class="fieldtext">
+	
+	<p>{% blocktrans %}Thank you for your interest in {{ SITE_NAME }}!{% endblocktrans %}</p>
+	
+	<p>{% blocktrans %}User accounts for {{ SITE_NAME }} require moderator approval. Please fill in the following details and our team will respond by email within 24 hours with your account
+	  activation information.{% endblocktrans %}</p>
+      </div>
+    </fieldset>
+
     <div class="login_options login_request_wrapper">	
       <div class="login_request_text">
 	<form action="{{request.path}}" method="post" class="uniForm">
