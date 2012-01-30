@@ -8,10 +8,6 @@ from django.utils import simplejson as json
 
 class ViewShareRegistrationForm(RegistrationForm):
 
-    first_name = forms.CharField(required=True,max_length=30, label=_("First Name"))
-
-    last_name = forms.CharField(required=True,max_length=30, label=_("Last Name"))
-
     organization = forms.CharField(required=True, max_length=100, label=_("Name"))
 
     org_type = forms.CharField(label="Type of Organization", max_length=100, required=True)
@@ -30,7 +26,7 @@ class ViewShareRegistrationForm(RegistrationForm):
         self.fields["username"].regex = r"^[\w.-_]+$"
         self.helper = FormHelper()
         self.helper.layout = Layout(
-                Fieldset("User Information", "first_name", "last_name", "email", "username",  "password1", "password2", css_class="inlineLabels"),
+                Fieldset("User Information", "username", "email", "password1", "password2", css_class="inlineLabels"),
                 Fieldset("Describe your Organization", "organization", "org_type", "org_state", css_class="inlineLabels"),
                 Fieldset("How do you plan to use Viewshare?", "reason", css_class="inlineLabels")
             )

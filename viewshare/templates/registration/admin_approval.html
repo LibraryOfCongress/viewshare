@@ -27,20 +27,17 @@
 {% block content %}
 <fieldset class=".module">
     <legend>User Information</legend>
-    <div id="div_id_name">
-        <label for="id_name">Name:</label> 
-        <span id="id_name">{{profile.user.get_profile.name}}</span>
-    </div>
-    
-    <div id="div_id_email">
-        <label for="id_email"> Email:</label>
-        <span id="id_email">{{profile.user.email}}</span>
-    </div>
 
     <div id="div_id_username">
         <label for="id_username"> Username:</label>
         <span id="id_username">{{profile.user.username}}</span>
     </div>
+
+    <div id="div_id_email">
+        <label for="id_email"> Email:</label>
+        <span id="id_email">{{profile.user.email}}</span>
+    </div>
+
     <a href="{% url admin:auth_user_change profile.user.id %}">Edit User</a>&nbsp;|&nbsp;
     <a href="{% url admin:profiles_profile_change profile.user.get_profile.id %}">Edit User Profile</a>
 

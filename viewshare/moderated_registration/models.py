@@ -32,13 +32,9 @@ class ModeratedRegistrationManager(RegistrationManager):
 
         new_user = User.objects.create_user(username, email, password)
         new_user.is_active = False
-        new_user.first_name=kwargs["first_name"]
-        new_user.last_name=kwargs["last_name"]
         new_user.save()
 
         profile = new_user.get_profile()
-
-        profile.name  = "%s %s"%(kwargs["first_name"], kwargs["last_name"])
 
         profile.location = kwargs["org_state"]
         if profile.location == "":

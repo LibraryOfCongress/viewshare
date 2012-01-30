@@ -1,5 +1,4 @@
 {%load freemix_helpers%}
-Name: {{profile.user.get_profile.name}}
 Email: {{profile.user.email}}
 Username: {{profile.user.username}}
 
