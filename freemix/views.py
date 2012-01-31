@@ -58,7 +58,9 @@ class OwnerListView(ListView):
 
 
 class OwnerSlugPermissionMixin:
-    
+
+    _object = None
+
     def filter_by_perm(self, obj):
         if hasattr(self, "object_perm") and \
             not self.request.user.has_perm(getattr(self, "object_perm"), obj):
@@ -66,12 +68,15 @@ class OwnerSlugPermissionMixin:
         return obj
 
     def get_object(self, queryset=None):
-        if queryset is None:
-            queryset = self.get_queryset()
-        obj = get_object_or_404(queryset,
-                                 owner__username=self.kwargs.get("owner"),
-                                 slug=self.kwargs.get("slug"))
-        return self.filter_by_perm(obj)
+        if self._object is None:
+            if queryset is None:
+                queryset = self.get_queryset()
+            obj = get_object_or_404(queryset,
+                                     owner__username=self.kwargs.get("owner"),
+                                     slug=self.kwargs.get("slug"))
+            obj = self.filter_by_perm(obj)
+            self._object = obj
+        return self._object
 
 
 class JSONResponse(HttpResponse):

@@ -6,10 +6,11 @@
 {% load exhibit_tags %}
 
 <div id="user_sections">
-  
+{% with exhibits.count as exhibit_count %}
+{% with datasets.count as dataset_count %}
 {% if is_me %}
 
-{% ifequal datasets.count 0 %}
+{% ifequal dataset_count 0 %}
 
 <div class="user_data_upload">
   <p class="hyper-upload">
@@ -18,17 +19,15 @@
   </p>
 </div>              
 
-{% endifequal %}
-
-{% ifnotequal datasets.count 0 %}
+{% else %}
 
 <div class="dataset_list">
   <h2 class="ui-widget-header">{% blocktrans %}Data{% endblocktrans %}</h2>
   {% dataset_list datasets.all 3 0 %}
 
-  {% if datasets.count > 3 %}
+  {% if dataset_count > 3 %}
   <div class="see_all">
-    <a href="{% url dataset_list_by_owner owner=other_user.username %}">{% trans "See all" %}  {{datasets.count}} set{{ datasets.count|pluralize }}</a>
+    <a href="{% url dataset_list_by_owner owner=other_user.username %}">{% trans "See all" %}  {{dataset_count}} set{{ dataset_count|pluralize }}</a>
   </div>
   {% endif%}
 </div>
@@ -38,26 +37,26 @@
   <h2 class="ui-widget-header">{% blocktrans %}Views{% endblocktrans %}</h2>
   {% exhibit_list exhibits.all 3 0 %}
 
-  {% if other_user.exhibits.count > 3 %}
+  {% if exhibit_count > 3 %}
   <div class="see_all">
-    <a href="{% url exhibit_list_by_owner other_user.username %}">{% trans "See all" %}  {{exhibits.count}} view{{ exhibits.count|pluralize }}</a>
+    <a href="{% url exhibit_list_by_owner other_user.username %}">{% trans "See all" %}  {{exhibit_count}} view{{ exhibit_count|pluralize }}</a>
   </div>
 
   {% endif %}
 </div>
 
-{% endifnotequal %}
+{% endifequal %}
 
 {% else %}
 
-{% ifnotequal datasets.count 0 %}
+{% ifnotequal dataset_count 0 %}
 
 <div class="dataset_list">
   <h2 class="ui-widget-header">{% blocktrans %}Data{% endblocktrans %}</h2>
   {% dataset_list datasets.all 3 0 %}
-  {% if datasets.count > 3 %}
+  {% if dataset_count > 3 %}
   <div class="see_all">
-    <a href="{% url dataset_list_by_owner owner=other_user.username %}">{% trans "See all" %} {{datasets.count}} set{{ datasets.count|pluralize }}</a>
+    <a href="{% url dataset_list_by_owner owner=other_user.username %}">{% trans "See all" %} {{dataset_count}} set{{ dataset_count|pluralize }}</a>
   </div>
   {% endif %}
 </div>
@@ -66,9 +65,9 @@
 <div class="exhibit_list">
   <h2 class="ui-widget-header">{% blocktrans %}Views{% endblocktrans %}</h2>
   {% exhibit_list exhibits.all 3 0 %}
-  {% if exhibits.count > 3 %}
+  {% if exhibit_count > 3 %}
   <div class="see_all">
-    <a href="{% url exhibit_list_by_owner other_user.username %}">{% trans "See all" %} {{exhibits.count}} view{{ exhibits.count|pluralize }}</a>
+    <a href="{% url exhibit_list_by_owner other_user.username %}">{% trans "See all" %} {{exhibit_count}} view{{ exhibit_count|pluralize }}</a>
   </div>
   {% endif %}
 </div>
@@ -77,6 +76,7 @@
 
 
 {% endif %}
-
+{% endwith %}
+{% endwith %}
 
 </div>

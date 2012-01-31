@@ -22,7 +22,7 @@ def site_skin():
             # This should be an impossible condition to reach, but just in case
             theme = SiteTheme.objects.get(id__exact=1)
             skin_url = theme.url
-        cache.set("site_skin_%s"%settings.SITE_ID, skin_url)
+        cache.set("site_skin_%s"%settings.SITE_ID, skin_url, 3600*24)
     return skin_url
 
 @register.tag

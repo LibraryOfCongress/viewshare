@@ -6,6 +6,7 @@ from django.template.loader import render_to_string
 from django_extensions.db.fields.json import JSONField
 from django_extensions.db.models import TitleSlugDescriptionModel, TimeStampedModel
 from freemix.dataset.models import Dataset
+from freemix.models import JSONDataModel
 
 
 class Canvas(TitleSlugDescriptionModel):
@@ -85,3 +86,6 @@ class Exhibit(TitleSlugDescriptionModel, TimeStampedModel):
         verbose_name_plural = "Exhibits"
         verbose_name = "Exhibit"
         ordering = ('-modified', )
+
+#class ExhibitProfile(JSONDataModel):
+#    pass

@@ -1,5 +1,6 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
+from django.db import transaction
 from django.db.models.query_utils import Q
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseServerError, Http404, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, render
@@ -21,7 +22,7 @@ from freemix.views import OwnerListView, OwnerSlugPermissionMixin, JSONResponse
 class DataProfileJSONView(View):
 
     def get_doc(self, ds):
-        return ds.profile
+        return ds.profile.data
 
     def get(self, request, *args, **kwargs):
         owner = kwargs["owner"]
@@ -38,19 +39,18 @@ class DataProfileJSONView(View):
 
 class DataJSONView(DataProfileJSONView):
     def get_doc(self, ds):
-        return ds.data
+        return ds.data.data
 
 
 class DataPropertiesCacheJSONView(DataProfileJSONView):
     def get_doc(self, ds):
-        return ds.properties_cache
+        return ds.properties_cache.data
 
 
 dataset_list_by_owner = OwnerListView.as_view(template_name="dataset/dataset_list_by_owner.html",
                                                model=models.Dataset,
                                                permission = "dataset.can_view",
-                                               related=("exhibits","owner"),
-                                               defer=("properties_cache","profile","data"))
+                                               related=("exhibits","owner"))
 
 #----------------------------------------------------------------------------------------------------------------------#
 # Dataset views
@@ -61,9 +61,12 @@ class DatasetView(OwnerSlugPermissionMixin, DetailView):
     object_perm="dataset.can_view"
     template_name= "dataset/dataset_summary.html"
 
+    def get_queryset(self):
+        return self.model.objects.select_related("owner", "source")
+
     def get_context_data(self, **kwargs):
         context = dict(super(DatasetView, self).get_context_data(**kwargs))
-        dataset = self.get_object()
+        dataset = self.get_object(models.Dataset.objects.select_related("source"))
         user = self.request.user
         filter = PermissionsRegistry.get_filter("dataset.can_view", user)
 
@@ -119,14 +122,15 @@ class DatasetCreateFormView(CreateView):
 
     def get_form_kwargs(self):
         kwargs = super(DatasetCreateFormView, self).get_form_kwargs()
+        del kwargs["instance"]
         kwargs["owner"] = self.request.user
-        source = get_object_or_404(models.DataSourceTransaction, tx_id=self.kwargs["tx_id"]).source
+        source = get_object_or_404(models.DataSource, transactions__tx_id=self.kwargs["tx_id"])
         kwargs["datasource"] = source
         return kwargs
 
     def get_initial(self):
         initial = dict(super(DatasetCreateFormView, self).get_initial())
-        source = get_object_or_404(models.DataSourceTransaction, tx_id=self.kwargs["tx_id"]).source
+        source = get_object_or_404(models.DataSource, transactions__tx_id=self.kwargs["tx_id"])
         if source:
             source = source.get_concrete()
         if hasattr(source, "title"):
@@ -188,10 +192,11 @@ class DatasetProfileEditView(OwnerSlugPermissionMixin, View):
             data = json.loads(request.raw_post_data)
             if not data.has_key("properties") or not data.has_key("items"):
                 return HttpResponseServerError("Invalid Request")
-            ds = self.get_object()
-            ds.profile = {"properties": data["properties"]}
-            ds.data = {"items": data["items"]}
-            ds.save()
+            with transaction.commit_on_success():
+                ds = self.get_object()
+                ds.update_profile({"properties": data["properties"]})
+                ds.update_data({"items": data["items"]})
+                ds.save()
             return render(request, "dataset/edit/success.html", {
                 "owner": ds.owner.username,
                 "slug": ds.slug

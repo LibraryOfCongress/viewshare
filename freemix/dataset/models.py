@@ -5,6 +5,7 @@ import uuid
 from django.contrib.auth.models import User
 from django.db.models import permalink
 from django_extensions.db.fields import UUIDField
+from django.db.models import signals
 
 from django.conf import settings
 from django.db import models, transaction as db_tx
@@ -12,37 +13,20 @@ from django_extensions.db.fields.json import JSONField
 from django_extensions.db.models import TimeStampedModel, TitleSlugDescriptionModel
 from freemix.dataset.transform import AKARA_TRANSFORM_URL
 from freemix.dataset.transform import AkaraTransformClient
+from freemix.models import JSONDataModel
 
 logger = logging.getLogger(__name__)
 
-# At some point, we need to migrate the freemix profile to use the exhibit
-# format for properties, but for now, maintain a separate field
-def synchronize_properties_cache(profile):
-    result = {}
-    for prop in profile["properties"]:
-        type = "text"
-        for tag in prop["tags"]:
-            if tag.startswith("property:type=") and not tag=="property:type=shredded_list":
-                type = tag[len("property:type="):]
-
-        result[prop["property"]] = {
-            "label": prop["label"],
-            "valueType": type
-
-        }
-    return {"properties": result}
 
 
 class Dataset(TitleSlugDescriptionModel, TimeStampedModel):
+    """
+    A dataset consists of an Exhibit JSON document along with an accompanying
+    profile that describes the properties contained in each record in a format
+    that the exhibit builder can ingest
+    """
     owner = models.ForeignKey(User, null=True, related_name="datasets")
-
     published = models.BooleanField(default=True)
-
-    profile = JSONField(default='{"properties": []}')
-
-    properties_cache = JSONField(default='{"properties": {}}')
-
-    data = JSONField(default='{"items": []}')
 
     class Meta:
         unique_together=("slug", "owner")
@@ -62,19 +46,79 @@ class Dataset(TitleSlugDescriptionModel, TimeStampedModel):
             'owner': self.owner.username,
             'slug': self.slug})
 
-    def save(self, force_insert=False, force_update=False, using=None):
+    def update_data(self, json):
+        data,created = DatasetJSONFile.objects.get_or_create(dataset=self, defaults={'data': json})
+        if not created:
+            data.data = json
+        data.save()
 
-        # Kludge in advance of collapsing freemix and exhibit property descriptions into one entity
-        self.properties_cache = synchronize_properties_cache(self.profile)
+    def update_profile(self, json):
+        profile,created = DatasetProfile.objects.get_or_create(dataset=self, defaults={'data': json})
+        if not created:
+            profile.data = json
+        profile.save()
 
-        super(Dataset, self).save(force_insert, force_update, using)
+
+class DatasetJSONFile(JSONDataModel):
+    """
+    The data associated with this dataset in the Exhibit JSON format
+    """
+    dataset = models.OneToOneField(Dataset, related_name="data")
+
+
+class DatasetProfile(JSONDataModel):
+    """
+    A JSON document representing the properties defined in the dataset
+    """
+    dataset = models.OneToOneField(Dataset, related_name="profile")
 
 
 
+class DatasetPropertiesCache(JSONDataModel):
+    """
+    An exhibit compatible representation of the properties defined in DatasetProfile.
 
+    This is a temporary duplication of the data in DatasetProfile.  The property definitions
+    need to be harmonized with what exhibit expects.
+    """
+
+    dataset = models.OneToOneField(Dataset, related_name="properties_cache")
+
+
+def sync_properties(sender, instance=None, **kwargs):
+    # convert freemix properties to exhibit properties
+    if instance is None:
+        return
+    profile = instance.data
+    result = {}
+    for prop in profile["properties"]:
+        type = "text"
+        for tag in prop["tags"]:
+            if tag.startswith("property:type=") and not tag=="property:type=shredded_list":
+                type = tag[len("property:type="):]
+
+        result[prop["property"]] = {
+            "label": prop["label"],
+            "valueType": type
+
+        }
+
+    property_cache,created = DatasetPropertiesCache.objects.get_or_create(dataset=instance.dataset, defaults={'data': result})
+    if not created:
+        property_cache.data = result
+    property_cache.save()
+
+signals.post_save.connect(sync_properties, sender=DatasetProfile)
 
 
 class DataSource(TimeStampedModel):
+    """
+    This class should be extended to define the source from which the data in Datasets are derived.
+
+    Extending subclasses should include any variable parameters that define a dataset.  In addition,
+    they should override the `refresh()` method to simply perform the data generation and return the result.
+
+    """
     classname = models.CharField(max_length=32, editable=False, null=True)
 
     owner = models.ForeignKey(User, null=True, blank=True, related_name="data_sources")
@@ -99,15 +143,21 @@ class DataSource(TimeStampedModel):
         tx.save()
         return tx
 
+    def refresh(self):
+        return None
+
     def save(self, *args, **kwargs):
         if self.classname is None:
             self.classname = self.__class__.__name__
         super(DataSource, self).save(*args, **kwargs)
 
 
-
-
 class TransformMixin(models.Model):
+    """
+    Contains the methods and parameters necessary to create a simple data
+     source that posts to a service and returns the result
+    """
+
     transform = AkaraTransformClient(AKARA_TRANSFORM_URL)
 
     class Meta:
@@ -161,16 +211,14 @@ def parse_profile_json(owner, contents, published=True):
     profile = contents.get("data_profile")
     title = profile.get("label", str(uuid.uuid4()))
     description = profile.get("description", None)
-    data = {"items": contents.get("items", [])}
-    profile = {"properties": profile["properties"]}
-    properties_cache = synchronize_properties_cache(profile)
-    ds = Dataset.objects.create(owner=owner,
+
+    with db_tx.commit_on_success():
+        ds = Dataset.objects.create(owner=owner,
                 published=published,
                 title=title,
-                description=description,
-                profile=profile,
-                data=data,
-                properties_cache=properties_cache)
+                description=description)
+        ds.update_data({"items": contents.get("items", [])})
+        ds.update_profile( {"properties": profile["properties"]})
 
 
     return ds

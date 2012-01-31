@@ -140,9 +140,7 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
 
     datasets = other_user.datasets.filter(PermissionsRegistry.get_filter("dataset.can_view", request.user))
     datasets = datasets.select_related("owner")
-    datasets = datasets.defer("properties_cache", "data", "profile")
     exhibits = other_user.exhibits.filter(PermissionsRegistry.get_filter("exhibit.can_view", request.user))
-    exhibits = exhibits.defer("dataset__properties_cache", "dataset__data", "dataset__profile")
     exhibits = exhibits.select_related("owner", "dataset__owner", "dataset")
     return render_to_response(template_name, dict({
         "is_me": is_me,

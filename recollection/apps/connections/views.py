@@ -82,7 +82,6 @@ class DatasetListConnectionsView(ListView):
                           Friendship.objects.friends_for_user(user)]
         list = Dataset.objects.filter(owner__pk__in=pre_friend_ids)
         list = list.select_related("owner",)
-        list = list.defer("properties_cache","profile","data")
 #        list = list.annotate(exhibit_count=Count('exhibits'))
         list = list.filter(PermissionsRegistry.get_filter("dataset.can_view", self.request.user))
 
@@ -122,7 +121,6 @@ class ExhibitListConnectionsView(ListView):
         perm_filter = PermissionsRegistry.get_filter("exhibit.can_view", self.request.user)
         list = Exhibit.objects.filter(owner__pk__in=pre_friend_ids).filter(perm_filter)
         list = list.select_related("owner", "dataset", "dataset__owner")
-        list = list.defer("dataset__properties_cache", "dataset__profile", "dataset__data", "profile")
         if sort:
             dir = vars.get('dir', "desc")
             order_by = (dir=="desc" and "-" or "") + sort

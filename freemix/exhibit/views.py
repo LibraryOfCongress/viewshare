@@ -62,6 +62,7 @@ class ExhibitCreateFormView(CreateView):
         self.object = form.save()
         return HttpResponseRedirect(self.get_success_url())
 
+
 class ExhibitDetailEditView(OwnerSlugPermissionMixin, UpdateView):
     form_class = forms.UpdateExhibitDetailForm
     object_perm="exhibit.can_edit"
@@ -86,7 +87,11 @@ class ExhibitCreateView(View):
 
     def get(self, request, *args, **kwargs):
         self.dataset_args = {"owner": self.kwargs["owner"], "slug": self.kwargs["slug"]}
-        self.dataset = get_object_or_404(Dataset,owner__username=self.kwargs["owner"], slug=self.kwargs["slug"])
+
+        self.dataset = get_object_or_404(Dataset.objects.select_related("owner"),
+                                         owner__username=self.kwargs["owner"],
+                                         slug=self.kwargs["slug"])
+
         if not self.check_permissions():
             raise Http404()
 
@@ -94,14 +99,15 @@ class ExhibitCreateView(View):
         dataset_profile_url = reverse("dataset_profile_json", kwargs=self.dataset_args)
         data_url = reverse("dataset_data_json", kwargs=self.dataset_args)
         dataset_properties_cache = reverse("dataset_properties_cache_json", kwargs=self.dataset_args)
-        canvas = get_object_or_404(models.Canvas,
-                                   slug=self.request.GET.get("canvas", conf.DEFAULT_EXHIBIT_CANVAS))
+
+        canvas_slug = self.request.GET.get("canvas", conf.DEFAULT_EXHIBIT_CANVAS)
+        canvas = get_object_or_404(models.Canvas, slug=canvas_slug)
+
         save_form_url = reverse("exhibit_create_form", kwargs={
             "owner": self.dataset.owner,
             "slug": self.dataset.slug,
             "canvas": canvas.slug
         })
-        
 
         return render(request, self.template_name, {
             "exhibit_profile_url": profile_url,
@@ -125,8 +131,14 @@ class ExhibitProfileUpdateView(View):
         return self.request.user.has_perm("exhibit.can_edit", self.exhibit)
 
     def setup(self):
-        self.exhibit = get_object_or_404(models.Exhibit, owner__username=self.kwargs["owner"],
+        qs = models.Exhibit.objects.select_related("dataset",
+                                                   "dataset__owner",
+                                                   "owner")
+
+        self.exhibit = get_object_or_404(qs,
+                                         owner__username=self.kwargs["owner"],
                                          slug=self.kwargs["slug"])
+
         self.dataset = self.exhibit.dataset
         self.dataset_args = {"owner": self.dataset.owner.username, "slug": self.dataset.slug}
 
@@ -189,7 +201,11 @@ class ExhibitProfileUpdateView(View):
 
 class ExhibitView(OwnerSlugPermissionMixin, DetailView):
 
-    model = models.Exhibit
+    select_related = ("owner", "dataset", "dataset__owner")
+
+    def get_queryset(self):
+        return models.Exhibit.objects.select_related(*self.select_related)
+
     object_perm = "exhibit.can_view"
     template_name = "exhibit/exhibit_display.html"
 
@@ -208,6 +224,9 @@ class ExhibitView(OwnerSlugPermissionMixin, DetailView):
         return context
 
 class ExhibitDisplayView(ExhibitView):
+
+    select_related = ("owner", "dataset", "dataset__owner", "theme", "canvas")
+
 
     def delete(self, request, *args, **kwargs):
         exhibit = self.get_object()
@@ -302,14 +321,14 @@ class EmbeddedExhibitView(View):
         canvas = exhibit.canvas
         canvas_html = render_to_string(canvas.location, {}).replace("\n", " ")
         profile = exhibit.dataset
-        data = profile.data
+        data = profile.data.data
 
         response = render(request, self.template_name, {
             "data": json.dumps(data, use_decimal=True),
             "title": exhibit.title,
             "description": exhibit.description,
             "metadata": json.dumps(metadata),
-            "data_profile": json.dumps(profile.profile),
+            "data_profile": json.dumps(profile.profile.data),
             "where": where,
             "permalink": get_site_url(reverse("exhibit_display",
                                               kwargs={'owner': owner,
@@ -317,6 +336,7 @@ class EmbeddedExhibitView(View):
             "canvas": canvas_html})
         response['Content-Type'] = "application/javascript"
         return response
+
 
 # Exhibit Profile Views
 
@@ -369,7 +389,6 @@ class ExhibitListView(OwnerListView):
 
     related = ("dataset__title", "dataset__owner", "dataset__slug", "owner__username", "owner__profile")
 
-    defer = ("dataset__data", "dataset__properties_cache", "dataset__profile")
 
 class ExhibitsByDatasetListView(ListView):
     template_name = "exhibit/list/exhibit_list_by_dataset.html"

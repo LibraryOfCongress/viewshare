@@ -47,7 +47,8 @@ class SharedKeyJSONView(View):
 
     def get(self, request, *args, **kwargs):
         slug = kwargs["slug"]
-        self.key = get_object_or_404(models.SharedExhibitKey, slug=slug)
+        qs = models.SharedExhibitKey.objects.select_related("exhibit","dataset")
+        self.key = get_object_or_404(qs, slug=slug)
         self.exhibit = self.key.exhibit
         if not self.exhibit.dataset_available(self.exhibit.owner):
             raise Http404
@@ -56,16 +57,18 @@ class SharedKeyJSONView(View):
 
 class SharedDatasetDataJSONView(SharedKeyJSONView):
     def get_json(self):
-        return self.exhibit.dataset.data
+        return self.exhibit.dataset.data.data
 
 
 class SharedDatasetProfileJSONView(SharedKeyJSONView):
     def get_json(self):
-        return self.exhibit.dataset.profile
+        return self.exhibit.dataset.profile.data
+
 
 class SharedDatasetPropertiesCacheJSONView(SharedKeyJSONView):
     def get_json(self):
-        return self.exhibit.dataset.profile
+        return self.exhibit.dataset.properties_cache.data
+
 
 class SharedExhibitProfileJSONView(SharedKeyJSONView):
     def get_json(self):
@@ -76,11 +79,13 @@ class SharedKeyCreateFormView(CreateView):
     form_class = forms.CreateSharedExhibitKeyForm
     template_name = "share/shared_key_form.html"
     def get_success_url(self):
-        return reverse('shared_key_create_success', kwargs={"slug": self.object.slug})
+        return reverse('shared_key_create_success',
+                       kwargs={"slug": self.object.slug})
 
     def get_form_kwargs(self):
         kwargs = super(SharedKeyCreateFormView, self).get_form_kwargs()
-        exhibit = get_object_or_404(Exhibit, slug=self.kwargs["slug"],
+        exhibit = get_object_or_404(Exhibit,
+                                    slug=self.kwargs["slug"],
                                     owner__username=self.kwargs["owner"])
         kwargs["exhibit"] = exhibit
 

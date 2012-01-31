@@ -73,10 +73,11 @@
 
       <div class="dataset-metadata dataset-left">
 	{% trans "Originally loaded by" %} <span class="dataset-owner"><a href="{% url profile_detail dataset.owner.username %}">{{ dataset.owner|nicename }}</a></span> {% trans "on" %} <span class="dataset-created-data">{{ dataset.created|date:"N j, Y" }}</span>
-	{% ifnotequal exhibits.count 0 %}
-	{% trans "and is the basis for" %} <span class="view-count"><a href="{% url exhibits_by_dataset owner=dataset.owner.username slug=dataset.slug %}">{{ exhibits.count }} {% trans "View" %}{{ exhibits.count|pluralize }}</a></span>
+    {% with exhibits.count as exhibits_count %}
+	{% ifnotequal exhibits_count 0 %}
+	{% trans "and is the basis for" %} <span class="view-count"><a href="{% url exhibits_by_dataset owner=dataset.owner.username slug=dataset.slug %}">{{ exhibits_count }} {% trans "View" %}{{ exhibits_count|pluralize }}</a></span>
 	{% endifnotequal %}
-	.
+	.{% endwith %}
       </div>
       
       {% if request.user.is_authenticated %}
