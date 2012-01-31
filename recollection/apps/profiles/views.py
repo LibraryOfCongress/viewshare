@@ -16,7 +16,6 @@ from friends.forms import InviteFriendForm
 from friends.models import FriendshipInvitation, Friendship
 from freemix.permissions import PermissionsRegistry
 
-from .models import Profile, nice_username
 from .forms import ProfileForm
 
 
@@ -200,7 +199,7 @@ def uservoice_options(request, **kwargs):
         sso_data = {
             'guid': request.user.username,
             'expires': expires,
-            'display_name': nice_username(request.user),
+            'display_name': request.user.username,
             'admin': 'accept' if request.user.is_staff else 'deny',
         }
         email = request.user.email

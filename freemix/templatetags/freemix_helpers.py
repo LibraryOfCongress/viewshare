@@ -7,15 +7,7 @@ from freemix import __version__
 register = template.Library()
 
 def _nicename(u):
-    result = cache.get("nicename%s"%u.id)
-    if result is None:
-
-        if u.get_profile().name:
-            result = u.get_profile().name
-        else:
-            result = u.username
-        cache.set("nicename%s"%u.id, result)
-    return result
+    return u.username
 
 "Outputs a string representing the user"
 @register.filter

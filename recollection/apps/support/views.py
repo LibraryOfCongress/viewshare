@@ -102,7 +102,7 @@ class RedmineIssueView(object):
 
     def generate_context(self, request, form, *args, **kwargs):
         return dict(form.cleaned_data, **{
-            'submitting_user_name': request.user.get_profile().name or request.user.username,
+            'submitting_user_name': request.user.username,
             'submitting_user_profile': get_site_url(reverse('profile_detail',
                                                             kwargs={'username':
                                                                     request.user.username})),

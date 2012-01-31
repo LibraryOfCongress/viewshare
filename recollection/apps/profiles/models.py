@@ -8,7 +8,6 @@ from django.utils.translation import ugettext_lazy as _
 class Profile(models.Model):
 
     user = models.ForeignKey(User, unique=True, verbose_name=_('user'), related_name="profile")
-    name = models.CharField(_('name'), max_length=50, null=True, blank=True)
     about = models.TextField(_('about'), null=True, blank=True)
     location = models.CharField(_('location'), max_length=40, null=True, blank=True)
     website = models.URLField(_('website'), null=True, blank=True, verify_exists=False)
@@ -40,12 +39,6 @@ def create_profile(sender, instance=None, **kwargs):
     profile, created = Profile.objects.get_or_create(user=instance)
 
 post_save.connect(create_profile, sender=User)
-
-def nice_username(u):
-    if u.get_profile().name:
-        return u.get_profile().name
-    else:
-        return u.username
 
 # Disable the creation of the superuser account on initial syncdb, as the profile model is managed by South
 
