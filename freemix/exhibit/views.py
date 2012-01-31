@@ -304,9 +304,8 @@ class EmbeddedExhibitView(View):
     def get(self, request, owner, slug):
         where = request.GET.get('where', 'freemix-embed')
         try:
-            exhibit = models.Exhibit.objects.get(slug=slug,
-                                                 owner__username=owner,
-                                                 published=True)
+            qs = models.Exhibit.objects.select_related("owner", "dataset")
+            exhibit = qs.get(slug=slug, owner__username=owner, published=True)
         except models.Exhibit.DoesNotExist:
             return self.not_found_response(request, where)
 
@@ -323,12 +322,14 @@ class EmbeddedExhibitView(View):
         profile = exhibit.dataset
         data = profile.data.data
 
+
         response = render(request, self.template_name, {
             "data": json.dumps(data, use_decimal=True),
             "title": exhibit.title,
             "description": exhibit.description,
             "metadata": json.dumps(metadata),
             "data_profile": json.dumps(profile.profile.data),
+            "properties": json.dumps(profile.properties_cache.data),
             "where": where,
             "permalink": get_site_url(reverse("exhibit_display",
                                               kwargs={'owner': owner,

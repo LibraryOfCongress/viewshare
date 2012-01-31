@@ -46,6 +46,17 @@ class Dataset(TitleSlugDescriptionModel, TimeStampedModel):
             'owner': self.owner.username,
             'slug': self.slug})
 
+    @permalink
+    def get_data_url(self):
+        return ("dataset_data_json",  (), {
+                    'owner': self.owner.username,
+                    'slug': self.slug})
+    @permalink
+    def get_properties_url(self):
+        return ("dataset_properties_cache_json",  (), {
+                    'owner': self.owner.username,
+                    'slug': self.slug})
+
     def update_data(self, json):
         data,created = DatasetJSONFile.objects.get_or_create(dataset=self, defaults={'data': json})
         if not created:
