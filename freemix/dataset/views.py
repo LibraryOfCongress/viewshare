@@ -4,6 +4,8 @@ from django.db import transaction
 from django.db.models.query_utils import Q
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseServerError, Http404, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, render
+from django.utils.decorators import method_decorator
+from django.views.decorators.http import condition, last_modified
 from django.views.generic.base import View, RedirectView
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.detail import DetailView
@@ -19,32 +21,46 @@ from freemix.views import OwnerListView, OwnerSlugPermissionMixin, JSONResponse
 #----------------------------------------------------------------------------------------------------------------------#
 # Data Profile Views
 
-class DataProfileJSONView(View):
-
-    def get_doc(self, ds):
-        return ds.profile.data
-
-    def get(self, request, *args, **kwargs):
+def get_request_instance(request, *args, **kwargs):
+    if not hasattr(request, "parent_object"):
         owner = kwargs["owner"]
         slug = kwargs["slug"]
+        request.parent_object = get_object_or_404(models.Dataset, owner__username=owner, slug=slug)
+    return request.parent_object
 
-        ds = get_object_or_404(models.Dataset, owner__username=owner, slug=slug)
+def last_modified_func(request, *args, **kwargs):
+
+    return get_request_instance(request, *args, **kwargs).modified
+
+class DataProfileJSONView(View):
+    model = models.DatasetProfile
+
+    def get_doc(self, ds):
+        return  self.model.objects.filter(dataset=ds).values_list("data")[0][0]
+
+
+    def get_parent_object(self):
+        return get_request_instance(self.request, *self.args, **self.kwargs)
+
+    @method_decorator(last_modified(last_modified_func))
+    def get(self, request, *args, **kwargs):
+        ds = self.get_parent_object()
         user = self.request.user
 
         if not user.has_perm("dataset.can_view", ds):
             raise Http404
 
-        return JSONResponse(self.get_doc(ds))
+        response = HttpResponse(self.get_doc(ds))
+        response["Content-Type"] = "text/javascript"
+        return response
 
 
 class DataJSONView(DataProfileJSONView):
-    def get_doc(self, ds):
-        return ds.data.data
+    model = models.DatasetJSONFile
 
 
 class DataPropertiesCacheJSONView(DataProfileJSONView):
-    def get_doc(self, ds):
-        return ds.properties_cache.data
+    model = models.DatasetPropertiesCache
 
 
 dataset_list_by_owner = OwnerListView.as_view(template_name="dataset/dataset_list_by_owner.html",

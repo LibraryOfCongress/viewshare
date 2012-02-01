@@ -116,7 +116,7 @@ def sync_properties(sender, instance=None, **kwargs):
 
     property_cache,created = DatasetPropertiesCache.objects.get_or_create(dataset=instance.dataset, defaults={'data': result})
     if not created:
-        property_cache.data = result
+        property_cache.data = {"properties": result}
     property_cache.save()
 
 signals.post_save.connect(sync_properties, sender=DatasetProfile)
