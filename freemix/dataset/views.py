@@ -50,8 +50,13 @@ class DataProfileJSONView(View):
         if not user.has_perm("dataset.can_view", ds):
             raise Http404
 
+        cache_control = "no-cache, must-revalidate"
+        if not ds.published:
+            cache_control += ", private"
+
         response = HttpResponse(self.get_doc(ds))
         response["Content-Type"] = "text/javascript"
+        response["Cache-Control"] = cache_control
         return response
 
 
