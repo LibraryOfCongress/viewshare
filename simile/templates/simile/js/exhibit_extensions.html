@@ -3,6 +3,14 @@
 
 {% compress js %}
 <script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/extensions/map/scripts/openlayers/OpenLayers.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        OpenLayers._getScriptLocation = function() {
+            return "{{STATIC_URL}}simile/exhibit/extensions/map/scripts/openlayers/";
+        };
+    });
+
+</script>
 <script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/extensions/map/scripts/openlayers/OpenStreetMap.js"></script>
 {% endcompress %}
 
