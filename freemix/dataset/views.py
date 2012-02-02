@@ -4,8 +4,7 @@ from django.db import transaction
 from django.db.models.query_utils import Q
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseServerError, Http404, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, render
-from django.utils.decorators import method_decorator
-from django.views.decorators.http import condition, last_modified
+from django.views.decorators.http import  last_modified
 from django.views.generic.base import View, RedirectView
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.detail import DetailView
@@ -15,7 +14,7 @@ from freemix.permissions import PermissionsRegistry
 from freemix.dataset import models
 from django.utils import simplejson as json
 
-from freemix.views import OwnerListView, OwnerSlugPermissionMixin, JSONResponse
+from freemix.views import OwnerListView, OwnerSlugPermissionMixin, JSONResponse, BaseJSONView
 
 
 #----------------------------------------------------------------------------------------------------------------------#
@@ -28,45 +27,38 @@ def get_request_instance(request, *args, **kwargs):
         request.parent_object = get_object_or_404(models.Dataset, owner__username=owner, slug=slug)
     return request.parent_object
 
-def last_modified_func(request, *args, **kwargs):
 
-    return get_request_instance(request, *args, **kwargs).modified
+class DatasetJSONView(BaseJSONView):
+    model = None
 
-class DataProfileJSONView(View):
-    model = models.DatasetProfile
-
-    def get_doc(self, ds):
+    def get_doc(self):
+        ds = self.get_parent_object()
         return  self.model.objects.filter(dataset=ds).values_list("data")[0][0]
-
 
     def get_parent_object(self):
         return get_request_instance(self.request, *self.args, **self.kwargs)
 
-    @method_decorator(last_modified(last_modified_func))
-    def get(self, request, *args, **kwargs):
-        ds = self.get_parent_object()
-        user = self.request.user
+    def check_perms(self):
+        if not self.request.user.has_perm("dataset.can_view", self.get_parent_object()):
+            return False
+        return True
 
-        if not user.has_perm("dataset.can_view", ds):
-            raise Http404
-
+    def cache_control_header(self):
         cache_control = "no-cache, must-revalidate"
-        if not ds.published:
+        if not self.get_parent_object().published:
             cache_control += ", private"
-
-        response = HttpResponse(self.get_doc(ds))
-        response["Content-Type"] = "text/javascript"
-        response["Cache-Control"] = cache_control
-        return response
+        else:
+            cache_control += ", public"
+        return cache_control
 
 
-class DataJSONView(DataProfileJSONView):
-    model = models.DatasetJSONFile
+lmdec = last_modified(lambda request, *args, **kwargs: get_request_instance(request, *args, **kwargs).modified)
 
+dataset_profile_json = lmdec(DatasetJSONView.as_view(model=models.DatasetProfile))
 
-class DataPropertiesCacheJSONView(DataProfileJSONView):
-    model = models.DatasetPropertiesCache
+dataset_data_json = lmdec(DatasetJSONView.as_view(model=models.DatasetJSONFile))
 
+dataset_properties_json = lmdec(DatasetJSONView.as_view(model=models.DatasetPropertiesCache))
 
 dataset_list_by_owner = OwnerListView.as_view(template_name="dataset/dataset_list_by_owner.html",
                                                model=models.Dataset,

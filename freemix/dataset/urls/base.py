@@ -4,13 +4,15 @@ from freemix.dataset import  views
 # Dataset parameters
 urlpatterns = patterns('',
     url(r"^(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/profile.json$",
-        views.DataProfileJSONView.as_view(),
+        views.dataset_profile_json,
         name="dataset_profile_json"),
+
     url(r"^(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/data.json$",
-        views.DataJSONView.as_view(),
+        views.dataset_data_json,
         name="dataset_data_json"),
+
     url(r"^(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/properties.json$",
-        views.DataPropertiesCacheJSONView.as_view(),
+        views.dataset_properties_json,
         name="dataset_properties_cache_json"),
 )
 

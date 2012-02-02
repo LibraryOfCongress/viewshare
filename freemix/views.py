@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404
 from django.template.loader import render_to_string
+from django.views.generic import View
 from django.views.generic.list import ListView
 from freemix.permissions import PermissionsRegistry
 
@@ -98,3 +99,32 @@ class JSONResponse(HttpResponse):
             content = content,
             mimetype = mime,
         )
+
+
+class BaseJSONView(View):
+
+    def get_doc(self):
+        """
+        This should return a raw string representation of the response document
+        """
+        return "{}"
+
+    def check_perms(self):
+        """
+        Returns a boolean value indicating whether or not the request user has
+        the appropriate permissions to view this document
+        """
+        return True
+
+    def cache_control_header(self):
+        return "no-cache, must-revalidate"
+
+    def get(self, request, *args, **kwargs):
+
+        if not self.check_perms():
+            raise Http404
+
+        response = HttpResponse(self.get_doc())
+        response["Content-Type"] = "application/json"
+        response["Cache-Control"] = self.cache_control_header()
+        return response
