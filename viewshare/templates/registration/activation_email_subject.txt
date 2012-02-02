@@ -1,1 +1,1 @@
-Activate your {{ SITE_NAME }} account!
+Activate the account for '{{profile.user.username}}' on  {{ SITE_NAME }}

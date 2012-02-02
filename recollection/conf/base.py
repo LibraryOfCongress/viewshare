@@ -1,7 +1,6 @@
 from os import path
 from posixpath import join as url_join
 from imp import find_module
-from recollection.migrations import SOUTH_MIGRATION_MODULES
 
 module_path = lambda m: path.abspath(find_module(m)[1])
 
@@ -168,7 +167,7 @@ TEMPLATE_DIRS = (
 
 SITE_NAME = "Recollection"
 SITE_NAME_STATUS = "BETA"
-CONTACT_EMAIL = "ndiippaccess@loc.gov"
+CONTACT_EMAIL = "noreply@example.com"
 DEFAULT_FROM_EMAIL = "webmaster@zepheira.com"
 FEEDBACKLINK = "mailto:recollection@lists.zepheira.com"
 
