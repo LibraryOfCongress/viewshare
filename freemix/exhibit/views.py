@@ -1,11 +1,9 @@
-from django.contrib.auth.decorators import login_required
-
 from django.utils.translation import ugettext_lazy as _
 
 from django.http import *
+from django.views.decorators.http import last_modified
 from django.views.generic.base import View
-from django.shortcuts import render_to_response, get_object_or_404, render
-from django.template import RequestContext
+from django.shortcuts import  get_object_or_404, render
 from django.template.loader import render_to_string
 from django.core.urlresolvers import  reverse
 from django.views.generic.detail import DetailView
@@ -270,74 +268,54 @@ class ExhibitDetailView(ExhibitView):
         return context
 
 
+def get_exhibit(request, owner, slug):
+    if not hasattr(request, "exhibit"):
+        qs = models.Exhibit.objects.select_related("owner", "dataset")
+        request.exhibit = get_object_or_404(qs, slug=slug, owner__username=owner, published=True)
+    return request.exhibit
+
 class EmbeddedExhibitView(View):
     """Generate the javascript necessary to embed an exhibit on an external site
     """
     # The
     template_name = "exhibit/embed/show.js"
 
-    # The template to display when an exhibit is not found
-    not_found_template_name = "exhibit/embed/none.js"
-
-    no_data_template_name = "exhibit/embed/no_dataset.js"
-
-    def not_found_response(self, request, where):
-        """Returns a trivial response when the desired exhibit is not found
-        """
-        response = render_to_response(self.not_found_template_name, {
-            "where": where,
-        }, context_instance=RequestContext(request))
-
-        response['Content-Type'] = "application/javascript"
-        return response
-
-    def no_dataset_response(self, request, where):
-        """Returns a trivial response when the desired dataset is not found
-        """
-        response = render_to_response(self.no_data_template_name, {
-            "where": where,
-        }, context_instance=RequestContext(request))
-
-        response['Content-Type'] = "application/javascript"
-        return response
-
     def get(self, request, owner, slug):
         where = request.GET.get('where', 'freemix-embed')
-        try:
-            qs = models.Exhibit.objects.select_related("owner", "dataset")
-            exhibit = qs.get(slug=slug, owner__username=owner, published=True)
-        except models.Exhibit.DoesNotExist:
-            return self.not_found_response(request, where)
+        exhibit = get_exhibit(request, owner, slug)
 
-        if not exhibit.published:
-            return self.not_found_response(request, where)
-
-        if not exhibit.dataset_available(self.request.user):
-            return self.no_dataset_response(request, where)
-        
         metadata = exhibit.profile
 
         canvas = exhibit.canvas
         canvas_html = render_to_string(canvas.location, {}).replace("\n", " ")
-        profile = exhibit.dataset
-        data = profile.data.data
+        dataset = exhibit.dataset
 
+        data_dict = Dataset.objects.filter(id=dataset.id).values("data__data",
+            "profile__data",
+            "properties_cache__data")[0]
 
         response = render(request, self.template_name, {
-            "data": json.dumps(data, use_decimal=True),
+            "data": data_dict["data__data"],
             "title": exhibit.title,
             "description": exhibit.description,
             "metadata": json.dumps(metadata),
-            "data_profile": json.dumps(profile.profile.data),
-            "properties": json.dumps(profile.properties_cache.data),
+            "data_profile": data_dict["profile__data"],
+            "properties": data_dict["properties_cache__data"],
             "where": where,
             "permalink": get_site_url(reverse("exhibit_display",
                                               kwargs={'owner': owner,
                                                       'slug': slug})),
             "canvas": canvas_html})
         response['Content-Type'] = "application/javascript"
+        response['Cache-Control'] = "no-cache, must-revalidate, public"
         return response
 
+def lmfunc(r, owner, slug):
+    ex = get_exhibit(r, owner, slug)
+    if ex.modified > ex.dataset.modified:
+        return ex.modified
+    return ex.dataset.modified
+embedded_exhibit_view = last_modified(lmfunc)(EmbeddedExhibitView.as_view())
 
 # Exhibit Profile Views
 

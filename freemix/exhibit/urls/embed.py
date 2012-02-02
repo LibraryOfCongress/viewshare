@@ -5,8 +5,7 @@ from freemix.exhibit import views
 urlpatterns = patterns('',
 
        url(r'^(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/embed.js$',
-          views.EmbeddedExhibitView.as_view(),
+          views.embedded_exhibit_view,
           name='exhibit_embed_js'),
-
 
 )
