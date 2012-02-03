@@ -2,7 +2,6 @@ from os import path
 from posixpath import join as url_join
 from imp import find_module
 
-
 module_path = lambda m: path.abspath(find_module(m)[1])
 
 MEDIA_ROOT = path.join(module_path("recollection"), "site_media", "media")
