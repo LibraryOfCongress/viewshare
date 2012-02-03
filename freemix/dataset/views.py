@@ -44,7 +44,7 @@ class DatasetJSONView(BaseJSONView):
         return True
 
     def cache_control_header(self):
-        cache_control = "no-cache, must-revalidate"
+        cache_control = super(DatasetJSONView, self).cache_control_header()
         if not self.get_parent_object().published:
             cache_control += ", private"
         else:

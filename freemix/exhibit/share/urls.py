@@ -9,18 +9,18 @@ urlpatterns = patterns('',
         name="shared_exhibit_display"),
 
     url(r"^(?P<slug>[a-zA-Z0-9_.-]+)/data.json$",
-        views.SharedDatasetDataJSONView.as_view(),
+        views.shared_dataset_data_json,
         name="shared_dataset_data_json"),
     url(r"^(?P<slug>[a-zA-Z0-9_.-]+)/data_profile.json$",
-        views.SharedDatasetProfileJSONView.as_view(),
+        views.shared_dataset_profile_json,
         name="shared_dataset_profile_json"),
 
     url(r"^(?P<slug>[a-zA-Z0-9_.-]+)/properties.json$",
-        views.SharedDatasetPropertiesCacheJSONView.as_view(),
+        views.shared_dataset_properties_json,
         name="shared_dataset_properties_cache_json"),
 
     url(r"^(?P<slug>[a-zA-Z0-9_.-]+)/profile.json$",
-        views.SharedExhibitProfileJSONView.as_view(),
+        views.shared_exhibit_profile_view,
         name="shared_exhibit_profile_json"),
 
     url(r"^view/(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/$",
