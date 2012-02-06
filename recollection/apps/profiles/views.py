@@ -7,6 +7,7 @@ from django.conf import settings
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.utils.http import http_date
 
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ugettext
@@ -242,4 +243,5 @@ def uservoice_options(request, **kwargs):
     response =  render(request, "profiles/uservoice_options.js", {
         "token": param_for_uservoice_sso,
     }, content_type="text/javascript")
+    response["Expires"] = http_date(dt)
     return response
