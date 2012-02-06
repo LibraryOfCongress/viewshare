@@ -268,11 +268,12 @@ class ExhibitDetailView(ExhibitView):
         return context
 
 
-def get_exhibit(request, owner, slug):
+def get_published_exhibit(request, owner, slug):
     if not hasattr(request, "exhibit"):
         qs = models.Exhibit.objects.select_related("owner", "dataset")
         request.exhibit = get_object_or_404(qs, slug=slug, owner__username=owner, published=True)
     return request.exhibit
+
 
 class EmbeddedExhibitView(View):
     """Generate the javascript necessary to embed an exhibit on an external site
@@ -282,7 +283,7 @@ class EmbeddedExhibitView(View):
 
     def get(self, request, owner, slug):
         where = request.GET.get('where', 'freemix-embed')
-        exhibit = get_exhibit(request, owner, slug)
+        exhibit = get_published_exhibit(request, owner, slug)
 
         metadata = exhibit.profile
 
@@ -311,7 +312,7 @@ class EmbeddedExhibitView(View):
         return response
 
 def lmfunc(r, owner, slug):
-    ex = get_exhibit(r, owner, slug)
+    ex = get_published_exhibit(r, owner, slug)
     if ex.modified > ex.dataset.modified:
         return ex.modified
     return ex.dataset.modified
@@ -342,6 +343,13 @@ class StockExhibitProfileJSONView(View):
                     "name": "List"}]}})
 
 
+
+def get_exhibit(request, owner, slug):
+    if not hasattr(request, "exhibit"):
+        qs = models.Exhibit.objects.select_related("owner", "dataset")
+        request.exhibit = get_object_or_404(qs, slug=slug, owner__username=owner)
+    return request.exhibit
+
 class ExhibitProfileJSONView(BaseJSONView):
 
     def get_parent_object(self):
@@ -352,13 +360,12 @@ class ExhibitProfileJSONView(BaseJSONView):
         return models.Exhibit.objects.filter(id=ex.id).values_list("profile", flat=True)[0]
 
     def check_perms(self):
-        if not self.request.user.has_perm("exhibit.can_view", self.get_parent_object()):
-            return False
-        return True
+        return self.request.user.has_perm("exhibit.can_view", self.get_parent_object())
+
 
     def cache_control_header(self):
         cache_control = super(ExhibitProfileJSONView, self).cache_control_header()
-        if not self.get_parent_object().published:
+        if not self.request.exhibit.published:
             cache_control += ", private"
         else:
             cache_control += ", public"
