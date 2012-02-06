@@ -126,5 +126,6 @@ class BaseJSONView(View):
 
         response = HttpResponse(self.get_doc())
         response["Content-Type"] = "application/json"
+        response["Expires"] = 0
         response["Cache-Control"] = self.cache_control_header()
         return response

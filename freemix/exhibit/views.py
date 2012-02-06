@@ -18,7 +18,7 @@ from freemix.utils import get_site_url
 
 from django.utils import simplejson as json
 import uuid
-from freemix.views import JSONResponse, OwnerListView, OwnerSlugPermissionMixin
+from freemix.views import JSONResponse, OwnerListView, OwnerSlugPermissionMixin, BaseJSONView
 
 
 # Edit Views
@@ -342,20 +342,29 @@ class StockExhibitProfileJSONView(View):
                     "name": "List"}]}})
 
 
-class ExhibitProfileJSONView(View):
+class ExhibitProfileJSONView(BaseJSONView):
 
-    def get(self, request, *args, **kwargs):
-        owner = kwargs["owner"]
-        slug = kwargs["slug"]
+    def get_parent_object(self):
+        return get_exhibit(self.request, self.kwargs["owner"], self.kwargs["slug"])
 
-        exhibit = get_object_or_404(models.Exhibit, owner__username=owner, slug=slug)
-        user = self.request.user
+    def get_doc(self):
+        ex = self.get_parent_object()
+        return models.Exhibit.objects.filter(id=ex.id).values_list("profile", flat=True)[0]
 
-        if not user.has_perm("exhibit.can_view", exhibit):
-            raise Http404
+    def check_perms(self):
+        if not self.request.user.has_perm("exhibit.can_view", self.get_parent_object()):
+            return False
+        return True
 
-        return JSONResponse(exhibit.profile)
-
+    def cache_control_header(self):
+        cache_control = super(ExhibitProfileJSONView, self).cache_control_header()
+        if not self.get_parent_object().published:
+            cache_control += ", private"
+        else:
+            cache_control += ", public"
+        return cache_control
+lmdec = last_modified(lambda request, *args, **kwargs: get_exhibit(request, kwargs["owner"], kwargs["slug"]).modified)
+exhibit_profile_json_view = lmdec(ExhibitProfileJSONView.as_view())
 
 # List Views
 
@@ -366,7 +375,7 @@ class ExhibitListView(OwnerListView):
 
     model = models.Exhibit
 
-    related = ("dataset__title", "dataset__owner", "dataset__slug", "owner__username", "owner__profile")
+    related = ("dataset", "dataset__owner", "owner", "owner__profile")
 
 
 class ExhibitsByDatasetListView(ListView):
