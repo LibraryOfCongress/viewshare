@@ -69,9 +69,9 @@
 {% cache 3600 footer %}
 <div class="footernav">
 <span class="linknav left">
-    <span class="aboutlink"><a href="{% page_url "community" %}">{% trans "About" %} {{ SITE_NAME }}</a></span> <span class="divider">|</span>
-    <span class="helplink"><a href="{% page_url "help" %}" target="_blank">{% trans "Help" %}</a></span> <span class="divider">|</span>
-    <span class="tos"><a href="{% page_url "tos" %}" target="_blank">{% trans "Terms of Service" %}</a></span>
+    <span class="aboutlink"><a href="{% url community %}">{% trans "About" %} {{ SITE_NAME }}</a></span> <span class="divider">|</span>
+    <span class="helplink"><a href="{% url help %}" target="_blank">{% trans "Help" %}</a></span> <span class="divider">|</span>
+    <span class="tos"><a href="{% url tos %}" target="_blank">{% trans "Terms of Service" %}</a></span>
 </span>
 
 <span class="sponsornav right">
@@ -85,7 +85,6 @@
 {% endblock %}
 
 {% block final %}
-    {% cache 600 footer_final %}
   <p id="versions">
         {{ SITE_NAME }} {% recollection_version %} <span class="divider">&middot;</span>
         Freemix {% freemix_version %} <span class="divider">&middot;</span>
@@ -95,5 +94,4 @@
         <script type="text/javascript" src="{% url uservoice_options %}"></script>
         <!--<script type="text/javascript" src="https://cdn.uservoice.com/javascripts/widgets/tab.js"></script>-->
     {% endif %}
-    {% endcache %}
 {% endblock %}

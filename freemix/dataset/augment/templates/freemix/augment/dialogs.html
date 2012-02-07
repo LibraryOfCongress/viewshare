@@ -63,7 +63,8 @@
                             <label for="edit_field_pattern_text_user_input">{% blocktrans %}Enter a pattern {% endblocktrans%}</label>
                             <input type="hidden" id="edit_field_pattern_text" />
                             <textarea id="edit_field_pattern_text_user_input"></textarea>
-                            <p class="formHint">{% blocktrans %}Valid patterns are described <a href="http://community.zepheira.com/wiki/loc/ValidPatternsList" target="_blank">here</a>.{% endblocktrans %}
+                            {% url augment-list-patterns as augment-list-patterns %}
+                            <p class="formHint">{% blocktrans %}Valid patterns are described <a href="{{ augment-list-patterns }}" target="_blank">here</a>.{% endblocktrans %}
                         </div>
                         <div id="div_id_pattern_type_toggle" class="ctrlHolder advanced_pattern ui-helper-hidden">
                             <label for="edit_field_pattern_type_select">{% blocktrans %}Pattern type:{%endblocktrans%}</label>

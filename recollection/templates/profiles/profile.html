@@ -77,9 +77,9 @@ $(document).ready(function() {
 <div class="priority-area">
   {% cache 3600 profile_pages %}
   <p>
-    <a href="{% page_url "home" %}">{{ SITE_NAME }} Home</a> <span class="divider">|</span>
-    <a href="{% page_url "userguide" %}">User's Guide</a> <span class="divider">|</span>
-    <a href="{% page_url "faq" %}">FAQ</a> <span class="divider">|</span>
+    <a href="{% url front_page %}">{{ SITE_NAME }} Home</a> <span class="divider">|</span>
+    <a href="{% url userguide %}">User's Guide</a> <span class="divider">|</span>
+    <a href="{% url faq %}">FAQ</a> <span class="divider">|</span>
     <a href="{% url profile_detail 'Guide' %}">Ask the Guide</a> <span class="divider">|</span>
     <a href="{% url upload_dataset %}" class="button_link">{% trans "Upload Data" %}</a>
   </p>
