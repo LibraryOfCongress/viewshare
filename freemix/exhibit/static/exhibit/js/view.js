@@ -334,13 +334,8 @@
 
             if (config.possibleOrders && config.possibleOrders.length > 0) {
                 view.attr("ex:possibleOrders", this._mapExpressions(config.possibleOrders));
-            } else {
-                var exp = this._expression;
-
-                view.attr("ex:possibleOrders", $.map(Freemix.property.enabledPropertiesArray(), function(p) {
-                    return exp(p.name());
-                }).join(","));
             }
+
         }
      });
 
