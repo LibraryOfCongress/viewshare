@@ -96,7 +96,7 @@ Exhibit.OLMapView._settingSpecs = {
     "showSummary":      { type: "boolean",  defaultValue: true      },
     "showFooter":       { type: "boolean",  defaultValue: true      },
     "showToolbox":      { type: "boolean",  defaultValue: true      },
-    "osmURL":           { type: "text",     defaultValue: "http://tah.openstreetmap.org/Tiles/tile/${z}/${x}/${y}.png" },
+    "osmURL":           { type: "text",     defaultValue: "http://tile.openstreetmap.org/${z}/${x}/${y}.png" },
     "wmsURL":           { type: "text",     defaultValue: "http://labs.metacarta.com/wms/vmap0" }
 };
 
