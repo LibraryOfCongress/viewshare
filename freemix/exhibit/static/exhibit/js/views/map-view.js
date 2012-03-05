@@ -66,8 +66,12 @@
         this._renderFormats(view);
 
         view.append(this._renderListLens(config));
-
+        this.annotate(view);
         return view;
+    };
+
+    Freemix.mapViewLib.annotate = function(view) {
+
     };
 
 })(window.Freemix.jQuery, window.Freemix);
