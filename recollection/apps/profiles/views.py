@@ -243,5 +243,6 @@ def uservoice_options(request, **kwargs):
     response =  render(request, "profiles/uservoice_options.js", {
         "token": param_for_uservoice_sso,
     }, content_type="text/javascript")
-    response["Expires"] = http_date(dt)
+    if param_for_uservoice_sso:
+        response["Expires"] = http_date(dt)
     return response
