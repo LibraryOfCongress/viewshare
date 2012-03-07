@@ -163,9 +163,13 @@ Uservoice_ feedback tab::
    USERVOICE_SETTINGS = {
       'API_KEY': '<your-api-key>',
       'ACCOUNT_KEY': '<your-account-key>',
+      'FORUM': '<forum-id>',               # default: 1
+      'HOST': '<uservoice-host>',          # default: recollection.uservoice.com
    }
 
 You can find your keys in the Uservoice control panel.
+
+If you wish to do any customization of the Uservoice tab, override the `profiles/uservoice_options` template.
 
 The FEEDBACKLINK setting, described above, can also be set to the URL
 of a Uservoice forum.

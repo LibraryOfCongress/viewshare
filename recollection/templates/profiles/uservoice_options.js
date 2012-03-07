@@ -1,9 +1,9 @@
 
 var uservoiceOptions = {
     /* required */
-     key: 'recollection'
-,    host: 'recollection.uservoice.com'
-,    forum: '1'
+     key: '{{key}}'
+,    host: '{{host}}'
+,    forum: '{{forum}}'
 ,    showTab: true
     /* optional */
 ,    alignment: 'right'

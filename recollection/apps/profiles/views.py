@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 from django.db.models import Count
 from django.shortcuts import render_to_response, render, get_object_or_404
 from django.template import RequestContext
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.conf import settings
 
 from django.contrib.auth.decorators import login_required
@@ -186,6 +186,57 @@ def profile_edit(request, form_class=ProfileForm, **kwargs):
     }, context_instance=RequestContext(request))
 
 
+def uservoice_token(request, api_key, account_key):
+    """
+    Calculates and caches a UserVoice SSO token based on an
+    authenticated user.
+    """
+    cache_key = "uservoice_sso_%s"%request.session.session_key
+    sso_token = cache.get(cache_key)
+    if sso_token is None:
+        # Calc expiry time. UV needs it in GMT
+        dt=time.mktime(request.session.get_expiry_date().timetuple())
+        utc_dt = datetime.fromtimestamp(dt)
+        expires = utc_dt.strftime("%Y-%m-%d %H:%M:%S")
+
+        sso_data = {
+            'guid': request.user.username,
+            'expires': expires,
+            'display_name': request.user.username,
+            'admin': 'accept' if request.user.is_staff else 'deny',
+        }
+        email = request.user.email
+        if email:
+            sso_data["email"] = email
+        block_size = 16
+        mode = AES.MODE_CBC
+
+        iv = "OpenSSL for Ruby"
+
+        json = simplejson.dumps(sso_data, separators=(',',':'))
+
+        salted = api_key+account_key
+
+        saltedHash = hashlib.sha1(salted).digest()[:16]
+
+        json_bytes = array.array('b', json[0 : len(json)])
+        iv_bytes = array.array('b', iv[0 : len(iv)])
+
+        # # xor the iv into the first 16 bytes.
+        for i in range(0, 16):
+            json_bytes[i] = operator.xor(json_bytes[i], iv_bytes[i])
+
+        pad = block_size - len(json_bytes.tostring()) % block_size
+        data = json_bytes.tostring() + pad * chr(pad)
+        aes = AES.new(saltedHash, mode, iv)
+        encrypted_bytes = aes.encrypt(data)
+
+        sso_token = urllib.quote(base64.b64encode(encrypted_bytes))
+        td  = utc_dt - datetime.now()
+        cache_expiry = td.days*24*3600 + td.seconds
+        cache.set(cache_key, sso_token, cache_expiry)
+    return sso_token
+
 
 def uservoice_options(request, **kwargs):
     """
@@ -193,64 +244,23 @@ def uservoice_options(request, **kwargs):
 
     Code derived from http://developer.uservoice.com/docs/single-sign-on-how-to
     """
+    s = getattr(settings, "USERVOICE_SETTINGS", None)
+    if s is None:
+        raise Http404
 
-    param_for_uservoice_sso = None
+    api_key = s.get('API_KEY')
+
+    if api_key is None:
+        raise Http404
+
+    ctx = {
+        "api_key": s.get("API_KEY"),
+        "forum": s.get("FORUM", 1),
+        "key": s.get('ACCOUNT_KEY',"recollection"),
+        "host": s.get("HOST", "recollection.uservoice.com")
+    }
 
     if request.user.is_authenticated():
-        cache_key = "uservoice_sso_%s"%request.user.username
-        param_for_uservoice_sso = cache.get(cache_key)
-        if param_for_uservoice_sso is None:
-            # Calc expiry time. UV needs it in GMT
-            dt=time.mktime(request.session.get_expiry_date().timetuple())
-            utc_dt = datetime.fromtimestamp(dt)
-            expires = utc_dt.strftime("%Y-%m-%d %H:%M:%S")
-
-            sso_data = {
-                'guid': request.user.username,
-                'expires': expires,
-                'display_name': request.user.username,
-                'admin': 'accept' if request.user.is_staff else 'deny',
-            }
-            email = request.user.email
-            if email:
-                sso_data["email"] = email
-            block_size = 16
-            mode = AES.MODE_CBC
-
-            invalid_key = 'invalid-key'
-            if 'USERVOICE_SETTINGS' in dir(settings):
-                api_key = settings.USERVOICE_SETTINGS.get('API_KEY',invalid_key)
-                account_key = settings.USERVOICE_SETTINGS.get('ACCOUNT_KEY',invalid_key)
-            else:
-                # Disable SSO by using a garbage key. Will result in logged auth
-                # failures in the Uservoice admin console.
-                api_key = invalid_key
-                account_key = invalid_key
-
-            iv = "OpenSSL for Ruby"
-
-            json = simplejson.dumps(sso_data, separators=(',',':'))
-
-            salted = api_key+account_key
-            saltedHash = hashlib.sha1(salted).digest()[:16]
-
-            json_bytes = array.array('b', json[0 : len(json)])
-            iv_bytes = array.array('b', iv[0 : len(iv)])
-
-            # # xor the iv into the first 16 bytes.
-            for i in range(0, 16):
-                json_bytes[i] = operator.xor(json_bytes[i], iv_bytes[i])
-
-            pad = block_size - len(json_bytes.tostring()) % block_size
-            data = json_bytes.tostring() + pad * chr(pad)
-            aes = AES.new(saltedHash, mode, iv)
-            encrypted_bytes = aes.encrypt(data)
-
-            param_for_uservoice_sso = urllib.quote(base64.b64encode(encrypted_bytes))
-            cache_expiry = int((utc_dt - datetime.now()).total_seconds())
-            cache.set(cache_key, param_for_uservoice_sso, cache_expiry)
-
-    response =  render(request, "profiles/uservoice_options.js", {
-        "token": param_for_uservoice_sso,
-    }, content_type="text/javascript")
-    return response
+        ctx["token"] = uservoice_token(request, ctx.get("api_key"), ctx.get("key"))
+    return render(request,"profiles/uservoice_options.js", ctx,
+                  content_type="text/javascript")
