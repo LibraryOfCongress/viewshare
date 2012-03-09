@@ -164,7 +164,7 @@ THEME_URL = '%s%s'%(STATIC_URL,THEME_FRAGMENT_URL)
 TEMPLATE_DIRS = (
     path.join(module_path("viewshare"), "templates"),
     path.join(module_path("recollection"), "templates"),
-)
+    )
 
 # Set to describe the site, properties and the names
 

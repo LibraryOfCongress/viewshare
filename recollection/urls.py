@@ -78,11 +78,21 @@ urlpatterns = patterns('',
     url(r'^userupload/$', login_required(RedirectView.as_view(url="/upload")), name="user_upload"),
 
 
-    # CMS url definition should come after all others
-    (r'^', include('cms.urls')),
 
 
 ) + staticfiles_urlpatterns()
+
+if getattr(settings, "USERVOICE_SETTINGS", None):
+    urlpatterns += patterns('',
+        (r'^uservoice/', include('viewshare.uservoice.urls')),
+    )
+
+urlpatterns += patterns('',
+
+    # CMS url definition should come after all others
+    (r'^', include('cms.urls')),
+)
+
 
 if settings.DEBUG:
     urlpatterns += patterns('',

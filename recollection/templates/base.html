@@ -31,8 +31,10 @@
   </head>
 
   <body class="{% block body_class %}{% endblock %}">
+
     {% block toolbar %}{% endblock %}
     <div class="container_12">
+        {% block banner %}
 
       {% if site_wide_announcements %}
       <div id="site_wide_announcements">
@@ -78,6 +80,8 @@
           {% endif %}
 
       <div id="subnav" class="ui-helper-clearfix">{% block subnav %}&nbsp;{% endblock %}</div>
+
+      {% endblock banner %}
 
       <div id="body" class='freemix-themeable'>
 

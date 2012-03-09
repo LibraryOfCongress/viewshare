@@ -1,0 +1,22 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Logout" %}{% endblock %}
+
+{% block body %}
+    <p>{% trans "You've been logged out." %}</p>
+{% endblock %}
+
+
+{% block final %}
+  {{ block.super }}
+    {% if USERVOICE_SETTINGS %}
+        <script type="text/javascript" src="http://feedback.uservoice.com/logout.js"></script>
+    {% endif %}
+    <script type="text/javascript">
+    jQuery(document).ready(function() {
+        window.location.href="{% url acct_login %}";
+    });
+    </script>
+{% endblock %}
