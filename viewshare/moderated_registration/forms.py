@@ -8,6 +8,12 @@ from django.utils import simplejson as json
 
 class ViewShareRegistrationForm(RegistrationForm):
 
+    username = forms.RegexField(regex=r'^[\w.-]+$',
+                                max_length=30,
+                                widget=forms.TextInput(attrs={'class': 'required'}),
+                                label=_("Username"),
+                                error_messages={'invalid': _("This value must contain only letters, numbers and underscores.")})
+
     organization = forms.CharField(required=True, max_length=100, label=_("Name"))
 
     org_type = forms.CharField(label="Type of Organization", max_length=100, required=True)
@@ -23,7 +29,7 @@ class ViewShareRegistrationForm(RegistrationForm):
     def __init__(self, *args, **kwargs):
         super(ViewShareRegistrationForm, self).__init__(*args, **kwargs)
         self.org_type_choices = json.dumps([b.value for b in models.OrganizationType.objects.all().order_by("value")])
-        self.fields["username"].regex = r"^[\w.-_]+$"
+#        self.fields["username"].regex = r"^[\w.-_]+$"
         self.helper = FormHelper()
         self.helper.layout = Layout(
                 Fieldset("User Information", "username", "email", "password1", "password2", css_class="inlineLabels"),
