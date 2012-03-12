@@ -109,7 +109,7 @@ def login(request, form_class=LoginForm, template_name="uservoice/login.html",
     if extra_context is None:
         extra_context = {}
     if request.method == "POST" and not url_required:
-        path = urllib.unquote(request.GET("return"))
+        path = urllib.unquote(request.GET["return"])
         success_url = "https://%s%s?sso=%s"
 
         form = form_class(request.POST)
