@@ -3,6 +3,7 @@ from django.core.cache import cache
 from django.shortcuts import  render
 from django.http import  Http404, HttpResponseRedirect
 from django.conf import settings
+from django.template.response import TemplateResponse
 
 from django.utils import simplejson
 
@@ -106,18 +107,18 @@ def login(request, form_class=LoginForm, template_name="uservoice/login.html",
     if s is None:
         raise Http404
 
-    if extra_context is None:
-        extra_context = {}
     if request.method == "POST" and not url_required:
-        path = urllib.unquote(request.GET["return"])
+        path = urllib.unquote(request.GET.get("return", "/login_success"))
         success_url = "https://%s%s?sso=%s"
-
+        size = request.GET.get("uv_size", "window")
         form = form_class(request.POST)
         if form.login(request):
             host = s.get("HOST")
             token = uservoice_token(request, s.get("API_KEY"), s.get("ACCOUNT_KEY"))
             success_url = success_url%(host, path, token,)
-            return HttpResponseRedirect(success_url)
+            if size == "window":
+                return HttpResponseRedirect(success_url)
+            return TemplateResponse(request, "uservoice/redirect.html", {"redirect_url": success_url})
     else:
         form = form_class()
     ctx = {
