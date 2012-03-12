@@ -109,12 +109,14 @@ def login(request, form_class=LoginForm, template_name="uservoice/login.html",
     if extra_context is None:
         extra_context = {}
     if request.method == "POST" and not url_required:
-        success_url = "https://feedback.uservoice.com/login_success?sso=%s"
+        path = urllib.unquote(request.GET("return"))
+        success_url = "https://%s%s?sso=%s"
 
         form = form_class(request.POST)
         if form.login(request):
+            host = s.get("HOST")
             token = uservoice_token(request, s.get("API_KEY"), s.get("ACCOUNT_KEY"))
-            success_url = success_url%(token,)
+            success_url = success_url%(host, path, token,)
             return HttpResponseRedirect(success_url)
     else:
         form = form_class()

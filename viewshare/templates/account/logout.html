@@ -12,7 +12,7 @@
 {% block final %}
   {{ block.super }}
     {% if USERVOICE_SETTINGS %}
-        <script type="text/javascript" src="http://feedback.uservoice.com/logout.js"></script>
+        <script type="text/javascript" src="http://{{USERVOICE_SETTINGS.HOST}}/logout.js"></script>
     {% endif %}
     <script type="text/javascript">
     jQuery(document).ready(function() {
