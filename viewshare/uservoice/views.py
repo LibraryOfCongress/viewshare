@@ -114,7 +114,8 @@ def login(request, form_class=LoginForm, template_name="uservoice/login.html",
         form = form_class(request.POST)
         if form.login(request):
             token = uservoice_token(request, s.get("API_KEY"), s.get("ACCOUNT_KEY"))
-            return HttpResponseRedirect(success_url%token)
+            success_url = success_url%(token,)
+            return HttpResponseRedirect(success_url)
     else:
         form = form_class()
     ctx = {
