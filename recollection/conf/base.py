@@ -2,8 +2,8 @@ from os import path
 from posixpath import join as url_join
 from imp import find_module
 
-from recollection.migrations import SOUTH_MIGRATION_MODULES
-
+import recollection.migrations
+SOUTH_MIGRATION_MODULES = recollection.migrations.SOUTH_MIGRATION_MODULES
 
 module_path = lambda m: path.abspath(find_module(m)[1])
 
@@ -119,7 +119,6 @@ INSTALLED_APPS = (
     'cms.plugins.snippet',
 
     # Freemix specific
-    'simile',
     'freemix',
     'freemix.dataset',
     'freemix.exhibit',
@@ -133,7 +132,7 @@ INSTALLED_APPS = (
     'recollection.utils',
     'recollection.apps.connections',
     'recollection.conf.recollection_defaults',
-    'recollection.upload',
+    'viewshare.upload',
 
     # Support pipeline
     'recollection.apps.support',

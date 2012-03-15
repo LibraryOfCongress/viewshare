@@ -23,7 +23,7 @@ class ListPatternJSONView(JSONView):
         return models.ListPattern.to_dict()
 
 
-pattern_jsonp = ListPatternJSONView.as_view(template="freemix/augment/patterns.js")
+pattern_jsonp = ListPatternJSONView.as_view(template="dataset/augment/patterns.js")
 pattern_json = ListPatternJSONView.as_view()
 
 
