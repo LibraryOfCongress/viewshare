@@ -1,0 +1,222 @@
+{% load embed_tags %}
+{% load freemix_helpers %}
+
+{% compress js%}
+<script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.highlight.js"></script>
+
+
+<script type="text/javascript" src="{{STATIC_URL}}simile/ajax/simile-ajax-base.js"></script>
+<script type="text/javascript">
+SimileAjax.urlPrefix="{% site_url STATIC_URL %}simile/ajax/"
+</script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/ajax/scripts/platform.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/ajax/scripts/debug.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/ajax/scripts/xmlhttp.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/ajax/scripts/json.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/ajax/scripts/dom.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/ajax/scripts/graphics.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/ajax/scripts/date-time.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/ajax/scripts/string.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/ajax/scripts/html.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/ajax/scripts/data-structure.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/ajax/scripts/units.js"></script>
+
+<script type="text/javascript" src="{{STATIC_URL}}simile/ajax/scripts/ajax.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/ajax/scripts/history.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/ajax/scripts/window-manager.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/ajax/scripts/remoteLog.js"></script>
+<script type="text/javascript">
+SimileAjax.History.enabled = false;
+</script>
+
+<script type="text/javascript">
+    window.Exhibit = {
+        version:    "2.2.0",
+        loaded:     false,
+        params:     { authenticated: false, autoCreate: false, safe: false },
+        namespace:  "http://simile.mit.edu/2006/11/exhibit#",
+        importers:  {},
+        locales:    [ "en" ],
+        urlPrefix: "{% site_url STATIC_URL %}simile/exhibit/"
+    };
+</script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/exhibit.js"></script>
+
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/persistence.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/authentication.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/util/set.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/util/util.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/util/settings.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/util/views.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/util/facets.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/util/coders.js"></script>
+
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/data/database.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/data/expression.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/data/expression-parser.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/data/functions.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/data/controls.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/data/collection.js"></script>
+
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/data/importers/authenticated-importer.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/data/importers/exhibit-json-importer.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/data/importers/html-table-importer.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/data/importers/jsonp-importer.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/data/importers/babel-based-importer.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/data/importers/rdfa-importer.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/data/importers/xml-importer.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/data/importers/tsv-csv-importer.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/data/importers/json-importer.js"></script>
+
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/data/exporters/rdf-xml-exporter.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/data/exporters/semantic-wikitext-exporter.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/data/exporters/exhibit-json-exporter.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/data/exporters/tsv-exporter.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/data/exporters/bibtex-exporter.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/data/exporters/facet-selection-exporter.js"></script>
+
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/ui/ui.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/ui/ui-context.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/ui/lens.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/ui/format-parser.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/ui/formatter.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/ui/coordinator.js"></script>
+
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/ui/facets/list-facet.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/ui/facets/numeric-range-facet.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/ui/facets/text-search-facet.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/ui/facets/cloud-facet.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/ui/facets/hierarchical-facet.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/ui/facets/image-facet.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/ui/facets/slider-facet.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/ui/facets/slider.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/ui/facets/alpha-range-facet.js"></script>
+
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/ui/coders/color-coder.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/ui/coders/default-color-coder.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/ui/coders/color-gradient-coder.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/ui/coders/size-coder.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/ui/coders/size-gradient-coder.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/ui/coders/icon-coder.js"></script>
+
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/ui/widgets/logo.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/ui/widgets/collection-summary-widget.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/ui/widgets/resizable-div-widget.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/ui/widgets/legend-widget.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/ui/widgets/legend-gradient-widget.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/ui/widgets/option-widget.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/ui/widgets/toolbox-widget.js"></script>
+
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/ui/views/view-panel.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/ui/views/ordered-view-frame.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/ui/views/tile-view.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/ui/views/thumbnail-view.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/ui/views/tabular-view.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/ui/views/html-view.js"></script>
+
+
+
+
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/extensions/map/scripts/openlayers/OpenLayers.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        OpenLayers._getScriptLocation = function() {
+            return "{% site_url STATIC_URL %}simile/exhibit/extensions/map/scripts/openlayers/";
+        };
+    });
+
+</script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/extensions/map/scripts/openlayers/OpenStreetMap.js"></script>
+
+<script type="text/javascript">
+    window.Timeline = new Object();
+    window.Timeline.DateTime = window.SimileAjax.DateTime; // for backward compatibility
+    window.Timeline.urlPrefix = "{% site_url STATIC_URL %}simile/timeline/";
+    window.Timeline.clientLocale="en";
+    window.Timeline.serverLocale="en";
+</script>
+
+<script type="text/javascript" src="{{STATIC_URL}}simile/timeline/scripts/timeline.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/timeline/scripts/band.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/timeline/scripts/themes.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/timeline/scripts/ethers.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/timeline/scripts/ether-painters.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/timeline/scripts/event-utils.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/timeline/scripts/labellers.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/timeline/scripts/sources.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/timeline/scripts/original-painter.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/timeline/scripts/detailed-painter.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/timeline/scripts/overview-painter.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/timeline/scripts/compact-painter.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/timeline/scripts/decorators.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/timeline/scripts/l10n/en/timeline.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/timeline/scripts/l10n/en/labellers.js"></script>
+
+
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/extensions/time/scripts/timeline-view.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/extensions/time/locales/en/time-locale.js"></script>
+
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/extensions/chart/scripts/scatter-plot-view.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/extensions/chart/scripts/bar-chart-view.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/extensions/chart/scripts/pivot-table-view.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/extensions/chart/locales/en/chart-locale.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/extensions/piechart/scripts/piechart-view.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/extensions/piechart/locales/en/piechart-locale.js"></script>
+
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/extensions/map/scripts/olmap-view.js"></script>
+{#<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/extensions/map/locales/en/map-locale.js"></script>#}
+
+<script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.machineTag.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.json.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/lightbox.js"></script>
+
+<script type="text/javascript" src="{{STATIC_URL}}freemix/js/freemix.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}freemix/js/exhibit.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}freemix/js/property.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}freemix/js/identify.js"></script>
+
+<script type="text/javascript" src="{{STATIC_URL}}exhibit/js/widget.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}exhibit/js/facet.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}exhibit/js/view.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}exhibit/js/views/map-view.js"></script>
+
+<script type="text/javascript" src="{{STATIC_URL}}exhibit/js/views/list-view.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}exhibit/js/views/openlayers-map-view.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}exhibit/js/views/scatterplot-view.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}exhibit/js/views/table-view.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}exhibit/js/views/timeline-view.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}exhibit/js/views/piechart-view.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}exhibit/js/views/thumbnail-view.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}exhibit/js/facets/search-facet.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}exhibit/js/facets/list-facet.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}exhibit/js/facets/tagcloud-facet.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}exhibit/js/facets/slider-facet.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}exhibit/js/facets/numeric-facet.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}exhibit/js/facets/logo-facet.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}exhibit/js/lib/creole.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}exhibit/js/facets/text-facet.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}exhibit/js/display.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}scripts/hide_items.js"></script>
+
+
+{% endcompress %}
+
+{% compress js %}
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/locales/en/scripts/exhibit-l10n.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/locales/en/scripts/data/database-l10n.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/locales/en/scripts/ui/views/ordered-view-frame-l10n.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/locales/en/scripts/ui/views/tabular-view-l10n.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/locales/en/scripts/ui/views/thumbnail-view-l10n.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/locales/en/scripts/ui/views/tile-view-l10n.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/locales/en/scripts/ui/views/view-panel-l10n.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/locales/en/scripts/ui/widgets/collection-summary-widget-l10n.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/locales/en/scripts/ui/formatter-l10n.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/locales/en/scripts/ui/lens-l10n.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/locales/en/scripts/ui/ui-context-l10n.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/locales/en/scripts/util/coders-l10n.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/locales/en/scripts/util/facets-l10n.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/locales/en/scripts/util/views-l10n.js"></script>
+
+
+{% endcompress %}

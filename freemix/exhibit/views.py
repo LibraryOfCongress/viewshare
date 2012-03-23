@@ -17,6 +17,7 @@ from freemix.permissions import PermissionsRegistry
 from freemix.utils import get_site_url
 
 from django.utils import simplejson as json
+from django.core.cache import cache
 import uuid
 from freemix.views import JSONResponse, OwnerListView, OwnerSlugPermissionMixin, BaseJSONView
 

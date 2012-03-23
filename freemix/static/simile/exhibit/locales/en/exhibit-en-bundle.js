@@ -1,6 +1,4 @@
-﻿
-
-/* database-l10n.js */
+﻿/**//* database-l10n.js */
 if(!("l10n" in Exhibit.Database)){Exhibit.Database.l10n={};
 }Exhibit.Database.l10n.itemType={label:"Item",pluralLabel:"Items",uri:"http://simile.mit.edu/2006/11/exhibit#Item"};
 Exhibit.Database.l10n.labelProperty={label:"label",pluralLabel:"labels",reverseLabel:"label of",reversePluralLabel:"labels of"};
