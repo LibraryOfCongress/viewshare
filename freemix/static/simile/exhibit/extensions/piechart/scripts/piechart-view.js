@@ -2,9 +2,10 @@
  *  Exhibit.PiechartView
  *==================================================
  */
+if (window.google && !window.google.visualization) {
+    google.load("visualization", "1", {packages:["piechart"]});
+}
 
-google.load("visualization", "1", {packages:["piechart"]});
- 
 Exhibit.PiechartView = function(containerElmt, uiContext) {
    
     this._div = containerElmt;
