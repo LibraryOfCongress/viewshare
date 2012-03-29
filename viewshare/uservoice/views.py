@@ -26,11 +26,11 @@ def uservoice_token(request, api_key, account_key):
     Calculates and caches a UserVoice SSO token based on an
     authenticated user.
     """
-    cache_key = "uservoice_sso_%s"%request.session.session_key
+    cache_key = "uservoice_sso_%s" % request.session.session_key
     sso_token = cache.get(cache_key)
     if sso_token is None:
         # Calc expiry time. UV needs it in GMT
-        dt=time.mktime(request.session.get_expiry_date().timetuple())
+        dt = time.mktime(request.session.get_expiry_date().timetuple())
         utc_dt = datetime.fromtimestamp(dt)
         expires = utc_dt.strftime("%Y-%m-%d %H:%M:%S")
 
@@ -48,14 +48,14 @@ def uservoice_token(request, api_key, account_key):
 
         iv = "OpenSSL for Ruby"
 
-        json = simplejson.dumps(sso_data, separators=(',',':'))
+        json = simplejson.dumps(sso_data, separators=(',', ':',))
 
-        salted = api_key+account_key
+        salted = api_key + account_key
 
         saltedHash = hashlib.sha1(salted).digest()[:16]
 
-        json_bytes = array.array('b', json[0 : len(json)])
-        iv_bytes = array.array('b', iv[0 : len(iv)])
+        json_bytes = array.array('b', json[0: len(json)])
+        iv_bytes = array.array('b', iv[0: len(iv)])
 
         # # xor the iv into the first 16 bytes.
         for i in range(0, 16):
@@ -67,8 +67,8 @@ def uservoice_token(request, api_key, account_key):
         encrypted_bytes = aes.encrypt(data)
 
         sso_token = urllib.quote(base64.b64encode(encrypted_bytes))
-        td  = utc_dt - datetime.now()
-        cache_expiry = td.days*24*3600 + td.seconds
+        td = utc_dt - datetime.now()
+        cache_expiry = td.days * 24 * 3600 + td.seconds
         cache.set(cache_key, sso_token, cache_expiry)
     return sso_token
 
@@ -91,39 +91,60 @@ def uservoice_options(request, **kwargs):
     ctx = {
         "api_key": s.get("API_KEY"),
         "forum": s.get("FORUM", 1),
-        "key": s.get('ACCOUNT_KEY',"recollection"),
+        "key": s.get('ACCOUNT_KEY', "recollection"),
         "host": s.get("HOST", "recollection.uservoice.com")
     }
 
     if request.user.is_authenticated():
-        ctx["token"] = uservoice_token(request, ctx.get("api_key"), ctx.get("key"))
-    return render(request,"uservoice/options.js", ctx, content_type="text/javascript")
+        ctx["token"] = uservoice_token(request,
+            ctx.get("api_key"),
+            ctx.get("key"))
+
+    response = render(request,
+        "uservoice/options.js",
+        ctx,
+        content_type="text/javascript")
+
+    return response
 
 
-def login(request, form_class=LoginForm, template_name="uservoice/login.html",
-          success_url=None,
-          url_required=False, extra_context=None):
+def uservoice_redirect(request):
+    success_url = "https://%s%s?sso=%s"
+    path = urllib.unquote(request.GET.get("return", "/login_success"))
+
     s = getattr(settings, "USERVOICE_SETTINGS", None)
     if s is None:
         raise Http404
+    host = s.get("HOST")
+
+    token = uservoice_token(request,
+        s.get("API_KEY"),
+        s.get("ACCOUNT_KEY"))
+
+    success_url = success_url % (host, path, token,)
+    size = request.GET.get("uv_size", "window")
+
+    if size == "window":
+        return HttpResponseRedirect(success_url)
+    return TemplateResponse(request,
+        "uservoice/redirect.html", {"redirect_url": success_url})
+
+
+def login(request,
+          form_class=LoginForm,
+          template_name="uservoice/login.html",
+          success_url=None,
+          url_required=False,
+          extra_context=None):
 
     if request.method == "POST" and not url_required:
-        path = urllib.unquote(request.GET.get("return", "/login_success"))
-        success_url = "https://%s%s?sso=%s"
-        size = request.GET.get("uv_size", "window")
         form = form_class(request.POST)
         if form.login(request):
-            host = s.get("HOST")
-            token = uservoice_token(request, s.get("API_KEY"), s.get("ACCOUNT_KEY"))
-            success_url = success_url%(host, path, token,)
-            if size == "window":
-                return HttpResponseRedirect(success_url)
-            return TemplateResponse(request, "uservoice/redirect.html", {"redirect_url": success_url})
+            return uservoice_redirect(request)
     else:
         form = form_class()
     ctx = {
         "form": form,
         "url_required": url_required,
     }
-#    ctx.update(extra_context)
     return render(request, template_name, ctx)
