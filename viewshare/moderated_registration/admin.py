@@ -11,34 +11,49 @@ from django.http import HttpResponseRedirect
 import csv
 from django.http import HttpResponse
 from registration.models import RegistrationProfile
-from viewshare.moderated_registration.models import ModeratedRegistrationManager, ModeratedRegistrationProfile
 
 
 class OrganizationTypeAdmin(admin.ModelAdmin):
-    list_display=('value',)
-    ordering=('value',)
+    list_display = ('value',)
+    ordering = ('value',)
 admin.site.register(models.OrganizationType, OrganizationTypeAdmin)
+
 
 def organization(obj):
     return obj.user.get_profile().organization
 organization.short_description = _("Organization")
 
+
 def org_type(obj):
     return obj.user.get_profile().org_type
 org_type.short_description = _("Organization Type")
+
 
 def org_state(obj):
     return obj.user.get_profile().location
 org_state.short_description = _("Location")
 
+
 def reason(obj):
     return obj.user.get_profile().about
 reason.short_description = _("Reason for joining")
 
+
 class ModeratedRegistrationAdmin(RegistrationAdmin):
-    export_fields = ('user', 'is_approved', 'activation_key',organization, org_type, org_state, reason)
+
+    csv_file_name = "registration_profiles.csv"
+
+    export_fields = ('user',
+                     'is_approved',
+                     'activation_key',
+                     organization,
+                     org_type,
+                     org_state,
+                     reason)
+
     list_display = list(export_fields)
     list_filter = ('is_approved', 'user__is_active')
+
     actions = ['approve_users', 'reject_users', 'export_as_csv']
 
     def get_actions(self, request):
@@ -65,7 +80,7 @@ class ModeratedRegistrationAdmin(RegistrationAdmin):
         Generic csv export admin action.
         based on http://djangosnippets.org/snippets/1697/
         """
-        fields  = self.export_fields
+        fields = self.export_fields
         field_names = []
         for field in fields:
             if hasattr(field, 'short_description'):
@@ -73,9 +88,11 @@ class ModeratedRegistrationAdmin(RegistrationAdmin):
             else:
                 field_names += [field]
 
+        mimetype = "text/csv"
+        content_disposition = 'attachment; filename=%s' % self.csv_file_name
 
-        response = HttpResponse(mimetype='text/csv')
-        response['Content-Disposition'] = 'attachment; filename=registration_profiles.csv'
+        response = HttpResponse(mimetype=mimetype)
+        response['Content-Disposition'] = content_disposition
 
         writer = csv.writer(response)
         writer.writerow(list(field_names))
@@ -85,29 +102,32 @@ class ModeratedRegistrationAdmin(RegistrationAdmin):
                 if isinstance(field, basestring):
                     row += [unicode(getattr(obj, field))]
                 else:
-                    row +=[unicode(field(obj))]
+                    row += [unicode(field(obj))]
 
             writer.writerow(row)
         return response
-    export_as_csv.short_description = "Export User Registration Profiles as CSV"
+    export_as_csv.short_description = "Export User Registration " \
+                                      "Profiles as CSV"
 
-    def approval_view(self, request, id, template_name="registration/admin_approval.html"):
-        registration_profile = get_object_or_404(self.model.objects.select_related('user', 'user__profile'), id=id)
+    def approval_view(self, request, id,
+                      template_name="registration/admin_approval.html"):
+        ds = self.model.objects.select_related('user', 'user__profile')
+        registration_profile = get_object_or_404(ds, id=id)
 
-        if (request.method == "POST" and "reject" in request.POST) or "reject" in request.GET:
-            ModeratedRegistrationProfile.objects.reject_profile(registration_profile)
+        args = getattr(request, request.method)
+        ds = models.ModeratedRegistrationProfile.objects
+        if "reject" in args:
+            ds.reject_profile(registration_profile)
             return HttpResponseRedirect("../../")
-        elif (request.method =="POST" and "approve" in request.POST) or "approve" in request.GET:
-
-                ModeratedRegistrationProfile.objects.approve_profile(registration_profile)
-
+        elif "approve" in args:
+            ds.approve_profile(registration_profile)
         return render(request,
                       template_name,
                       {'profile': registration_profile})
 
     def change_view(self, request, object_id, extra_context=None):
-
-        return HttpResponseRedirect(reverse('admin:approve_users', kwargs={"id": object_id}))
+        approve_url = reverse('admin:approve_users', kwargs={"id": object_id})
+        return HttpResponseRedirect(approve_url)
 
     def get_urls(self):
         urls = super(ModeratedRegistrationAdmin, self).get_urls()
@@ -119,6 +139,6 @@ class ModeratedRegistrationAdmin(RegistrationAdmin):
         ) + urls
 
 
-
 admin.site.unregister(RegistrationProfile)
-admin.site.register(models.ViewShareRegistrationProfile, ModeratedRegistrationAdmin)
+admin.site.register(models.ViewShareRegistrationProfile,
+    ModeratedRegistrationAdmin)

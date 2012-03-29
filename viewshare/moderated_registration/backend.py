@@ -1,10 +1,9 @@
 from django.contrib.sites.models import RequestSite, Site
 from registration import signals
 from registration.backends.default import DefaultBackend
-from viewshare.moderated_registration.forms import ViewShareRegistrationForm
-
+from viewshare.moderated_registration import forms
 from django.conf import settings
-from viewshare.moderated_registration.models import ViewShareRegistrationProfile
+from viewshare.moderated_registration import models
 
 
 class ModeratedRegistrationBackend(DefaultBackend):
@@ -55,8 +54,8 @@ class ModeratedRegistrationBackend(DefaultBackend):
 
     """
 
-    model = ViewShareRegistrationProfile
-    form = ViewShareRegistrationForm
+    model = models.ViewShareRegistrationProfile
+    form = forms.ViewShareRegistrationForm
 
     def register(self, request, **kwargs):
 
@@ -118,7 +117,7 @@ class ModeratedRegistrationBackend(DefaultBackend):
         user registration.
 
         """
-        return ('registration_complete', (), {})
+        return 'registration_complete', (), {}
 
     def post_activation_redirect(self, request, user):
         """
@@ -126,4 +125,4 @@ class ModeratedRegistrationBackend(DefaultBackend):
         account activation.
 
         """
-        return ('registration_activation_complete', (), {})
+        return 'registration_activation_complete', (), {}

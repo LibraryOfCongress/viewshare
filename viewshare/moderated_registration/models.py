@@ -18,6 +18,7 @@ if not settings.DEBUG:
 else:
     from django.core.mail import send_mail
 
+
 class OrganizationType(models.Model):
     value = models.CharField(max_length=100, unique=True)
     key = AutoSlugField(populate_from="value")
@@ -25,6 +26,7 @@ class OrganizationType(models.Model):
 
 class ModeratedRegistrationManager(RegistrationManager):
 
+    @transaction.commit_on_success
     def create_moderated_user(self, *args, **kwargs):
         username = kwargs["username"]
         password = kwargs["password1"]
@@ -50,10 +52,9 @@ class ModeratedRegistrationManager(RegistrationManager):
                     )
         registration_profile.send_approval_email(kwargs["site"])
         return new_user
-    create_moderated_user = transaction.commit_on_success(create_moderated_user)
 
     def approve_profile(self, profile):
-        profile.is_approved=True
+        profile.is_approved = True
         self.send_activation(profile)
 
     def reject_profile(self, profile):
@@ -63,12 +64,14 @@ class ModeratedRegistrationManager(RegistrationManager):
 
     def send_activation(self, profile):
         """
-        Generate an activation key for a profile that has been moderator approved and
+        Generate an activation key for a profile that has been moderator
+        approved
         """
 
         if profile.is_approved and not profile.user.is_active:
             salt = hashlib.sha1(str(random.random())).hexdigest()[:5]
-            profile.activation_key = hashlib.sha1(salt+profile.user.username).hexdigest()
+            user_hash = hashlib.sha1(salt + profile.user.username)
+            profile.activation_key = user_hash.hexdigest()
             profile.save()
 
             current_site = Site.objects.get_current()
@@ -78,7 +81,7 @@ class ModeratedRegistrationManager(RegistrationManager):
         return False
 
 
-class ModeratedRegistrationProfile(RegistrationProfile,models.Model):
+class ModeratedRegistrationProfile(RegistrationProfile, models.Model):
     PENDING = "Pending Moderation"
 
     objects = ModeratedRegistrationManager()
@@ -86,8 +89,7 @@ class ModeratedRegistrationProfile(RegistrationProfile,models.Model):
     is_approved = models.BooleanField(_("approved"), default=False)
 
     class Meta:
-        abstract=True
-
+        abstract = True
 
     def send_approval_email(self, site):
         ctx_dict = {
@@ -101,14 +103,20 @@ class ModeratedRegistrationProfile(RegistrationProfile,models.Model):
 
         message = render_to_string('registration/approval_email.txt',
                                    ctx_dict)
-        from_addr = getattr(settings, "USER_REGISTRATION_FROM_EMAIL", settings.CONTACT_EMAIL)
-        to = getattr(settings, "USER_APPROVAL_EMAIL_LIST", [settings.CONTACT_EMAIL])
-        send_mail(subject, message, from_addr, to)
+        from_addr = getattr(settings,
+            "USER_REGISTRATION_FROM_EMAIL",
+            settings.CONTACT_EMAIL)
 
+        to = getattr(settings,
+            "USER_APPROVAL_EMAIL_LIST",
+            [settings.CONTACT_EMAIL])
+
+        send_mail(subject, message, from_addr, to)
 
     def send_activation_email(self, site):
         """
-        Overrides the base method to add the profile itself to the activation templates
+        Overrides the base method to add the profile itself to the
+        activation templates
 
         """
         ctx_dict = {'activation_key': self.activation_key,
@@ -116,6 +124,7 @@ class ModeratedRegistrationProfile(RegistrationProfile,models.Model):
                     'site': site,
                     'profile': self,
                     'SITE_NAME': settings.SITE_NAME}
+
         subject = render_to_string('registration/activation_email_subject.txt',
                                    ctx_dict)
         # Email subject *must not* contain newlines
@@ -123,13 +132,14 @@ class ModeratedRegistrationProfile(RegistrationProfile,models.Model):
 
         message = render_to_string('registration/activation_email.txt',
                                    ctx_dict)
-        from_addr = getattr(settings, "USER_REGISTRATION_FROM_EMAIL", settings.CONTACT_EMAIL)
-        send_mail(subject, message, from_addr, [self.user.email])
+        from_addr = getattr(settings,
+            "USER_REGISTRATION_FROM_EMAIL",
+            settings.CONTACT_EMAIL)
 
+        send_mail(subject, message, from_addr, [self.user.email])
 
 
 class ViewShareRegistrationProfile(ModeratedRegistrationProfile):
 
-
     class Meta:
-        abstract=False
+        abstract = False
