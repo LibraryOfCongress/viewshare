@@ -27,7 +27,7 @@ SimileAjax.DOM.registerEvent = function(elmt, eventName, handler) {
         return true;
     }
     
-    if (SimileAjax.Platform.browser.isIE && (SimileAjax.Platform.browser.majorVersion < 9)) {
+    if (elmt.attachEvent) {
         elmt.attachEvent("on" + eventName, handler2);
     } else {
         elmt.addEventListener(eventName, handler2, false);
