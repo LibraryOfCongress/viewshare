@@ -18,7 +18,6 @@ import array
 import time
 from datetime import datetime
 from recollection.apps.account.forms import LoginForm
-from recollection.apps.account.utils import get_default_redirect
 
 
 def uservoice_token(request, api_key, account_key):

@@ -3,19 +3,15 @@ URL patterns for user registration, admin authorization, and activation
 
 """
 
-from django.conf.urls.defaults import *
-from django.views.generic.simple import direct_to_template
+from django.conf.urls.defaults import patterns, url
 
-from registration.views import activate
-from registration.views import register
 
 _registration_backend_ = 'viewshare.moderated_registration.backend' \
                          '.ModeratedRegistrationBackend'
 
 urlpatterns = patterns('',
     url(r'^activate/complete/$',
-       direct_to_template,
-       {'template': 'registration/activation_complete.html'},
+       'viewshare.moderated_registration.views.activation_complete',
        name='registration_activation_complete'),
 
     # Activation keys get matched by \w+ instead of the more specific
@@ -24,22 +20,20 @@ urlpatterns = patterns('',
     # that way it can return a sensible "invalid key" message instead of a
     # confusing 404.
     url(r'^activate/(?P<activation_key>\w+)/$',
-       activate,
+       'registration.views.activate',
        {'backend': _registration_backend_},
        name='registration_activate'),
 
     url(r'^register/$',
-       register,
+       'registration.views.register',
        {'backend': _registration_backend_},
        name='registration_register'),
 
     url(r'^register/complete/$',
-       direct_to_template,
-       {'template': 'registration/registration_complete.html'},
-       name='registration_complete'),
+        'viewshare.moderated_registration.views.registration_complete',
+        name='registration_complete'),
 
     url(r'^register/closed/$',
-       direct_to_template,
-       {'template': 'registration/registration_closed.html'},
+        'viewshare.moderated_registration.views.registration_closed',
        name='registration_disallowed'),
     )

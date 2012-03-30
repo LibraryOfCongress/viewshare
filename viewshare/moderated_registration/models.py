@@ -7,16 +7,11 @@ from django.contrib.sites.models import Site
 from django.db import models, transaction
 from django.template.loader import render_to_string
 from django_extensions.db.fields import AutoSlugField
-from registration.models import RegistrationProfile, RegistrationManager
 from django.utils.translation import ugettext_lazy as _
 
-if not settings.DEBUG:
-    try:
-        from mailer import send_mail
-    except:
-        from django.core.mail import send_mail
-else:
-    from django.core.mail import send_mail
+from registration.models import RegistrationProfile, RegistrationManager
+
+from recollection.mail import send_mail
 
 
 class OrganizationType(models.Model):

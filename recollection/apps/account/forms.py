@@ -4,16 +4,8 @@ from django import forms
 from django.template.loader import render_to_string
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _, ugettext
-from django.utils.encoding import smart_unicode
 from django.utils.hashcompat import sha_constructor
 
-if not settings.DEBUG:
-    try:
-        from mailer import send_mail
-    except:
-        from django.core.mail import send_mail
-else:
-    from django.core.mail import send_mail
 
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
@@ -21,6 +13,7 @@ from django.contrib.sites.models import Site
 
 from emailconfirmation.models import EmailAddress
 from recollection.apps.account.models import Account
+from recollection.mail import send_mail
 
 from timezones.forms import TimeZoneField
 
