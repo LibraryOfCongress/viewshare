@@ -8,7 +8,7 @@ from viewshare.upload import models
 class DataSourceForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.user = None
-        if kwargs.has_key('user'):
+        if "user" in kwargs:
             self.user = kwargs.pop('user')
         super(DataSourceForm, self).__init__(*args, **kwargs)
 
@@ -21,7 +21,7 @@ class DataSourceForm(forms.ModelForm):
 
     class Meta:
         model = DataSource
-        exclude= ('owner', 'uuid', 'dataset')
+        exclude = ('owner', 'uuid', 'dataset')
 
 
 class FileDataSourceForm(DataSourceForm):
@@ -59,28 +59,27 @@ class OAIDataSourceForm(DataSourceForm):
     set_choice = forms.CharField(label=_("Set"), widget=Select)
 
     def clean_set_choice(self):
-        print self.cleaned_data
-        if not self.cleaned_data.get("title") or not self.cleaned_data.get("set"):
+        cleaned = self.cleaned_data
+        if not ("title" in cleaned and "set" in cleaned):
             raise forms.ValidationError(_("Set is required"))
         return self.cleaned_data.get("set")
 
     class Meta(DataSourceForm.Meta):
         model = models.OAIDataSource
-        fields=("url",  "title", "set","set_choice", "limit",)
-        widgets= {
+        fields = ("url", "title", "set", "set_choice", "limit",)
+        widgets = {
             "title": forms.HiddenInput(),
             "set": forms.HiddenInput()
         }
 
-    
 
 class ModsURLDataSourceForm(DataSourceForm):
 
     class Meta(DataSourceForm.Meta):
         model = models.ModsURLDataSource
 
+
 class ModsFileDataSourceForm(DataSourceForm):
 
     class Meta(DataSourceForm.Meta):
         model = models.ModsFileDataSource
-

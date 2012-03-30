@@ -3,7 +3,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.views.generic.base import View
 from freemix.dataset.transform import AkaraTransformClient
-from freemix.dataset.views import DataSourceFormRegistry
+from freemix.dataset.views import create_form_view
 from freemix.views import JSONResponse
 
 from viewshare.upload import forms, conf
@@ -12,41 +12,34 @@ from viewshare.upload import models
 logger = logging.getLogger(__name__)
 
 
-
-DataSourceFormRegistry.register(models.ContentDMDataSource,
+create_cdm_view = create_form_view(models.ContentDMDataSource,
                                 forms.ContentDMDataSourceForm,
                                 "upload/cdm_datasource_form.html")
-create_cdm_view = DataSourceFormRegistry.create_view(models.ContentDMDataSource)
 
 
-DataSourceFormRegistry.register(model_class=models.OAIDataSource,
+create_oai_view = create_form_view(model_class=models.OAIDataSource,
                                form_class=forms.OAIDataSourceForm,
                                form_template="upload/oai_datasource_form.html")
-create_oai_view = DataSourceFormRegistry.create_view(models.OAIDataSource)
 
 
-DataSourceFormRegistry.register(model_class=models.URLDataSource,
-                               form_class=forms.URLDataSourceForm,
-                               form_template="upload/url_datasource_form.html")
-create_url_view = DataSourceFormRegistry.create_view(models.URLDataSource)
+create_url_view = create_form_view(models.URLDataSource,
+                               forms.URLDataSourceForm,
+                               "upload/url_datasource_form.html")
 
 
-DataSourceFormRegistry.register(model_class=models.FileDataSource,
-                               form_class=forms.FileDataSourceForm,
-                               form_template="upload/file_datasource_form.html")
-create_file_view = DataSourceFormRegistry.create_view(models.FileDataSource)
+create_file_view = create_form_view(models.FileDataSource,
+                               forms.FileDataSourceForm,
+                               "upload/file_datasource_form.html")
 
 
-DataSourceFormRegistry.register(model_class=models.ModsURLDataSource,
-                               form_class=forms.ModsURLDataSourceForm,
-                               form_template="upload/modsurl_datasource_form.html")
-create_mods_url_view = DataSourceFormRegistry.create_view(models.ModsURLDataSource)
+create_mods_url_view = create_form_view(models.ModsURLDataSource,
+                               forms.ModsURLDataSourceForm,
+                               "upload/modsurl_datasource_form.html")
 
 
-DataSourceFormRegistry.register(model_class=models.ModsFileDataSource,
-                               form_class=forms.ModsFileDataSourceForm,
-                               form_template="upload/modsfile_datasource_form.html")
-create_mods_file_view =  DataSourceFormRegistry.create_view(models.ModsFileDataSource)
+create_mods_file_view = create_form_view(models.ModsFileDataSource,
+                               forms.ModsFileDataSourceForm,
+                               "upload/modsfile_datasource_form.html")
 
 
 class OAISetListView(View):
@@ -56,8 +49,8 @@ class OAISetListView(View):
     def get(self, request, *args, **kwargs):
         url = request.GET.get("endpoint")
         try:
-            result = self.transform(params = {"endpoint": url})
+            result = self.transform(params={"endpoint": url})
         except Exception, ex:
-            logger.error("Error loading OAI set list for %s: %s"%(url,ex))
+            logger.error("Error loading OAI set list for %s: %s" % (url, ex))
             result = ()
         return JSONResponse(result)

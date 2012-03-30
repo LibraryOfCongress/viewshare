@@ -246,7 +246,6 @@ class CreateDataSourceView(CreateView):
         return self.tx.get_absolute_url()
 
 
-
 class DataSourceFormRegistry:
     _registry = {}
 
@@ -280,6 +279,15 @@ class DataSourceFormRegistry:
         if not cls._registry.has_key(key):
             return None
         return cls._registry[key][2]
+
+
+def create_form_view(model_class, form_class, form_template):
+    """
+    A convenience function that registers a DataSource and returns
+    an instance
+    """
+    DataSourceFormRegistry.register(model_class, form_class, form_template)
+    return DataSourceFormRegistry.create_view(model_class)
 
 
 class UpdateDataSourceView(UpdateView):
