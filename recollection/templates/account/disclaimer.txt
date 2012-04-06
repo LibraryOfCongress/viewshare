@@ -1,0 +1,2 @@
+If you have questions regarding {{SITE_NAME}} or this email please contact us
+at {{CONTACT_EMAIL}}.

@@ -98,9 +98,7 @@ class ModeratedRegistrationProfile(RegistrationProfile, models.Model):
 
         message = render_to_string('registration/approval_email.txt',
                                    ctx_dict)
-        from_addr = getattr(settings,
-            "USER_REGISTRATION_FROM_EMAIL",
-            settings.CONTACT_EMAIL)
+        from_addr = settings.DEFAULT_FROM_EMAIL
 
         to = getattr(settings,
             "USER_APPROVAL_EMAIL_LIST",
@@ -118,7 +116,8 @@ class ModeratedRegistrationProfile(RegistrationProfile, models.Model):
                     'expiration_days': settings.ACCOUNT_ACTIVATION_DAYS,
                     'site': site,
                     'profile': self,
-                    'SITE_NAME': settings.SITE_NAME}
+                    'SITE_NAME': settings.SITE_NAME,
+                    'CONTACT_EMAIL': settings.CONTACT_EMAIL}
 
         subject = render_to_string('registration/activation_email_subject.txt',
                                    ctx_dict)
@@ -127,9 +126,7 @@ class ModeratedRegistrationProfile(RegistrationProfile, models.Model):
 
         message = render_to_string('registration/activation_email.txt',
                                    ctx_dict)
-        from_addr = getattr(settings,
-            "USER_REGISTRATION_FROM_EMAIL",
-            settings.CONTACT_EMAIL)
+        from_addr = settings.DEFAULT_FROM_EMAIL
 
         send_mail(subject, message, from_addr, [self.user.email])
 
