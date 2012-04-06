@@ -170,7 +170,6 @@ TEMPLATE_DIRS = (
 SITE_NAME = "Recollection"
 SITE_NAME_STATUS = "BETA"
 CONTACT_EMAIL = "noreply@example.com"
-DEFAULT_FROM_EMAIL = "webmaster@zepheira.com"
 FEEDBACKLINK = "mailto:recollection@lists.zepheira.com"
 
 LOGIN_URL = "/account/login"

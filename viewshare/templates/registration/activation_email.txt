@@ -2,4 +2,4 @@
 
 To activate your {{ SITE_NAME }} account for user '{{profile.user.username}}', click the following link: {%site_url activation_url%}
 
-{%include "account/disclaimer.txt"}
+{%include "account/disclaimer.txt"%}

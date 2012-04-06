@@ -3,4 +3,4 @@
 To confirm this is correct, go to {{ activate_url }}
 {% endblocktrans %}
 
-{%include "account/disclaimer.txt"}
+{%include "account/disclaimer.txt"%}

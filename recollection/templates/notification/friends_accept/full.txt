@@ -1,3 +1,3 @@
 {% load i18n %}{% load freemix_helpers %}{{ invitation.to_user|nicename }} {% blocktrans %}has accepted your connection request.{% endblocktrans %}
 
-{%include "account/disclaimer.txt"}
+{%include "account/disclaimer.txt"%}

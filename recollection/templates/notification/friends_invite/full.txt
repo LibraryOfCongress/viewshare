@@ -3,4 +3,4 @@
 http://{{ current_site }}{{ invitation_page }}
 {% endblocktrans %}
 
-{%include "account/disclaimer.txt"}
+{%include "account/disclaimer.txt"%}
