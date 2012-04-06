@@ -1,2 +1,2 @@
-If you have questions regarding {{SITE_NAME}} or this email please contact us
-at {{CONTACT_EMAIL}}.
+If you have questions regarding Viewshare or this email please contact us
+at ndiippaccess@loc.gov.
