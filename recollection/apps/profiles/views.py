@@ -20,8 +20,6 @@ from freemix.permissions import PermissionsRegistry
 
 from .forms import ProfileForm
 
-from Crypto.Cipher import AES
-
 
 import base64
 import hashlib
