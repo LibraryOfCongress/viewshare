@@ -6,7 +6,7 @@ def front_page(request):
     """
     Render the home page.
     """
-    featured_exhibits = CuratedExhibit.objects.live('front_page')
+    featured_exhibits = CuratedExhibit.objects.live('front-page')
     return render(
             request,
             'front_page.html',

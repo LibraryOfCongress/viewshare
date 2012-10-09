@@ -27,7 +27,7 @@ class CuratedExhibitManager(models.Manager):
         """
         exhibits = self.filter(collection__slug=collection_slug)\
                 .filter(publish_date__lte=datetime.now())\
-                .order_by('-publish_date')
+                .order_by('-publish_date', 'position')
         return exhibits
 
 
@@ -39,6 +39,10 @@ class CuratedExhibit(CuratedItem):
     custom_title = models.CharField(max_length=255, blank=True)
     publish_date = models.DateTimeField(blank=True, null=True)
     collection = models.ForeignKey(CuratedExhibitCollection)
+    thumbnail = models.ImageField(
+            upload_to='discover/curated_exhibits',
+            blank=True,
+            help_text='Home page: 272x130')
     exhibit = CuratedForeignKey(Exhibit)
 
     objects = CuratedExhibitManager()
