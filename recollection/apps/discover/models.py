@@ -48,5 +48,8 @@ class CuratedExhibit(CuratedItem):
     objects = CuratedExhibitManager()
     field_overrides = {'title': 'custom_title'}
 
+    def get_absolute_url(self):
+        return self.exhibit.get_absolute_url()
+
     def __unicode__(self):
         return self.custom_title

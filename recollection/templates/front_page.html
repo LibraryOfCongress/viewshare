@@ -22,22 +22,14 @@
 
 {% block body %}
 <div class="homeimagebox">           
-  <div class="homepageImageRight">
-    <a href="/views/trow/the-phay-collection/"> <img src="/media/cms_page_media/13/phay-kids.png"/> </a>
-    <a href="/views/trow/the-phay-collection/"> <p> Present Visual Collections</p></a>
+{% if featured_exhibits %}
+{% for exhibit in featured_exhibits %}
+  <div class="{% cycle 'homepageImageRight' 'homepageImageLeft' %}">
+    <a href="{{ exhibit.get_absolute_url }}"><img src="{{ exhibit.thumbnail.url }}"/></a>
+    <a href="{{ exhibit.get_absolute_url }}"><p>{{ exhibit.custom_title }}</p></a>
   </div>
-  <div class="homepageImageLeft">
-    <a href="/views/abpo/ndiipp-collections/"> <img src="/media/cms_page_media/13/collections-map.png"/></a>
-    <a href="/views/abpo/ndiipp-collections/"> <p> Map your collections </p></a>
-  </div>
-  <div class="homepageImageRight">
-    <a href="/views/DOVE/nov/"> <img src="/media/cms_page_media/13/dove-timeline.png"/> </a>
-    <a href="/views/DOVE/nov/"><p> Browse collection timelines</p></a>
-  </div>
-  <div class="homepageImageLeft">
-    <a href="/views/jefferson/fulton-street-trade-cards-collection/"> <img src="/media/cms_page_media/13/cards-chart.png"/> </a>
-    <a href="/views/jefferson/fulton-street-trade-cards-collection/"><p> Chart relationships in collection data</p></a>
-  </div>
+{% endfor %}
+{% endif %}
 </div><!-- /.homeimagebox -->
 <div class="primarydisc">
   <p>
