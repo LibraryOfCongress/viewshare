@@ -142,7 +142,7 @@ INSTALLED_APPS = (
     'viewshare.moderated_registration',
 
     # ViewShare specific
-    'viewshare.discover',
+    'recollection.apps.discover',
     )
 
 STATICFILES_DIRS = (

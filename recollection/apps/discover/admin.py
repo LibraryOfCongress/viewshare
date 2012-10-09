@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from viewshare.discover.models import CuratedExhibit, CuratedExhibitCollection
+from recollection.apps.discover.models import CuratedExhibit, CuratedExhibitCollection
 
 
 class CuratedExhibitAdmin(admin.TabularInline):

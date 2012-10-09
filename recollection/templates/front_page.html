@@ -1,0 +1,110 @@
+{% extends "site_base.html" %}
+
+
+{% load i18n %}
+
+
+{% block head_title %}Welcome to Viewshare{% endblock %}
+
+
+{% block head_css %}
+{{block.super}}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}stylesheets/home-page.css"/>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}site_theme/css/homepage/base.css"/>
+{% endblock %}
+
+
+{% block tab_id %}id="home_tab"{% endblock %}
+
+
+{% block home-tab-selected %} ui-tabs-selected ui-state-active{% endblock %}
+
+
+{% block body %}
+<div class="homeimagebox">           
+  <div class="homepageImageRight">
+    <a href="/views/trow/the-phay-collection/"> <img src="/media/cms_page_media/13/phay-kids.png"/> </a>
+    <a href="/views/trow/the-phay-collection/"> <p> Present Visual Collections</p></a>
+  </div>
+  <div class="homepageImageLeft">
+    <a href="/views/abpo/ndiipp-collections/"> <img src="/media/cms_page_media/13/collections-map.png"/></a>
+    <a href="/views/abpo/ndiipp-collections/"> <p> Map your collections </p></a>
+  </div>
+  <div class="homepageImageRight">
+    <a href="/views/DOVE/nov/"> <img src="/media/cms_page_media/13/dove-timeline.png"/> </a>
+    <a href="/views/DOVE/nov/"><p> Browse collection timelines</p></a>
+  </div>
+  <div class="homepageImageLeft">
+    <a href="/views/jefferson/fulton-street-trade-cards-collection/"> <img src="/media/cms_page_media/13/cards-chart.png"/> </a>
+    <a href="/views/jefferson/fulton-street-trade-cards-collection/"><p> Chart relationships in collection data</p></a>
+  </div>
+</div><!-- /.homeimagebox -->
+<div class="primarydisc">
+  <p>
+  <strong>Viewshare</strong> is a <strong>free</strong> platform for generating and customizing views <strong>(interactive maps, timelines, facets, tag clouds)</strong> that allow users to experience your <strong>digital collections</strong>.
+  </p> 
+  <a href="/registration/register/">
+    <div id="first" class="linkblock">Request Free Account</div>
+  </a>
+  <a href="/screencast">
+    <div id="second" class="linkblock">Watch Screencast</div>
+  </a>
+  <a href="http://recollection.zepheira.com/about/help/">
+    <div id="third" class="linkblock">Get Started</div>
+  </a>
+</div><!-- /.primarydisc -->
+<style type="text/css">
+  .homepageImageRight {
+    padding-right:11px;
+    padding-bottom:5px;
+    width:272px;
+    float:left;
+  }
+  .homepageImageLeft{
+    padding-bottom:5px;
+    float:left;
+    width:272px;
+  }
+  .homeimagebox {
+    width: 570px;
+    float: left;
+    margin-top:3px;
+  }
+  .primarydisc {
+    margin-left:5px
+  }
+  .homeimagebox p {
+    text-align:right;
+    background-color:#5582A1;
+    color:white;
+    font-weight: bold;
+    padding-top:5px;
+    margin-top:0px;
+    padding-right: 3px;
+    padding-bottom:2px;
+    margin-top:-2px
+  }
+  .linkblock {
+    padding:1.2em 1em 1em 1em
+  }
+</style>
+
+<div class="action-set first-action-set">
+  <a href="/import"><h3 class="grid_title">Import Collections</h3></a>
+  <div class="stepblock">
+    Ingest collections from <strong>spreadsheets</strong> or <strong><a href="http://www.loc.gov/standards/mods/">MODS</a></strong> records. Upload from your desktop or import them from a URL. 
+  </div>
+</div><!-- /.action-set -->
+<div class="action-set">
+  <a href="generate-views"><h3 class="grid_title">Generate Views</h3></a>
+  <div class="stepblock">
+    Generate distinct interactive visual interfaces to your digital collections, including <strong>maps</strong> and <strong>timelines</strong>, and sophisticated <strong>faceted navigation</strong>.
+  </div>
+</div><!-- /.action-set -->
+<div class="action-set">
+  <a href="/embed-and-share"><h3 class="grid_title">Embed and Share</h3></a>
+  <div class="stepblock">
+    Just <strong>copy-paste to embed</strong> your interface in any webpage. Provide your users with novel and intuitive ways to explore your content    
+  </div>
+</div><!-- /.action-set -->
+{% endblock %}

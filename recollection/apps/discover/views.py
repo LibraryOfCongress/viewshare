@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from viewshare.discover.models import CuratedExhibit
+from recollection.apps.discover.models import CuratedExhibit
 
 def front_page(request):
     """
@@ -9,6 +9,6 @@ def front_page(request):
     featured_exhibits = CuratedExhibit.objects.live('front_page')
     return render(
             request,
-            'recollection/templates/front_page.html',
+            'front_page.html',
             {'featured_exhibits': featured_exhibits}
             )

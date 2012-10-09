@@ -74,7 +74,7 @@ urlpatterns = patterns('',
     url(r'^augment/patterns/$', 'cms.views.details', kwargs={"slug": "augment-list-patterns"}, name="augment-list-patterns"),
 
     # home page
-    url(r'^$', 'viewshare.discover.views.front_page', name="front_page"),
+    url(r'^$', 'recollection.apps.discover.views.front_page', name="front_page"),
 
     # For legacy purposes
     url(r'^userupload/$', login_required(RedirectView.as_view(url="/upload")), name="user_upload"),
