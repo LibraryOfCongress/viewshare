@@ -13,8 +13,7 @@ class CuratedExhibitAdmin(admin.StackedInline):
             'exhibit',
             'custom_title',
             'thumbnail',
-            'publish_date',
-            'position'
+            'publish_date'
             ]
     extra = 0
 

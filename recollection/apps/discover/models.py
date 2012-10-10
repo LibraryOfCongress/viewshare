@@ -48,6 +48,14 @@ class CuratedExhibit(CuratedItem):
     objects = CuratedExhibitManager()
     field_overrides = {'title': 'custom_title'}
 
+    def __init__(self, *args, **kwargs):
+        """
+        We're not concerned with CuratedItem.position at the moment
+        so we'll set a default here.
+        """
+        super(CuratedExhibit, self).__init__(*args, **kwargs)
+        self.position = 0
+
     def get_absolute_url(self):
         return self.exhibit.get_absolute_url()
 
