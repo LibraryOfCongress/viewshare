@@ -22,7 +22,7 @@ django-filter==0.5.3
 template_utils==0.4p2
 django_compressor==1.1.1
 django-reversion==1.4
-httplib2==0.6.0
+httplib2==0.7.6
 django-classy-tags==0.3.4.1
 django-cms==2.2
 django-sekizai==0.5
