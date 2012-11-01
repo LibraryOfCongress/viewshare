@@ -3,21 +3,59 @@ from posixpath import join as url_join
 from imp import find_module
 
 import recollection.migrations
+
 SOUTH_MIGRATION_MODULES = recollection.migrations.SOUTH_MIGRATION_MODULES
 
-module_path = lambda m: path.abspath(find_module(m)[1])
+DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 
-MEDIA_ROOT = path.join(module_path("recollection"), "site_media", "media")
+ADMINS = (
+# ('Your Name', 'your_email@domain.com'),
+)
+MEDIA_ROOT = path.join(path.dirname(__file__), '..', "media")
 MEDIA_URL = '/media/'
 
-STATIC_ROOT = path.join(module_path("recollection"), "site_media", 'static')
+STATIC_ROOT = path.join(path.dirname(__file__), '..', "static")
 STATIC_URL = '/static/'
+
+CMS_MEDIA_ROOT = path.join(STATIC_ROOT, 'cms/')
+CMS_MEDIA_URL = path.join(STATIC_URL, 'cms/')
+
+FILE_UPLOAD_PATH = path.join(path.dirname(__file__), '..', "upload")
 
 COMPRESS_ROOT = STATIC_ROOT
 COMPRESS_URL = STATIC_URL
 
-CMS_MEDIA_ROOT = path.join(STATIC_ROOT, 'cms/')
-CMS_MEDIA_URL = path.join(STATIC_URL, 'cms/')
+MANAGERS = ADMINS
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'dev.db', # Or path to database file if using sqlite3.
+        'USER': '', # Not used with sqlite3.
+        'PASSWORD': '', # Not used with sqlite3.
+        'HOST': '', # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '', # Set to empty string for default. Not used with sqlite3.
+    }
+}
+
+# Local time zone for this installation. Choices can be found here:
+# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
+# although not all choices may be available on all operating systems.
+# If running in a Windows environment this must be set to the same as your
+# system time zone.
+TIME_ZONE = 'US/Eastern'
+
+# Language code for this installation. All choices can be found here:
+# http://www.i18nguy.com/unicode/language-identifiers.html
+LANGUAGE_CODE = 'en-us'
+
+SITE_ID = 1
+
+# If you set this to False, Django will make some optimizations so as not
+# to load the internationalization machinery.
+USE_I18N = True
+
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
@@ -31,7 +69,7 @@ SECRET_KEY = 'changeme'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-)
+    )
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
@@ -45,15 +83,14 @@ MIDDLEWARE_CLASSES = (
     'cms.middleware.user.CurrentUserMiddleware',
     'cms.middleware.toolbar.ToolbarMiddleware',
 
-)
-
+    )
 
 ROOT_URLCONF = 'recollection.urls'
 
-AUTHENTICATION_BACKENDS  = (
+AUTHENTICATION_BACKENDS = (
     'freemix.permissions.RegistryBackend',
     'django.contrib.auth.backends.ModelBackend',
-)
+    )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",
@@ -71,7 +108,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "cms.context_processors.media",
     'sekizai.context_processors.sekizai',
 
-)
+    )
 
 INSTALLED_APPS = (
     'django.contrib.staticfiles',
@@ -145,13 +182,15 @@ INSTALLED_APPS = (
     'recollection.apps.discover',
     )
 
+module_path = lambda m: path.abspath(find_module(m)[1])
+
 STATICFILES_DIRS = (
     ('', path.join(module_path('viewshare'), 'static')),
 
     ('', path.join(module_path('recollection'), 'static')),
     ('', path.join(module_path('ajax_validation'), 'media')),
     ('', path.join(module_path('django_extensions'), 'media')),
-)
+    )
 
 ABSOLUTE_URL_OVERRIDES = {
     "auth.user": lambda o: "/profiles/profile/%s/" % o.username,
@@ -160,8 +199,8 @@ AUTH_PROFILE_MODULE = 'profiles.Profile'
 NOTIFICATION_LANGUAGE_MODULE = 'account.Account'
 
 THEME_DIR_URL = "themes/chili"
-THEME_FRAGMENT_URL = "%s/chili.css"%THEME_DIR_URL
-THEME_URL = '%s%s'%(STATIC_URL,THEME_FRAGMENT_URL)
+THEME_FRAGMENT_URL = "%s/chili.css" % THEME_DIR_URL
+THEME_URL = '%s%s' % (STATIC_URL, THEME_FRAGMENT_URL)
 
 TEMPLATE_DIRS = (
     path.join(module_path("viewshare"), "templates"),
@@ -178,21 +217,21 @@ FEEDBACKLINK = "mailto:recollection@lists.zepheira.com"
 LOGIN_URL = "/account/login"
 LOGIN_REDIRECT_URLNAME = "user_home"
 
-ANONYMOUS_USERNAME='guest'
+ANONYMOUS_USERNAME = 'guest'
 
 ACCOUNT_REQUIRED_EMAIL = False
 ACCOUNT_EMAIL_VERIFICATION = False
 
-ACCOUNT_ACTIVATION_DAYS=14
+ACCOUNT_ACTIVATION_DAYS = 14
 
-FIXTURE_DIRS=(
+FIXTURE_DIRS = (
     path.join(module_path("viewshare"), "fixtures"),
     path.join(module_path("recollection"), "fixtures"),
-)
+    )
 
-LOCALE_PATHS=(
+LOCALE_PATHS = (
     path.join(module_path("recollection"), "locale"),
-)
+    )
 
 # Javascript and CSS compression
 COMPRESS_ENABLED = False
@@ -201,13 +240,13 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
-)
+    )
 
 # django-cms
 CMS_TEMPLATES = (
     ('template.html', 'Front Page Template'),
     ('about/template.html', 'About Page Template'),
-)
+    )
 
 CACHES = {
     'default': {
@@ -216,7 +255,48 @@ CACHES = {
 }
 
 import logging
+
 logging.basicConfig(
-    level = logging.DEBUG,
-    format = '%(asctime)s %(levelname)s %(message)s',
+    level=logging.DEBUG,
+    format='%(asctime)s %(levelname)s %(message)s',
 )
+
+
+# A sample logging configuration. The only tangible logging
+# performed by this configuration is to send an email to
+# the site admins on every HTTP 500 error.
+# See http://docs.djangoproject.com/en/dev/topics/logging for
+# more details on how to customize your logging configuration.
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'null': {
+            'level': 'DEBUG',
+            'class': 'django.utils.log.NullHandler',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'freemix': {
+            'handlers': ['console'],
+            'level': 'DEBUG'
+        },
+        'recollection': {
+            'handlers': ['console'],
+            'level': 'DEBUG'
+        }
+    }
+}
+
+LOCAL_INSTALLED_APPS = ()
+
+try:
+    from local_settings import *
+except ImportError:
+    pass
+
+INSTALLED_APPS += LOCAL_INSTALLED_APPS
