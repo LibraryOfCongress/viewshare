@@ -32,6 +32,7 @@ django-piston==0.2.3
 django-timezones==0.2
 diff-match-patch==20110725.1
 django-registration==0.8
+-e git+git://github.com/theatlantic/django-curation.git#egg=django-curation
 
 # Uncomment for uservoice integration
 # pycrypto==2.3
