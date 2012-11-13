@@ -90,3 +90,101 @@ h3.grid_title {
 .showcased a {
     color: #117011;
 }
+
+/*
+    Slideshow
+*/
+
+
+#slides {
+    float: left;
+}
+
+
+/*
+    Slides container
+    Important:
+    Set the width of your slides container
+    Set to display none, prevents content flash
+*/
+
+.slides_container {
+    width:500px;
+    height:370px;
+    display:none;
+}
+
+/*
+    Each slide
+    Important:
+    Set the width of your slides
+    If height not specified height will be set by the slide content
+    Set to display block
+*/
+
+.slides_container div.slide {
+    width:500px;
+    height:370px;
+    display:block;
+}
+
+#slides .next,#slides .prev {
+    position:absolute;
+    top:107px;
+    left:-39px;
+    width:24px;
+    height:43px;
+    display:block;
+    z-index:101;
+}
+
+#slides .next {
+    left:585px;
+}
+
+
+.pagination {
+    margin:26px auto 0;
+    width:100px;
+}
+
+.pagination li {
+    float:left;
+    margin:0 1px;
+    list-style:none;
+}
+
+.pagination li a {
+    display:block;
+    width:12px;
+    height:0;
+    padding-top:12px;
+    background-image:url(../img/pagination.png);
+    background-position:0 0;
+    float:left;
+    overflow:hidden;
+}
+
+.pagination li.current a {
+    background-position:0 -12px;
+}
+
+.caption {
+    z-index:500;
+    position:relative;
+    left:0;
+    height:30px;
+    padding:5px 20px 0 20px;
+    background:#000;
+    background:rgba(0,0,0,.5);
+    width:500px;
+    font-size:1.3em;
+    line-height:1.33;
+    color:#fff;
+    border-top:1px solid #000;
+    text-shadow:none;
+}
+a:hover,a:active {
+    color:#599100;
+    text-decoration:underline;
+}

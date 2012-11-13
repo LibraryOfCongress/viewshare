@@ -14,6 +14,11 @@
 {% endblock %}
 
 
+{% block head_scripts %}
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.slides.js"></script>
+{% endblock head_scripts %}
+
+
 {% block tab_id %}id="home_tab"{% endblock %}
 
 
@@ -21,16 +26,28 @@
 
 
 {% block body %}
-<div class="homeimagebox">           
 {% if featured_exhibits %}
-{% for exhibit in featured_exhibits %}
-  <div class="{% cycle 'homepageImageRight' 'homepageImageLeft' %}">
-    <a href="{{ exhibit.get_absolute_url }}"><img src="{{ exhibit.thumbnail.url }}"/></a>
-    <a href="{{ exhibit.get_absolute_url }}"><p>{{ exhibit.custom_title }}</p></a>
-  </div>
-{% endfor %}
+<div id="slides">
+  <div class="slides_container">
+  {% for exhibit in featured_exhibits %}
+    <div class="slide">
+      <a href="{{ exhibit.get_absolute_url }}">
+      {% if exhibit.thumbnail %}
+        <img src="{{ exhibit.thumbnail.url }}" />
+      {% else %}
+        <img src="{{ STATIC_URL }}freemix/img/slide_holder.png" />
+      {% endif %}
+      </a>
+      <div class="caption">
+        <p>{{ exhibit.custom_title }}</p>
+      </div>
+    </div><!-- /.slide -->
+  {% endfor %}
+  </div><!-- /#slides_container -->
+  <a href="#" class="prev"><img src="{{ STATIC_URL }}freemix/img/arrow-prev.png" width="24" height="43" alt="Arrow Prev"></a>
+  <a href="#" class="next"><img src="{{ STATIC_URL }}freemix/img/arrow-next.png" width="24" height="43" alt="Arrow Next"></a>
+</div><!-- /#slides -->
 {% endif %}
-</div><!-- /.homeimagebox -->
 <div class="primarydisc">
   <p>
   <strong>Viewshare</strong> is a <strong>free</strong> platform for generating and customizing views <strong>(interactive maps, timelines, facets, tag clouds)</strong> that allow users to experience your <strong>digital collections</strong>.
@@ -46,36 +63,6 @@
   </a>
 </div><!-- /.primarydisc -->
 <style type="text/css">
-  .homepageImageRight {
-    padding-right:11px;
-    padding-bottom:5px;
-    width:272px;
-    float:left;
-  }
-  .homepageImageLeft{
-    padding-bottom:5px;
-    float:left;
-    width:272px;
-  }
-  .homeimagebox {
-    width: 570px;
-    float: left;
-    margin-top:3px;
-  }
-  .primarydisc {
-    margin-left:5px
-  }
-  .homeimagebox p {
-    text-align:right;
-    background-color:#5582A1;
-    color:white;
-    font-weight: bold;
-    padding-top:5px;
-    margin-top:0px;
-    padding-right: 3px;
-    padding-bottom:2px;
-    margin-top:-2px
-  }
   .linkblock {
     padding:1.2em 1em 1em 1em
   }
@@ -100,3 +87,41 @@
   </div>
 </div><!-- /.action-set -->
 {% endblock %}
+
+
+{% block final %}
+<script>
+$(function() {
+  $('#slides').slides({
+    preload: true,
+    preloadImage: '{{ STATIC_URL }}freemix/img/loading.gif',
+    play: 5000,
+    pause: 2500,
+    hoverPause: true,
+    animationStart: function(current){
+      $('.caption').animate({
+        bottom:-35
+      },100);
+      if (window.console && console.log) {
+        // example return of current slide number
+        console.log('animationStart on slide: ', current);
+      };
+    },
+    animationComplete: function(current){
+      $('.caption').animate({
+        bottom:0
+      },200);
+      if (window.console && console.log) {
+        // example return of current slide number
+        console.log('animationComplete on slide: ', current);
+      };
+    },
+    slidesLoaded: function() {
+      $('.caption').animate({
+        bottom:0
+      },200);
+    }
+  });
+});
+</script>
+{% endblock final %}
