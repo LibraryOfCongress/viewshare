@@ -97,6 +97,7 @@ h3.grid_title {
 
 
 #slides {
+    padding: 5px 10px 0px 22px;
     float: left;
 }
 
@@ -130,8 +131,8 @@ h3.grid_title {
 
 #slides .next,#slides .prev {
     position:absolute;
-    top:107px;
-    left:-39px;
+    top:345px;
+    left:136px;
     width:24px;
     height:43px;
     display:block;
@@ -139,12 +140,12 @@ h3.grid_title {
 }
 
 #slides .next {
-    left:585px;
+    left:660px;
 }
 
 
 .pagination {
-    margin:26px auto 0;
+    margin:10px auto 0;
     width:100px;
 }
 
@@ -159,7 +160,7 @@ h3.grid_title {
     width:12px;
     height:0;
     padding-top:12px;
-    background-image:url(../img/pagination.png);
+    background-image:url(../freemix/img/pagination.png);
     background-position:0 0;
     float:left;
     overflow:hidden;
