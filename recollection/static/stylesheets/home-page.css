@@ -172,13 +172,13 @@ h3.grid_title {
 
 .caption {
     z-index:500;
-    position:relative;
+    position:absolute;
     left:0;
-    height:30px;
+    height:auto;
     padding:5px 20px 0 20px;
     background:#000;
     background:rgba(0,0,0,.5);
-    width:500px;
+    width:457px;
     font-size:1.3em;
     line-height:1.33;
     color:#fff;
