@@ -130,22 +130,21 @@ h3.grid_title {
 }
 
 #slides .next,#slides .prev {
-    position:absolute;
-    top:345px;
-    left:136px;
+    position:relative;
+    bottom:205px;
+    right:24px;
     width:24px;
     height:43px;
-    display:block;
     z-index:101;
 }
 
 #slides .next {
-    left:660px;
+    left:472px;
 }
 
 
 .pagination {
-    margin:10px auto 0;
+    margin:-30px auto 0;
     width:100px;
 }
 
