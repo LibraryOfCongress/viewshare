@@ -97,7 +97,6 @@ h3.grid_title {
 
 
 #slides {
-    padding: 5px 10px 0px 22px;
     float: left;
 }
 
@@ -110,8 +109,8 @@ h3.grid_title {
 */
 
 .slides_container {
-    width:500px;
-    height:370px;
+    width:556px;
+    height:375px;
     display:none;
 }
 
@@ -124,28 +123,24 @@ h3.grid_title {
 */
 
 .slides_container div.slide {
-    width:500px;
-    height:370px;
+    width:556px;
+    height:375px;
     display:block;
 }
 
+.arrows {
+    position: absolute;
+    margin-top: 3px;
+}
+
 #slides .next,#slides .prev {
-    position:relative;
-    bottom:205px;
-    right:24px;
     width:24px;
-    height:43px;
-    z-index:101;
+    height:24px;
 }
-
-#slides .next {
-    left:472px;
-}
-
 
 .pagination {
-    margin:-30px auto 0;
-    width:100px;
+    margin: 10px auto 0;
+    float: right;
 }
 
 .pagination li {
@@ -177,7 +172,7 @@ h3.grid_title {
     padding:5px 20px 0 20px;
     background:#000;
     background:rgba(0,0,0,.5);
-    width:457px;
+    width:513px;
     font-size:1.3em;
     line-height:1.33;
     color:#fff;
