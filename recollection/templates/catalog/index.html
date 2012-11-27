@@ -7,9 +7,8 @@
 
 {% block head_scripts %}
 {% include "simile/js/exhibit.html" %}
+{% include "simile/js/exhibit_extensions.html" %}
 
-<script type="text/javascript" src="http://extensions.simile.zepheira.com/map/map-extension.js?service=openlayers"></script>
-<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 {{ block.super }}
 <script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/scripts/create.js"></script>
 
