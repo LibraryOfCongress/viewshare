@@ -100,7 +100,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.request",
     "django.core.context_processors.static",
     "recollection.utils.context_processors.recollection_settings",
-    "notification.context_processors.notification",
+    "viewshare.apps.vendor.notification.context_processors.notification",
     "announcements.context_processors.site_wide_announcements",
     "recollection.apps.account.context_processors.account",
     #"messages.context_processors.inbox",
@@ -121,9 +121,7 @@ INSTALLED_APPS = (
     'django.contrib.markup',
     'django.contrib.admin',
 
-
     # external
-    'notification',
     'emailconfirmation',
     'django_extensions',
     'robots',
@@ -135,9 +133,6 @@ INSTALLED_APPS = (
     'ajax_validation',
     'uni_form',
     'django_sorting',
-
-    'recollection.apps.account',
-    'recollection.apps.profiles',
 
     'compressor',
     'south',
@@ -163,7 +158,9 @@ INSTALLED_APPS = (
     'freemix.exhibit.share',
 
     # Recollection specific
-    'recollection.apps.notices',
+    'viewshare.apps.vendor.notification',
+    'recollection.apps.account',
+    'recollection.apps.profiles',
     'recollection.apps.site_theme',
     'recollection.apps.collection_catalog',
     'recollection.utils',

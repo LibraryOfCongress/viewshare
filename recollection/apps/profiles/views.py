@@ -29,11 +29,6 @@ import array
 import time
 from datetime import datetime
 
-if "notification" in settings.INSTALLED_APPS:
-    from notification import models as notification
-else:
-    notification = None
-
 
 def profiles(request, template_name="profiles/profiles.html", extra_context=None):
     if extra_context is None:
