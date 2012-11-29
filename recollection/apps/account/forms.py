@@ -10,6 +10,7 @@ from django.utils.hashcompat import sha_constructor
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
+from django.contrib import messages
 
 from emailconfirmation.models import EmailAddress
 from recollection.apps.account.models import Account
@@ -46,7 +47,7 @@ class LoginForm(forms.Form):
     def login(self, request):
         if self.is_valid():
             login(request, self.user)
-            request.user.message_set.create(message=ugettext(u"Successfully logged in as %(username)s.") % {'username': self.user.username})
+            messages.success(request, ugettext(u"Successfully logged in as %(username)s.") % {'username': self.user.username})
             if self.cleaned_data['remember']:
                 request.session.set_expiry(60 * 60 * 24 * 7 * 3)
             else:
@@ -84,7 +85,6 @@ class AddEmailForm(UserForm):
         raise forms.ValidationError(_("This email address already associated with this account."))
     
     def save(self):
-        self.user.message_set.create(message=ugettext(u"Confirmation email sent to %(email)s") % {'email': self.cleaned_data["email"]})
         return EmailAddress.objects.add_email(self.user, self.cleaned_data["email"])
 
 
@@ -108,7 +108,6 @@ class ChangePasswordForm(UserForm):
     def save(self):
         self.user.set_password(self.cleaned_data['password1'])
         self.user.save()
-        self.user.message_set.create(message=ugettext(u"Password successfully changed."))
 
 
 class SetPasswordForm(UserForm):
@@ -125,7 +124,6 @@ class SetPasswordForm(UserForm):
     def save(self):
         self.user.set_password(self.cleaned_data["password1"])
         self.user.save()
-        self.user.message_set.create(message=ugettext(u"Password successfully set."))
 
 
 class ResetPasswordForm(forms.Form):
@@ -190,8 +188,7 @@ class ResetPasswordKeyForm(forms.Form):
         user = User.objects.get(passwordreset__exact=password_reset)
         user.set_password(self.cleaned_data["password1"])
         user.save()
-        user.message_set.create(message=ugettext(u"Password successfully changed."))
-        
+
         # change all the password reset records to this person to be true.
         for password_reset in PasswordReset.objects.filter(user=user):
             password_reset.reset = True
@@ -209,7 +206,6 @@ class ChangeTimezoneForm(AccountForm):
     def save(self):
         self.account.timezone = self.cleaned_data["timezone"]
         self.account.save()
-        self.user.message_set.create(message=ugettext(u"Timezone successfully updated."))
 
 
 class ChangeLanguageForm(AccountForm):
@@ -223,5 +219,4 @@ class ChangeLanguageForm(AccountForm):
     def save(self):
         self.account.language = self.cleaned_data["language"]
         self.account.save()
-        self.user.message_set.create(message=ugettext(u"Language successfully updated."))
 

@@ -4,6 +4,7 @@ from django.template import RequestContext
 from django.utils.translation import  ugettext_lazy as _
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 from recollection.apps.account.utils import get_default_redirect
 from recollection.apps.account.forms import AddEmailForm, LoginForm, \
@@ -34,6 +35,10 @@ def login(request, form_class=LoginForm, template_name="account/login.html",
         context_instance = RequestContext(request)
     )
 
+def confirmation_message(request, email):
+    messages.success(request, _("Confirmation email sent to %(email)s") % {
+                                                    'email': email,
+                                                })
 
 @login_required
 def email(request, form_class=AddEmailForm,
@@ -43,6 +48,7 @@ def email(request, form_class=AddEmailForm,
             add_email_form = form_class(request.user, request.POST)
             if add_email_form.is_valid():
                 add_email_form.save()
+                confirmation_message(request, request.POST["email"])
                 add_email_form = form_class() # @@@
         else:
             add_email_form = form_class()
@@ -53,10 +59,8 @@ def email(request, form_class=AddEmailForm,
                         user=request.user,
                         email=email,
                     )
-                    request.user.message_set.create(
-                        message=_("Confirmation email sent to %(email)s") % {
-                            'email': email,
-                        })
+                    confirmation_message(request, email)
+
                     EmailConfirmation.objects.send_confirmation(email_address)
                 except EmailAddress.DoesNotExist:
                     pass
@@ -68,8 +72,7 @@ def email(request, form_class=AddEmailForm,
                         email=email
                     )
                     email_address.delete()
-                    request.user.message_set.create(
-                        message=_("Removed email address %(email)s") % {
+                    messages.success(request, _("Removed email address %(email)s") % {
                             'email': email,
                         })
                 except EmailAddress.DoesNotExist:
@@ -96,6 +99,8 @@ def password_change(request, form_class=ChangePasswordForm,
         password_change_form = form_class(request.user, request.POST)
         if password_change_form.is_valid():
             password_change_form.save()
+            messages.success(request, _(u"Password successfully changed."))
+
             password_change_form = form_class(request.user)
     else:
         password_change_form = form_class(request.user)
@@ -112,6 +117,8 @@ def password_set(request, form_class=SetPasswordForm,
         password_set_form = form_class(request.user, request.POST)
         if password_set_form.is_valid():
             password_set_form.save()
+            messages.success(request, _(u"Password successfully set."))
+
             return HttpResponseRedirect(reverse("acct_passwd"))
     else:
         password_set_form = form_class(request.user)
@@ -138,6 +145,8 @@ def password_reset(request, form_class=ResetPasswordForm,
         password_reset_form = form_class(request.POST)
         if password_reset_form.is_valid():
             email = password_reset_form.save()
+            messages.success(request, _(u"Password successfully changed."))
+
             return render_to_response(template_name_done, {
                 "email": email,
             }, context_instance=RequestContext(request))
@@ -169,6 +178,8 @@ def timezone_change(request, form_class=ChangeTimezoneForm,
         form = form_class(request.user, request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, _(u"Timezone successfully updated."))
+
     else:
         form = form_class(request.user)
     return render_to_response(template_name, {
@@ -182,6 +193,8 @@ def language_change(request, form_class=ChangeLanguageForm,
         form = form_class(request.user, request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, _(u"Language successfully updated."))
+
             next = request.META.get('HTTP_REFERER', None)
             return HttpResponseRedirect(next)
     else:

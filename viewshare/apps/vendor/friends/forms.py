@@ -1,6 +1,7 @@
 from django import forms
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.utils.translation import ugettext_lazy as _
 
 from viewshare.apps.vendor.friends.models import *
 
@@ -33,7 +34,6 @@ if EmailAddress:
     
         def save(self, user):
             join_request = JoinInvitation.objects.send_invitation(user, self.cleaned_data["email"], self.cleaned_data["message"])
-            user.message_set.create(message="Invitation to join sent to %s" % join_request.contact.email)
             return join_request
     
 class InviteFriendForm(UserForm):
@@ -46,7 +46,7 @@ class InviteFriendForm(UserForm):
         try:
             User.objects.get(username=to_username)
         except User.DoesNotExist:
-            raise forms.ValidationError(u"Unknown user.")
+            raise forms.ValidationError(_(u"Unknown user."))
             
         return self.cleaned_data["to_user"]
     
@@ -54,11 +54,11 @@ class InviteFriendForm(UserForm):
         to_user = User.objects.get(username=self.cleaned_data["to_user"])
         previous_invitations_to = FriendshipInvitation.objects.invitations(to_user=to_user, from_user=self.user)
         if previous_invitations_to.count() > 0:
-            raise forms.ValidationError(u"Already requested friendship with %s" % to_user.username)
+            raise forms.ValidationError(_(u"Already requested friendship with %s") % to_user.username)
         # check inverse
         previous_invitations_from = FriendshipInvitation.objects.invitations(to_user=self.user, from_user=to_user)
         if previous_invitations_from.count() > 0:
-            raise forms.ValidationError(u"%s has already requested friendship with you" % to_user.username)
+            raise forms.ValidationError(_(u"%s has already requested friendship with you") % to_user.username)
         return self.cleaned_data
     
     def save(self):
@@ -69,5 +69,4 @@ class InviteFriendForm(UserForm):
         if notification:
             notification.send([to_user], "friends_invite", {"invitation": invitation})
             notification.send([self.user], "friends_invite_sent", {"invitation": invitation})
-        self.user.message_set.create(message="Friendship requested with %s" % to_user.username) # @@@ make link like notification
         return invitation

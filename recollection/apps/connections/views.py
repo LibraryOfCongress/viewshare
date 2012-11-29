@@ -3,6 +3,7 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 from django.utils.translation import ugettext_lazy as _
 
@@ -22,8 +23,8 @@ def connections(request, template_name="connections/invitations.html"):
                 invitation = FriendshipInvitation.objects.get(id=invitation_id)
                 if invitation.to_user == request.user:
                     invitation.accept()
-                    request.user.message_set.create(message=_("Accepted connection to %(from_user)s") %
-                                                            {'from_user': invitation.from_user})
+                    messages.success(request, _("Accepted connection to %(from_user)s") %
+                                              {'from_user': invitation.from_user})
             except FriendshipInvitation.DoesNotExist:
                 pass
 
@@ -32,8 +33,8 @@ def connections(request, template_name="connections/invitations.html"):
                 invitation = FriendshipInvitation.objects.get(id=invitation_id)
                 if invitation.to_user == request.user:
                     invitation.decline()
-                    request.user.message_set.create(message=_("Declined connection to %(from_user)s") %
-                        {'from_user': invitation.from_user})
+                    messages.success(request, _("Declined connection to %(from_user)s") %
+                                                                  {'from_user': invitation.from_user})
             except FriendshipInvitation.DoesNotExist:
                 pass
 
