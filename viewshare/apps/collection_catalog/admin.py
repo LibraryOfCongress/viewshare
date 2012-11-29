@@ -1,10 +1,11 @@
 "Admin helpers for the collection catalog models"
 from django.contrib import admin
-from recollection.apps.collection_catalog.models import Topic, Collection, Project, Organization
+from django.conf import settings
+
+from viewshare.apps.collection_catalog.models import Topic, Collection, Project, Organization
 from recollection.utils.widgets import AutocompleteAdmin
 from freemix.utils import get_username
-from django.conf.urls.defaults import *
-from django.conf import settings
+
 
 class CatalogAdmin(admin.ModelAdmin):
     class Media:

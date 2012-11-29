@@ -4,10 +4,10 @@ Currently, this just consists of what is necessary for exhibit.
 from django.conf.urls.defaults import *
 from django.views.generic.simple import direct_to_template
 from piston.resource import Resource
-from recollection.apps.collection_catalog.handlers import ProjectHandler
-from recollection.apps.collection_catalog.handlers import OrganizationHandler
-from recollection.apps.collection_catalog.handlers import CollectionHandler
-from recollection.apps.collection_catalog.handlers import TopicHandler
+from viewshare.apps.collection_catalog.handlers import ProjectHandler
+from viewshare.apps.collection_catalog.handlers import OrganizationHandler
+from viewshare.apps.collection_catalog.handlers import CollectionHandler
+from viewshare.apps.collection_catalog.handlers import TopicHandler
 
 
 def generate_url_pattern(resource):

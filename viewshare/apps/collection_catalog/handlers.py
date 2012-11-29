@@ -1,9 +1,11 @@
 """This module defines an abstract handler for exposing collection catalog
 resources in exhibit format"""
-from piston.handler import BaseHandler
-from recollection.apps.collection_catalog.models import Collection, Project, Organization, Topic
 from django.shortcuts import get_object_or_404
+
+from piston.handler import BaseHandler
+from viewshare.apps.collection_catalog.models import Collection, Project, Organization, Topic
 from freemix.utils import get_site_url
+
 
 class AbstractCatalogHandler(BaseHandler):
     """

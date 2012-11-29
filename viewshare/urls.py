@@ -28,7 +28,7 @@ urlpatterns = patterns('',
     (r'^robots.txt$', include('robots.urls')),
     (r'^admin/', include(admin.site.urls)),
 
-    (r'^catalog/', include('recollection.apps.collection_catalog.urls')),
+    (r'^catalog/', include('viewshare.apps.collection_catalog.urls')),
     (r'^support/', include('viewshare.apps.support.urls')),
 
     url(r'^profiles/profile/(?P<username>[\w\._-]+)/connections/$',
