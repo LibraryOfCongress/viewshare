@@ -1,5 +1,5 @@
 from django import forms
-from .apps.profiles.models import Profile
+from viewshare.apps.profiles.models import Profile
 
 class ProfileForm(forms.ModelForm):
     class Meta:

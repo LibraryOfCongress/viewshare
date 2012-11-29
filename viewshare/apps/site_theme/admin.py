@@ -1,5 +1,5 @@
 from django.contrib import admin
-from recollection.apps.site_theme.models import SiteTheme, Skin
+from viewshare.apps.site_theme.models import SiteTheme, Skin
 
 class SiteThemeAdmin(admin.ModelAdmin):
     list_display   = ('name', 'description')

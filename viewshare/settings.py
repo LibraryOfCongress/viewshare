@@ -157,7 +157,7 @@ INSTALLED_APPS = (
 
     'viewshare.apps.account',
     'viewshare.apps.profiles',
-    'recollection.apps.site_theme',
+    'viewshare.apps.site_theme',
     'recollection.apps.collection_catalog',
     'recollection.utils',
     'recollection.apps.connections',

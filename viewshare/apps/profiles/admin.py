@@ -5,7 +5,7 @@ from django.contrib.auth.admin import UserAdmin
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from .apps.profiles.models import Profile
+from viewshare.apps.profiles.models import Profile
 
 
 

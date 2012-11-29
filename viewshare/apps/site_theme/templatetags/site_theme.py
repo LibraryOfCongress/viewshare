@@ -1,9 +1,10 @@
 from django import template
 from django.conf import settings
 from django.core.cache import cache
-from recollection.apps.site_theme.models import SiteTheme, Skin
-from django.template.loader import render_to_string
 from django.template import Variable
+
+from viewshare.apps.site_theme.models import SiteTheme, Skin
+
 
 register = template.Library()
 

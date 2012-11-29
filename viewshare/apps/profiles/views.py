@@ -14,7 +14,7 @@ from viewshare.apps.vendor.friends.forms import InviteFriendForm
 from viewshare.apps.vendor.friends.models import FriendshipInvitation, Friendship
 from freemix.permissions import PermissionsRegistry
 
-from .apps.profiles.forms import ProfileForm
+from viewshare.apps.profiles.forms import ProfileForm
 
 
 def profiles(request, template_name="profiles/profiles.html", extra_context=None):
