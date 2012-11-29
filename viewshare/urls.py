@@ -22,7 +22,7 @@ urlpatterns = patterns('',
 
     (r'^profiles/', include('viewshare.apps.profiles.urls')),
 
-    (r'^invitations/', include('recollection.apps.connections.urls')),
+    (r'^invitations/', include('viewshare.apps.connections.urls')),
     (r'^notices/', include('viewshare.apps.vendor.notification.urls')),
     (r'^announcements/', include('viewshare.apps.vendor.announcements.urls')),
     (r'^robots.txt$', include('robots.urls')),
@@ -32,16 +32,16 @@ urlpatterns = patterns('',
     (r'^support/', include('viewshare.apps.support.urls')),
 
     url(r'^profiles/profile/(?P<username>[\w\._-]+)/connections/$',
-        'recollection.apps.connections.views.connection_list_by_user',
+        'viewshare.apps.connections.views.connection_list_by_user',
         name='connection_list_by_user') ,
 
     # Lists of connections datasets and views
     url(r'data/(?P<username>[a-zA-Z0-9_.-]+)/connections/$',
-        'recollection.apps.connections.views.datasets_by_user_connections',
+        'viewshare.apps.connections.views.datasets_by_user_connections',
         name='datasets_by_user_connections'),
 
     url(r'views/(?P<username>[a-zA-Z0-9_.-]+)/connections/$',
-        'recollection.apps.connections.views.exhibit_list_by_user_connections',
+        'viewshare.apps.connections.views.exhibit_list_by_user_connections',
         name='exhibit_list_by_user_connections'),
 
     (r'^upload/', include('viewshare.apps.upload.urls')),
