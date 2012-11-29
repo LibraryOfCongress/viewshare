@@ -14,7 +14,7 @@ from django.template.response import TemplateResponse
 from django.utils import simplejson
 
 from Crypto.Cipher import AES
-from recollection.viewshare.apps.account.forms import LoginForm
+from viewshare.apps.account.forms import LoginForm
 
 
 def uservoice_token(request, api_key, account_key):
