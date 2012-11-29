@@ -85,7 +85,7 @@ MIDDLEWARE_CLASSES = (
 
     )
 
-ROOT_URLCONF = 'recollection.urls'
+ROOT_URLCONF = 'viewshare.urls'
 
 AUTHENTICATION_BACKENDS = (
     'freemix.permissions.RegistryBackend',
