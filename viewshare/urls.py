@@ -20,7 +20,7 @@ urlpatterns = patterns('',
     (r'^account/', include('viewshare.apps.account.urls')),
     (r'^registration/', include('viewshare.apps.moderated_registration.urls')),
 
-    (r'^profiles/', include('recollection.apps.profiles.urls')),
+    (r'^profiles/', include('viewshare.apps.profiles.urls')),
 
     (r'^invitations/', include('recollection.apps.connections.urls')),
     (r'^notices/', include('viewshare.apps.vendor.notification.urls')),

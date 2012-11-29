@@ -1,11 +1,12 @@
 from django.contrib import admin
-from .models import Profile
-
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin
 from django import forms
 from django.utils.translation import ugettext_lazy as _
+
+from .apps.profiles.models import Profile
+
 
 
 # Override the user admin to reflect the regex for usernames

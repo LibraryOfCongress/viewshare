@@ -1,35 +1,20 @@
-from django.core.cache import cache
 from django.core.urlresolvers import reverse
-from django.db.models import Count
-from django.shortcuts import render_to_response, render, get_object_or_404
+from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
-from django.http import HttpResponseRedirect, Http404
-from django.conf import settings
+from django.http import HttpResponseRedirect
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
 
-from django.utils.http import http_date
-
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ugettext
-from django.utils import simplejson
 
 from viewshare.apps.vendor.friends.forms import InviteFriendForm
 from viewshare.apps.vendor.friends.models import FriendshipInvitation, Friendship
 from freemix.permissions import PermissionsRegistry
 
-from .forms import ProfileForm
-
-
-import base64
-import hashlib
-import urllib
-import operator
-import array
-import time
-from datetime import datetime
+from .apps.profiles.forms import ProfileForm
 
 
 def profiles(request, template_name="profiles/profiles.html", extra_context=None):
