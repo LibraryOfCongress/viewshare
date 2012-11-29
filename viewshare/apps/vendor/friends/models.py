@@ -13,11 +13,7 @@ from django.conf import settings
 
 sha_constructor = hashlib.sha1
 
-# favour django-mailer but fall back to django.core.mail
-if "mailer" in settings.INSTALLED_APPS:
-    from mailer import send_mail
-else:
-    from django.core.mail import send_mail
+from django.core.mail import send_mail
 
 from viewshare.apps.vendor.notification import models as notification
 

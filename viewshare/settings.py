@@ -124,7 +124,6 @@ INSTALLED_APPS = (
     'emailconfirmation',
     'django_extensions',
     'robots',
-    'mailer',
     'pagination',
     'timezones',
     'ajax_validation',

@@ -13,7 +13,7 @@ from django.contrib.sites.models import Site
 
 from emailconfirmation.models import EmailAddress
 from recollection.apps.account.models import Account
-from recollection.mail import send_mail
+from django.core.mail import send_mail
 
 from timezones.forms import TimeZoneField
 

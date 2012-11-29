@@ -11,7 +11,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from registration.models import RegistrationProfile, RegistrationManager
 
-from recollection.mail import send_mail
+from django.core.mail import send_mail
 
 
 class OrganizationType(models.Model):

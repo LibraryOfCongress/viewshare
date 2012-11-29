@@ -86,6 +86,3 @@ virtualenv.
 
 To run the server on port 8000
 > python manage.py runserver
-
-The following should be run at a regular interval:
-> python manage.py send_mail
