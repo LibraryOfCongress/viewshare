@@ -31,3 +31,5 @@ MANIFEST
 .hg/*
 .hgignore
 .hgtags
+*~
+*#
