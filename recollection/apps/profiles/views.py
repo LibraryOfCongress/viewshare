@@ -14,8 +14,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ugettext
 from django.utils import simplejson
 
-from friends.forms import InviteFriendForm
-from friends.models import FriendshipInvitation, Friendship
+from viewshare.apps.vendor.friends.forms import InviteFriendForm
+from viewshare.apps.vendor.friends.models import FriendshipInvitation, Friendship
 from freemix.permissions import PermissionsRegistry
 
 from .forms import ProfileForm
@@ -89,7 +89,7 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
         if request.method == "POST":
             if request.POST.get("action") == "remove": # @@@ perhaps the form should just post to friends and be redirected here
                 Friendship.objects.remove(request.user, other_user)
-                request.user.message_set.create(message=_("You have removed %(from_user)s from friends") % {'from_user': other_user})
+                request.user.message_set.create(message=_("You have removed %(from_user)s from your connections") % {'from_user': other_user})
                 is_friend = False
                 invite_form = InviteFriendForm(request.user, {
                     'to_user': username,

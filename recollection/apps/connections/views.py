@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 from django.utils.translation import ugettext_lazy as _
 
-from friends.models import *
+from viewshare.apps.vendor.friends.models import *
 from freemix.dataset.models import Dataset
 from freemix.permissions import PermissionsRegistry
 from django.views.generic.list import ListView

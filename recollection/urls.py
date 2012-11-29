@@ -24,7 +24,7 @@ urlpatterns = patterns('',
 
     (r'^invitations/', include('recollection.apps.connections.urls')),
     (r'^notices/', include('viewshare.apps.vendor.notification.urls')),
-    (r'^announcements/', include('announcements.urls')),
+    (r'^announcements/', include('viewshare.apps.vendor.announcements.urls')),
     (r'^robots.txt$', include('robots.urls')),
     (r'^admin/', include(admin.site.urls)),
 

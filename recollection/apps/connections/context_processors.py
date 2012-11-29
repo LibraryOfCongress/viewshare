@@ -1,4 +1,4 @@
-from friends.models import FriendshipInvitation
+from viewshare.apps.vendor.friends.models import FriendshipInvitation
 
 def invitations(request):
     if request.user.is_authenticated():

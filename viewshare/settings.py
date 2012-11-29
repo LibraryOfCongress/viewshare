@@ -101,9 +101,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     "recollection.utils.context_processors.recollection_settings",
     "viewshare.apps.vendor.notification.context_processors.notification",
-    "announcements.context_processors.site_wide_announcements",
+    "viewshare.apps.vendor.announcements.context_processors.site_wide_announcements",
     "recollection.apps.account.context_processors.account",
-    #"messages.context_processors.inbox",
     "recollection.apps.connections.context_processors.invitations",
     "cms.context_processors.media",
     'sekizai.context_processors.sekizai',
@@ -125,9 +124,7 @@ INSTALLED_APPS = (
     'emailconfirmation',
     'django_extensions',
     'robots',
-    'friends',
     'mailer',
-    'announcements',
     'pagination',
     'timezones',
     'ajax_validation',
@@ -136,7 +133,6 @@ INSTALLED_APPS = (
 
     'compressor',
     'south',
-    #'piston',
 
     # CMS stuff
     'cms',
@@ -159,6 +155,9 @@ INSTALLED_APPS = (
 
     # Recollection specific
     'viewshare.apps.vendor.notification',
+    'viewshare.apps.vendor.friends',
+    'viewshare.apps.vendor.announcements',
+
     'recollection.apps.account',
     'recollection.apps.profiles',
     'recollection.apps.site_theme',

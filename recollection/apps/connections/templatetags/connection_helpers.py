@@ -1,5 +1,5 @@
 from django import template
-from friends.models import Friendship
+from viewshare.apps.vendor.friends.models import Friendship
 from freemix.permissions import PermissionsRegistry
 
 
