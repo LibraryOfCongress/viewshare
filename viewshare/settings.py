@@ -2,10 +2,6 @@ from os import path
 from posixpath import join as url_join
 from imp import find_module
 
-import recollection.migrations
-
-SOUTH_MIGRATION_MODULES = recollection.migrations.SOUTH_MIGRATION_MODULES
-
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
