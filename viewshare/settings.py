@@ -162,14 +162,14 @@ INSTALLED_APPS = (
     'recollection.utils',
     'recollection.apps.connections',
     'recollection.conf.recollection_defaults',
-    'viewshare.upload',
+    'viewshare.apps.upload',
 
     # Support pipeline
     'recollection.apps.support',
 
     # Site registration
     'registration',
-    'viewshare.moderated_registration',
+    'viewshare.apps.moderated_registration',
     )
 
 module_path = lambda m: path.abspath(find_module(m)[1])

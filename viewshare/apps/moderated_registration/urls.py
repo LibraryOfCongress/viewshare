@@ -11,7 +11,7 @@ _registration_backend_ = 'viewshare.moderated_registration.backend' \
 
 urlpatterns = patterns('',
     url(r'^activate/complete/$',
-       'viewshare.moderated_registration.views.activation_complete',
+        'viewshare.apps.moderated_registration.views.activation_complete',
        name='registration_activation_complete'),
 
     # Activation keys get matched by \w+ instead of the more specific
@@ -30,10 +30,10 @@ urlpatterns = patterns('',
        name='registration_register'),
 
     url(r'^register/complete/$',
-        'viewshare.moderated_registration.views.registration_complete',
+        'viewshare.apps.moderated_registration.views.registration_complete',
         name='registration_complete'),
 
     url(r'^register/closed/$',
-        'viewshare.moderated_registration.views.registration_closed',
+        'viewshare.apps.moderated_registration.views.registration_closed',
        name='registration_disallowed'),
     )

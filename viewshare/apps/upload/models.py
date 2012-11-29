@@ -2,12 +2,13 @@ from os.path import join, sep
 from django.core.files.storage import FileSystemStorage
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
+
 from freemix.dataset.models import (DataSource,
                                     URLDataSourceMixin,
                                     make_file_data_source_mixin)
-from django.utils.translation import ugettext_lazy as _
 from freemix.dataset.transform import AkaraTransformClient
-from viewshare.upload import conf
+from viewshare.apps.upload import conf
 
 
 def source_upload_path(instance, filename):

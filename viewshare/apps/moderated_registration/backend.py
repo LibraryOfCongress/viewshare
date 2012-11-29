@@ -1,9 +1,11 @@
 from django.contrib.sites.models import RequestSite, Site
+from django.conf import settings
+
 from registration import signals
 from registration.backends.default import DefaultBackend
-from viewshare.moderated_registration import forms
-from django.conf import settings
-from viewshare.moderated_registration import models
+
+from viewshare.apps.moderated_registration import forms
+from viewshare.apps.moderated_registration import models
 
 
 class ModeratedRegistrationBackend(DefaultBackend):

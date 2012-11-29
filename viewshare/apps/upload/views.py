@@ -6,8 +6,8 @@ from freemix.dataset.transform import AkaraTransformClient
 from freemix.dataset.views import create_form_view
 from freemix.views import JSONResponse
 
-from viewshare.upload import forms, conf
-from viewshare.upload import models
+from viewshare.apps.upload import forms, conf
+from viewshare.apps.upload import models
 
 logger = logging.getLogger(__name__)
 

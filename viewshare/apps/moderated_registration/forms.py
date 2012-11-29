@@ -2,9 +2,9 @@ from django import forms
 from uni_form.helpers import FormHelper, Layout, Fieldset, Submit
 from django.contrib.localflavor.us.us_states import US_STATES
 from registration.forms import RegistrationForm
-from viewshare.moderated_registration import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils import simplejson as json
+from viewshare.apps.moderated_registration import models
 
 _invalid_username_ = _("This value must contain only letters, "
                      "numbers and underscores.")

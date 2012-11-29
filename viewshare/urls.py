@@ -18,7 +18,7 @@ handler500 = 'recollection.utils.views.server_error'
 urlpatterns = patterns('',
 
     (r'^account/', include('recollection.apps.account.urls')),
-    (r'^registration/', include('viewshare.moderated_registration.urls')),
+    (r'^registration/', include('viewshare.apps.moderated_registration.urls')),
 
     (r'^profiles/', include('recollection.apps.profiles.urls')),
 
@@ -44,7 +44,7 @@ urlpatterns = patterns('',
         'recollection.apps.connections.views.exhibit_list_by_user_connections',
         name='exhibit_list_by_user_connections'),
 
-    (r'^upload/', include('viewshare.upload.urls')),
+    (r'^upload/', include('viewshare.apps.upload.urls')),
     (r'^data/', include('freemix.dataset.urls')),
     (r'^source/', include('freemix.dataset.urls.datasource')),
 
@@ -83,7 +83,7 @@ urlpatterns = patterns('',
 
 if getattr(settings, "USERVOICE_SETTINGS", None):
     urlpatterns += patterns('',
-        (r'^uservoice/', include('viewshare.uservoice.urls')),
+        (r'^uservoice/', include('viewshare.apps.uservoice.urls')),
     )
 
 urlpatterns += patterns('',

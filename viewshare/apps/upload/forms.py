@@ -2,7 +2,7 @@ from django import forms
 from django.forms.widgets import Select
 from django.utils.translation import ugettext_lazy as _
 from freemix.dataset.models import DataSource
-from viewshare.upload import models
+from viewshare.apps.upload import models
 
 
 class DataSourceForm(forms.ModelForm):
