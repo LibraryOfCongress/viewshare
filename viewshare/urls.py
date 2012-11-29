@@ -29,7 +29,7 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
 
     (r'^catalog/', include('recollection.apps.collection_catalog.urls')),
-    (r'^support/', include('recollection.apps.support.urls')),
+    (r'^support/', include('viewshare.apps.support.urls')),
 
     url(r'^profiles/profile/(?P<username>[\w\._-]+)/connections/$',
         'recollection.apps.connections.views.connection_list_by_user',

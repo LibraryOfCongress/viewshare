@@ -4,8 +4,8 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
 from django.template import loader, RequestContext
 
-from recollection.apps.support.redmine.utils import RedmineClient, RedmineIssue
-from recollection.apps.support.redmine.consts import *
+from viewshare.apps.support.redmine.utils import RedmineClient, RedmineIssue
+from viewshare.apps.support.redmine.consts import *
 from freemix.dataset.models import parse_profile_json
 
 from recollection.utils.views import get_akara_version
@@ -14,7 +14,7 @@ from freemix import __version__ as freemix_version
 from freemix.utils import get_user, get_site_url
 
 from recollection import __version__ as recollection_version
-from recollection.apps.support import forms
+from viewshare.apps.support import forms
 
 logger = logging.getLogger(__name__)
 

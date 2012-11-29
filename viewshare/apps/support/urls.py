@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import url, patterns
 from django.views.generic.simple import direct_to_template
-from . import views
+from viewshare.apps.support import views
 
 
 urlpatterns = patterns('',

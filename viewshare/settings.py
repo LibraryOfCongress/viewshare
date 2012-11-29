@@ -165,7 +165,7 @@ INSTALLED_APPS = (
     'viewshare.apps.upload',
 
     # Support pipeline
-    'recollection.apps.support',
+    'viewshare.apps.support',
 
     # Site registration
     'registration',
