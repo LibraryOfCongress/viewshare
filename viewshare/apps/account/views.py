@@ -5,12 +5,13 @@ from django.utils.translation import  ugettext_lazy as _
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from emailconfirmation.models import EmailAddress, EmailConfirmation
 
-from recollection.apps.account.utils import get_default_redirect
-from recollection.apps.account.forms import AddEmailForm, LoginForm, \
+from viewshare.apps.account.utils import get_default_redirect
+from viewshare.apps.account.forms import AddEmailForm, LoginForm, \
     ChangePasswordForm, SetPasswordForm, ResetPasswordForm, \
     ChangeTimezoneForm, ChangeLanguageForm, ResetPasswordKeyForm
-from emailconfirmation.models import EmailAddress, EmailConfirmation
+
 
 def login(request, form_class=LoginForm, template_name="account/login.html",
           success_url=None,

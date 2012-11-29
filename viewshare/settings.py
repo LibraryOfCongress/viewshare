@@ -100,7 +100,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "recollection.utils.context_processors.recollection_settings",
     "viewshare.apps.vendor.notification.context_processors.notification",
     "viewshare.apps.vendor.announcements.context_processors.site_wide_announcements",
-    "recollection.apps.account.context_processors.account",
+    "viewshare.apps.account.context_processors.account",
     "recollection.apps.connections.context_processors.invitations",
     "cms.context_processors.media",
     'sekizai.context_processors.sekizai',
@@ -155,7 +155,7 @@ INSTALLED_APPS = (
     'viewshare.apps.vendor.friends',
     'viewshare.apps.vendor.announcements',
 
-    'recollection.apps.account',
+    'viewshare.apps.account',
     'recollection.apps.profiles',
     'recollection.apps.site_theme',
     'recollection.apps.collection_catalog',

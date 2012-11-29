@@ -17,7 +17,7 @@ handler500 = 'recollection.utils.views.server_error'
 
 urlpatterns = patterns('',
 
-    (r'^account/', include('recollection.apps.account.urls')),
+    (r'^account/', include('viewshare.apps.account.urls')),
     (r'^registration/', include('viewshare.apps.moderated_registration.urls')),
 
     (r'^profiles/', include('recollection.apps.profiles.urls')),

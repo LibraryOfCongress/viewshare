@@ -1,15 +1,3 @@
-
-from django.core.cache import cache
-from django.shortcuts import  render
-from django.http import  Http404, HttpResponseRedirect
-from django.conf import settings
-from django.template.response import TemplateResponse
-
-from django.utils import simplejson
-
-from Crypto.Cipher import AES
-
-
 import base64
 import hashlib
 import urllib
@@ -17,7 +5,16 @@ import operator
 import array
 import time
 from datetime import datetime
-from recollection.apps.account.forms import LoginForm
+
+from django.core.cache import cache
+from django.shortcuts import  render
+from django.http import  Http404, HttpResponseRedirect
+from django.conf import settings
+from django.template.response import TemplateResponse
+from django.utils import simplejson
+
+from Crypto.Cipher import AES
+from recollection.viewshare.apps.account.forms import LoginForm
 
 
 def uservoice_token(request, api_key, account_key):

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from recollection.apps.account.models import Account, PasswordReset
+from viewshare.apps.account.models import Account, PasswordReset
 
 admin.site.register(Account)
 

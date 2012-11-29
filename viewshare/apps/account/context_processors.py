@@ -1,5 +1,5 @@
 
-from recollection.apps.account.models import Account, AnonymousAccount
+from viewshare.apps.account.models import Account, AnonymousAccount
 
 def account(request):
     if request.user.is_authenticated():
