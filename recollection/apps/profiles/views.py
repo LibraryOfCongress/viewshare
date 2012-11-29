@@ -105,7 +105,7 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
                 invite_form = InviteFriendForm(request.user, request.POST)
                 if invite_form.is_valid():
                     invite_form.save()
-                    messages.success(request, _("Connection requested with %s") % to_user.username) # @@@ make link like notification
+                    messages.success(request, _("Connection requested with %s") % invite_form.cleaned_data["to_user"]) # @@@ make link like notification
 
             else:
                 invite_form = InviteFriendForm(request.user, {
