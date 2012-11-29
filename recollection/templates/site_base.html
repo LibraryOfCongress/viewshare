@@ -17,14 +17,19 @@
 
 {% block head_css %}
     {% compress css %}
+<!-- 
     <link href="{{STATIC_URL}}stylesheets/reset.css" rel="stylesheet" type="text/css" media="screen,projection" />
     <link href="{{STATIC_URL}}stylesheets/base.css" rel="stylesheet" type="text/css" media="screen,projection" />
     <link href="{{STATIC_URL}}uni_form/default.uni-form.css" rel="stylesheet" type="text/css" media="screen,projection" />
     <link href="{{STATIC_URL}}stylesheets/uni-form.css" rel="stylesheet" type="text/css" media="screen,projection" />
-    <link href="{{STATIC_URL}}stylesheets/style.css" rel="stylesheet" type="text/css" media="screen,projection" />
+-->
+    <link href="{{STATIC_URL}}stylesheets/bootstrap.css" rel="stylesheet" type="text/css" media="screen,projection" />
+    <link href="{{STATIC_URL}}stylesheets/bootstrap-responsive.css" rel="stylesheet" type="text/css" media="screen,projection" />    
+    <link href="{{STATIC_URL}}stylesheets/style.css" rel="stylesheet" type="text/css" media="screen,projection" /> 
     <link href="{{STATIC_URL}}stylesheets/lc.css" rel="stylesheet" type="text/css" media="screen,projection" />
     <link href="{{STATIC_URL}}themes/chili/chili.css" rel="stylesheet" type="text/css" media="screen,projection" />
     <link href="{{STATIC_URL}}themes/chili/adjunct.css" rel="stylesheet" type="text/css" media="screen,projection" />
+
     {%endcompress %}
     <link href="{% site_skin %}" rel="stylesheet" type="text/css" media="screen,projection" />
 
@@ -32,19 +37,25 @@
 
 {% block head_scripts %}
 
-
 {% endblock %}
 
 {% block login %}
     {% if user.is_authenticated %}
-        <a href="{% url profile_detail user.username %}">{% trans "Home" %}</a> <span class="divider">|</span> <a href="{% url acct_email %}">{% trans "Settings" %}</a> <span class="divider">|</span> <a href="{% url notification.views.notices %}">{% trans "Messages" %}{% if notice_unseen_count %} ({{ notice_unseen_count }}){% endif %}</a>  <span class="divider">|</span> {% if user.is_staff %}<a href="/admin/" target="_blank">{% trans "Admin" %}</a> <span class="divider">|</span> {% endif %} <a href="{% url acct_logout %}">{% trans "Logout" %}</a>
+    <li><a href="{% url profile_detail user.username %}">{% trans "Home" %}</a></li><li class="divider-vertical"></li>
+    <li><a href="{% url acct_email %}">{% trans "Settings" %}</a></li><li class="divider-vertical"></li>
+    <li><a href="{% url notification.views.notices %}">{% trans "Messages" %}{% if notice_unseen_count %} ({{ notice_unseen_count }}){% endif %}</a></li><li class="divider-vertical"></li>
+    {% if user.is_staff %}<li><a href="/admin/" target="_blank">{% trans "Admin" %}</a></li><li class="divider-vertical"></li>{% endif %} 
+    <li><a href="{% url acct_logout %}">{% trans "Logout" %}</a></li>
     {% else %}
-        <a href="{% url acct_login %}">{% trans "Login" %}</a> {% trans "or" %} <a href="{% url registration_register %}">{% trans "Sign up" %}</a>
+    <li><a href="{% url acct_login %}">{% trans "Login" %}</a></li><li class="divider-vertical"></li>
+    <li><a href="{% url registration_register %}">{% trans "Sign up" %}</li>
     {% endif %}
         
+    <!--
     {% if user.is_authenticated %}
-        <p class="login-welcome"><strong>{% trans "Welcome" %}, {{ user|nicename }}</strong> {% block headerprofile %}{% endblock %}</p>
+      <p class="login-welcome"><strong>{% trans "Welcome" %}, {{ user|nicename }}</strong> {% block headerprofile %}{% endblock %}</p>
     {% endif %}
+     -->
 {% endblock %}
 
 
@@ -54,13 +65,9 @@
 
 {% block right_tab %}
     {% if user.is_authenticated %}
-    <div id="tabs" class="ui-tabs ui-widget ui-corner-all">
-        <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-corner-all">
-            <li class="ui-state-default ui-corner-top{% block profile-tab-selected %}{% endblock %}"><a href="{% url profile_detail user %}">{% trans "Users" %}</a></li>
-            <li class="ui-state-default ui-corner-top{% block data-tab-selected %}{% endblock %}"><a href="{% url dataset_list_by_owner owner=user %}">{% trans "Data" %}</a></li>
-            <li class="ui-state-default ui-corner-top{% block view-tab-selected %}{% endblock %}"><a href="{% url exhibit_list_by_owner user %}">{% trans "Views" %}</a></li>
-        </ul>
-    </div>
+    <li class="{% block profile-tab-selected %}{% endblock %}"><a href="{% url profile_detail user %}">{% trans "Users" %}</a></li>
+    <li class="{% block data-tab-selected %}{% endblock %}"><a href="{% url dataset_list_by_owner owner=user %}">{% trans "Data" %}</a></li>
+    <li class="{% block view-tab-selected %}{% endblock %}"><a href="{% url exhibit_list_by_owner user %}">{% trans "Views" %}</a></li>
     {% endif %}
 {% endblock %}
 

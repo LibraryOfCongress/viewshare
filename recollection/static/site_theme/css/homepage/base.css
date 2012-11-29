@@ -9,7 +9,7 @@ a {
     color: rgb(0, 176, 216);
 }
 
-#header #application-logo {
+#application-logo {
     background-image: url(images/viewshare-logo.png);
     width: 272px;
 }

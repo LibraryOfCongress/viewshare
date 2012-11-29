@@ -18,15 +18,8 @@
 
 {% block subnav %}
 {% if user.is_authenticated %}
-<div class="ui-tabs ui-widget ui-corner-all">
-  <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-corner-all">
-    <li class="ui-state-default ui-corner-top {% block yourprofile-tab-selected %}{% endblock %}"><a href="{% url profile_detail user.username %}">{% trans "Your Details" %}</a></li>
-    <li class="ui-state-default ui-corner-top {% block yourfriendsprofile-tab-selected %}{% endblock %}"><a href="{% url connection_list_by_user user.username %}">{% blocktrans %}Your Connections{% endblocktrans %}</a></li>
-    <li class="ui-state-default ui-corner-top {% block allprofiles-tab-selected %}{% endblock %}"><a href="{% url profile_list %}">{% blocktrans %}All Users{% endblocktrans %}</a></li>
-    {% block extra_subnav %}{% endblock %}
-  </ul>
-</div>
-{% else %}
-&nbsp;
+<li class="{% block yourprofile-tab-selected %}{% endblock %}"><a href="{% url profile_detail user.username %}">{% trans "Your Details" %}</a></li>
+<li class="{% block yourfriendsprofile-tab-selected %}{% endblock %}"><a href="{% url connection_list_by_user user.username %}">{% blocktrans %}Your Connections{% endblocktrans %}</a></li>
+<li class="{% block allprofiles-tab-selected %}{% endblock %}"><a href="{% url profile_list %}">{% blocktrans %}All Users{% endblocktrans %}</a></li>
 {% endif %}
 {% endblock %}

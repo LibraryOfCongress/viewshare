@@ -6,7 +6,7 @@
         {% csrf_token %}
         {{ profile_form|as_uni_form }}
         <div class="form_block">
-            <input type="submit" value="{% trans "Update" %}" />
+            <button type="submit" class="btn btn-primary">{% trans "Update" %}</button>
         </div>
     </fieldset>
 </form>

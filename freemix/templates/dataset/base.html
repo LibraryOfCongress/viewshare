@@ -8,15 +8,12 @@
 
 {% block subnav %}
 {% if user.is_authenticated %}
-<div class="ui-tabs ui-widget ui-corner-all">
-  <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-corner-all">
-    <li class="ui-state-default ui-corner-top{% block mydata-tab-selected %}{% endblock %}"><a href="{% url dataset_list_by_owner owner=user.username %}">{% trans "Your Data" %}</a></li>
-    <li class="ui-state-default ui-corner-top{% block myfriendsdata-tab-selected %}{% endblock %}"><a href="{% url datasets_by_user_connections user.username %}">{%blocktrans%}Your Connections' Data{%endblocktrans %}</a></li> 
-    {% comment %}set by instance policy 
-    <li class="ui-state-default ui-corner-top{% block everyonedata-tab-selected %}{% endblock %}"><a href="{% url profile_list %}">{% trans "All Data" %}</a></li> {% endcomment %}
-    {% block extra_subnav %}{% endblock %}
-  </ul>
-</div>
+<li class="ui-state-default ui-corner-top{% block mydata-tab-selected %}{% endblock %}"><a href="{% url dataset_list_by_owner owner=user.username %}">{% trans "Your Data" %}</a></li>
+<li class="ui-state-default ui-corner-top{% block myfriendsdata-tab-selected %}{% endblock %}"><a href="{% url datasets_by_user_connections user.username %}">{%blocktrans%}Your Connections' Data{%endblocktrans %}</a></li> 
+{% comment %}set by instance policy 
+<li class="ui-state-default ui-corner-top{% block everyonedata-tab-selected %}{% endblock %}"><a href="{% url profile_list %}">{% trans "All Data" %}</a></li> 
+{% endcomment %}
+{% block extra_subnav %}{% endblock %}
 {% else %}
 {% block unauthenticated_subnav %}{% endblock %}
 {% endif %}

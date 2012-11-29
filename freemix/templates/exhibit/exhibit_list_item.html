@@ -1,77 +1,82 @@
 {% load i18n %}
 {% load freemix_helpers %}
 {%  with exhibit.owner.username as exhibit_owner_username %}
+
 <li class="exhibit_list_item result_set_item clearfix {% if exhibit.published %}public{% else %}private{% endif %}">
 
-    {% if not visible %}
-        <div class="exhibit-title">{{exhibit.title}}</div>
+  {% if not visible %}
+  <div class="exhibit-title">{{exhibit.title}}</div>
 
-        <div class="exhibit-left">
-            {% blocktrans %}The dataset is no longer available.{% endblocktrans %}
-        </div>
-        {% if request.user.is_authenticated and request.user.username == exhibit_owner_username %}
-        <div class="exhibit-right">
-
-          <div class="exhibit-links">
-            <span class="action action_delete_exhibit">
-              <a class="exhibit_delete" href="{{  exhibit.get_absolute_url }}">{% trans "Delete" %}</a>
-            </span>
-          </div>
-        </div>
-        {% endif %}
-    {%  else %}
-    <div class="exhibit-title"><a href="{{  exhibit.get_absolute_url }}">{{exhibit.title}}</a></div>
+  <div class="exhibit-left">
+    {% blocktrans %}The dataset is no longer available.{% endblocktrans %}
+  </div>
+  {% if request.user.is_authenticated and request.user.username == exhibit_owner_username %}
+  <div class="exhibit-right">
     
-    {% if exhibit.description %}
-    {% ifnotequal exhibit.description exhibit.description|truncatewords:20 %}
-    <div class="exhibit-description exhibit-short-description">
-      {{ exhibit.description|truncatewords:20 }}
-      <a class="readmore" href="{{ exhibit.get_absolute_url }}">read more</a>
+    <div class="exhibit-links">
+      <span class="action action_delete_exhibit">
+        <a class="exhibit_delete" href="{{  exhibit.get_absolute_url }}">{% trans "Delete" %}</a>
+      </span>
     </div>
-    <div class="exhibit-description exhibit-long-description ui-helper-hidden">
-      {{ exhibit.description }}
-    </div>
-    {%  else %}
-    <div class="exhibit-description">
-      {{ exhibit.description }}
-    </div>
-    {% endifnotequal %}
-    {% endif %}
+  </div>
+  {% endif %}
 
-    <div class="exhibit-metadata exhibit-left">
-      {% trans "Created by"%} <span class="exhibit-creator"><a href="{% url profile_detail exhibit_owner_username %}">{{exhibit.owner|nicename}}</a></span> {% trans "on" %} <span class="exhibit-created-data">{{exhibit.created|date:"N j, Y"}}</span> {% trans "and based on the" %} <span class="exhibit-dataset-title"><a href="{{exhibit.dataset.get_absolute_url }}" title="{{exhibit.dataset.title}}">{{exhibit.dataset.title}}</a></span> {% trans "data set" %}.
-    </div>
+  {%  else %}
 
-    {% if can_inspect %}
+  <div class="exhibit-title"><a href="{{  exhibit.get_absolute_url }}">{{exhibit.title}}</a></div>
+    
+  {% if exhibit.description %}
+  {% ifnotequal exhibit.description exhibit.description|truncatewords:20 %}
+  <div class="exhibit-description exhibit-short-description">
+    {{ exhibit.description|truncatewords:20 }}
+    <a class="readmore" href="{{ exhibit.get_absolute_url }}">read more</a>
+  </div>
+  <div class="exhibit-description exhibit-long-description ui-helper-hidden">
+    {{ exhibit.description }}
+  </div>
+  {%  else %}
+  <div class="exhibit-description">
+    {{ exhibit.description }}
+  </div>
+  {% endifnotequal %}
+  {% endif %}
 
-    <div class="exhibit-actions exhibit-right">
-
-      <div class="exhibit-links">
-
-        <span class="action action_inspect_exhibit">
-          <a class="exhibit_inspect" href="{% url exhibit_detail owner=exhibit_owner_username slug=exhibit.slug %}">{% trans "Inspect" %}</a>
-        </span>
-
-        {% if can_edit %}
-        <span class="divider action_edit_exhibit">|</span>
-
-        <span class="action action_edit_exhibit">
-          <a class="exhibit_edit" href="{% url exhibit_edit owner=exhibit_owner_username slug=exhibit.slug %}">{% trans "Edit" %}</a>
-        </span>
-	{% endif %}
-
-        {% if can_delete %}
-        <span class="divider action_delete_exhibit">|</span>
-
-        <span class="action action_delete_exhibit">
-          <a class="exhibit_delete" href="{{  exhibit.get_absolute_url }}">{% trans "Delete" %}</a>
-        </span>
-	{% endif %}
-
+  <div class="row-fluid">
+    <div class="span7">
+      
+      <div class="exhibit-metadata">
+        {% trans "Created by"%} <span class="exhibit-creator"><a href="{% url profile_detail exhibit_owner_username %}">{{exhibit.owner|nicename}}</a></span> {% trans "on" %} <span class="exhibit-created-data">{{exhibit.created|date:"N j, Y"}}</span> {% trans "and based on the" %} <span class="exhibit-dataset-title"><a href="{{exhibit.dataset.get_absolute_url }}" title="{{exhibit.dataset.title}}">{{exhibit.dataset.title}}</a></span> {% trans "data set" %}.
       </div>
-    </div>
 
+    </div>
+    
+    {% if can_inspect %}
+    
+    <div class="span5">
+      
+      <div class="exhibit-actions">
+        
+        <div class="exhibit-links btn-group">
+          
+          <a class="btn btn-small exhibit_inspect" href="{% url exhibit_detail owner=exhibit_owner_username slug=exhibit.slug %}">{% trans "Inspect" %}</a>
+          
+          {% if can_edit %}
+          <a class="btn btn-small exhibit_edit" href="{% url exhibit_edit owner=exhibit_owner_username slug=exhibit.slug %}">{% trans "Edit" %}</a>
+	  {% endif %}
+          
+          {% if can_delete %}
+          <a class="btn btn-small exhibit_delete" href="{{  exhibit.get_absolute_url }}">{% trans "Delete" %}</a>
+	  {% endif %}
+          
+        </div>
+        
+      </div>
+      
+    </div>
     {% endif %}
-    {% endif %}
+    
+  </div> <!-- row-fluid -->
+
+  {% endif %}
 </li>
 {% endwith %}

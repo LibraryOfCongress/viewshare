@@ -21,7 +21,7 @@
 
 {% else %}
 
-<div class="dataset_list">
+<div class="dataset_list well">
   <h2 class="ui-widget-header">{% blocktrans %}Data{% endblocktrans %}</h2>
   {% dataset_list datasets.all 3 0 %}
 
@@ -33,7 +33,7 @@
 </div>
 
 
-<div class="exhibit_list">
+<div class="exhibit_list well">
   <h2 class="ui-widget-header">{% blocktrans %}Views{% endblocktrans %}</h2>
   {% exhibit_list exhibits.all 3 0 %}
 
@@ -51,7 +51,7 @@
 
 {% ifnotequal dataset_count 0 %}
 
-<div class="dataset_list">
+<div class="dataset_list well">
   <h2 class="ui-widget-header">{% blocktrans %}Data{% endblocktrans %}</h2>
   {% dataset_list datasets.all 3 0 %}
   {% if dataset_count > 3 %}
@@ -62,7 +62,7 @@
 </div>
 
 
-<div class="exhibit_list">
+<div class="exhibit_list well">
   <h2 class="ui-widget-header">{% blocktrans %}Views{% endblocktrans %}</h2>
   {% exhibit_list exhibits.all 3 0 %}
   {% if exhibit_count > 3 %}

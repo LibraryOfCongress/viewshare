@@ -172,8 +172,6 @@
                 nextRecord(model);
                 populateRecordDisplay(model);
             }).parent().buttonset();
-            root.find(".right-record-button").addClass("ui-corner-right");
-            root.find(".left-record-button").addClass("ui-corner-left");
 
             populateRecordDisplay(model);
         });

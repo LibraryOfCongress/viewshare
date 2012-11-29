@@ -63,12 +63,6 @@ font-size: 90%;
 .record-controls button {
 }
 
-.data-property-add {
-    float: right;
-    margin-right: 10px;
-    font-size: 70%;
-}
-
 
 .data-record-delete, .data-refresh {
 }
