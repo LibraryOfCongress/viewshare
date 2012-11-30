@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.conf import settings
 
 from viewshare.apps.collection_catalog.models import Topic, Collection, Project, Organization
-from recollection.utils.widgets import AutocompleteAdmin
+from viewshare.apps.collection_catalog.widgets import AutocompleteAdmin
 from freemix.utils import get_username
 
 
