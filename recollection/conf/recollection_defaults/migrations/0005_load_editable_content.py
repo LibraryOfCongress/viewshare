@@ -9,14 +9,7 @@ class Migration(DataMigration):
 
     depends_on= (("cms", "0033_auto__del_field_title_publisher_is_draft__del_field_title_publisher_st",),)
     def forwards(self, orm):
-        from django.core.management import call_command
-        call_command("loaddata", "editable_content")
-        site = orm['sites.site'].objects.get(id=settings.SITE_ID)
-
-
-        for page in orm['cms.page'].objects.filter(site__id=1):
-            page.site=site
-            page.save()
+        pass
 
     def backwards(self, orm):
         "Write your backwards methods here."
