@@ -1,7 +1,7 @@
 (function($) {
 
     function getFormUrl() {
-        return $("link[rel='recollection/support']").attr("href");
+        return $("link[rel='freemix/support']").attr("href");
     }
 
     function resetForm() {
