@@ -124,7 +124,6 @@ INSTALLED_APPS = (
     'robots',
     'pagination',
     'timezones',
-    'ajax_validation',
     'uni_form',
     'django_sorting',
 
@@ -150,7 +149,7 @@ INSTALLED_APPS = (
     'freemix.dataset.augment',
     'freemix.exhibit.share',
 
-    # Recollection specific
+    # Viewshare specific
     'viewshare.apps.vendor.notification',
     'viewshare.apps.vendor.friends',
     'viewshare.apps.vendor.announcements',
@@ -174,11 +173,7 @@ module_path = lambda m: path.abspath(find_module(m)[1])
 
 STATICFILES_DIRS = (
     ('', path.join(module_path('viewshare'), 'static')),
-
-    ('', path.join(module_path('recollection'), 'static')),
-    ('', path.join(module_path('ajax_validation'), 'media')),
-    ('', path.join(module_path('django_extensions'), 'media')),
-    )
+)
 
 ABSOLUTE_URL_OVERRIDES = {
     "auth.user": lambda o: "/profiles/profile/%s/" % o.username,
@@ -214,12 +209,8 @@ ACCOUNT_ACTIVATION_DAYS = 14
 
 FIXTURE_DIRS = (
     path.join(module_path("viewshare"), "fixtures"),
-    path.join(module_path("recollection"), "fixtures"),
     )
 
-LOCALE_PATHS = (
-    path.join(module_path("recollection"), "locale"),
-    )
 
 # Javascript and CSS compression
 COMPRESS_ENABLED = False
