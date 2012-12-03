@@ -160,7 +160,6 @@ INSTALLED_APPS = (
     'viewshare.apps.site_theme',
     'viewshare.apps.collection_catalog',
     'viewshare.apps.connections',
-    'recollection.conf.recollection_defaults',
     'viewshare.apps.upload',
 
     # Support pipeline

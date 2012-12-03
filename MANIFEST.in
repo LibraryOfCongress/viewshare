@@ -1,10 +1,10 @@
 include setup.py README MANIFEST.in
 global-include fixtures/*
 
-graft recollection/templates
-graft recollection/static
+graft viewshare/templates
+graft viewshare/static
 graft requirements
-graft recollection/locale
+graft viewshare/locale
 graft test
 graft docs
 graft akara
@@ -17,11 +17,11 @@ graft simile/templates
 graft viewshare/static
 graft viewshare/templates
 
-recursive-include recollection/*/templates *
-recursive-include recollection/*/static *
+recursive-include viewshare/*/templates *
+recursive-include viewshare/*/static *
 
-recursive-include recollection/apps/*/templates *
-recursive-include recollection/apps/*/static *
+recursive-include viewshare/apps/*/templates *
+recursive-include viewshare/apps/*/static *
 
 recursive-include freemix/*/static *
 recursive-include freemix/*/templates *
@@ -38,5 +38,5 @@ recursive-include viewshare/*/static *
 recursive-include viewshare/*/templates *
 
 
-prune recollection/site_media
+prune viewshare/site_media
 prune docs/_build

@@ -22,4 +22,4 @@ class Migration(DataMigration):
 
     }
 
-    complete_apps = ['recollection_defaults']
+    complete_apps = ['support']
