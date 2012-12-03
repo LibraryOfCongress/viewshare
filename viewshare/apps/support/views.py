@@ -8,7 +8,7 @@ from viewshare.apps.support.redmine.utils import RedmineClient, RedmineIssue
 from viewshare.apps.support.redmine.consts import *
 from freemix.dataset.models import parse_profile_json
 
-from recollection.utils.views import get_akara_version
+from viewshare.utilities.views import get_akara_version
 from freemix.dataset.transform import AKARA_URL_PREFIX
 from freemix import __version__ as freemix_version
 from freemix.utils import get_user, get_site_url

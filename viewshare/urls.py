@@ -6,14 +6,14 @@ from django.contrib import admin
 
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from recollection.utils.views import UserHomeView
+from viewshare.utilities.views import UserHomeView
 from viewshare.utilities import feeds
 
 
 admin.autodiscover()
 
 # override context-less 500
-handler500 = 'recollection.utils.views.server_error'
+handler500 = 'viewshare.utilities.views.server_error'
 
 urlpatterns = patterns('',
 
