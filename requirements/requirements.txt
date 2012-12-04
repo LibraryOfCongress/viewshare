@@ -1,27 +1,31 @@
 South>=0.7.6
 Django==1.4.2
 pillow==1.7.8
-elementtree==1.2.7-20070827-preview
 simplejson==2.1.6
 pytz==2009l
+django-timezones==0.2
+django-registration==0.8
+django_compressor==1.2
 django-email-confirmation==0.2
 django-extensions==1.0.1
 django-pagination==1.0.7
 django-robots==0.6.1
 django-sorting>=0.1
 django-uni-form==0.8.0
-django_compressor==1.2
-django-reversion==1.6.4
 httplib2==0.7.6
+
+#django-cms depends on the following
+django-reversion==1.6.4
 django-classy-tags==0.3.4.1
-django-cms==2.3.3
+elementtree==1.2.7-20070827-preview
 django-sekizai==0.6.1
 django-mptt==0.5.2
 html5lib==0.95
+django-cms==2.3.3
+
+# Piston is required by viewshare.apps.collection_catalog and uses the following
 django-piston==0.2.3
-django-timezones==0.2
 diff-match-patch==20110725.1
-django-registration==0.8
 
 # Uncomment for uservoice integration
 # pycrypto==2.3
