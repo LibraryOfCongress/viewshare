@@ -84,8 +84,13 @@ Custom apps
 * Freemix specific
     * freemix
     * freemix.dataset
-    * freemix.exhibit
+        * A DataSet can be thought of as a group of information related to uploaded data. A DataSet contains information about:
+            * The raw data that was uploaded to Viewshare
+            * Descriptions of the columns in uploaded data
+            * Type of data (CSV file, MODS file, etc.)
+            * Descriptions of the data properties which are compatible with exhibit 
     * freemix.dataset.augment
+    * freemix.exhibit
     * freemix.exhibit.share
 
 * Recollection specific
