@@ -72,9 +72,7 @@ The following settings should be customized on a per-site basis:
 * ANONYMOUS_USERNAME: the user name used by anonymous users, e.g. "guest"
 * ACCOUNT_REQUIRED_EMAIL: require email addresses for new accounts
 * ACCOUNT_EMAIL_VERIFICATION: require an email address verification step for new accounts
-* THEME_DIR_URL: the path to the theme directory, by default "themes/chili"
-* THEME_FRAGMENT_URL: the path to the theme CSS, optional
-* THEME_URL: the absolute URL of the theme CSS, optional
+
 
 Transformation Server
 ---------------------
@@ -171,8 +169,6 @@ You can find your keys in the Uservoice control panel.
 
 If you wish to do any customization of the Uservoice tab, override the `profiles/uservoice_options` template.
 
-The FEEDBACKLINK setting, described above, can also be set to the URL
-of a Uservoice forum.
 
 Email
 ^^^^^

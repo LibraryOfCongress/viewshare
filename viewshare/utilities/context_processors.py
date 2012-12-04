@@ -35,12 +35,9 @@ def settings_processor(*settings_list):
 #-----------------------------------------------------------------------------#
 
 recollection_settings = settings_processor(
-    'SITE_NAME_STATUS',
-    'THEME_DIR_URL',
-    'FEEDBACKLINK',
-    'THEME_URL',
-    'THEME_FRAGMENT_URL',
     'CONTACT_EMAIL',
     'SITE_NAME',
+    'SITE_NAME_STATUS',
     'USERVOICE_SETTINGS'
 )
+

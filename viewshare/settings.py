@@ -181,10 +181,6 @@ ABSOLUTE_URL_OVERRIDES = {
 AUTH_PROFILE_MODULE = 'profiles.Profile'
 NOTIFICATION_LANGUAGE_MODULE = 'account.Account'
 
-THEME_DIR_URL = "themes/chili"
-THEME_FRAGMENT_URL = "%s/chili.css" % THEME_DIR_URL
-THEME_URL = '%s%s' % (STATIC_URL, THEME_FRAGMENT_URL)
-
 TEMPLATE_DIRS = (
     path.join(module_path("viewshare"), "templates"),
     )
@@ -194,7 +190,6 @@ TEMPLATE_DIRS = (
 SITE_NAME = "Recollection"
 SITE_NAME_STATUS = "BETA"
 CONTACT_EMAIL = "noreply@example.com"
-FEEDBACKLINK = "mailto:recollection@lists.zepheira.com"
 
 LOGIN_URL = "/account/login"
 LOGIN_REDIRECT_URLNAME = "user_home"
@@ -209,7 +204,6 @@ ACCOUNT_ACTIVATION_DAYS = 14
 FIXTURE_DIRS = (
     path.join(module_path("viewshare"), "fixtures"),
     )
-
 
 # Javascript and CSS compression
 COMPRESS_ENABLED = False
