@@ -100,8 +100,11 @@ Custom apps
 
 * Recollection specific
     * recollection.apps.notices
+        * User can control email settings for system events like invitations and announcements.
     * recollection.apps.site_theme
+        * Admin can create or select one of multiple CSS files to be used throughout the site.
     * recollection.apps.collection_catalog
+        * Admin can group Exhibits that have been published on the system into Collections. Collections can be grouped into Projects. Collections can be tagged with Topics and can be attributed to Organizations.
     * recollection.utils
     * recollection.apps.connections
     * recollection.conf.recollection_defaults
