@@ -68,15 +68,15 @@ class LabCssCompressor(CssCompressor):
 
 class LabJSCompressorNode(CompressorNode):
 
-    def compressor_cls(self, *args, **kwargs):
+    def compressor_cls(self, kind, *args, **kwargs):
         compressors = {
             "css": LabCssCompressor,
             "js": LabJsCompressor,
         }
-        if self.kind not in compressors.keys():
+        if kind not in compressors.keys():
             raise template.TemplateSyntaxError(
                 "The compress tag's argument must be 'js' or 'css'.")
-        return compressors.get(self.kind)(*args, **kwargs)
+        return compressors.get(kind)(*args, **kwargs)
 
     def debug_mode(self, context):
         return False
