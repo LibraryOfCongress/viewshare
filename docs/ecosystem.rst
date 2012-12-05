@@ -17,11 +17,6 @@ Third-party Apps
 * announcements
     * Make site-wide announcements
     * https://github.com/brosner/django-announcements
-    * NOTE: Is this being used in in the code?
-* ajax_validation
-    * perform ajax validation on django forms
-    * https://github.com/alex/django-ajax-validation
-    * NOTE: Is this being used in the code?
 * CMS Apps
     * cms
     * mptt
@@ -49,10 +44,7 @@ Third-party Apps
 * friends
     * Friendship, contact and invitation management
     * https://github.com/jtauber/django-friends
-    * NOTE: Is this being used by users?
-* mailer
-    * Queues and sends email
-    * https://github.com/jtauber/django-mailer
+    * candidate for elimination
 * notification
     * user notification management
     * https://github.com/jtauber/django-notification 
@@ -107,7 +99,7 @@ Custom apps
         * Admin can group Exhibits that have been published on the system into Collections. Collections can be grouped into Projects. Collections can be tagged with Topics and can be attributed to Organizations.
     * recollection.utils
         * This is a general, catch-all app to store utilities used throughout the system. Some of the code includes:
-            * context processors to add settings values to a ''RequestContext''. NOTE: combined_inbox_count appears to be unused
+            * context processors to add settings values to a ''RequestContext''.
             * template tags to display recollection and akara versions.
     * recollection.apps.connections
         * Allows a user to create and accept invitations from other users.
@@ -116,7 +108,6 @@ Custom apps
         * This 'app' only exists to contain South migrations that are used in system configuration tasks like loading data for augmentation errors.
     * recollection.apps.support
         * A system for reporting system errors like data upload and augmentation issues
-        * NOTE: Is this being used anymore?
     * recollection.apps.account
         * Stores timezone and language information about a user. Also, handles password resets.
     * recollection.apps.profiles
