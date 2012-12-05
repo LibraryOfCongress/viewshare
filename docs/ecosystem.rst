@@ -106,6 +106,9 @@ Custom apps
     * recollection.apps.collection_catalog
         * Admin can group Exhibits that have been published on the system into Collections. Collections can be grouped into Projects. Collections can be tagged with Topics and can be attributed to Organizations.
     * recollection.utils
+        * This is a general, catch-all app to store utilities used throughout the system. Some of the code includes:
+            * context processors to add settings values to a ''RequestContext''. NOTE: combined_inbox_count appears to be unused
+            * template tags to display recollection and akara versions.
     * recollection.apps.connections
     * recollection.conf.recollection_defaults
     * recollection.apps.support
