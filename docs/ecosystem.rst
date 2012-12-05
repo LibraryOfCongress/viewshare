@@ -19,7 +19,7 @@ Third-party Apps
     * https://github.com/brosner/django-announcements
     * NOTE: Is this being used in in the code?
 * ajax_validation
-    * preform ajax validation on django forms
+    * perform ajax validation on django forms
     * https://github.com/alex/django-ajax-validation
     * NOTE: Is this being used in the code?
 * CMS Apps
@@ -96,6 +96,7 @@ Custom apps
             * Theme - color scheme of the Exhibit
             * Canvas - layout of the Exhibit e.g. "A view container with a facet container to the left"
     * freemix.exhibit.share
+        * Allows an Exhibit owner to generate a unique URL for their Exhibit.
 
 * Recollection specific
     * recollection.apps.notices
