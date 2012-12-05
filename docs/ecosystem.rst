@@ -90,6 +90,7 @@ Custom apps
             * Type of data (CSV file, MODS file, etc.)
             * Descriptions of the data properties which are compatible with exhibit 
     * freemix.dataset.augment
+        * Stores and provides augmentation patterns for dataset cells. For example, a DataSet data cell may contain a list of values separated by a comma. This app provides a pattern that recognizes comma separated data and parses it accordingly.
     * freemix.exhibit
     * freemix.exhibit.share
 
