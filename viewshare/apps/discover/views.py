@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from recollection.apps.discover.models import CuratedExhibit
+from viewshare.apps.discover.models import CuratedExhibit
 
 def front_page(request):
     """

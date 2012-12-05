@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from recollection.apps.discover.models import CuratedExhibit, CuratedExhibitCollection
+from viewshare.apps.discover.models import CuratedExhibit, CuratedExhibitCollection
 
 
 class CuratedExhibitAdmin(admin.StackedInline):

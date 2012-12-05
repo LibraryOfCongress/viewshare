@@ -26,7 +26,6 @@ django-cms==2.3.3
 # Piston is required by viewshare.apps.collection_catalog and uses the following
 django-piston==0.2.3
 diff-match-patch==20110725.1
-django-registration==0.8
 
 # django-curation is required by viewshare.apps.discover
 -e git+git://github.com/theatlantic/django-curation.git#egg=django-curation
