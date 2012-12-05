@@ -118,8 +118,11 @@ Custom apps
         * A system for reporting system errors like data upload and augmentation issues
         * NOTE: Is this being used anymore?
     * recollection.apps.account
+        * Stores timezone and language information about a user. Also, handles password resets.
     * recollection.apps.profiles
+        * Stores information about a user such as: bio, website, location, and organization.
     * recollection.apps.discover
+        * Allows an admin to create a collection of Exhibits for the purposes of display. Also includes a front-end slideshow utilized on the homepage.
 
 * ViewShare specific
     * viewshare.upload
