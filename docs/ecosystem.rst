@@ -110,8 +110,13 @@ Custom apps
             * context processors to add settings values to a ''RequestContext''. NOTE: combined_inbox_count appears to be unused
             * template tags to display recollection and akara versions.
     * recollection.apps.connections
+        * Allows a user to create and accept invitations from other users.
+        * This app is a facade over the third-party 'friends' app
     * recollection.conf.recollection_defaults
+        * This 'app' only exists to contain South migrations that are used in system configuration tasks like loading data for augmentation errors.
     * recollection.apps.support
+        * A system for reporting system errors like data upload and augmentation issues
+        * NOTE: Is this being used anymore?
     * recollection.apps.account
     * recollection.apps.profiles
     * recollection.apps.discover
