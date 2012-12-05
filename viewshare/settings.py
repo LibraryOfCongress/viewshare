@@ -121,7 +121,6 @@ INSTALLED_APPS = (
     # external
     'emailconfirmation',
     'django_extensions',
-    'robots',
     'pagination',
     'timezones',
     'uni_form',
