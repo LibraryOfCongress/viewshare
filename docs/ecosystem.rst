@@ -126,4 +126,6 @@ Custom apps
 
 * ViewShare specific
     * viewshare.upload
+        * Tracks the files or URLs involved in a DataSet upload. File types include Mods file/URL, OAI URL, CSV file/URL, or ContentDM URL.
     * viewshare.moderated_registration
+        * A user must request an account before they can begin using the system. This app moderates the queue of people requesting user accounts. Accounts are granted or denied depending on an admin's choice.
