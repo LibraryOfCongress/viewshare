@@ -90,3 +90,96 @@ h3.grid_title {
 .showcased a {
     color: #117011;
 }
+
+/*
+    Slideshow
+*/
+
+
+#slides {
+    float: left;
+}
+
+
+/*
+    Slides container
+    Important:
+    Set the width of your slides container
+    Set to display none, prevents content flash
+*/
+
+.slides_container {
+    width:556px;
+    height:375px;
+    display:none;
+}
+
+/*
+    Each slide
+    Important:
+    Set the width of your slides
+    If height not specified height will be set by the slide content
+    Set to display block
+*/
+
+.slides_container div.slide {
+    width:556px;
+    height:375px;
+    display:block;
+}
+
+.arrows {
+    position: absolute;
+    margin-top: 3px;
+}
+
+#slides .next,#slides .prev {
+    width:24px;
+    height:24px;
+}
+
+.pagination {
+    margin: 10px auto 0;
+    float: right;
+}
+
+.pagination li {
+    float:left;
+    margin:0 1px;
+    list-style:none;
+}
+
+.pagination li a {
+    display:block;
+    width:12px;
+    height:0;
+    padding-top:12px;
+    background-image:url(../freemix/img/pagination.png);
+    background-position:0 0;
+    float:left;
+    overflow:hidden;
+}
+
+.pagination li.current a {
+    background-position:0 -12px;
+}
+
+.caption {
+    z-index:500;
+    position:absolute;
+    left:0;
+    height:auto;
+    padding:5px 20px 0 20px;
+    background:#000;
+    background:rgba(0,0,0,.5);
+    width:513px;
+    font-size:1.3em;
+    line-height:1.33;
+    color:#fff;
+    border-top:1px solid #000;
+    text-shadow:none;
+}
+a:hover,a:active {
+    color:#599100;
+    text-decoration:underline;
+}
