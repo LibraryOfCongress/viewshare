@@ -64,13 +64,15 @@ urlpatterns = patterns('',
     (r'^feeds/data_atom/(?P<owner>[a-zA-Z0-9_.-]+)/$', feeds.AtomUserDatasets()),
 
     # URL mappings for fixed cms pages
-    url(r'^$', 'cms.views.details', kwargs={"slug": "home"}, name="front_page"),
     url(r'^tos/$', 'cms.views.details', kwargs={"slug": "tos"}, name="tos"),
     url(r'^about/community/$', 'cms.views.details', kwargs={"slug": "community"}, name="community"),
     url(r'^about/help/$', 'cms.views.details', kwargs={"slug": "help"}, name="help"),
     url(r'^about/faq/$', 'cms.views.details', kwargs={"slug": "faq"}, name="faq"),
     url(r'^about/userguide/$', 'cms.views.details', kwargs={"slug": "userguide"}, name="userguide"),
     url(r'^augment/patterns/$', 'cms.views.details', kwargs={"slug": "augment-list-patterns"}, name="augment-list-patterns"),
+
+    # home page
+    url(r'^$', 'recollection.apps.discover.views.front_page', name="front_page"),
 
     # For legacy purposes
     url(r'^userupload/$', login_required(RedirectView.as_view(url="/upload")), name="user_upload"),
