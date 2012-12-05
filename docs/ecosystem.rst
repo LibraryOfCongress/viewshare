@@ -88,10 +88,13 @@ Custom apps
             * The raw data that was uploaded to Viewshare
             * Descriptions of the columns in uploaded data
             * Type of data (CSV file, MODS file, etc.)
-            * Descriptions of the data properties which are compatible with exhibit 
+            * Descriptions of the data properties which are compatible with exhibit and used to visualize the DataSet through SIMILE's Exhibit
     * freemix.dataset.augment
         * Stores and provides augmentation patterns for dataset cells. For example, a DataSet data cell may contain a list of values separated by a comma. This app provides a pattern that recognizes comma separated data and parses it accordingly.
     * freemix.exhibit
+        * An Exhibit is a visualization of a DataSet. An Exhibit consists of a Theme and a Canvas:
+            * Theme - color scheme of the Exhibit
+            * Canvas - layout of the Exhibit e.g. "A view container with a facet container to the left"
     * freemix.exhibit.share
 
 * Recollection specific
