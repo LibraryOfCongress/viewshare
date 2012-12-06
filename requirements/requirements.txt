@@ -9,7 +9,6 @@ django_compressor==1.2
 django-email-confirmation==0.2
 django-extensions==1.0.1
 django-pagination==1.0.7
-django-robots==0.6.1
 django-sorting>=0.1
 django-uni-form==0.8.0
 httplib2==0.7.6

@@ -8,6 +8,7 @@ from django.core.cache import cache
 
 from django.conf import settings
 from urlparse import urljoin
+from django.template.response import TemplateResponse
 from django.views.generic.base import RedirectView
 from freemix.dataset.transform import AKARA_URL_PREFIX
 
@@ -41,3 +42,9 @@ def cache_akara_version():
 class UserHomeView(RedirectView):
     def get_redirect_url(self, **kwargs):
         return reverse('profile_detail', kwargs={'username': self.request.user.username})
+
+
+class PlainTextResponse(TemplateResponse):
+    def __init__(self, *args, **kwargs):
+        kwargs['mimetype']= 'text/plain'
+        super(PlainTextResponse, self).__init__(*args, **kwargs)
