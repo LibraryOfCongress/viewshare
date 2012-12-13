@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect
 from django.views.generic import list_detail
 from django.shortcuts import get_object_or_404
 
-from announcements.models import Announcement, current_announcements_for_request
+from .models import Announcement, current_announcements_for_request
 
 try:
     set
