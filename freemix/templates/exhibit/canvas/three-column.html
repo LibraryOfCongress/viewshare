@@ -1,23 +1,25 @@
 {% extends "exhibit/canvas/base.html" %}
 
-
 {% block exhibit_wrap %}
-    <div class="colhead">
-      <div id="top-facets" class="facet-container facet-container-horizontal"></div>        
-    </div>
 
-    <div class="clear">&nbsp;</div>
-    
-    <div class="colmask threecol">
-      <div class="colmid">
-        <div class="colleft">
-          <div id="views" class="view-container view-default col1"></div>
-          <div id="left-facets" class="facet-container col2"></div>
-          <div id="right-facets" class="facet-container col3"></div>
-        </div>
-      </div>
-    </div>
+<div class="row-fluid">
+  <div class="span12">
+    <div id="top-facets" class="facet-container facet-container-horizontal"></div>        
+  </div>
+</div>
 
-    <div class="clear">&nbsp;</div>
+<div class="row-fluid">
+  <div class="span2">
+    <div id="left-facets" class="facet-container"></div>
+  </div>
+
+  <div class="span8">    
+    <div id="views" class="view-container view-default"></div>
+  </div>
+
+  <div class="span2">
+    <div id="right-facets" class="facet-container"></div>
+  </div>
+</div>
     
 {% endblock %}

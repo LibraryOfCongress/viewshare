@@ -1,18 +1,18 @@
 from setuptools import setup, find_packages
 
-VERSION = __import__('recollection').__version__
+VERSION = __import__('viewshare').__version__
 
 from distutils.command.sdist import sdist
 from distutils.command.build import build
 import os
 
 def write_version_file():
-    f = open("recollection/version.py", "w")
+    f = open("viewshare/version.py", "w")
     f.write('__version__ = "%s"\n' % (VERSION,))
     f.close()
 
 def remove_version_file():
-    os.remove("recollection/version.py")
+    os.remove("viewshare/version.py")
 
 class sdist_version(sdist):
 
@@ -29,9 +29,9 @@ class build_version(build):
         remove_version_file()
 
 setup(
-    name = "recollection",
+    name = "viewshare",
     version = VERSION,
-    description = "Recollection",
+    description = "Viewshare",
     url = "https://sourceforge.net/projects/loc-recollect/",
     packages = find_packages(exclude=('example_project',)),
     include_package_data=True,

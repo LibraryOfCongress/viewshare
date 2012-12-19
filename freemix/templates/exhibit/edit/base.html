@@ -74,53 +74,56 @@
 
 {% if exhibit %}
 <div class="exhibit_edit">
+
   <ul class="exhibit_list_items">
+
     <li class="exhibit_list_item result_set_item clearfix {% if exhibit.published %}public{% else %}private{% endif %}">
       
-      <div class="exhibit-title"><a href="{{  exhibit.get_absolute_url }}">{{exhibit.title}}</a></div>
+      <div class="row-fluild">
+        <div class="span12">
+          <div class="exhibit-title"><a href="{{  exhibit.get_absolute_url }}">{{exhibit.title}}</a></div>
 
-      {% if exhibit.description %}
-      {% ifnotequal exhibit.description exhibit.description|truncatewords:100 %}
-      <div class="exhibit-description exhibit-short-description">
-        {{ exhibit.description|truncatewords:100 }}
-        <a class="readmore" href="{{ exhibit.get_absolute_url }}">read more</a>
-      </div>
-      <div class="exhibit-description exhibit-long-description ui-helper-hidden">
-        {{ exhibit.description }}
-      </div>
-      {%  else %}
-      <div class="exhibit-description">
-	{{ exhibit.description }}
-      </div>
-      {% endifnotequal %}
-      {% endif %}
+          {% if exhibit.description %}
+          {% ifnotequal exhibit.description exhibit.description|truncatewords:100 %}
+          
+          <div class="exhibit-description exhibit-short-description">
+            {{ exhibit.description|truncatewords:100 }}
+            <a class="readmore" href="{{ exhibit.get_absolute_url }}">read more</a>
+          </div>
+          <div class="exhibit-description exhibit-long-description ui-helper-hidden">
+            {{ exhibit.description }}
+          </div>
+          {%  else %}
+          <div class="exhibit-description">
+	    {{ exhibit.description }}
+          </div>
+          {% endifnotequal %}
+          {% endif %}
+        </div>
+      </div> <!-- row-fluid -->
 
-      <div class="exhibit-left exhibit-metadata">
-        {% trans "Created by"%} <span class="exhibit-creator"><a href="{% url profile_detail exhibit.owner.username %}">{{exhibit.owner|nicename}}</a></span> {% trans "on"%} <span class="exhibit-modified-data">{{exhibit.modified|date:"N j, Y"}}</span> {% trans "and based on the " %}<span class="exhibit-dataset-title"><a href="{{exhibit.dataset.get_absolute_url }}" title="{{exhibit.dataset.title}}">{{exhibit.dataset.title}}</a></span> {% trans "data set." %}
-      </div>
-      
-      <div class="exhibit-right exhibit-actions">
+      <div class="row-fluid">
+        <div class="span7">
+          <div class="exhibit-metadata">
+            {% trans "Created by"%} <span class="exhibit-creator"><a href="{% url profile_detail exhibit.owner.username %}">{{exhibit.owner|nicename}}</a></span> {% trans "on"%} <span class="exhibit-modified-data">{{exhibit.modified|date:"N j, Y"}}</span> {% trans "and based on the " %}<span class="exhibit-dataset-title"><a href="{{exhibit.dataset.get_absolute_url }}" title="{{exhibit.dataset.title}}">{{exhibit.dataset.title}}</a></span> {% trans "data set." %}
+          </div>
+        </div>
+        <div class="span5">
+
+          <div class="exhibit-actions">
 	
-	<div class="exhibit-links">
-	  
-          <span class="action action_preview_exhibit">
-	    <input type="checkbox" id="preview_toggle" /><label for="preview_toggle">{% trans "Preview" %}</label>
-	  </span>
-
-          <span class="divider">|</span>
-
-          <span class="action action_save_exhibit">
-	    <span id="save_message"></span>
-	    <a href="" id="save_button">{% trans "Save" %}</a>
-	  </span>
-
-          <span class="divider">|</span>
-          <span class="action action_cancel_exhibit">
-	    <a href="{{ cancel_url }}" id="cancel_button">{% trans "Cancel" %}</a>
-	  </span>
-
-	</div>
-      </div>
+	    <div class="exhibit-links btn-group">
+	      
+	      <input type="checkbox" class=" btn btn-small action_preview_exhibit" id="preview_toggle"><label for="preview_toggle">{% trans "Preview" %}</label></input>
+              
+	      <a href="" id="save_button" class="btn btn-small action_save_exhibit">{% trans "Save" %}<span id="save_message"></span></a>
+              
+	      <a href="{{ cancel_url }}" id="cancel_button" class="btn btn-small action_cancel_exhibit">{% trans "Cancel" %}</a>
+              
+	    </div>
+          </div>
+        </div>
+      </div> <!-- row-fluid -->
     </li>
   </ul>
 </div>
@@ -129,29 +132,26 @@
   <ul class="exhibit_list_items">
     <li class="exhibit_list_item result_set_item clearfix">
 
-      <div class="exhibit-title">View based on '{{dataset.title}}'</div>
-
-      <div class="exhibit-right exhibit-actions">
-	
-	<div class="exhibit-links">
-	  	  	  
-          <span class="action action_preview_exhibit">
-	    <input type="checkbox" id="preview_toggle" /><label for="preview_toggle">{% trans "Preview" %}</label>
-	  </span>
-
-          <span class="divider">|</span>
-
-          <span class="action action_save_exhibit">
-	    <span id="save_message"></span>
-	    <a href="" id="save_button">{% trans "Save" %}</a>
-	  </span>
-
-          <span class="divider">|</span>
-          <span class="action action_cancel_exhibit">
-	    <a href="{{ cancel_url }}" id="cancel_button">{% trans "Cancel" %}</a>
-	  </span>
-
-	</div>
+      <div class="row-fluid">
+        <div class="span7">
+          <div class="exhibit-title">View based on '{{dataset.title}}'</div>
+        </div>
+        
+        <div class="span5">
+          <div class="exhibit-right exhibit-actions">
+	    
+	    <div class="exhibit-links btn-group">
+	      
+	      <input type="checkbox" class=" btn btn-small action_preview_exhibit" id="preview_toggle"><label for="preview_toggle">{% trans "Preview" %}</label></input>
+              
+	      <a href="" id="save_button" class="btn btn-small action_save_exhibit">{% trans "Save" %}<span id="save_message"></span></a>
+              
+	      <a href="{{ cancel_url }}" id="cancel_button" class="btn btn-small action_cancel_exhibit">{% trans "Cancel" %}</a>
+              
+	    </div>
+          </div>
+        </div>
+      </div> <!-- row-fluid -->
     </li>
   </ul>
 </div>

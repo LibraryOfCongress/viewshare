@@ -2,10 +2,6 @@ from os import path
 from posixpath import join as url_join
 from imp import find_module
 
-import recollection.migrations
-
-SOUTH_MIGRATION_MODULES = recollection.migrations.SOUTH_MIGRATION_MODULES
-
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -74,6 +70,7 @@ TEMPLATE_LOADERS = (
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'pagination.middleware.PaginationMiddleware',
@@ -85,7 +82,7 @@ MIDDLEWARE_CLASSES = (
 
     )
 
-ROOT_URLCONF = 'recollection.urls'
+ROOT_URLCONF = 'viewshare.urls'
 
 AUTHENTICATION_BACKENDS = (
     'freemix.permissions.RegistryBackend',
@@ -94,17 +91,17 @@ AUTHENTICATION_BACKENDS = (
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",
+    'django.contrib.messages.context_processors.messages',
     "django.core.context_processors.debug",
     "django.core.context_processors.i18n",
     "django.core.context_processors.media",
     "django.core.context_processors.request",
     "django.core.context_processors.static",
     "recollection.utils.context_processors.recollection_settings",
-    "notification.context_processors.notification",
-    "announcements.context_processors.site_wide_announcements",
-    "recollection.apps.account.context_processors.account",
-    #"messages.context_processors.inbox",
-    "recollection.apps.connections.context_processors.invitations",
+    "viewshare.apps.vendor.notification.context_processors.notification",
+    "viewshare.apps.vendor.announcements.context_processors.site_wide_announcements",
+    "viewshare.apps.account.context_processors.account",
+    "viewshare.apps.connections.context_processors.invitations",
     "cms.context_processors.media",
     'sekizai.context_processors.sekizai',
 
@@ -121,27 +118,18 @@ INSTALLED_APPS = (
     'django.contrib.markup',
     'django.contrib.admin',
 
-
     # external
-    'notification',
     'emailconfirmation',
     'django_extensions',
     'robots',
-    'friends',
-    'mailer',
-    'announcements',
     'pagination',
     'timezones',
     'ajax_validation',
     'uni_form',
     'django_sorting',
 
-    'recollection.apps.account',
-    'recollection.apps.profiles',
-
     'compressor',
     'south',
-    #'piston',
 
     # CMS stuff
     'cms',
@@ -163,20 +151,25 @@ INSTALLED_APPS = (
     'freemix.exhibit.share',
 
     # Recollection specific
-    'recollection.apps.notices',
-    'recollection.apps.site_theme',
-    'recollection.apps.collection_catalog',
+    'viewshare.apps.vendor.notification',
+    'viewshare.apps.vendor.friends',
+    'viewshare.apps.vendor.announcements',
+
+    'viewshare.apps.account',
+    'viewshare.apps.profiles',
+    'viewshare.apps.site_theme',
+    'viewshare.apps.collection_catalog',
     'recollection.utils',
-    'recollection.apps.connections',
+    'viewshare.apps.connections',
     'recollection.conf.recollection_defaults',
-    'viewshare.upload',
+    'viewshare.apps.upload',
 
     # Support pipeline
-    'recollection.apps.support',
+    'viewshare.apps.support',
 
     # Site registration
     'registration',
-    'viewshare.moderated_registration',
+    'viewshare.apps.moderated_registration',
     )
 
 module_path = lambda m: path.abspath(find_module(m)[1])

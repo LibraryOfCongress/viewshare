@@ -1,2 +1,2 @@
-from recollection import __version__
+from viewshare import __version__
 

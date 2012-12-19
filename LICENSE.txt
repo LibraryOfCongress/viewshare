@@ -34,7 +34,6 @@ The license below applies to the following dependencies:
  * django-email-confirmation:  James Tauber (jtauber@jtauber.com)
  * django-extensions:  Copyright (c) 2007 Michael Trier
  * django-friends:  James Tauber (jtauber@jtauber.com)
- * django-mailer:  Copyright (c) 2009 James Tauber and contributors
  * django-mptt: Copyright (c) 2007, Jonathan Buchanan
  * django-notification:  Copyright (c) 2008 James Tauber and contributors
  * django-uni-form:  Copyright (c) 2009 Daniel Greenfeld and contributors

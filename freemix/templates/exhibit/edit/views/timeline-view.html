@@ -3,30 +3,35 @@
 
   <div class="timeline-view-editor">
 
-    <div class="view-properties ui-state-highlight">
-      <label class="view-editor-pane-title">{% trans "Timeline View Settings" %}</label>
+    <div class="view-properties">
+
       <div class="view-edit-body">
 
-	<form class="uniForm">
+	<form>
 	  <fieldset>
-           <div id="view_label" class="ctrlHolder text-entry">
-             <label for="view_label_input">{% trans "Label" %}</label>
-             <input type="text" id="view_label_input"/>
-           </div>
-           <div class="ctrlHolder pull-down">
+            <legend>{% trans "Timeline View Settings" %}</legend>
+            
+            <div id="view_label" class="control-group">
+              <label for="view_label_input">{% trans "Label" %}</label>
+              <input type="text" id="view_label_input"/>
+            </div>
+
+            <div class="control-group">
              <label for="start_property">{% trans "Start Date" %}</label>
              <select id="start_property"></select>
            </div>
-	   <div class="ctrlHolder pull-down">
+
+	   <div class="control-group">
              <label for="end_property">{% trans "End Date" %}</label>
              <select id="end_property"></select>
            </div>
-           <div class="ctrlHolder pull-down">
+
+           <div class="control-group">
 	     <label for="color_property">{% trans "Color Key" %}</label>
 	     <select id="color_property"></select>
 	   </div>
 	   
-           <div class="ctrlHolder pull-down">
+           <div class="control-group">
              <label for="top-band-unit">{% trans "Top band time units" %}</label>
              <select id="top-band-unit">
                <option value="">auto</option>
@@ -44,7 +49,7 @@
              </select>
            </div>
 	   
-           <div class="ctrlHolder pull-down">
+           <div class="control-group">
              <label for="bottom-band-unit">{% trans "Bottom band time units" %}</label>
              <select id="bottom-band-unit">
                <option value="">auto</option>
@@ -59,29 +64,37 @@
                <option value="decade">decade</option>
                <option value="century">century</option>
                <option value="millennium">millennium</option>
-           </select>           </div>
+             </select>
+           </div>
+
 	  </fieldset>
 	</form>
+
       </div>
     </div>
     
-    <div class="record-box view-lens-properties ui-state-hightlight">
-      <label class="view-editor-pane-title">{% trans "Timline Lens Settings" %}</label>
+    <div class="record-box view-lens-properties">
+
       <div class="view-edit-body">
-	<form class="uniForm">
+
+	<form>
 	  <fieldset>      
-            <div class="ctrlHolder pull-down">
+            <legend>{% trans "Timline Lens Settings" %}</legend>
+
+            <div class="control-group">
               <label for="title_property">{% trans "Title" %}</label>
               <select id="title_property"></select>
             </div>
-            <div class="ctrlHolder pull-down">
+
+            <div class="control-group">
               <label for="title_link_property">{% trans "Link" %}</label>
               <select id="title_link_property"></select>
             </div>
+
 	  </fieldset>
 	</form>
 	
-	<table class="property-list-table">
+        <table class="property-list-table table table-condensed table-striped">
           <thead class="ui-widget-header ui-corner-top">
             <tr>
               <th class="visible">{% trans "Show" %}</th>
@@ -92,15 +105,14 @@
                   <button class="right-record-button" title="{% trans "Next Record" %}">&nbsp;</button>
 		</span>
 		<span id="current-record">#p</span> of <span id="record-count">#t</span>
-		
               </th>
             </tr>
-	    
           </thead>
+
           <tbody></tbody>
+
           <tfoot>
             <tr class='table-footer'>
-	      
               <td></td>
               <td colspan="2">
 		<div class="record-controls ui-helper-clearfix ui-widget-header ui-corner-bottom">
@@ -109,9 +121,10 @@
             </tr>
           </tfoot>
 	</table>
+
       </div>
     </div> <!-- end view-lens-property -->
     
   </div> <!-- end list-view-editor -->
-
+  
 </div>

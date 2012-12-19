@@ -1,9 +1,0 @@
-
-msgid "one of your friends has a new connection"
-msgstr "one of your connections has a new connection" 
-
-msgid "Accepted friendship request from %(from_user)s"
-msgstr "Accepted connection request from %(from_user)s"
-
-msgid "Declined friendship request from %(from_user)s"
-msgstr "Declined connection request from %(from_user)s"
