@@ -2,7 +2,6 @@
 
 {% load i18n %}
 {% load freemix_helpers %}
-{% load recollection_helpers %}
 {% load site_theme %}
 {% load compress %}
 {% load cms_tags %}
@@ -94,11 +93,6 @@
 {% endblock %}
 
 {% block final %}
-  <p id="versions">
-        {{ SITE_NAME }} {% recollection_version %} <span class="divider">&middot;</span>
-        Freemix {% freemix_version %} <span class="divider">&middot;</span>
-        Zepheira Akara translator {% akara_prefix_url %}
-  </p>
     {% if USERVOICE_SETTINGS %}
         <script type="text/javascript" src="{% url uservoice_options %}"></script>
         <!--<script type="text/javascript" src="https://cdn.uservoice.com/javascripts/widgets/tab.js"></script>-->

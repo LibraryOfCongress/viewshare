@@ -41,12 +41,6 @@ FreemixEmbed.insertStyle = function(src) {
 var lab = $LAB;
 lab = lab.setOptions({AlwaysPreserveOrder: true, UseLocalXHR: false, AllowDuplicates: false});
 
-//var old$ = window.$;
-//var oldjQuery = null;
-//if (window.jQuery) {
-//    oldjQuery = window.jQuery.noConflict(true);
-//}
-
 function load() {
     {%include "exhibit/embed/embed_js.html" %}
 
@@ -58,12 +52,12 @@ function load() {
 
         (function($) {
 
-            var randTmpId = 'embed-shell-' + Math.round(Math.random()*1000);
+            var randTmpId = 'freemix-embed-shell-' + Math.round(Math.random()*1000);
             var title_html = "<div id='titles' class='colhead'>" +
                             "<h1 id='title' title='Title'>{{ title }}</h1>" +
                             "<h2 id='subtitle' title='Subtitle'>{{ description }}</h2>" +
                             "</div>";
-            $('#{{where}}').after('<div id="' + randTmpId + '" class="freemix-themeable container_12">' +
+            $('#{{where}}').after('<div id="' + randTmpId + '" class="freemix-embed-shell freemix-themeable container_12">' +
                     '<div class="ui-widget-content ui-helper-clearfix"><div class="freemix-themeable">' +
                     '<div id="canvas">' + title_html +
                     '{{ canvas|safe }}</div></div></div></div>');
@@ -74,10 +68,7 @@ function load() {
 
             window.Freemix.exhibit.initializeDatabase(Freemix.data, function() {
                 $(".freemix-themeable #canvas").generateExhibitHTML(Freemix.profile).createExhibit();
-    //                jQuery.noConflict(true);
-    //
-    //                window.$ = old$;
-    //                window.jQuery = oldjQuery;
+                $.noConflict(true);
             });
         })(Freemix.jQuery);
 

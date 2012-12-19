@@ -2,18 +2,19 @@ from django.conf.urls.defaults import *
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.views.generic.base import RedirectView
+from django.views.generic.base import TemplateView
 from django.contrib import admin
 
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from recollection import feeds
-from recollection.utils.views import UserHomeView
+from viewshare.utilities.views import UserHomeView, PlainTextResponse
+from viewshare.utilities import feeds
 
 
 admin.autodiscover()
 
 # override context-less 500
-handler500 = 'recollection.utils.views.server_error'
+handler500 = 'viewshare.utilities.views.server_error'
 
 urlpatterns = patterns('',
 
@@ -25,7 +26,6 @@ urlpatterns = patterns('',
     (r'^invitations/', include('viewshare.apps.connections.urls')),
     (r'^notices/', include('viewshare.apps.vendor.notification.urls')),
     (r'^announcements/', include('viewshare.apps.vendor.announcements.urls')),
-    (r'^robots.txt$', include('robots.urls')),
     (r'^admin/', include(admin.site.urls)),
 
     (r'^catalog/', include('viewshare.apps.collection_catalog.urls')),
@@ -51,7 +51,6 @@ urlpatterns = patterns('',
     (r'^views/', include('freemix.exhibit.urls')),
     (r'^augment/', include('freemix.dataset.augment.urls')),
     (r'^share/', include('freemix.exhibit.share.urls')),
-    url(r'mix/', 'recollection.mixer.mix_data', name='mixer_receiving_endpoint'),
 
     url(r'^userhome/$', login_required(UserHomeView.as_view()), name="user_home"),
 
@@ -74,10 +73,12 @@ urlpatterns = patterns('',
     url(r'^augment/patterns/$', 'cms.views.details', kwargs={"slug": "augment-list-patterns"}, name="augment-list-patterns"),
 
     # For legacy purposes
-    url(r'^userupload/$', login_required(RedirectView.as_view(url="/upload")), name="user_upload"),
+    url(r'^userupload/$', login_required(RedirectView.as_view(url="/upload")),
+                                                              name="user_upload"),
 
-
-
+    # Override the robots.txt template to
+    (r'^robots.txt$', TemplateView.as_view(template_name="robots.txt",
+                                           response_class=PlainTextResponse)),
 
 ) + staticfiles_urlpatterns()
 

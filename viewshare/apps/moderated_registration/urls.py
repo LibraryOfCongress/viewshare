@@ -6,7 +6,7 @@ URL patterns for user registration, admin authorization, and activation
 from django.conf.urls.defaults import patterns, url
 
 
-_registration_backend_ = 'viewshare.moderated_registration.backend' \
+_registration_backend_ = 'viewshare.apps.moderated_registration.backend' \
                          '.ModeratedRegistrationBackend'
 
 urlpatterns = patterns('',

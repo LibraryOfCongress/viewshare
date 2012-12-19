@@ -5,16 +5,20 @@ from south.v2 import DataMigration
 from django.db import models
 
 class Migration(DataMigration):
-
-    depends_on= []
+    depends_on= [
+        ('support', '0001_add_pick_lists',),
+    ]
     def forwards(self, orm):
-        pass
+        from django.core.management import call_command
+        call_command("loaddata", "support_picklists")
+
 
     def backwards(self, orm):
         "Write your backwards methods here."
 
 
     models = {
+
     }
 
-    complete_apps = ['recollection_defaults']
+    complete_apps = ['support']

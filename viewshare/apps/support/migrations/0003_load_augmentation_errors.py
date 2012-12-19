@@ -6,11 +6,12 @@ from django.db import models
 
 class Migration(DataMigration):
     depends_on= [
-        ('support', '0001_add_pick_lists',),
+        ('augment', '0003_add_error_codes',),
     ]
     def forwards(self, orm):
         from django.core.management import call_command
-        call_command("loaddata", "support_picklists")
+        call_command("loaddata", "augmentation_errors")
+
 
 
     def backwards(self, orm):
@@ -21,4 +22,4 @@ class Migration(DataMigration):
 
     }
 
-    complete_apps = ['recollection_defaults']
+    complete_apps = ['support']

@@ -5,7 +5,7 @@
         if (url) {
             clearUrlError();
             $("#div_id_set_choice").append("<span class='loading_message'>Loading...</span>");
-            $.get($("link[type='recollection/oai_set_list']").attr("rel"), {endpoint: url}, function(data) {
+            $.get($("link[type='viewshare/oai_set_list']").attr("rel"), {endpoint: url}, function(data) {
                 $("#id_set_choice").empty();
                 if (data.length == 0) {
                     setUrlError("No OAI sets found for this URL");

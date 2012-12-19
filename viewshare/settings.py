@@ -97,7 +97,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.media",
     "django.core.context_processors.request",
     "django.core.context_processors.static",
-    "recollection.utils.context_processors.recollection_settings",
+    "viewshare.utilities.context_processors.recollection_settings",
     "viewshare.apps.vendor.notification.context_processors.notification",
     "viewshare.apps.vendor.announcements.context_processors.site_wide_announcements",
     "viewshare.apps.account.context_processors.account",
@@ -121,10 +121,8 @@ INSTALLED_APPS = (
     # external
     'emailconfirmation',
     'django_extensions',
-    'robots',
     'pagination',
     'timezones',
-    'ajax_validation',
     'uni_form',
     'django_sorting',
 
@@ -150,7 +148,7 @@ INSTALLED_APPS = (
     'freemix.dataset.augment',
     'freemix.exhibit.share',
 
-    # Recollection specific
+    # Viewshare specific
     'viewshare.apps.vendor.notification',
     'viewshare.apps.vendor.friends',
     'viewshare.apps.vendor.announcements',
@@ -159,9 +157,7 @@ INSTALLED_APPS = (
     'viewshare.apps.profiles',
     'viewshare.apps.site_theme',
     'viewshare.apps.collection_catalog',
-    'recollection.utils',
     'viewshare.apps.connections',
-    'recollection.conf.recollection_defaults',
     'viewshare.apps.upload',
 
     # Support pipeline
@@ -176,11 +172,7 @@ module_path = lambda m: path.abspath(find_module(m)[1])
 
 STATICFILES_DIRS = (
     ('', path.join(module_path('viewshare'), 'static')),
-
-    ('', path.join(module_path('recollection'), 'static')),
-    ('', path.join(module_path('ajax_validation'), 'media')),
-    ('', path.join(module_path('django_extensions'), 'media')),
-    )
+)
 
 ABSOLUTE_URL_OVERRIDES = {
     "auth.user": lambda o: "/profiles/profile/%s/" % o.username,
@@ -188,13 +180,8 @@ ABSOLUTE_URL_OVERRIDES = {
 AUTH_PROFILE_MODULE = 'profiles.Profile'
 NOTIFICATION_LANGUAGE_MODULE = 'account.Account'
 
-THEME_DIR_URL = "themes/chili"
-THEME_FRAGMENT_URL = "%s/chili.css" % THEME_DIR_URL
-THEME_URL = '%s%s' % (STATIC_URL, THEME_FRAGMENT_URL)
-
 TEMPLATE_DIRS = (
     path.join(module_path("viewshare"), "templates"),
-    path.join(module_path("recollection"), "templates"),
     )
 
 # Set to describe the site, properties and the names
@@ -202,7 +189,6 @@ TEMPLATE_DIRS = (
 SITE_NAME = "Recollection"
 SITE_NAME_STATUS = "BETA"
 CONTACT_EMAIL = "noreply@example.com"
-FEEDBACKLINK = "mailto:recollection@lists.zepheira.com"
 
 LOGIN_URL = "/account/login"
 LOGIN_REDIRECT_URLNAME = "user_home"
@@ -216,11 +202,6 @@ ACCOUNT_ACTIVATION_DAYS = 14
 
 FIXTURE_DIRS = (
     path.join(module_path("viewshare"), "fixtures"),
-    path.join(module_path("recollection"), "fixtures"),
-    )
-
-LOCALE_PATHS = (
-    path.join(module_path("recollection"), "locale"),
     )
 
 # Javascript and CSS compression

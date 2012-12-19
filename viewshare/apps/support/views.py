@@ -8,12 +8,12 @@ from viewshare.apps.support.redmine.utils import RedmineClient, RedmineIssue
 from viewshare.apps.support.redmine.consts import *
 from freemix.dataset.models import parse_profile_json
 
-from recollection.utils.views import get_akara_version
+from viewshare.utilities.views import get_akara_version
 from freemix.dataset.transform import AKARA_URL_PREFIX
 from freemix import __version__ as freemix_version
 from freemix.utils import get_user, get_site_url
 
-from recollection import __version__ as recollection_version
+from viewshare import __version__ as viewshare_version
 from viewshare.apps.support import forms
 
 logger = logging.getLogger(__name__)
@@ -110,7 +110,7 @@ class RedmineIssueView(object):
             'system_link': get_site_url(),
             'system_info': '%s %s - Freemix %s - Akara %s - Akara Root %s' %
             (settings.SITE_NAME,
-             recollection_version,
+             viewshare_version,
              freemix_version,
              get_akara_version(),
              AKARA_URL_PREFIX,)

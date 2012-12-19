@@ -22,7 +22,7 @@
 
     {{ block.super }}
     {% if show_error %}
-    <link rel="recollection/support" href="{% url upload_issue tx_id=transaction.tx_id %}">
+    <link rel="freemix/support" href="{% url upload_issue tx_id=transaction.tx_id %}">
     {% endif %}
 {% endblock %}
 
