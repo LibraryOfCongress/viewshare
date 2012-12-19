@@ -73,9 +73,9 @@
         generateWidget: function() {
              var view = this;
              return $("<li class='view ui-state-default'>" +
-                 "<span class='ui-icon ui-icon-grip-dotted-vertical'/>" +
+                 "<a href='#'><i class='move-button icon-resize-horizontal'></i>" +
                  "<span class='label'></span>" +
-                 "<a href='#' class='delete-button ui-icon ui-icon-closethick' title='Delete this view'/>" +
+                 "<i class='delete-button icon-remove'></i></a>" +
                  "</li>")
                 .attr("id", view.config.id)
                 .find("span.label").text(view.config.name).end()

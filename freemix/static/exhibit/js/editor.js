@@ -44,9 +44,8 @@
             w.data("model", facetContainer);
             w.addClass("ui-widget-content").addClass("facet-container");
             w.append("<div class='create-facet ui-state-default'>" +
-                "<div class='create-facet-button button button-icon-right' title='Add a Widget'>" +
-                "<span class='ui-icon ui-icon-plus'></span><span class='label'>Add a Widget</span>" +
-                "</div></div>");
+                "<button class='create-facet-button btn btn-small btn-primary'><i class='icon-plus'></i> Add a Widget</button>" +
+                "</div>");
 
             var dialog =$("<div style='display:hidden;'></div>").appendTo('body');
             facetContainer._dialog = dialog;
@@ -86,7 +85,7 @@
             viewContainer.id = $(this).attr("id");
 
             var model = $(this).data("model", viewContainer);
-            model.append("<ul class='view-set'></ul>");
+            model.append("<ul class='view-set nav nav-tabs'></ul>");
             model.append("<div class='view-content'></div>");
             model.addClass("view-container");
 
@@ -102,10 +101,9 @@
                         $(ui.item).data("model")._container = undefined;
                     }
                 });
-            set.append("<li class='create-view ui-state-default'>" +
-                "<div class='create-view-button button button-icon-right'>" +
-                "<span class='ui-icon ui-icon-plus'></span><span class='label'>Add a View</span>" +
-                "</div></li>");
+            set.append("<li class='create-view'>" +
+                "<button class='create-view-button btn btn-small btn-primary'><i class='icon-plus'></i> Add a View</button>" +
+                "</li>");
 
             var dialog =$("<div style='display:hidden;'></div>").appendTo('body');
             viewContainer._dialog = dialog;

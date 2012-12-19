@@ -55,7 +55,7 @@
           <a class="btn btn-small dataset_inspect" href="{% url dataset_detail owner=dataset.owner.username slug=dataset.slug %}">{% trans "Inspect" %}</a>
           
           {% if can_build %}
-          <a class="btn btn-small dataset_create" href="{% url exhibit_canvas_chooser owner=dataset.owner.username slug=dataset.slug %}">{% trans "Build" %}</a>
+          <a class="btn btn-small dataset_create" href="{% url exhibit_canvas_chooser owner=dataset.owner.username slug=dataset.slug %}" >{% trans "Build" %}</a>
           {% endif %}
           
           {% if can_edit %}
