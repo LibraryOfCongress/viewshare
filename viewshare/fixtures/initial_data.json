@@ -7,13 +7,5 @@
         "domain": "localhost:8000",
         "name": "localhost"
       }
-  },
-  {
-    "pk": 1,
-    "model": "discover.curatedexhibitcollection",
-    "fields": {
-      "name": "Front page",
-      "slug": "front-page"
-    }
   }
 ]
