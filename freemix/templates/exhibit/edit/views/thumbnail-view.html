@@ -7,26 +7,32 @@
 
       <div class="view-edit-body">
 
-        <form>
+        <form class="form-horizontal">
           <fieldset>
             <legend>{% trans "Thumbnail View Settings" %}</legend>
             
             <div id="view_label" class="control-group">
-              <label for="view_label_input">{% trans "Label" %}</label>
-              <input type="text" id="view_label_input"/>
+              <label class="control-label" for="view_label_input">{% trans "Label" %}</label>
+              <div class="controls">
+                <input type="text" id="view_label_input"/>
+              </div>
             </div>
 
             <div class="control-group">
-              <label for="sort_property">{% trans "Sort By" %}</label>
-              <select id="sort_property"></select>
+              <label class="control-label" for="sort_property">{% trans "Sort By" %}</label>
+              <div class="controls">
+                <select id="sort_property"></select>
+              </div>
             </div>
             
             <div class="ctrlHolder pull-down">
-              <label for="sort_order">{% trans "Sort Order" %}</label>
-              <select id="sort_order" name="sort_order" class="sort-order">
-                <option value="ascending">{% trans "Ascending" %}</option>
-                <option value="descending">{% trans "Descending" %}</option>
-              </select>
+              <label class="control-label" for="sort_order">{% trans "Sort Order" %}</label>
+              <div class="controls">
+                <select id="sort_order" name="sort_order" class="sort-order">
+                  <option value="ascending">{% trans "Ascending" %}</option>
+                  <option value="descending">{% trans "Descending" %}</option>
+                </select>
+              </div>
             </div>
 
           </fieldset>
@@ -39,23 +45,29 @@
 
       <div class="view-edit-body">
 
-        <form>
+        <form class="form-horizontal">
           <fieldset>
             <legend>{% trans "List Lens Settings" %}</legend>
 
             <div id="thumbnail_image" class="control-group">
-              <label for="image_property">{% trans "Image" %}</label>
-              <select id="image_property"></select>
+              <label class="control-label" for="image_property">{% trans "Image" %}</label>
+              <div class="controls">
+                <select id="image_property"></select>
+              </div>
             </div>
 
             <div id="thumbnail_title" class="control-group">
-              <label for="title_property">{% trans "Title" %}</label>
-              <select id="title_property"></select>
+              <label class="control-label" for="title_property">{% trans "Title" %}</label>
+              <div class="controls">
+                <select id="title_property"></select>
+              </div>
             </div>
 
             <div id="thumbnail_title_link" class="control-group">
-              <label for="title_link_property">{% trans "Link" %}</label>
-              <select id="title_link_property"></select>
+              <label class="control-label" for="title_link_property">{% trans "Link" %}</label>
+              <div class="controls">
+                <select id="title_link_property"></select>
+              </div>
             </div>
 
           </fieldset>

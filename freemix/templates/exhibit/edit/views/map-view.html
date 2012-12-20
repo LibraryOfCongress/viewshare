@@ -6,40 +6,48 @@
     <div class="view-properties">
 
       <div class="view-edit-body">
-        <form>
+        <form class="form-horizontal">
           <fieldset>
             <legend>{% trans "Map View Settings" %}</legend>
             
             <div id="view_label" class="control-group">
-              <label for="view_label_input">{% trans "Label" %}</label>
-              <input type="text" id="view_label_input"/>
+              <label class="control-label" for="view_label_input">{% trans "Label" %}</label>
+              <div class="controls">
+                <input type="text" id="view_label_input"/>
+              </div>
             </div>
             
             <div class="control-group">
-              <label for="latlng_property">{% trans "Latitude / Longitude" %}</label>
-              <select id="latlng_property"></select>
+              <label class="control-label" for="latlng_property">{% trans "Latitude / Longitude" %}</label>
+              <div class="controls">
+                <select id="latlng_property"></select>
+              </div>
             </div>
 
             <div class="control-group">
-              <label for="color_property">{% trans "Color Key" %}</label>
-              <select id="color_property"></select>
+              <label class="control-label" for="color_property">{% trans "Color Key" %}</label>
+              <div class="controls">
+                <select id="color_property"></select>
+              </div>
             </div>
 
             <div class="control-group">
-              <label for="zoom_level">{% trans "Zoom Level" %}</label>
-              <select id="zoom_level">
-                <option value="">auto</option>
-                <option value="1">1 (Farthest)</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="8">9</option>
-                <option value="10">10 (Nearest)</option>
-              </select>
+              <label class="control-label" for="zoom_level">{% trans "Zoom Level" %}</label>
+              <div class="controls">
+                <select id="zoom_level">
+                  <option value="">auto</option>
+                  <option value="1">1 (Farthest)</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="8">9</option>
+                  <option value="10">10 (Nearest)</option>
+                </select>
+              </div>
             </div>
             
           </fieldset>
@@ -51,19 +59,24 @@
 
       <div class="view-edit-body">
 
-        <form>
+        <form class="form-horizontal">
           <fieldset>
             <legend>{% trans "Map Lens Settings" %}</legend>
             
             <div class="control-group">
-              <label for="title_property">{% trans "Title" %}</label>
-              <select id="title_property"></select>
+              <label class="control-label" for="title_property">{% trans "Title" %}</label>
+              <div class="controls">
+                <select id="title_property"></select>
+              </div>
             </div>
 
             <div class="control-group">
-              <label for="title_link_property">{% trans "Link" %}</label>
-              <select id="title_link_property"></select>
+              <label class="control-label" for="title_link_property">{% trans "Link" %}</label>
+              <div class="controls">
+                <select id="title_link_property"></select>
+              </div>
             </div>
+
           </fieldset>
         </form>
         
@@ -73,12 +86,11 @@
               <th class="visible">{% trans "Show" %}</th>
               <th class="property">{% trans "Property" %}</th>
               <th class="value">{% trans "Value" %}
-                <span class="record-pager">
-                  <button class="left-record-button" title="{% trans "Previous Record" %}">&nbsp;</button>
-                  <button class="right-record-button" title="{% trans "Next Record" %}">&nbsp;</button>
+                <span class="record-pager btn-group">
+                  <button class="btn btn-small left-record-button" title="{% trans "Previous Record" %}"><i class="icon-arrow-left"></i></button>
+                  <button class="btn btn-small counter disabled" disabled="disabled"><span id="current-record">#p</span> of <span id="record-count">#t</span></button>
+                  <button class="btn btn-small right-record-button" title="{% trans "Next Record" %}"><i class="icon-arrow-right"></i></button>
                 </span>
-                <span id="current-record">#p</span> of <span id="record-count">#t</span>
-                
               </th>
             </tr>
             
@@ -88,14 +100,18 @@
 
           <tfoot>
             <tr class='table-footer'>
-              
-              <td></td>
-              <td colspan="2">
-                <div class="record-controls ui-helper-clearfix ui-widget-header ui-corner-bottom">
+              <td colspan="3">
+                <div class="record-controls">
+                  <span class="record-pager btn-group">
+                    <button class="btn btn-small left-record-button" title="{% trans "Previous Record" %}"><i class="icon-arrow-left"></i></button>
+                    <button class="btn btn-small counter disabled" disabled="disabled"><span id="current-record">#p</span> of <span id="record-count">#t</span></button>
+                    <button class="btn btn-small right-record-button" title="{% trans "Next Record" %}"><i class="icon-arrow-right"></i></button>
+                  </span>
                 </div>
               </td>
             </tr>
           </tfoot>
+
         </table>
       </div>
 
