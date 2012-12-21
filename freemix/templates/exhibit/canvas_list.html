@@ -1,16 +1,16 @@
 {% load i18n %}
-<div id="create_view_dialog">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>{% trans "Pick a Canvas to Create a Data View" %}</h3>
-  </div>
-  <div class="chooser modal-body">
-    <ul id="canvas_chooser">
-      {% for canvas in object_list %}
-      <li>
-        <a id='{{canvas.slug}}' href='{{ base_url }}?canvas={{ canvas.slug }}' title='{{ canvas.title }}'><img src='{{ STATIC_URL }}{{ canvas.thumbnail }}' alt='{{ canvas.title }}' title='{{ canvas.title }}'/><span class='chooser-canvas-name'>{{ canvas.title }}</span></a>
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
+
+<div class="chooser">
+  <ul id="canvas_chooser" class="thumbnails">
+    {% for canvas in object_list %}
+    <li>
+      <div class="thumbnail">
+        <a id="{{canvas.slug}}" href="{{ base_url }}?canvas={{ canvas.slug }}" title="{{ canvas.title }}">
+          <img src="{{ STATIC_URL }}{{ canvas.thumbnail }}" alt="{{ canvas.title }}' title='{{ canvas.title }}" />
+          <legend class="chooser-canvas-name">{{ canvas.title }}</legend>
+        </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
 </div>

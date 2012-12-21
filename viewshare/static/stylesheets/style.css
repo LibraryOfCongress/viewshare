@@ -54,10 +54,8 @@ header, .header, #header{
 
 .chooser li {
     float: left;
-    width: 96px;
     font-size: 1em;
-    margin: .8em 5px .8em 0;
-    min-height: 100px;
+    margin: 5px 5px 5px 5px;
     list-style: none;
 }
 
@@ -71,7 +69,7 @@ header, .header, #header{
 }
 
 .chooser li img {
-    width: 90px;
+    width: 100px;
     height: auto;
     display: block;
     padding-top:3px;
@@ -96,9 +94,13 @@ header, .header, #header{
     opacity: 1.0;
 }
 
-.chooser li span {
-    display: block;
+.chooser li legend {
     margin: .1em 4px;
+    font-size: 9pt;
+    border: none;
+    font-weight: bold;
+    color: rgb(0, 176, 216);
+
 }
 
 .chooser li.disabled img {

@@ -55,7 +55,18 @@
           <a class="btn btn-small dataset_inspect" href="{% url dataset_detail owner=dataset.owner.username slug=dataset.slug %}">{% trans "Inspect" %}</a>
           
           {% if can_build %}
-          <a class="btn btn-small dataset_create" href="{% url exhibit_canvas_chooser owner=dataset.owner.username slug=dataset.slug %}" >{% trans "Build" %}</a>
+          <a class="btn btn-small dataset_create" href="{% url exhibit_canvas_chooser owner=dataset.owner.username slug=dataset.slug %}" data-toggle="modal" data-target="#view_template_chooser">{% trans "Build" %}</a>
+
+          <div id="view_template_chooser" class="modal hide fade form-dialog" tabindex="-1" role="dialog" aria-labelledby="viewTemplateLabel" aria-hidden="true">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3 id="viewTemplateLabel">{% trans "Select a View Template" %}</h3>
+            </div>
+            <div class="modal-body">
+              <!-- target gets filled in -->
+            </div>
+          </div>
+
           {% endif %}
           
           {% if can_edit %}
