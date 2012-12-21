@@ -1,7 +1,7 @@
 {% extends "profiles/base.html" %}
 
 {% load i18n %}
-{% load uni_form_tags %}
+{% load crispy_forms_tags %}
 {% load notification_utils %}
 {% load connection_helpers %}
 {% load freemix_helpers %}
@@ -23,6 +23,7 @@
 {{block.super}}
 {% include "freemix/js_include/jquery_ui.html" %}
 
+<!-- 
 <script type="text/javascript">
 $(document).ready(function() {
     $('#edit_profile_form').load('{% url profile_edit %}', function() {
@@ -45,6 +46,8 @@ $(document).ready(function() {
     });
 });
 </script>
+-->
+
 {% endblock %}
 
 {# check to see if the user being inspected is user logged in #}
@@ -101,24 +104,6 @@ $(document).ready(function() {
   
   <div class="span4">
       
-    <!-- Button to trigger modal -->
-    <a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
-     
-    <!-- Modal -->
-    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">Modal header</h3>
-    </div>
-    <div class="modal-body">
-    <p>One fine body…</p>
-    </div>
-    <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button class="btn btn-primary">Save changes</button>
-    </div>
-    </div>
-
     <div id="about-box" class="info-section well">
       
       <table class="about_profile">
@@ -154,7 +139,19 @@ $(document).ready(function() {
       {% endif %}
       
       {% if is_me %}
-      <p class="about_edit"><a href="#edit_profile_form" id="edit-profile-button" class="btn btn-small button_link">{% trans "Edit" %}</a></p>
+      <span class="about_edit">
+        <a href="{% url profile_edit %}" data-target="#edit_profile_form" role="button" id="edit-profile-button" class="btn btn-small" data-toggle="modal">{% trans "Edit" %}</a>
+      </span>
+
+      <div id="edit_profile_form" class="modal hide fade form-dialog" tabindex="-1" role="dialog" aria-labelledby="editProfileFormLabel" aria-hidden="true">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="editProfileFormLabel">{% trans "Edit Profile" %}</h3>
+        </div>
+        <div class="modal-body">
+        </div>
+      </div>
+
       {% endif %}
       
       {% if user.is_authenticated %}
@@ -207,7 +204,7 @@ $(document).ready(function() {
         {% csrf_token %}
         <fieldset class="inlineLabels">
           
-          {{ invite_form|as_uni_form }}
+          {{ invite_form|crispy }}
           <div class="form_block">
             <input type="hidden" name="action" value="invite" />
             <p class="center"><input type="submit" value="{% trans "Invite" %}"/>
@@ -270,19 +267,17 @@ $(document).ready(function() {
       
       {% endif %}
       
-      <div id="edit_profile_form" class="form-dialog">
+      
+    </div> <!-- end span4 -->
+
+    <div class="span8">
+
+      <div class="right_panel data_panel">
+        {% include "profiles/profile_right_panel.html" %}
       </div>
-
-  </div> <!-- end span4 -->
-
-  <div class="span8">
-
-    <div class="right_panel data_panel">
-      {% include "profiles/profile_right_panel.html" %}
-    </div>
-
-  </div> <!-- end span8 -->
-</div> <!-- end row-fluid -->
+      
+    </div> <!-- end span8 -->
+  </div> <!-- end row-fluid -->
   
   {% endblock %}
   
