@@ -17,3 +17,7 @@ AKARA_OAIPMH_LIST_URL = getattr(settings,
 FILE_UPLOAD_PATH = getattr(settings,
     "FILE_UPLOAD_PATH",
     "/tmp/recollectionupload")
+
+SITE_NAME = getattr(settings,
+    "SITE_NAME",
+    "Recollection")

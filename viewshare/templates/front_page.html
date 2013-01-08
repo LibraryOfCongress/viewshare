@@ -4,7 +4,7 @@
 {% load i18n %}
 
 
-{% block head_title %}Welcome to Viewshare{% endblock %}
+{% block head_title %}Welcome to {{ SITE_NAME }}{% endblock %}
 
 
 {% block head_css %}
@@ -52,7 +52,7 @@
 {% endif %}
 <div class="primarydisc">
   <p>
-  <strong>Viewshare</strong> is a <strong>free</strong> platform for generating and customizing views <strong>(interactive maps, timelines, facets, tag clouds)</strong> that allow users to experience your <strong>digital collections</strong>.
+  <strong>{{ SITE_NAME }}</strong> is a <strong>free</strong> platform for generating and customizing views <strong>(interactive maps, timelines, facets, tag clouds)</strong> that allow users to experience your <strong>digital collections</strong>.
   </p> 
   <a href="/registration/register/">
     <div id="first" class="linkblock">Request Free Account</div>

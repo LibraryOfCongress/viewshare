@@ -151,8 +151,9 @@ class ResetPasswordForm(forms.Form):
                 "user": user,
                 "temp_key": temp_key,
                 "domain": domain,
+                "SITE_NAME": settings.SITE_NAME,
             })
-            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email], priority="high")
+            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email])
         return self.cleaned_data["email"]
 
 

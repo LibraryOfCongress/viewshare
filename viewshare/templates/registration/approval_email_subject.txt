@@ -1,1 +1,1 @@
-{{profile.user.username}} ({{profile.user.email}}) has requested access to Viewshare
+{{profile.user.username}} ({{profile.user.email}}) has requested access to {{ SITE_NAME }}

@@ -305,6 +305,8 @@ def send_now(users, label, extra_context=None, on_site=True, sender=None):
             "notice": ugettext(notice_type.display),
             "notices_url": notices_url,
             "current_site": current_site,
+            "SITE_NAME": settings.SITE_NAME,
+            "CONTACT_EMAIL": settings.CONTACT_EMAIL,
         })
         context.update(extra_context)
         

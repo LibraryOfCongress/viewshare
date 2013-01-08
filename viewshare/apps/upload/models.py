@@ -15,7 +15,7 @@ def source_upload_path(instance, filename):
     return join(instance.uuid, filename)
 
 
-class RecollectionFileStorage(FileSystemStorage):
+class ViewshareFileStorage(FileSystemStorage):
 
     def url(self, name):
         uuid, filename = name.split(sep)
@@ -23,7 +23,7 @@ class RecollectionFileStorage(FileSystemStorage):
             kwargs={"uuid": uuid, "filename": filename})
 
 
-fs = RecollectionFileStorage(location=conf.FILE_UPLOAD_PATH)
+fs = ViewshareFileStorage(location=conf.FILE_UPLOAD_PATH)
 
 file_datasource_mixin = make_file_data_source_mixin(storage=fs,
     upload_to=source_upload_path)
@@ -117,13 +117,14 @@ class OAIDataSource(URLDataSourceMixin, DataSource):
         return "%s (%s, %s)" % (self.title, self.url, self.set)
 
 cdm_help_text = """
-<p>For XML MODS files, Recollection recognizes the most commonly
+<p>For XML MODS files, %(site_name)s recognizes the most commonly
  used elements and attributes. Some XML MODS files include local extension
  elements or elements not already tested. If you suspect that some of the
  elements are not loading, click "Verify Data" to run diagnostics
- to identify elements in the file that are not recognized by Recollection.</p>
+ to identify elements in the file that are not recognized by %(site_name)s.
+ </p>
 <p>Note: Diagnostics operation will slow the upload process slightly.</p>
-"""
+""" % {"site_name" : conf.SITE_NAME}
 
 
 class ModsMixin(models.Model):
