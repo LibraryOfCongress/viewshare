@@ -8,13 +8,8 @@
             var type = config.radio ? 'radio' : 'checkbox';
             var name = config.name ? config.name : $.make_uuid();
 
-            var disabled = "";
-            if (config.enabled) {
-                if (!config.enabled()) {
-                    disabled = " disabled='true'";
-                }
-            }
-            var check = $("<input type='" + type + "' name='" + name + "'" + disabled + "/>");
+            var check = $("<input>").attr("type", type).attr("name", name);
+
             $this.append(check);
             if (config.checked) {
                 check.attr("checked", "checked");
@@ -104,7 +99,8 @@
                 }
             }
         });
-        $("<td class='name'></td>").append("<span>" + deriveLabel(metadata) + "</span>").appendTo(row);
+        var label = $("<span>").text(deriveLabel(metadata));
+        $("<td class='name'></td>").append(label).appendTo(row);
         $("<td class='value'></td>").appendTo(row);
         if (row_callback) {
             row_callback(row, model, metadata);

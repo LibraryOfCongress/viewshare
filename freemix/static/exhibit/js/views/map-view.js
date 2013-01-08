@@ -47,12 +47,12 @@
 
     Freemix.mapViewLib.generateExhibitHTML = function(config) {
         config = config || this.config;
+        var view = $("<div ex:role='view'></div>").attr("ex:viewClass", this.viewClass);
         if (!config.latlng) {
-            return $("<div ex:role='view' ex:viewClass='"+this.viewClass+"' ex:viewLabel='Location Missing'></div>");
+            return view.attr("ex:viewLabel", "Location Missing");
         }
         var latlng = config.latlng;
         var colorKey = config.colorKey;
-        var view = $("<div ex:role='view' ex:viewClass='"+this.viewClass+"'></div>");
         view.attr("ex:viewLabel", config.name);
         if (latlng) {
             view.attr("ex:latlng", '.' + latlng);

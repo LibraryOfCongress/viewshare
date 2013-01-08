@@ -298,7 +298,8 @@
                     var td = $("<td class='exhibit-label'></td>");
                     td.text(label);
                     tr.append(td);
-                    td = $("<td class='exhibit-value'>" +renderProperty(metadata) + "</td>");
+                    td = $("<td class='exhibit-value'></td>");
+                    td.append(renderProperty(metadata));
                     tr.append(td);
                     table.append(tr);
                 }

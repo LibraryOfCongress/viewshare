@@ -51,7 +51,7 @@
               var properties = Freemix.facet.generatePropertyList(facet.propertyTypes);
 
               $.each(properties, function() {
-                  var option = "<option value='" + this.expression + "'>" + this.label + "</option>";
+                  var option = $("<option>").attr("value", this.expression).text(this.label);
                   select.append(option);
               });
               if (config.expression) {
