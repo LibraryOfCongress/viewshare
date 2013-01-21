@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, render
 from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.template import RequestContext
 from django.utils.translation import  ugettext_lazy as _
@@ -6,6 +6,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from emailconfirmation.models import EmailAddress, EmailConfirmation
+from viewshare.apps.account.models import PasswordReset
 
 from viewshare.apps.account.utils import get_default_redirect
 from viewshare.apps.account.forms import AddEmailForm, LoginForm, \
@@ -160,6 +161,9 @@ def password_reset(request, form_class=ResetPasswordForm,
     
 def password_reset_from_key(request, key, form_class=ResetPasswordKeyForm,
         template_name="account/password_reset_from_key.html"):
+    if PasswordReset.objects.filter(temp_key=key, reset=False).count() == 0:
+        return render(request, template_name, {"invalid_key": True})
+
     if request.method == "POST":
         password_reset_key_form = form_class(request.POST)
         if password_reset_key_form.is_valid():
@@ -168,9 +172,9 @@ def password_reset_from_key(request, key, form_class=ResetPasswordKeyForm,
     else:
         password_reset_key_form = form_class(initial={"temp_key": key})
     
-    return render_to_response(template_name, {
+    return render(request, template_name, {
         "form": password_reset_key_form,
-    }, context_instance=RequestContext(request))
+    })
     
 @login_required
 def timezone_change(request, form_class=ChangeTimezoneForm,

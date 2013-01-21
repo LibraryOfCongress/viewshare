@@ -90,6 +90,7 @@ class ModeratedRegistrationProfile(RegistrationProfile, models.Model):
         ctx_dict = {
             'profile': self,
             'SITE_NAME': settings.SITE_NAME,
+            'CONTACT_EMAIL': settings.CONTACT_EMAIL,
         }
 
         subject = render_to_string('registration/approval_email_subject.txt',
