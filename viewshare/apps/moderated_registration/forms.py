@@ -1,4 +1,5 @@
 from django import forms
+from django.conf import settings
 from uni_form.helpers import FormHelper, Layout, Fieldset, Submit
 from django.contrib.localflavor.us.us_states import US_STATES
 from registration.forms import RegistrationForm
@@ -63,7 +64,7 @@ class ViewShareRegistrationForm(RegistrationForm):
                     "org_state",
                     css_class="inlineLabels"),
 
-                Fieldset("How do you plan to use Viewshare?",
+                Fieldset("How do you plan to use %s?" % settings.SITE_NAME,
                     "reason",
                     css_class="inlineLabels")
             )

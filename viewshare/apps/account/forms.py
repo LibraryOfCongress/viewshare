@@ -1,11 +1,12 @@
 import re
+import hashlib
+from random import random
 from django import forms
+from django.contrib.auth.models import User
 from django.template.loader import render_to_string
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _, ugettext
-from django.utils.hashcompat import sha_constructor
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.contrib import messages
 from emailconfirmation.models import EmailAddress
@@ -126,18 +127,17 @@ class ResetPasswordForm(forms.Form):
     email = forms.EmailField(label=_("Email"), required=True, widget=forms.TextInput(attrs={'size':'30'}))
     
     def clean_email(self):
-        if EmailAddress.objects.filter(email__iexact=self.cleaned_data["email"], verified=True).count() == 0:
+        if User.objects.filter(email__iexact=self.cleaned_data["email"]).count() == 0:
             raise forms.ValidationError(_("Email address not verified for any user account"))
         return self.cleaned_data["email"]
     
     def save(self):
-        for user in User.objects.filter(email__iexact=self.cleaned_data["email"]):
-            temp_key = sha_constructor("%s%s%s" % (
-                settings.SECRET_KEY,
-                user.email,
-                settings.SECRET_KEY,
-            )).hexdigest()
-            
+        email = self.cleaned_data["email"]
+        for user in User.objects.filter(email__iexact=email):
+
+            salt = hashlib.sha1(str(random())).hexdigest()[:5]
+            temp_key = hashlib.sha1(salt + email + settings.SECRET_KEY).hexdigest()
+
             # save it to the password reset model
             password_reset = PasswordReset(user=user, temp_key=temp_key)
             password_reset.save()
@@ -151,8 +151,10 @@ class ResetPasswordForm(forms.Form):
                 "user": user,
                 "temp_key": temp_key,
                 "domain": domain,
+                "SITE_NAME": settings.SITE_NAME,
+                'CONTACT_EMAIL': settings.CONTACT_EMAIL,
             })
-            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email], priority="high")
+            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email])
         return self.cleaned_data["email"]
 
 
@@ -164,7 +166,7 @@ class ResetPasswordKeyForm(forms.Form):
     
     def clean_temp_key(self):
         temp_key = self.cleaned_data.get("temp_key")
-        if not PasswordReset.objects.filter(temp_key=temp_key, reset=False).count() == 1:
+        if not PasswordReset.objects.filter(temp_key=temp_key, reset=False).count() >= 1:
             raise forms.ValidationError(_("Temporary key is invalid."))
         return temp_key
     
@@ -177,10 +179,10 @@ class ResetPasswordKeyForm(forms.Form):
     def save(self):
         # get the password_reset object
         temp_key = self.cleaned_data.get("temp_key")
-        password_reset = PasswordReset.objects.get(temp_key__exact=temp_key)
+        password_reset = PasswordReset.objects.filter(temp_key__exact=temp_key, reset=False).order_by("-timestamp")[0]
         
         # now set the new user password
-        user = User.objects.get(passwordreset__exact=password_reset)
+        user = password_reset.user
         user.set_password(self.cleaned_data["password1"])
         user.save()
 

@@ -75,7 +75,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'pagination.middleware.PaginationMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
-    'reversion.middleware.RevisionMiddleware',
+    #'reversion.middleware.RevisionMiddleware',
     'cms.middleware.page.CurrentPageMiddleware',
     'cms.middleware.user.CurrentUserMiddleware',
     'cms.middleware.toolbar.ToolbarMiddleware',
@@ -155,6 +155,7 @@ INSTALLED_APPS = (
     'viewshare.apps.vendor.announcements',
 
     'viewshare.apps.account',
+    'viewshare.apps.discover',
     'viewshare.apps.profiles',
     'viewshare.apps.site_theme',
     'viewshare.apps.collection_catalog',

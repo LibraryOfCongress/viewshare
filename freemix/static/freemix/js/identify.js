@@ -5,9 +5,9 @@
         var property = row.data("property");
         var result;
         if (property.label() != property.name()) {
-            result = $("<span class='changed'>" + property.label()  + "</span>");
+            result = $("<span class='changed'></span>").text(property.label());
         } else {
-            result = $("<span>" + property.name() + "</span>");
+            result = $("<span></span>").text(property.name());
         }
         return result;
     }
@@ -47,7 +47,7 @@
         addProperty: function(property) {
             var identify = this;
             var footer = $(".table-footer", this.getContent());
-            var row = $("<tr class='property-row' id='" + property.config.property + "'></tr>").data("property", property);
+            var row = $("<tr class='property-row'></tr>").attr("id", property.config.property).data("property", property);
             footer.before(row);
 
             var td = $("<td class='enabled'></td>");
@@ -143,7 +143,7 @@
             var property = row.data("property");
             var type = property.type();
             var label = Freemix.property.type[type].label || type;
-            return $("<div>" + label + "</div>").appendTo(column);
+            return $("<div></div>").text(label).appendTo(column);
         },
         propertyChanged: function(property) {
             if (Freemix.profile.localProperties) {

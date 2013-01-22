@@ -18,7 +18,7 @@ from urlparse import urljoin
 logger = logging.getLogger(__name__)
 
 
-AKARA_URL_PREFIX = getattr(settings, "AKARA_URL_PREFIX", "http://transformer.zepheira.com:8883")
+AKARA_URL_PREFIX = getattr(settings, "AKARA_URL_PREFIX", "http://transformer.zepheira.com:8882")
 AKARA_TRANSFORM_URL = getattr(settings, "AKARA_TRANSFORM_URL", urljoin(AKARA_URL_PREFIX, "freemix.json"))
 
 

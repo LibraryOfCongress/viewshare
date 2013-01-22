@@ -60,7 +60,7 @@ opacity:0.0;
 filter: alpha(opacity=0);
 }
 
-.primarydisc {float: left; margin-left:20px;}
+.primarydisc {float: right; margin-left:20px;}
 
 .primarydisc p{width: 280px; margin-top: 0px; font-size: 150%;}
 
