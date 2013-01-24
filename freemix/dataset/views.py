@@ -2,19 +2,30 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.db import transaction
 from django.db.models.query_utils import Q
-from django.http import HttpResponse, HttpResponseRedirect, HttpResponseServerError, Http404, HttpResponseForbidden
+from django.http import (
+        HttpResponse,
+        HttpResponseRedirect,
+        HttpResponseServerError,
+        Http404,
+        HttpResponseForbidden
+        )
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.http import  last_modified
 from django.views.generic.base import View, RedirectView
+from django.utils import simplejson as json
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
-from freemix.dataset import forms, conf
-from freemix.permissions import PermissionsRegistry
-from freemix.dataset import models
-from django.utils import simplejson as json
 
-from freemix.views import OwnerListView, OwnerSlugPermissionMixin, JSONResponse, BaseJSONView
+from freemix.dataset import conf, forms, models
+from freemix.dataset.tasks import run_transaction
+from freemix.permissions import PermissionsRegistry
+from freemix.views import (
+        OwnerListView,
+        OwnerSlugPermissionMixin,
+        JSONResponse,
+        BaseJSONView
+        )
 
 
 #----------------------------------------------------------------------------------------------------------------------#
@@ -238,7 +249,7 @@ class CreateDataSourceView(CreateView):
     def form_valid(self, form):
         self.object = form.save()
 
-        self.tx = self.object.create_transaction(self.request.user)
+        self.tx = self.object.create_transaction()
 
         return HttpResponseRedirect(self.get_success_url())
 
@@ -310,7 +321,7 @@ class UpdateDataSourceView(UpdateView):
     def form_valid(self, form):
         self.object = form.save()
 
-        self.tx = self.object.create_transaction(self.request.user)
+        self.tx = self.object.create_transaction()
 
         return HttpResponseRedirect(self.get_success_url())
 
@@ -346,32 +357,62 @@ class DataSourceTransactionView(View):
 
 class ProcessTransactionView(DataSourceTransactionView):
 
-    def success(self):
+    def display_transaction_result(self):
+        """
+        Render 'datasource_transaction_result'.
+        """
         source = self.transaction.source
         save_url = None
         if source.dataset:
             template_name="dataset/dataset_update.html"
             dataset = source.dataset
-            profile_url = reverse('dataset_profile_json', kwargs={'owner': dataset.owner.username,
-                                                                  'slug': dataset.slug})
-            cancel_url = reverse('dataset_summary', kwargs={'owner': dataset.owner.username,
-                                                              'slug': dataset.slug})
-            save_url = reverse('dataset_edit', kwargs={'owner': source.dataset.owner.username,
-                                           'slug': source.dataset.slug})
+            profile_url = reverse(
+                    'dataset_profile_json',
+                    kwargs={
+                        'owner': dataset.owner.username,
+                        'slug': dataset.slug
+                        }
+                    )
+            cancel_url = reverse(
+                    'dataset_summary',
+                    kwargs={
+                        'owner': dataset.owner.username,
+                        'slug': dataset.slug
+                        }
+                    )
+            save_url = reverse(
+                    'dataset_edit',
+                    kwargs={
+                        'owner': source.dataset.owner.username,
+                        'slug': source.dataset.slug
+                        }
+                    )
         else:
             template_name="dataset/dataset_create.html"
-            save_url = reverse('datasource_transaction', kwargs={"tx_id": self.transaction.tx_id})
-            profile_url = reverse('datasource_transaction_result', kwargs={'tx_id': self.transaction.tx_id})
+            save_url = reverse(
+                    'datasource_transaction',
+                    kwargs={"tx_id": self.transaction.tx_id}
+                    )
+            profile_url = reverse(
+                    'datasource_transaction_result',
+                    kwargs={'tx_id': self.transaction.tx_id}
+                    )
             cancel_url = reverse('upload_dataset', kwargs={})
+        dataurl = reverse(
+                'datasource_transaction_result',
+                kwargs={'tx_id': self.transaction.tx_id}
+                )
         return render(self.request, template_name, {
             "transaction": self.transaction,
             "dataset": source.dataset,
             "save_url": save_url,
-            "dataurl": reverse('datasource_transaction_result', kwargs={'tx_id': self.transaction.tx_id}),
+            "dataurl": dataurl,
             "profileurl": profile_url,
             "cancel_url": cancel_url
         })
 
+    def success(self):
+        return self.display_transaction_result()
 
     def failure(self):
         source = self.transaction.source.get_concrete()
@@ -390,11 +431,13 @@ class ProcessTransactionView(DataSourceTransactionView):
         return  HttpResponseRedirect(reverse('dataset_upload'))
 
     def running(self):
-        return HttpResponse("running")
+        return self.display_transaction_result()
 
     def pending(self):
-        tx = self.transaction
-        tx.run()
+        self.transaction.status = models.TX_STATUS['running']
+        self.transaction.save()
+        tx_id = self.transaction.id
+        run_transaction.delay(tx_id)
         return self.redirect()
 
     def scheduled(self):

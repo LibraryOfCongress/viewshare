@@ -149,7 +149,7 @@ class DataSource(TimeStampedModel):
     def __unicode__(self):
         return self.classname + " " + self.uuid
 
-    def create_transaction(self, user):
+    def create_transaction(self):
         tx = DataSourceTransaction(source=self)
         tx.save()
         return tx
@@ -285,13 +285,7 @@ class DataSourceTransaction(TimeStampedModel):
         return True
 
     def run(self):
-        if self.status != TX_STATUS["pending"]:
-            raise
-
         with db_tx.commit_manually():
-            self.status=TX_STATUS["running"]
-            self.save()
-
             try:
                 source = self.source.get_concrete()
                 self.result = source.refresh()

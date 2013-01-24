@@ -104,6 +104,10 @@
     };
 
     $(document).ready(function() {
+        var profileURL = $("link[rel='freemix/dataprofile']").attr("href"),
+          pollCount = 0,
+          pollMax = 6;
+
         setupCreateExhibitButton();
 
         $("#delete-property-dialog").dialog({
@@ -132,18 +136,27 @@
             }
         });
 
-        var profileURL = $("link[rel='freemix/dataprofile']").attr("href");
-
-        var xhr = $.ajax({
-                 url: profileURL,
-                 type: "GET",
-                 dataType: "json",
-                 success: function(data) {
-                     var editor = new Freemix.DatasetEditor();
-                     editor.setData(data);
-                     
-                 }
-        });
+        // poll for transaction results
+        function pollTransactionResults() {
+          $.ajax({
+            url: profileURL,
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+              pollCount += 1;
+              if ($.isEmptyObject(data) && pollCount <= pollMax) {
+                setTimeout(function () {pollTransactionResults();}, 5000);
+              } else {
+                if (pollCount > pollMax) {
+                  data = {"message": "No Data"};
+                }
+                var editor = new Freemix.DatasetEditor();
+                editor.setData(data);
+              }
+            }
+          });
+        }
+        pollTransactionResults();
     });
 
 })(window.Freemix.jQuery, window.Freemix);
