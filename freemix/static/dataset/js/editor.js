@@ -46,6 +46,26 @@
         identify.populateRecordDisplay();
     }
 
+    function pollTransactionResults(profileURL) {
+      $.ajax({
+        url: profileURL,
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+          pollCount += 1;
+          if ($.isEmptyObject(data) && pollCount <= pollMax) {
+            setTimeout(function () {pollTransactionResults();}, 5000);
+          } else {
+            if (pollCount > pollMax) {
+              data = {"message": "No Data"};
+            }
+            var editor = new Freemix.DatasetEditor();
+            editor.setData(data);
+          }
+        }
+      });
+    }
+
      Freemix.DatasetEditor = function() {
 
         $("#delete-record-dialog").dialog({
@@ -136,27 +156,7 @@
             }
         });
 
-        // poll for transaction results
-        function pollTransactionResults() {
-          $.ajax({
-            url: profileURL,
-            type: "GET",
-            dataType: "json",
-            success: function(data) {
-              pollCount += 1;
-              if ($.isEmptyObject(data) && pollCount <= pollMax) {
-                setTimeout(function () {pollTransactionResults();}, 5000);
-              } else {
-                if (pollCount > pollMax) {
-                  data = {"message": "No Data"};
-                }
-                var editor = new Freemix.DatasetEditor();
-                editor.setData(data);
-              }
-            }
-          });
-        }
-        pollTransactionResults();
+        pollTransactionResults(profileURL);
     });
 
 })(window.Freemix.jQuery, window.Freemix);
