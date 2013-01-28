@@ -55,13 +55,18 @@
       this.profileURL = options.profileURL;
     };
 
-    /** Handles data request for a DataSourceTransaction */
+    /** 
+     * Handles data request for a DataSourceTransaction
+     * @param {function} options.success - Function to run on $.ajax() success
+     * @param {function} options.error - Function to run on $.ajax() error
+     */
     Transaction.prototype.sync = function(options) {
       $.ajax({
         url: this.profileURL,
         type: "GET",
         dataType: "json",
-        success: options.success
+        success: options.success,
+        error: options.error
       });
     };
 
@@ -97,12 +102,25 @@
       }
     };
 
+    /** 
+     * Handles DOM manipulation on a failed ajax request
+     * @param {string} data - Data returned from successful jquery ajax request
+     */
+    LoadingTransactionView.prototype.pollError = function() {
+      this.loadingDialog.html(
+        'Error while processing transaction.<br />Please try to reload the page later.'
+      );
+      this.loadingDialog.dialog('open');
+    };
+
     /** Controls display of LoadingTransactionView */
     LoadingTransactionView.prototype.render = function() {
       var success = $.proxy(this.pollSuccess, this)
+      var error = $.proxy(this.pollError, this)
 
       this.transaction.sync({
-        success: success
+        success: success,
+        error: error
       });
     };
 
