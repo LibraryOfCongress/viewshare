@@ -66,15 +66,12 @@
     };
 
     /**
-     * Represents the display while waiting, polling, and loading a Transaction
+     * Represents the display while polling results for a Transaction
      * @constructor
-     * @param {integer} options.pollMax - Maximum number of times to poll the server
      * @param {Transaction} options.transaction - Transaction with profileURL
      * @param {jQuery} options.el - $() element that contains loading dialog
      */
     LoadingTransactionView = function(options) {
-      this.pollCount = 0;
-      this.pollMax = options.pollMax;
       this.transaction = options.transaction;
       this.loadingDialog = options.el.dialog({
         resizable: false,
@@ -90,14 +87,10 @@
      * @param {string} data - Data returned from successful jquery ajax request
      */
     LoadingTransactionView.prototype.pollSuccess = function(data) {
-      this.pollCount += 1;
-      if ($.isEmptyObject(data) && this.pollCount <= this.pollMax) {
+      if ($.isEmptyObject(data)) {
         this.loadingDialog.dialog('open');
         setTimeout($.proxy(this.render, this), 5000);
       } else {
-        if (this.pollCount > this.pollMax) {
-          data = {"message": "No Data"};
-        }
         this.loadingDialog.dialog('close');
         var editor = new Freemix.DatasetEditor();
         editor.setData(data);
@@ -205,8 +198,7 @@
 
         new LoadingTransactionView({
           el: $('#loading-transaction-dialog'),
-          transaction: transaction,
-          pollMax: 400
+          transaction: transaction
         }).render();
     });
 
