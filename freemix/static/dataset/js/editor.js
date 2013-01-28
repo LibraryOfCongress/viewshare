@@ -1,7 +1,7 @@
 /*global jQuery */
 (function($, Freemix) {
 
-    var identify;
+    var identify, Transaction, LoadingTransactionView;
 
     function setupIdentifier(data) {
         if (!Freemix.profile && "data_profile" in data) {
@@ -46,25 +46,80 @@
         identify.populateRecordDisplay();
     }
 
-    function pollTransactionResults(profileURL) {
+    /**
+     * Represents a DataSourceTransaction
+     * @constructor
+     * @param {string} options.profileURL - The freemix/dataprofile/ URL 
+     */
+    Transaction = function(options) {
+      this.profileURL = options.profileURL;
+    };
+
+    /** Handles data request for a DataSourceTransaction */
+    Transaction.prototype.sync = function(options) {
       $.ajax({
-        url: profileURL,
+        url: this.profileURL,
         type: "GET",
         dataType: "json",
-        success: function(data) {
-          pollCount += 1;
-          if ($.isEmptyObject(data) && pollCount <= pollMax) {
-            setTimeout(function () {pollTransactionResults();}, 5000);
-          } else {
-            if (pollCount > pollMax) {
-              data = {"message": "No Data"};
-            }
-            var editor = new Freemix.DatasetEditor();
-            editor.setData(data);
+        success: options.success
+      });
+    };
+
+    /**
+     * Represents the display while waiting, polling, and loading a Transaction
+     * @constructor
+     * @param {integer} options.pollMax - Maximum number of times to poll the server
+     * @param {Transaction} options.transaction - Transaction with profileURL
+     * @param {jQuery} options.el - $() element that contains loading dialog
+     */
+    LoadingTransactionView = function(options) {
+      this.pollCount = 0;
+      this.pollMax = options.pollMax;
+      this.transaction = options.transaction;
+      this.loadingDialog = options.el.dialog({
+        resizable: false,
+        height:"auto",
+        modal: true,
+        autoOpen: false,
+        position: 'center',
+        buttons: {
+          'Delete': function() {
+            $(this).dialog('close');
+          },
+          Cancel: function() {
+            $(this).dialog('close');
           }
         }
+
       });
-    }
+    };
+
+    /** 
+     * Handles DOM manipulation on a successful ajax request
+     * @param {string} data - Data returned from successful jquery ajax request
+     */
+    LoadingTransactionView.prototype.pollSuccess = function(data) {
+      this.pollCount += 1;
+      if ($.isEmptyObject(data) && this.pollCount <= this.pollMax) {
+        setTimeout($.proxy(this.render, this), 5000);
+      } else {
+        if (this.pollCount > this.pollMax) {
+          data = {"message": "No Data"};
+        }
+        var editor = new Freemix.DatasetEditor();
+        editor.setData(data);
+      }
+    };
+
+    /** Controls display of LoadingTransactionView */
+    LoadingTransactionView.prototype.render = function() {
+      var success = $.proxy(this.pollSuccess, this)
+
+      this.transaction.sync({
+        success: success
+      });
+    };
+
 
      Freemix.DatasetEditor = function() {
 
@@ -125,8 +180,7 @@
 
     $(document).ready(function() {
         var profileURL = $("link[rel='freemix/dataprofile']").attr("href"),
-          pollCount = 0,
-          pollMax = 6;
+          transaction = new Transaction({profileURL: profileURL});
 
         setupCreateExhibitButton();
 
@@ -156,7 +210,11 @@
             }
         });
 
-        pollTransactionResults(profileURL);
+        new LoadingTransactionView({
+          el: $('#record-picker-dialog'),
+          transaction: transaction,
+          pollMax: 6
+        }).render();
     });
 
 })(window.Freemix.jQuery, window.Freemix);
