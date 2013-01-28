@@ -81,16 +81,7 @@
         height:"auto",
         modal: true,
         autoOpen: false,
-        position: 'center',
-        buttons: {
-          'Delete': function() {
-            $(this).dialog('close');
-          },
-          Cancel: function() {
-            $(this).dialog('close');
-          }
-        }
-
+        position: 'center'
       });
     };
 
@@ -101,11 +92,13 @@
     LoadingTransactionView.prototype.pollSuccess = function(data) {
       this.pollCount += 1;
       if ($.isEmptyObject(data) && this.pollCount <= this.pollMax) {
+        this.loadingDialog.dialog('open');
         setTimeout($.proxy(this.render, this), 5000);
       } else {
         if (this.pollCount > this.pollMax) {
           data = {"message": "No Data"};
         }
+        this.loadingDialog.dialog('close');
         var editor = new Freemix.DatasetEditor();
         editor.setData(data);
       }
@@ -211,9 +204,9 @@
         });
 
         new LoadingTransactionView({
-          el: $('#record-picker-dialog'),
+          el: $('#loading-transaction-dialog'),
           transaction: transaction,
-          pollMax: 6
+          pollMax: 400
         }).render();
     });
 

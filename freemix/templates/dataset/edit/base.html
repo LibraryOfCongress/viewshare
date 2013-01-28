@@ -239,8 +239,11 @@
       </p>
   </div>
   
-  <div id="record-picker-dialog">
-
+  <div id="loading-transaction-dialog">
+    <img src="{{ STATIC_URL }}images/loading.gif" alt="Loading" />
+    {% blocktrans %}
+    Processing your data...
+    {% endblocktrans %}
   </div>
 
   {% endblock dataset_edit_hidden %}
