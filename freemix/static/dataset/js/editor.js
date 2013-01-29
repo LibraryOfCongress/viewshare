@@ -74,17 +74,11 @@
      * Represents the display while polling results for a Transaction
      * @constructor
      * @param {Transaction} options.transaction - Transaction with profileURL
-     * @param {jQuery} options.el - $() element that contains loading dialog
+     * @param {jQuery} options.el - $() element that contains loading message
      */
     LoadingTransactionView = function(options) {
       this.transaction = options.transaction;
-      this.loadingDialog = options.el.dialog({
-        resizable: false,
-        height:"auto",
-        modal: true,
-        autoOpen: false,
-        position: 'center'
-      });
+      this.el = options.el;
     };
 
     /** 
@@ -93,10 +87,10 @@
      */
     LoadingTransactionView.prototype.pollSuccess = function(data) {
       if ($.isEmptyObject(data)) {
-        this.loadingDialog.dialog('open');
+        this.el.show();
         setTimeout($.proxy(this.render, this), 5000);
       } else {
-        this.loadingDialog.dialog('close');
+        this.el.hide();
         var editor = new Freemix.DatasetEditor();
         editor.setData(data);
       }
@@ -107,10 +101,10 @@
      * @param {string} data - Data returned from successful jquery ajax request
      */
     LoadingTransactionView.prototype.pollError = function() {
-      this.loadingDialog.html(
+      this.el.html(
         'Error while processing transaction.<br />Please try to reload the page later.'
       );
-      this.loadingDialog.dialog('open');
+      this.loadingDialog.show();
     };
 
     /** Controls display of LoadingTransactionView */
@@ -215,7 +209,7 @@
         });
 
         new LoadingTransactionView({
-          el: $('#loading-transaction-dialog'),
+          el: $('#loading-transaction'),
           transaction: transaction
         }).render();
     });

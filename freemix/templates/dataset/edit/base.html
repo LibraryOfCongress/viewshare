@@ -65,6 +65,13 @@
 {% endblock %}
 
 {% block freemix_body %}
+  
+  <div id="loading-transaction">
+    <img src="{{ STATIC_URL }}images/loaderbar.gif" alt="Loading" />
+    {% blocktrans %}
+    Processing your data...
+    {% endblocktrans %}
+  </div>
 
 <div id="contents" class="ui-helper-hidden">
 {% block contents %}
@@ -237,13 +244,6 @@
           This property will be permanently deleted and cannot be recovered. Are you sure?
           {% endblocktrans %}
       </p>
-  </div>
-  
-  <div id="loading-transaction-dialog">
-    <img src="{{ STATIC_URL }}images/loading.gif" alt="Loading" />
-    {% blocktrans %}
-    Processing your data...
-    {% endblocktrans %}
   </div>
 
   {% endblock dataset_edit_hidden %}
