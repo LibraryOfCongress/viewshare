@@ -3,12 +3,20 @@
 {% load pagination_tags %}
 {% load timezone_filters %}
 {% load dataset_tags %}
+{% load datasource_transaction_tags %}
 {% load exhibit_tags %}
 
 <div id="user_sections">
 {% with exhibits.count as exhibit_count %}
 {% with datasets.count as dataset_count %}
 {% if is_me %}
+
+{% ifnotequal pending_datasets.count 0 %}
+<div class="pending_dataset_list">
+  <h2 class="ui-widget-header">{% blocktrans %}Pending Data{% endblocktrans %}</h2>
+  {% datasource_transaction_list pending_datasets %}
+</div>
+{% endifnotequal %}
 
 {% ifequal dataset_count 0 %}
 
