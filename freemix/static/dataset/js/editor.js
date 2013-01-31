@@ -80,7 +80,6 @@
       this.el.html(
         'Error while processing transaction.<br />Please try to reload the page later.'
       );
-      this.loadingDialog.show();
     };
 
     /** Controls display of LoadingTransactionView */

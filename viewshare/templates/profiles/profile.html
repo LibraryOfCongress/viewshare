@@ -21,10 +21,19 @@
 
 {% block head_scripts %}
   {{block.super}}
+  <script type="text/javascript" src="{{STATIC_URL}}dataset/js/transaction.js"></script>
+  <script type="text/javascript" src="{{STATIC_URL}}dataset/js/transaction_user_profile.js"></script>
   {% include "freemix/js_include/jquery_ui.html" %}
 
   <script type="text/javascript">
   $(document).ready(function() {
+    var userTransactionView, transactions = $('.transaction');
+    if (transactions.length > 0) {
+      // poll for DataSourceTransaction updates
+      userTransactionsView = new window.UserTransactionsView({
+        transactions: $('.transaction')
+      }).render();
+    }
     $('#edit_profile_form').load('{% url profile_edit %}', function() {
       var q = $('form.uniForm');
       if (q.length) {

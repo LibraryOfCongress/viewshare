@@ -4,5 +4,6 @@ from django.conf.urls.defaults import url, patterns
 urlpatterns = patterns('',
     url(r'^(?P<tx_id>[a-f0-9-]+)/$', views.ProcessTransactionView.as_view(), name='datasource_transaction'),
     url(r'^(?P<tx_id>[a-f0-9-]+)/result.json$', views.DataSourceTransactionResultView.as_view(), name='datasource_transaction_result'),
+    #TODO: How about a view that just returns the status of a DataSourceTransaction
     url(r'^(?P<tx_id>[a-f0-9-]+)/publish$', views.DataSourceTransactionResultView.as_view(), name='dataset_publish'),
 )
