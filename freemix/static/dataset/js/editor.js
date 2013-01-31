@@ -1,7 +1,7 @@
 /*global jQuery */
 (function($, Freemix) {
 
-    var identify, Transaction, LoadingTransactionView;
+    var identify, LoadingTransactionView;
 
     function setupIdentifier(data) {
         if (!Freemix.profile && "data_profile" in data) {
@@ -45,30 +45,6 @@
         identify.setCurrentRecord(identify.getCurrentRecord());
         identify.populateRecordDisplay();
     }
-
-    /**
-     * Represents a DataSourceTransaction
-     * @constructor
-     * @param {string} options.profileURL - The freemix/dataprofile/ URL 
-     */
-    Transaction = function(options) {
-      this.profileURL = options.profileURL;
-    };
-
-    /** 
-     * Handles data request for a DataSourceTransaction
-     * @param {function} options.success - Function to run on $.ajax() success
-     * @param {function} options.error - Function to run on $.ajax() error
-     */
-    Transaction.prototype.sync = function(options) {
-      $.ajax({
-        url: this.profileURL,
-        type: "GET",
-        dataType: "json",
-        success: options.success,
-        error: options.error
-      });
-    };
 
     /**
      * Represents the display while polling results for a Transaction
@@ -178,7 +154,7 @@
 
     $(document).ready(function() {
         var profileURL = $("link[rel='freemix/dataprofile']").attr("href"),
-          transaction = new Transaction({profileURL: profileURL});
+          transaction = new window.FreemixTransaction({profileURL: profileURL});
 
         setupCreateExhibitButton();
 
