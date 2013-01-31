@@ -9,14 +9,10 @@
     {{ datasource_transaction.source }}
     {% endif %}
   </div>
+  <div class="dataset-description">
+    {% trans "Status" %}: {{ status }}
+  </div>
   <div class="dataset-metadata dataset-left">
     {% trans "Originally loaded by" %} <span class="dataset-owner"><a href="{% url profile_detail datasource_transaction.source.owner.username %}">{{ datasource_transaction.source.owner|nicename }}</a></span> {% trans "on" %} <span class="dataset-created-data">{{ datasource_transaction.created|date:"N j, Y" }}</span>.
-  </div>
-  <div class="dataset-actions dataset-right">
-    <div class="dataset-links">
-      <span class="action action_inspect_dataset">
-        {% trans "Status" %}: {{ status }}
-      </span>
-    </div>
   </div>
 </li>
