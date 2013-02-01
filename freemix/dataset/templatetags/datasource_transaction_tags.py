@@ -1,7 +1,7 @@
 from django import template
-from django.utils.translation import ugettext_lazy as _
+from django.core.urlresolvers import reverse
 
-from freemix.dataset.models import TX_STATUS
+from freemix.dataset.utils import pretty_print_transaction_status
 
 register = template.Library()
 
@@ -13,23 +13,15 @@ def datasource_transaction_list_item(context, datasource_transaction):
     """
     Display details for a DataSourceTransaction model
     """
-    datasource_transaction_url = datasource_transaction.get_absolute_url()
-    status = datasource_transaction.status
-    if status == TX_STATUS['pending']:
-        status = _('Pending')
-    elif status == TX_STATUS['scheduled']:
-        status = _('Scheduled')
-    elif status == TX_STATUS['running']:
-        status = _('Running')
-    elif status == TX_STATUS['success']:
-        status = _('Successful')
-    elif status == TX_STATUS['cancelled']:
-        status = _('Cancelled')
-    else:
-        status = _('Unknown')
+    transaction_url = datasource_transaction.get_absolute_url()
+    transaction_result_url = reverse(
+            'datasource_transaction_status',
+            kwargs={'tx_id': datasource_transaction.tx_id})
+    status = pretty_print_transaction_status(datasource_transaction.status)
 
     return {'datasource_transaction': datasource_transaction,
-            'datasource_transaction_url': datasource_transaction_url,
+            'datasource_transaction_url': transaction_url,
+            'datasource_transaction_result_url': transaction_result_url,
             'status': status}
 
 

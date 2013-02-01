@@ -19,6 +19,7 @@ from django.views.generic.edit import CreateView, UpdateView
 
 from freemix.dataset import conf, forms, models
 from freemix.dataset.tasks import run_transaction
+from freemix.dataset.utils import pretty_print_transaction_status
 from freemix.permissions import PermissionsRegistry
 from freemix.views import (
         OwnerListView,
@@ -454,6 +455,19 @@ class DataSourceTransactionResultView(View):
             raise Http404
 
         return JSONResponse(tx.result)
+
+
+class DataSourceTransactionStatusView(View):
+
+    def get(self, request, *args, **kwargs):
+        tx_id = kwargs["tx_id"]
+
+        tx = get_object_or_404(models.DataSourceTransaction, tx_id=tx_id)
+        if not self.request.user.has_perm('datasourcetransaction.can_view', tx):
+            raise Http404
+        status = pretty_print_transaction_status(tx.status)
+
+        return JSONResponse({'status': unicode(status)})
 
 
 class FileDataSourceDownloadView(View):

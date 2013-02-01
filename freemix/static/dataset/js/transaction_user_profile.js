@@ -9,7 +9,7 @@
   PendingTransactionView = function(options) {
     var profileURL;
     this.el = $(options.el);
-    profileURL = this.el.find('.dataset-title a').attr('href');
+    profileURL = this.el.find('.dataset-title a').attr('data-poll-href');
     this.transaction = new Transaction({profileURL: profileURL});
     this.status = this.el.find('.status');
   };
@@ -19,7 +19,6 @@
    * @param {string} data - Data returned from successful jquery ajax request
    */
   PendingTransactionView.prototype.pollSuccess = function(data) {
-    // TODO: Are we hard-coding a check for this.status = 'Successful'?
     if ($.isEmptyObject(data)) {
       setTimeout($.proxy(this.render, this), 5000);
     } else {
