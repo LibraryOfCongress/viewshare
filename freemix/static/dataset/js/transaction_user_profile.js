@@ -7,10 +7,11 @@
    * @param {HTML Element} options.el - DOM Element containing single transaction
    */
   PendingTransactionView = function(options) {
-    var profileURL = options.el.$('.dataset-title a').attr('href');
+    var profileURL;
+    this.el = $(options.el);
+    profileURL = this.el.find('.dataset-title a').attr('href');
     this.transaction = new Transaction({profileURL: profileURL});
-    this.el = options.el;
-    this.status = this.el.$('.status');
+    this.status = this.el.find('.status');
   };
 
   /** 
@@ -59,8 +60,10 @@
   };
 
   UserTransactionsView.prototype.render = function() {
-    for (var i = 0; i < options.transactions.length; i++) {
+    for (var i = 0; i < this.transactions.length; i++) {
       this.transactions[i].render();
     }
   };
+
+  window.UserTransactionsView = UserTransactionsView;
 })($, window.FreemixTransaction);
