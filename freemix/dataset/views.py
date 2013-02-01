@@ -458,7 +458,11 @@ class DataSourceTransactionResultView(View):
 
 
 class DataSourceTransactionStatusView(View):
-
+    """
+    Return a status string for a DataSourceTransaction with a given 'tx_id'.
+    Useful for polling from the client. Also return a boolean indicating if
+    the DataSourceTransaction's status will continue to change.
+    """
     def get(self, request, *args, **kwargs):
         tx_id = kwargs["tx_id"]
 
@@ -466,8 +470,12 @@ class DataSourceTransactionStatusView(View):
         if not self.request.user.has_perm('datasourcetransaction.can_view', tx):
             raise Http404
         status = pretty_print_transaction_status(tx.status)
+        is_complete = (tx.status == models.TX_STATUS['success'] or
+                tx.status == models.TX_STATUS['failure'])
 
-        return JSONResponse({'status': unicode(status)})
+        return JSONResponse({
+            'status': unicode(status),
+            'isComplete': is_complete})
 
 
 class FileDataSourceDownloadView(View):
