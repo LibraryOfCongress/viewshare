@@ -1,7 +1,7 @@
 {% extends "dataset/base.html" %}
 
 {% load i18n %}
-{% load dataset_tags %}
+{% load datasource_transaction_tags %}
 {% load freemix_helpers %}
 
 {% block head_title %}{{owner|nicename}}{% blocktrans %}'s Data{% endblocktrans %}{% endblock %}
@@ -31,7 +31,7 @@
 
 {% block body %}
 
-<h1>{{owner|nicename}}{% blocktrans %}'s Data{% endblocktrans %}</h1>
+<h1>{{owner|nicename}}{% blocktrans %}'s Pending Data{% endblocktrans %}</h1>
 
 {% ifequal user owner  %}
 <div class="priority-area">
@@ -50,13 +50,11 @@
   {% else %}
     {{ owner|nicename }} {% trans "has" %}
   {% endifequal %}
-  {{object_list_count}} {% trans "data set" %}{{ object_list_count|pluralize }}.
+  {{object_list_count}} {% trans "pending data set" %}{{ object_list_count|pluralize }}.
   </p>
   {% endif %}
-  {% dataset_list object_list %}
+  {% datasource_transaction_list object_list %}
 </div>
 
     {% endwith %}
-
-    <a href="{% url datasource_transaction_list_by_owner owner=owner.username %}">{% trans "See all pending datasets" %}</a>
-{% endblock body %}
+{% endblock %}

@@ -9,12 +9,18 @@
 <div id="user_sections">
 {% with exhibits.count as exhibit_count %}
 {% with datasets.count as dataset_count %}
+{% with pending_datasets.count as pending_dataset_count %}
 {% if is_me %}
 
-{% ifnotequal pending_datasets.count 0 %}
+{% ifnotequal pending_dataset_count 0 %}
 <div class="pending_dataset_list">
   <h2 class="ui-widget-header">{% blocktrans %}Pending Data{% endblocktrans %}</h2>
-  {% datasource_transaction_list pending_datasets %}
+  {% datasource_transaction_list pending_datasets 3 %}
+  {% if pending_dataset_count > 3 %}
+  <div class="see_all">
+    <a href="{% url datasource_transaction_list_by_owner owner=other_user.username %}">{% trans "See all" %}  {{ pending_dataset_count }} set{{ pending_dataset_count|pluralize }}</a>
+  </div>
+  {% endif %}
 </div>
 {% endifnotequal %}
 
@@ -84,6 +90,7 @@
 
 
 {% endif %}
+{% endwith %}
 {% endwith %}
 {% endwith %}
 

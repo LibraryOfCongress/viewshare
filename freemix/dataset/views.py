@@ -77,6 +77,11 @@ dataset_list_by_owner = OwnerListView.as_view(template_name="dataset/dataset_lis
                                                permission = "dataset.can_view",
                                                related=("exhibits","owner"))
 
+datasource_transaction_list_by_owner = OwnerListView.as_view(
+        template_name="dataset/datasource_transaction_list_by_owner.html",
+        model=models.DataSourceTransaction,
+        owner_field='source__owner')
+
 #----------------------------------------------------------------------------------------------------------------------#
 # Dataset views
 
