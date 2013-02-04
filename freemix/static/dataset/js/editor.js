@@ -65,7 +65,11 @@
       if ($.isEmptyObject(data)) {
         this.el.show();
         setTimeout($.proxy(this.render, this), 5000);
-      } else {
+      } else if (data.hasOwnProperty('message')) {
+        if (data.message === 'No Data') {
+          window.location.reload(true);
+        }
+      }else {
         this.el.hide();
         var editor = new Freemix.DatasetEditor();
         editor.setData(data);
