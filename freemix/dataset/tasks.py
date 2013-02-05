@@ -24,3 +24,13 @@ def delete_expired_transactions():
     date older than the expiration time
     """
     call_command('delete_expired_transactions')
+
+
+@periodic_task(run_every=crontab(hour='*/4'))
+def delete_expired_datasources():
+    """
+    Delete DataSource records that have a modified
+    date older than the expiration time and have no
+    associated dataset
+    """
+    call_command('delete_expired_datasources')
