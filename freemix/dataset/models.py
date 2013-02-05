@@ -162,6 +162,10 @@ class DataSource(TimeStampedModel):
             self.classname = self.__class__.__name__
         super(DataSource, self).save(*args, **kwargs)
 
+    def is_expired(self):
+        return self.modified < (datetime.now() - TRANSACTION_LIFESPAN) \
+            and self.dataset is None
+
 
 class TransformMixin(models.Model):
     """
@@ -242,7 +246,8 @@ TX_STATUS = {
     "running": 3,
     "success": 4,
     "failure": 5,
-    "cancelled": 6
+    "cancelled": 6,
+    "completed": 7
 }
 
 
