@@ -1,6 +1,10 @@
 from celery import task
+from celery.task import periodic_task
+from celery.task.schedules import crontab
+from django.core.management import call_command
 
 from freemix.dataset.models import DataSourceTransaction
+
 
 @task
 def run_transaction(transaction_id):
@@ -11,3 +15,12 @@ def run_transaction(transaction_id):
     tx = DataSourceTransaction.objects.get(id=transaction_id)
     tx.run()
     return tx
+
+
+@periodic_task(run_every=crontab(hour='*/4'))
+def delete_expired_transactions():
+    """
+    Delete DataSourceTransaction records that have a modified
+    date older than the expiration time
+    """
+    call_command('delete_expired_transactions')

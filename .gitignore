@@ -29,5 +29,6 @@ dist/*
 MANIFEST
 /build/*
 .hg/*
-.hgignore
 .hgtags
+celerybeat-schedule
+celerybeat.pid

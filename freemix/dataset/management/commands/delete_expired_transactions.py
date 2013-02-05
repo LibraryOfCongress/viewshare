@@ -6,7 +6,8 @@ from freemix.dataset.models import DataSourceTransaction
 
 
 class Command(NoArgsCommand):
-    help = "Emit queued notices."
+    help = ("Delete DataSourceTransaction records that have a modified "
+            " date older than the expiration time")
     
     def handle_noargs(self, **options):
         logging.basicConfig(level=logging.DEBUG, format="%(message)s")
