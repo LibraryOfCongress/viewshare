@@ -154,8 +154,8 @@ class DatasetCreateFormView(CreateView):
         kwargs = super(DatasetCreateFormView, self).get_form_kwargs()
         del kwargs["instance"]
         kwargs["owner"] = self.request.user
-        source = get_object_or_404(models.DataSource, transactions__tx_id=self.kwargs["tx_id"])
-        kwargs["datasource"] = source
+        tx = get_object_or_404(models.DataSourceTransaction, tx_id=self.kwargs["tx_id"])
+        kwargs["datasource_transaction"] = tx
         return kwargs
 
     def get_initial(self):
@@ -440,14 +440,13 @@ class ProcessTransactionView(DataSourceTransactionView):
         return self.display_transaction_result()
 
     def pending(self):
-        self.transaction.status = models.TX_STATUS['running']
-        self.transaction.save()
-        tx_id = self.transaction.id
-        run_transaction.delay(tx_id)
-        return self.redirect()
+        return self.display_transaction_result()
 
     def scheduled(self):
         return self.pending()
+
+    def completed(self):
+        return HttpResponseRedirect(self.transaction.source.dataset.get_absolute_url())
 
 
 class DataSourceTransactionResultView(View):

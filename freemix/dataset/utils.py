@@ -19,6 +19,8 @@ def pretty_print_transaction_status(status_id):
         status = _('Failure')
     elif status_id == TX_STATUS['cancelled']:
         status = _('Cancelled')
+    elif status_id == TX_STATUS['completed']:
+        status = _('Completed')
     else:
         status = _('Unknown')
 

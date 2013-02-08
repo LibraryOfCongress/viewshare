@@ -1,13 +1,14 @@
 from django import forms
 from django.db import transaction
-from freemix.dataset.models import Dataset
+from freemix.dataset.models import Dataset, TX_STATUS
 from django.utils.translation import ugettext_lazy as _
 
-published_choices = choices=((True, "Public"), (False, "Private"))
+published_choices = ((True, "Public"), (False, "Private"))
+
 
 class CreateDatasetForm(forms.Form):
 
-    title = forms.CharField(label =_('Title'), max_length=255)
+    title = forms.CharField(label=_('Title'), max_length=255)
 
     description = forms.CharField(label=_('Description'),
                                   required=False)
@@ -17,15 +18,12 @@ class CreateDatasetForm(forms.Form):
                                   choices=published_choices,
                                   initial=True)
 
-
     profile = forms.CharField(widget=forms.HiddenInput())
     data = forms.CharField(widget=forms.HiddenInput())
 
-
-
     def __init__(self, *args, **kwargs):
         self.owner = kwargs.pop('owner')
-        self.datasource = kwargs.pop('datasource')
+        self.tx = kwargs.pop('datasource_transaction')
         super(CreateDatasetForm, self).__init__(*args, **kwargs)
 
     def save(self, commit=True):
@@ -38,13 +36,12 @@ class CreateDatasetForm(forms.Form):
             instance.save()
             instance.update_data(self.cleaned_data["data"])
             instance.update_profile(self.cleaned_data["profile"])
-            self.datasource.dataset = instance
-            self.datasource.save()
+            self.tx.source.dataset = instance
+            self.tx.source.save()
+            self.tx.status = TX_STATUS["completed"]
+            self.tx.save()
 
         return instance
-
-
-
 
 
 class EditDatasetDetailForm(forms.ModelForm):
@@ -52,6 +49,6 @@ class EditDatasetDetailForm(forms.ModelForm):
         model = Dataset
         fields = ("title", "description", "published",)
 
-        widgets= {
+        widgets = {
             "published": forms.RadioSelect(choices=published_choices)
         }

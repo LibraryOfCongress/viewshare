@@ -1,4 +1,4 @@
-from celery import task
+from celery.task import task
 from celery.task import periodic_task
 from celery.task.schedules import crontab
 from django.core.management import call_command
@@ -12,7 +12,7 @@ def run_transaction(transaction_id):
     Handles creating a DataSourceTransaction for a valid DataSource. Reports
     updates to dataset.views.DataSourceTransactionView.
     """
-    tx = DataSourceTransaction.objects.get(id=transaction_id)
+    tx = DataSourceTransaction.objects.get(tx_id=transaction_id)
     tx.run()
     return tx
 

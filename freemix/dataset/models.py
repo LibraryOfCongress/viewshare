@@ -15,8 +15,11 @@ from freemix.dataset.transform import AKARA_TRANSFORM_URL
 from freemix.dataset.transform import AkaraTransformClient
 from freemix.models import JSONDataModel
 
+
 logger = logging.getLogger(__name__)
 
+TRANSACTION_LIFESPAN = getattr(settings, "TRANSACTION_EXPIRATION_INTERVAL",
+                               timedelta(hours=24))
 
 
 class Dataset(TitleSlugDescriptionModel, TimeStampedModel):
@@ -150,17 +153,31 @@ class DataSource(TimeStampedModel):
         return self.classname + " " + self.uuid
 
     def create_transaction(self):
-        tx = DataSourceTransaction(source=self)
-        tx.save()
+        with db_tx.commit_manually():
+            try:
+                tx = DataSourceTransaction(source=self)
+                tx.save()
+            except:
+                db_tx.rollback()
+            else:
+                db_tx.commit()
+                tx.schedule()
         return tx
 
     def refresh(self):
         return None
 
     def save(self, *args, **kwargs):
-        if self.classname is None:
-            self.classname = self.__class__.__name__
-        super(DataSource, self).save(*args, **kwargs)
+        with db_tx.commit_manually():
+            try:
+                if self.classname is None:
+                    self.classname = self.__class__.__name__
+                super(DataSource, self).save(*args, **kwargs)
+            except:
+                db_tx.rollback()
+                raise
+            else:
+                db_tx.commit()
 
     def is_expired(self):
         return self.modified < (datetime.now() - TRANSACTION_LIFESPAN) \
@@ -186,7 +203,6 @@ class TransformMixin(models.Model):
 
     def refresh(self):
         return self.transform(body=self.get_transform_body(), params=self.get_transform_params())
-
 
 
 class URLDataSourceMixin(TransformMixin, models.Model):
@@ -251,9 +267,6 @@ TX_STATUS = {
 }
 
 
-TRANSACTION_LIFESPAN = getattr(settings, "TRANSACTION_EXPIRATION_INTERVAL",
-                                          timedelta(hours=24))
-
 class DataSourceTransaction(TimeStampedModel):
     """Stores the the status and raw result of a remote data transaction for a
        particular data source.
@@ -269,7 +282,6 @@ class DataSourceTransaction(TimeStampedModel):
     source = models.ForeignKey(DataSource, related_name="transactions")
 
     result = JSONField(null=True, blank=True)
-
 
     def is_expired(self):
         return self.modified < (datetime.now() - TRANSACTION_LIFESPAN)
@@ -289,20 +301,54 @@ class DataSourceTransaction(TimeStampedModel):
         self.status = TX_STATUS["success"]
         return True
 
+    def schedule(self):
+        with db_tx.commit_manually():
+            try:
+                self.status = TX_STATUS["scheduled"]
+                self.save()
+                db_tx.commit()
+            except Exception as ex:
+                logger.error("Error scheduling transaction %s: %s" % (self.tx_id, ex.message))
+                self.status = TX_STATUS["failure"]
+                self.result = {"message": "Error transforming data: %s" % ex.message}
+                self.save()
+                db_tx.commit()
+            else:
+                from freemix.dataset.tasks import run_transaction
+                run_transaction.delay(self.tx_id)
+
     def run(self):
         with db_tx.commit_manually():
             try:
+                self.status = TX_STATUS["running"]
+                self.save()
+                db_tx.commit()
+
                 source = self.source.get_concrete()
                 self.result = source.refresh()
                 self.validate()
             except Exception as ex:
 
-                logger.error("Error for transaction %s: %s"%(self.tx_id, ex.message))
-                self.status=TX_STATUS["failure"]
-                self.result = {"message": "Error transforming data: %s"%ex.message}
+                logger.error("Error for transaction %s: %s" % (self.tx_id, ex.message))
+                self.status = TX_STATUS["failure"]
+                self.result = {"message": "Error transforming data: %s" % ex.message}
 
             self.save()
 
             db_tx.commit()
 
         return self
+
+    def success(self):
+        self.status = TX_STATUS["success"]
+        self.save()
+
+    def complete(self):
+        self.status = TX_STATUS["completed"]
+        self.result = None
+        self.save()
+
+    def cancel(self):
+        self.status = TX_STATUS["cancelled"]
+        self.result = None
+        self.save()
