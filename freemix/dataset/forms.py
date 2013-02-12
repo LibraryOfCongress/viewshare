@@ -1,6 +1,6 @@
 from django import forms
 from django.db import transaction
-from freemix.dataset.models import Dataset, TX_STATUS
+from freemix.dataset.models import Dataset
 from django.utils.translation import ugettext_lazy as _
 
 published_choices = ((True, "Public"), (False, "Private"))
@@ -23,7 +23,7 @@ class CreateDatasetForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         self.owner = kwargs.pop('owner')
-        self.tx = kwargs.pop('datasource_transaction')
+        self.datasource_transaction = kwargs.pop('datasource_transaction')
         super(CreateDatasetForm, self).__init__(*args, **kwargs)
 
     def save(self, commit=True):
@@ -36,10 +36,9 @@ class CreateDatasetForm(forms.Form):
             instance.save()
             instance.update_data(self.cleaned_data["data"])
             instance.update_profile(self.cleaned_data["profile"])
-            self.tx.source.dataset = instance
-            self.tx.source.save()
-            self.tx.status = TX_STATUS["completed"]
-            self.tx.save()
+            self.datasource_transaction.source.dataset = instance
+            self.datasource_transaction.source.save()
+            self.datasource_transaction.complete()
 
         return instance
 

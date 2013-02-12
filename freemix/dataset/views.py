@@ -18,7 +18,6 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 
 from freemix.dataset import conf, forms, models
-from freemix.dataset.tasks import run_transaction
 from freemix.dataset.utils import pretty_print_transaction_status
 from freemix.permissions import PermissionsRegistry
 from freemix.views import (
@@ -170,6 +169,8 @@ class DatasetCreateFormView(CreateView):
 
     def form_valid(self, form):
         self.object = form.save()
+        tx = get_object_or_404(models.DataSourceTransaction, tx_id=self.kwargs["tx_id"])
+        tx.complete()
         return HttpResponseRedirect(self.get_success_url())
 
 
@@ -355,6 +356,8 @@ class DataSourceTransactionView(View):
         tx_id = kwargs["tx_id"]
         user = request.user
         self.transaction = get_object_or_404(models.DataSourceTransaction, tx_id=tx_id)
+        if self.transaction.is_complete:
+            raise Http404
         if not user.has_perm('datasourcetransaction.can_view', self.transaction):
             raise Http404
 
@@ -421,17 +424,20 @@ class ProcessTransactionView(DataSourceTransactionView):
         return self.display_transaction_result()
 
     def failure(self):
-        source = self.transaction.source.get_concrete()
-        form = DataSourceFormRegistry.get_form(source)
-        form_url = reverse("datasource_update", kwargs={"uuid": source.uuid})
-        template_name = DataSourceFormRegistry.get_form_template(source)
-        return render(self.request, template_name, {
-            "form": form,
-            "form_url": form_url,
-            "object": source,
-            "transaction": self.transaction,
-            "show_error": True
-        })
+        if not self.transaction.is_complete:
+            source = self.transaction.source.get_concrete()
+            form = DataSourceFormRegistry.get_form(source)
+            form_url = reverse("datasource_update", kwargs={"uuid": source.uuid})
+            template_name = DataSourceFormRegistry.get_form_template(source)
+            return render(self.request, template_name, {
+                "form": form,
+                "form_url": form_url,
+                "object": source,
+                "transaction": self.transaction,
+                "show_error": True
+            })
+        else:
+            return HttpResponseRedirect(self.transaction.source.get_absolute_url())
 
     def cancelled(self):
         return  HttpResponseRedirect(reverse('dataset_upload'))
@@ -443,7 +449,7 @@ class ProcessTransactionView(DataSourceTransactionView):
         return self.display_transaction_result()
 
     def scheduled(self):
-        return self.pending()
+        return self.display_transaction_result()
 
     def completed(self):
         return HttpResponseRedirect(self.transaction.source.dataset.get_absolute_url())
@@ -473,13 +479,13 @@ class DataSourceTransactionStatusView(View):
         tx = get_object_or_404(models.DataSourceTransaction, tx_id=tx_id)
         if not self.request.user.has_perm('datasourcetransaction.can_view', tx):
             raise Http404
+        if tx.is_complete:
+            raise Http404
         status = pretty_print_transaction_status(tx.status)
-        is_complete = (tx.status == models.TX_STATUS['success'] or
-                tx.status == models.TX_STATUS['failure'])
 
         return JSONResponse({
             'status': unicode(status),
-            'isComplete': is_complete})
+            'isReady': tx.is_ready()})
 
 
 class FileDataSourceDownloadView(View):

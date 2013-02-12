@@ -155,10 +155,13 @@ class DataSource(TimeStampedModel):
     def create_transaction(self):
         with db_tx.commit_manually():
             try:
+                # Ensure that existing transactions are marked as complete when creating a new one
+                DataSourceTransaction.objects.filter(source=self).update(is_complete=True, result=None)
                 tx = DataSourceTransaction(source=self)
                 tx.save()
             except:
                 db_tx.rollback()
+                raise
             else:
                 db_tx.commit()
                 tx.schedule()
@@ -263,7 +266,6 @@ TX_STATUS = {
     "success": 4,
     "failure": 5,
     "cancelled": 6,
-    "completed": 7
 }
 
 
@@ -283,8 +285,13 @@ class DataSourceTransaction(TimeStampedModel):
 
     result = JSONField(null=True, blank=True)
 
+    is_complete = models.BooleanField(default=False)
+
     def is_expired(self):
         return self.modified < (datetime.now() - TRANSACTION_LIFESPAN)
+
+    def is_ready(self):
+        return self.status in (TX_STATUS["success"], TX_STATUS["cancelled"])
 
     @models.permalink
     def get_absolute_url(self):
@@ -294,11 +301,9 @@ class DataSourceTransaction(TimeStampedModel):
 
     def validate(self):
         if not len(self.result.get("items", [])):
-            self.status = TX_STATUS["failure"]
-            self.result = {"message": "No Data"}
+            self.failure("No Data")
             return False
-
-        self.status = TX_STATUS["success"]
+        self.success()
         return True
 
     def schedule(self):
@@ -308,11 +313,9 @@ class DataSourceTransaction(TimeStampedModel):
                 self.save()
                 db_tx.commit()
             except Exception as ex:
-                logger.error("Error scheduling transaction %s: %s" % (self.tx_id, ex.message))
-                self.status = TX_STATUS["failure"]
-                self.result = {"message": "Error transforming data: %s" % ex.message}
-                self.save()
-                db_tx.commit()
+                logger.error("Error for transaction %s: %s" % (self.tx_id, ex.message))
+                db_tx.rollback()
+                raise ex
             else:
                 from freemix.dataset.tasks import run_transaction
                 run_transaction.delay(self.tx_id)
@@ -327,28 +330,31 @@ class DataSourceTransaction(TimeStampedModel):
                 source = self.source.get_concrete()
                 self.result = source.refresh()
                 self.validate()
+                self.save()
             except Exception as ex:
-
-                logger.error("Error for transaction %s: %s" % (self.tx_id, ex.message))
-                self.status = TX_STATUS["failure"]
-                self.result = {"message": "Error transforming data: %s" % ex.message}
-
-            self.save()
+                self.failure(ex.message)
 
             db_tx.commit()
 
         return self
+
+    def failure(self, message):
+        logger.error("Error for transaction %s: %s" % (self.tx_id, message))
+        self.status = TX_STATUS["failure"]
+        self.result = {"message": message}
+        self.save()
 
     def success(self):
         self.status = TX_STATUS["success"]
         self.save()
 
     def complete(self):
-        self.status = TX_STATUS["completed"]
+        self.is_complete = True
         self.result = None
         self.save()
 
     def cancel(self):
         self.status = TX_STATUS["cancelled"]
         self.result = None
+        self.is_complete = True
         self.save()
