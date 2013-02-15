@@ -20,7 +20,10 @@ from freemix.models import JSONDataModel
 logger = logging.getLogger(__name__)
 
 TRANSACTION_LIFESPAN = getattr(settings, "TRANSACTION_EXPIRATION_INTERVAL",
-                               timedelta(hours=24))
+                               timedelta(weeks=1))
+
+UNSAVED_DATASOURCE_LIFESPAN = getattr(settings, "UNSAVED_DATASOURCE_LIFESPAN",
+                                      timedelta(hours=24))
 
 
 class Dataset(TitleSlugDescriptionModel, TimeStampedModel):
@@ -190,7 +193,7 @@ class DataSource(TimeStampedModel):
                 db_tx.commit()
 
     def is_expired(self):
-        return self.modified < (datetime.now() - TRANSACTION_LIFESPAN) \
+        return self.modified < (datetime.now() - UNSAVED_DATASOURCE_LIFESPAN) \
             and self.dataset is None
 
 
