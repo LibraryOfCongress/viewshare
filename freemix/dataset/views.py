@@ -16,6 +16,7 @@ from django.utils import simplejson as json
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.list import ListView
 
 from freemix.dataset import conf, forms, models
 from freemix.dataset.utils import pretty_print_transaction_status
@@ -75,11 +76,6 @@ dataset_list_by_owner = OwnerListView.as_view(template_name="dataset/dataset_lis
                                                model=models.Dataset,
                                                permission = "dataset.can_view",
                                                related=("exhibits","owner"))
-
-datasource_transaction_list_by_owner = OwnerListView.as_view(
-        template_name="dataset/datasource_transaction_list_by_owner.html",
-        model=models.DataSourceTransaction,
-        owner_field='source__owner')
 
 #----------------------------------------------------------------------------------------------------------------------#
 # Dataset views
@@ -264,13 +260,13 @@ class CreateDataSourceView(CreateView):
         return self.tx.get_absolute_url()
 
 
-class DataSourceFormRegistry:
+class DataSourceRegistry:
     _registry = {}
 
     @classmethod
-    def register(cls, model_class, form_class, form_template):
+    def register(cls, model_class, form_class, form_template, detail_template):
         key = model_class.__name__
-        cls._registry[key] = (model_class, form_class, form_template)
+        cls._registry[key] = (model_class, form_class, form_template, detail_template)
 
     @classmethod
     def create_view(cls, model_class):
@@ -279,24 +275,30 @@ class DataSourceFormRegistry:
         return CreateDataSourceView.as_view(model_class=entry[0],
                                             form_class=entry[1],
                                             template_name=entry[2])
+
+    @classmethod
+    def get_value(cls, instance, index):
+        key = instance.__class__.__name__
+        if key not in cls._registry:
+            return None
+        return cls._registry[key][index]
+
     @classmethod
     def get_form_class(cls, instance):
-        key = instance.__class__.__name__
-        if not cls._registry.has_key(key):
-            return None
-        return cls._registry[key][1]
+        return cls.get_value(instance, 1)
 
     @classmethod
     def get_form(cls, instance):
-        form_class=cls.get_form_class(instance)
+        form_class = cls.get_form_class(instance)
         return form_class(instance=instance)
 
     @classmethod
     def get_form_template(cls, instance):
-        key = instance.__class__.__name__
-        if not cls._registry.has_key(key):
-            return None
-        return cls._registry[key][2]
+        return cls.get_value(instance, 2)
+
+    @classmethod
+    def get_detail_template(cls, instance):
+        return cls.get_value(instance, 3)
 
 
 def create_form_view(model_class, form_class, form_template):
@@ -304,8 +306,8 @@ def create_form_view(model_class, form_class, form_template):
     A convenience function that registers a DataSource and returns
     an instance
     """
-    DataSourceFormRegistry.register(model_class, form_class, form_template)
-    return DataSourceFormRegistry.create_view(model_class)
+    DataSourceRegistry.register(model_class, form_class, form_template)
+    return DataSourceRegistry.create_view(model_class)
 
 
 class UpdateDataSourceView(UpdateView):
@@ -320,10 +322,10 @@ class UpdateDataSourceView(UpdateView):
 
     def get_form_class(self):
         source = self.get_object()
-        return DataSourceFormRegistry.get_form_class(source)
+        return DataSourceRegistry.get_form_class(source)
 
     def get_template_names(self):
-        return [DataSourceFormRegistry.get_form_template(self.get_object()),]
+        return [DataSourceRegistry.get_form_template(self.get_object()),]
 
     def form_valid(self, form):
         self.object = form.save()
@@ -342,6 +344,20 @@ class RedirectUpdateDataSourceView(RedirectView):
         if not ds.source:
             raise Http404()
         return reverse("datasource_update", kwargs={"uuid": ds.source.uuid})
+
+
+class PendingDataSourceListView(ListView):
+
+    model = models.DataSource
+
+    template_name = "dataset/datasource_list_pending.html"
+
+    def get_queryset(self):
+        list = self.model.objects.filter(owner=self.request.user, dataset=None).order_by("-created")
+        return list
+
+datasource_list_pending = PendingDataSourceListView.as_view()
+
 
 # Data Source Transaction Views
 class DataSourceTransactionView(View):
@@ -426,9 +442,9 @@ class ProcessTransactionView(DataSourceTransactionView):
     def failure(self):
         if not self.transaction.is_complete:
             source = self.transaction.source.get_concrete()
-            form = DataSourceFormRegistry.get_form(source)
+            form = DataSourceRegistry.get_form(source)
             form_url = reverse("datasource_update", kwargs={"uuid": source.uuid})
-            template_name = DataSourceFormRegistry.get_form_template(source)
+            template_name = DataSourceRegistry.get_form_template(source)
             return render(self.request, template_name, {
                 "form": form,
                 "form_url": form_url,
@@ -498,7 +514,7 @@ class FileDataSourceDownloadView(View):
     """
     def nginx_response(self, source):
         response = HttpResponse()
-        url = '/fileuploads/%s'%(source.file.name)
+        url = '/fileuploads/%s' % source.file.name
         response["Content-Type"] = "application/binary"
         response["X-Accel-Redirect"] = url
         return response
@@ -512,7 +528,6 @@ class FileDataSourceDownloadView(View):
 
     def get(self, request, *args, **kwargs):
         uuid = kwargs["uuid"]
-        filename = kwargs["filename"]
 
         source = get_object_or_404(models.DataSource, uuid=uuid)
         source = source.get_concrete()
@@ -527,6 +542,6 @@ class FileDataSourceDownloadView(View):
         else:
             response = self.naive_response(source)
 
-        response["Content-Disposition"] = 'attachment; filename=%s'%filename
+        response["Content-Disposition"] = 'attachment; filename=%s' % source.get_filename()
 
         return response

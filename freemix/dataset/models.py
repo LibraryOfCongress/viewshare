@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 import logging
 import urllib2
 import uuid
+import os
 from django.contrib.auth.models import User
 from django.db.models import permalink
 from django_extensions.db.fields import UUIDField
@@ -141,6 +142,12 @@ class DataSource(TimeStampedModel):
 
     uuid = UUIDField()
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('datasource_detail', (), {
+            "uuid": self.uuid
+        })
+
     def get_concrete(self):
         if self.classname == "DataSource":
             return self
@@ -231,11 +238,15 @@ def make_file_data_source_mixin(storage, upload_to):
     """
     class FileDataSourceMixin(TransformMixin, models.Model):
         file = models.FileField(storage=storage, upload_to=upload_to, max_length=255)
+
         class Meta:
             abstract=True
 
         def get_transform_body(self):
             return self.file.read()
+
+        def get_filename(self):
+            return os.path.basename(self.file.name)
 
         def __unicode__(self):
             return self.file.name

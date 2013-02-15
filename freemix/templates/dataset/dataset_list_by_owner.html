@@ -58,5 +58,5 @@
 
     {% endwith %}
 
-    <a href="{% url datasource_transaction_list_by_owner owner=owner.username %}">{% trans "See all pending datasets" %}</a>
+    <a href="{% url datasource_list_pending %}">{% trans "See all pending datasets" %}</a>
 {% endblock body %}
