@@ -35,5 +35,9 @@ urlpatterns = patterns('',
 
     url(r'^oailist.json',
         views.OAISetListView.as_view(),
-        name="oai_set_list")
+        name="oai_set_list"),
+
+    url(r'^json/',
+        login_required(views.create_json_view),
+        name="json_transform")
 )

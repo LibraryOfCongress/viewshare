@@ -151,3 +151,7 @@ class ModsURLDataSource(ModsMixin, URLDataSourceMixin, DataSource):
 class ModsFileDataSource(ModsMixin, file_datasource_mixin, DataSource):
     """Load XMLMODS from an uploaded file
     """
+
+class JSONDataSource(URLDataSourceMixin, DataSource):
+    """Load JSON from a URL
+    """

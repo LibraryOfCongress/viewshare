@@ -42,6 +42,10 @@ create_mods_file_view = create_form_view(models.ModsFileDataSource,
                                "upload/modsfile_datasource_form.html")
 
 
+create_json_view = create_form_view(models.JSONDataSource,
+                               forms.JSONDataSourceForm,
+                               "upload/json_datasource_form.html")
+
 class OAISetListView(View):
     transform = AkaraTransformClient(conf.AKARA_OAIPMH_LIST_URL)
 
