@@ -46,7 +46,7 @@ urlpatterns = patterns('',
 
     (r'^upload/', include('viewshare.apps.upload.urls')),
     (r'^data/', include('freemix.dataset.urls')),
-    (r'^source/', include('freemix.dataset.urls.datasource')),
+    # (r'^source/', include('freemix.dataset.urls.datasource')),
 
     (r'^views/', include('freemix.exhibit.urls')),
     (r'^augment/', include('freemix.dataset.augment.urls')),

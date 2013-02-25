@@ -3,8 +3,8 @@ from django.conf.urls.defaults import patterns, include
 
 urlpatterns = patterns('',
 
-    (r'tx/', include('freemix.dataset.urls.transaction')),
     (r'^', include('freemix.dataset.urls.list')),
+    (r'^source/', include('freemix.dataset.urls.datasource')),
     (r'^', include('freemix.dataset.urls.base')),
     (r'^', include('freemix.dataset.urls.viewer')),
     (r'^', include('freemix.dataset.urls.editor')),

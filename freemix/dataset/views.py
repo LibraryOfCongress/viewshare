@@ -80,11 +80,12 @@ dataset_list_by_owner = OwnerListView.as_view(template_name="dataset/dataset_lis
 #----------------------------------------------------------------------------------------------------------------------#
 # Dataset views
 
+
 class DatasetView(OwnerSlugPermissionMixin, DetailView):
 
     model = models.Dataset
-    object_perm="dataset.can_view"
-    template_name= "dataset/dataset_summary.html"
+    object_perm = "dataset.can_view"
+    template_name = "dataset/dataset_summary.html"
 
     def get_queryset(self):
         return self.model.objects.select_related("owner", "source")
@@ -110,8 +111,9 @@ class DatasetView(OwnerSlugPermissionMixin, DetailView):
         context["exhibits"] = dataset.exhibits.filter(filter)
         return context
 
+
 class DatasetSummaryView(DatasetView):
-    template_name="dataset/dataset_summary.html"
+    template_name = "dataset/dataset_summary.html"
 
     def delete(self, request, *args, **kwargs):
         ds = self.get_object()
@@ -126,7 +128,7 @@ class DatasetSummaryView(DatasetView):
 
 
 class DatasetDetailView(DatasetView):
-    template_name="dataset/dataset_detail.html"
+    template_name = "dataset/dataset_detail.html"
     object_perm = "dataset.can_inspect"
 
 
@@ -142,20 +144,22 @@ class DatasetCreateFormView(CreateView):
 
     def get_context_data(self, **kwargs):
         ctx = super(DatasetCreateFormView, self).get_context_data(**kwargs)
-        ctx["tx_id"] = self.kwargs["tx_id"]
+        ctx["uuid"] = self.kwargs["uuid"]
         return ctx
 
     def get_form_kwargs(self):
         kwargs = super(DatasetCreateFormView, self).get_form_kwargs()
         del kwargs["instance"]
         kwargs["owner"] = self.request.user
-        tx = get_object_or_404(models.DataSourceTransaction, tx_id=self.kwargs["tx_id"])
+        tx = get_object_or_404(models.DataSourceTransaction,
+                               source__uuid=self.kwargs["uuid"],
+                               is_complete=False)
         kwargs["datasource_transaction"] = tx
         return kwargs
 
     def get_initial(self):
         initial = dict(super(DatasetCreateFormView, self).get_initial())
-        source = get_object_or_404(models.DataSource, transactions__tx_id=self.kwargs["tx_id"])
+        source = get_object_or_404(models.DataSource, uuid=self.kwargs["uuid"])
         if source:
             source = source.get_concrete()
         if hasattr(source, "title"):
@@ -165,7 +169,9 @@ class DatasetCreateFormView(CreateView):
 
     def form_valid(self, form):
         self.object = form.save()
-        tx = get_object_or_404(models.DataSourceTransaction, tx_id=self.kwargs["tx_id"])
+        tx = get_object_or_404(models.DataSourceTransaction,
+                               source__uuid=self.kwargs["uuid"],
+                               is_complete=False)
         tx.complete()
         return HttpResponseRedirect(self.get_success_url())
 
@@ -183,6 +189,7 @@ class DatasetDetailEditView(OwnerSlugPermissionMixin, UpdateView):
                 "object": self.object,
                 "is_saved": True
             })
+
 
 class DatasetProfileEditView(OwnerSlugPermissionMixin, View):
     object_perm="dataset.can_edit"
@@ -252,12 +259,10 @@ class CreateDataSourceView(CreateView):
     def form_valid(self, form):
         self.object = form.save()
 
-        self.tx = self.object.create_transaction()
-
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
-        return self.tx.get_absolute_url()
+        return reverse("datasource_refresh", kwargs={"uuid": self.object.uuid})
 
 
 class DataSourceRegistry:
@@ -301,13 +306,35 @@ class DataSourceRegistry:
         return cls.get_value(instance, 3)
 
 
-def create_form_view(model_class, form_class, form_template):
-    """
-    A convenience function that registers a DataSource and returns
-    an instance
-    """
-    DataSourceRegistry.register(model_class, form_class, form_template)
-    return DataSourceRegistry.create_view(model_class)
+class DataSourceDetailView(DetailView):
+    template_name = "dataset/datasource_detail.html"
+
+    def get_object(self, queryset=None):
+        uuid = self.kwargs["uuid"]
+
+        ds = get_object_or_404(models.DataSource, uuid=uuid)
+        if not self.request.user.has_perm("datasource.can_view", ds):
+            raise Http404()
+        return ds.get_concrete()
+
+    def get_context_data(self, **kwargs):
+        context = dict(super(DetailView, self).get_context_data(**kwargs))
+        source = self.get_object()
+        user = self.request.user
+        filter = PermissionsRegistry.get_filter("datasource.can_view", user)
+
+        context["can_view"] = user.has_perm("datasource.can_view", source),
+        context["can_inspect"] = user.has_perm("datasource.can_inspect", source),
+
+        context["can_build"] = user.has_perm("datasource.can_build", source)
+        context["can_edit"] = user.has_perm("datasource.can_edit", source)
+        context["can_delete"] = user.has_perm("datasource.can_delete", source)
+
+        try:
+            context["can_refresh"] = user.has_perm("datasource.can_edit", source)
+        except ObjectDoesNotExist, ex:
+            pass
+        return context
 
 
 class UpdateDataSourceView(UpdateView):
@@ -330,12 +357,10 @@ class UpdateDataSourceView(UpdateView):
     def form_valid(self, form):
         self.object = form.save()
 
-        self.tx = self.object.create_transaction()
-
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
-        return self.tx.get_absolute_url()
+        return reverse("datasource_refresh", kwargs={"uuid": self.get_object().uuid})
 
 
 class RedirectUpdateDataSourceView(RedirectView):
@@ -353,8 +378,7 @@ class PendingDataSourceListView(ListView):
     template_name = "dataset/datasource_list_pending.html"
 
     def get_queryset(self):
-        list = self.model.objects.filter(owner=self.request.user, dataset=None).order_by("-created")
-        return list
+        return self.model.objects.filter(owner=self.request.user, dataset=None).order_by("-created")
 
 datasource_list_pending = PendingDataSourceListView.as_view()
 
@@ -369,24 +393,20 @@ class DataSourceTransactionView(View):
         return HttpResponseServerError("Invalid transaction status for %s"%self.transaction.tx_id)
 
     def get(self, request, *args, **kwargs):
-        tx_id = kwargs["tx_id"]
+        uuid = kwargs["uuid"]
         user = request.user
-        self.transaction = get_object_or_404(models.DataSourceTransaction, tx_id=tx_id)
-        if self.transaction.is_complete:
+        source = get_object_or_404(models.DataSource, uuid=uuid)
+        if not user.has_perm('datasource.can_edit', source):
             raise Http404
-        if not user.has_perm('datasourcetransaction.can_view', self.transaction):
-            raise Http404
-
+        self.transaction = source.open_transaction()
+        self.source = source
         return self.redirect()
-
-
-class ProcessTransactionView(DataSourceTransactionView):
 
     def display_transaction_result(self):
         """
         Render 'datasource_transaction_result'.
         """
-        source = self.transaction.source
+        source = self.source
         save_url = None
         if source.dataset:
             template_name="dataset/dataset_update.html"
@@ -416,16 +436,16 @@ class ProcessTransactionView(DataSourceTransactionView):
             template_name="dataset/dataset_create.html"
             save_url = reverse(
                     'datasource_transaction',
-                    kwargs={"tx_id": self.transaction.tx_id}
+                    kwargs={"uuid": source.uuid}
                     )
             profile_url = reverse(
                     'datasource_transaction_result',
-                    kwargs={'tx_id': self.transaction.tx_id}
+                    kwargs={'uuid': source.uuid}
                     )
             cancel_url = reverse('upload_dataset', kwargs={})
         dataurl = reverse(
                 'datasource_transaction_result',
-                kwargs={'tx_id': self.transaction.tx_id}
+                kwargs={'uuid': source.uuid}
                 )
         return render(self.request, template_name, {
             "transaction": self.transaction,
@@ -440,20 +460,17 @@ class ProcessTransactionView(DataSourceTransactionView):
         return self.display_transaction_result()
 
     def failure(self):
-        if not self.transaction.is_complete:
-            source = self.transaction.source.get_concrete()
-            form = DataSourceRegistry.get_form(source)
-            form_url = reverse("datasource_update", kwargs={"uuid": source.uuid})
-            template_name = DataSourceRegistry.get_form_template(source)
-            return render(self.request, template_name, {
-                "form": form,
-                "form_url": form_url,
-                "object": source,
-                "transaction": self.transaction,
-                "show_error": True
-            })
-        else:
-            return HttpResponseRedirect(self.transaction.source.get_absolute_url())
+        source = self.transaction.source.get_concrete()
+        form = DataSourceRegistry.get_form(source)
+        form_url = reverse("datasource_update", kwargs={"uuid": source.uuid})
+        template_name = DataSourceRegistry.get_form_template(source)
+        return render(self.request, template_name, {
+            "form": form,
+            "form_url": form_url,
+            "object": source,
+            "transaction": self.transaction,
+            "show_error": True
+        })
 
     def cancelled(self):
         return  HttpResponseRedirect(reverse('dataset_upload'))
@@ -467,36 +484,54 @@ class ProcessTransactionView(DataSourceTransactionView):
     def scheduled(self):
         return self.display_transaction_result()
 
-    def completed(self):
-        return HttpResponseRedirect(self.transaction.source.dataset.get_absolute_url())
-
 
 class DataSourceTransactionResultView(View):
-
+    """
+    Return the JSON document representing the result of a DataSourceTransaction
+    """
     def get(self, request, *args, **kwargs):
-        tx_id = kwargs["tx_id"]
-
-        tx = get_object_or_404(models.DataSourceTransaction, tx_id=tx_id)
-        if not self.request.user.has_perm('datasourcetransaction.can_view', tx):
+        uuid = kwargs["uuid"]
+        source = get_object_or_404(models.DataSource, uuid=uuid)
+        if not self.request.user.has_perm('datasource.can_edit', source):
             raise Http404
-
+        tx = source.open_transaction()
         return JSONResponse(tx.result)
+
+
+class RefreshDataSourceView(View):
+    """
+    Force the creation of a new DataSourceTransaction
+    """
+    def get(self, request, *args, **kwargs):
+        uuid = kwargs["uuid"]
+        source = get_object_or_404(models.DataSource, uuid=uuid)
+        if not self.request.user.has_perm('datasource.can_edit', source):
+            raise Http404
+        source.create_transaction()
+        return HttpResponseRedirect(reverse("datasource_transaction",
+                                            kwargs={
+                                                "uuid": uuid
+                                            }))
 
 
 class DataSourceTransactionStatusView(View):
     """
-    Return a status string for a DataSourceTransaction with a given 'tx_id'.
+    Return a status string for the open DataSourceTransaction for the
+    given data source.
+
     Useful for polling from the client. Also return a boolean indicating if
     the DataSourceTransaction's status will continue to change.
     """
     def get(self, request, *args, **kwargs):
-        tx_id = kwargs["tx_id"]
-
-        tx = get_object_or_404(models.DataSourceTransaction, tx_id=tx_id)
-        if not self.request.user.has_perm('datasourcetransaction.can_view', tx):
+        uuid = kwargs["uuid"]
+        source = get_object_or_404(models.DataSource, uuid=uuid)
+        if not self.request.user.has_perm('datasource.can_edit', source):
             raise Http404
+
+        tx = source.open_transaction()
         if tx.is_complete:
             raise Http404
+
         status = pretty_print_transaction_status(tx.status)
 
         return JSONResponse({

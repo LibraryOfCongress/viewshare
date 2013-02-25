@@ -129,6 +129,109 @@ def sync_properties(sender, instance=None, **kwargs):
 signals.post_save.connect(sync_properties, sender=DatasetProfile)
 
 
+#------------------------------------------------------------------------------#
+
+TX_STATUS = {
+    "pending": 1,
+    "scheduled": 2,
+    "running": 3,
+    "success": 4,
+    "failure": 5,
+    "cancelled": 6,
+}
+
+
+class DataSourceTransaction(TimeStampedModel):
+    """Stores the the status and raw result of a remote data transaction for a
+       particular data source.
+
+       This implementation is temporary, to be replaced with a solution with
+       pluggable backends.
+    """
+    tx_id = UUIDField()
+
+    status = models.IntegerField(choices=[(v,k) for k,v in TX_STATUS.iteritems()],
+                                 default=TX_STATUS["pending"])
+
+    source = models.ForeignKey('DataSource', related_name="transactions")
+
+    result = JSONField(null=True, blank=True)
+
+    is_complete = models.BooleanField(default=False)
+
+    def is_expired(self):
+        return self.modified < (datetime.now() - TRANSACTION_LIFESPAN)
+
+    def is_ready(self):
+        return self.status in (TX_STATUS["success"], TX_STATUS["cancelled"])
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('datasource_transaction', (), {
+            "tx_id": self.tx_id
+        })
+
+    def validate(self):
+        if not len(self.result.get("items", [])):
+            self.failure("No Data")
+            return False
+        self.success()
+        return True
+
+    def schedule(self):
+        with db_tx.commit_manually():
+            try:
+                self.status = TX_STATUS["scheduled"]
+                self.save()
+                db_tx.commit()
+            except Exception as ex:
+                logger.error("Error for transaction %s: %s" % (self.tx_id, ex.message))
+                db_tx.rollback()
+                raise ex
+            else:
+                from freemix.dataset.tasks import run_transaction
+                run_transaction.delay(self.tx_id)
+
+    def run(self):
+        with db_tx.commit_manually():
+            try:
+                self.status = TX_STATUS["running"]
+                self.save()
+                db_tx.commit()
+
+                source = self.source.get_concrete()
+                self.result = source.refresh()
+                self.validate()
+                self.save()
+            except Exception as ex:
+                self.failure(ex.message)
+
+            db_tx.commit()
+
+        return self
+
+    def failure(self, message):
+        logger.error("Error for transaction %s: %s" % (self.tx_id, message))
+        self.status = TX_STATUS["failure"]
+        self.result = {"message": message}
+        self.save()
+
+    def success(self):
+        self.status = TX_STATUS["success"]
+        self.save()
+
+    def complete(self):
+        self.is_complete = True
+        self.result = None
+        self.save()
+
+    def cancel(self):
+        self.status = TX_STATUS["cancelled"]
+        self.result = None
+        self.is_complete = True
+        self.save()
+
+
 class DataSource(TimeStampedModel):
     """
     This class should be extended to define the source from which the data in Datasets are derived.
@@ -176,6 +279,12 @@ class DataSource(TimeStampedModel):
                 db_tx.commit()
                 tx.schedule()
         return tx
+
+    def open_transaction(self):
+        transaction = DataSourceTransaction.objects.filter(source=self, is_complete=False)[:1]
+        if not transaction:
+            return self.create_transaction()
+        return transaction[0]
 
     def refresh(self):
         return None
@@ -270,105 +379,3 @@ def parse_profile_json(owner, contents, published=True):
 
 
     return ds
-
-#------------------------------------------------------------------------------#
-
-TX_STATUS = {
-    "pending": 1,
-    "scheduled": 2,
-    "running": 3,
-    "success": 4,
-    "failure": 5,
-    "cancelled": 6,
-}
-
-
-class DataSourceTransaction(TimeStampedModel):
-    """Stores the the status and raw result of a remote data transaction for a
-       particular data source.
-
-       This implementation is temporary, to be replaced with a solution with
-       pluggable backends.
-    """
-    tx_id = UUIDField()
-
-    status = models.IntegerField(choices=[(v,k) for k,v in TX_STATUS.iteritems()],
-                                 default=TX_STATUS["pending"])
-
-    source = models.ForeignKey(DataSource, related_name="transactions")
-
-    result = JSONField(null=True, blank=True)
-
-    is_complete = models.BooleanField(default=False)
-
-    def is_expired(self):
-        return self.modified < (datetime.now() - TRANSACTION_LIFESPAN)
-
-    def is_ready(self):
-        return self.status in (TX_STATUS["success"], TX_STATUS["cancelled"])
-
-    @models.permalink
-    def get_absolute_url(self):
-        return ('datasource_transaction', (), {
-            "tx_id": self.tx_id
-        })
-
-    def validate(self):
-        if not len(self.result.get("items", [])):
-            self.failure("No Data")
-            return False
-        self.success()
-        return True
-
-    def schedule(self):
-        with db_tx.commit_manually():
-            try:
-                self.status = TX_STATUS["scheduled"]
-                self.save()
-                db_tx.commit()
-            except Exception as ex:
-                logger.error("Error for transaction %s: %s" % (self.tx_id, ex.message))
-                db_tx.rollback()
-                raise ex
-            else:
-                from freemix.dataset.tasks import run_transaction
-                run_transaction.delay(self.tx_id)
-
-    def run(self):
-        with db_tx.commit_manually():
-            try:
-                self.status = TX_STATUS["running"]
-                self.save()
-                db_tx.commit()
-
-                source = self.source.get_concrete()
-                self.result = source.refresh()
-                self.validate()
-                self.save()
-            except Exception as ex:
-                self.failure(ex.message)
-
-            db_tx.commit()
-
-        return self
-
-    def failure(self, message):
-        logger.error("Error for transaction %s: %s" % (self.tx_id, message))
-        self.status = TX_STATUS["failure"]
-        self.result = {"message": message}
-        self.save()
-
-    def success(self):
-        self.status = TX_STATUS["success"]
-        self.save()
-
-    def complete(self):
-        self.is_complete = True
-        self.result = None
-        self.save()
-
-    def cancel(self):
-        self.status = TX_STATUS["cancelled"]
-        self.result = None
-        self.is_complete = True
-        self.save()
