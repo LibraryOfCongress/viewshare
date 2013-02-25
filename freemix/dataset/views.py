@@ -169,10 +169,6 @@ class DatasetCreateFormView(CreateView):
 
     def form_valid(self, form):
         self.object = form.save()
-        tx = get_object_or_404(models.DataSourceTransaction,
-                               source__uuid=self.kwargs["uuid"],
-                               is_complete=False)
-        tx.complete()
         return HttpResponseRedirect(self.get_success_url())
 
 
