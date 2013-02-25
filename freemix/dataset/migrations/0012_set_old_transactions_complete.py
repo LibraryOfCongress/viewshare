@@ -15,6 +15,7 @@ class Migration(DataMigration):
         """
         # Note: Remember to use orm['appname.ModelName'] rather than "from appname.models..."
         orm["dataset.DataSourceTransaction"].objects.all().update(is_complete=True, result=None)
+        orm["dataset.DataSourceTransaction"].objects.filter(status__lt=4).update(status=6)
 
     def backwards(self, orm):
         pass
