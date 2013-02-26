@@ -12,7 +12,7 @@ from django.utils.translation import ugettext
 
 from viewshare.apps.vendor.friends.forms import InviteFriendForm
 from viewshare.apps.vendor.friends.models import FriendshipInvitation, Friendship
-from freemix.dataset.models import DataSourceTransaction
+from freemix.dataset.models import DataSource
 from freemix.permissions import PermissionsRegistry
 
 from viewshare.apps.profiles.forms import ProfileForm
@@ -125,9 +125,10 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
             })
     pending_datasets = None
     if is_me:
-        pending_datasets = DataSourceTransaction.objects\
-                .filter(source__owner=other_user)\
-                .filter(source__dataset__isnull=True)
+        pending_datasets = DataSource.objects\
+                                     .filter(owner=other_user)\
+                                     .filter(dataset__isnull=True)\
+                                     .order_by("-modified")
 
     datasets = other_user.datasets.filter(PermissionsRegistry.get_filter("dataset.can_view", request.user))
     datasets = datasets.select_related("owner")

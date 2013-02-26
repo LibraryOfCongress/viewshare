@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 import logging
 import urllib2
 import uuid
+import os
 from django.contrib.auth.models import User
 from django.db.models import permalink
 from django_extensions.db.fields import UUIDField
@@ -15,8 +16,14 @@ from freemix.dataset.transform import AKARA_TRANSFORM_URL
 from freemix.dataset.transform import AkaraTransformClient
 from freemix.models import JSONDataModel
 
+
 logger = logging.getLogger(__name__)
 
+TRANSACTION_LIFESPAN = getattr(settings, "TRANSACTION_EXPIRATION_INTERVAL",
+                               timedelta(weeks=1))
+
+UNSAVED_DATASOURCE_LIFESPAN = getattr(settings, "UNSAVED_DATASOURCE_LIFESPAN",
+                                      timedelta(hours=24))
 
 
 class Dataset(TitleSlugDescriptionModel, TimeStampedModel):
@@ -122,6 +129,109 @@ def sync_properties(sender, instance=None, **kwargs):
 signals.post_save.connect(sync_properties, sender=DatasetProfile)
 
 
+#------------------------------------------------------------------------------#
+
+TX_STATUS = {
+    "pending": 1,
+    "scheduled": 2,
+    "running": 3,
+    "success": 4,
+    "failure": 5,
+    "cancelled": 6,
+}
+
+
+class DataSourceTransaction(TimeStampedModel):
+    """Stores the the status and raw result of a remote data transaction for a
+       particular data source.
+
+       This implementation is temporary, to be replaced with a solution with
+       pluggable backends.
+    """
+    tx_id = UUIDField()
+
+    status = models.IntegerField(choices=[(v,k) for k,v in TX_STATUS.iteritems()],
+                                 default=TX_STATUS["pending"])
+
+    source = models.ForeignKey('DataSource', related_name="transactions")
+
+    result = JSONField(null=True, blank=True)
+
+    is_complete = models.BooleanField(default=False)
+
+    def is_expired(self):
+        return self.modified < (datetime.now() - TRANSACTION_LIFESPAN)
+
+    def is_ready(self):
+        return self.status in (TX_STATUS["success"], TX_STATUS["cancelled"])
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('datasource_transaction', (), {
+            "tx_id": self.tx_id
+        })
+
+    def validate(self):
+        if not len(self.result.get("items", [])):
+            self.failure("No Data")
+            return False
+        self.success()
+        return True
+
+    def schedule(self):
+        with db_tx.commit_manually():
+            try:
+                self.status = TX_STATUS["scheduled"]
+                self.save()
+                db_tx.commit()
+            except Exception as ex:
+                logger.error("Error for transaction %s: %s" % (self.tx_id, ex.message))
+                db_tx.rollback()
+                raise ex
+            else:
+                from freemix.dataset.tasks import run_transaction
+                run_transaction.delay(self.tx_id)
+
+    def run(self):
+        with db_tx.commit_manually():
+            try:
+                self.status = TX_STATUS["running"]
+                self.save()
+                db_tx.commit()
+
+                source = self.source.get_concrete()
+                self.result = source.refresh()
+                self.validate()
+                self.save()
+            except Exception as ex:
+                self.failure(ex.message)
+
+            db_tx.commit()
+
+        return self
+
+    def failure(self, message):
+        logger.error("Error for transaction %s: %s" % (self.tx_id, message))
+        self.status = TX_STATUS["failure"]
+        self.result = {"message": message}
+        self.save()
+
+    def success(self):
+        self.status = TX_STATUS["success"]
+        self.save()
+
+    def complete(self):
+        self.is_complete = True
+        self.result = None
+        self.save()
+
+    def cancel(self):
+        self.status = TX_STATUS["cancelled"]
+        self.result = None
+        self.is_complete = True
+        self.save()
+
+
 class DataSource(TimeStampedModel):
     """
     This class should be extended to define the source from which the data in Datasets are derived.
@@ -138,6 +248,12 @@ class DataSource(TimeStampedModel):
 
     uuid = UUIDField()
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('datasource_detail', (), {
+            "uuid": self.uuid
+        })
+
     def get_concrete(self):
         if self.classname == "DataSource":
             return self
@@ -150,17 +266,44 @@ class DataSource(TimeStampedModel):
         return self.classname + " " + self.uuid
 
     def create_transaction(self):
-        tx = DataSourceTransaction(source=self)
-        tx.save()
+        with db_tx.commit_manually():
+            try:
+                # Ensure that existing transactions are marked as complete when creating a new one
+                DataSourceTransaction.objects.filter(source=self).update(is_complete=True, result=None)
+                tx = DataSourceTransaction(source=self)
+                tx.save()
+            except:
+                db_tx.rollback()
+                raise
+            else:
+                db_tx.commit()
+                tx.schedule()
         return tx
+
+    def open_transaction(self):
+        transaction = DataSourceTransaction.objects.filter(source=self, is_complete=False)[:1]
+        if not transaction:
+            return self.create_transaction()
+        return transaction[0]
 
     def refresh(self):
         return None
 
     def save(self, *args, **kwargs):
-        if self.classname is None:
-            self.classname = self.__class__.__name__
-        super(DataSource, self).save(*args, **kwargs)
+        with db_tx.commit_manually():
+            try:
+                if self.classname is None:
+                    self.classname = self.__class__.__name__
+                super(DataSource, self).save(*args, **kwargs)
+            except:
+                db_tx.rollback()
+                raise
+            else:
+                db_tx.commit()
+
+    def is_expired(self):
+        return self.modified < (datetime.now() - UNSAVED_DATASOURCE_LIFESPAN) \
+            and self.dataset is None
 
 
 class TransformMixin(models.Model):
@@ -182,7 +325,6 @@ class TransformMixin(models.Model):
 
     def refresh(self):
         return self.transform(body=self.get_transform_body(), params=self.get_transform_params())
-
 
 
 class URLDataSourceMixin(TransformMixin, models.Model):
@@ -208,11 +350,15 @@ def make_file_data_source_mixin(storage, upload_to):
     """
     class FileDataSourceMixin(TransformMixin, models.Model):
         file = models.FileField(storage=storage, upload_to=upload_to, max_length=255)
+
         class Meta:
             abstract=True
 
         def get_transform_body(self):
             return self.file.read()
+
+        def get_filename(self):
+            return os.path.basename(self.file.name)
 
         def __unicode__(self):
             return self.file.name
@@ -233,71 +379,3 @@ def parse_profile_json(owner, contents, published=True):
 
 
     return ds
-
-#------------------------------------------------------------------------------#
-
-TX_STATUS = {
-    "pending": 1,
-    "scheduled": 2,
-    "running": 3,
-    "success": 4,
-    "failure": 5,
-    "cancelled": 6
-}
-
-
-TRANSACTION_LIFESPAN = getattr(settings, "TRANSACTION_EXPIRATION_INTERVAL",
-                                          timedelta(hours=24))
-
-class DataSourceTransaction(TimeStampedModel):
-    """Stores the the status and raw result of a remote data transaction for a
-       particular data source.
-
-       This implementation is temporary, to be replaced with a solution with
-       pluggable backends.
-    """
-    tx_id = UUIDField()
-
-    status = models.IntegerField(choices=[(v,k) for k,v in TX_STATUS.iteritems()],
-                                 default=TX_STATUS["pending"])
-
-    source = models.ForeignKey(DataSource, related_name="transactions")
-
-    result = JSONField(null=True, blank=True)
-
-
-    def is_expired(self):
-        return self.modified < (datetime.now() - TRANSACTION_LIFESPAN)
-
-    @models.permalink
-    def get_absolute_url(self):
-        return ('datasource_transaction', (), {
-            "tx_id": self.tx_id
-        })
-
-    def validate(self):
-        if not len(self.result.get("items", [])):
-            self.status = TX_STATUS["failure"]
-            self.result = {"message": "No Data"}
-            return False
-
-        self.status = TX_STATUS["success"]
-        return True
-
-    def run(self):
-        with db_tx.commit_manually():
-            try:
-                source = self.source.get_concrete()
-                self.result = source.refresh()
-                self.validate()
-            except Exception as ex:
-
-                logger.error("Error for transaction %s: %s"%(self.tx_id, ex.message))
-                self.status=TX_STATUS["failure"]
-                self.result = {"message": "Error transforming data: %s"%ex.message}
-
-            self.save()
-
-            db_tx.commit()
-
-        return self

@@ -10,9 +10,6 @@ urlpatterns = patterns('',
         login_required(views.DatasetProfileEditView.as_view()),
         name="dataset_edit"),
 
-    url(r'^tx/(?P<tx_id>[a-f0-9-]+)/create/$',
-        login_required(views.DatasetCreateFormView.as_view()),
-        name="dataset_create_form"),
 
     url(r'^(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/detail/edit/$',
         login_required(views.DatasetDetailEditView.as_view()),

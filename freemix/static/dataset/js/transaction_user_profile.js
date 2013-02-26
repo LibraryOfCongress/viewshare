@@ -17,13 +17,13 @@
   /** 
    * Handles DOM manipulation on a successful ajax request
    * @param {string} data.status - Printable status for the transaction
-   * @param {bool} data.isComplete - Tells us to continue polling or not
+   * @param {bool} data.isReady - Tells us to continue polling or not
    */
   PendingTransactionView.prototype.pollSuccess = function(data) {
     if (data.status !== this.status.html()) {
       this.status.html(data.status);
     }
-    if (!data.isComplete) {
+    if (!data.isReady) {
       setTimeout($.proxy(this.render, this), 5000);
     }
   };

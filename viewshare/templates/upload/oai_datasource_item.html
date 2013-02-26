@@ -1,0 +1,33 @@
+{% load i18n %}
+<div class="datasource_field">
+    <span class="datasource_label">URL:</span>
+    <span class="datasource_value">
+        <a href="{{ datasource.url }}">{{ datasource.url }}</a>
+    </span>
+</div>
+
+<div class="datasource_field">
+    <span class="datasource_label">{% trans "Set" %}:</span>
+    <span class="datasource_value">
+        {{ datasource.set }}
+    </span>
+</div>
+
+<div class="datasource_field">
+    <span class="datasource_label">{% trans "Title" %}:</span>
+    <span class="datasource_value">
+        {{ datasource.title }}
+    </span>
+</div>
+
+<div class="datasource_field">
+    <span class="datasource_label">{% trans "Limit" %}:</span>
+    <span class="datasource_value">
+        {{ datasource.limit }}
+    </span>
+</div>
+
+<div class="datasource_field">
+    <span class="datasource_label">{% trans "Type" %}:</span>
+    <span class="datasource_value">OAI</span>
+</div>
