@@ -38,7 +38,4 @@ urlpatterns = patterns('',
     url(r'^(?P<uuid>[a-f0-9-]+)/create/$',
         login_required(views.DatasetCreateFormView.as_view()),
         name="dataset_create_form"),
-    # url(r'^tx/(?P<tx_id>[a-f0-9-]+)/$', views.ProcessTransactionView.as_view(), name='datasource_transaction'),
-    # url(r'^tx/(?P<tx_id>[a-f0-9-]+)/result.json$', views.DataSourceTransactionResultView.as_view(), name='datasource_transaction_result'),
-    # url(r'^tx/(?P<tx_id>[a-f0-9-]+)/status.json$', views.DataSourceTransactionStatusView.as_view(), name='datasource_transaction_status'),
 )
