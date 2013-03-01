@@ -7,5 +7,5 @@
 
 {% block freemix_meta %}
     {{ block.super }}
-    <link rel="freemix/saveform" href="{% url dataset_create_form transaction.tx_id %}"/>
+    <link rel="freemix/saveform" href="{% url dataset_create_form transaction.source.uuid %}"/>
 {% endblock %}

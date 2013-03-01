@@ -20,7 +20,7 @@ class ViewshareFileStorage(FileSystemStorage):
     def url(self, name):
         uuid, filename = name.split(sep)
         return reverse("file_datasource_file_url",
-            kwargs={"uuid": uuid, "filename": filename})
+                       kwargs={"uuid": uuid})
 
 
 fs = ViewshareFileStorage(location=conf.FILE_UPLOAD_PATH)

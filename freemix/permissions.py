@@ -101,7 +101,6 @@ PermissionsRegistry.register('dataset.can_build', dataset_can_build, published_q
 PermissionsRegistry.register('datasource.can_view', check_owner, owner_filter)
 PermissionsRegistry.register('datasource.can_edit', check_owner, owner_filter)
 PermissionsRegistry.register('datasource.can_delete', check_owner, owner_filter)
-PermissionsRegistry.register('datasourcetransaction.can_view', lambda user_obj, obj: user_obj.id==obj.source.owner.id)
 
 def exhibit_can_view(user, obj):
     if user.is_authenticated() and check_owner(user,obj):
