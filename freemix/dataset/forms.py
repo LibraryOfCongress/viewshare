@@ -28,9 +28,10 @@ class CreateDatasetForm(forms.Form):
 
     def save(self, commit=True):
         with transaction.commit_on_success():
-            instance = Dataset.objects.create(title=self.cleaned_data["title"],
-                                              description=self.cleaned_data["description"],
-                                              owner=self.owner)
+            instance = Dataset.objects.create(
+                title=self.cleaned_data["title"],
+                description=self.cleaned_data["description"],
+                owner=self.owner)
 
             instance.published = (self.cleaned_data["published"] == "True")
             instance.save()
