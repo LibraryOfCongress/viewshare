@@ -1,0 +1,18 @@
+{% load i18n %}
+{% load freemix_helpers %}
+
+<li class="dataset_list_item result_set_item clearfix transaction">
+  <div class="dataset-title">
+    {% if datasource_transaction_url %}
+    <a href="{{ datasource_transaction_url }}" data-poll-href="{{ datasource_transaction_result_url}}">{{ datasource_transaction.source }}</a>
+    {% else %}
+    {{ datasource_transaction.source }}
+    {% endif %}
+  </div>
+  <div class="dataset-description">
+    {% trans "Status" %}: <span class="status">{{ status }}</span>
+  </div>
+  <div class="dataset-metadata dataset-left">
+    {% trans "Originally loaded by" %} <span class="dataset-owner"><a href="{% url profile_detail datasource_transaction.source.owner.username %}">{{ datasource_transaction.source.owner|nicename }}</a></span> {% trans "on" %} <span class="dataset-created-data">{{ datasource_transaction.created|date:"N j, Y" }}</span>.
+  </div>
+</li>

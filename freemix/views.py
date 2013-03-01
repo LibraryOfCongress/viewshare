@@ -12,15 +12,12 @@ class OwnerListView(ListView):
     """A base view for filtering based on the 'owner' of a particular object.  For now, 'owner' is expected to be a
        username that maps to a Django User.
     """
-
     permission = None
-
     related= None
-
     defer = None
+    owner_field = 'owner'
 
     def sort_filter(self):
-
         return
 
     def get_queryset(self):
@@ -32,8 +29,8 @@ class OwnerListView(ListView):
 
 
         self.owner = get_object_or_404(User, username=self.kwargs.get("owner"))
-
-        list = self.model.objects.filter(owner=self.owner)
+        owner_lookup = dict([(self.owner_field, self.owner)])
+        list = self.model.objects.filter(**owner_lookup)
 
 
         if self.permission:
