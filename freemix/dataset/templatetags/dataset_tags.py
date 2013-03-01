@@ -4,6 +4,7 @@ from freemix.permissions import PermissionsRegistry
 
 register = template.Library()
 
+
 @register.inclusion_tag("dataset/dataset_list_item.html", takes_context=True)
 def dataset_list_item(context, dataset):
     request = context["request"]
@@ -18,7 +19,8 @@ def dataset_list_item(context, dataset):
 
     return {"dataset": dataset,
             "dataset_url": dataset.get_absolute_url(),
-            "exhibits": dataset.exhibits.filter(PermissionsRegistry.get_filter("exhibit.can_view", user)),
+            "exhibits": dataset.exhibits.filter(
+                PermissionsRegistry.get_filter("exhibit.can_view", user)),
             "request": request,
             "can_view": can_view,
             "can_edit": can_edit,
@@ -28,10 +30,9 @@ def dataset_list_item(context, dataset):
             }
 
 
-
 @register.inclusion_tag("dataset/dataset_list.html", takes_context=True)
 def dataset_list(context, datasets, max_count=10, pageable=True):
-    return {"object_list": datasets, "max_count": max_count, "pageable": pageable,
+    return {"object_list": datasets,
+            "max_count": max_count,
+            "pageable": pageable,
             "request": context['request']}
-
-
