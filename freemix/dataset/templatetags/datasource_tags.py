@@ -3,9 +3,13 @@ from freemix.dataset.views import DataSourceRegistry
 
 register = template.Library()
 
+
 @register.inclusion_tag("dataset/datasource_list.html", takes_context=True)
 def datasource_list(context, sources, max_count=10, pageable=True):
-    return {"object_list": sources, "max_count": max_count, "pageable": pageable,
+    return {
+            "object_list": sources,
+            "max_count": max_count,
+            "pageable": pageable,
             "request": context['request']}
 
 
