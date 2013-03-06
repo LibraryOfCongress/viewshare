@@ -14,9 +14,11 @@
   .uniForm select {
     width: auto !important;
   }
-  .buttons {
+  .buttons, .button {
     margin-top: 2em;
     clear: both;
+    padding-left: 0;
+    padding-right: 0;
   }
   em.gray {
     color: #777;
@@ -38,6 +40,9 @@
   #item-properties {
     max-height: 20em;
     overflow: auto;
+  }
+  #div_id_path, #div_id_mapping {
+    display: none;
   }
 </style>
 <script>
@@ -70,6 +75,7 @@ $(document).ready(function() {
     };
 
     displayer = function(k, i) {
+        var propMap = {};
         if (typeof i === "undefined") {
             i = 0;
         }
@@ -81,8 +87,10 @@ $(document).ready(function() {
                 +'" checked="checked" />'
                 + '<label class="prop" for="' + val + '">' + val + '</label>: '
                 + formatter(original[k][i][val]) + '</p>');
+            propMap[val] = [val];
         });
         $("#pager-current").text(i + 1);
+        $("#load-prop-mapping").val(JSON.stringify(propMap));
     };
 
     analyzer = function(k, v) {
@@ -156,6 +164,8 @@ $(document).ready(function() {
         $(".upload-jsonsearch").fadeOut(function() {
             $("#json-search").fadeIn();
         });
+        $("#load-csrf").val($(".upload-form input[name=csrfmiddlewaretoken]").val());
+        $("#load-url").val($("#id_url").val());
         evt.preventDefault();
     });
 });
@@ -182,17 +192,20 @@ $(document).ready(function() {
     <legend>
       <h1>Loading JSON Data</h1>
     </legend>
-    <form id="json-search-form" class="uniForm">
+    <form id="json-search-form" class="uniForm" method="POST" action="">
+      <input type="hidden" id="load-csrf" name="csrfmiddlewaretoken" />
+      <input type="hidden" id="load-url" name="url" />
+      <input type="hidden" id="load-prop-mapping" name="mapping" />
       <h2>From <a id="search-result-url" target="_new"></a></h2>
       <p>Select the data collection from the set of lists found below:</p>
       <br />
       <div class="ctrlHolder">
         <div id="array-options-container">
           <label for="array-options" class="requiredField">Lists</label>
-          <select id="array-options">
+          <select id="array-options" name="path">
           </select>
           <br />
-          <div class="buttons">
+          <div class="button">
             <input class="submit" type="submit" value="Continue" />
           </div>
         </div>

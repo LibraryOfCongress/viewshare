@@ -14,6 +14,14 @@ AKARA_OAIPMH_LIST_URL = getattr(settings,
     "AKARA_OAI_LIST_URL",
     urljoin(AKARA_URL_PREFIX, "oai.listsets.json"))
 
+AKARA_JSON_NAV_URL = getattr(settings,
+    "AKARA_JSON_NAV_URL",
+    urljoin(AKARA_URL_PREFIX, "json.nav.prep"))
+
+AKARA_JSON_EXTRACT_URL = getattr(settings,
+    "AKARA_JSON_EXTRACT_URL",
+    urljoin(AKARA_URL_PREFIX, "load.extract.json"))
+
 FILE_UPLOAD_PATH = getattr(settings,
     "FILE_UPLOAD_PATH",
     "/tmp/recollectionupload")

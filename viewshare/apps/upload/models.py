@@ -2,6 +2,7 @@ from os.path import join, sep
 from django.core.files.storage import FileSystemStorage
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.utils import simplejson as json
 from django.utils.translation import ugettext_lazy as _
 
 from freemix.dataset.models import (DataSource,
@@ -9,6 +10,7 @@ from freemix.dataset.models import (DataSource,
                                     make_file_data_source_mixin)
 from freemix.dataset.transform import AkaraTransformClient
 from viewshare.apps.upload import conf
+import urllib2
 
 
 def source_upload_path(instance, filename):
@@ -116,6 +118,27 @@ class OAIDataSource(URLDataSourceMixin, DataSource):
     def __unicode__(self):
         return "%s (%s, %s)" % (self.title, self.url, self.set)
 
+
+class JSONDataSource(URLDataSourceMixin, DataSource):
+    """Load JSON from a URL
+    """
+    path = models.TextField(_("Items Array"))
+
+    mapping = models.TextField(_("Property Mapping"))
+
+    transform = AkaraTransformClient(conf.AKARA_JSON_EXTRACT_URL)
+
+    def get_transform_body(self):
+        r = urllib2.urlopen(self.url)
+        part1 = r.read()
+        part2 = [([self.path], json.loads(self.mapping))]
+        body = "%s\f%s" % (part1, json.dumps(part2))
+        return body
+
+    def __unicode__(self):
+        return "%s (%s)" % (self.url, self.path)
+
+
 cdm_help_text = """
 <p>For XML MODS files, %(site_name)s recognizes the most commonly
  used elements and attributes. Some XML MODS files include local extension
@@ -150,8 +173,4 @@ class ModsURLDataSource(ModsMixin, URLDataSourceMixin, DataSource):
 
 class ModsFileDataSource(ModsMixin, file_datasource_mixin, DataSource):
     """Load XMLMODS from an uploaded file
-    """
-
-class JSONDataSource(URLDataSourceMixin, DataSource):
-    """Load JSON from a URL
     """

@@ -1,25 +1,26 @@
-# encoding: utf-8
+# -*- coding: utf-8 -*-
 import datetime
 from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
         # Adding model 'JSONDataSource'
         db.create_table('upload_jsondatasource', (
             ('datasource_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['dataset.DataSource'], unique=True, primary_key=True)),
             ('url', self.gf('django.db.models.fields.URLField')(max_length=200)),
+            ('path', self.gf('django.db.models.fields.TextField')()),
+            ('mapping', self.gf('django.db.models.fields.TextField')()),
         ))
         db.send_create_signal('upload', ['JSONDataSource'])
 
 
     def backwards(self, orm):
-        
-        # Deleting model 'OAIDataSource'
-        db.delete_table('upload_jsonsearchdatasource')
+        # Deleting model 'JSONDataSource'
+        db.delete_table('upload_jsondatasource')
 
 
     models = {
@@ -59,13 +60,25 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        'dataset.datasource': {
-            'Meta': {'object_name': 'DataSource'},
-            'classname': ('django.db.models.fields.CharField', [], {'max_length': '32', 'null': 'True'}),
+        'dataset.dataset': {
+            'Meta': {'ordering': "('-modified',)", 'unique_together': "(('slug', 'owner'),)", 'object_name': 'Dataset'},
             'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now', 'blank': 'True'}),
+            'description': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'modified': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now', 'blank': 'True'}),
-            'owner': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'data_sources'", 'to': "orm['auth.User']"}),
+            'owner': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'datasets'", 'null': 'True', 'to': "orm['auth.User']"}),
+            'published': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'slug': ('django_extensions.db.fields.AutoSlugField', [], {'allow_duplicates': 'False', 'max_length': '50', 'separator': "u'-'", 'blank': 'True', 'populate_from': "'title'", 'overwrite': 'False'}),
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '255'})
+        },
+        'dataset.datasource': {
+            'Meta': {'ordering': "('-modified', '-created')", 'object_name': 'DataSource'},
+            'classname': ('django.db.models.fields.CharField', [], {'max_length': '32', 'null': 'True'}),
+            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now', 'blank': 'True'}),
+            'dataset': ('django.db.models.fields.related.OneToOneField', [], {'blank': 'True', 'related_name': "'source'", 'unique': 'True', 'null': 'True', 'to': "orm['dataset.Dataset']"}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'modified': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now', 'blank': 'True'}),
+            'owner': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'data_sources'", 'null': 'True', 'to': "orm['auth.User']"}),
             'uuid': ('django.db.models.fields.CharField', [], {'max_length': '36', 'blank': 'True'})
         },
         'upload.contentdmdatasource': {
@@ -80,6 +93,13 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'FileDataSource', '_ormbases': ['dataset.DataSource']},
             'datasource_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['dataset.DataSource']", 'unique': 'True', 'primary_key': 'True'}),
             'file': ('django.db.models.fields.files.FileField', [], {'max_length': '255'})
+        },
+        'upload.jsondatasource': {
+            'Meta': {'object_name': 'JSONDataSource', '_ormbases': ['dataset.DataSource']},
+            'datasource_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['dataset.DataSource']", 'unique': 'True', 'primary_key': 'True'}),
+            'mapping': ('django.db.models.fields.TextField', [], {}),
+            'path': ('django.db.models.fields.TextField', [], {}),
+            'url': ('django.db.models.fields.URLField', [], {'max_length': '200'})
         },
         'upload.modsfiledatasource': {
             'Meta': {'object_name': 'ModsFileDataSource', '_ormbases': ['dataset.DataSource']},
@@ -103,11 +123,6 @@ class Migration(SchemaMigration):
         },
         'upload.urldatasource': {
             'Meta': {'object_name': 'URLDataSource', '_ormbases': ['dataset.DataSource']},
-            'datasource_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['dataset.DataSource']", 'unique': 'True', 'primary_key': 'True'}),
-            'url': ('django.db.models.fields.URLField', [], {'max_length': '200'})
-        },
-        'upload.jsonsearchdatasource': {
-            'Meta': {'object_name': 'JSONDataSource', '_ormbases': ['dataset.DataSource']},
             'datasource_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['dataset.DataSource']", 'unique': 'True', 'primary_key': 'True'}),
             'url': ('django.db.models.fields.URLField', [], {'max_length': '200'})
         }
