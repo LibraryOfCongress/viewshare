@@ -1,7 +1,7 @@
 /*global jQuery */
 (function($, Freemix) {
 
-    var identify;
+    var identify, LoadingTransactionView;
 
     function setupIdentifier(data) {
         if (!Freemix.profile && "data_profile" in data) {
@@ -45,6 +45,58 @@
         identify.setCurrentRecord(identify.getCurrentRecord());
         identify.populateRecordDisplay();
     }
+
+    /**
+     * Represents the display while polling results for a Transaction
+     * @constructor
+     * @param {Transaction} options.transaction - Transaction with profileURL
+     * @param {jQuery} options.el - $() element that contains loading message
+     */
+    LoadingTransactionView = function(options) {
+      this.transaction = options.transaction;
+      this.el = options.el;
+    };
+
+    /** 
+     * Handles DOM manipulation on a successful ajax request
+     * @param {string} data - Data returned from successful jquery ajax request
+     */
+    LoadingTransactionView.prototype.pollSuccess = function(data) {
+      if ($.isEmptyObject(data)) {
+        this.el.show();
+        setTimeout($.proxy(this.render, this), 5000);
+      } else if (data.hasOwnProperty('message')) {
+        if (data.message === 'No Data') {
+          window.location.reload(true);
+        }
+      }else {
+        this.el.hide();
+        var editor = new Freemix.DatasetEditor();
+        editor.setData(data);
+      }
+    };
+
+    /** 
+     * Handles DOM manipulation on a failed ajax request
+     * @param {string} data - Data returned from successful jquery ajax request
+     */
+    LoadingTransactionView.prototype.pollError = function() {
+      this.el.html(
+        'Error while processing transaction.<br />Please try to reload the page later.'
+      );
+    };
+
+    /** Controls display of LoadingTransactionView */
+    LoadingTransactionView.prototype.render = function() {
+      var success = $.proxy(this.pollSuccess, this)
+      var error = $.proxy(this.pollError, this)
+
+      this.transaction.sync({
+        success: success,
+        error: error
+      });
+    };
+
 
      Freemix.DatasetEditor = function() {
 
@@ -104,6 +156,9 @@
     };
 
     $(document).ready(function() {
+        var profileURL = $("link[rel='freemix/dataprofile']").attr("href"),
+          transaction = new window.FreemixTransaction({profileURL: profileURL});
+
         setupCreateExhibitButton();
 
         $("#delete-property-dialog").dialog({
@@ -132,18 +187,10 @@
             }
         });
 
-        var profileURL = $("link[rel='freemix/dataprofile']").attr("href");
-
-        var xhr = $.ajax({
-                 url: profileURL,
-                 type: "GET",
-                 dataType: "json",
-                 success: function(data) {
-                     var editor = new Freemix.DatasetEditor();
-                     editor.setData(data);
-                     
-                 }
-        });
+        new LoadingTransactionView({
+          el: $('#loading-transaction'),
+          transaction: transaction
+        }).render();
     });
 
 })(window.Freemix.jQuery, window.Freemix);

@@ -1,0 +1,33 @@
+{% load i18n %}
+<div class="datasource_field">
+    <span class="datasource_label">URL:</span>
+    <span class="datasource_value">
+        <a href="{{ datasource.url }}">{{ datasource.url }}</a>
+    </span>
+</div>
+
+<div class="datasource_field">
+    <span class="datasource_label">{% trans "Collection" %}:</span>
+    <span class="datasource_value">
+        {{ datasource.collection }}
+    </span>
+</div>
+
+<div class="datasource_field">
+    <span class="datasource_label">{% trans "Query" %}:</span>
+    <span class="datasource_value">
+        {{ datasource.query }}
+    </span>
+</div>
+
+<div class="datasource_field">
+    <span class="datasource_label">{% trans "Limit" %}:</span>
+    <span class="datasource_value">
+        {{ datasource.limit }}d
+    </span>
+</div>
+
+<div class="datasource_field">
+    <span class="datasource_label">{% trans "Type" %}:</span>
+    <span class="datasource_value">ContentDM</span>
+</div>

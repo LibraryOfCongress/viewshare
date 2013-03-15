@@ -3,12 +3,26 @@
 {% load pagination_tags %}
 {% load timezone_filters %}
 {% load dataset_tags %}
+{% load datasource_tags %}
 {% load exhibit_tags %}
 
 <div id="user_sections">
 {% with exhibits.count as exhibit_count %}
 {% with datasets.count as dataset_count %}
+{% with pending_datasets.count as pending_dataset_count %}
 {% if is_me %}
+
+{% ifnotequal pending_dataset_count 0 %}
+<div class="pending_dataset_list">
+  <h2 class="ui-widget-header">{% blocktrans %}Pending Data{% endblocktrans %}</h2>
+  {% datasource_list pending_datasets 3 0 %}
+  {% if pending_dataset_count > 3 %}
+  <div class="see_all">
+    <a href="{% url datasource_list_pending %}">{% trans "See all" %}  {{ pending_dataset_count }} set{{ pending_dataset_count|pluralize }}</a>
+  </div>
+  {% endif %}
+</div>
+{% endifnotequal %}
 
 {% ifequal dataset_count 0 %}
 
@@ -76,6 +90,7 @@
 
 
 {% endif %}
+{% endwith %}
 {% endwith %}
 {% endwith %}
 

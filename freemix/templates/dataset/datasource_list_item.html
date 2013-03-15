@@ -1,0 +1,29 @@
+{% load i18n %}
+
+<li class="dataset_list_item result_set_item clearfix">
+   <div class="datasource-description">
+       {% block datasource_description %}
+            {% include template_name with datasource=datasource.get_concrete %}
+       {% endblock %}
+   </div>
+
+    {%  if can_view %}
+    <div class="dataset-actions dataset-right">
+        <div class="dataset-links">
+{#            <span class="action action_inspect_datasource">#}
+{#                <a class="datasource_inspect" href="{% url datasource_detail uuid=datasource.uuid %}">{% trans "Inspect" %}</a>#}
+{#            </span>|#}
+
+            <span class="action action_refresh_datasource">
+                <a class="datasource_refresh" href="{% url datasource_transaction uuid=datasource.uuid %}">{% trans "Edit" %}</a>
+            </span>&nbsp;|&nbsp;
+
+            <span class="action action_refresh_datasource">
+                <a class="datasource_refresh" href="{% url datasource_update uuid=datasource.uuid %}">{% trans "Refresh" %}</a>
+            </span>
+
+
+        </div>
+     </div>
+    {% endif %}
+</li>
