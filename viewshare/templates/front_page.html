@@ -39,7 +39,7 @@
       {% endif %}
       </a>
       <div class="caption">
-        <p>{{ exhibit.custom_title }}</p>
+        <p>{{ exhibit.custom_title|safe }}</p>
       </div>
     </div><!-- /.slide -->
   {% endfor %}
