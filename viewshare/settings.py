@@ -272,5 +272,3 @@ except ImportError:
     pass
 
 INSTALLED_APPS += LOCAL_INSTALLED_APPS
-
-AKARA_URL_PREFIX = 'http://localhost:8882/'
