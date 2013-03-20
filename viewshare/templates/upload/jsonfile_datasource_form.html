@@ -3,218 +3,81 @@
 {% load i18n %}
 
 {% block head_data %}
-<link rel="exhibit-data" type="application/json" href="/static/data/search_sample.json" />
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}stylesheets/json-upload.css" />
 {% endblock %}
 
 {% block head_scripts %}
-<style type="text/css">
-  .uniForm label.prop {
-    display: inline;
-  }
-  .uniForm select {
-    width: auto !important;
-  }
-  .buttons, .button {
-    margin-top: 2em;
-    clear: both;
-    padding-left: 0;
-    padding-right: 0;
-  }
-  em.gray {
-    color: #777;
-    font-size: 90%;
-  }
-  h4 {
-    font-weight: bold;
-    margin-bottom: 0.5em;
-  }
-  #array-options-container {
-    float: left;
-    width: 25%;
-  }
-  #selected-sample-container {
-    float: left;
-    margin-left: 4%;
-    width: 70%;
-  }
-  #item-properties {
-    max-height: 20em;
-    overflow: auto;
-  }
-  #div_id_path, #div_id_mapping {
-    display: none;
-  }
-</style>
+<script src="{{STATIC_URL}}scripts/json-upload.js"></script>
 <script>
 $(document).ready(function() {
-    var runner, analyzer, displayer, formatter, original, map = {};
-    map["lists"] = {};
-    map["lengths"] = {};
-    map["bookmarks"] = {};
-
-    formatter = function(val) {
-        var trailer;
-        if (typeof val === "string") {
-            return val.substr(0, 50) + ((val.length > 50) ? "..." : "");
-        } else if (typeof val === "object" && typeof val.length !== "undefined" && val.length > 0) {
-            if (val.length === 1) {
-               trailer = ' <em class="gray">in a list</em>';
-            } else if (val.length === 2) {
-               trailer = ' <em class="gray">and one other object in a  list</em>';
-            } else {
-               trailer = ' <em class="gray">and " + (val.length - 1) + " other objects in a list</em>';
-            }
-            return formatter(val[0]) + trailer;
-        } else if (typeof val === "object") {
-            return '<em class="gray">[object]</em>';
-        } else if (typeof val === "undefined") {
-            return '<em class="gray">[missing]</em>';
-        } else {
-            return val;
-        }
-    };
-
-    displayer = function(k, i) {
-        var propMap = {};
-        if (typeof i === "undefined") {
-            i = 0;
-        }
-        $("#pager-total").text(map.lengths[k]);
-        $("#item-properties").empty();
-        $.each(map.lists[k], function(idx, val) {
-            $("#item-properties").append('<p><input type="checkbox" value="'
-                + val + '" name="attribute" id="' + val
-                +'" checked="checked" />'
-                + '<label class="prop" for="' + val + '">' + val + '</label>: '
-                + formatter(original[k][i][val]) + '</p>');
-            propMap[val] = [val];
-        });
-        $("#pager-current").text(i + 1);
-        $("#load-prop-mapping").val(JSON.stringify(propMap));
-    };
-
-    analyzer = function(k, v) {
-        var opt, i;
-        map.lengths[k] = v.length;
-        map.bookmarks[k] = 0;
-        map.lists[k] = [];
-        for (i = 0; i < v.length; i++) {
-            $.each(v[i], function(key, val) {
-                if (map.lists[k].indexOf(key) === -1) {
-                    map.lists[k].push(key);
-                }
-            });
-        }
-        opt = $('<option value="' + k + '">' + k + '</option>');
-        $("#array-options").append(opt);
-    };
-
-    runner = function() {
-        $.ajax({
-            "url": $("link[rel='exhibit-data']").attr("href"),
-            "dataType": "json",
-            "success": function(d) {
-                var longest, longestLength = 0;
-                original = d;
-                $.each(d, function(key, val) {
-                    if (typeof val === "object"
-                        && typeof val.length !== "undefined"
-                        && val.length > 0) {
-                        if (val.length > longestLength) {
-                            longest = key;
-                            longestLength = val.length;
-                        }
-                        analyzer(key, val);
-                    }
-                });
-                displayer(longest);
-            }
-        });
-    };
-    
-    $("#json-search").hide();
-    $("#id_url").val("http://api.dp.la/v0.03/item/?filter=dpla.keyword:einstein");
-    $("#array-options").bind("change", function(evt) {
-        displayer($(this).val(), map.bookmarks[$(this).val()]);
-    });
-    $("#pager-back").bind("click", function(evt) {
-        var curIdx, list;
-        list = $("#array-options").val();
-        curIdx = map.bookmarks[list];
-        if (curIdx === 0) {
-            curIdx = map.lengths[list];
-        }
-        map.bookmarks[list] = --curIdx % map.lengths[list];
-        displayer(list, map.bookmarks[list]);
-        evt.preventDefault();
-    });
-    $("#pager-forward").bind("click", function(evt) {
-        var curIdx, list;
-        list = $("#array-options").val();
-        curIdx = map.bookmarks[list];
-        map.bookmarks[list] = ++curIdx % map.lengths[list];
-        displayer(list, map.bookmarks[list]);
-        evt.preventDefault();
-    });
-    $(".upload-form .buttons input.submit").bind("click", function(evt) {
-        $("#search-result-url")
-            .text($("#id_url").val())
-            .attr("href", $("#id_url").val());
-        runner();
-        $(".upload-jsonsearch").fadeOut(function() {
-            $("#json-search").fadeIn();
-        });
-        $("#load-csrf").val($(".upload-form input[name=csrfmiddlewaretoken]").val());
-        $("#load-url").val($("#id_url").val());
-        evt.preventDefault();
-    });
+    JSONPrep.init("{% url json_prep_view %}", false);
 });
 </script>
 {% endblock %}
 
-{% block upload_form_type %}<div class="upload-jsonsearch">{% endblock %}
+{% block upload_form_type %}<div class="upload-json">{% endblock %}
 
 {% block upload_form_title %}<h1 id="upload-label">{% trans "Load JSON Data"%}</h1>{% endblock %}
 
 {% block format_error %}
 
-<h3>For JSON:</h3>
+<h3>{% blocktrans %}For JSON:{% endblocktrans %}</h3>
 
 <ul>
-    <li>File must be valid JSON.</li>
+    <li>{% blocktrans %}File must be valid JSON.{% endblocktrans %}</li>
 </ul>
 {% endblock %}
 
 {% block body %}
+<div id="systemMsg" style="display: none;">
+  <ul id="load-messages" class="messages">
+    <li id="load-failure-general" class="errorMsg">
+      <span></span>
+    </li>
+  </ul>
+</div>
 {{ block.super }}
-<div id="json-search">
+<div id="spinner">
+  <p><img src="{{STATIC_URL}}images/loading.gif"/></p>
+  <p>{% blocktrans %}Analyzing JSON, please wait.{% endblocktrans %}</p>
+</div>
+<div id="json-upload">
   <fieldset class="upload-form">
     <legend>
-      <h1>Loading JSON Data</h1>
+      <h1>{% blocktrans %}Loading JSON Data{% endblocktrans %}</h1>
     </legend>
-    <form id="json-search-form" class="uniForm" method="POST" action="">
+    <form id="json-upload-form" class="uniForm" method="POST" action="">
       <input type="hidden" id="load-csrf" name="csrfmiddlewaretoken" />
-      <input type="hidden" id="load-url" name="url" />
-      <input type="hidden" id="load-prop-mapping" name="mapping" />
-      <h2>From <a id="search-result-url" target="_new"></a></h2>
-      <p>Select the data collection from the set of lists found below:</p>
+      <input type="hidden" id="load-prop-mapping" name="mapping" value="{}"/>
+      <h2>{% blocktrans %}From file{% endblocktrans %}</h2>
+      <p>{% blocktrans %}Select the data collection from the set of lists found below:{% endblocktrans %}</p>
       <br />
       <div class="ctrlHolder">
         <div id="array-options-container">
-          <label for="array-options" class="requiredField">Lists</label>
+          <label for="array-options" class="requiredField">{% trans "Lists" %}</label>
           <select id="array-options" name="path">
           </select>
           <br />
           <div class="button">
-            <input class="submit" type="submit" value="Continue" />
+            <input class="submit" type="submit" value="{% trans "Continue" %}" />
           </div>
         </div>
         <div id="selected-sample-container">
-          <h4>Sample item from selected list</h4>
+          <h4>{% blocktrans %}Sample item from selected list{% endblocktrans %}</h4>
           <button id="pager-back">&lt;</button>
-          <span id="pager-current"></span> of <span id="pager-total"></span> items
+          <span id="pager-current"></span> {% trans "of" %} <span id="pager-total"></span> {% trans "sample items" %}
           <button id="pager-forward">&gt;</button>
-          <div id="item-properties">
+          <div id="item-properties-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>{% trans "Property" %}</th>
+                  <th>{% trans "Frequency" %}</th>
+                  <th>{% trans "Item value" %}</th>
+                </tr>
+              </thead>
+              <tbody id="item-properties"></tbody>
+            </table>
           </div>
         </div>
       </div>

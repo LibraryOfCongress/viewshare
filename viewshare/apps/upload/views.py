@@ -67,15 +67,19 @@ class OAISetListView(View):
             result = ()
         return JSONResponse(result)
 
+
 class JSONPrepView(CreateView):
     transform = AkaraTransformClient(conf.AKARA_JSON_NAV_URL)
 
     @method_decorator(cache_page(60 * 15))
     def post(self, request, *args, **kwargs):
         url = request.POST.get("url")
+        if url is None:
+            body = request.FILES["file"]
         try:
-            r = urllib2.urlopen(url)
-            body = r.read()
+            if url is not None:
+                r = urllib2.urlopen(url)
+                body = r.read()
             result = self.transform(body=body)
         except Exception, ex:
             logger.error("Error loading JSON analysis of %s: %s" % (url, ex))

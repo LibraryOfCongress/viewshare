@@ -10,7 +10,7 @@
 <script src="{{STATIC_URL}}scripts/json-upload.js"></script>
 <script>
 $(document).ready(function() {
-    JSONPrep.init("{% url json_prep_view %}");
+    JSONPrep.init("{% url json_prep_view %}", true);
 });
 </script>
 {% endblock %}

@@ -6,12 +6,11 @@
 
 /**
  * @namespace
- * @param {Array} structure
- * @param {String} [url]
  */
 var JSONPrep = {
     "response": null,
-    "option": null
+    "option": null,
+    "isURL": null
 };
 
 /**
@@ -99,9 +98,21 @@ JSONPrep.error = function(status, err) {
  * @param {String} transform
  */
 JSONPrep.runner = function(transform) {
+    var data, processData, contentType;
+    if (JSONPrep.isURL) {
+        data = { "url": $("#id_url").val() };
+        processData = true;
+        contentType = "application/x-www-form-urlencoded; charset=UTF-8";
+    } else {
+        data = new FormData($(".upload-json form").get(0));
+        processData = false;
+        contentType = false;
+    }
     $.ajax({
         "url": transform,
-        "data": { "url": $("#id_url").val() },
+        "data": data,
+        "processData": processData,
+        "contentType": contentType,
         "type": "POST",
         "dataType": "json",
         "success": function(d) {
@@ -109,7 +120,9 @@ JSONPrep.runner = function(transform) {
             if (d.length === 0) {
                 JSONPrep.error(
                     "baddata",
-                    "Could not load from URL. Verify and try again."
+                    (JSONPrep.isURL) ?
+                        "Could not load from URL. Verify and try again." :
+                        "Could not load from file. Verify and try again."
                 );
                 return;
             }
@@ -135,8 +148,10 @@ JSONPrep.runner = function(transform) {
 /**
  * @static
  * @param {String} transform
+ * @param {Boolean} isURL
  */
-JSONPrep.init = function(transform) {
+JSONPrep.init = function(transform, isURL) {
+    JSONPrep.isURL = isURL;
     $("#json-upload").hide();
     $("#array-options").bind("change", function(evt) {
         JSONPrep.option = JSONPrep.response.getOption(
@@ -162,20 +177,30 @@ JSONPrep.init = function(transform) {
         JSONPrep.displayer(JSONPrep.option);
     });
     $(".upload-form .buttons input.submit").bind("click", function(evt) {
+        var url;
         evt.preventDefault();
-        var url = $("#id_url").val();
-        $("#input-url")
-            .text(url)
-            .attr("href", url);
+        if (JSONPrep.isURL) {
+            url = $("#id_url").val();
+            $("#input-url")
+                .text(url)
+                .attr("href", url);
+            $("#load-url").val(url);
+        } else {
+            $("#json-upload-form .submit").bind("click", function(evt) {
+                evt.preventDefault();
+                $("#id_path").val($("#array-options").val());
+                $("#id_mapping").val($("#load-prop-mapping").val());
+                $(".upload-json form").submit();
+            });
+        }
+        $("#load-csrf").val(
+            $(".upload-form input[name=csrfmiddlewaretoken]").val()
+        );
         $(".upload-json").fadeOut(function() {
             JSONPrep.runner(transform);
             $("#systemMsg").hide();
             $("#spinner").fadeIn();
         });
-        $("#load-csrf").val(
-            $(".upload-form input[name=csrfmiddlewaretoken]").val()
-        );
-        $("#load-url").val(url);
     });
 };
 
