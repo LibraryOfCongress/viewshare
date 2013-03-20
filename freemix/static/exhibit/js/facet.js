@@ -38,16 +38,22 @@
         },
         getPopupContent: function() {
             var fc = this;
-                return $("<div class='chooser'></div>").freemixThumbnails(
-                    Freemix.facet.types, Freemix.facet.prototypes,
-                function(facetTemplate) {
-                    var facet = Freemix.facet.createFacet({type: facetTemplate.config.type});
-                    fc.findWidget().one("edit-facet", function() {
-                        fc.addFacet(facet);
-                    });
-                    facet.showEditor(fc);
-                });
-            },
+
+            var chooserThumbnails = $("<div><div class='modal-header'><h3 id='addWidgetModalLabel'>Select Facet Widget</h3></div></div>");
+            
+            $("<div class='chooser modal-body'></div>").freemixThumbnails(
+                                                                  Freemix.facet.types, Freemix.facet.prototypes,
+                                                                  function(facetTemplate) {
+                                                                      var facet = Freemix.facet.createFacet({type: facetTemplate.config.type});
+                                                                      fc.findWidget().one("edit-facet", function() {
+                                                                              fc.addFacet(facet);
+                                                                          });
+                                                                      facet.showEditor(fc);
+                                                                  }).appendTo(chooserThumbnails);
+            
+            return chooserThumbnails;
+            
+        },
         getPopupButton: function() {
             return this.findWidget().find(".create-facet-button");
         }

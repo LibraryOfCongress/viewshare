@@ -3,17 +3,17 @@
 
     $.fn.freemixThumbnails = function(tags, items, clickHandler) {
         return this.each(function() {
-            var list = $("<ul></ul>");
+            var list = $("<ul class='thumbnails'></ul>");
             $.each(tags,function(key, tag) {
                 var item = items[tag];
                 item.id = key;
                 var li = $("<li></li>");
                 var img = "<img src='" + item.thumbnail +
                                                     "' alt='" + item.label + "' title='" + item.label + "'/>";
-                var label = $("<span class='chooser-item-name'>" +
-                                    item.label + "</span>");
+                var label = $("<legend class='chooser-item-name'>" +
+                                    item.label + "</legend>");
                 if (item.isAvailable()) {
-                    var body = $("<a href='' title='" + item.label + "'></a>").append(img).append(label);
+                    var body = $("<a class='thumbnail' href='' title='" + item.label + "'></a>").append(img).append(label);
                     body.click(function(e) {
                         clickHandler(item);
                         e.preventDefault();
@@ -43,11 +43,14 @@
             });
             w.data("model", facetContainer);
             w.addClass("ui-widget-content").addClass("facet-container");
-            w.append("<div class='create-facet ui-state-default'>" +
-                "<button class='create-facet-button btn btn-small btn-primary'><i class='icon-plus'></i> Add a Widget</button>" +
+            w.append("<div class='create-facet'>" +
+                "<button class='create-facet-button btn btn-small btn-primary' href='#addWidgetModal' data-toggle='modal'><i class='icon-plus'></i> Add a Widget</button>" +
                 "</div>");
 
-            var dialog =$("<div style='display:hidden;'></div>").appendTo('body');
+            var dialog =$("<div id='addWidgetModal' class='modal hide fade' tabindex='-1' role='dialog' aria-labelledby='addWidgetModalLabel' aria-hidden='true'>" +
+                          "</div>").appendTo('body');
+
+            /* 
             facetContainer._dialog = dialog;
             dialog.dialog({
                 width: 500,
@@ -63,10 +66,12 @@
                     facetContainer.findWidget().off("edit-facet");
                 }
             });
+            */
 
             w.find(".create-facet").click(function() {
                 dialog.empty();
                 dialog.append(facetContainer.getPopupContent());
+                /*
                 dialog.dialog("option", {
                     "title":"Select widget type",
                     "buttons": [],
@@ -74,8 +79,8 @@
                     "position": "center"
                 });
                 dialog.dialog("open");
+                */
             });
-
         });
     };
 
@@ -102,8 +107,8 @@
                     }
                 });
             set.append("<li class='create-view'>" +
-                "<button class='create-view-button btn btn-small btn-primary'><i class='icon-plus'></i> Add a View</button>" +
-                "</li>");
+                       "<button class='create-view-button btn btn-small btn-primary'><i class='icon-plus'></i> Add a View</button>" +
+                       "</li>");
 
             var dialog =$("<div style='display:hidden;'></div>").appendTo('body');
             viewContainer._dialog = dialog;
