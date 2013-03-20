@@ -8,19 +8,31 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'JSONDataSource'
-        db.create_table('upload_jsondatasource', (
+        # Adding model 'JSONFileDataSource'
+        db.create_table('upload_jsonfiledatasource', (
+            ('datasource_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['dataset.DataSource'], unique=True, primary_key=True)),
+            ('file', self.gf('django.db.models.fields.files.FileField')(max_length=255)),
+            ('path', self.gf('django.db.models.fields.TextField')()),
+            ('mapping', self.gf('django.db.models.fields.TextField')()),
+        ))
+        db.send_create_signal('upload', ['JSONFileDataSource'])
+
+        # Adding model 'JSONURLDataSource'
+        db.create_table('upload_jsonurldatasource', (
             ('datasource_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['dataset.DataSource'], unique=True, primary_key=True)),
             ('url', self.gf('django.db.models.fields.URLField')(max_length=200)),
             ('path', self.gf('django.db.models.fields.TextField')()),
             ('mapping', self.gf('django.db.models.fields.TextField')()),
         ))
-        db.send_create_signal('upload', ['JSONDataSource'])
+        db.send_create_signal('upload', ['JSONURLDataSource'])
 
 
     def backwards(self, orm):
-        # Deleting model 'JSONDataSource'
-        db.delete_table('upload_jsondatasource')
+        # Deleting model 'JSONFileDataSource'
+        db.delete_table('upload_jsonfiledatasource')
+
+        # Deleting model 'JSONURLDataSource'
+        db.delete_table('upload_jsonurldatasource')
 
 
     models = {
@@ -94,8 +106,15 @@ class Migration(SchemaMigration):
             'datasource_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['dataset.DataSource']", 'unique': 'True', 'primary_key': 'True'}),
             'file': ('django.db.models.fields.files.FileField', [], {'max_length': '255'})
         },
-        'upload.jsondatasource': {
-            'Meta': {'object_name': 'JSONDataSource', '_ormbases': ['dataset.DataSource']},
+        'upload.jsonfiledatasource': {
+            'Meta': {'object_name': 'JSONFileDataSource', '_ormbases': ['dataset.DataSource']},
+            'datasource_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['dataset.DataSource']", 'unique': 'True', 'primary_key': 'True'}),
+            'file': ('django.db.models.fields.files.FileField', [], {'max_length': '255'}),
+            'mapping': ('django.db.models.fields.TextField', [], {}),
+            'path': ('django.db.models.fields.TextField', [], {})
+        },
+        'upload.jsonurldatasource': {
+            'Meta': {'object_name': 'JSONURLDataSource', '_ormbases': ['dataset.DataSource']},
             'datasource_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['dataset.DataSource']", 'unique': 'True', 'primary_key': 'True'}),
             'mapping': ('django.db.models.fields.TextField', [], {}),
             'path': ('django.db.models.fields.TextField', [], {}),

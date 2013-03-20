@@ -85,7 +85,13 @@ class ModsFileDataSourceForm(DataSourceForm):
         model = models.ModsFileDataSource
 
 
-class JSONDataSourceForm(DataSourceForm):
+class JSONURLDataSourceForm(DataSourceForm):
 
     class Meta(DataSourceForm.Meta):
-        model = models.JSONDataSource
+        model = models.JSONURLDataSource
+
+
+class JSONFileDataSourceForm(DataSourceForm):
+
+    class Meta(DataSourceForm.Meta):
+        model = models.JSONFileDataSource

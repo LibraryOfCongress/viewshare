@@ -12,7 +12,6 @@ from freemix.dataset.transform import AkaraTransformClient
 from viewshare.apps.upload import conf
 import urllib2
 
-
 def source_upload_path(instance, filename):
     return join(instance.uuid, filename)
 
@@ -119,7 +118,7 @@ class OAIDataSource(URLDataSourceMixin, DataSource):
         return "%s (%s, %s)" % (self.title, self.url, self.set)
 
 
-class JSONDataSource(URLDataSourceMixin, DataSource):
+class JSONURLDataSource(URLDataSourceMixin, DataSource):
     """Load JSON from a URL
     """
     path = models.TextField(_("Items Array"))
@@ -131,12 +130,31 @@ class JSONDataSource(URLDataSourceMixin, DataSource):
     def get_transform_body(self):
         r = urllib2.urlopen(self.url)
         part1 = r.read()
-        part2 = [([self.path], json.loads(self.mapping))]
+        part2 = [(json.loads(self.path), json.loads(self.mapping))]
         body = "%s\f%s" % (part1, json.dumps(part2))
         return body
 
     def __unicode__(self):
         return "%s (%s)" % (self.url, self.path)
+
+
+class JSONFileDataSource(file_datasource_mixin, DataSource):
+    """Load JSON from a file
+    """
+    path = models.TextField(_("Items Array"))
+
+    mapping = models.TextField(_("Property Mapping"))
+
+    transform = AkaraTransformClient(conf.AKARA_JSON_EXTRACT_URL)
+
+    def get_transform_body(self):
+        part1 = self.file.read()
+        part2 = [(json.loads(self.path), json.loads(self.mapping))]
+        body = "%s\f%s" % (part1, json.dumps(part2))
+        return body
+
+    def __unicode__(self):
+        return "%s (%s)" % (self.file.name, self.path)
 
 
 cdm_help_text = """

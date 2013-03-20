@@ -1,0 +1,88 @@
+{% extends "upload/datasource_form.html" %}
+
+{% load i18n %}
+
+{% block head_data %}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}stylesheets/json-upload.css" />
+{% endblock %}
+
+{% block head_scripts %}
+<script src="{{STATIC_URL}}scripts/json-upload.js"></script>
+<script>
+$(document).ready(function() {
+    JSONPrep.init("{% url json_prep_view %}");
+});
+</script>
+{% endblock %}
+
+{% block upload_form_type %}<div class="upload-json">{% endblock %}
+
+{% block upload_form_title %}<h1 id="upload-label">{% trans "Load JSON Data"%}</h1>{% endblock %}
+
+{% block format_error %}
+
+<h3>{% blocktrans %}For JSON:{% endblocktrans %}</h3>
+
+<ul>
+    <li>{% blocktrans %}File must be valid JSON.{% endblocktrans %}</li>
+</ul>
+{% endblock %}
+
+{% block body %}
+<div id="systemMsg" style="display: none;">
+  <ul id="load-messages" class="messages">
+    <li id="load-failure-general" class="errorMsg">
+      <span></span>
+    </li>
+  </ul>
+</div>
+{{ block.super }}
+<div id="spinner">
+  <p><img src="{{STATIC_URL}}images/loading.gif"/></p>
+  <p>{% blocktrans %}Analyzing JSON, please wait.{% endblocktrans %}</p>
+</div>
+<div id="json-upload">
+  <fieldset class="upload-form">
+    <legend>
+      <h1>{% blocktrans %}Loading JSON Data{% endblocktrans %}</h1>
+    </legend>
+    <form id="json-upload-form" class="uniForm" method="POST" action="">
+      <input type="hidden" id="load-csrf" name="csrfmiddlewaretoken" />
+      <input type="hidden" id="load-url" name="url" />
+      <input type="hidden" id="load-prop-mapping" name="mapping" value="{}"/>
+      <h2>{% trans "From" %} <a id="input-url" target="_new"></a></h2>
+      <p>{% blocktrans %}Select the data collection from the set of lists found below:{% endblocktrans %}</p>
+      <br />
+      <div class="ctrlHolder">
+        <div id="array-options-container">
+          <label for="array-options" class="requiredField">{% trans "Lists" %}</label>
+          <select id="array-options" name="path">
+          </select>
+          <br />
+          <div class="button">
+            <input class="submit" type="submit" value="{% trans "Continue" %}" />
+          </div>
+        </div>
+        <div id="selected-sample-container">
+          <h4>{% blocktrans %}Sample item from selected list{% endblocktrans %}</h4>
+          <button id="pager-back">&lt;</button>
+          <span id="pager-current"></span> {% trans "of" %} <span id="pager-total"></span> {% trans "sample items" %}
+          <button id="pager-forward">&gt;</button>
+          <div id="item-properties-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>{% trans "Property" %}</th>
+                  <th>{% trans "Frequency" %}</th>
+                  <th>{% trans "Item value" %}</th>
+                </tr>
+              </thead>
+              <tbody id="item-properties"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </form>
+  </fieldset>
+</div>
+{% endblock %}
