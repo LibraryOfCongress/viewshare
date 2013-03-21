@@ -61,6 +61,7 @@ header, .header, #header{
 
 .chooser li.disabled {
     opacity: 0.3;
+    padding:  10px 5px 10px 5px;
 }
 
 .chooser li a {

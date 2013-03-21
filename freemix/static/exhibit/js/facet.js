@@ -39,7 +39,7 @@
         getPopupContent: function() {
             var fc = this;
 
-            var chooserThumbnails = $("<div><div class='modal-header'><h3 id='addWidgetModalLabel'>Select Facet Widget</h3></div></div>");
+            var chooserThumbnails = $("<div><div class='modal-header'><button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button><h3 id='addWidgetModalLabel'>Select Facet Widget</h3></div></div>");
             
             $("<div class='chooser modal-body'></div>").freemixThumbnails(
                                                                   Freemix.facet.types, Freemix.facet.prototypes,
