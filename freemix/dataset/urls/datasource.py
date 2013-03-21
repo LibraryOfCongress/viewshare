@@ -23,11 +23,11 @@ urlpatterns = patterns('',
         name="datasource_transaction_result"
         ),
 
-    url(r'^(?P<uuid>[a-zA-Z0-9_.-]+)/latest',
+    url(r'^(?P<uuid>[a-zA-Z0-9_.-]+)/latest$',
         login_required(views.DataSourceTransactionView.as_view()),
         name="datasource_transaction"),
 
-    url(r'^(?P<uuid>[a-zA-Z0-9_.-]+)/latest_status.json',
+    url(r'^(?P<uuid>[a-zA-Z0-9_.-]+)/latest_status.json$',
         views.DataSourceTransactionStatusView.as_view(),
         name="datasource_transaction_status"),
 

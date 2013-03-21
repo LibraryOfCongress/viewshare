@@ -49,15 +49,18 @@ DataSourceRegistry.register(models.ModsFileDataSource,
                             "upload/modsfile_datasource_item.html")
 create_mods_file_view = DataSourceRegistry.create_view(models.ModsFileDataSource)
 
+DataSourceRegistry.register(models.JSONFileDataSource,
+                            forms.JSONFileDataSourceForm,
+                            "upload/jsonfile_datasource_form.html",
+                            "upload/jsonfile_datasource_item.html")
+create_json_file_view = DataSourceRegistry.create_view(models.JSONFileDataSource)
 
-create_json_file_view = create_form_view(models.JSONFileDataSource,
-                               forms.JSONFileDataSourceForm,
-                               "upload/jsonfile_datasource_form.html")
 
-
-create_json_url_view = create_form_view(models.JSONURLDataSource,
-                               forms.JSONURLDataSourceForm,
-                               "upload/jsonurl_datasource_form.html")
+DataSourceRegistry.register(models.JSONURLDataSource,
+                            forms.JSONURLDataSourceForm,
+                            "upload/jsonurl_datasource_form.html",
+                            "upload/jsonurl_datasource_item.html")
+create_json_url_view = DataSourceRegistry.create_view(models.JSONURLDataSource)
 
 
 class OAISetListView(View):
@@ -86,6 +89,8 @@ class JSONPrepView(CreateView):
             if url is not None:
                 r = urllib2.urlopen(url)
                 body = r.read()
+            else:
+                raise Exception("No Data returned")
             result = self.transform(body=body)
         except Exception, ex:
             logger.error("Error loading JSON analysis of %s: %s" % (url, ex))
