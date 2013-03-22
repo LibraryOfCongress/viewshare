@@ -46,30 +46,33 @@ header, .header, #header{
 
 /* choosers */
 
-.chooser ul {
+.chooser ul.thumbnails {
     margin: 0;
     padding: 0;
     list-style-type:none;
 }
 
-.chooser li {
+.chooser ul.thumbnails li {
     float: left;
     font-size: 1em;
     margin: 5px 5px 5px 5px;
     list-style: none;
 }
 
-.chooser li.disabled {
+.chooser ul.thumbnails li.disabled {
     opacity: 0.3;
     padding:  10px 5px 10px 5px;
 }
 
-.chooser li a {
+.chooser ul.thumbnails li.disabled img {
+    border: none;
+}
+.chooser ul.thumbnails li a {
     text-decoration: none;
     position: relative;
 }
 
-.chooser li img {
+.chooser ul.thumbnails li img {
     width: 100px;
     height: auto;
     display: block;
@@ -80,7 +83,7 @@ header, .header, #header{
     border: lightgrey 1px solid;
 }
 
-.chooser li a:hover img {
+.chooser ul.thumbnails li a:hover img {
     /*border: 2px solid #ccc;*/
     opacity: 1.0;
  -moz-box-shadow: 3px 3px 4px #999; /* Firefox */
@@ -90,12 +93,12 @@ header, .header, #header{
  : progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#999999');/* IE 5.5 - 7 */ 
 }
 
-.chooser li a:active img {
+.chooser ul.thumbnails li a:active img {
     /*border: 2px solid #f58809;*/
     opacity: 1.0;
 }
 
-.chooser li legend {
+.chooser ul.thumbnails li legend {
     margin: .1em 4px;
     font-size: 9pt;
     border: none;
@@ -104,9 +107,6 @@ header, .header, #header{
 
 }
 
-.chooser li.disabled img {
-    border: none;
-}
 
 /* for Exhibits */
 /* Maybe move to a profiles.css? */

@@ -107,10 +107,13 @@
                     }
                 });
             set.append("<li class='create-view'>" +
-                       "<button class='create-view-button btn btn-small btn-primary'><i class='icon-plus'></i> Add a View</button>" +
+                       "<button class='create-view-button btn btn-small btn-primary' href='#addViewModal' data-toggle='modal'><i class='icon-plus'></i> Add a View</button>" +
                        "</li>");
 
-            var dialog =$("<div style='display:hidden;'></div>").appendTo('body');
+            var dialog =$("<div id='addViewModal' class='modal hide fade' tabindex='-1' role='dialog' aria-labelledby='addViewModalLable' aria-hidden='true'>" + 
+                          "</div>").appendTo('body');
+
+            /*
             viewContainer._dialog = dialog;
             dialog.dialog({
                 width: 500,
@@ -123,18 +126,20 @@
                 show: "fade",
                 hide: "fade"
             });
+            */
 
             set.find(".create-view-button").click(function() {
                 dialog.empty();
                 dialog.append(viewContainer.getPopupContent());
+                /*
                 dialog.dialog("option", {
                     "title":"Select view type",
                     "buttons": [],
                     "width": 500,
                     "position": "center"
                 });
-
                 dialog.dialog("open");
+                */
             });
         });
     };

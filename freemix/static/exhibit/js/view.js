@@ -48,11 +48,15 @@
         },
         getPopupContent: function() {
             var fc = this;
-            return $("<div class='chooser'></div>")
-                .freemixThumbnails(Freemix.view.types, Freemix.view.prototypes, function(viewTemplate) {
+
+            var viewThumbnails = $("<div><div class='modal-header'><button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button><h3 id='addViewModalLabel'>Select View</h3></div></div>");
+            
+            $("<div class='chooser modal-body'></div>").freemixThumbnails(Freemix.view.types, Freemix.view.prototypes, function(viewTemplate) {
                     var view = Freemix.view.createView({type: viewTemplate.config.type, name: viewTemplate.label});
                     view.showEditor(fc);
-                });
+                }).appendTo(viewThumbnails);
+            
+            return viewThumbnails;
         },
         getPopupButton: function() {
             return this.findWidget().find(".create-view-button");
