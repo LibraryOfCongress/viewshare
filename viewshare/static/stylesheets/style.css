@@ -57,11 +57,13 @@ header, .header, #header{
     font-size: 1em;
     margin: 5px 5px 5px 5px;
     list-style: none;
+    width: 120px;
+    height: 120px;
+    padding-bottom: 20px;
 }
 
 .chooser ul.thumbnails li.disabled {
     opacity: 0.3;
-    padding:  10px 5px 10px 5px;
 }
 
 .chooser ul.thumbnails li.disabled img {
@@ -74,11 +76,9 @@ header, .header, #header{
 
 .chooser ul.thumbnails li img {
     width: 100px;
-    height: auto;
+    height: 80px;
     display: block;
     padding-top:3px;
-    /*border: 0;*/
-    /*border: 2px solid #000;*/
     position: relative;
     border: lightgrey 1px solid;
 }

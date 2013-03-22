@@ -4,12 +4,10 @@
   <ul id="canvas_chooser" class="thumbnails">
     {% for canvas in object_list %}
     <li>
-      <div class="thumbnail">
-        <a id="{{canvas.slug}}" href="{{ base_url }}?canvas={{ canvas.slug }}" title="{{ canvas.title }}">
-          <img src="{{ STATIC_URL }}{{ canvas.thumbnail }}" alt="{{ canvas.title }}' title='{{ canvas.title }}" />
-          <legend class="chooser-canvas-name">{{ canvas.title }}</legend>
-        </a>
-      </div>
+      <a id="{{canvas.slug}}" class="thumbnail" href="{{ base_url }}?canvas={{ canvas.slug }}" title="{{ canvas.title }}">
+        <img src="{{ STATIC_URL }}{{ canvas.thumbnail }}" alt="{{ canvas.title }}" title="{{ canvas.title }}" />
+        <legend class="chooser-canvas-name">{{ canvas.title }}</legend>
+      </a>
     </li>
     {% endfor %}
   </ul>
