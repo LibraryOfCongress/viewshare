@@ -22,22 +22,8 @@
             }
         };
 
-        var browser_visibility = function() {
-            if ($("#id_browser").val() == "other") {
-                $("#div_id_browser_text").show().effect("highlight");
-            } else {
-                $("#div_id_browser_text").hide();
-                $("#id_browser_text").val("");
-            }
-        };
-
-
         $("#id_contact_type").change(function() {
             contact_visibility();
-        });
-
-        $("#id_browser").change(function() {
-            browser_visibility();
         });
 
         form.ajaxForm({
@@ -64,7 +50,6 @@
                    }
         });
         contact_visibility();
-        browser_visibility();
         return form;
     }
 

@@ -30,22 +30,8 @@ class SupportIssueForm(forms.Form):
                                     max_length=25,
                                     label=_("Phone number"))
 
-    browser = forms.ChoiceField(label=_("Browser"),
-                                help_text=_("Please select your browser from"
-                                            " the list, or 'Other' to enter "
-                                            "an alternative"),
-                                required=False)
-
-    browser_text = forms.CharField(required=False,
-                                   label=_("Browser Description"),
-                                   help_text=_("Please describe your browser"))
-
     def __init__(self, *args, **kwargs):
         super(SupportIssueForm, self).__init__(*args, **kwargs)
-        browsers = [(b.key, b.value,) for b in
-                    models.BrowserPickListItem.objects.all()]
-        self.fields["browser"].choices = [(u'', u''), ] + browsers + \
-                                         [(u'other', u'Other',), ]
 
     def clean(self):
         cleaned_data = self.cleaned_data
@@ -53,10 +39,6 @@ class SupportIssueForm(forms.Form):
             if val[0] == cleaned_data.get('contact_type'):
                 cleaned_data["contact_type_pretty"] = val[1]
 
-        for val in self.fields['browser'].choices:
-            if val[0] == cleaned_data.get('browser') \
-                    and cleaned_data.get('browser') != 'other':
-                cleaned_data["browser_text"] = val[1]
         return cleaned_data
 
     def clean_contact_email(self):
@@ -79,17 +61,6 @@ class SupportIssueForm(forms.Form):
             else:
                 self.cleaned_data["contact_point"] = phone
         return phone
-
-    def clean_browser_text(self):
-        browser_text = self.cleaned_data.get("browser_text")
-        browser = self.cleaned_data.get("browser")
-        if browser:
-            if not browser == "other":
-                objects = models.BrowserPickListItem.objects
-                browser_text = objects.get(key=browser).value
-            elif not browser_text:
-                raise forms.ValidationError(_("Please describe your browser"))
-        return browser_text
 
 
 class DataLoadUploadIssueForm(SupportIssueForm):
