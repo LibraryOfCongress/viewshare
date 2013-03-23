@@ -4,10 +4,8 @@
 {% block body %}
 <div id="issue_create_content">
     <h1>{% trans "Ticket Created" %}</h1>
-    <p>{% blocktrans %}Thank you. A support ticket has been generated and sent to the {{SITE_NAME}} support team.{% endblocktrans %}</p>
+    <p>{% blocktrans %}Thank you.  A support ticket (<a href="{{issue_link}}">#{{issue_id}}</a>) has been generated and sent to the {{SITE_NAME}} support team.{% endblocktrans %}</p>
     <input type="button" class="ticket-created" value="{% trans "OK" %}"/>
 </div>
 
 {% endblock %}
-
-

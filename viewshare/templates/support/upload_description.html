@@ -1,12 +1,14 @@
+{% load freemix_helpers %}
+* Data Source: {% site_url source.get_absolute_url %}
+* User: "{{ submitting_user_name }}":{{submitting_user_profile}}
+* {{ contact_type }}: {{ contact_point }}
 
-*Transaction ID:* {{tx_id}}
-*User:* "{{ submitting_user_name }}":{{submitting_user_profile}}
-*{{ contact_type }}:* {{ contact_point }}
-*Browser:* {{ browser_text }}
-*File Format:* {{file_format_text}}
-*Issue Description:* {{issue_reason_text}}
-*Additional comments:* {{ comments }}
+* Browser: {{ browser_text }}
+* Browser User Agent: {{ user_agent }}
+
+* File Format: {{file_format_text}}
+* Issue Description: {{issue_reason_text}}
+
+* Additional comments: {{ comments }}
 
 This diagnosis submission comes from "{{ system_name }}":{{ system_link }} - {{ system_info }}
-
-

@@ -7,8 +7,8 @@ import time
 from datetime import datetime
 
 from django.core.cache import cache
-from django.shortcuts import  render
-from django.http import  Http404, HttpResponseRedirect
+from django.shortcuts import render
+from django.http import Http404, HttpResponseRedirect
 from django.conf import settings
 from django.template.response import TemplateResponse
 from django.utils import simplejson
@@ -79,13 +79,12 @@ def uservoice_options(request, **kwargs):
     if s is None:
         raise Http404
 
-    api_key = s.get('API_KEY')
+    sso_key = s.get('SSO_KEY')
 
-    if api_key is None:
+    if sso_key is None:
         raise Http404
 
     ctx = {
-        "api_key": s.get("API_KEY"),
         "forum": s.get("FORUM", 1),
         "key": s.get('ACCOUNT_KEY', "recollection"),
         "host": s.get("HOST", "recollection.uservoice.com")
@@ -93,13 +92,13 @@ def uservoice_options(request, **kwargs):
 
     if request.user.is_authenticated():
         ctx["token"] = uservoice_token(request,
-            ctx.get("api_key"),
-            ctx.get("key"))
+                                       sso_key,
+                                       ctx.get("key"))
 
     response = render(request,
-        "uservoice/options.js",
-        ctx,
-        content_type="text/javascript")
+                      "support/uservoice/options.js",
+                      ctx,
+                      content_type="text/javascript")
 
     return response
 
@@ -114,8 +113,8 @@ def uservoice_redirect(request):
     host = s.get("HOST")
 
     token = uservoice_token(request,
-        s.get("API_KEY"),
-        s.get("ACCOUNT_KEY"))
+                            s.get("SSO_KEY"),
+                            s.get("ACCOUNT_KEY"))
 
     success_url = success_url % (host, path, token,)
     size = request.GET.get("uv_size", "window")
@@ -123,12 +122,13 @@ def uservoice_redirect(request):
     if size == "window":
         return HttpResponseRedirect(success_url)
     return TemplateResponse(request,
-        "uservoice/redirect.html", {"redirect_url": success_url})
+                            "support/uservoice/redirect.html",
+                            {"redirect_url": success_url})
 
 
 def login(request,
           form_class=LoginForm,
-          template_name="uservoice/login.html",
+          template_name="support/uservoice/login.html",
           success_url=None,
           url_required=False,
           extra_context=None):

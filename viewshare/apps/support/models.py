@@ -3,14 +3,17 @@ from django_extensions.db.fields import AutoSlugField
 from django.contrib.auth.models import User
 import os
 
+
 class SupportPickListItem(models.Model):
     """
     Support Form item pick lists
     """
     value = models.CharField(max_length=100, unique=True)
     key = AutoSlugField(populate_from="value")
+
     class Meta:
-        abstract=True
+        abstract = True
+
 
 class BrowserPickListItem(SupportPickListItem):
     """
@@ -18,11 +21,13 @@ class BrowserPickListItem(SupportPickListItem):
     """
     pass
 
+
 class FileFormatPickListItem(SupportPickListItem):
     """
     An editable list of file formats for data loading support tickets
     """
     pass
+
 
 class DataLoadReasonPickListItem(SupportPickListItem):
     """
@@ -30,8 +35,12 @@ class DataLoadReasonPickListItem(SupportPickListItem):
     """
     pass
 
+
 def source_upload_path(instance, filename):
-    return os.path.join("support", "datasource", instance.user.username, filename)
+    return os.path.join("support",
+                        "datasource",
+                        instance.user.username,
+                        filename)
 
 
 class SupportFileDataSource(models.Model):
@@ -40,4 +49,3 @@ class SupportFileDataSource(models.Model):
 
     def __unicode__(self):
         return self.file.url
-
