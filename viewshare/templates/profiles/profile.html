@@ -1,7 +1,7 @@
 {% extends "profiles/base.html" %}
 
 {% load i18n %}
-{% load crispy_forms_tags %}
+{% load uni_form_tags %}
 {% load notification_utils %}
 {% load connection_helpers %}
 {% load freemix_helpers %}
@@ -12,155 +12,138 @@
 {% block head_title %}{{ other_user|nicename }}{% endblock %}
 
 {% block head_css %}
-{{ block.super }}
-{% compress css %}
-<!-- style users as friends -->
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}stylesheets/profile_friends.css"/>
-{% endcompress %}
+  {{ block.super }}
+  {% compress css %}
+    <!-- style users as friends -->
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}stylesheets/profile_friends.css"/>
+  {% endcompress %}
 {% endblock %}
 
 {% block head_scripts %}
-{{block.super}}
-{% include "freemix/js_include/jquery_ui.html" %}
+  {{block.super}}
+  <script type="text/javascript" src="{{STATIC_URL}}dataset/js/transaction.js"></script>
+  <script type="text/javascript" src="{{STATIC_URL}}dataset/js/transaction_user_profile.js"></script>
+  {% include "freemix/js_include/jquery_ui.html" %}
 
-<!-- 
-<script type="text/javascript">
-$(document).ready(function() {
+  <script type="text/javascript">
+  $(document).ready(function() {
+    var userTransactionView, transactions = $('.transaction');
+    if (transactions.length > 0) {
+      // poll for DataSourceTransaction updates
+      userTransactionsView = new window.UserTransactionsView({
+        transactions: $('.transaction')
+      }).render();
+    }
     $('#edit_profile_form').load('{% url profile_edit %}', function() {
-        var q = $('form.uniForm');
-        if (q.length) {
-//            q.uniform();
-        }
+      var q = $('form.uniForm');
+      if (q.length) {
+        //            q.uniform();
+      }
     });
     var opts = {
-        title: "{% trans "Edit Profile" %}",
-        modal: true,
-        autoOpen: false,
-        position: ["top","center"],
-        width: 400
+      title: "{% trans "Edit Profile" %}",
+      modal: true,
+      autoOpen: false,
+      position: ["top","center"],
+      width: 400
     };
     $('#edit_profile_form').dialog(opts);
     $('#edit-profile-button').click(function() {
-        $('#edit_profile_form').dialog('open');
-        return false;
+      $('#edit_profile_form').dialog('open');
+      return false;
     });
-});
-</script>
--->
-
-{% endblock %}
+  });
+  </script>
+{% endblock head_scripts %}
 
 {# check to see if the user being inspected is user logged in #}
 
 {% block yourprofile-tab-selected %}
-{% if is_me %} ui-tabs-selected ui-state-active{% endif %}
+  {% if is_me %} ui-tabs-selected ui-state-active{% endif %}
 {% endblock %}
 
 {# if user being inspected is not the one logged in, create a hierarchical tab-group for display #}
 
 {% block extra_subnav %}
-{% ifnotequal user other_user %}
-{% if other_user %}
-<li>
-  <ul class="tab-group">
-    <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="">{{ other_user|nicename }}</a></li>
-  </ul>
-</li>
-{% endif %}
-{% endifnotequal %}
-{% endblock %}
+  {% ifnotequal user other_user %}
+    {% if other_user %}
+    <li>
+    <ul class="tab-group">
+      <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="">{{ other_user|nicename }}</a></li>
+    </ul>
+    </li>
+    {% endif %}
+  {% endifnotequal %}
+{% endblock extra_subnav %}
 
 {% block body_class %}profile{% endblock %}
 
 {% block body %}
 
+<h1>{{ other_user|nicename }}</h1>
+{% if is_me %}
+<div class="priority-area">
+  {% cache 3600 profile_pages %}
+  <p>
+  <a href="{% url front_page %}">{{ SITE_NAME }} Home</a> <span class="divider">|</span>
+  <a href="{% url userguide %}">User's Guide</a> <span class="divider">|</span>
+  <a href="{% url faq %}">FAQ</a> <span class="divider">|</span>
+  <a href="{% url profile_detail 'Guide' %}">Ask the Guide</a> <span class="divider">|</span>
+  <a href="{% url upload_dataset %}" class="button_link">{% trans "Upload Data" %}</a>
+  </p>
+</div>
+{% endcache %}
+{% endif %}
 
-<div class="row-fluid">
-  <div class="span12">
+<div class="right_panel data_panel">
+  {% include "profiles/profile_right_panel.html" %}
+</div>
 
-    <div class="navbar">
-      <div class="navbar-inner">
-        <a class="brand" href="#">{{ other_user|nicename }}</a>
+<div class="left_panel user_panel">
+  <div id="about-box" class="info-section">
+    <table class="about_profile">
+      <tbody>
+      <tr>
+        <td class="inspector_icon profile_icon">
+          <div class="user_avatar"></div>
+        </td>
+        <td>
+          <div class="inspector_info profile_info">
+            {% if other_user.get_profile.website %}
+            <p class="about_name">{{ other_user|nicename }}<a class="url about_homepage" href="{{ other_user.get_profile.website }}" title="{{ other_user.get_profile.website }}"></a></p>
+            {% else %}
+            <p class="about_name">{{ other_user|nicename }}</p>
+            {% endif %}
+            {% if other_user.get_profile.location %}
+            <p class="about_location">{{ other_user.get_profile.location }}</p>
+            {% endif %}
 
-        {% if is_me %}
-        {% cache 3600 profile_pages %}
-        <ul class="nav pull-right">
-          <li><a href="{% url front_page %}">{{ SITE_NAME }} Home</a></li> <li class="divider-vertical"></li>
-          <li><a href="{% url userguide %}">User's Guide</a></li> <li class="divider-vertical"></li>
-          <li><a href="{% url faq %}">FAQ</a></li> <li class="divider-vertical"></li>
-          <li><a href="{% url profile_detail 'Guide' %}">Ask the Guide</a></li> <li class="divider-vertical"></li>
-          <li><a href="{% url upload_dataset %}" class="button_link">{% trans "Upload Data" %}</a></li>
-        </ul>
-        {% endcache %}
-        {% endif %}
-
-      </div>
-    </div>
-    
-  </div>
-</div> <!-- end row-fluid -->
-
-<div class="row-fluid">
-  
-  <div class="span4">
-      
-    <div id="about-box" class="info-section well">
-      
-      <table class="about_profile">
-        <tbody>
-	  <tr>
-	    <td class="inspector_icon profile_icon">
-	      <div class="user_avatar"></div>
-	    </td>
-	    <td>
-	      <div class="inspector_info profile_info">
-	        {% if other_user.get_profile.website %}
-	        <p class="about_name">{{ other_user|nicename }}<a class="url about_homepage" href="{{ other_user.get_profile.website }}" title="{{ other_user.get_profile.website }}"></a></p>
-	        {% else %}
-	        <p class="about_name">{{ other_user|nicename }}</p>
-	        {% endif %}
-	        {% if other_user.get_profile.location %}
-	        <p class="about_location">{{ other_user.get_profile.location }}</p>
-	        {% endif %}
-                
-	        <!-- user stats -->
-	        <div class="dataset-links">
-		  {% user_counts other_user %}
-	        </div>
-	    </td>
-	  </tr>
+            <!-- user stats -->
+            <div class="dataset-links">
+              {% user_counts other_user %}
+            </div>
+          </td>
+        </tr>
         </tbody>
       </table>
-      
+
       {% if other_user.get_profile.about %}
       <div class="profile_info">
         <div class="about_description">{{ other_user.get_profile.about|linebreaks }}</div>
       </div>
       {% endif %}
-      
+
       {% if is_me %}
-      <span class="about_edit">
-        <a href="{% url profile_edit %}" data-target="#edit_profile_form" role="button" id="edit-profile-button" class="btn btn-small" data-toggle="modal">{% trans "Edit" %}</a>
-      </span>
-
-      <div id="edit_profile_form" class="modal hide fade form-dialog" tabindex="-1" role="dialog" aria-labelledby="editProfileFormLabel" aria-hidden="true">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h3 id="editProfileFormLabel">{% trans "Edit Profile" %}</h3>
-        </div>
-        <div class="modal-body">
-        </div>
-      </div>
-
+      <p class="about_edit"><a href="#edit_profile_form" id="edit-profile-button" class="button_link">{% trans "Edit" %}</a></p>
       {% endif %}
-      
+
       {% if user.is_authenticated %}
-      
+
       {% if not is_me %}
-      
+
       {% if is_friend %}
       <p class="center connection_extra">
-        {% blocktrans %}You are connected to {% endblocktrans %}{{ other_user|nicename }}.
+      {% blocktrans %}You are connected to {% endblocktrans %}{{ other_user|nicename }}.
       </p>
       <form method="POST" action="">
         {%csrf_token %}
@@ -168,10 +151,10 @@ $(document).ready(function() {
         <p class="center"><input type="submit" class="negative-button" value="{% trans "Remove Connection" %}"/></p>
       </form>
       {% else %}
-      
+
       {% if previous_invitations_from %}
       <div class="invitation connection_extra">
-        
+
         {% for invitation in previous_invitations_from %}
         <p>{{ other_user|nicename }} {% blocktrans %}requested a connection on{% endblocktrans %} {{ invitation.sent|date }}:</p>
         <p class="invitation_message">{{ invitation.message }}</p>
@@ -189,96 +172,84 @@ $(document).ready(function() {
         </form>
         {% endfor %}
       </div>
-      
+
       {% else %}
-      
+
       {% if previous_invitations_to %}
-      
+
       <p class="center">{% trans "Connection request sent." %}</p>
-      
+
       {% else %}
-      
+
       <h2>{% trans "Add Connection" %}</h2>
-      
+
       <form class="uniForm" method="POST" action="">
         {% csrf_token %}
         <fieldset class="inlineLabels">
-          
-          {{ invite_form|crispy }}
+
+          {{ invite_form|as_uni_form }}
           <div class="form_block">
             <input type="hidden" name="action" value="invite" />
             <p class="center"><input type="submit" value="{% trans "Invite" %}"/>
-              {{ other_user|nicename }} {% blocktrans %}to connect.{%  endblocktrans %}
+            {{ other_user|nicename }} {% blocktrans %}to connect.{%  endblocktrans %}
             </p>
           </div>
         </fieldset>
       </form>
-      
+
       {% endif %} {# previous_invitations_to #}
-      
+
       {% endif %} {# previous_invitations_from #}
-      
+
       {% endif %} {# is_friend #}
-      
+
       {% endif %} {# is me #}
-      
+
       {% else %} {# not user.is_authenticated #}
-      
+
       {% url acct_login as login_url %}
       <p class="center">{% blocktrans %}<a href="{{login_url}}">Log in</a> to add this person as a connection.{% endblocktrans %}</p>
-      
-      {% endif %}
-      </div>
-      
-      <!-- my news -->
-      
-      {%  if user.is_authenticated %}
-      
-      <div class="info-section well">
-        <h2 class="ui-widget-header">{% blocktrans %}Connections{% endblocktrans %}</h2>
-        <div class="user_friends">
-	  {% if other_friends %}
-	  {% connection_list other_friends 3 0 %} 
-	  <div class="see_all">
-	    <a href="{% url connection_list_by_user other_user.username %}">{% trans "See all" %}</a>
-	  </div> 
-	  {% else %}
-          
-	  {% if is_me %}
-	  {% url profile_list as profile_list_url %}
-	  <p class="center">{% blocktrans %}Look at all of the <a href="{{ profile_list_url }}">profiles</a> and see if there's anyone you know.{% endblocktrans %}</p>
-	  {% else %}
-	  <p class="center">{% trans "Invite" %} {{ other_user|nicename }} {% blocktrans %}to connect.{% endblocktrans %}</p>
-	  {% endif %}
-          
-	  {% endif %}
-        </div>
-      </div>
-      
-      {% if is_me %}
-      
-      <div class="info-section well">
-        <h2 class="ui-widget-header">{% blocktrans %}Notices{% endblocktrans %}</h2>
-        <div class="notices">
-	  {% notification_summary_list other_user %}
-        </div>
-      </div>
-      {% endif %}
-      
-      {% endif %}
-      
-      
-    </div> <!-- end span4 -->
 
-    <div class="span8">
+      {% endif %}
+    </div>
 
-      <div class="right_panel data_panel">
-        {% include "profiles/profile_right_panel.html" %}
+    <!-- my news -->
+
+    {%  if user.is_authenticated %}
+    <div class="info-section">
+      <h2 class="ui-widget-header">{% blocktrans %}Connections{% endblocktrans %}</h2>
+      <div class="user_friends">
+        {% if other_friends %}
+        {% connection_list other_friends 3 0 %} 
+        <div class="see_all">
+          <a href="{% url connection_list_by_user other_user.username %}">{% trans "See all" %}</a>
+        </div> 
+        {% else %}
+
+        {% if is_me %}
+        {% url profile_list as profile_list_url %}
+        <p class="center">{% blocktrans %}Look at all of the <a href="{{ profile_list_url }}">profiles</a> and see if there's anyone you know.{% endblocktrans %}</p>
+        {% else %}
+        <p class="center">{% trans "Invite" %} {{ other_user|nicename }} {% blocktrans %}to connect.{% endblocktrans %}</p>
+        {% endif %}
+
+        {% endif %}
       </div>
-      
-    </div> <!-- end span8 -->
-  </div> <!-- end row-fluid -->
-  
-  {% endblock %}
-  
+    </div>
 
+    {% if is_me %}
+    <div class="info-section">
+      <h2 class="ui-widget-header">{% blocktrans %}Notices{% endblocktrans %}</h2>
+      <div class="notices">
+        {% notification_summary_list other_user %}
+      </div>
+    </div>
+    {% endif %}
+
+    {% endif %}
+
+    <div id="edit_profile_form" class="form-dialog">
+    </div>
+  </div> <!-- /#about-box -->
+{# TODO: Are we missing a div here? #}
+{% endblock body %}

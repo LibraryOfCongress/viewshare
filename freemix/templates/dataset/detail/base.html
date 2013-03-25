@@ -5,6 +5,7 @@
 {% load exhibit_tags %}
 {% load compress %}
 {% load exhibit_tags %}
+{% load datasource_tags %}
 {% block freemix_title %}{% blocktrans %}Data Profile{% endblocktrans %}: {{ object.title }}{% endblock %}
 
 {% block freemix_css %}
@@ -65,6 +66,12 @@
     </div>
     
     <div class="right_panel data_panel">
+    {% if object.source %}
+    <div class="datasource_list">
+        <h2 class="ui-widget-header">{% trans "Source" %}</h2>
+        {% datasource_list_item object.source.get_concrete %}
+    </div>
+    {% endif %}
       <div class="exhibit_list">
 	<h2 class="ui-widget-header">{% blocktrans %}Views{% endblocktrans %}</h2>
  	{% exhibit_list exhibits.all 10 0 %}

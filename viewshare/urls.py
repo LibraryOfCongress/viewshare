@@ -1,13 +1,12 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.views.generic.base import RedirectView
-from django.views.generic.base import TemplateView
+
 from django.contrib import admin
 
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from viewshare.utilities.views import UserHomeView, PlainTextResponse
+from viewshare.utilities.views import UserHomeView
 from viewshare.utilities import feeds
 
 
@@ -46,7 +45,7 @@ urlpatterns = patterns('',
 
     (r'^upload/', include('viewshare.apps.upload.urls')),
     (r'^data/', include('freemix.dataset.urls')),
-    (r'^source/', include('freemix.dataset.urls.datasource')),
+    # (r'^source/', include('freemix.dataset.urls.datasource')),
 
     (r'^views/', include('freemix.exhibit.urls')),
     (r'^augment/', include('freemix.dataset.augment.urls')),
@@ -63,38 +62,18 @@ urlpatterns = patterns('',
     (r'^feeds/data/(?P<owner>[a-zA-Z0-9_.-]+)/$', feeds.UserDatasets()),
     (r'^feeds/data_atom/(?P<owner>[a-zA-Z0-9_.-]+)/$', feeds.AtomUserDatasets()),
 
-    # URL mappings for fixed cms pages
-    url(r'^tos/$', 'cms.views.details', kwargs={"slug": "tos"}, name="tos"),
-    url(r'^about/community/$', 'cms.views.details', kwargs={"slug": "community"}, name="community"),
-    url(r'^about/help/$', 'cms.views.details', kwargs={"slug": "help"}, name="help"),
-    url(r'^about/faq/$', 'cms.views.details', kwargs={"slug": "faq"}, name="faq"),
-    url(r'^about/userguide/$', 'cms.views.details', kwargs={"slug": "userguide"}, name="userguide"),
-    url(r'^augment/patterns/$', 'cms.views.details', kwargs={"slug": "augment-list-patterns"}, name="augment-list-patterns"),
-
     # home page
     url(r'^$', 'viewshare.apps.discover.views.front_page', name="front_page"),
 
-    # For legacy purposes
-    url(r'^userupload/$', login_required(RedirectView.as_view(url="/upload")),
-                                                              name="user_upload"),
-
-    # Override the robots.txt template to
-    (r'^robots.txt$', TemplateView.as_view(template_name="robots.txt",
-                                           response_class=PlainTextResponse)),
-
-) + staticfiles_urlpatterns()
-
-if getattr(settings, "USERVOICE_SETTINGS", None):
-    urlpatterns += patterns('',
-        (r'^uservoice/', include('viewshare.apps.uservoice.urls')),
-    )
-
-urlpatterns += patterns('',
-
-    # CMS url definition should come after all others
-    (r'^', include('cms.urls')),
 )
 
+urlpatterns += staticfiles_urlpatterns()
+
+try:
+    import local_urls
+    urlpatterns += local_urls.urlpatterns
+except ImportError:
+    pass
 
 if settings.DEBUG:
     urlpatterns += patterns('',

@@ -159,7 +159,7 @@ Add the following section to settings.py to configure the use of a
 Uservoice_ feedback tab::
 
    USERVOICE_SETTINGS = {
-      'API_KEY': '<your-api-key>',
+      'SSO_KEY': '<your-api-key>',
       'ACCOUNT_KEY': '<your-account-key>',
       'FORUM': '<forum-id>',               # default: 1
       'HOST': '<uservoice-host>',          # default: recollection.uservoice.com

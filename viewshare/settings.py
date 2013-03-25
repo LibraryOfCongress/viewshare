@@ -119,6 +119,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
 
     # external
+    'djcelery',
     'emailconfirmation',
     'django_extensions',
     'pagination',
@@ -126,7 +127,6 @@ INSTALLED_APPS = (
     'uni_form',
     'crispy_forms',
     'django_sorting',
-
     'compressor',
     'south',
 
@@ -273,3 +273,6 @@ except ImportError:
     pass
 
 INSTALLED_APPS += LOCAL_INSTALLED_APPS
+
+import djcelery
+djcelery.setup_loader()

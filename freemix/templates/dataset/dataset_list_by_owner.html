@@ -57,4 +57,6 @@
 </div>
 
     {% endwith %}
-{% endblock %}
+
+    <a href="{% url datasource_list_pending %}">{% trans "See all pending datasets" %}</a>
+{% endblock body %}

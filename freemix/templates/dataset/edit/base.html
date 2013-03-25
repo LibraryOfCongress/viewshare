@@ -31,7 +31,6 @@
     <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.dataTables.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.uuid.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.cookie.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/csrf.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}freemix/js/freemix.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/lightbox.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}freemix/js/exhibit.js"></script>
@@ -39,6 +38,7 @@
     <script type="text/javascript" src="{{STATIC_URL}}freemix/js/identify.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}freemix/js/identify-edit.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/new_exhibit_dialog.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}dataset/js/transaction.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}dataset/js/editor.js"></script>
 
     {% endcompress %}
@@ -59,6 +59,13 @@
 {% endblock %}
 
 {% block freemix_body %}
+  
+  <div id="loading-transaction" style="display: none">
+    <img src="{{ STATIC_URL }}images/loaderbar.gif" alt="Loading" />
+    {% blocktrans %}
+    Processing your data...
+    {% endblocktrans %}
+  </div>
 
 <div id="contents" class="ui-helper-hidden">
 {% block contents %}
@@ -215,10 +222,6 @@
           This property will be permanently deleted and cannot be recovered. Are you sure?
           {% endblocktrans %}
       </p>
-  </div>
-  
-  <div id="record-picker-dialog">
-
   </div>
 
   {% endblock dataset_edit_hidden %}

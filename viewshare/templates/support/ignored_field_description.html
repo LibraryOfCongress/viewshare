@@ -1,10 +1,13 @@
+{% load freemix_helpers %}
+* Data Source: {% site_url source.get_absolute_url %}
+* Relevant Elements: {{ elements }}
 
-*Relevant Elements:* {{ elements }}
-*Transaction ID:* {{tx_id}}
-*User:* "{{ submitting_user_name }}":{{submitting_user_profile}}
-*{{ contact_type }}:* {{ contact_point }}
-*Browser:* {{ browser_text }}
-*Additional comments:* {{ comments }}
+* User: "{{ submitting_user_name }}" {{submitting_user_profile}}
+* {{ contact_type }}: {{ contact_point }}
+
+* Browser User Agent: {{ user_agent }}
+
+* Additional comments: {{ comments }}
 
 This diagnosis submission comes from "{{ system_name }}":{{ system_link }} - {{ system_info }}
 

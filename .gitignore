@@ -24,12 +24,14 @@ include/python*
 /upload/*
 *.db*
 local_settings.py
+local_urls.py
 .mo
 dist/*
 MANIFEST
 /build/*
 .hg/*
-.hgignore
 .hgtags
 *~
 *#
+celerybeat-schedule
+celerybeat.pid

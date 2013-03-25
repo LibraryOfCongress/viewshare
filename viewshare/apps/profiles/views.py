@@ -11,24 +11,20 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ugettext
 
 from viewshare.apps.vendor.friends.forms import InviteFriendForm
-from viewshare.apps.vendor.friends.models import FriendshipInvitation, Friendship
+from viewshare.apps.vendor.friends.models import (FriendshipInvitation,
+                                                  Friendship)
+from freemix.dataset.models import DataSource
 from freemix.permissions import PermissionsRegistry
 
 from viewshare.apps.profiles.forms import ProfileForm
 
 
-def profiles(request, template_name="profiles/profiles.html", extra_context=None):
+def profiles(request, template_name="profiles/profiles.html",
+             extra_context=None):
     if extra_context is None:
         extra_context = {}
     users = User.objects.all().order_by("-date_joined")
-
-#    f = PermissionsRegistry.get_filter("exhibit.can_view", request.user, "exhibits")
-
-#    users = users.filter(f)
-#
-#    users = users.annotate(exhibit_count=Count("exhibits", distinct=True), dataset_count=Count("datasets", distinct=True))
-#    users = users.select_related("profile", "exhibit_count")
-
+    users = users.filter(is_active=True)
     users = users.select_related("profile")
     search_terms = request.GET.get('search', '')
     order = request.GET.get('order')
@@ -47,12 +43,17 @@ def profiles(request, template_name="profiles/profiles.html", extra_context=None
     }, **extra_context), context_instance=RequestContext(request))
 
 
-def profile(request, username, template_name="profiles/profile.html", extra_context=None):
+def send_message(request, message, data):
+    messages.success(request, message % data)
+
+
+def profile(request, username, template_name="profiles/profile.html",
+            extra_context=None):
 
     if extra_context is None:
         extra_context = {}
 
-    other_user = get_object_or_404(User, username=username)
+    other_user = get_object_or_404(User, username=username, is_active=True)
 
     if request.user.is_authenticated():
         is_friend = Friendship.objects.are_friends(request.user, other_user)
@@ -61,8 +62,11 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
             is_me = True
         else:
             is_me = False
-        previous_invitations_to = FriendshipInvitation.objects.invitations(to_user=other_user, from_user=request.user)
-        previous_invitations_from = FriendshipInvitation.objects.invitations(to_user=request.user, from_user=other_user)
+        objects = FriendshipInvitation.objects
+        previous_invitations_to = objects.invitations(to_user=other_user,
+                                                      from_user=request.user)
+        previous_invitations_from = objects.invitations(to_user=request.user,
+                                                        from_user=other_user)
     else:
         other_friends = []
         is_friend = False
@@ -74,9 +78,12 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
     if is_friend:
         invite_form = None
         if request.method == "POST":
-            if request.POST.get("action") == "remove": # @@@ perhaps the form should just post to friends and be redirected here
+            if request.POST.get("action") == "remove":
                 Friendship.objects.remove(request.user, other_user)
-                messages.success(request, _("You have removed %(from_user)s from your connections") % {'from_user': other_user})
+                send_message(request,
+                             _("You have removed %(from_user)s"
+                               " from your connections"),
+                             {'from_user': other_user})
 
                 is_friend = False
                 invite_form = InviteFriendForm(request.user, {
@@ -86,35 +93,47 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
 
     else:
         if request.user.is_authenticated() and request.method == "POST":
-            if request.POST.get("action") == "invite": # @@@ perhaps the form should just post to friends and be redirected here
+            if request.POST.get("action") == "invite":
                 invite_form = InviteFriendForm(request.user, request.POST)
                 if invite_form.is_valid():
                     invite_form.save()
-                    messages.success(request, _("Connection requested with %s") % invite_form.cleaned_data["to_user"]) # @@@ make link like notification
-
+                    send_message(request,
+                                 _("Connection requested with %s"),
+                                 invite_form.cleaned_data["to_user"])
             else:
                 invite_form = InviteFriendForm(request.user, {
                     'to_user': username,
                     'message': ugettext("Let's be Connect!"),
                 })
                 invitation_id = request.POST.get("invitation", None)
-                if request.POST.get("action") == "accept": # @@@ perhaps the form should just post to friends and be redirected here
+
+                friends_for_user = Friendship.objects.friends_for_user
+                invitations = FriendshipInvitation.objects
+                if request.POST.get("action") == "accept":
                     try:
-                        invitation = FriendshipInvitation.objects.get(id=invitation_id)
+                        invitation = invitations.get(id=invitation_id)
                         if invitation.to_user == request.user:
                             invitation.accept()
-                            messages.success(request, _("You have accepted the connection request from %(from_user)s") % {'from_user': invitation.from_user})
+                            message = _("You have accepted the connection "
+                                        "request from %(from_user)s")
+                            send_message(request,
+                                         message,
+                                         {'from_user': invitation.from_user})
+
                             is_friend = True
-                            other_friends = Friendship.objects.friends_for_user(other_user)
+                            other_friends = friends_for_user(other_user)
                     except FriendshipInvitation.DoesNotExist:
                         pass
-                elif request.POST.get("action") == "decline": # @@@ perhaps the form should just post to friends and be redirected here
+                elif request.POST.get("action") == "decline":
                     try:
-                        invitation = FriendshipInvitation.objects.get(id=invitation_id)
+                        invitation = invitations.get(id=invitation_id)
                         if invitation.to_user == request.user:
                             invitation.decline()
-                            messages.success(request, _("You have declined the connection request from %(from_user)s") % {'from_user': invitation.from_user})
-                            other_friends = Friendship.objects.friends_for_user(other_user)
+                            send_message(request,
+                                         _("You have declined the connection "
+                                           "request from %(from_user)s"),
+                                         {'from_user': invitation.from_user})
+                            other_friends = friends_for_user(other_user)
                     except FriendshipInvitation.DoesNotExist:
                         pass
         else:
@@ -122,17 +141,30 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
                 'to_user': username,
                 'message': ugettext("Let's Connect!"),
             })
+    pending_datasets = None
+    if is_me:
+        pending_datasets = DataSource.objects\
+                                     .filter(owner=other_user)\
+                                     .filter(dataset__isnull=True)\
+                                     .order_by("-modified")
 
-    datasets = other_user.datasets.filter(PermissionsRegistry.get_filter("dataset.can_view", request.user))
+    dataset_filter = PermissionsRegistry.get_filter("dataset.can_view",
+                                                    request.user)
+    datasets = other_user.datasets.filter(dataset_filter)
     datasets = datasets.select_related("owner")
-    exhibits = other_user.exhibits.filter(PermissionsRegistry.get_filter("exhibit.can_view", request.user))
+
+    exhibit_filter = PermissionsRegistry.get_filter("exhibit.can_view",
+                                                    request.user)
+    exhibits = other_user.exhibits.filter(exhibit_filter)
     exhibits = exhibits.select_related("owner", "dataset__owner", "dataset")
+
     return render_to_response(template_name, dict({
         "is_me": is_me,
         "is_friend": is_friend,
         "other_user": other_user,
         "datasets": datasets,
-        "exhibits":exhibits,
+        "exhibits": exhibits,
+        "pending_datasets": pending_datasets,
         "other_friends": other_friends,
         "invite_form": invite_form,
         "previous_invitations_to": previous_invitations_to,
@@ -159,7 +191,8 @@ def profile_edit(request, form_class=ProfileForm, **kwargs):
             profile = profile_form.save(commit=False)
             profile.user = request.user
             profile.save()
-            return HttpResponseRedirect(reverse("profile_detail", args=[request.user.username]))
+            return HttpResponseRedirect(reverse("profile_detail",
+                                                args=[request.user.username]))
     else:
         profile_form = form_class(instance=profile)
 
@@ -167,4 +200,3 @@ def profile_edit(request, form_class=ProfileForm, **kwargs):
         "profile": profile,
         "profile_form": profile_form,
     }, context_instance=RequestContext(request))
-

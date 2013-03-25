@@ -19,15 +19,6 @@
             }
         };
 
-        var browser_visibility = function() {
-            if ($("#id_browser").val() == "other") {
-                $("#div_id_browser_text").show().effect("highlight");
-            } else {
-                $("#div_id_browser_text").hide();
-                $("#id_browser_text").val("");
-            }
-        };
-
         var reason_visibility = function() {
             if ($("#id_issue_reason").val() == "other") {
                 $("#div_id_issue_reason_text").show().effect("highlight");
@@ -49,10 +40,6 @@
 
         $("#id_contact_type").change(function() {
             contact_visibility();
-        });
-
-        $("#id_browser").change(function() {
-            browser_visibility();
         });
 
         $("#id_issue_reason").change(function() {
@@ -89,7 +76,6 @@
 
         });
         contact_visibility();
-        browser_visibility();
         reason_visibility();
         format_visibility();
         return form;

@@ -1,0 +1,19 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% block body %}
+    {% if no_email %}
+        <div id="issue_create_content">
+            <h1>{% trans "Email Address Required" %}</h1>
+            <p>{% blocktrans %}Please set a primary email address in the 'Settings' tab.{% endblocktrans %}</p>
+            <input type="button" class="ticket-created" value="{% trans "OK" %}"/>
+        </div>
+    {% else %}
+        <div id="issue_create_content">
+            <h1>{% trans "Ticket Created" %}</h1>
+            <p>{% blocktrans %}Thank you.  A support ticket (<a href="{{issue_link}}">#{{issue_id}}</a>) has been generated and sent to the {{SITE_NAME}} support team.  You will receive an email notification.{% endblocktrans %}</p>
+            <input type="button" class="ticket-created" value="{% trans "OK" %}"/>
+        </div>
+    {% endif %}
+{% endblock %}
