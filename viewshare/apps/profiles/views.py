@@ -22,14 +22,7 @@ def profiles(request, template_name="profiles/profiles.html", extra_context=None
     if extra_context is None:
         extra_context = {}
     users = User.objects.all().order_by("-date_joined")
-
-#    f = PermissionsRegistry.get_filter("exhibit.can_view", request.user, "exhibits")
-
-#    users = users.filter(f)
-#
-#    users = users.annotate(exhibit_count=Count("exhibits", distinct=True), dataset_count=Count("datasets", distinct=True))
-#    users = users.select_related("profile", "exhibit_count")
-
+    users = users.filter(is_active=True)
     users = users.select_related("profile")
     search_terms = request.GET.get('search', '')
     order = request.GET.get('order')
@@ -53,7 +46,7 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
     if extra_context is None:
         extra_context = {}
 
-    other_user = get_object_or_404(User, username=username)
+    other_user = get_object_or_404(User, username=username, is_active=True)
 
     if request.user.is_authenticated():
         is_friend = Friendship.objects.are_friends(request.user, other_user)
