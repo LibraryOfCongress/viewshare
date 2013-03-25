@@ -1,0 +1,25 @@
+{% load i18n %}
+
+<div class="datasource_field">
+    <span class="datasource_label">URL:</span>
+    <span class="datasource_value">
+        <a href="{{ datasource.url }}">{{ datasource.url }}</a>
+    </span>
+</div>
+<div class="datasource_field">
+    <span class="datasource_label">{% trans "Path" %}:</span>
+    <span class="datasource_value">
+        {{ datasource.path }}
+    </span>
+</div>
+
+<div class="datasource_field">
+    <span class="datasource_label">{% trans "Mapping" %}:</span>
+    <span class="datasource_value">
+        {{ datasource.mapping }}
+    </span>
+</div>
+<div class="datasource_field">
+    <span class="datasource_label">{% trans "Type" %}:</span>
+    <span class="datasource_value">JSON URL</span>
+</div>
