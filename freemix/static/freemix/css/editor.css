@@ -791,10 +791,6 @@ padding-bottom: 12px;
 }
 
 .facet-preview, .view-preview {
-  margin-top: 10px;
-  margin-right: 20px;
-  background-color: #F5F5F5;
-  border: 1px solid lightgrey;
 }
 
 .view-lens-properties {

@@ -50,8 +50,13 @@
             var dialog =$("<div id='addWidgetModal' class='modal hide fade' tabindex='-1' role='dialog' aria-labelledby='addWidgetModalLabel' aria-hidden='true'>" +
                           "</div>").appendTo('body');
 
-            /* 
+            dialog.modal({
+                    show:false
+                });
+
             facetContainer._dialog = dialog;
+
+            /* 
             dialog.dialog({
                 width: 500,
                 height: "auto",
@@ -110,11 +115,15 @@
                        "<button class='create-view-button btn btn-small btn-primary' href='#addViewModal' data-toggle='modal'><i class='icon-plus'></i> Add a View</button>" +
                        "</li>");
 
-            var dialog =$("<div id='addViewModal' class='modal hide fade' tabindex='-1' role='dialog' aria-labelledby='addViewModalLable' aria-hidden='true'>" + 
+            var dialog =$("<div id='addViewModal' class='modal hide fade' tabindex='-1' role='dialog' aria-labelledby='addViewModalLabel' aria-hidden='true'>" + 
                           "</div>").appendTo('body');
 
-            /*
+            dialog.modal({
+                    show:false
+                });
+
             viewContainer._dialog = dialog;
+            /*
             dialog.dialog({
                 width: 500,
                 height: "auto",

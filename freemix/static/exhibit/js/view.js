@@ -122,7 +122,7 @@
         display: function() {},
         generateExhibitHTML: function(config) {},
         showEditor: function(vc) {
-            vc._dialog.dialog("close");
+            vc._dialog.modal("hide");
             vc.addView(this);
             this.select();
         },
