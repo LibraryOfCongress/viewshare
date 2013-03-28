@@ -354,6 +354,10 @@ ul.upload-options li#upload-contentdm {
    background: transparent url(../images/contentdm.png) top left no-repeat;
 }
 
+ul.upload-options li#upload-json {
+   background: transparent url(../images/json-file.png) top left no-repeat;
+}
+
 li.option ul.sources {
     list-style-type:none;
     margin: auto;
