@@ -71,31 +71,17 @@
                 config.name = label.val();
                 updatePreview();
             });
-            dialog.empty().append(template).dialog("option", {
-                title: "Edit List",
-                position: "center",
-                buttons: [{
-                   text: "Ok",
-                   id: "ok-button",
-                   click: function() {
-                           var model = template.data("model");
-                           model.config = config;
-                           facetContainer.findWidget().trigger("edit-facet");
-                           model.refresh();
-                           facetContainer.getDialog().dialog("close");
-                       }
-                   },
-                   {
-                   text: "Cancel",
-                   click: function() {
-                           $(this).dialog("close");
-                       }
-                   }
-              ]
-            }).dialog("option", "position", "center");
+            dialog.empty().append(template);
+            dialog.find("#facet_save_button").click(function() {
+               var model = template.data("model");
+               model.config = config;
+               facetContainer.findWidget().trigger("edit-facet");
+               model.refresh();
+               facetContainer.getDialog().modal("hide");
+            });
 
             updatePreview();
-            dialog.dialog("open");
+            dialog.modal("show");
         }
     });
 })(window.Freemix.jQuery, window.Freemix);
