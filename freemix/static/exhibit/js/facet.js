@@ -100,12 +100,41 @@
         },
 
         showEditor: function(facetContainer){
-            facetContainer = facetContainer || this.findContainer();
+            var facet = this;
+            var config = $.extend(true, {}, facet.config);
+            var template = Freemix.getTemplate("facet-editor");
+            facetContainer = facetContainer || facet.findContainer();
+            var dialog = facetContainer.getDialog();
+            template.data("model", this);
+            var form = Freemix.getTemplate(this.template_name);
+            template.find(".facet-properties .facet-edit-body").append(form);
 
-            facetContainer.getDialog().dialog("close");
-            facetContainer.addFacet(this);
+            form.submit(function() {return false;});
+
+            template.bind("update-preview", function() {
+                facet.updatePreview(template.find("#facet-preview"), config);
+            });
+            this.setupEditor(config, template);
+
+            dialog.empty().append(template);
+            dialog.find("#facet_save_button").click(function() {
+               var model = template.data("model");
+               model.config = config;
+               facetContainer.findWidget().trigger("edit-facet");
+               model.refresh();
+               facetContainer.getDialog().modal("hide");
+            });
+
+            template.trigger("update-preview");
+            dialog.modal("show");
         },
-        generateExhibitHTML: function() {}
+        updatePreview: function(target, config) {
+            var preview = $(this.generateExhibitHTML(config));
+            target.empty().append(preview);
+            var exhibit = Freemix.getBuilderExhibit();
+            this.facetClass.createFromDOM(preview.get(0), null, exhibit.getUIContext());
+        },
+        generateExhibitHTML: function(config) {}
      });
 
     function isFacetCandidate(prop) {
