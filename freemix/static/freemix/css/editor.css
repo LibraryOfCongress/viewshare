@@ -803,14 +803,37 @@ padding-bottom: 12px;
 
 
 .facet-preview .facet-edit-body, .view-preview .view-edit-body {
-padding: 20px 10px 0px 10px;
-margin-right: 20px;
+padding: 15px 10px 0px 0px;
 }
 
-.facet-properties .facet-edit-body {
-padding-left: 10px;
-padding-top: 10px;
+.facet-edit {
+  padding: 0px;
+  margin: 0px;
 }
+
+.facet-edit .well, .facet-edit .preview-well {
+padding: 10px;
+}
+
+.facet-edit .preview-well {
+background-color: #FFF9EC;
+}
+
+.facet-edit {
+  min-height: 240px;
+}
+
+.facet-properties, .facet-preview {
+ min-height: 220px;
+}
+
+.facet-properties legend, .facet-preview legend {
+  margin-bottom: 0px;
+  line-height: 25px;
+  font-size: 18px;
+}
+
+
 
 .list-view-editor, .map-view-editor, .scatterplot-view-editor, .table-view-editor, .timeline-view-editor, .piechart-view-editor, .thumbnail-view-editor {
   border: 1px solid lightgrey;

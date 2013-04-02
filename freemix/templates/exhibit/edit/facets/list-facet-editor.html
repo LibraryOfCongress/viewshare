@@ -10,32 +10,43 @@
 
     <div class="modal-body">
       <div class="row-fluid">
-        <div class="span6">
-          <div class="facet-properties well">
-            <label class="facet-editor-pane-title">{% trans "Settings" %}</label>
-            <div class="facet-edit-body">
-              <form class="uniForm">
+        <div class="facet-edit">
+          <div class="span6">
+            <div class="facet-properties preview-well well">
+              <div class="facet-edit-body">
+                <form>
+                  <fieldset>
+                    <legend>{% trans "Settings" %}</legend>
+                    <div class="control-group">
+                      <label class="control-label" for="facet_name">{% trans "Title" %}:</label>
+                      <div class="controls">
+                        <input id="facet_name" class="textinput" type="text"  name="facet_name"/>
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <label class="control-label" for="facet_property">{% trans "Property" %}:</label>
+                      <div class="controls">
+                        <select id="facet_property"></select>
+                      </div>
+                    </div>
+                  </fieldset>
+                </form>
+	      </div>
+            </div>
+          </div>
+          
+          <div class="span6">
+            <div class="facet-preview well">
+              <form>
                 <fieldset>
-                  <div class="ctrlHolder text-entry">
-                    <label for="facet_name">{% trans "Title" %}:</label>
-                    <input id="facet_name" class="textinput" type="text"  name="facet_name"/>
-                  </div>
-                  <div class="ctrlHolder pull-down">
-                    <label for="facet_property">{% trans "Property" %}:</label>
-                    <select id="facet_property"></select>
+                  <legend>{% trans "Preview" %}</legend>
+	          <div class="facet-edit-body">
+                    <div class="ui-widget-content ui-corner-all" id="facet-preview"></div>
                   </div>
                 </fieldset>
               </form>
 	    </div>
           </div>
-        </div>
-        <div class="span6">
-          <div class="facet-preview well">
-            <label class="facet-editor-pane-title">{% trans "Preview" %}</label>
-	    <div class="facet-edit-body">
-              <div class="ui-widget-content ui-corner-all" id="facet-preview"></div>
-            </div>
-	  </div>
         </div>
       </div>
     </div>
