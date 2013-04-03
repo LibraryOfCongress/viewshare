@@ -1,0 +1,47 @@
+{% load i18n %}
+<div id="facet-editor">
+
+  <div class="widget-edit-dialog facet-editor">
+
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h3 id="facet-editor-title">Facet Widget</h3>
+    </div>
+
+    <div class="modal-body">
+      <div class="row-fluid">
+
+        <div class="facet-edit">
+
+          <div class="span6">
+            <div class="facet-properties settings-well well">
+              <div class="facet-edit-body">
+                
+              </div>
+            </div>
+          </div>
+
+          <div class="span6">
+            <div class="facet-preview well">
+              <form>
+                <fieldset>
+                  <legend>{% trans "Preview" %}</legend>
+                  <div class="facet-edit-body">
+                    <div id="facet-preview"></div>
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+
+        </div> <!-- facet-edit -->
+
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button id="facet_save_button" class="btn btn-primary">Save</button>
+    </div>
+
+  </div>
+</div>

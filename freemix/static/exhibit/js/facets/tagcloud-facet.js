@@ -24,24 +24,12 @@
             if (config.name && config.name.length > 0) {
                 result.attr("ex:facetLabel", config.name);
             }
-            return result;        },
+            return result;
+        },
 
-        showEditor: function(facetContainer) {
+        template_name: "tagcloud-facet-editor",
+        setupEditor: function(config, template) {
             var facet = this;
-            var config = $.extend(true, {}, facet.config);
-            var template = Freemix.getTemplate("tagcloud-facet-editor");
-            facetContainer = facetContainer || facet.findContainer();
-            var dialog = facetContainer.getDialog();
-            template.data("model", this);
-            template.find("form").submit(function() {return false;});
-
-            function updatePreview() {
-                var preview = $(facet.generateExhibitHTML(config));
-                template.find("#facet-preview").empty().append(preview);
-                var exhibit = Freemix.getBuilderExhibit();
-                facet.facetClass.createFromDOM(preview.get(0), null, exhibit.getUIContext());
-
-            }
             var select = template.find("#facet_property");
             var properties = Freemix.facet.generatePropertyList(facet.propertyTypes);
 
@@ -57,40 +45,16 @@
             }
             select.change(function() {
                 config.expression = $(this).val();
-                updatePreview();
+                template.trigger("update-preview");
             });
 
             var label = template.find("#facet_name");
             label.val(config.name);
             label.change(function() {
                 config.name = label.val();
-                updatePreview();
+                template.trigger("update-preview");
             });
-            dialog.empty().append(template).dialog("option", {
-                title: "Edit Tag Cloud",
-                position: "center",
-                buttons: [{
-                   text: "Ok",
-                   id: "ok-button",
-                   click: function() {
-                           var model = template.data("model");
-                           model.config = config;
-                           facetContainer.findWidget().trigger("edit-facet");
-                           model.refresh();
-                           facetContainer.getDialog().dialog("close");
-                       }
-                   },
-                   {
-                   text: "Cancel",
-                   click: function() {
-                           $(this).dialog("close");
-                       }
-                   }
-              ]
-            }).dialog("option", "position", "center");
 
-            updatePreview();
-            dialog.dialog("open");
         }
     });
 })(window.Freemix.jQuery, window.Freemix);

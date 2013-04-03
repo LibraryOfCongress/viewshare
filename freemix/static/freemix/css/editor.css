@@ -811,20 +811,27 @@ padding: 15px 10px 0px 0px;
   margin: 0px;
 }
 
-.facet-edit .well, .facet-edit .preview-well {
+.facet-edit .well, .facet-edit .settings-well {
 padding: 10px;
 }
 
-.facet-edit .preview-well {
+.facet-edit .settings-well {
 background-color: #FFF9EC;
 }
 
 .facet-edit {
-  min-height: 240px;
+}
+
+.facet-edit .form-horizontal .control-label {
+  width: 60px;
+}
+
+.facet-edit .form-horizontal .controls {
+  margin-left: 70px;
 }
 
 .facet-properties, .facet-preview {
- min-height: 220px;
+   height: 220px;
 }
 
 .facet-properties legend, .facet-preview legend {
