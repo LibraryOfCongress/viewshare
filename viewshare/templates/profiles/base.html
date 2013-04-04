@@ -13,13 +13,4 @@
 <link href="/feeds/views/{{ other_user }}/" type="application/rss+xml" rel="alternate" title="Latest Data View News Feed for {{ other_user }}" />
 <link href="/feeds/data/{{ other_user }}/" type="application/rss+xml" rel="alternate" title="Latest Data News Feed for {{ other_user }}" />
 
-
-{% endblock %}
-
-{% block subnav %}
-{% if user.is_authenticated %}
-<li class="{% block yourprofile-tab-selected %}{% endblock %}"><a href="{% url profile_detail user.username %}">{% trans "Your Details" %}</a></li>
-<li class="{% block yourfriendsprofile-tab-selected %}{% endblock %}"><a href="{% url connection_list_by_user user.username %}">{% blocktrans %}Your Connections{% endblocktrans %}</a></li>
-<li class="{% block allprofiles-tab-selected %}{% endblock %}"><a href="{% url profile_list %}">{% blocktrans %}All Users{% endblocktrans %}</a></li>
-{% endif %}
 {% endblock %}

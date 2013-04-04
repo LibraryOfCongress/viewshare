@@ -30,83 +30,63 @@
 
   <body class="{% block body_class %}{% endblock %}">
 
-    <div class="container-fluid fm-body-container">
+    <div class="container-fluid">
 
-    {% block toolbar %}{% endblock %}
-
-    {% block banner %}
-
-    {% if site_wide_announcements %}
-    <div class="alert" id="site_wide_announcements">
-      <ul>
-        {% for announcement in site_wide_announcements %}
-        <li>
-          <a href="{{ announcement.get_absolute_url }}">{{ announcement }}</a>
-          <a href="{% url announcement_hide announcement.pk %}?next={{ request.path }}">{% trans "(hide announcement)" %}</a>
-        </li>
-        {% endfor %}
-      </ul>
-    </div>
-    {% endif %}
+      {% block banner %}
       
-
-    <!-- fixed header across all application -->
-
-    <div id="header">
-      <div id="tabhead" class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-          
-          <div class="container">
-            <a href="/" class="brand"><span id="application-logo"></span>
-              <span class="tagline">
-                <span>Interfaces to our heritage</span>
-              </span>
-              <span id="application-status">{{ SITE_NAME_STATUS }}</span></a>            
-            <ul class="nav pull-right">
-              {% block login %}{% endblock %}
-            </ul>
-          </div>
-          
-        </div>
+      {% if site_wide_announcements %}
+      <div class="alert" id="site_wide_announcements">
+        <ul>
+          {% for announcement in site_wide_announcements %}
+          <li>
+            <a href="{{ announcement.get_absolute_url }}">{{ announcement }}</a>
+            <a href="{% url announcement_hide announcement.pk %}?next={{ request.path }}">{% trans "(hide announcement)" %}</a>
+          </li>
+          {% endfor %}
+        </ul>
       </div>
-    </div>
-
-    <div {% block rtab_id %}{% endblock %}>
+      {% endif %}
       
-      <div class="container-fluid fm-nav-container well">
-        
-        <div class="row-fluid">
-          <div id="nav" class="span12">
-            <ul class="nav nav-tabs pull-right">
-              {% block right_tab %}{% endblock %}
-            </ul>
-          </div>
-        </div>
-        
-        {% if messages %}
-        <div id="systemMsg">
-          <ul id="system_messages" class="messages">
-            {% for message in messages %}
-            <li id="message_{{ forloop.counter }}" class="infoMsg">{{ message }}</li>
-            {% endfor %}
-          </ul>
-        </div>
-        {% endif %}
-        
-     {% endblock banner %}
-        
-        <div class="container-fluid fm-subnav-container well">
-          
-          <div class="row-fluid">
-            <div id="subnav" class="span12">
-              <ul class="nav nav-tabs pull-left">
-                {% block subnav %}&nbsp;{% endblock %}
+      <!-- fixed header across all application -->
+      
+      <div id="header">
+        <div id="tabhead" class="navbar navbar-fixed-top">
+          <div class="navbar-inner">
+            
+            <div class="container">
+              <a href="/" class="brand"><span id="application-logo"></span>
+                <span class="tagline">
+                  <span>Interfaces to our heritage</span>
+                </span>
+                <span id="application-status">{{ SITE_NAME_STATUS }}</span></a>            
+              <ul class="nav pull-right">
+                {% block login %}{% endblock %}
               </ul>
             </div>
+            
           </div>
-          
+        </div>
+      </div>
       
-          <div id="body" class='freemix-themeable'>
+      {% endblock banner %}
+      
+      <div {% block rtab_id %}{% endblock %}>
+        
+        {% if messages %}
+        <div class="container-fluid">
+          <div id="systemMsg">
+            <ul id="system_messages" class="messages">
+              {% for message in messages %}
+              <li id="message_{{ forloop.counter }}" class="infoMsg">{{ message }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div> <!-- end container -->
+        {% endif %}
+        
+        <div class="container-fluid">
+          
+          <div id="body" class="freemix-themeable well">
             
             <div id="inner-body">
               {% block body %}
@@ -114,24 +94,22 @@
             </div>
           </div>
           
-        </div> <!-- end fm-subnav-container -->
-
-      </div> <!-- end fm-nav-container -->
-      
-      <div id="footer">
-        {% block footer %}
-        {% endblock %}
+        </div> <!-- end container -->
+        
+        <div id="footer">
+          {% block footer %}
+          {% endblock %}
+        </div>
+        
+        {% block extra_body %}{% endblock %}
       </div>
       
-
-      {% block extra_body %}{% endblock %}
-    </div>
-
-    {% block final %}
-    {% endblock %}
-
-    {% render_block "js" %}
-
+      {% block final %}
+      {% endblock %}
+      
+      {% render_block "js" %}
+      
     </div> <!-- body container -->
   </body>
 </html>
+
