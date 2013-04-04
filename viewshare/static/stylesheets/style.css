@@ -143,6 +143,151 @@ div#body.freemix-themeable > div > h1,
 }
 
 
+/* upload .. dealing with silly pinax fieldset */
+
+.upload-form h1 {
+    background: #fff url(/static/images/header-background.png) bottom center repeat-x;
+    border-bottom: 1px solid #ddd;
+    font-size: 125%;
+    position: absolute;
+    width: 899px;
+    padding-top: 7px;
+    padding-bottom: 10px;
+    padding-left: 9px;
+    margin-left: -25px;
+    margin-top: -11px;
+}
+
+.upload-form form {
+padding-top: 40px;
+}
+
+.attraction #identify h1 {
+    padding: 0.5em 0.5em;
+    margin: 0 0 0.5em;
+}
+
+div#body.freemix-themeable > div > h1,
+.dataprofile .tab-contents h1,
+.dataprofile-viewer h1 {
+    margin: -0.66em -26.5px 1.5em;
+}
+
+.freemix-themeable > div .priority-area {
+    background: #fff url(../images/header-background.png) bottom center repeat-x;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #ddd;
+    padding: 0.5em 1.5em;
+    margin: -2.3em -26.5px 1em;
+    text-align: right;
+}
+
+h2.help {
+    font-size: 1.5em;
+    padding: .4em 30px .4em 0;
+    margin: 0 0 1em 0;
+    border-bottom: 1px solid #e3f5f7;
+    color: darkslategrey;
+}
+
+h3.help {
+    font-size: 1.25em;
+    padding: .4em 0px .4em 0;
+    margin: 0 0 -3em 0;
+    color: darkslategrey;
+}
+
+h2 img {
+    text-align: right;
+    vertical-align: top;
+    height: 40px;
+    width: 40px;
+    margin-top: -25px;
+}
+
+/* Theme switcher */
+#toolbar {
+    width: 99%;
+    min-height: 1em;
+    padding: 8px 0 0;
+}
+
+#theme {
+    float: right;
+}
+
+/* Groups */
+
+.tribe_left {
+    display: inline;
+    float: left;
+    position: relative;
+    margin-left: 9px; /* changed from 10 ??? */
+    margin-right: 9px; /* changed from 10 ??? */
+    width: 65%;
+}
+
+.tribe_right {
+    display:inline;
+    float: left;
+    position: relative;
+    margin-left: 9px; /* changed from 10 ??? */
+    margin-right: 9px; /* changed from 10 ??? */
+    width: 30%;
+}
+
+/* loading */
+
+ul.upload-options {
+    margin: 0;
+    padding: 0;
+    list-style-type:none;
+}
+
+ul.upload-options li.option {
+   padding-left: 80px;
+   padding-bottom: 20px;
+   min-height: 80px;
+}
+
+ul.upload-options li.option .title {
+   font-size: 130%;
+   font-weight: bold;
+   padding-bottom: 0.4em;
+}
+
+ul.upload-options li#upload-ss {
+   background: transparent url(../images/spreadsheet.png) top left no-repeat;
+}
+
+ul.upload-options li#upload-mods {
+   background: transparent url(../images/xml-file.png) top left no-repeat;
+}
+
+ul.upload-options li#upload-oai {
+   background: transparent url(../images/oai.png) top left no-repeat;
+}
+
+ul.upload-options li#upload-contentdm {
+   background: transparent url(../images/contentdm.png) top left no-repeat;
+}
+
+ul.upload-options li#upload-json {
+   background: transparent url(../images/json-file.png) top left no-repeat;
+}
+
+li.option ul.sources {
+    list-style-type:none;
+    margin: auto;
+    padding-top: 5px;
+}
+
+li.option ul.sources li {
+    font-weight: bold;
+    float: left;
+    padding-right: 10px;
+}
+
 /* data views and sets */
 
 .dataset_list, .exhibit_list, .data_details, .exhibit_details, .shared_key_list {

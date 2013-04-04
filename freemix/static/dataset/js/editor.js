@@ -66,7 +66,7 @@
         this.el.show();
         setTimeout($.proxy(this.render, this), 5000);
       } else if (data.hasOwnProperty('message')) {
-        if (data.message === 'No Data') {
+        if (data.message === 'No Data' || data.message === '') {
           window.location.reload(true);
         }
       }else {
