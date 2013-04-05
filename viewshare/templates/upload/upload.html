@@ -12,13 +12,6 @@
     {% endcompress %}
 {% endblock %}
 
-{%  block head_scripts %}
-    {{ block.super }}
-    {% include "freemix/js_include/jquery_ui.html" %}
-
-    <script type="text/javascript" src="{{ STATIC_URL }}upload/js/upload.js"></script>
-{% endblock %}
-
 {% block rtab_id %}id="data_tab"{% endblock %}
 
 {% block data-tab-selected %} ui-tabs-selected ui-state-active{% endblock %}
@@ -72,16 +65,11 @@
 
     </ul>
 
-    <div id="systemMsg">
-      <ul id="system_messages" class="messages">
-	<li class="infoMsg">See <a class="supported-file-types" href="#supported-file-types">Supported Data Source Types</a> if you don't know or don't see the format you are trying to load. 
-	</li>
-      </ul>
+    <div class="alert alert-info">
+        See <a class="supported-file-types" data-toggle="modal" href="#supported-file-types">Supported Data Source Types</a> if you don't know or don't see the format you are trying to load.
     </div>
 
-    <div id="supported-file-types" class="ui-helper-hidden" title="{% trans "Supported Data Source Types" %}">
       {% include "upload/supported.html" %}
-    </div>
 
 </div>
 
