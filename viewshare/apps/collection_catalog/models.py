@@ -1,4 +1,4 @@
-"Models for building the Recollection collection catalog"
+"Models for building the Viewshare collection catalog"
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -46,7 +46,7 @@ class Organization(CatalogModel):
                       "a map.")
 
 class Project(CatalogModel):
-    "A recollection project"
+    "A Viewshare project"
 
 class Topic(CatalogModel):
     "A fixed set of simple tags that indicate the topic of a collection"

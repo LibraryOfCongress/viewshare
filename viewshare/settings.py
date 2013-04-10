@@ -97,7 +97,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.media",
     "django.core.context_processors.request",
     "django.core.context_processors.static",
-    "viewshare.utilities.context_processors.recollection_settings",
+    "viewshare.utilities.context_processors.viewshare_settings",
     "viewshare.apps.vendor.notification.context_processors.notification",
     "viewshare.apps.vendor.announcements.context_processors.site_wide_announcements",
     "viewshare.apps.account.context_processors.account",
@@ -188,7 +188,7 @@ TEMPLATE_DIRS = (
 
 # Set to describe the site, properties and the names
 
-SITE_NAME = "Recollection"
+SITE_NAME = "Viewshare"
 SITE_NAME_STATUS = "BETA"
 CONTACT_EMAIL = "noreply@example.com"
 
@@ -258,7 +258,7 @@ LOGGING = {
             'handlers': ['console'],
             'level': 'DEBUG'
         },
-        'recollection': {
+        'viewshare': {
             'handlers': ['console'],
             'level': 'DEBUG'
         }
