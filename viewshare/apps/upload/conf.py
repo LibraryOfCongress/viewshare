@@ -28,4 +28,4 @@ FILE_UPLOAD_PATH = getattr(settings,
 
 SITE_NAME = getattr(settings,
     "SITE_NAME",
-    "Recollection")
+    "Viewshare")

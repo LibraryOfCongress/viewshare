@@ -187,7 +187,7 @@ TEMPLATE_DIRS = (
 
 # Set to describe the site, properties and the names
 
-SITE_NAME = "Recollection"
+SITE_NAME = "Viewshare"
 SITE_NAME_STATUS = "BETA"
 CONTACT_EMAIL = "noreply@example.com"
 
