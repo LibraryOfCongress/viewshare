@@ -1,4 +1,4 @@
-"Recollection Context Processors"
+"Viewshare Context Processors"
 
 
 from django.conf import settings
@@ -34,7 +34,7 @@ def settings_processor(*settings_list):
 
 #-----------------------------------------------------------------------------#
 
-recollection_settings = settings_processor(
+viewshare_settings = settings_processor(
     'CONTACT_EMAIL',
     'SITE_NAME',
     'SITE_NAME_STATUS',
