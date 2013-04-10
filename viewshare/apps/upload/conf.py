@@ -24,7 +24,7 @@ AKARA_JSON_EXTRACT_URL = getattr(settings,
 
 FILE_UPLOAD_PATH = getattr(settings,
     "FILE_UPLOAD_PATH",
-    "/tmp/recollectionupload")
+    "/tmp/viewshareupload")
 
 SITE_NAME = getattr(settings,
     "SITE_NAME",
