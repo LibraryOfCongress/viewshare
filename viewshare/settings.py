@@ -257,7 +257,7 @@ LOGGING = {
             'handlers': ['console'],
             'level': 'DEBUG'
         },
-        'recollection': {
+        'viewshare': {
             'handlers': ['console'],
             'level': 'DEBUG'
         }
