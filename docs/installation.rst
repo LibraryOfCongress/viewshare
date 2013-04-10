@@ -1,5 +1,5 @@
-Installing and Configuring Recollection
-=======================================
+Installing and Configuring Viewshare
+====================================
 
 Linux based Installation
 ------------------------
@@ -14,15 +14,15 @@ Requires:
 
 To build::
 
-   $ virtualenv --no-site-packages --distribute recollection
-   $ cd recollection
+   $ virtualenv --no-site-packages --distribute viewshare
+   $ cd viewshare
    $ source bin/activate
-   $ pip install git+git://loc-recollect.git.sourceforge.net/gitroot/loc-recollect/loc-recollect#egg=recollection
-   $ pip install -r src/recollection/requirements/requirements.txt
+   $ pip install git+git://loc-recollect.git.sourceforge.net/gitroot/loc-recollect/loc-recollect#egg=viewshare
+   $ pip install -r src/viewshare/requirements/requirements.txt
 
 The "example_project" directory provides the starting point for the
 initial configuration
-of a Recollection site.  As with all Django applications, be sure to
+of a Viewshare site.  As with all Django applications, be sure to
 pick your own secret
 for the SECRET_KEY setting in settings.py.
 
@@ -63,7 +63,7 @@ Site Settings
 
 The following settings should be customized on a per-site basis:
 
-* SITE_NAME: the name of the site, e.g. "My Recollection"
+* SITE_NAME: the name of the site, e.g. "My Viewshare"
 * SITE_NAME_STATUS: a string identifying the status of the site, e.g. "BETA"
 * CONTACT_EMAIL: an email address that users can use to contact the site owner
 * DEFAULT_FROM_EMAIL: the email address from which all sent emails will originate
@@ -77,13 +77,13 @@ The following settings should be customized on a per-site basis:
 Transformation Server
 ---------------------
 
-Most Recollection installations will need the use of an Akara_ instance for
+Most Viewshare installations will need the use of an Akara_ instance for
 providing data transformation and augmentation services.
 
 To install Akara, perform the following steps::
 
-   $ virtualenv --no-site-packages --distribute akara-recollection
-   $ cd akara-recollection
+   $ virtualenv --no-site-packages --distribute akara-viewshare
+   $ cd akara-viewshare
    $ source bin/activate
    $ pip install html5lib httplib2 python-dateutil simplejson feedparser xlrd
    $ pip install hg+http://foundry.zepheira.com/hg/zenpub#egg=zen
@@ -95,7 +95,7 @@ Create an akara.conf file with these contents (making the path substitution for 
 
    class Akara:
        Listen = 8001
-       ConfigRoot = "<path-of-akara-recollection-directory>"
+       ConfigRoot = "<path-of-akara-viewshare-directory>"
        PidFile = "logs/akara.pid"
        ModuleDir = "modules"
        ModuleCache = "caches"
@@ -132,7 +132,7 @@ Then initialize and run Akara::
    $ akara -f akara.conf setup
    $ akara -f akara.conf start
 
-You can now point your Recollection installation at this Akara service using
+You can now point your Viewshare installation at this Akara service using
 the AKARA_URL_PREFIX configuration option in settings.py. For example::
 
    AKARA_URL_PREFIX = 'http://transformer.example.com:8001'

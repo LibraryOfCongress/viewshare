@@ -90,29 +90,29 @@ Custom apps
     * freemix.exhibit.share
         * Allows an Exhibit owner to generate a unique URL for their Exhibit.
 
-* Recollection specific
-    * recollection.apps.notices
+* Viewshare specific
+    * viewshare.apps.notices
         * User can control email settings for system events like invitations and announcements.
-    * recollection.apps.site_theme
+    * viewshare.apps.site_theme
         * Admin can create or select one of multiple CSS files to be used throughout the site.
-    * recollection.apps.collection_catalog
+    * viewshare.apps.collection_catalog
         * Admin can group Exhibits that have been published on the system into Collections. Collections can be grouped into Projects. Collections can be tagged with Topics and can be attributed to Organizations.
-    * recollection.utils
+    * viewshare.utilities
         * This is a general, catch-all app to store utilities used throughout the system. Some of the code includes:
             * context processors to add settings values to a ''RequestContext''.
-            * template tags to display recollection and akara versions.
-    * recollection.apps.connections
+            * template tags to display viewshare and akara versions.
+    * viewshare.apps.connections
         * Allows a user to create and accept invitations from other users.
         * This app is a facade over the third-party 'friends' app
-    * recollection.conf.recollection_defaults
+    * viewshare.conf.viewshare_defaults
         * This 'app' only exists to contain South migrations that are used in system configuration tasks like loading data for augmentation errors.
-    * recollection.apps.support
+    * viewshare.apps.support
         * A system for reporting system errors like data upload and augmentation issues
-    * recollection.apps.account
+    * viewshare.apps.account
         * Stores timezone and language information about a user. Also, handles password resets.
-    * recollection.apps.profiles
+    * viewshare.apps.profiles
         * Stores information about a user such as: bio, website, location, and organization.
-    * recollection.apps.discover
+    * viewshare.apps.discover
         * Allows an admin to create a collection of Exhibits for the purposes of display. Also includes a front-end slideshow utilized on the homepage.
 
 * ViewShare specific

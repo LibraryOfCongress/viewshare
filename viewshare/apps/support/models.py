@@ -17,7 +17,7 @@ class SupportPickListItem(models.Model):
 
 class BrowserPickListItem(SupportPickListItem):
     """
-    An editable list of browsers for selection in recollection support tickets
+    An editable list of browsers for selection in Viewshare support tickets
     """
     pass
 
