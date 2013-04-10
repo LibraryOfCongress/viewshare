@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# recollection documentation build configuration file, created by
+# Viewshare documentation build configuration file, created by
 # sphinx-quickstart on Wed Jul  6 10:14:53 2011.
 #
 # This file is execfile()d with the current directory set to its containing dir.
@@ -40,7 +40,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'recollection'
+project = u'Viewshare'
 copyright = u'2011, Zepheira, LLC'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -164,7 +164,7 @@ html_static_path = ['_static']
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'recollectiondoc'
+htmlhelp_basename = 'viewsharedoc'
 
 
 # -- Options for LaTeX output --------------------------------------------------
@@ -178,8 +178,8 @@ htmlhelp_basename = 'recollectiondoc'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'recollection.tex', u'recollection Documentation',
-   u'Zepheira, LLC', 'manual'),
+  ('index', 'viewshare.tex', u'Viewshare Documentation',
+   u'Library of Congress', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -211,8 +211,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'recollection', u'recollection Documentation',
-     [u'Zepheira, LLC'], 1)
+    ('index', 'viewshare', u'Viewshare Documentation',
+     [u'Library of Congress'], 1)
 ]
 
 
