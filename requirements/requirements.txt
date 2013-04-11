@@ -15,12 +15,12 @@ django-uni-form==0.8.0
 httplib2==0.7.6
 
 #django-cms depends on the following
-django-reversion==1.7
+django-reversion==1.6.6
 django-classy-tags==0.4
 django-sekizai==0.7
 django-mptt==0.5.2
 html5lib==0.95
-django-cms==2.4.0.RC1
+django-cms==2.3.6
 
 # Piston is required by viewshare.apps.collection_catalog and uses the following
 django-piston==0.2.3
