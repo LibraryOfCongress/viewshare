@@ -1,33 +1,32 @@
-"""URLs for Collections, Organizations, Projects and Topics                   
+"""URLs for Collections, Organizations, Projects and Topics
 Currently, this just consists of what is necessary for exhibit.
 """
-from django.conf.urls.defaults import *
-from django.views.generic.simple import direct_to_template
-from piston.resource import Resource
-from viewshare.apps.collection_catalog.handlers import ProjectHandler
-from viewshare.apps.collection_catalog.handlers import OrganizationHandler
-from viewshare.apps.collection_catalog.handlers import CollectionHandler
-from viewshare.apps.collection_catalog.handlers import TopicHandler
+
+from django.conf.urls import url, patterns
+from django.views.generic import TemplateView
+from viewshare.apps.collection_catalog import views, models
 
 
-def generate_url_pattern(resource):
-    "Generate some standard REST URLs for a particular resource"
-    model_name = resource.handler.model.__name__.lower()
+def generate_url_pattern(model):
+    "Generate list and instance JSON URLs for a particular resource"
+    model_name = model.__name__.lower()
     return (
-        url(r'^%ss/(?P<slug>[^/]+)/$'%model_name,
-            resource,
-            {'emitter_format': 'json'},
-            name='%s_resource'%model_name),
+        url(r'^%ss/(?P<slug>[^/]+)/$' % model_name,
+            views.CatalogItemJSONView.as_view(model=model),
+            name='%s_resource' % model_name),
 
-        url(r'^%ss/?$'%model_name,
-            resource, {'emitter_format': 'json'},
-            name='%ss'%model_name),
+        url(r'^%ss/?$' % model_name,
+            views.CatalogListJSONView.as_view(model=model),
+            name='%ss' % model_name),
     )
 
+
 urlpatterns = patterns('',
-               url(r'^$', direct_to_template, {"template": "catalog/index.html"}, name="catalog"),
-               )
-urlpatterns += generate_url_pattern(Resource(CollectionHandler))
-urlpatterns += generate_url_pattern(Resource(OrganizationHandler))
-urlpatterns += generate_url_pattern(Resource(ProjectHandler))
-urlpatterns += generate_url_pattern(Resource(TopicHandler))
+    url(r'^$',
+       TemplateView.as_view(template_name="catalog/index.html"),
+       name="catalog"),
+)
+urlpatterns += generate_url_pattern(models.Collection)
+urlpatterns += generate_url_pattern(models.Organization)
+urlpatterns += generate_url_pattern(models.Project)
+urlpatterns += generate_url_pattern(models.Topic)
