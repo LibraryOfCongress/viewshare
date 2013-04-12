@@ -2,17 +2,6 @@
 (function($, Freemix) {
 
     function setupSaveButton() {
-        var dialog = $('<div style="display:hidden"></div>').appendTo('body');
-
-        dialog.dialog({
-            width: 500,
-            height: "auto",
-            modal: true,
-            draggable: false,
-            resizable: false,
-            autoOpen: false,
-            title: "Save a New View"
-        });
 
         function setupForm(dialog) {
             var form = dialog.find("form");
@@ -27,24 +16,27 @@
                         setupForm(dialog);
                     }
                     return false;
-
                 }
             });
         }
 
         $("#save_button").click(function() {
-                var url = $("link[rel='freemix/saveform']").attr("href");
-                dialog.dialog("open");
-                dialog.load(url, function (responseText, textStatus, XMLHttpRequest) {
-                    setupForm(dialog);
-                    dialog.find("#id_profile").val($.toJSON(Freemix.syncMetadata(Freemix.profile)));
-                    $(".exhibit-create-form-cancel").click(function() {dialog.dialog("close");});
-                });
-                return false;
+            var url = $("link[rel='freemix/saveform']").attr("href");
+
+            $.get(url).success(function(data) {
+                var dialog = $(data).appendTo("body");
+                setupForm(dialog);
+                dialog.find("#id_profile").val($.toJSON(Freemix.syncMetadata(Freemix.profile)));
+                    $(".exhibit-create-form-cancel").click(function() {dialog.modal("hide");});
+                dialog.modal();
+
             });
+
+            return false;
+        });
 
     }
 
-    $(document).ready(setupSaveButton)
+    $(document).ready(setupSaveButton);
 
 })(window.Freemix.jQuery, window.Freemix);

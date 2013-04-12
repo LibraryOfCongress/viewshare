@@ -1,5 +1,5 @@
 {% extends "site_base.html" %}
-{% load uni_form_tags %}
+{% load crispy_forms_tags %}
 {% load compress %}
 
 {% load i18n %}
@@ -34,13 +34,13 @@
     <div class="login_options login_request_wrapper">	
       <div class="login_request_text">
               {% with form.helper as helper %}
-                  {% uni_form form helper %}
+                  {% crispy form helper %}
               {% endwith %}
 
 {#          <form action="{{request.path}}" method="post" class="uniForm">#}
 {#                   <fieldset class="inlineLabels">#}
 {#                     {%csrf_token%}#}
-{#                     {{ form|as_uni_form }}#}
+{#                     {{ form|crispy }}#}
 {#                   </fieldset>#}
 {#                   <input type="submit" value="Sign Up"/>#}
 {#         	</form>#}

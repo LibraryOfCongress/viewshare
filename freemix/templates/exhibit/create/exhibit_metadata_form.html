@@ -1,10 +1,16 @@
-{%  load i18n %}
-{% load uni_form_tags %}
-<form action="{% url exhibit_create_form owner=owner slug=slug canvas=canvas %}" method="post" class="uniForm">
-        {% csrf_token %}
-        {{ form|as_uni_form }}
-      <div class="buttons">
-          <input type="submit" value="{% trans "Save" %}" class="submit" />
-          <input type="button" value="{% trans "Cancel" %}" class="exhibit-create-form-cancel negative-button" />
-      </div>
-</form>
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+<div class='modal hide fade' tabindex='-1' role='dialog' aria-labelledby='' aria-hidden='true'>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 id="new-view-label">Save a New View</h3>
+    </div>
+    <form action="{% url exhibit_create_form owner=owner slug=slug canvas=canvas %}" method="post" class="uniForm">
+            {% csrf_token %}
+            {{ form|crispy }}
+          <div class="form_block">
+            <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
+          </div>
+    </form>
+</div>

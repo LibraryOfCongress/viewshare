@@ -1,7 +1,7 @@
 {% extends "profiles/base.html" %}
 
 {% load i18n %}
-{% load uni_form_tags %}
+{% load crispy_forms_tags %}
 {% load notification_utils %}
 {% load connection_helpers %}
 {% load freemix_helpers %}
@@ -173,7 +173,7 @@
             {% csrf_token %}
             <fieldset class="inlineLabels">
 
-              {{ invite_form|as_uni_form }}
+              {{ invite_form|crispy }}
               <div class="form_block">
                 <input type="hidden" name="action" value="invite" />
                 <p class="center"><input type="submit" value="{% trans "Invite" %}"/>

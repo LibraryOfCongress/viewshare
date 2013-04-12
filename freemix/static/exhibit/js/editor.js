@@ -56,35 +56,10 @@
 
             facetContainer._dialog = dialog;
 
-            /* 
-            dialog.dialog({
-                width: 500,
-                height: "auto",
-                modal: true,
-                draggable: false,
-                resizable: false,
-                autoOpen: false,
-                title: "Select widget type",
-                show: "fade",
-                hide: "fade",
-                close: function(event, ui) {
-                    facetContainer.findWidget().off("edit-facet");
-                }
-            });
-            */
-
             w.find(".create-facet").click(function() {
                 dialog.empty();
                 dialog.append(facetContainer.getPopupContent());
-                /*
-                dialog.dialog("option", {
-                    "title":"Select widget type",
-                    "buttons": [],
-                    "width": 500,
-                    "position": "center"
-                });
-                dialog.dialog("open");
-                */
+
             });
         });
     };
@@ -123,32 +98,11 @@
                 });
 
             viewContainer._dialog = dialog;
-            /*
-            dialog.dialog({
-                width: 500,
-                height: "auto",
-                modal: true,
-                draggable: false,
-                resizable: false,
-                autoOpen: false,
-                title: "Select view type",
-                show: "fade",
-                hide: "fade"
-            });
-            */
+
 
             set.find(".create-view-button").click(function() {
                 dialog.empty();
                 dialog.append(viewContainer.getPopupContent());
-                /*
-                dialog.dialog("option", {
-                    "title":"Select view type",
-                    "buttons": [],
-                    "width": 500,
-                    "position": "center"
-                });
-                dialog.dialog("open");
-                */
             });
         });
     };

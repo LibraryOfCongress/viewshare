@@ -124,9 +124,8 @@
                model.refresh();
                facetContainer.getDialog().modal("hide");
             });
-
-            template.trigger("update-preview");
             dialog.modal("show");
+            template.trigger("update-preview");
         },
         updatePreview: function(target, config) {
             var preview = $(this.generateExhibitHTML(config));

@@ -124,7 +124,6 @@ INSTALLED_APPS = (
     'django_extensions',
     'pagination',
     'timezones',
-    'uni_form',
     'crispy_forms',
     'django_sorting',
     'compressor',

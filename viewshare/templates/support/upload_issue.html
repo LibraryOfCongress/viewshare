@@ -1,6 +1,6 @@
 {% extends "site_base.html" %}
 {% load i18n %}
-{% load uni_form_tags %}
+{% load crispy_forms_tags %}
 
 {% block body %}
 <div id="issue_create_content">
@@ -8,7 +8,7 @@
     <form action="{{request.path}}" method="post" class="uniForm">
         <fieldset class="inlineLabels">
             {%csrf_token%}
-            {{ form|as_uni_form }}
+            {{ form|crispy }}
         </fieldset>
         <input type="submit" value="Send Report"/>
         <input type="button" class="cancel-button negative-button" value="{% trans "Cancel" %}"/>

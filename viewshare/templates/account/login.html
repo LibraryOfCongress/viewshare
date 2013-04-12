@@ -1,7 +1,7 @@
 {% extends "site_base.html" %}
 
 {% load i18n %}
-{% load uni_form_tags %}
+{% load crispy_forms_tags %}
 {% load freemix_helpers %}
 {% load cms_tags %}
 
@@ -36,7 +36,7 @@ $(document).ready(function() {
       <form class="login uniForm user_pass" method="POST">
           {% csrf_token %}	
 	
-          {{ form|as_uni_form }}
+          {{ form|crispy }}
           <div class="form_block">
             <input type="submit" value="{% trans "Log in" %}" />
           </div>
