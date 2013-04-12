@@ -1,35 +1,22 @@
 "Admin helpers for the collection catalog models"
 from django.contrib import admin
-from django.conf import settings
-
-from viewshare.apps.collection_catalog.models import Topic, Collection, Project, Organization
-from viewshare.apps.collection_catalog.widgets import AutocompleteAdmin
+from viewshare.apps.collection_catalog import models
 from freemix.utils import get_username
 
 
-class CatalogAdmin(admin.ModelAdmin):
-    class Media:
-        css = {
-            'all': ('%sdjango_extensions/css/jquery.autocomplete.css'%settings.STATIC_URL,)
-        }
-        js = (
-            '%sdjango_extensions/js/jquery.js'%settings.STATIC_URL,
-            '%sdjango_extensions/js/jquery.bgiframe.min.js'%settings.STATIC_URL,
-            '%sdjango_extensions/js/jquery.ajaxQueue.js'%settings.STATIC_URL,
-            '%sdjango_extensions/js/jquery.autocomplete.js'%settings.STATIC_URL,
-        )
-
-
-class TopicAdmin(CatalogAdmin):
+class TopicAdmin(admin.ModelAdmin):
     "Admin interface for Catalog Topics"
-    list_display   = ('name', )
-    search_fields  = ('name', )
+    list_display = ('name', )
+    search_fields = ('name', )
 
     prepopulated_fields = {"slug": ("name", )}
-admin.site.register(Topic, TopicAdmin)
+admin.site.register(models.Topic, TopicAdmin)
 
-class CollectionAdmin(AutocompleteAdmin, CatalogAdmin):
-    "Admin interface for Collections"
+
+class CollectionAdmin(admin.ModelAdmin):
+    """
+    Admin interface for Collections
+    """
 
     related_search_fields = {
         'exhibit': ('title',),
@@ -43,24 +30,26 @@ class CollectionAdmin(AutocompleteAdmin, CatalogAdmin):
     list_display = ('name', 'description', )
     search_fields = ('name',)
     list_filter = ('project', 'organizations', 'topics', )
-    filter_horizontal = ('topics',)
+    filter_horizontal = ('topics', 'exhibits', 'organizations')
     fields = ('name', 'slug', 'description', 'project', 'home_page',
-        'thumbnail', 'enabled', 'topics', 'organizations', 'exhibits',
-        'external_view', )
-admin.site.register(Collection, CollectionAdmin)
+              'thumbnail', 'enabled', 'topics', 'organizations', 'exhibits',
+              'external_view', )
+admin.site.register(models.Collection, CollectionAdmin)
 
-class ProjectAdmin(CatalogAdmin):
+
+class ProjectAdmin(admin.ModelAdmin):
     "Admin interface for projects"
     list_display = ('name', 'description', )
     prepopulated_fields = {"slug": ("name", )}
     search_fields = ('name',)
 
-admin.site.register(Project, ProjectAdmin)
+admin.site.register(models.Project, ProjectAdmin)
 
-class OrganizationAdmin(CatalogAdmin):
+
+class OrganizationAdmin(admin.ModelAdmin):
     "Admin interface for Organizations"
     list_display = ('name', 'description', )
 
     prepopulated_fields = {"slug": ("name", )}
     search_fields = ('name',)
-admin.site.register(Organization, OrganizationAdmin)
+admin.site.register(models.Organization, OrganizationAdmin)
