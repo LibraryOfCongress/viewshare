@@ -4,19 +4,25 @@
 
 {% block head_title %}{% trans "Logout" %}{% endblock %}
 
-{% block body %}
-    <p>{% trans "You've been logged out." %}</p>
+{% block head_css %}
+{{ block.super }}
+<link href="{{STATIC_URL}}stylesheets/login.css" rel="stylesheet" type="text/css" media="screen,projection" />
 {% endblock %}
 
+{% block body %}
+<div class="alert alert-info">
+  {% trans "You've been logged out." %}
+</div>
+{% endblock %}
 
 {% block final %}
-  {{ block.super }}
-    {% if USERVOICE_SETTINGS %}
-        <script type="text/javascript" src="http://{{USERVOICE_SETTINGS.HOST}}/logout.js"></script>
-    {% endif %}
-    <script type="text/javascript">
-    jQuery(document).ready(function() {
-        window.location.href="{% url acct_login %}";
-    });
-    </script>
+{{ block.super }}
+{% if USERVOICE_SETTINGS %}
+<script type="text/javascript" src="http://{{USERVOICE_SETTINGS.HOST}}/logout.js"></script>
+{% endif %}
+<script type="text/javascript">
+  jQuery(document).ready(function() {
+  window.location.href="{% url acct_login %}";
+  });
+</script>
 {% endblock %}

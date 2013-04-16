@@ -3,9 +3,8 @@
 }
 
 #load h1 {
-    background: #fff url('/static/images/header-background.png') bottom center repeat-x;
-    border-bottom: 1px solid #ddd;
-    font-size: 1.5em;
-    padding: 0.5em 0.5em;
-    margin: -0.66em -26.5px 1.5em;
+    border-bottom: 1px solid lightgrey;
+    font-size: 2.0em;
+    padding: 0.2em 0.1em;
+    margin: 0 0 1em;
 }

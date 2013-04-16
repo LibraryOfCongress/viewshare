@@ -529,6 +529,10 @@ p.tip {
 
 /* general warning messages */
 
+ul#system_messages.messages li {
+list-style-type: none;
+}
+
 div#warningMsg ul, div#compatibility-warning ul {
 border: 1px solid;
 margin: 10px 0px;

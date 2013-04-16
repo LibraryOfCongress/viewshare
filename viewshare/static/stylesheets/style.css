@@ -12,7 +12,7 @@ header, .header, #header{
 
 #application-logo {
     position: absolute;
-    left: 20px;
+    left: 35px;
     top: 5px;
     height: 40px;
     background-repeat: no-repeat;
@@ -21,11 +21,11 @@ header, .header, #header{
 #header #application-status {
     position: absolute;
     font-family: courier;
-    font-size: 70%;
+    font-size: 80%;
     font-weight: 100;
     color: red;
-    top: 15px;
-    left: 420px;
+    top: 17px;
+    left: 230px;
 }
 
 .brand .tagline {
@@ -135,12 +135,33 @@ margin-top: 20px;
 div#body.freemix-themeable > div > h1,
 .dataprofile .tab-contents h1,
 .dataprofile-viewer h1 {
-    background: #fff url(../images/header-background.png) bottom center repeat-x;
-    border-bottom: 1px solid #ddd;
-    font-size: 1.5em;
-    padding: 0.5em 0.5em;
-    margin: 0 0 1.5em;
+    border-bottom: 1px solid lightgrey;
+    font-size: 2.0em;
+    padding: 0.2em 0.1em;
+    margin: 0 0 1em;
 }
+
+div#body.freemix-themeable > div > h2,
+.dataprofile .tab-contents h2,
+.dataprofile-viewer h2 {
+    font-size: 1.5em;
+    padding: 0.1em 0.1em;
+    line-height: 30px;
+}
+
+/* Search */
+
+.search-area label {
+padding-right: 5px;
+font-weight: bold;
+}             
+
+.search-area .help-inline .sort-label {
+padding-left: 20px;
+margin-right: -5px;
+font-weight: bold;
+}             
+
 
 
 /* upload .. dealing with silly pinax fieldset */
@@ -165,12 +186,6 @@ padding-top: 40px;
 .attraction #identify h1 {
     padding: 0.5em 0.5em;
     margin: 0 0 0.5em;
-}
-
-div#body.freemix-themeable > div > h1,
-.dataprofile .tab-contents h1,
-.dataprofile-viewer h1 {
-    margin: -0.66em -26.5px 1.5em;
 }
 
 .freemix-themeable > div .priority-area {

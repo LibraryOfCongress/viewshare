@@ -40,21 +40,6 @@
 
 {% endblock %}
 
-
-<!--
-<li class="dropdown">
-                      <a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                      <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="http://google.com">Action</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#anotherAction">Another action</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-                        <li role="presentation" class="divider"></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
-                      </ul>
-                    </li>
--->
-
-
 {% block login %}
     {% if user.is_authenticated %}
 
@@ -94,14 +79,7 @@
     <li><a href="{% url acct_login %}">{% trans "Login" %}</a></li><li class="divider-vertical"></li>
     <li><a href="{% url registration_register %}">{% trans "Sign up" %}</a></li>
     {% endif %}
-        
-    <!--
-    {% if user.is_authenticated %}
-      <p class="login-welcome"><strong>{% trans "Welcome" %}, {{ user|nicename }}</strong> {% block headerprofile %}{% endblock %}</p>
-    {% endif %}
-     -->
 {% endblock %}
-
 
 {% block logo_link_image %}{% endblock %}
 

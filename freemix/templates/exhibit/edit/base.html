@@ -141,7 +141,34 @@
           <div class="exhibit-right exhibit-actions">
 	    
 	    <div class="exhibit-links btn-group">
-	      
+
+	      <div class="btn-group">
+              
+              <div class="btn-group">
+                <button class="btn btn-info active btn-small">Build</button>
+                <button class="btn btn-small btn-info dropdown-toggle" data-toggle="dropdown">
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Layout</a></li>
+                  <li><a href="#">Lens</a></li>
+                </ul>
+              </div>
+              <div class="btn-group">
+                <button class="btn btn-info btn-small">Preview</button>
+                <button class="btn btn-small btn-info dropdown-toggle" data-toggle="dropdown">
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Sunny</a></li>
+                  <li><a href="#">Trontastic</a></li>
+                  <li><a href="#">Silly</a></li>
+                  <li><a href="#">Farty</a></li>
+                </ul>
+              </div>
+              
+              </div>
+
 	      <input type="checkbox" class=" btn btn-small action_preview_exhibit" id="preview_toggle"><label for="preview_toggle">{% trans "Preview" %}</label></input>
               
 	      <a href="" id="save_button" class="btn btn-small action_save_exhibit">{% trans "Save" %}<span id="save_message"></span></a>
