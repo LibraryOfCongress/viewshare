@@ -1,5 +1,4 @@
 {% load i18n %}
-{% load sorting_tags %}
 {% load pagination_tags %}
 {% load exhibit_tags %}
 {% load datasource_tags %}
@@ -7,10 +6,21 @@
     {% autopaginate object_list max_count %}
     {% if object_list %}
         {% if pageable %}
-        <p><span class="sort-label">{% trans "Sort by:" %}</span>
-            {% anchor created Creation %} <span class="divider">|</span>
-            {% anchor modified Modified %}
-        </p>
+        <div class="help-inline">
+          <span class="sort-label">{% trans "Sort by:" %}</span>
+          <span class="btn-group">
+            {% if sort == "created" or sort == None %}
+            <a class="btn btn-small active" href="#">{% trans "Created" %}</a>
+            {% else %}
+            <a class="btn btn-small" href="{{request.path}}?sort=created">{% trans "Created" %}</a>
+            {% endif %}
+            {% if sort == "modified" %}
+            <a class="btn btn-small active" href="#">{% trans "Modified" %}</a>
+            {% else %}
+            <a class="btn btn-small" href="{{request.path}}?sort=modified">{% trans "Modified" %}</a>
+            {% endif %}
+          </span>
+        </div>
         {% endif %}
 
         <ul class="dataset_list_items">
