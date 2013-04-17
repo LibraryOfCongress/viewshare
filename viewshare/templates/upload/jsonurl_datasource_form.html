@@ -3,15 +3,16 @@
 {% load i18n %}
 
 {% block head_data %}
-<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}stylesheets/json-upload.css" />
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}upload/css/json-upload.css" />
+<link rel="viewshare/json-prep" href="{% url json_prep_view %}" />
 {% endblock %}
 
 {% block head_scripts %}
-<script src="{{STATIC_URL}}scripts/json-upload.js"></script>
+<script src="{{STATIC_URL}}upload/js/json-upload.js"></script>
 <script>
 $(document).ready(function() {
-    JSONPrep.init("{% url json_prep_view %}", true);
-});
+    var url = $("link[rel='viewshare/json-prep']").attr("href");
+    JSONPrep.init(url, true);});
 </script>
 {% endblock %}
 
