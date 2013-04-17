@@ -11,7 +11,7 @@ django-email-confirmation==0.2
 django-extensions==1.1.1
 django-pagination==1.0.7
 django-sorting>=0.1
-django-uni-form==0.8.0
+django-crispy-forms==1.2.4
 
 #django-cms depends on the following
 django-reversion==1.6.6
