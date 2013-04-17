@@ -17,7 +17,7 @@ h3.grid_title {
 }
 
 .action-set {
-    background: #fff url('/static/images/content-bg-gradient.png') center center repeat-x;
+    background: #fff url('../../images/content-bg-gradient.png') center center repeat-x;
     border-right: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
     width: 33%;
