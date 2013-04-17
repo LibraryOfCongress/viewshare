@@ -66,10 +66,9 @@ Third-party Apps
 * timezones
     * Deal with timezone localization for users
     * https://github.com/brosner/django-timezones
-* uni_form
+* django-crispy-forms
     * Build programmatic reusable layouts out of components, having full control of the rendered HTML
-    * https://github.com/pydanny/django-uni-form
-    * NOTE: uni_form is deprecated for django-crispy-forms
+    * http://django-crispy-forms.readthedocs.org/en/latest/
 
 Custom apps
 -----------

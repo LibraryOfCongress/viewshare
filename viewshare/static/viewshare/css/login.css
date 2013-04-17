@@ -1,7 +1,7 @@
 /* login / out styling */
 
 .login_wrapper {
-  background-image:url(../images/login_bg.png);
+  background-image:url(../../images/login_bg.png);
   background-repeat:no-repeat;
   width:680px;
   height:400px;
@@ -12,7 +12,7 @@
 }
 
 .login_request_wrapper {
-  background-image:url(../images/login_request_bg.png);
+  background-image:url(../../images/login_request_bg.png);
   background-repeat:no-repeat;
   width:680px;
   height:1000px;
@@ -24,7 +24,7 @@
 
 .login_text {
   padding: 25px 25px;
-  background: url(../images/login_icon.png) 90% 55% no-repeat;
+  background: url(../../images/login_icon.png) 90% 55% no-repeat;
 }
 
 .login_request_text {

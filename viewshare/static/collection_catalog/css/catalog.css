@@ -23,8 +23,8 @@ ol.exhibit-tileView-body > li {
 .image {
     float: left;
     clear: left;
-    background: url(../images/shadowAlpha.png) no-repeat bottom right !important;
-    background: url(../images/shadow.gif) no-repeat bottom right;
+    background: url(../../images/shadowAlpha.png) no-repeat bottom right !important;
+    background: url(../../images/shadow.gif) no-repeat bottom right;
     margin: 10px;
 }
 

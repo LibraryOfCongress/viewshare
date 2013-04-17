@@ -8,7 +8,7 @@ ul.profile_list li {
 }
 
 .user_profile_entry {
-    background: #fff url(../images/header-background.png) left bottom repeat-x;
+    background: #fff url(../../images/header-background.png) left bottom repeat-x;
     border: 1px solid #eee;
     line-height: 1.3em;
     margin: 1em 0;
@@ -36,7 +36,7 @@ ul.profile_list li {
 }
 
 .user_data_entry .user_counts {
-    background: #fff url(../images/header-background.png) bottom left repeat-x;
+    background: #fff url(../../images/header-background.png) bottom left repeat-x;
     border: 1px solid #ddd;
     float: right;
     margin: 0.5em 0 0.5em 1em;
@@ -68,13 +68,13 @@ ul.profile_list li {
 }
 
 .user_data_entry .user_datasets {
-    background: url(../images/dataset-24.png) top left no-repeat;
+    background: url(../../images/dataset-24.png) top left no-repeat;
     padding: 0.25em 0 0.25em 30px;
     display: block;
 }
 
 .user_data_entry .user_exhibits {
-    background: url(../images/palette-24.png) top left no-repeat;
+    background: url(../../images/palette-24.png) top left no-repeat;
     padding-left: 30px;
     padding-bottom: 5px;
 }

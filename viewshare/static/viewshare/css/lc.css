@@ -64,7 +64,7 @@ h1 {
   border: 1px solid #aaa;
   color: #00529B;
   background-color: #BDE5F8;
-  background-image: url('../images/info.png');
+  background-image: url('../../images/info.png');
   background-repeat: no-repeat;
   background-position: 10px center;
 }
@@ -104,7 +104,7 @@ right:15px;
 }
 
 .uniForm .focused {
-    background: #fff url(../images/header-background.png) repeat-x center bottom;
+    background: #fff url(../../images/header-background.png) repeat-x center bottom;
     border: 1px solid #ddd;
     padding: 6px;
 }

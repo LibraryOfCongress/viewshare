@@ -189,7 +189,7 @@ padding-top: 40px;
 }
 
 .freemix-themeable > div .priority-area {
-    background: #fff url(../images/header-background.png) bottom center repeat-x;
+    background: #fff url(../../images/header-background.png) bottom center repeat-x;
     border-top: 1px solid #eee;
     border-bottom: 1px solid #ddd;
     padding: 0.5em 1.5em;
@@ -272,23 +272,23 @@ ul.upload-options li.option .title {
 }
 
 ul.upload-options li#upload-ss {
-   background: transparent url(../images/spreadsheet.png) top left no-repeat;
+   background: transparent url(../../images/spreadsheet.png) top left no-repeat;
 }
 
 ul.upload-options li#upload-mods {
-   background: transparent url(../images/xml-file.png) top left no-repeat;
+   background: transparent url(../../images/xml-file.png) top left no-repeat;
 }
 
 ul.upload-options li#upload-oai {
-   background: transparent url(../images/oai.png) top left no-repeat;
+   background: transparent url(../../images/oai.png) top left no-repeat;
 }
 
 ul.upload-options li#upload-contentdm {
-   background: transparent url(../images/contentdm.png) top left no-repeat;
+   background: transparent url(../../images/contentdm.png) top left no-repeat;
 }
 
 ul.upload-options li#upload-json {
-   background: transparent url(../images/json-file.png) top left no-repeat;
+   background: transparent url(../../images/json-file.png) top left no-repeat;
 }
 
 li.option ul.sources {
@@ -316,7 +316,7 @@ li.option ul.sources li {
 }
 
 .dataset_list_item, .exhibit_list_item, .shared_key_list_item {
-   background: #fff url(../images/header-background.png) bottom center repeat-x;
+   background: #fff url(../../images/header-background.png) bottom center repeat-x;
    border: 1px solid #ddd;
    list-style-type: none;
    margin: 1em 0;
@@ -330,7 +330,7 @@ li.option ul.sources li {
 
 
 .dataset_list_item .dataset-title {
-   background: transparent url(../images/dataset-24.png) top left no-repeat;
+   background: transparent url(../../images/dataset-24.png) top left no-repeat;
    font-size: 115%;
    font-weight: bold;
    padding-bottom: 15px;
@@ -338,7 +338,7 @@ li.option ul.sources li {
 }
 
 .exhibit_list_item .exhibit-title {
-   background: transparent url(../images/palette-24.png) top left no-repeat;
+   background: transparent url(../../images/palette-24.png) top left no-repeat;
    font-size: 115%;
    font-weight: bold;
    padding-bottom: 15px;
@@ -346,7 +346,7 @@ li.option ul.sources li {
 }
 
 .shared_key_list_item .shared-key-label {
-   background: transparent url(../images/key-24.png) top left no-repeat;
+   background: transparent url(../../images/key-24.png) top left no-repeat;
    font-size: 115%;
    font-weight: bold;
    padding-bottom: 0.4em;
@@ -354,7 +354,7 @@ li.option ul.sources li {
 }
 
 .shared-link-notice {
-   background: transparent url(../images/key-24.png) top left no-repeat;
+   background: transparent url(../../images/key-24.png) top left no-repeat;
    font-size: 100%;
    line-height: 140%;
    font-weight: bold;
@@ -364,7 +364,7 @@ li.option ul.sources li {
 
 
 .dataset_edit .dataset-title, .dataset_summary .dataset-title {
-   background: transparent url(../images/dataset-32.png) top left no-repeat;
+   background: transparent url(../../images/dataset-32.png) top left no-repeat;
    font-size: 140%;
    font-weight: bold;
    padding-top: 0.5em;
@@ -374,7 +374,7 @@ li.option ul.sources li {
 }
 
 .exhibit_edit .exhibit-title, .exhibit_display .exhibit-title {
-   background: transparent url(../images/palette-32.png) top left no-repeat;
+   background: transparent url(../../images/palette-32.png) top left no-repeat;
    font-size: 140%;
    font-weight: bold;
    padding-bottom: 0.5em;
@@ -383,7 +383,7 @@ li.option ul.sources li {
 }
 
 .exhibit_display .shared-key .exhibit-title {
-   background: transparent url(../images/key-32.png) 0% 25% no-repeat;
+   background: transparent url(../../images/key-32.png) 0% 25% no-repeat;
    font-size: 140%;
    font-weight: bold;
    padding-bottom: 0.5em;
@@ -421,19 +421,19 @@ height: 100%;
 }
 
 .about_profile .profile_icon {
-background: url(../images/person-96.png) center center no-repeat;
+background: url(../../images/person-96.png) center center no-repeat;
 width:106px;
 height:106px;
 }
 
 .about_profile .dataset_icon {
-background: url(../images/dataset-96.png) center center no-repeat;
+background: url(../../images/dataset-96.png) center center no-repeat;
 width:106px;
 height:106px;
 }
 
 .about_profile .exhibit_icon {
-background: url(../images/palette-96.png) center center no-repeat;
+background: url(../../images/palette-96.png) center center no-repeat;
 width:106px;
 height:106px;
 }
@@ -449,7 +449,7 @@ height:106px;
 }
 
 #about-box .about_homepage {
-  background: url(../images/home.png) bottom left no-repeat;
+  background: url(../../images/home.png) bottom left no-repeat;
   width: 24px;
   height: 24px;
   margin-left: 15px;
@@ -488,11 +488,11 @@ height:106px;
 }
 
 .exhibit_display .private, .exhibit_edit .private, .dataset_edit .private, .dataset_summary .private, .dataset_list_items .private, .exhibit_list_items .private  {
-   background: #fffcdf url(../images/lock.png) 99% 5% no-repeat;
+   background: #fffcdf url(../../images/lock.png) 99% 5% no-repeat;
   }
 
 .exhibit-visibility .private {
-   background-image: url(../images/lock.png);
+   background-image: url(../../images/lock.png);
    color: #9F6000;
    background-color: #fffcdf;
    margin: 20px 0px;
@@ -503,7 +503,7 @@ height:106px;
 }
 
 .dataset-visibility .private {
-   background-image: url(../images/lock.png);
+   background-image: url(../../images/lock.png);
    color: #9F6000;
    background-color: #fffcdf;
    margin: 20px 0px;
@@ -514,7 +514,7 @@ height:106px;
 }
 
 .exhibit-visibility .public {
-   background-image: url(../images/unlock.png);
+   background-image: url(../../images/unlock.png);
    color: #00529B;
    background-color: #BDE5F8;
    margin: 20px 0px;
@@ -525,7 +525,7 @@ height:106px;
 }
 
 .dataset-visibility .public {
-   background-image: url(../images/unlock.png);
+   background-image: url(../../images/unlock.png);
    color: #00529B;
    background-color: #BDE5F8;
    margin: 20px 0px;
@@ -541,7 +541,7 @@ height:106px;
 }
 
 .exhibit-right, .dataset-right, .shared-key-right {
-   background: #fff url(../images/header-background.png) bottom left repeat-x;
+   background: #fff url(../../images/header-background.png) bottom left repeat-x;
    border: 1px solid #ddd;
    float: right;
 }
@@ -591,7 +591,7 @@ ul.responses li.thread-8 {
 /* profiles */
 
 .info-section {
-    background: #fff url(../images/header-background.png) bottom center repeat-x;
+    background: #fff url(../../images/header-background.png) bottom center repeat-x;
     border: 1px solid #eee;
     margin-bottom: 1.5em;
 }
@@ -631,7 +631,7 @@ img.photo {
 }
 
 #about-box {
-    background: #fff url(../images/header-background.png) bottom center repeat-x;
+    background: #fff url(../../images/header-background.png) bottom center repeat-x;
 }
 
 div.profile_info, div.dataset_info, div.exhibit_info {
@@ -699,12 +699,12 @@ div.notices h2 {
 }
 
 .notice .notice_message {
-  background: #fff url(../images/bullet.png) center left no-repeat;
+  background: #fff url(../../images/bullet.png) center left no-repeat;
   padding-left: 20px;
 }
 
 .unseen_notice .notice_message {
-  background: #fff url(../images/new-bullet.png) center left no-repeat;
+  background: #fff url(../../images/new-bullet.png) center left no-repeat;
   padding-left: 20px;
 }
 
@@ -758,7 +758,7 @@ div.notices h2 {
 
 /* loading bar */
 .loading {
-    background: transparent url(../images/bar-animated.gif) top center no-repeat;
+    background: transparent url(../../images/bar-animated.gif) top center no-repeat;
     margin: 1em auto;
     min-width: 180px;
     padding: 20px 0 0;
