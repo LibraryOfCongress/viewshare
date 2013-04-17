@@ -28,12 +28,11 @@ def exhibit_list_item(context, exhibit):
 
 @register.inclusion_tag("exhibit/exhibit_list.html", takes_context=True)
 def exhibit_list(context, exhibits, max_count=10, pageable=True):
-    c = dict(context)
-    c["object_list"] = exhibits
-    c["max_count"] = max_count
-    c["pageable"] = pageable
-    c["request"] = context["request"]
-    return c
+    return {"object_list": exhibits, "max_count": max_count, "pageable": pageable,
+            "request": context['request'],
+            "sort": context["request"].GET.get("sort", None),
+            "dir": context["request"].GET.get("dir", "desc"),
+            }
 
 @register.inclusion_tag("exhibit/exhibit_create_dialog.html", takes_context=True)
 def new_exhibit(context):
