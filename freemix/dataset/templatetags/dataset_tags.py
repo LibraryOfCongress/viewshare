@@ -35,4 +35,6 @@ def dataset_list(context, datasets, max_count=10, pageable=True):
     return {"object_list": datasets,
             "max_count": max_count,
             "pageable": pageable,
+            "sort": context["request"].GET.get("sort", None),
+            "dir": context["request"].GET.get("dir", "desc"),
             "request": context['request']}
