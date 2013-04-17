@@ -11,15 +11,7 @@
     {% endcompress %}
 {% endblock %}
 
-{% block rtab_id %}id="data_tab"{% endblock %}
-
-{% block data-tab-selected %} ui-tabs-selected ui-state-active{% endblock %}
-{% block subnav %}
-{% endblock %}
-
-
 {% block head_data %}
-
     {{ block.super }}
     {% if show_error %}
     <link rel="freemix/support" href="{% url upload_issue source_id=transaction.source.uuid %}">
@@ -42,11 +34,14 @@
 {% block body %}
     {% if show_error %}
      <div id="systemMsg">
-      <ul id="load-messages" class="messages">
-        <li id="load-failure-general" class="errorMsg">
-          <p>{% trans "We're sorry that you've encountered a problem uploading your file. Please use the following troubleshooting tips to try to correct the problem." %}</p>
+      <ul id="load-messages">
+        <li id="load-failure-general" class="alert alert-error">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <div class="errorMsg-general">{% trans "We're sorry that you've encountered a problem uploading your file. Please use the following troubleshooting tips to try to correct the problem." %}</div>
+          <div class="errorMsg-specific">
           {% block format_error %}{% endblock %}
-          <p>{% trans "If you have a file that you think should work after troubleshooting please <strong><a href='' class='support-link'>Click here to create a support ticket</a></strong>." %}</p>
+          </div>
+          <div class="errorMsg-followup">{% trans "If you have a file that you think should work after troubleshooting please <strong><a href='' class='support-link'>Click here to create a support ticket</a></strong>." %}</div>
         </li>
       </ul>
     </div>
@@ -54,20 +49,20 @@
 
      {% block upload_form_type %}{% endblock %}
 
+     {% block upload_form_title %}<h1 id="upload-label">{% trans "Load Data"%}</h1>{% endblock %}
+
      <fieldset class="upload-form">
        
-       <legend>
-         {% block upload_form_title %}<h1 id="upload-label">{% trans "Load Data"%}</h1>{% endblock %}
-       </legend>
-       
-       <form action="{{ form_url }}" method="post" class="uniForm" {% block uploadform_enctype %}{% endblock %}>
+       <form action="{{ form_url }}" method="post" class="uniForm form" {% block uploadform_enctype %}{% endblock %}>
          {%csrf_token %}
 
          {{ form|crispy }}
-          <div class="buttons">
-              <input type="submit" value="{% trans "Upload" %}" class="submit" />
-              <a href="{% url upload_dataset %}"><input type="button" value="{% trans "Cancel" %}" class="load-form-cancel negative-button" /></a>
-          </div>
+
+         <div class="buttons">
+           <input type="submit" value="{% trans "Upload" %}" class="submit btn btn-primary" />
+           <a href="{% url upload_dataset %}"><input type="button" value="{% trans "Cancel" %}" class="load-form-cancel negative-button btn btn-danger" /></a>
+         </div>
+
        </form>
 
      </fieldset>

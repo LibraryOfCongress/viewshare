@@ -36,15 +36,15 @@
       <a id="nav-users" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">{% trans "Users" %} <b class="caret"></b></a>
       <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
         <li><a href="{% url profile_detail user.username %}">{% trans "Me" %}</a></li>
-        <li class="{% block yourfriendsprofile-tab-selected %}{% endblock %}"><a href="{% url connection_list_by_user user.username %}">{% blocktrans %}Your Connections{% endblocktrans %}</a></li>
+        <li class="{% block yourfriendsprofile-tab-selected %}{% endblock %}"><a href="{% url connection_list_by_user user.username %}">{% blocktrans %}My Connections{% endblocktrans %}</a></li>
         <li class="{% block allprofiles-tab-selected %}{% endblock %}"><a href="{% url profile_list %}">{% blocktrans %}All Users{% endblocktrans %}</a></li>
       </ul>
     </li>
     <li class="dropdown">
       <a id="nav-users" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">{% trans "Views" %} <b class="caret"></b></a>
       <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-        <li><a href="{% url profile_detail user.username %}">{% trans "My Views" %}</a></li>
-        <li><a href="{% url profile_detail user.username %}">{% trans "My connections' Views" %}</a></li>
+        <li><a href="{% url exhibit_list_by_owner user.username %}">{% trans "My Views" %}</a></li>
+        <li><a href="{% url exhibit_list_by_user_connections user.username %}">{% trans "My connections' Views" %}</a></li>
         <li><a href="{% url profile_detail user.username %}">{% trans "All Views" %}</a></li>
         <li class="divider"></li>
         <li><a href="{% url upload_dataset %}" class="button_link">{% trans "Create View" %}</a></li>

@@ -16,6 +16,8 @@ header, .header, #header{
     top: 5px;
     height: 40px;
     background-repeat: no-repeat;
+    background-image: url(../img/viewshare-logo.png);
+    width: 228px;
 }
 
 #header #application-status {
@@ -24,8 +26,8 @@ header, .header, #header{
     font-size: 80%;
     font-weight: 100;
     color: red;
-    top: 17px;
-    left: 230px;
+    top: 21px;
+    left: 270px;
 }
 
 .brand .tagline {
@@ -162,27 +164,6 @@ margin-right: -5px;
 font-weight: bold;
 }             
 
-
-
-/* upload .. dealing with silly pinax fieldset */
-
-.upload-form h1 {
-    background: #fff url(/static/images/header-background.png) bottom center repeat-x;
-    border-bottom: 1px solid #ddd;
-    font-size: 125%;
-    position: absolute;
-    width: 899px;
-    padding-top: 7px;
-    padding-bottom: 10px;
-    padding-left: 9px;
-    margin-left: -25px;
-    margin-top: -11px;
-}
-
-.upload-form form {
-padding-top: 40px;
-}
-
 .attraction #identify h1 {
     padding: 0.5em 0.5em;
     margin: 0 0 0.5em;
@@ -251,57 +232,6 @@ h2 img {
     width: 30%;
 }
 
-/* loading */
-
-ul.upload-options {
-    margin: 0;
-    padding: 0;
-    list-style-type:none;
-}
-
-ul.upload-options li.option {
-   padding-left: 80px;
-   padding-bottom: 20px;
-   min-height: 80px;
-}
-
-ul.upload-options li.option .title {
-   font-size: 130%;
-   font-weight: bold;
-   padding-bottom: 0.4em;
-}
-
-ul.upload-options li#upload-ss {
-   background: transparent url(../../upload/img/spreadsheet.png) top left no-repeat;
-}
-
-ul.upload-options li#upload-mods {
-   background: transparent url(../../upload/img/xml-file.png) top left no-repeat;
-}
-
-ul.upload-options li#upload-oai {
-   background: transparent url(../../upload/img/oai.png) top left no-repeat;
-}
-
-ul.upload-options li#upload-contentdm {
-   background: transparent url(../../upload/img/contentdm.png) top left no-repeat;
-}
-
-ul.upload-options li#upload-json {
-   background: transparent url(../../upload/img/json-file.png) top left no-repeat;
-}
-
-li.option ul.sources {
-    list-style-type:none;
-    margin: auto;
-    padding-top: 5px;
-}
-
-li.option ul.sources li {
-    font-weight: bold;
-    float: left;
-    padding-right: 10px;
-}
 
 /* data views and sets */
 
@@ -698,15 +628,6 @@ div.notices h2 {
  display: none;
 }
 
-.notice .notice_message {
-  background: #fff url(../../images/bullet.png) center left no-repeat;
-  padding-left: 20px;
-}
-
-.unseen_notice .notice_message {
-  background: #fff url(../../images/new-bullet.png) center left no-repeat;
-  padding-left: 20px;
-}
 
 
 /* groups */

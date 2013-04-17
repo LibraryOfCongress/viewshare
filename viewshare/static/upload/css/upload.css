@@ -1,10 +1,82 @@
-#subnav {
-    display: none;
-}
-
-#load h1 {
+#load h1, #upload-label {
     border-bottom: 1px solid lightgrey;
     font-size: 2.0em;
     padding: 0.2em 0.1em;
     margin: 0 0 1em;
+}
+
+#load .upload-caption {
+font-size: 150%;
+padding-bottom: 30px;
+}
+
+/* loading */
+
+ul.upload-options {
+    margin: 0;
+    padding: 0;
+    list-style-type:none;
+}
+
+ul.upload-options li.option {
+   padding-left: 80px;
+   padding-bottom: 20px;
+   min-height: 80px;
+}
+
+ul.upload-options li.option .title {
+   font-size: 130%;
+   font-weight: bold;
+   padding-bottom: 0.4em;
+}
+
+ul.upload-options li#upload-ss {
+   background: transparent url(../../upload/img/spreadsheet.png) top left no-repeat;
+}
+
+ul.upload-options li#upload-mods {
+   background: transparent url(../../upload/img/xml-file.png) top left no-repeat;
+}
+
+ul.upload-options li#upload-oai {
+   background: transparent url(../../upload/img/oai.png) top left no-repeat;
+}
+
+ul.upload-options li#upload-contentdm {
+   background: transparent url(../../upload/img/contentdm.png) top left no-repeat;
+}
+
+ul.upload-options li#upload-json {
+   background: transparent url(../../upload/img/json-file.png) top left no-repeat;
+}
+
+li.option ul.sources {
+    list-style-type:none;
+    margin: auto;
+    padding-top: 5px;
+}
+
+li.option ul.sources li {
+    font-weight: bold;
+    float: left;
+    padding-right: 10px;
+}
+
+
+.errorMsg-general {
+font-size: 120%;
+font-weight: bold;
+padding-top: 10px;
+}
+
+.errorMsg-specific {
+}
+
+.errorMsg-specific h3 {
+font-size: 140%;
+}
+
+.errorMsg-followup {
+padding-top: 20px;
+padding-bottom: 10px;
 }

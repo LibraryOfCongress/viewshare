@@ -9,11 +9,6 @@ a {
     color: rgb(0, 176, 216);
 }
 
-#application-logo {
-    background-image: url(../img/viewshare-logo.png);
-    width: 272px;
-}
-
 .homeimage {
     float: left;
 }
