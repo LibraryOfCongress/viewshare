@@ -2,7 +2,6 @@
 
 {% load i18n %}
 {% load freemix_helpers %}
-{% load site_theme %}
 {% load compress %}
 {% load cms_tags %}
 {% load cache %}
@@ -20,10 +19,8 @@
     <link href="{{STATIC_URL}}freemix/css/bootstrap-responsive.css" rel="stylesheet" type="text/css" media="screen,projection" />    
     <link href="{{STATIC_URL}}viewshare/css/style.css" rel="stylesheet" type="text/css" media="screen,projection" />
     <link href="{{STATIC_URL}}viewshare/css/lc.css" rel="stylesheet" type="text/css" media="screen,projection" />
+    <link href="{{STATIC_URL}}viewshare/css/base.css" rel="stylesheet" type="text/css" media="screen,projection" />
     {%endcompress %}
-
-    <link href="{% site_skin %}" rel="stylesheet" type="text/css" media="screen,projection" />
-
 {% endblock head_css %}
 
 {% block head_scripts %}

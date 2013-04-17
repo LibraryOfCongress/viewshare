@@ -1,5 +1,5 @@
 body {
-    background: #fff top left repeat-x url(images/background.gif);
+    background: #fff top left repeat-x url(../img/background.gif);
     font-family: "Helvetica Neue", Arial, sans-serif;
     font-size: 10pt;
     color: #000;
@@ -10,7 +10,7 @@ a {
 }
 
 #application-logo {
-    background-image: url(images/viewshare-logo.png);
+    background-image: url(../img/viewshare-logo.png);
     width: 272px;
 }
 

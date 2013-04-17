@@ -86,11 +86,11 @@ right:15px;
 }
 
 #subnav ul.step-menu li a.step-completed {
-    background-image: url(/static/images/fade-arrow-bg.png) !important;
+    background-image: url(../../images/fade-arrow-bg.png) !important;
 }
 
 #subnav ul.step-menu li a.step-selected {
-    background-image: url(/static/images/fade-arrow.png) !important;
+    background-image: url(../../images/fade-arrow.png) !important;
 }
 
 #subnav ul.step-menu li a {

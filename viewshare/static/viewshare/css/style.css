@@ -272,23 +272,23 @@ ul.upload-options li.option .title {
 }
 
 ul.upload-options li#upload-ss {
-   background: transparent url(../../images/spreadsheet.png) top left no-repeat;
+   background: transparent url(../../upload/img/spreadsheet.png) top left no-repeat;
 }
 
 ul.upload-options li#upload-mods {
-   background: transparent url(../../images/xml-file.png) top left no-repeat;
+   background: transparent url(../../upload/img/xml-file.png) top left no-repeat;
 }
 
 ul.upload-options li#upload-oai {
-   background: transparent url(../../images/oai.png) top left no-repeat;
+   background: transparent url(../../upload/img/oai.png) top left no-repeat;
 }
 
 ul.upload-options li#upload-contentdm {
-   background: transparent url(../../images/contentdm.png) top left no-repeat;
+   background: transparent url(../../upload/img/contentdm.png) top left no-repeat;
 }
 
 ul.upload-options li#upload-json {
-   background: transparent url(../../images/json-file.png) top left no-repeat;
+   background: transparent url(../../upload/img/json-file.png) top left no-repeat;
 }
 
 li.option ul.sources {
