@@ -52,6 +52,9 @@ class OwnerListView(ListView):
         kwargs = super(OwnerListView, self).get_context_data(**kwargs)
         kwargs["owner"] = self.owner
         kwargs["user"] = self.request.user
+        p = self.request.GET
+        kwargs["sort"] = vars.get('sort', None)
+        kwargs["dir"] = vars.get('dir', "desc")
         return kwargs
 
 
