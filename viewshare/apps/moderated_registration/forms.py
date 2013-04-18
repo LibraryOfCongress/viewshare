@@ -1,3 +1,4 @@
+import json
 from django import forms
 from django.conf import settings
 from crispy_forms.helper import FormHelper
@@ -5,7 +6,6 @@ from crispy_forms.layout import Layout, Fieldset, Submit
 from django.contrib.localflavor.us.us_states import US_STATES
 from registration.forms import RegistrationForm
 from django.utils.translation import ugettext_lazy as _
-from django.utils import simplejson as json
 from viewshare.apps.moderated_registration import models
 
 _invalid_username_ = _("This value must contain only letters, "

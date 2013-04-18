@@ -1,8 +1,5 @@
 from django import template
-from django.core.cache import cache
-from freemix.permissions import PermissionsRegistry
 from freemix.utils import get_site_url
-from freemix import __version__
 
 register = template.Library()
 
@@ -20,14 +17,3 @@ nicename.is_safe = True
 @register.simple_tag
 def site_url(path="/"):
     return str(get_site_url(path))
-
-
-"Outputs the current Freemix version"
-@register.simple_tag
-def freemix_version():
-    return __version__
-
-
-@register.filter
-def permission_filter(queryset, permission, user):
-    return queryset.filter(PermissionsRegistry.get_filter(permission, user))

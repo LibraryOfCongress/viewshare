@@ -1,3 +1,4 @@
+import json
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.db import transaction
@@ -12,7 +13,6 @@ from django.http import (
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.http import  last_modified
 from django.views.generic.base import View, RedirectView
-from django.utils import simplejson as json
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView

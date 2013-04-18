@@ -1,8 +1,10 @@
+import urllib2
+import json
+
 from os.path import join, sep
 from django.core.files.storage import FileSystemStorage
 from django.core.urlresolvers import reverse
 from django.db import models
-from django.utils import simplejson as json
 from django.utils.translation import ugettext_lazy as _
 
 from freemix.dataset.models import (DataSource,
@@ -10,7 +12,7 @@ from freemix.dataset.models import (DataSource,
                                     make_file_data_source_mixin)
 from freemix.dataset.transform import AkaraTransformClient
 from viewshare.apps.upload import conf
-import urllib2
+
 
 def source_upload_path(instance, filename):
     return join(instance.uuid, filename)
