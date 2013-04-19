@@ -1,3 +1,4 @@
+{% load url from future %}
 {% load i18n %}
 {% load freemix_helpers %}
 
@@ -34,9 +35,9 @@
       {% with exhibits.count as exhibits_count %}
 
       <div class="dataset-metadata">
-        {% trans "Originally loaded by" %} <span class="dataset-owner"><a href="{% url profile_detail dataset.owner.username %}">{{ dataset.owner|nicename }}</a></span> {% trans "on" %} <span class="dataset-created-data">{{ dataset.created|date:"N j, Y" }}</span>
+        {% trans "Originally loaded by" %} <span class="dataset-owner"><a href="{% url 'profile_detail' dataset.owner.username %}">{{ dataset.owner|nicename }}</a></span> {% trans "on" %} <span class="dataset-created-data">{{ dataset.created|date:"N j, Y" }}</span>
         {% ifnotequal exhibits_count 0 %}
-        {% trans "and is the basis for" %} <span class="view-count"><a href="{% url exhibits_by_dataset owner=dataset.owner.username slug=dataset.slug %}">{{ exhibits_count }} {% trans "View" %}{{ exhibits_count|pluralize }}</a></span>
+        {% trans "and is the basis for" %} <span class="view-count"><a href="{% url 'exhibits_by_dataset' owner=dataset.owner.username slug=dataset.slug %}">{{ exhibits_count }} {% trans "View" %}{{ exhibits_count|pluralize }}</a></span>
         {% endifnotequal %}
         .
       </div>
@@ -52,10 +53,10 @@
         
         <div class="dataset-links btn-group">
 	  
-          <a class="btn btn-small dataset_inspect" href="{% url dataset_detail owner=dataset.owner.username slug=dataset.slug %}">{% trans "Inspect" %}</a>
+          <a class="btn btn-small dataset_inspect" href="{% url 'dataset_detail' owner=dataset.owner.username slug=dataset.slug %}">{% trans "Inspect" %}</a>
           
           {% if can_build %}
-          <a class="btn btn-small dataset_create" href="{% url exhibit_canvas_chooser owner=dataset.owner.username slug=dataset.slug %}" data-toggle="modal" data-target="#view_template_chooser">{% trans "Build" %}</a>
+          <a class="btn btn-small dataset_create" href="{% url 'exhibit_canvas_chooser' owner=dataset.owner.username slug=dataset.slug %}" data-toggle="modal" data-target="#view_template_chooser">{% trans "Build" %}</a>
 
           <div id="view_template_chooser" class="modal hide fade form-dialog" tabindex="-1" role="dialog" aria-labelledby="viewTemplateLabel" aria-hidden="true">
             <div class="modal-header">
@@ -70,7 +71,7 @@
           {% endif %}
           
           {% if can_edit %}
-          <a class="btn btn-small dataset_edit" href="{% url dataset_edit owner=dataset.owner.username slug=dataset.slug %}">{% trans "Edit" %}</a>
+          <a class="btn btn-small dataset_edit" href="{% url 'dataset_edit' owner=dataset.owner.username slug=dataset.slug %}">{% trans "Edit" %}</a>
           {% endif %}
           
           {% if can_delete %}

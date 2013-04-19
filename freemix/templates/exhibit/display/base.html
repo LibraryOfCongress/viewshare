@@ -1,4 +1,6 @@
 {% extends "site_base.html" %}
+{% load url from future %}
+
 
 {% load i18n %}
 {% load exhibit_tags %}
@@ -12,11 +14,11 @@
 {% block body_class %}main-attraction{% endblock %}
 {% block head_data %}
 {{ block.super }}
-<link rel="exhibit/data" href="{% url dataset_data_json owner=object.dataset.owner.username slug=object.dataset.slug %}"/>
-<link rel="exhibit/data" href="{% url dataset_properties_cache_json owner=object.dataset.owner.username slug=object.dataset.slug %}"/>
+<link rel="exhibit/data" href="{% url 'dataset_data_json' owner=object.dataset.owner.username slug=object.dataset.slug %}"/>
+<link rel="exhibit/data" href="{% url 'dataset_properties_cache_json' owner=object.dataset.owner.username slug=object.dataset.slug %}"/>
 
-<link rel="freemix/dataprofile" href="{% url dataset_profile_json owner=object.dataset.owner.username slug=object.dataset.slug %}"/>
-<link rel="freemix/exhibit_profile" href="{% url exhibit_profile_json owner=object.owner.username slug=object.slug %}"/>
+<link rel="freemix/dataprofile" href="{% url 'dataset_profile_json' owner=object.dataset.owner.username slug=object.dataset.slug %}"/>
+<link rel="freemix/exhibit_profile" href="{% url 'exhibit_profile_json' owner=object.owner.username slug=object.slug %}"/>
 {% endblock %}
 
 {% block head_scripts %}
@@ -103,7 +105,7 @@
       <div class="row-fluid">
         <div class="span7">
           <div class="exhibit-metadata">
-            {% trans "Created by"%} <span class="exhibit-creator"><a href="{% url profile_detail exhibit.owner.username %}">{{exhibit.owner|nicename}}</a></span> {% trans "on"%} <span class="exhibit-modified-data">{{exhibit.modified|date:"N j, Y"}}</span> {% trans "and based on the " %}<span class="exhibit-dataset-title"><a href="{{exhibit.dataset.get_absolute_url }}" title="{{exhibit.dataset.title}}">{{exhibit.dataset.title}}</a></span> {% trans "data set." %}
+            {% trans "Created by"%} <span class="exhibit-creator"><a href="{% url 'profile_detail' exhibit.owner.username %}">{{exhibit.owner|nicename}}</a></span> {% trans "on"%} <span class="exhibit-modified-data">{{exhibit.modified|date:"N j, Y"}}</span> {% trans "and based on the " %}<span class="exhibit-dataset-title"><a href="{{exhibit.dataset.get_absolute_url }}" title="{{exhibit.dataset.title}}">{{exhibit.dataset.title}}</a></span> {% trans "data set." %}
           </div>
         </div>
 
@@ -113,11 +115,11 @@
 	    
 	    <div class="exhibit-links btn-group">	  
               {% if can_inspect %}
-              <a class="exhibit_inspect btn btn-small" href="{% url exhibit_detail owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Inspect" %}</a>
+              <a class="exhibit_inspect btn btn-small" href="{% url 'exhibit_detail' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Inspect" %}</a>
 	      {% endif %}
               
               {% if can_share %}
-              <a class="exhibit_share btn btn-small" href="{% url shared_key_create_form owner=exhibit.owner slug=exhibit.slug %}">{% trans "Share" %}</a>
+              <a class="exhibit_share btn btn-small" href="{% url 'shared_key_create_form' owner=exhibit.owner slug=exhibit.slug %}">{% trans "Share" %}</a>
               {% endif %}
               
               {% if can_embed %} 
@@ -125,7 +127,7 @@
               {% endif %}
               
               {% if can_edit %}
-              <a class="exhibit_edit btn btn-small" href="{% url exhibit_edit owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Edit" %}</a>
+              <a class="exhibit_edit btn btn-small" href="{% url 'exhibit_edit' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Edit" %}</a>
 	      {% endif %}
 	    </div>
           </div>

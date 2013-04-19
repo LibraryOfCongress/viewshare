@@ -1,3 +1,4 @@
+{% load url from future %}
 {% load i18n %}
 {% load freemix_helpers %}
 
@@ -13,6 +14,6 @@
     {% trans "Status" %}: <span class="status">{{ status }}</span>
   </div>
   <div class="dataset-metadata dataset-left">
-    {% trans "Originally loaded by" %} <span class="dataset-owner"><a href="{% url profile_detail datasource_transaction.source.owner.username %}">{{ datasource_transaction.source.owner|nicename }}</a></span> {% trans "on" %} <span class="dataset-created-data">{{ datasource_transaction.created|date:"N j, Y" }}</span>.
+    {% trans "Originally loaded by" %} <span class="dataset-owner"><a href="{% url 'profile_detail' datasource_transaction.source.owner.username %}">{{ datasource_transaction.source.owner|nicename }}</a></span> {% trans "on" %} <span class="dataset-created-data">{{ datasource_transaction.created|date:"N j, Y" }}</span>.
   </div>
 </li>

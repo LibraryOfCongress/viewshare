@@ -1,4 +1,6 @@
 {% extends "exhibit/template.html" %}
+{% load url from future %}
+
 
 {% load i18n %}
 
@@ -8,10 +10,10 @@
 
 {% block subnav %}
 {% if user.is_authenticated %}
-<li class="{% block myview-tab-selected %}{% endblock %}"><a href="{% url exhibit_list_by_owner user.username %}">{% trans "Your Views" %}</a></li>
-<li class="ui-state-default ui-corner-top {% block myfriendsview-tab-selected %}{% endblock %}"><a href="{% url exhibit_list_by_user_connections user.username %}">{% blocktrans %}Your Connections' Views{% endblocktrans %}</a></li>
+<li class="{% block myview-tab-selected %}{% endblock %}"><a href="{% url 'exhibit_list_by_owner' user.username %}">{% trans "Your Views" %}</a></li>
+<li class="ui-state-default ui-corner-top {% block myfriendsview-tab-selected %}{% endblock %}"><a href="{% url 'exhibit_list_by_user_connections' user.username %}">{% blocktrans %}Your Connections' Views{% endblocktrans %}</a></li>
 {% comment %} set by instance policy
-<li class="ui-state-default ui-corner-top {% block everyoneview-tab-selected %}{% endblock %}"><a href="{% url profile_list %}">{% blocktrans %}All Views{% endblocktrans %}</a></li> 
+<li class="ui-state-default ui-corner-top {% block everyoneview-tab-selected %}{% endblock %}"><a href="{% url 'profile_list' %}">{% blocktrans %}All Views{% endblocktrans %}</a></li> 
 {% endcomment %}
 {% endif %}
 {% endblock %}

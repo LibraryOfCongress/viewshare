@@ -1,8 +1,9 @@
+{% load url from future %}
 {% load freemix_helpers %}
 
 {% if obj.description %}
 	{{ obj.description }}
 	<br>
 {% endif %}
-created by <a href="{% url profile_detail username=obj.owner %}">{{ obj.owner|nicename }}</a>
+created by <a href="{% url 'profile_detail' username=obj.owner %}">{{ obj.owner|nicename }}</a>
 <br>

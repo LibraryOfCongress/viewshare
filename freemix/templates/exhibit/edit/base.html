@@ -1,4 +1,6 @@
 {% extends "site_base.html" %}
+{% load url from future %}
+
 
 {% load i18n %}
 {% load freemix_helpers %}
@@ -105,7 +107,7 @@
       <div class="row-fluid">
         <div class="span7">
           <div class="exhibit-metadata">
-            {% trans "Created by"%} <span class="exhibit-creator"><a href="{% url profile_detail exhibit.owner.username %}">{{exhibit.owner|nicename}}</a></span> {% trans "on"%} <span class="exhibit-modified-data">{{exhibit.modified|date:"N j, Y"}}</span> {% trans "and based on the " %}<span class="exhibit-dataset-title"><a href="{{exhibit.dataset.get_absolute_url }}" title="{{exhibit.dataset.title}}">{{exhibit.dataset.title}}</a></span> {% trans "data set." %}
+            {% trans "Created by"%} <span class="exhibit-creator"><a href="{% url 'profile_detail' exhibit.owner.username %}">{{exhibit.owner|nicename}}</a></span> {% trans "on"%} <span class="exhibit-modified-data">{{exhibit.modified|date:"N j, Y"}}</span> {% trans "and based on the " %}<span class="exhibit-dataset-title"><a href="{{exhibit.dataset.get_absolute_url }}" title="{{exhibit.dataset.title}}">{{exhibit.dataset.title}}</a></span> {% trans "data set." %}
           </div>
         </div>
         <div class="span5">

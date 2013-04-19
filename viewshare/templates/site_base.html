@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load url from future %}
+
 
 {% load i18n %}
 {% load freemix_helpers %}
@@ -30,41 +32,41 @@
 {% block login %}
     {% if user.is_authenticated %}
 
-    <li><a href="{% url profile_detail user.username %}"><i class="icon-home"></i> {{ user|nicename }}</a></li><li class="divider-vertical"></li>
+    <li><a href="{% url 'profile_detail' user.username %}"><i class="icon-home"></i> {{ user|nicename }}</a></li><li class="divider-vertical"></li>
 
     <li class="dropdown">
       <a id="nav-users" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">{% trans "Users" %} <b class="caret"></b></a>
       <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-        <li><a href="{% url profile_detail user.username %}">{% trans "Me" %}</a></li>
-        <li class="{% block yourfriendsprofile-tab-selected %}{% endblock %}"><a href="{% url connection_list_by_user user.username %}">{% blocktrans %}My Connections{% endblocktrans %}</a></li>
-        <li class="{% block allprofiles-tab-selected %}{% endblock %}"><a href="{% url profile_list %}">{% blocktrans %}All Users{% endblocktrans %}</a></li>
+        <li><a href="{% url 'profile_detail' user.username %}">{% trans "Me" %}</a></li>
+        <li class="{% block yourfriendsprofile-tab-selected %}{% endblock %}"><a href="{% url 'connection_list_by_user' user.username %}">{% blocktrans %}My Connections{% endblocktrans %}</a></li>
+        <li class="{% block allprofiles-tab-selected %}{% endblock %}"><a href="{% url 'profile_list' %}">{% blocktrans %}All Users{% endblocktrans %}</a></li>
       </ul>
     </li>
     <li class="dropdown">
       <a id="nav-users" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">{% trans "Views" %} <b class="caret"></b></a>
       <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-        <li><a href="{% url exhibit_list_by_owner user.username %}">{% trans "My Views" %}</a></li>
-        <li><a href="{% url exhibit_list_by_user_connections user.username %}">{% trans "My connections' Views" %}</a></li>
-        <li><a href="{% url profile_detail user.username %}">{% trans "All Views" %}</a></li>
+        <li><a href="{% url 'exhibit_list_by_owner' user.username %}">{% trans "My Views" %}</a></li>
+        <li><a href="{% url 'exhibit_list_by_user_connections' user.username %}">{% trans "My connections' Views" %}</a></li>
+        <li><a href="{% url 'profile_detail' user.username %}">{% trans "All Views" %}</a></li>
         <li class="divider"></li>
-        <li><a href="{% url upload_dataset %}" class="button_link">{% trans "Create View" %}</a></li>
+        <li><a href="{% url 'upload_dataset' %}" class="button_link">{% trans "Create View" %}</a></li>
       </ul>
     </li>
-    <li><a href="{% url notification_notices %}">{% trans "Messages" %} {% if notice_unseen_count %}<span class="badge badge-info">{{ notice_unseen_count }}</span>{% endif %}</a></li>
-    <li><a href="{% url acct_email %}">{% trans "Settings" %}</a></li>
+    <li><a href="{% url 'notification_notices' %}">{% trans "Messages" %} {% if notice_unseen_count %}<span class="badge badge-info">{{ notice_unseen_count }}</span>{% endif %}</a></li>
+    <li><a href="{% url 'acct_email' %}">{% trans "Settings" %}</a></li>
     <li class="dropdown">
       <a id="nav-users" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">{% trans "Help" %} <b class="caret"></b></a>
       <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-        <li><a href="{% url userguide %}">User's Guide</a></li>
-        <li><a href="{% url faq %}">FAQ</a></li>
-        <li><a href="{% url profile_detail 'Guide' %}">Ask the Guide</a></li>
+        <li><a href="{% url 'userguide' %}">User's Guide</a></li>
+        <li><a href="{% url 'faq' %}">FAQ</a></li>
+        <li><a href="{% url 'profile_detail' 'Guide' %}">Ask the Guide</a></li>
       </ul>
     </li><li class="divider-vertical"></li>
     {% if user.is_staff %}<li><a href="/admin/" target="_blank"><i class="icon-cog"></i> {% trans "Admin" %}</a></li><li class="divider-vertical"></li>{% endif %} 
-    <li><a href="{% url acct_logout %}">{% trans "Logout" %}</a></li>
+    <li><a href="{% url 'acct_logout' %}">{% trans "Logout" %}</a></li>
     {% else %}
-    <li><a href="{% url acct_login %}">{% trans "Login" %}</a></li><li class="divider-vertical"></li>
-    <li><a href="{% url registration_register %}">{% trans "Sign up" %}</a></li>
+    <li><a href="{% url 'acct_login' %}">{% trans "Login" %}</a></li><li class="divider-vertical"></li>
+    <li><a href="{% url 'registration_register' %}">{% trans "Sign up" %}</a></li>
     {% endif %}
 {% endblock %}
 
@@ -75,9 +77,9 @@
 {% cache 3600 footer %}
 <div class="footernav">
 <span class="linknav left">
-    <span class="aboutlink"><a href="{% url community %}">{% trans "About" %} {{ SITE_NAME }}</a></span> <span class="divider">|</span>
-    <span class="helplink"><a href="{% url help %}" target="_blank">{% trans "Help" %}</a></span> <span class="divider">|</span>
-    <span class="tos"><a href="{% url tos %}" target="_blank">{% trans "Terms of Service" %}</a></span>
+    <span class="aboutlink"><a href="{% url 'community' %}">{% trans "About" %} {{ SITE_NAME }}</a></span> <span class="divider">|</span>
+    <span class="helplink"><a href="{% url 'help' %}" target="_blank">{% trans "Help" %}</a></span> <span class="divider">|</span>
+    <span class="tos"><a href="{% url 'tos' %}" target="_blank">{% trans "Terms of Service" %}</a></span>
 </span>
 
 <span class="sponsornav right">
@@ -92,7 +94,7 @@
 
 {% block final %}
     {% if USERVOICE_SETTINGS %}
-        <script type="text/javascript" src="{% url uservoice_options %}"></script>
+        <script type="text/javascript" src="{% url 'uservoice_options' %}"></script>
         <!--<script type="text/javascript" src="https://cdn.uservoice.com/javascripts/widgets/tab.js"></script>-->
     {% endif %}
 {% endblock %}

@@ -1,4 +1,5 @@
-{% load i18n %}{% load freemix_helpers %}{% url invitations as invitation_page %}{{ invitation.from_user|nicename }} {% blocktrans %}has requested to create a connection with you. You can accept their invitation at:
+{% load url from future %}
+{% load i18n %}{% load freemix_helpers %}{% url 'invitations' as invitation_page %}{{ invitation.from_user|nicename }} {% blocktrans %}has requested to create a connection with you. You can accept their invitation at:
 
 http://{{ current_site }}{{ invitation_page }}
 {% endblocktrans %}

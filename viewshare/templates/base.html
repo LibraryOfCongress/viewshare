@@ -1,3 +1,4 @@
+{% load url from future %}
 {% load i18n %}
 {% load compress %}
 {% load sekizai_tags %}
@@ -40,7 +41,7 @@
           {% for announcement in site_wide_announcements %}
           <li>
             <a href="{{ announcement.get_absolute_url }}">{{ announcement }}</a>
-            <a href="{% url announcement_hide announcement.pk %}?next={{ request.path }}">{% trans "(hide announcement)" %}</a>
+            <a href="{% url 'announcement_hide' announcement.pk %}?next={{ request.path }}">{% trans "(hide announcement)" %}</a>
           </li>
           {% endfor %}
         </ul>

@@ -1,4 +1,6 @@
 {% extends "messages/base.html" %}
+{% load url from future %}
+
 
 {% load i18n %}
 {% load freemix_helpers %}
@@ -19,7 +21,7 @@
                 {% ifequal invitation.status "2" %}
                     <tr>
                         <td colspan="3" class="friendship_request">
-                            <p>From <a href="{% url profile_detail invitation.from_user.username %}">{{ invitation.from_user|nicename }}</a>
+                            <p>From <a href="{% url 'profile_detail' invitation.from_user.username %}">{{ invitation.from_user|nicename }}</a>
                                 ({{ invitation.sent }}):</p>
                             <p class="invitation_message">{{ invitation.message }}</p>
                             <form method="post" action="">
@@ -32,7 +34,7 @@
                     </tr>
                 {% else %}
                     <tr>
-                        <td class="user"><a href="{% url profile_detail invitation.from_user.username %}">{{ invitation.from_user|nicename }}</a></td>
+                        <td class="user"><a href="{% url 'profile_detail' invitation.from_user.username %}">{{ invitation.from_user|nicename }}</a></td>
                         <td class="date">{{ invitation.sent }}</td>
                         <td class="invitation_{{ invitation.status }}">{{ invitation.get_status_display }}</td>
                     </tr>
@@ -50,7 +52,7 @@
         <table class="invitation_list">
             {% for invitation in invites_sent %}
                 <tr>
-                    <td class="user"><a href="{% url profile_detail invitation.to_user.username %}">{{ invitation.to_user|nicename }}</a></td>
+                    <td class="user"><a href="{% url 'profile_detail' invitation.to_user.username %}">{{ invitation.to_user|nicename }}</a></td>
                     <td class="date">{{ invitation.sent }}</td>
                     <td class="invitation_{{ invitation.status }}">{{ invitation.get_status_display }}</td>
                 </tr>

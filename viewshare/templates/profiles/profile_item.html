@@ -1,3 +1,4 @@
+{% load url from future %}
 {% load i18n %}
 {% load pagination_tags %}
 {% load humanize %}
@@ -10,7 +11,7 @@
   
   <div class="user_data_entry">
     <div class="user_top">
-      <a href="{% url profile_detail user.username %}" title="{{ user|nicename }}" class="user_name">
+      <a href="{% url 'profile_detail' user.username %}" title="{{ user|nicename }}" class="user_name">
          <span class="value">{{ user|nicename }}</span>
       </a>
       

@@ -1,6 +1,7 @@
+{% load url from future %}
 {%  load i18n %}
 {% load crispy_forms_tags %}
-<form action="{% url exhibit_edit_form owner=object.owner slug=object.slug %}" method="post>
+<form action="{% url 'exhibit_edit_form' owner=object.owner slug=object.slug %}" method="post>
         {% csrf_token %}
         {{ form|crispy }}
         <div class="form_block">

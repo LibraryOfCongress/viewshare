@@ -1,7 +1,8 @@
+{% load url from future %}
 {% load crispy_forms_tags %}
 {% load i18n %}
 
-  <form class="form-horizontal" method="POST" action="{% url profile_edit %}">
+  <form class="form-horizontal" method="POST" action="{% url 'profile_edit' %}">
     <fieldset>
       {% csrf_token %}
       {{ profile_form|crispy }}

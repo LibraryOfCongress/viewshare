@@ -1,4 +1,6 @@
 {% extends "site_base.html" %}
+{% load url from future %}
+
 
 {% load i18n %}
 {% load compress %}
@@ -14,7 +16,7 @@
 {% block head_data %}
     {{ block.super }}
     {% if show_error %}
-    <link rel="freemix/support" href="{% url upload_issue source_id=transaction.source.uuid %}">
+    <link rel="freemix/support" href="{% url 'upload_issue' source_id=transaction.source.uuid %}">
     {% endif %}
 {% endblock %}
 
@@ -60,7 +62,7 @@
 
          <div class="buttons">
            <input type="submit" value="{% trans "Upload" %}" class="submit btn btn-primary" />
-           <a href="{% url upload_dataset %}"><input type="button" value="{% trans "Cancel" %}" class="load-form-cancel negative-button btn btn-danger" /></a>
+           <a href="{% url 'upload_dataset' %}"><input type="button" value="{% trans "Cancel" %}" class="load-form-cancel negative-button btn btn-danger" /></a>
          </div>
 
        </form>

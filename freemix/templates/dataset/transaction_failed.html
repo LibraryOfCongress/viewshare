@@ -1,4 +1,6 @@
 {% extends "site_base.html" %}
+{% load url from future %}
+
 {% load i18n %}
 {% load compress %}
 
@@ -21,7 +23,7 @@
 {% block head_data %}
 
     {{ block.super }}
-    <link rel="freemix/support" href="{% url upload_issue source_id=transaction.source.uuid %}">
+    <link rel="freemix/support" href="{% url 'upload_issue' source_id=transaction.source.uuid %}">
 {% endblock %}
 
 {% block rtab_id %}id="data_tab"{% endblock %}
@@ -68,7 +70,7 @@
           </li>
 
       </ul>
-    <a href="{% url upload_dataset %}"><input type="button" value="{% trans "Back to Upload" %}" class="load-form-cancel negative-button" /></a>
+    <a href="{% url 'upload_dataset' %}"><input type="button" value="{% trans "Back to Upload" %}" class="load-form-cancel negative-button" /></a>
     </div>
     <div id="support" class="ui-helper-hidden"></div>
     <div id="support-spinner" class="ui-helper-hidden loading">

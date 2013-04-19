@@ -1,4 +1,6 @@
 {% extends "site_base.html" %}
+{% load url from future %}
+
 
 {% load i18n %}
 {% load compress %}
@@ -32,8 +34,8 @@
 	<div class="title">{% trans "Simple Spreadsheets" %}</div>
         <div class="desc">{% trans "Simple rectangular spreadsheets in CSV or Microsoft Excel format." %}</div>
         <ul class="sources">
-          <li class="web"><a href="{% url url_transform %}">From the web</a></li>
-          <li class="filesystem"><a href="{% url file_transform %}">From a file on your computer</a></li>
+          <li class="web"><a href="{% url 'url_transform' %}">From the web</a></li>
+          <li class="filesystem"><a href="{% url 'file_transform' %}">From a file on your computer</a></li>
         </ul>
       </li>
 
@@ -41,8 +43,8 @@
         <div class="title">{% trans "XML MODS file" %}</div>
 	<div class="desc">{% trans "An XML file conforming to the Metadata Object Description Schema (MODS) schema." %}</div>
         <ul class="sources">
-          <li class="web"><a href="{% url mods_url_transform %}">From the web</a></li>
-          <li class="filesystem"><a href="{% url mods_file_transform %}">From a file on your computer</a></li>
+          <li class="web"><a href="{% url 'mods_url_transform' %}">From the web</a></li>
+          <li class="filesystem"><a href="{% url 'mods_file_transform' %}">From a file on your computer</a></li>
         </ul>
       </li>
 
@@ -50,17 +52,17 @@
         <div class="title">{% trans "JSON data" %}</div>
         <div class="desc">{% trans "Data collections represented within a JSON list." %}</div>
         <ul class="sources">
-          <li class="web"><a href="{% url json_url_transform %}">From the web</a></li>
+          <li class="web"><a href="{% url 'json_url_transform' %}">From the web</a></li>
         </ul>
       </li>
 
       <li class="option" id="upload-oai">
-        <div class="title">{% trans "OAI " %}<a href="{% url oai_transform %}">{% trans "Open Archives Initiative" %}</a> {% trans "end point (Beta)" %}</div>
+        <div class="title">{% trans "OAI " %}<a href="{% url 'oai_transform' %}">{% trans "Open Archives Initiative" %}</a> {% trans "end point (Beta)" %}</div>
         <div class="desc">{% trans "The Open Archives Initiative develops and promotes interoperability standards that aim to facilitate the efficient dissemination of content." %}</div>
       </li>
 
       <li class="option" id="upload-contentdm">
-        <div class="title">{% trans "A " %}<a href="{% url cdm_transform %}">{% trans "ContentDM database" %}</a> {% trans "(Beta)" %}</div>
+        <div class="title">{% trans "A " %}<a href="{% url 'cdm_transform' %}">{% trans "ContentDM database" %}</a> {% trans "(Beta)" %}</div>
         <div class="desc">{% trans "Digital Collection Management Software from OCLC." %}</div>
       </li>
 

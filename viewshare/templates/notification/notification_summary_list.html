@@ -1,3 +1,4 @@
+{% load url from future %}
 {% load i18n %}
 {% load humanize i18n %}
 {% load timezone_filters %}
@@ -22,10 +23,10 @@
 {% endfor %}
 
 {% else %}
-{% url notification_notices as notices_url %}
+{% url 'notification_notices' as notices_url %}
 <p class="center">{% blocktrans %}You have no unseen <a href="{{ notices_url }}">notices</a>.{% endblocktrans %}</p>
 {% endif %}
 
 {% if queryset %}
-<div class="see_all"><a href="{% url notification_notices %}">{% trans "See all" %}</a></div>
+<div class="see_all"><a href="{% url 'notification_notices' %}">{% trans "See all" %}</a></div>
 {% endif %}

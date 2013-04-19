@@ -1,3 +1,4 @@
+{% load url from future %}
 {% load cms_tags %}
 <div id="supported-file-types" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="supported-file-types-label"
      aria-hidden="true">
@@ -26,7 +27,7 @@
 
         <br/>
 
-        <div class="alert alert-info">More details are available in <a href="{% url userguide %}#s3.1.1" target="_blank">User Guide Data File
-            Section</a> or the <a href="{% url userguide %}#s3.1.4" target="_blank">Troubleshooting Guidelines</a></div>
+        <div class="alert alert-info">More details are available in <a href="{% url 'userguide' %}#s3.1.1" target="_blank">User Guide Data File
+            Section</a> or the <a href="{% url 'userguide' %}#s3.1.4" target="_blank">Troubleshooting Guidelines</a></div>
     </div>
 </div>

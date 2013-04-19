@@ -1,3 +1,4 @@
+{% load url from future %}
 {% load i18n %}
 {% load freemix_helpers %}
 {% load connection_helpers %}
@@ -17,7 +18,7 @@
 	     <div class="dataset-title">{{ object.title }}</div>
 	     
 	     <div class="dataset-creator">
-	       <span class="property-label">{% trans "Loaded by:" %} </span> <a href="{% url profile_detail object.owner.username %}">{{ object.owner|nicename }}</a>
+	       <span class="property-label">{% trans "Loaded by:" %} </span> <a href="{% url 'profile_detail' object.owner.username %}">{{ object.owner|nicename }}</a>
 	     </div>
 	     <div class="dataset-metadata">
 	       <div class="dataset-created-data"><span class="property-label">{% trans "Loaded on:" %} </span>{{ object.created|date:"N j, Y" }}</div>
@@ -46,7 +47,7 @@
        {% if is_saved %}
        <span class="inline_save_message">{% trans "Saved" %}</span>
        {% endif %}
-       <a href="{% url dataset_edit_form owner=object.owner slug=object.slug %}" id="detail_edit_button" class="button_link">{% trans "Edit" %}</a>
+       <a href="{% url 'dataset_edit_form' owner=object.owner slug=object.slug %}" id="detail_edit_button" class="button_link">{% trans "Edit" %}</a>
      </p>
      {% endif %}
      
@@ -66,7 +67,7 @@
 
 	  <div class="user_data_entry">
 	    <span class="user_name">
-	      <a href="{% url profile_detail object.owner.username %}" title="{{ object.owner|nicename }}">
+	      <a href="{% url 'profile_detail' object.owner.username %}" title="{{ object.owner|nicename }}">
 		<span class="value">{{ object.owner|nicename }}</span>
 	      </a>
 	    </span>

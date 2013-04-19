@@ -1,10 +1,12 @@
 {% extends "upload/file_datasource_form.html" %}
+{% load url from future %}
+
 
 {% load i18n %}
 
 {% block head_data %}
 <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}upload/css/json-upload.css" />
-<link rel="viewshare/json-prep" href="{% url json_prep_view %}" />
+<link rel="viewshare/json-prep" href="{% url 'json_prep_view' %}" />
 
 {% endblock %}
 

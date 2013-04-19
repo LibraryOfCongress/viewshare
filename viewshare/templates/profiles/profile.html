@@ -1,4 +1,6 @@
 {% extends "profiles/base.html" %}
+{% load url from future %}
+
 
 {% load i18n %}
 {% load crispy_forms_tags %}
@@ -34,7 +36,7 @@
         transactions: $('.transaction')
       }).render();
     }
-    $('#edit_profile_form').load('{% url profile_edit %}', function() {
+    $('#edit_profile_form').load('{% url 'profile_edit' %}', function() {
       var q = $('form.uniForm');
       if (q.length) {
         //            q.uniform();
@@ -108,7 +110,7 @@
           
           {% if is_me %}
           <span class="about_edit">
-            <a href="{% url profile_edit %}" data-target="#edit_profile_form" role="button" id="edit-profile-button" class="btn btn-small" data-toggle="modal">{% trans "Edit" %}</a>
+            <a href="{% url 'profile_edit' %}" data-target="#edit_profile_form" role="button" id="edit-profile-button" class="btn btn-small" data-toggle="modal">{% trans "Edit" %}</a>
           </span>
           
           <div id="edit_profile_form" class="modal hide fade form-dialog" tabindex="-1" role="dialog" aria-labelledby="editProfileFormLabel" aria-hidden="true">
@@ -193,7 +195,7 @@
 
           {% else %} {# not user.is_authenticated #}
 
-          {% url acct_login as login_url %}
+          {% url 'acct_login' as login_url %}
           <p class="center">{% blocktrans %}<a href="{{login_url}}">Log in</a> to add this person as a connection.{% endblocktrans %}</p>
 
           {% endif %}
@@ -208,12 +210,12 @@
               {% if other_friends %}
               {% connection_list other_friends 3 0 %} 
               <div class="see_all">
-                <a href="{% url connection_list_by_user other_user.username %}">{% trans "See all" %}</a>
+                <a href="{% url 'connection_list_by_user' other_user.username %}">{% trans "See all" %}</a>
               </div> 
               {% else %}
 
               {% if is_me %}
-              {% url profile_list as profile_list_url %}
+              {% url 'profile_list' as profile_list_url %}
               <p class="center">{% blocktrans %}Look at all of the <a href="{{ profile_list_url }}">profiles</a> and see if there's anyone you know.{% endblocktrans %}</p>
               {% else %}
               <p class="center">{% trans "Invite" %} {{ other_user|nicename }} {% blocktrans %}to connect.{% endblocktrans %}</p>

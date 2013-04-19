@@ -1,4 +1,6 @@
 {% extends "dataset/base.html" %}
+{% load url from future %}
+
 
 {% load i18n %}
 {% load datasource_transaction_tags %}
@@ -36,7 +38,7 @@
 {% ifequal user owner  %}
 <div class="priority-area">
 <p>
-<a href="{% url upload_dataset %}" class="button_link">{% trans "Upload Data" %}</a>
+<a href="{% url 'upload_dataset' %}" class="button_link">{% trans "Upload Data" %}</a>
 </p>
 </div>
 {% endifequal %}

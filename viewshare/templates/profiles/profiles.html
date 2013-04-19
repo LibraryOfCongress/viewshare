@@ -1,4 +1,6 @@
 {% extends "profiles/base.html" %}
+{% load url from future %}
+
 
 {% load i18n %}
 {% load pagination_tags %}
@@ -39,12 +41,12 @@
           {% if order == "name" %}
           <a class="btn btn-small active" href="#">{% trans "Name" %}</a>
           {% else %}
-          <a class="btn btn-small" href="{% url profile_list %}?order=name">{% trans "Name" %}</a>
+          <a class="btn btn-small" href="{% url 'profile_list' %}?order=name">{% trans "Name" %}</a>
           {% endif %}
           {% if order == "date" %}
           <a class="btn btn-small active" href="#">{% trans "Joined" %}</a>
           {% else %}
-          <a class="btn btn-small" href="{% url profile_list %}?order=date">{% trans "Joined" %}</a>
+          <a class="btn btn-small" href="{% url 'profile_list' %}?order=date">{% trans "Joined" %}</a>
           {% endif %}
         </span>
       </div>

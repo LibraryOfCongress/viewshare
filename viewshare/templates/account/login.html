@@ -1,4 +1,6 @@
 {% extends "site_base.html" %}
+{% load url from future %}
+
 
 {% load i18n %}
 {% load crispy_forms_tags %}
@@ -28,7 +30,7 @@ $(document).ready(function() {
   {% blocktrans %}You are already logged in as{% endblocktrans %} {{ user|nicename }}.
 </div>
 {% else %}
-{% url registration_register as signup_url %}
+{% url 'registration_register' as signup_url %}
 <div class="signup alert alert-block span4 center">
   {% blocktrans %}Don't yet have an account? <a href="{{ signup_url }}">Sign up</a>!{% endblocktrans %}
 </div>
@@ -42,7 +44,7 @@ $(document).ready(function() {
       <fieldset>
         <legend>Log In
           <div class="forgot pull-right">
-            <a href="{% url acct_passwd_reset %}">{% trans "Forgot password?" %}</a>
+            <a href="{% url 'acct_passwd_reset' %}">{% trans "Forgot password?" %}</a>
           </div>
         </legend>
         {% csrf_token %}	

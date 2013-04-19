@@ -1,4 +1,6 @@
 {% extends "site_base.html" %}
+{% load url from future %}
+
 
 {% load i18n %}
 {% load exhibit_tags %}
@@ -12,11 +14,11 @@
 
 {% block head_data %}
     {{ block.super }}
-    <link rel="exhibit/data" href="{% url shared_dataset_data_json slug=object.slug %}"/>
-    <link rel="exhibit/data" href="{% url shared_dataset_properties_cache_json slug=object.slug %}"/>
+    <link rel="exhibit/data" href="{% url 'shared_dataset_data_json' slug=object.slug %}"/>
+    <link rel="exhibit/data" href="{% url 'shared_dataset_properties_cache_json' slug=object.slug %}"/>
 
-    <link rel="freemix/dataprofile" href="{% url shared_dataset_profile_json slug=object.slug %}"/>
-    <link rel="freemix/exhibit_profile" href="{% url shared_exhibit_profile_json slug=object.slug %}"/>
+    <link rel="freemix/dataprofile" href="{% url 'shared_dataset_profile_json' slug=object.slug %}"/>
+    <link rel="freemix/exhibit_profile" href="{% url 'shared_exhibit_profile_json' slug=object.slug %}"/>
 
 {% endblock %}
 
@@ -78,7 +80,7 @@
       </div>
       {% endif %}
 
-      {% url shared_exhibit_display slug=object.slug as display_url %}
+      {% url 'shared_exhibit_display' slug=object.slug as display_url %}
 
       <div class="exhibit-left exhibit-metadata">
         {% trans "This view was shared by"%} <span class="exhibit-creator">{{exhibit.owner|nicename}}</span>.
