@@ -13,7 +13,7 @@ class Canvas(TitleSlugDescriptionModel):
     location = models.CharField(_('location'), unique=True, max_length=100,
                                 help_text=_("Example: 'exhibit/canvas/three-column.html'"))
 
-    thumbnail = models.URLField(_('thumbnail'), verify_exists = False)
+    thumbnail = models.URLField(_('thumbnail'))
 
     enabled = models.BooleanField(_('enabled'), null=False,default=True)
 
@@ -32,8 +32,7 @@ class Theme(TitleSlugDescriptionModel, models.Model):
                           help_text=_("Example: '/static/exhibit/css/"
                                       "smoothness/smoothness.css'"),
                           default="/static/exhibit/css/"
-                                  "smoothness/smoothness.css",
-                          verify_exists=False)
+                                  "smoothness/smoothness.css")
     thumbnail = models.ImageField(_('thumbnail'), upload_to='view_theme/img',
                                   default="static/images/thumbnails"
                                           "/three-column/smoothness.png")

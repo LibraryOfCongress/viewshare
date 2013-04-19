@@ -87,7 +87,7 @@ class Topic(CatalogModel):
 class Collection(CatalogModel):
     "a list of data views that are associated with a particular project"
 
-    home_page = models.URLField(_('home page'), verify_exists=False)
+    home_page = models.URLField(_('home page'))
 
     thumbnail = models.ImageField(_('thumbnail'),
                                   upload_to='catalog/thumbnails',
@@ -118,8 +118,7 @@ class Collection(CatalogModel):
 
     external_view = models.URLField(_('external view'),
                                     null=True,
-                                    blank=True,
-                                    verify_exists=False)
+                                    blank=True)
 
     def to_dict(self):
         d = super(Collection, self).to_dict()
