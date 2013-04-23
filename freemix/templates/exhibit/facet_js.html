@@ -1,12 +1,28 @@
 {% load compress %}
 
 {% compress js %}
-<script type="text/javascript" src="{{STATIC_URL}}exhibit/js/facets/search-facet.js"></script>
-<script type="text/javascript" src="{{STATIC_URL}}exhibit/js/facets/list-facet.js"></script>
-<script type="text/javascript" src="{{STATIC_URL}}exhibit/js/facets/tagcloud-facet.js"></script>
-<script type="text/javascript" src="{{STATIC_URL}}exhibit/js/facets/slider-facet.js"></script>
-<script type="text/javascript" src="{{STATIC_URL}}exhibit/js/facets/numeric-facet.js"></script>
-<script type="text/javascript" src="{{STATIC_URL}}exhibit/js/facets/logo-facet.js"></script>
-<script type="text/javascript" src="{{STATIC_URL}}exhibit/js/lib/creole.js"></script>
-<script type="text/javascript" src="{{STATIC_URL}}exhibit/js/facets/text-facet.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/facets/b-new.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/facets/container.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/facets/search.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/facets/list.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/facets/tagcloud.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/facets/slider.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/facets/numeric.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/facets/logo.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/lib/creole.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/facets/text.js"></script>
 {% endcompress %}
+
+{% if editor %}
+    {% compress js %}
+        <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/editor/facets/base.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/editor/facets/container.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/editor/facets/search.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/editor/facets/list.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/editor/facets/tagcloud.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/editor/facets/slider.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/editor/facets/numeric.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/editor/facets/logo.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/editor/facets/text.js"></script>
+    {% endcompress %}
+{% endif %}
