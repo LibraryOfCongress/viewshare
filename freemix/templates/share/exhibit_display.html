@@ -33,6 +33,8 @@
     <script type="text/javascript" src="{{STATIC_URL}}freemix/js/freemix.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/lightbox.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}freemix/js/exhibit.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/patch_exhibit.js"></script>
+
     <script type="text/javascript" src="{{STATIC_URL}}freemix/js/property.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}freemix/js/identify.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/widget.js"></script>
@@ -42,7 +44,7 @@
     <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.highlight.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/display.js"></script>
     {% endcompress %}
-    {% include "exhibit/lens_js.html" %}
+    {% include "exhibit/view_js.html" %}
     {% include "exhibit/facet_js.html" %}
     {% compress js %}
     <script type="text/javascript" src="{{STATIC_URL}}exhibit/share/js/shared_exhibit.js"></script>

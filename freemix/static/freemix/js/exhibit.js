@@ -64,17 +64,7 @@ Exhibit.Formatter._ImageFormatter.prototype.format = function(value, appender) {
     appender(a);
 };
 
-(function($) {
-    $("body").live('rendered.exhibit', function() {
-        var extype = window.exhibit._database._types['Item'];
-        extype._custom.label = "";
-        extype._custom.pluralLabel = "";
-        $('.exhibit-collectionSummaryWidget-count').parent().contents().filter(function(){
-            return this.nodeType===3;
-        }).remove();
 
-    });
-})(jQuery);
 
 
 (function($, Freemix) {
@@ -154,6 +144,7 @@ Exhibit.Formatter._ImageFormatter.prototype.format = function(value, appender) {
             }
             return $.extend({}, expressionCount, {label: label});
         },
+        expression: function(property){return "." + property;}
         exportDatabase: function(database) {
             var db = database || this.database;
             var items = [];
