@@ -1,4 +1,6 @@
 {% extends "exhibit/base.html" %}
+{% load url from future %}
+
 
 {% load i18n %}
 {% load freemix_helpers %}
@@ -14,8 +16,8 @@
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/layout.css"/>
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/views.css"/>
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/editor.css"/>
-<link href="{{STATIC_URL}}stylesheets/inspector.css" rel="stylesheet" type="text/css" media="screen,projection" />
-<link href="{{STATIC_URL}}stylesheets/embed.css" rel="stylesheet" type="text/css" media="screen,projection" />
+<link href="{{STATIC_URL}}freemix/css/inspector.css" rel="stylesheet" type="text/css" media="screen,projection" />
+<link href="{{STATIC_URL}}exhibit/css/embed.css" rel="stylesheet" type="text/css" media="screen,projection" />
 
 {% endcompress %}
 {% endblock %}
@@ -48,7 +50,7 @@
         <span class="divider">|</span>
 
         <span class="action action_share_exhibit">
-          <a class="exhibit_share" href="{% url shared_key_create_form owner=exhibit.owner slug=exhibit.slug %}">{% trans "Share" %}</a>
+          <a class="exhibit_share" href="{% url 'shared_key_create_form' owner=exhibit.owner slug=exhibit.slug %}">{% trans "Share" %}</a>
         </span>
         {% endif %}
 

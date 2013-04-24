@@ -1,6 +1,8 @@
 {% extends "site_base.html" %}
+{% load url from future %}
+
 {% load i18n %}
-{% load uni_form_tags %}
+{% load crispy_forms_tags %}
 
 {% block head_css %}
 {{ block.super }}
@@ -13,10 +15,10 @@
 <div id="issue_create_content">
     <h1>Report a Data Augmentation Problem</h1>
 
-    <form action="{% url create_augmentation_issue %}" method="post" class="uniForm">
+    <form action="{% url 'create_augmentation_issue' %}" method="post" class="uniForm">
         <fieldset class="inlineLabels">
             {%csrf_token%}
-            {{ form|as_uni_form }}
+            {{ form|crispy }}
         </fieldset>
         <input type="submit" value="Send Report"/>
         <input type="button" class="cancel-button negative-button" value="{% trans "Cancel" %}"/>

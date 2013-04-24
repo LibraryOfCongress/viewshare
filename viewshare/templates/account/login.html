@@ -1,11 +1,18 @@
 {% extends "site_base.html" %}
+{% load url from future %}
+
 
 {% load i18n %}
-{% load uni_form_tags %}
+{% load crispy_forms_tags %}
 {% load freemix_helpers %}
 {% load cms_tags %}
 
 {% block head_title %}{% trans "Login" %}{% endblock %}
+
+{% block head_css %}
+{{ block.super }}
+<link href="{{STATIC_URL}}viewshare/css/login.css" rel="stylesheet" type="text/css" media="screen,projection" />
+{% endblock %}
 
 {% block head_scripts %}
 {{ block.super }}
@@ -19,38 +26,58 @@ $(document).ready(function() {
 {% block body %}
 
 {% if user.is_authenticated %}
-<p>
-  <span class="warning">{% blocktrans %}You are already logged in as{% endblocktrans %} {{ user|nicename }}.</span>
-</p>
-<br />
+<div class="alert alert-block">
+  {% blocktrans %}You are already logged in as{% endblocktrans %} {{ user|nicename }}.
+</div>
 {% else %}
-{% url registration_register as signup_url %}
-<p>{% blocktrans %}Don't yet have an account? <a href="{{ signup_url }}">Sign up</a>!{% endblocktrans %}</p>
+{% url 'registration_register' as signup_url %}
+<div class="signup alert alert-block span4 center">
+  {% blocktrans %}Don't yet have an account? <a href="{{ signup_url }}">Sign up</a>!{% endblocktrans %}
+</div>
 <br />
 {% endif %}
 
 <div class="login_options login_wrapper">	
-   <div class="login_text">
-    <fieldset class="window inlineLabels loginTypeUP">
+  <div class="login_text">
 
-      <form class="login uniForm user_pass" method="POST">
-          {% csrf_token %}	
-	
-          {{ form|as_uni_form }}
-          <div class="form_block">
-            <input type="submit" value="{% trans "Log in" %}" />
+    <form class="login user_pass form-horizontal" method="POST">
+      <fieldset>
+        <legend>Log In
+          <div class="forgot pull-right">
+            <a href="{% url 'acct_passwd_reset' %}">{% trans "Forgot password?" %}</a>
           </div>
+        </legend>
+        {% csrf_token %}	
 
-          <div class="form_block">
-            <a href="{% url acct_passwd_reset %}">{% trans "Forgot password?" %}</a>
+        <div class="control-group">
+        <label class="control-label" for="id_username">Username</label>
+        <div class="controls">
+          <input type="text" id="id_username" placeholder="Username" name="username" required="true"></input>
+        </div>
+
+        <div class="control-group">
+        <label class="control-label" for="id_password">Password</label>
+        <div class="controls">
+          <input type="password" id="id_password" placeholder="Password" name="password" required="true"></input>
+        </div>
+
+        <div class="control-group">
+          <div class="controls">
+            <label class="checkbox" for="id_remember">
+              <input type="checkbox" id="id_remember" name="remember"> Remember me
+            </label>
+            <button type="submit" class="btn">{% trans "Log in" %}</button>
           </div>
-      </form>
-    </fieldset>
+        </div>
+      </fieldset>
+    </form>
+
+    <br />
+    <br />
+    <div class="alert alert-info">
+      {% blocktrans %}If you have any trouble logging in to your account, contact us at <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>.{% endblocktrans %}
+    </div>
    
-   <div class="contact">
-     {% blocktrans %}If you have any trouble logging in to your account, contact us at <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>.{% endblocktrans %}
-   </div>
-
   </div>  
 </div>
 

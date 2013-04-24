@@ -66,10 +66,9 @@ Third-party Apps
 * timezones
     * Deal with timezone localization for users
     * https://github.com/brosner/django-timezones
-* uni_form
+* django-crispy-forms
     * Build programmatic reusable layouts out of components, having full control of the rendered HTML
-    * https://github.com/pydanny/django-uni-form
-    * NOTE: uni_form is deprecated for django-crispy-forms
+    * http://django-crispy-forms.readthedocs.org/en/latest/
 
 Custom apps
 -----------
@@ -93,8 +92,6 @@ Custom apps
 * Viewshare specific
     * viewshare.apps.notices
         * User can control email settings for system events like invitations and announcements.
-    * viewshare.apps.site_theme
-        * Admin can create or select one of multiple CSS files to be used throughout the site.
     * viewshare.apps.collection_catalog
         * Admin can group Exhibits that have been published on the system into Collections. Collections can be grouped into Projects. Collections can be tagged with Topics and can be attributed to Organizations.
     * viewshare.utilities

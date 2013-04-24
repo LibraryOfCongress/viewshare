@@ -1,12 +1,12 @@
 {% extends "dataset/edit/base.html" %}
+{% load url from future %}
+
 {% load i18n %}
 {% load augment_tags %}
 {% load compress %}
 {% block head_scripts %}
     {{block.super}}
     {% compress js %}
-    <script src="{{ STATIC_URL }}uni_form/uni-form.jquery.js" type="text/javascript"></script>
-
     <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/ui.multiselect.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}dataset/augment/js/augment.js"></script>
 
@@ -19,9 +19,9 @@
 {% block head_data %}
     {{ block.super }}
     {%  if transaction %}
-    <link rel="support/ignored_fields" href="{% url ignored_fields_issue source_id=transaction.source.uuid %}"/>
+    <link rel="support/ignored_fields" href="{% url 'ignored_fields_issue' source_id=transaction.source.uuid %}"/>
     {% endif %}
-    <link rel="support/augment" href="{% url create_augmentation_issue %}"/>
+    <link rel="support/augment" href="{% url 'create_augmentation_issue' %}"/>
 
 {% endblock %}
 

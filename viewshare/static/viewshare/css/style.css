@@ -1,0 +1,695 @@
+/* This file is for styles that apply across the entire site (e.g.,
+ * navigation tabs).  Styles that only apply in certain sections or
+ * pages should be broken into their own files and included where
+ * appropriate.
+ */
+
+header, .header, #header{
+    background-color: #fff;
+    width: 100%;
+    padding-top: 40px;
+}
+
+#application-logo {
+    position: absolute;
+    left: 35px;
+    top: 5px;
+    height: 40px;
+    background-repeat: no-repeat;
+    background-image: url(../img/viewshare-logo.png);
+    width: 228px;
+}
+
+#header #application-status {
+    position: absolute;
+    font-family: courier;
+    font-size: 80%;
+    font-weight: 100;
+    color: red;
+    top: 21px;
+    left: 270px;
+}
+
+.brand .tagline {
+    position: absolute;
+    left:220px;
+    top: 13px;
+    font-size: 90%;
+    color: slate;
+}
+
+#footer {
+    width: 100%;
+}
+
+#templates {
+    display: none;
+}
+
+/* choosers */
+
+.chooser ul.thumbnails {
+    margin: 0;
+    padding: 0;
+    list-style-type:none;
+}
+
+.chooser ul.thumbnails li {
+    float: left;
+    font-size: 1em;
+    margin: 5px 5px 5px 5px;
+    list-style: none;
+    width: 120px;
+    height: 120px;
+    padding-bottom: 20px;
+}
+
+.chooser ul.thumbnails li.disabled {
+    opacity: 0.3;
+}
+
+.chooser ul.thumbnails li.disabled img {
+    border: none;
+}
+.chooser ul.thumbnails li a {
+    text-decoration: none;
+    position: relative;
+}
+
+.chooser ul.thumbnails li img {
+    width: 100px;
+    height: 80px;
+    display: block;
+    padding-top:3px;
+    position: relative;
+    border: lightgrey 1px solid;
+}
+
+.chooser ul.thumbnails li a:hover img {
+    /*border: 2px solid #ccc;*/
+    opacity: 1.0;
+ -moz-box-shadow: 3px 3px 4px #999; /* Firefox */
+ -webkit-box-shadow: 3px 3px 4px #999; /* Safari/Chrome */
+ box-shadow: 3px 3px 4px #999; /* Opera and other CSS3 supporting browsers */
+ -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#999999')";/* IE 8 */
+ : progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#999999');/* IE 5.5 - 7 */ 
+}
+
+.chooser ul.thumbnails li a:active img {
+    /*border: 2px solid #f58809;*/
+    opacity: 1.0;
+}
+
+.chooser ul.thumbnails li legend {
+    margin: .1em 4px;
+    font-size: 9pt;
+    border: none;
+    font-weight: bold;
+    color: rgb(0, 176, 216);
+
+}
+
+
+/* for Exhibits */
+/* Maybe move to a profiles.css? */
+
+.exhibit-collectionView-group-count {
+    display: none;
+}
+
+ol.exhibit-tileView-body > li {
+    list-style: none;
+}
+
+ol.exhibit-tileView-body {
+    margin: 0;
+    padding: 0;
+}
+
+div.exhibit-collectionView-header-sortControls {
+    display: none;
+}
+
+#body {
+margin-top: 20px;
+}
+
+div#body.freemix-themeable > div > h1,
+.dataprofile .tab-contents h1,
+.dataprofile-viewer h1 {
+    border-bottom: 1px solid lightgrey;
+    font-size: 2.0em;
+    padding: 0.2em 0.1em;
+    margin: 0 0 1em;
+}
+
+div#body.freemix-themeable > div > h2,
+.dataprofile .tab-contents h2,
+.dataprofile-viewer h2 {
+    font-size: 1.5em;
+    padding: 0.1em 0.1em;
+    line-height: 30px;
+}
+
+/* Search */
+
+.search-area label {
+padding-right: 5px;
+font-weight: bold;
+}             
+
+.search-area .help-inline .sort-label {
+padding-left: 20px;
+margin-right: -5px;
+font-weight: bold;
+}             
+
+.attraction #identify h1 {
+    padding: 0.5em 0.5em;
+    margin: 0 0 0.5em;
+}
+
+.freemix-themeable > div .priority-area {
+    background: #fff url(../../images/header-background.png) bottom center repeat-x;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #ddd;
+    padding: 0.5em 1.5em;
+    margin: -2.3em -26.5px 1em;
+    text-align: right;
+}
+
+h2.help {
+    font-size: 1.5em;
+    padding: .4em 30px .4em 0;
+    margin: 0 0 1em 0;
+    border-bottom: 1px solid #e3f5f7;
+    color: darkslategrey;
+}
+
+h3.help {
+    font-size: 1.25em;
+    padding: .4em 0px .4em 0;
+    margin: 0 0 -3em 0;
+    color: darkslategrey;
+}
+
+h2 img {
+    text-align: right;
+    vertical-align: top;
+    height: 40px;
+    width: 40px;
+    margin-top: -25px;
+}
+
+/* Theme switcher */
+#toolbar {
+    width: 99%;
+    min-height: 1em;
+    padding: 8px 0 0;
+}
+
+#theme {
+    float: right;
+}
+
+/* Groups */
+
+.tribe_left {
+    display: inline;
+    float: left;
+    position: relative;
+    margin-left: 9px; /* changed from 10 ??? */
+    margin-right: 9px; /* changed from 10 ??? */
+    width: 65%;
+}
+
+.tribe_right {
+    display:inline;
+    float: left;
+    position: relative;
+    margin-left: 9px; /* changed from 10 ??? */
+    margin-right: 9px; /* changed from 10 ??? */
+    width: 30%;
+}
+
+
+/* data views and sets */
+
+.dataset_list, .exhibit_list, .data_details, .exhibit_details, .shared_key_list {
+   margin-bottom: 1.5em;
+}
+
+.dataset_list_items, .exhibit_list_items, .shared_key_list_items {
+   margin: 0;
+   padding: 0;
+   list-style-type: none;
+}
+
+.dataset_list_item, .exhibit_list_item, .shared_key_list_item {
+   background: #fff url(../../images/header-background.png) bottom center repeat-x;
+   border: 1px solid #ddd;
+   list-style-type: none;
+   margin: 1em 0;
+   padding: 5px 10px;
+   text-align: left;
+}
+
+.shared-key-url {
+  width: 98%;
+}
+
+
+.dataset_list_item .dataset-title {
+   background: transparent url(../../images/dataset-24.png) top left no-repeat;
+   font-size: 115%;
+   font-weight: bold;
+   padding-bottom: 15px;
+   padding-left: 30px;
+}
+
+.exhibit_list_item .exhibit-title {
+   background: transparent url(../../images/palette-24.png) top left no-repeat;
+   font-size: 115%;
+   font-weight: bold;
+   padding-bottom: 15px;
+   padding-left: 30px;
+}
+
+.shared_key_list_item .shared-key-label {
+   background: transparent url(../../images/key-24.png) top left no-repeat;
+   font-size: 115%;
+   font-weight: bold;
+   padding-bottom: 0.4em;
+   padding-left: 30px;
+}
+
+.shared-link-notice {
+   background: transparent url(../../images/key-24.png) top left no-repeat;
+   font-size: 100%;
+   line-height: 140%;
+   font-weight: bold;
+   padding-bottom: 0.5em;
+   padding-left: 30px;
+}
+
+
+.dataset_edit .dataset-title, .dataset_summary .dataset-title {
+   background: transparent url(../../images/dataset-32.png) top left no-repeat;
+   font-size: 140%;
+   font-weight: bold;
+   padding-top: 0.5em;
+   padding-bottom: 0.5em;
+   padding-left: 40px;
+   vertical-align:middle;
+}
+
+.exhibit_edit .exhibit-title, .exhibit_display .exhibit-title {
+   background: transparent url(../../images/palette-32.png) top left no-repeat;
+   font-size: 140%;
+   font-weight: bold;
+   padding-bottom: 0.5em;
+   padding-top: 0.5em;
+   padding-left: 40px;
+}
+
+.exhibit_display .shared-key .exhibit-title {
+   background: transparent url(../../images/key-32.png) 0% 25% no-repeat;
+   font-size: 140%;
+   font-weight: bold;
+   padding-bottom: 0.5em;
+   padding-top: 0.5em;
+   padding-left: 40px;
+}
+
+
+/* handle this style due to jquery uithemer base override */
+
+.exhibit_edit ul.exhibit_list_items, .exhibit_display ul.exhibit_list_items {
+  margin-left: 20px;
+  margin-right: 20px;
+  color: black;
+}
+
+.exhibit_edit ul.exhibit_list_items a, .exhibit_display ul.exhibit_list_items a {
+    color: rgb(0, 176, 216);
+}
+
+.about_profile .dataset-title, .about_profile .exhibit-title {
+   font-size: 115%;
+   font-weight: bold;
+   padding-bottom: 0.4em;
+   padding-left: 0px;
+}
+
+.dataset-metadata, .exhibit-metadata {
+    font-size: 90%;
+    padding-left: 0px;
+}
+
+.inspector_info {
+height: 100%;
+}
+
+.about_profile .profile_icon {
+background: url(../../images/person-96.png) center center no-repeat;
+width:106px;
+height:106px;
+}
+
+.about_profile .dataset_icon {
+background: url(../../images/dataset-96.png) center center no-repeat;
+width:106px;
+height:106px;
+}
+
+.about_profile .exhibit_icon {
+background: url(../../images/palette-96.png) center center no-repeat;
+width:106px;
+height:106px;
+}
+
+#about-box .about_edit {
+ padding-right: 5px;
+ padding-bottom: 5px;
+}
+
+#about-box .about_name {
+ font-weight: bold;
+ font-size: 130%;
+}
+
+#about-box .about_homepage {
+  background: url(../../images/home.png) bottom left no-repeat;
+  width: 24px;
+  height: 24px;
+  margin-left: 15px;
+  padding-left: 30px;
+  
+}
+
+#about-box .user_counts {
+  padding-top: 5px;
+  font-size: 95%;
+}
+
+/* set width accordingly for appropriate page display */
+
+.dataset-actions, .exhibit-actions, .shared-key-actions {
+     float:right;
+}
+	       
+.dataset-description, .exhibit-description {
+    padding-bottom: 10px;
+}
+
+.inspector_panel .dataset_description, .inspector_panel .exhibit-description {
+    padding-bottom: 30px;
+}
+
+.exhibit-short-description, .exhibit-long-description {
+}
+
+/* policy */
+
+.public .dataset-title {
+}
+
+.public .exhibit-title {
+}
+
+.exhibit_display .private, .exhibit_edit .private, .dataset_edit .private, .dataset_summary .private, .dataset_list_items .private, .exhibit_list_items .private  {
+   background: #fffcdf url(../../images/lock.png) 99% 5% no-repeat;
+  }
+
+.exhibit-visibility .private {
+   background-image: url(../../images/lock.png);
+   color: #9F6000;
+   background-color: #fffcdf;
+   margin: 20px 0px;
+   padding:15px 15px 15px 40px;
+   background-repeat: no-repeat;
+   background-position: 15px center;
+   border: 1px solid;
+}
+
+.dataset-visibility .private {
+   background-image: url(../../images/lock.png);
+   color: #9F6000;
+   background-color: #fffcdf;
+   margin: 20px 0px;
+   padding:15px 15px 15px 40px;
+   background-repeat: no-repeat;
+   background-position: 15px center;
+   border: 1px solid;
+}
+
+.exhibit-visibility .public {
+   background-image: url(../../images/unlock.png);
+   color: #00529B;
+   background-color: #BDE5F8;
+   margin: 20px 0px;
+   padding:15px 15px 15px 40px;
+   background-repeat: no-repeat;
+   background-position: 15px center;
+   border: 1px solid;
+}
+
+.dataset-visibility .public {
+   background-image: url(../../images/unlock.png);
+   color: #00529B;
+   background-color: #BDE5F8;
+   margin: 20px 0px;
+   padding:15px 15px 15px 40px;
+   background-repeat: no-repeat;
+   background-position: 15px center;
+   border: 1px solid;
+}
+
+.exhibit-left, .dataset-left, .shared-key-left {
+   float: left;
+   font-size: 0.9em;
+}
+
+.exhibit-right, .dataset-right, .shared-key-right {
+   background: #fff url(../../images/header-background.png) bottom left repeat-x;
+   border: 1px solid #ddd;
+   float: right;
+}
+
+
+/* see all / see more */
+.see_all {
+    padding-top: 10px;
+    padding-bottom: 25px;
+    font-weight: bold;
+}
+
+.editForm #id_body {
+    width: 98%;
+    height: 200px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* threaded */
+ul.responses li.odd:nth-child(1) {
+    border: solid lightgrey 1px;
+    margin-bottom: 20px;
+}
+
+ul.responses li.thread-0 {
+    border-top: solid lightgrey 1px;
+    border-bottom: solid lightgrey 1px;
+    margin-bottom: 10px;
+}
+
+ul.responses li.thread-1,
+ul.responses li.thread-2,
+ul.responses li.thread-3,
+ul.responses li.thread-4,
+ul.responses li.thread-5,
+ul.responses li.thread-6,
+ul.responses li.thread-7,
+ul.responses li.thread-8 {
+    border-top: solid lightgrey 1px;
+    border-bottom: solid lightgrey 1px;
+    padding-left: 20px;
+    margin-bottom: 10px;
+}
+
+
+/* profiles */
+
+.info-section {
+    background: #fff url(../../images/header-background.png) bottom center repeat-x;
+    border: 1px solid #eee;
+    margin-bottom: 1.5em;
+}
+
+.profile h2, .dataset_list h2, .exhibit_list h2, .info-section h2, .shared_key_list h2 {
+    background-color: #5582A1;
+    color: #fff;
+    font-size: 1.0em;
+    margin: 0;
+    padding: 0.25em;
+}
+
+.about_profile {
+    background-color: #072146;
+    width: 100%;
+}
+
+.about_profile .profile_info, .about_profile .dataset_info, .about_profile .exhibit_info {
+    background-color: #1C3C62;
+    color: #fff;
+    height: 72%;
+}
+
+table.about_profile td {
+    padding: 5px;
+    text-align: left;
+}
+
+img.photo {
+    border: 5px solid #1C3C62;
+    padding: 5px;
+}
+
+.about_edit {
+    padding-top: 2em;
+    text-align: right;
+}
+
+#about-box {
+    background: #fff url(../../images/header-background.png) bottom center repeat-x;
+}
+
+div.profile_info, div.dataset_info, div.exhibit_info {
+    padding: 1em 1em;
+    line-height: 1.3em;
+}
+
+.see_all {
+    text-align: center;
+    font-weight: normal;
+}
+
+
+
+/* avatar views */
+
+/* profile avatar */
+#profile_avatar_container, #inspector_container {
+    width: 116px;
+}
+
+div#profile_avatar, div#dataset_avatar {
+    position: relative;
+}
+
+div#profile_avatar a {
+    background: #111;
+    filter: alpha(opacity=75);
+    opacity: .75;
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 55px; /* 64 (gravatar - 1 margin-left) */
+    margin-top: 1px;
+    margin-bottom: 15px;
+    margin-left: 25px;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 90%;
+    border: 1px solid #999;
+}
+
+/* Friends list */
+ul.connection_list {
+    margin-left: 0px;
+    list-style-type: none;
+}
+
+/* Activities */
+div.notices h2 {
+    display: none;
+}
+
+
+/* notices */
+
+.notice, .unseen_notice {
+ line-height: 130%;
+}
+
+.notice .notice_type, .unseen_notice .notice_type {
+ display: none;
+}
+
+
+
+/* groups */
+.user_groups_list {
+    margin: 0;
+    padding: 0;
+}
+
+.user_groups_list li {
+    list-style-type: none;
+    padding: 0.5em;
+}
+
+/* factor the following out (later) into task based stylesheet files */
+/* account */
+.login_options {
+}
+
+/* common structural elements */
+#subnav-extra {
+    float: right;
+    padding-top: 0.65em;
+}
+
+.sort-label {
+    padding-right: 0.75em;
+}
+
+.start-matter {
+    margin: 2em 0;
+}
+
+
+.project {
+    margin: 1em 0;
+}
+
+.community_logo {
+    clear: left;
+    float: left;
+    width: 25%;
+}
+
+.project_description {
+    clear: right;
+    float: right;
+    width: 72%;
+}
+
+/* loading bar */
+.loading {
+    background: transparent url(../../images/bar-animated.gif) top center no-repeat;
+    margin: 1em auto;
+    min-width: 180px;
+    padding: 20px 0 0;
+    text-align: center;
+}
+
+/* Django CMS */
+#cms_toolbar_logo,
+#cms_toolbar_logoutbutton {
+    display: none;
+}
+
+

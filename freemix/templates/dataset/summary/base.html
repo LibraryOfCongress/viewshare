@@ -1,4 +1,6 @@
 {% extends "dataset/base.html" %}
+{% load url from future %}
+
 
 {% load i18n %}
 {% load freemix_helpers %}
@@ -9,8 +11,8 @@
 
 {% block freemix_meta %}
     {{ block.super }}
-    <link rel="freemix/dataprofile" href="{% url dataset_profile_json owner=object.owner.username slug=object.slug %}"/>
-    <link rel="exhibit/data" href="{% url dataset_data_json owner=object.owner.username slug=object.slug %}"/>
+    <link rel="freemix/dataprofile" href="{% url 'dataset_profile_json' owner=object.owner.username slug=object.slug %}"/>
+    <link rel="exhibit/data" href="{% url 'dataset_data_json' owner=object.owner.username slug=object.slug %}"/>
 {% endblock %}
 
 {% block freemix_css %}
@@ -73,10 +75,10 @@
       </div>
 
       <div class="dataset-metadata dataset-left">
-	{% trans "Originally loaded by" %} <span class="dataset-owner"><a href="{% url profile_detail dataset.owner.username %}">{{ dataset.owner|nicename }}</a></span> {% trans "on" %} <span class="dataset-created-data">{{ dataset.created|date:"N j, Y" }}</span>
+	{% trans "Originally loaded by" %} <span class="dataset-owner"><a href="{% url 'profile_detail' dataset.owner.username %}">{{ dataset.owner|nicename }}</a></span> {% trans "on" %} <span class="dataset-created-data">{{ dataset.created|date:"N j, Y" }}</span>
     {% with exhibits.count as exhibits_count %}
 	{% ifnotequal exhibits_count 0 %}
-	{% trans "and is the basis for" %} <span class="view-count"><a href="{% url exhibits_by_dataset owner=dataset.owner.username slug=dataset.slug %}">{{ exhibits_count }} {% trans "View" %}{{ exhibits_count|pluralize }}</a></span>
+	{% trans "and is the basis for" %} <span class="view-count"><a href="{% url 'exhibits_by_dataset' owner=dataset.owner.username slug=dataset.slug %}">{{ exhibits_count }} {% trans "View" %}{{ exhibits_count|pluralize }}</a></span>
 	{% endifnotequal %}
 	.{% endwith %}
       </div>
@@ -88,13 +90,13 @@
 	<div class="dataset-links">
 	
           <span class="action action_inspect_dataset">
-            <a class="dataset_inspect" href="{% url dataset_detail owner=dataset.owner.username slug=dataset.slug %}">{% trans "Inspect" %}</a>
+            <a class="dataset_inspect" href="{% url 'dataset_detail' owner=dataset.owner.username slug=dataset.slug %}">{% trans "Inspect" %}</a>
           </span>
 	  
           <span class="divider">|</span>
 	  
           <span class="action action_create_dataset">
-            <a class="dataset_create" href="{% url exhibit_canvas_chooser owner=dataset.owner.username slug=dataset.slug %}">{% trans "Build" %}</a>
+            <a class="dataset_create" href="{% url 'exhibit_canvas_chooser' owner=dataset.owner.username slug=dataset.slug %}">{% trans "Build" %}</a>
           </span>
 	  
 	  
@@ -102,7 +104,7 @@
           <span class="divider">|</span>
 	  
           <span class="action action_edit_dataset">
-            <a class="dataset_edit" href="{% url dataset_edit owner=dataset.owner.username slug=dataset.slug %}">{% trans "Edit" %}</a>
+            <a class="dataset_edit" href="{% url 'dataset_edit' owner=dataset.owner.username slug=dataset.slug %}">{% trans "Edit" %}</a>
           </span>
 	  
           {% endifequal %}

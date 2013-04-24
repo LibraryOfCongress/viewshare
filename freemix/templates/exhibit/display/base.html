@@ -1,4 +1,6 @@
 {% extends "site_base.html" %}
+{% load url from future %}
+
 
 {% load i18n %}
 {% load exhibit_tags %}
@@ -12,11 +14,11 @@
 {% block body_class %}main-attraction{% endblock %}
 {% block head_data %}
 {{ block.super }}
-<link rel="exhibit/data" href="{% url dataset_data_json owner=object.dataset.owner.username slug=object.dataset.slug %}"/>
-<link rel="exhibit/data" href="{% url dataset_properties_cache_json owner=object.dataset.owner.username slug=object.dataset.slug %}"/>
+<link rel="exhibit/data" href="{% url 'dataset_data_json' owner=object.dataset.owner.username slug=object.dataset.slug %}"/>
+<link rel="exhibit/data" href="{% url 'dataset_properties_cache_json' owner=object.dataset.owner.username slug=object.dataset.slug %}"/>
 
-<link rel="freemix/dataprofile" href="{% url dataset_profile_json owner=object.dataset.owner.username slug=object.dataset.slug %}"/>
-<link rel="freemix/exhibit_profile" href="{% url exhibit_profile_json owner=object.owner.username slug=object.slug %}"/>
+<link rel="freemix/dataprofile" href="{% url 'dataset_profile_json' owner=object.dataset.owner.username slug=object.dataset.slug %}"/>
+<link rel="freemix/exhibit_profile" href="{% url 'exhibit_profile_json' owner=object.owner.username slug=object.slug %}"/>
 {% endblock %}
 
 {% block head_scripts %}
@@ -74,8 +76,8 @@
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/layout.css"/>
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/views.css"/>
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}exhibit/css/canvas.css"/>
-<link href="{{STATIC_URL}}stylesheets/inspector.css" rel="stylesheet" type="text/css" media="screen,projection" />
-<link href="{{STATIC_URL}}stylesheets/embed.css" rel="stylesheet" type="text/css" media="screen,projection" />
+<link href="{{STATIC_URL}}freemix/css/inspector.css" rel="stylesheet" type="text/css" media="screen,projection" />
+<link href="{{STATIC_URL}}exhibit/css/embed.css" rel="stylesheet" type="text/css" media="screen,projection" />
 {% endcompress %}
 
 <link rel="stylesheet" type="text/css" href="{{ exhibit.theme.url }}" />
@@ -87,55 +89,53 @@
 <div class="exhibit_display">
   <ul class="exhibit_list_items">
     <li class="exhibit_list_item result_set_item clearfix {% if exhibit.published %}public{% else %}private{% endif %}">
-      
-      <div class="exhibit-title">{{exhibit.title}}</div>
 
-      {% if exhibit.description %}
-      <div class="exhibit-description">
-	{{ exhibit.description }}
-      </div>
-      {% endif %}
+      <div class="row-fluild">
+        <div class="span12">
+          <div class="exhibit-title">{{exhibit.title}}</div>
 
-      <div class="exhibit-left exhibit-metadata">
-        {% trans "Created by"%} <span class="exhibit-creator"><a href="{% url profile_detail exhibit.owner.username %}">{{exhibit.owner|nicename}}</a></span> {% trans "on"%} <span class="exhibit-modified-data">{{exhibit.modified|date:"N j, Y"}}</span> {% trans "and based on the " %}<span class="exhibit-dataset-title"><a href="{{exhibit.dataset.get_absolute_url }}" title="{{exhibit.dataset.title}}">{{exhibit.dataset.title}}</a></span> {% trans "data set." %}
-      </div>
-      
-      <div class="exhibit-right exhibit-actions">
-	
-	<div class="exhibit-links">	  
-          {% if can_inspect %}
-          <span class="action action_inspect_exhibit">
-            <a class="exhibit_inspect" href="{% url exhibit_detail owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Inspect" %}</a>
-          </span>
-	  {% endif %}
-
-        {% if can_share %}
-        <span class="divider">|</span>
-
-        <span class="action action_share_exhibit">
-          <a class="exhibit_share" href="{% url shared_key_create_form owner=exhibit.owner slug=exhibit.slug %}">{% trans "Share" %}</a>
-        </span>
-        {% endif %}
-          {% if can_embed %} 
-          <span class="divider">|</span>
-	  
-          <span class="action action_embed_exhibit">
-            <a class="exhibit_embed" href="">{% trans "Embed" %}</a>
-          </span>
+          {% if exhibit.description %}
+          <div class="exhibit-description">
+	    {{ exhibit.description }}
+          </div>
           {% endif %}
+        </div>
+      </div> <!-- row-fluid -->
+      
+      <div class="row-fluid">
+        <div class="span7">
+          <div class="exhibit-metadata">
+            {% trans "Created by"%} <span class="exhibit-creator"><a href="{% url 'profile_detail' exhibit.owner.username %}">{{exhibit.owner|nicename}}</a></span> {% trans "on"%} <span class="exhibit-modified-data">{{exhibit.modified|date:"N j, Y"}}</span> {% trans "and based on the " %}<span class="exhibit-dataset-title"><a href="{{exhibit.dataset.get_absolute_url }}" title="{{exhibit.dataset.title}}">{{exhibit.dataset.title}}</a></span> {% trans "data set." %}
+          </div>
+        </div>
 
-          {% if can_edit %}
-          <span class="divider">|</span>
-	  
-          <span class="action action_edit_exhibit">
-            <a class="exhibit_edit" href="{% url exhibit_edit owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Edit" %}</a>
-          </span>
-	  {% endif %}
-	</div>
-      </div>
+        <div class="span5">
+          
+          <div class="exhibit-actions">
+	    
+	    <div class="exhibit-links btn-group">	  
+              {% if can_inspect %}
+              <a class="exhibit_inspect btn btn-small" href="{% url 'exhibit_detail' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Inspect" %}</a>
+	      {% endif %}
+              
+              {% if can_share %}
+              <a class="exhibit_share btn btn-small" href="{% url 'shared_key_create_form' owner=exhibit.owner slug=exhibit.slug %}">{% trans "Share" %}</a>
+              {% endif %}
+              
+              {% if can_embed %} 
+              <a class="exhibit_embed btn btn-small" href="">{% trans "Embed" %}</a>
+              {% endif %}
+              
+              {% if can_edit %}
+              <a class="exhibit_edit btn btn-small" href="{% url 'exhibit_edit' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Edit" %}</a>
+	      {% endif %}
+	    </div>
+          </div>
+        </div>
+      </div> <!-- row-fluid -->
     </li>
   </ul>
-</div>
+  </div>
 
 {% if can_embed %}
 <div id="embed">

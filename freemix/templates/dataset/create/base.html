@@ -1,4 +1,6 @@
 {% extends "dataset/dataset_profile_editor.html" %}
+{% load url from future %}
+
 
 {% block freemix_js %}
     {{ block.super }}
@@ -7,5 +9,5 @@
 
 {% block freemix_meta %}
     {{ block.super }}
-    <link rel="freemix/saveform" href="{% url dataset_create_form transaction.source.uuid %}"/>
+    <link rel="freemix/saveform" href="{% url 'dataset_create_form' transaction.source.uuid %}"/>
 {% endblock %}

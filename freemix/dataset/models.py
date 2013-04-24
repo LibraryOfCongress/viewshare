@@ -352,7 +352,7 @@ class TransformMixin(models.Model):
 
 class URLDataSourceMixin(TransformMixin, models.Model):
 
-    url = models.URLField(verify_exists=False)
+    url = models.URLField()
 
     class Meta:
         abstract = True

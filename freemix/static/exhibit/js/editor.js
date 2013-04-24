@@ -3,17 +3,17 @@
 
     $.fn.freemixThumbnails = function(tags, items, clickHandler) {
         return this.each(function() {
-            var list = $("<ul></ul>");
+            var list = $("<ul class='thumbnails'></ul>");
             $.each(tags,function(key, tag) {
                 var item = items[tag];
                 item.id = key;
                 var li = $("<li></li>");
                 var img = "<img src='" + item.thumbnail +
                                                     "' alt='" + item.label + "' title='" + item.label + "'/>";
-                var label = $("<span class='chooser-item-name'>" +
-                                    item.label + "</span>");
+                var label = $("<legend class='chooser-item-name'>" +
+                                    item.label + "</legend>");
                 if (item.isAvailable()) {
-                    var body = $("<a href='' title='" + item.label + "'></a>").append(img).append(label);
+                    var body = $("<a class='thumbnail' href='' title='" + item.label + "'></a>").append(img).append(label);
                     body.click(function(e) {
                         clickHandler(item);
                         e.preventDefault();
@@ -43,40 +43,24 @@
             });
             w.data("model", facetContainer);
             w.addClass("ui-widget-content").addClass("facet-container");
-            w.append("<div class='create-facet ui-state-default'>" +
-                "<div class='create-facet-button button button-icon-right' title='Add a Widget'>" +
-                "<span class='ui-icon ui-icon-plus'></span><span class='label'>Add a Widget</span>" +
-                "</div></div>");
+            w.append("<div class='create-facet'>" +
+                "<button class='create-facet-button btn btn-small btn-info' href='#addWidgetModal' data-toggle='modal'><i class='icon-plus'></i> Add a Widget</button>" +
+                "</div>");
 
-            var dialog =$("<div style='display:hidden;'></div>").appendTo('body');
+            var dialog =$("<div id='addWidgetModal' class='modal hide fade' tabindex='-1' role='dialog' aria-labelledby='addWidgetModalLabel' aria-hidden='true'>" +
+                          "</div>").appendTo('body');
+
+            dialog.modal({
+                    show:false
+                });
+
             facetContainer._dialog = dialog;
-            dialog.dialog({
-                width: 500,
-                height: "auto",
-                modal: true,
-                draggable: false,
-                resizable: false,
-                autoOpen: false,
-                title: "Select widget type",
-                show: "fade",
-                hide: "fade",
-                close: function(event, ui) {
-                    facetContainer.findWidget().off("edit-facet");
-                }
-            });
 
             w.find(".create-facet").click(function() {
                 dialog.empty();
                 dialog.append(facetContainer.getPopupContent());
-                dialog.dialog("option", {
-                    "title":"Select widget type",
-                    "buttons": [],
-                    "width": 500,
-                    "position": "center"
-                });
-                dialog.dialog("open");
-            });
 
+            });
         });
     };
 
@@ -86,7 +70,7 @@
             viewContainer.id = $(this).attr("id");
 
             var model = $(this).data("model", viewContainer);
-            model.append("<ul class='view-set'></ul>");
+            model.append("<ul class='view-set nav nav-tabs'></ul>");
             model.append("<div class='view-content'></div>");
             model.addClass("view-container");
 
@@ -102,36 +86,23 @@
                         $(ui.item).data("model")._container = undefined;
                     }
                 });
-            set.append("<li class='create-view ui-state-default'>" +
-                "<div class='create-view-button button button-icon-right'>" +
-                "<span class='ui-icon ui-icon-plus'></span><span class='label'>Add a View</span>" +
-                "</div></li>");
+            set.append("<li class='create-view'>" +
+                       "<button class='create-view-button btn btn-small btn-info' href='#addViewModal' data-toggle='modal'><i class='icon-plus'></i> Add a View</button>" +
+                       "</li>");
 
-            var dialog =$("<div style='display:hidden;'></div>").appendTo('body');
+            var dialog =$("<div id='addViewModal' class='modal hide fade' tabindex='-1' role='dialog' aria-labelledby='addViewModalLabel' aria-hidden='true'>" + 
+                          "</div>").appendTo('body');
+
+            dialog.modal({
+                    show:false
+                });
+
             viewContainer._dialog = dialog;
-            dialog.dialog({
-                width: 500,
-                height: "auto",
-                modal: true,
-                draggable: false,
-                resizable: false,
-                autoOpen: false,
-                title: "Select view type",
-                show: "fade",
-                hide: "fade"
-            });
+
 
             set.find(".create-view-button").click(function() {
                 dialog.empty();
                 dialog.append(viewContainer.getPopupContent());
-                dialog.dialog("option", {
-                    "title":"Select view type",
-                    "buttons": [],
-                    "width": 500,
-                    "position": "center"
-                });
-
-                dialog.dialog("open");
             });
         });
     };

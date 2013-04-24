@@ -4,75 +4,103 @@
   <div class="scatterplot-view-editor">
 
     <div class="view-properties ui-state-highlight">
-      <label class="view-editor-pane-title">{% trans "Scatter Plot View Settings" %}</label>
+
       <div class="view-edit-body">
 	
-	<form class="uniForm">
+	<form class="form-horizontal">
 	  <fieldset>
-            <div id="view_label" class="ctrlHolder text-entry">
-              <label for="view_label_input">{% trans "Label" %}</label>
-              <input type="text" id="view_label_input"/>
+            <legend>{% trans "Scatter Plot View Settings" %}</legend>
+            
+            <div id="view_label" class="control-group">
+              <label class="control-label" for="view_label_input">{% trans "Label" %}</label>
+              <div class="controls">
+                <input type="text" id="view_label_input"/>
+              </div>
             </div>
-            <div class="ctrlHolder pull-down">
-              <label for="xaxis_property">{% trans "X Axis" %}</label>
-              <select id="xaxis_property"></select>
+
+            <div class="control-group">
+              <label class="control-label" for="xaxis_property">{% trans "X Axis" %}</label>
+              <div class="controls">
+                <select id="xaxis_property"></select>
+              </div>
             </div>
-            <div class="ctrlHolder pull-down">
-              <label for="yaxis_property">{% trans "Y Axis" %}</label>
-              <select id="yaxis_property"></select>
+
+            <div class="control-group">
+              <label class="control-label" for="yaxis_property">{% trans "Y Axis" %}</label>
+              <div class="controls">
+                <select id="yaxis_property"></select>
+              </div>
             </div>
+
 	  </fieldset>
 	</form>
+
       </div>
     </div>
-
+    
     <div class="record-box view-lens-properties ui-state-hightlight">
-      <label class="view-editor-pane-title">{% trans "Scatter Plot Lens Settings" %}</label>
+
       <div class="view-edit-body">
-	<form class="uniForm">
+
+	<form class="form-horizontal">
 	  <fieldset>      
-            <div class="ctrlHolder pull-down">
-              <label for="title_property">{% trans "Title" %}</label>
-              <select id="title_property"></select>
+            <legend>{% trans "Scatter Plot Lens Settings" %}</legend>
+
+            <div class="control-group">
+              <label class="control-label" for="title_property">{% trans "Title" %}</label>
+              <div class="controls">
+                <select id="title_property"></select>
+              </div>
             </div>
-            <div class="ctrlHolder pull-down">
-              <label for="title_link_property">{% trans "Link" %}</label>
-              <select id="title_link_property"></select>
+
+            <div class="control-group">
+              <label class="control-label" for="title_link_property">{% trans "Link" %}</label>
+              <div class="controls">
+                <select id="title_link_property"></select>
+              </div>
             </div>
+
 	  </fieldset>
 	</form>
 	
-	<table class="property-list-table">
+        <table class="property-list-table table table-condensed table-striped">
+
           <thead class="ui-widget-header ui-corner-top">
             <tr>
               <th class="visible">{% trans "Show" %}</th>
               <th class="property">{% trans "Property" %}</th>
               <th class="value">{% trans "Value" %}
-		<span class="record-pager">
-                  <button class="left-record-button" title="{% trans "Previous Record" %}">&nbsp;</button>
-                  <button class="right-record-button" title="{% trans "Next Record" %}">&nbsp;</button>
-		</span>
-		<span id="current-record">#p</span> of <span id="record-count">#t</span>
-		
+                <span class="record-pager btn-group">
+                  <button class="btn btn-small left-record-button" title="{% trans "Previous Record" %}"><i class="icon-arrow-left"></i></button>
+                  <button class="btn btn-small counter disabled" disabled="disabled"><span id="current-record">#p</span> of <span id="record-count">#t</span></button>
+                  <button class="btn btn-small right-record-button" title="{% trans "Next Record" %}"><i class="icon-arrow-right"></i></button>
+                </span>
               </th>
             </tr>
-	    
           </thead>
+
           <tbody></tbody>
+
           <tfoot>
             <tr class='table-footer'>
-	      
-              <td></td>
-              <td colspan="2">
-		<div class="record-controls ui-helper-clearfix ui-widget-header ui-corner-bottom">
-		</div>
+              <td colspan="3">
+                <div class="record-controls">
+                  <span class="record-pager btn-group">
+                    <button class="btn btn-small left-record-button" title="{% trans "Previous Record" %}"><i class="icon-arrow-left"></i></button>
+                    <button class="btn btn-small counter disabled" disabled="disabled"><span id="current-record">#p</span> of <span id="record-count">#t</span></button>
+                    <button class="btn btn-small right-record-button" title="{% trans "Next Record" %}"><i class="icon-arrow-right"></i></button>
+                  </span>
+                </div>
               </td>
             </tr>
           </tfoot>
+
 	</table>
+
       </div>
+
     </div> <!-- end view-lens-property -->
     
   </div> <!-- end list-view-editor -->
-
+  
 </div>

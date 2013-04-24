@@ -1,0 +1,179 @@
+/* login / out styling */
+
+.login_wrapper {
+  background-image:url(../../images/login_bg.png);
+  background-repeat:no-repeat;
+  width:680px;
+  height:400px;
+  color:#333;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+}
+
+.login_request_wrapper {
+  background-image:url(../../images/login_request_bg.png);
+  background-repeat:no-repeat;
+  width:680px;
+  height:1000px;
+  color:#333;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+}
+
+.login_text {
+  padding: 25px 25px;
+  background: url(../../images/login_icon.png) 90% 55% no-repeat;
+}
+
+.login_request_text {
+  padding-left: 70px;
+  padding-right: 70px;
+  padding-top: 30px;
+}
+
+.login_request_text .fieldtext {
+   font-size: 110%;
+   color: darkslategrey;
+   font-weight: bold; 
+}
+
+.center {
+     float: none;
+     margin-left: auto;
+     margin-right: auto;
+}
+
+.signup {
+font-size: 120%;
+}
+
+.login .forgot {
+font-size: 70%;
+}
+
+/* handle error messages differently from rest of application due to size constraints */
+
+.login_request_text .uniForm .ctrlHolder.error p, .login_request_text .uniForm .ctrlHolder.focused.error p { 
+     background-image: none;
+     display:inline;
+     position: absolute;
+     right: 1px; 
+     padding-left: 10px;
+     padding-right: 1px;
+     margin-top: -3px;
+     font-size: 80%;
+     width: 20%;
+}
+
+
+.login_request_text .uniForm #div_id_org_text { 
+     background-image: none;
+     display:inline;
+     position: absolute;
+     right: 1px; 
+     padding-left: 10px;
+     padding-right: 1px;
+     margin-top: -20px;
+     font-size: 80%;
+     width: 20%;
+}
+
+.login_request_text .fieldtext p {
+  padding-top: 20px;
+}
+
+
+.login_request_text .ctrlHolder .textarea {
+  float: left;
+  width: 64%;
+  max-height: 80px;
+  margin: 0; 
+  margin-top: 10px;
+}
+
+.login_request_text .ctrlHolder .select {
+  float: left;
+  width: 30%;
+  margin: 0; 
+  margin-top: 10px;
+}
+
+.login_request_text fieldset {
+    margin-bottom: 30px;
+}
+
+.login_request_text .buttonHolder {
+    background: none;
+}
+
+.login_request_text .textInput.ui-autocomplete-input {
+    width: 50%;
+}
+
+.login_text .ctrlHolder label {
+    padding-top: 5px;
+    padding-bottom: 15px;
+    font-size: 120%;
+    color: grey;
+    position: absolute;
+    align: right;
+    display: inline;
+}
+
+
+.login_text .ctrlHolder label span {
+    display: none;
+}
+
+.login_text .ctrlHolder input {
+    display: inline;
+    margin-left: 10em;
+}
+
+.login_text #div_id_username, .login_text #div_id_passwd {
+  padding-bottom: 5px;
+}
+
+.login_text .ctrlHolder input.textinput, login_text .ctrlHolder input.textInput {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  margin-left: 10em;
+  width: 25%;
+}
+
+.login_text .ctrlHolder .passwordinput {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  margin-left: 10em;
+  width: 25%;
+}
+
+.login_text .checkbox {
+  font-size: 80%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.login_text .ctrlHolder .formHint {
+    display: block;
+    color: grey;
+    position: absolute;
+    padding-left: 10px;
+    padding-top: 5px;
+    font-size: 110%;
+}
+
+.login_text .form_block {
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+.login_text .contact {
+    padding-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align:center;
+}
+

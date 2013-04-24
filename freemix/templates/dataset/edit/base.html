@@ -1,4 +1,6 @@
 {% extends "dataset/base.html" %}
+{% load url from future %}
+
 
 {% load i18n %}
 {% load exhibit_tags %}
@@ -11,12 +13,6 @@
 {% block body_class %}dataprofile{% endblock %}
 
 {% block subnav %}
-
-  <p id="subnav-extra">
-
-
-  </p>
-
 {% endblock %}
 
 {% block freemix_meta %}
@@ -103,9 +99,9 @@
 	  </div>
 
 	  <div class="dataset-metadata dataset-left">
-	    {% trans "Originally loaded by" %} <span class="dataset-owner"><a href="{% url profile_detail dataset.owner.username %}">{{ dataset.owner|nicename }}</a></span> {% trans "on" %} <span class="dataset-created-data">{{ dataset.created|date:"N j, Y" }}</span>
+	    {% trans "Originally loaded by" %} <span class="dataset-owner"><a href="{% url 'profile_detail' dataset.owner.username %}">{{ dataset.owner|nicename }}</a></span> {% trans "on" %} <span class="dataset-created-data">{{ dataset.created|date:"N j, Y" }}</span>
 	    {% ifnotequal exhibits.count 0 %}
-	    {% trans "and is the basis for" %} <span class="view-count"><a href="{% url exhibits_by_dataset owner=dataset.owner.username slug=dataset.slug %}">{{ exhibits.count }} {% trans "View" %}{{ exhibits.count|pluralize }}</a></span>
+	    {% trans "and is the basis for" %} <span class="view-count"><a href="{% url 'exhibits_by_dataset' owner=dataset.owner.username slug=dataset.slug %}">{{ exhibits.count }} {% trans "View" %}{{ exhibits.count|pluralize }}</a></span>
 	    {% endifnotequal %}
 	    .
 	  </div>
@@ -114,19 +110,9 @@
 	  
 	  <div class="dataset-actions dataset-right">
 	    
-	    <div class="dataset-links">
-	      	      
-              <span class="action action_save_dataset">
-		<span id="save_message"></span>
-		<a href="{{ save_url }}" id="save_button">{% trans "Save" %}</a>
-	      </span>
-	      
-              <span class="divider">|</span>
-
-              <span class="action action_cancel_dataset">
-		<a href="{{ cancel_url }}" id="cancel_button">{% trans "Cancel" %}</a>
-	      </span>
-	      
+	    <div class="dataset-links btn-group">
+	      <a class="btn btn-small action_save_dataset" href="{{ save_url }}" id="save_button">{% trans "Save" %}</a>
+	      <a class="btn btn-small action_cancel_dataset" href="{{ cancel_url }}" id="cancel_button">{% trans "Cancel" %}</a>
 	    </div>
 	  </div>
 	  {% endif %}
@@ -142,18 +128,9 @@
 	  <div class="dataset-title">New {{ SITE_NAME }} Dataset</div>
 
 	  <div class="dataset-right">
-	    <div class="dataset-links">
-	      
-              <span class="action action_save_exhibit">
-		<span id="save_message"></span>
-		<a href="{{ save_url }}" id="save_button">{% trans "Save" %}</a>
-	      </span>
-	      
-              <span class="divider">|</span>
-              <span class="action action_cancel_exhibit">
-		<a href="{{ cancel_url }}" id="cancel_button">{% trans "Cancel" %}</a>
-	      </span>
-	      
+	    <div class="dataset-links btn-group">
+	      <a class="btn btn-small action_save_exhibit" href="{{ save_url }}" id="save_button">{% trans "Save" %}</a>
+	      <a class="btn btn-small action_cancel_exhibit" href="{{ cancel_url }}" id="cancel_button">{% trans "Cancel" %}</a>
 	    </div>
 	</li>
       </ul>
@@ -171,7 +148,7 @@
       </ul>
     </div>
 
-    <table id="identify-table" class="property-list-table">
+    <table id="identify-table" class="table table-striped property-list-table">
 
       <thead class="facet-header ui-widget-header">
         <tr>
@@ -180,7 +157,7 @@
           </th>
           <th class="header-name">
             <span class="col-header">{% trans "Field Name" %}</span>
-              <button class="data-property-add" title="Add a Field">{% trans "Add" %}</button>
+              <button class="btn btn-small btn-primary data-property-add pull-right" title="Add a Field"><i class="icon-plus"></i>{% trans "Add" %}</button>
           </th>
           <th class="header-types">
               <span class="col-header">{% trans "Type"%}</span>
@@ -190,12 +167,15 @@
 
              <div class="record-pager">
 	       <span id="current-record">#p</span> of <span id="record-count">#t</span>&#160;
-               <button class="left-record-button" title="Previous Record">&nbsp;</button>
-               <button class="right-record-button" title="Next Record">&nbsp;</button>
-	       &nbsp;
-               <button class="data-record-delete ui-corner-bottom ui-corner-top" title="Delete this Record">{% trans "Delete Record" %}</button>
-	       &nbsp;
-               <button class="data-refresh ui-corner-bottom ui-corner-top" title="Augment Data">{% trans "Augment" %}</button>
+
+               <span class="btn-group">
+                 <button class="btn btn-small left-record-button" title="Previous Record"><i class="icon-arrow-left"></i></button>
+                 <button class="btn btn-small right-record-button" title="Next Record"><i class="icon-arrow-right"></i></button>
+               </span>
+
+               <button class="btn btn-small btn-warning data-record-delete" title="Delete this Record"><i class="icon-remove-sign"></i>{% trans "Delete Record" %}</button>
+
+               <button class="btn btn-small btn-info data-refresh" title="Augment Data"><i class="icon-refresh"></i>{% trans "Augment" %}</button>
              </div>
           </th> 
         </tr>

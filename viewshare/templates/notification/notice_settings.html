@@ -1,4 +1,6 @@
 {% extends "account/base.html" %}
+{% load url from future %}
+
 
 {% load humanize i18n %}
 {% load timezone_filters %}
@@ -12,10 +14,10 @@
 
       <div class="setting_account">
 
-        <p class="center">{% blocktrans %}These settings control how notices are sent to your email address but do not affect their display in your{% endblocktrans %} <a href="{% url notification_notices %}">{% trans "notices pane" %}</a>.</p>
+        <p class="center">{% blocktrans %}These settings control how notices are sent to your email address but do not affect their display in your{% endblocktrans %} <a href="{% url 'notification_notices' %}">{% trans "notices pane" %}</a>.</p>
         <p class="center">
 
-      {% url acct_email as email_url %}
+      {% url 'acct_email' as email_url %}
       {% if user.email %}
 
 	{% trans "Primary email" %}: <strong>{{ user.email }}</strong> <span class="setting_account_msg">({% blocktrans %}Use your account <a href="{{ email_url }}">settings</a> to change your email address{% endblocktrans %}.)</span>

@@ -1,4 +1,6 @@
 {% extends "dataset/summary/base.html" %}
+{% load url from future %}
+
 {% load freemix_helpers %}
 
 {% block rtab_id %}id="builder_tab"{% endblock %}
@@ -10,7 +12,7 @@
     <li>
         <ul class="tab-group">
         <li class="ui-state-default ui-corner-top">
-            <a href="{% url dataset_list_by_owner owner=object.owner.username %}">{{ object.owner|nicename }}</a>
+            <a href="{% url 'dataset_list_by_owner' owner=object.owner.username %}">{{ object.owner|nicename }}</a>
     </li>
     {% endifnotequal %}
     <li>
@@ -34,7 +36,7 @@
     <div class="ui-tabs ui-widget ui-corner-all">
         <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-corner-all">
             <li class="ui-state-default ui-corner-top">
-                <a href="{% url dataset_list_by_owner owner=object.owner.username %}">{{ object.owner|nicename }}</a>
+                <a href="{% url 'dataset_list_by_owner' owner=object.owner.username %}">{{ object.owner|nicename }}</a>
             </li>
             <li>
                 <ul class="tab-group">

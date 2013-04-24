@@ -1,16 +1,14 @@
+{% load url from future %}
 {% load i18n %}
 {% load compress %}
 {% load sekizai_tags %}
 <!DOCTYPE html>
-
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     {% block rss_feeds %}{% endblock %}
 
-    <title>
-      {% if site_name %}{{ site_name }} : {% endif %}{% block head_title %}{% endblock %}</title>
-
+    <title>{% if site_name %}{{ site_name }} : {% endif %}{% block head_title %}{% endblock %}</title>
 
     {% block head_css %}{% endblock %}
     {% block head_data %}{% endblock %}
@@ -21,90 +19,100 @@
     <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.highlight.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.csrf.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}scripts/ui.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}scripts/jquery.cookie.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}scripts/compatible.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.cookie.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/bootstrap.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}viewshare/js/compatible.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}viewshare/js/ui.js"></script>
+
     {% endcompress %}
     {% block head_scripts %}{% endblock %}
-
-
 
   </head>
 
   <body class="{% block body_class %}{% endblock %}">
 
-    {% block toolbar %}{% endblock %}
-    <div class="container_12">
-        {% block banner %}
+    <div class="container-fluid">
 
+      {% block banner %}
+      
       {% if site_wide_announcements %}
-      <div id="site_wide_announcements">
+      <div class="alert" id="site_wide_announcements">
         <ul>
           {% for announcement in site_wide_announcements %}
           <li>
             <a href="{{ announcement.get_absolute_url }}">{{ announcement }}</a>
-            <a href="{% url announcement_hide announcement.pk %}?next={{ request.path }}">{% trans "(hide announcement)" %}</a>
+            <a href="{% url 'announcement_hide' announcement.pk %}?next={{ request.path }}">{% trans "(hide announcement)" %}</a>
           </li>
           {% endfor %}
         </ul>
       </div>
       {% endif %}
       
-      <div id="tabhead" class="ui-helper-clearfix">
-        <div id="header">
-          <a href="/"><span id="application-logo"></span><span id="application-status">{{ SITE_NAME_STATUS }}</span></a>
-        </div>
-        <div class="login">{% block login %}{% endblock %}</div>
-        <div class="right_tab" {% block rtab_id %}{% endblock %}>{% block right_tab %}{% endblock %}</div>
-      </div>
-
-          <div id="compatibility-warning" class="ui-state-highlight ui-corner-all">
-	    <ul>
-	      <li>
-		<a href="#" class="ui-icon ui-icon-closethick close-message">&#160;</a>
-
-		<p><strong>Your browser version is not supported in {{ SITE_NAME }}.</strong>  You may continue to attempt using the site with your current browser, however some portions of the site may not function as intended.  A list of supported browsers is available in the <a href="/about/userguide/#s1.1">user guide</a>.</p>
-
-	      </li>
-	    </ul>
+      <!-- fixed header across all application -->
+      
+      <div id="header">
+        <div id="tabhead" class="navbar navbar-fixed-top">
+          <div class="navbar-inner">
+            
+            <div class="container">
+              <a href="/" class="brand"><span id="application-logo"></span>
+                <span id="application-status">{{ SITE_NAME_STATUS }}</span></a>            
+              <ul class="nav pull-right">
+                {% block login %}{% endblock %}
+              </ul>
+            </div>
+            
           </div>
-
-          
-          {% if messages %}
-	   <div id="systemMsg">
-             <ul id="system_messages" class="messages">
-               {% for message in messages %}
-               <li id="message_{{ forloop.counter }}" class="infoMsg">{{ message }}</li>
-               {% endfor %}
-             </ul>
-	   </div>
-          {% endif %}
-
-      <div id="subnav" class="ui-helper-clearfix">{% block subnav %}&nbsp;{% endblock %}</div>
-
-      {% endblock banner %}
-
-      <div id="body" class='freemix-themeable'>
-
-        <div id="inner-body" class='ui-widget-content ui-helper-clearfix'>
-          {% block body %}
-          {% endblock %}
         </div>
-      </div>
-
-      <div id="footer">
-        {% block footer %}
-        {% endblock %}
       </div>
       
-
-      {% block extra_body %}{% endblock %}
-    </div>
-
-    {% block final %}
-    {% endblock %}
-
-    {% render_block "js" %}
-
+      {% endblock banner %}
+      
+      <div {% block rtab_id %}{% endblock %}>
+        
+        {% if messages %}
+        <div class="container-fluid">
+          <div id="systemMsg">
+            <ul id="system_messages" class="messages">
+              {% for message in messages %}
+              <li id="message_{{ forloop.counter }}" class="infoMsg">
+                <div class="alert alert-info">
+                  <button type="button" class="close" data-dismiss="alert">&times;</button>
+                  {{ message }}
+                </div>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div> <!-- end container -->
+        {% endif %}
+        
+        <div class="container-fluid">
+          
+          <div id="body" class="freemix-themeable well">
+            
+            <div id="inner-body">
+              {% block body %}
+              {% endblock %}
+            </div>
+          </div>
+          
+        </div> <!-- end container -->
+        
+        <div id="footer">
+          {% block footer %}
+          {% endblock %}
+        </div>
+        
+        {% block extra_body %}{% endblock %}
+      </div>
+      
+      {% block final %}
+      {% endblock %}
+      
+      {% render_block "js" %}
+      
+    </div> <!-- body container -->
   </body>
 </html>
+

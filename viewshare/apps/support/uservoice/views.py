@@ -4,6 +4,7 @@ import urllib
 import operator
 import array
 import time
+import json
 from datetime import datetime
 
 from django.core.cache import cache
@@ -11,7 +12,6 @@ from django.shortcuts import render
 from django.http import Http404, HttpResponseRedirect
 from django.conf import settings
 from django.template.response import TemplateResponse
-from django.utils import simplejson
 
 from Crypto.Cipher import AES
 from viewshare.apps.account.forms import LoginForm
@@ -44,13 +44,13 @@ def uservoice_token(request, api_key, account_key):
 
         iv = "OpenSSL for Ruby"
 
-        json = simplejson.dumps(sso_data, separators=(',', ':',))
+        json_str = json.dumps(sso_data, separators=(',', ':',))
 
         salted = api_key + account_key
 
         saltedHash = hashlib.sha1(salted).digest()[:16]
 
-        json_bytes = array.array('b', json[0: len(json)])
+        json_bytes = array.array('b', json_str[0: len(json_str)])
         iv_bytes = array.array('b', iv[0: len(iv)])
 
         # # xor the iv into the first 16 bytes.

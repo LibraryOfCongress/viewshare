@@ -1,6 +1,7 @@
+{% load url from future %}
  {% load i18n %}
  {% load freemix_helpers %}
- {% url shared_exhibit_display slug=key.slug as display_url %}
+ {% url 'shared_exhibit_display' slug=key.slug as display_url %}
 <li class="shared_key_list_item result_set_item clearfix">
     <div class="shared-key-label">
         <a href="{{ display_url }}">
@@ -17,7 +18,7 @@
     <input type="text" value="{% site_url display_url %}" class="shared-key-url" readonly="readonly"/>
 
    <div class="shared-key-metadata shared-key-left">
-     {% trans "Created by"%} <span class="exhibit-creator"><a href="{% url profile_detail exhibit.owner.username %}">{{exhibit.owner|nicename}}</a></span>.
+     {% trans "Created by"%} <span class="exhibit-creator"><a href="{% url 'profile_detail' exhibit.owner.username %}">{{exhibit.owner|nicename}}</a></span>.
    </div>
 
     <div class="shared-key-right">

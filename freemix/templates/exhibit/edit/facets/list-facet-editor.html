@@ -1,36 +1,22 @@
 {% load i18n %}
 <div id="list-facet-editor">
-
-    <div class="colmask doublepage widget-edit-dialog list-facet-editor">
-      <div class="colleft">
-
-        <div class="col1 facet-properties ui-state-highlight">
-          <label class="facet-editor-pane-title">{% trans "Settings" %}</label>
- 	  <div class="facet-edit-body">
-            <form class="uniForm">
-              <fieldset>
-                <div class="ctrlHolder text-entry">
-                  <label for="facet_name">{% trans "Title" %}:</label>
-                  <input id="facet_name" class="textinput" type="text"  name="facet_name"/>
-                </div>
-                <div class="ctrlHolder pull-down">
-                  <label for="facet_property">{% trans "Property" %}:</label>
-                  <select id="facet_property"></select>
-                </div>
-              </fieldset>
-            </form>
-	  </div>
+  
+  <form>
+    <fieldset>
+      <legend>{% trans "List Settings" %}</legend>
+      <div class="control-group">
+        <label class="control-label" for="facet_name">{% trans "Title" %}:</label>
+        <div class="controls">
+          <input id="facet_name" class="textinput" type="text"  name="facet_name"/>
         </div>
-
-        <div class="col2 facet-preview">
-          <label class="facet-editor-pane-title">{% trans "Preview" %}</label>
-	  <div class="facet-edit-body">
-            <div class="ui-widget-content ui-corner-all" id="facet-preview"></div>
-          </div>
-	</div>
-
       </div>
-    </div>
+      <div class="control-group">
+        <label class="control-label" for="facet_property">{% trans "Property" %}:</label>
+        <div class="controls">
+          <select id="facet_property"></select>
+        </div>
+      </div>
+    </fieldset>
+  </form>
 
-
- </div>
+</div>

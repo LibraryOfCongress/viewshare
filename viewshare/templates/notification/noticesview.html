@@ -1,3 +1,4 @@
+{% load url from future %}
 {% load humanize i18n %}
 {% load pagination_tags %}
 {% load timezone_filters %}
@@ -7,7 +8,7 @@
 {% if notices %}
 
 <div class="notice_clear">
-<a href="{% url notification_mark_all_seen %}">{% trans "Mark all unseen notices seen" %}</a>
+<a href="{% url 'notification_mark_all_seen' %}">{% trans "Mark all unseen notices seen" %}</a>
 </div>
 
 {# TODO: get timezone support working with regroup #}

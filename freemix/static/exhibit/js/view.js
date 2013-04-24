@@ -48,11 +48,15 @@
         },
         getPopupContent: function() {
             var fc = this;
-            return $("<div class='chooser'></div>")
-                .freemixThumbnails(Freemix.view.types, Freemix.view.prototypes, function(viewTemplate) {
+
+            var viewThumbnails = $("<div><div class='modal-header'><button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button><h3 id='addViewModalLabel'>Select View</h3></div></div>");
+            
+            $("<div class='chooser modal-body'></div>").freemixThumbnails(Freemix.view.types, Freemix.view.prototypes, function(viewTemplate) {
                     var view = Freemix.view.createView({type: viewTemplate.config.type, name: viewTemplate.label});
                     view.showEditor(fc);
-                });
+                }).appendTo(viewThumbnails);
+            
+            return viewThumbnails;
         },
         getPopupButton: function() {
             return this.findWidget().find(".create-view-button");
@@ -73,9 +77,9 @@
         generateWidget: function() {
              var view = this;
              return $("<li class='view ui-state-default'>" +
-                 "<span class='ui-icon ui-icon-grip-dotted-vertical'/>" +
+                 "<a href='#'><i class='move-button icon-resize-horizontal'></i>" +
                  "<span class='label'></span>" +
-                 "<a href='#' class='delete-button ui-icon ui-icon-closethick' title='Delete this view'/>" +
+                 "<i class='delete-button icon-remove'></i></a>" +
                  "</li>")
                 .attr("id", view.config.id)
                 .find("span.label").text(view.config.name).end()
@@ -118,7 +122,7 @@
         display: function() {},
         generateExhibitHTML: function(config) {},
         showEditor: function(vc) {
-            vc._dialog.dialog("close");
+            vc._dialog.modal("hide");
             vc.addView(this);
             this.select();
         },

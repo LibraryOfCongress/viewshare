@@ -1,50 +1,17 @@
-.embed-watermark {
-    font-size: 90%;
-    color: #999;
+#embedding-code {
+        display: block;
+        line-height: 2.5em;
+        width: 75%;
+        overflow-y: none;
+        overflow-x: auto;
+        margin: 0.5em auto;
+        border: 1px solid #c6c6c6;
+        color: #000;
+        background: #F3F3F3 url(../img/form-shadow.png)
+        repeat-x scroll left top;
+        text-align: left;
+        font-family: monospace;
+        padding: 0.5em;
+        white-space: nowrap;
 }
-
-.embed-watermark a {
-    font-weight: bold;
-    text-decoration: none;
-    color: #777;
-}
-
-.embed-watermark a:hover {
-    text-decoration: underline;
-}
-
-div.olMap {
-    background-color: #B5D6F1;
-}
-
-div.embed-lightbox {
-    background-color: #fff;
-    padding: 5px 20px 20px;
-    position: absolute;
-    visibility: hidden;
-    z-index: 500001;
-}
-
-p.embed-lightbox-image {
-    margin: 0;
-    overflow: auto;
-    padding: 0;
-    text-align: center;
-}
-
-p.embed-lightbox-control {
-    font-size: 0.9em;
-    margin: 0;
-    padding: 0 0 5px 0;
-    text-align: right;
-}
-
-div.clear {
-display: none;
-}
-
-/*#titles {*/
-/*margin-bottom: -30px;*/
-
-/*}*/
 

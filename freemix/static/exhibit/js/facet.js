@@ -38,16 +38,22 @@
         },
         getPopupContent: function() {
             var fc = this;
-                return $("<div class='chooser'></div>").freemixThumbnails(
-                    Freemix.facet.types, Freemix.facet.prototypes,
-                function(facetTemplate) {
-                    var facet = Freemix.facet.createFacet({type: facetTemplate.config.type});
-                    fc.findWidget().one("edit-facet", function() {
-                        fc.addFacet(facet);
-                    });
-                    facet.showEditor(fc);
-                });
-            },
+
+            var chooserThumbnails = $("<div><div class='modal-header'><button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button><h3 id='addWidgetModalLabel'>Select Facet Widget</h3></div></div>");
+            
+            $("<div class='chooser modal-body'></div>").freemixThumbnails(
+                                                                  Freemix.facet.types, Freemix.facet.prototypes,
+                                                                  function(facetTemplate) {
+                                                                      var facet = Freemix.facet.createFacet({type: facetTemplate.config.type});
+                                                                      fc.findWidget().one("edit-facet", function() {
+                                                                              fc.addFacet(facet);
+                                                                          });
+                                                                      facet.showEditor(fc);
+                                                                  }).appendTo(chooserThumbnails);
+            
+            return chooserThumbnails;
+            
+        },
         getPopupButton: function() {
             return this.findWidget().find(".create-facet-button");
         }
@@ -94,12 +100,40 @@
         },
 
         showEditor: function(facetContainer){
-            facetContainer = facetContainer || this.findContainer();
+            var facet = this;
+            var config = $.extend(true, {}, facet.config);
+            var template = Freemix.getTemplate("facet-editor");
+            facetContainer = facetContainer || facet.findContainer();
+            var dialog = facetContainer.getDialog();
+            template.data("model", this);
+            var form = Freemix.getTemplate(this.template_name);
+            template.find(".facet-properties .facet-edit-body").append(form);
 
-            facetContainer.getDialog().dialog("close");
-            facetContainer.addFacet(this);
+            form.submit(function() {return false;});
+
+            template.bind("update-preview", function() {
+                facet.updatePreview(template.find("#facet-preview"), config);
+            });
+            this.setupEditor(config, template);
+
+            dialog.empty().append(template);
+            dialog.find("#facet_save_button").click(function() {
+               var model = template.data("model");
+               model.config = config;
+               facetContainer.findWidget().trigger("edit-facet");
+               model.refresh();
+               facetContainer.getDialog().modal("hide");
+            });
+            dialog.modal("show");
+            template.trigger("update-preview");
         },
-        generateExhibitHTML: function() {}
+        updatePreview: function(target, config) {
+            var preview = $(this.generateExhibitHTML(config));
+            target.empty().append(preview);
+            var exhibit = Freemix.getBuilderExhibit();
+            this.facetClass.createFromDOM(preview.get(0), null, exhibit.getUIContext());
+        },
+        generateExhibitHTML: function(config) {}
      });
 
     function isFacetCandidate(prop) {

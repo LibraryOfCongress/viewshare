@@ -1,4 +1,4 @@
-from django.utils import simplejson as json
+import json
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.http import Http404, HttpResponse
@@ -52,6 +52,9 @@ class OwnerListView(ListView):
         kwargs = super(OwnerListView, self).get_context_data(**kwargs)
         kwargs["owner"] = self.owner
         kwargs["user"] = self.request.user
+        p = self.request.GET
+        kwargs["sort"] = p.get('sort', None)
+        kwargs["dir"] = p.get('dir', "desc")
         return kwargs
 
 
@@ -83,13 +86,13 @@ class JSONResponse(HttpResponse):
         indent = 2 if settings.DEBUG else None
 
         if template:
-            context = {"json": json.dumps(data, indent=indent, use_decimal=True)}
+            context = {"json": json.dumps(data, indent=indent)}
             if extra_context:
                 context.update(extra_context)
             content = render_to_string(template, context)
             mime = "application/javascript"
         else:
-            content = json.dumps(data, indent=indent, use_decimal=True)
+            content = json.dumps(data, indent=indent)
             mime = ("text/javascript" if settings.DEBUG
                                   else "application/json")
         super(JSONResponse, self).__init__(

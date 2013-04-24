@@ -1,0 +1,82 @@
+/* css used to render friends list of users on the profile page */
+
+ul.connection_list {
+    margin-left: 0px;
+    list-style-type: none;
+}
+
+.user_profile_entry {
+    padding: 5px 5px 5px 10px;
+}
+
+div.user_data_entry .user_name .value {
+    font-weight: bold;
+    font-size: 100%;
+}
+
+div.user_data_entry .user_counts {
+    display: block;
+}
+
+div.user_data_entry .user_counts .user_datasets,
+div.user_data_entry .user_counts .user_exhibits {
+    display: inline;
+}
+
+div.user_data_entry .user_description {
+    display: none; /* don't display user description of friends */
+}
+
+div.user_data_entry .user_bottom {
+    display: none;
+}
+
+.profile_left_panel {
+    float: left;
+    width: 56px;
+}
+
+.profile_right_panel {
+    float: right;
+    width: 75%;
+}
+
+/* remove option to include any sort of message in connection request */
+
+#div_id_message {
+    display: none;
+}
+ 
+/* styling connections */
+
+.user_profile_entry .user_data_entry {
+}
+
+.user_profile_entry .user_stats {
+ font-size: 95%;
+}
+
+.user_friends .user_profile_entry .user_data_entry {
+padding-top: 5px;
+}
+
+.user_friends .user_profile_entry .user_data_entry .user_name {
+   background: transparent url(../../images/person-24.png) top left no-repeat;
+   font-size: 100%;
+   font-weight: bold;
+   position:absolute;
+   margin-top: 5px;
+   padding-bottom: 10px;
+   padding-left: 30px;
+}
+
+.user_friends .user_profile_entry .user_data_entry .user_location {
+ display: none;
+}
+
+.user_friends .user_profile_entry .user_data_entry .user_stats {
+ font-size: 90%;
+ border: 1px solid lightgrey;
+ float: right;
+ padding: 5px 10px 5px 10px;
+}

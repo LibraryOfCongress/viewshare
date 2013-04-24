@@ -1,4 +1,6 @@
 {% extends "profiles/base.html" %}
+{% load url from future %}
+
 
 {% load i18n %}
 {% load pagination_tags %}
@@ -10,7 +12,7 @@
 {% block head_css %}
 {{ block.super }}
 {% compress css %}
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}stylesheets/profile_users.css"/>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}profiles/css/profile_users.css"/>
 {% endcompress %}
 {% endblock %}
 
@@ -19,37 +21,39 @@
 {% block body %}
 <h1>{% trans "All Users" %}</h1>
 
-  <div class="priority-area">
-   <form method="GET" action="">
-   <p>
-   <label for="search">
-   <img src="{{ STATIC_URL }}images/search.png" style="vertical-align: middle;" alt="" />
-   <strong>{% trans "Find a user" %}</strong>
-   </label>
-   <input type="text" name="search" id="search" value="{{ search_terms }}" />
-   <input type="submit" value="{% trans "Find" %}" />
-   {% if search_terms %}
-   <a href="{% clear_search_url request %}" class="button_link negative-button">{% trans "Clear" %}</a>
-   {% endif %}
-   </p>
-   </form>
-  </div>
-    
-{% if users.count > 0 %}
-<p>
-  <span class="sort-label">{% trans "Sort by:" %}</span>
-   {% ifequal order "name" %}
-   <strong>{% trans "Name" %} &uarr;</strong>
-   {% else %}
-   <a href="{% url profile_list %}?order=name">{% trans "Name" %}</a>
-   {% endifequal %}
-   <span class="divider">|</span>
-   {% ifequal order "date" %}
-   <strong>{% trans "Joined" %} &darr;</strong>
-   {% else %}
-   <a href="{% url profile_list %}?order=date">{% trans "Joined" %}</a>
-   {% endifequal %}
-</p>
+<div class="search-area">
+  <form method="GET" action="" class="form-search">
+
+    <div class="control-group">
+      <label class="control-label">{% trans "Find a user" %}</label>
+
+      <div class="input-append">
+        <input type="text" name="search" class="input-medium search-query" id="search" value="{{ search_terms }}" />
+        <button type="submit" class="btn">{% trans "Search" %}</button>
+      </div>
+         
+      {% if users.count > 0 %}
+
+      <div class="help-inline">
+        <span class="sort-label">{% trans "Sort by:" %}</span>
+        
+        <span class="btn-group">
+          {% if order == "name" %}
+          <a class="btn btn-small active" href="#">{% trans "Name" %}</a>
+          {% else %}
+          <a class="btn btn-small" href="{% url 'profile_list' %}?order=name">{% trans "Name" %}</a>
+          {% endif %}
+          {% if order == "date" %}
+          <a class="btn btn-small active" href="#">{% trans "Joined" %}</a>
+          {% else %}
+          <a class="btn btn-small" href="{% url 'profile_list' %}?order=date">{% trans "Joined" %}</a>
+          {% endif %}
+        </span>
+      </div>
+    </div>
+  </form>
+</div>
+
 
 {% autopaginate users%}
 
@@ -75,7 +79,11 @@
 {% paginate %}
 
 {% else %}
-<p class="center">{% blocktrans %}No profiles were found.{% endblocktrans %}</p>
+<br />
+<br />
+<div class="alert">
+  {% blocktrans %}No users were found matching search critera.{% endblocktrans %}</p>
+</div>
 {% endif %}
 
 {% endblock %}

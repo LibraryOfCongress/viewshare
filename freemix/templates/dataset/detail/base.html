@@ -1,4 +1,6 @@
 {% extends "dataset/base.html" %}
+{% load url from future %}
+
 
 {% load i18n %}
 {% load freemix_helpers %}
@@ -19,7 +21,7 @@
 
 {% block head_css %}
 {{ block.super }}
-<link href="{{STATIC_URL}}stylesheets/inspector.css" rel="stylesheet" type="text/css" media="screen,projection" />
+<link href="{{STATIC_URL}}freemix/css/inspector.css" rel="stylesheet" type="text/css" media="screen,projection" />
 {% endblock %}
 
 {% block freemix_js %}
@@ -38,7 +40,7 @@
       <p>
         {%  if can_refresh %}
         <span class="action action_refresh_dataset">
-            <a class="dataset_refresh" href="{% url dataset_source_update owner=dataset.owner.username slug=dataset.slug %}">{% trans "Refresh" %}</a>
+            <a class="dataset_refresh" href="{% url 'dataset_source_update' owner=dataset.owner.username slug=dataset.slug %}">{% trans "Refresh" %}</a>
 
         </span>
 
@@ -47,7 +49,7 @@
 
         {% if can_view %}
         <span class="action action_create_dataset">
-          <a class="dataset_export" href="{% url dataset_data_json owner=dataset.owner.username slug=dataset.slug %}">{% trans "Export" %}</a>
+          <a class="dataset_export" href="{% url 'dataset_data_json' owner=dataset.owner.username slug=dataset.slug %}">{% trans "Export" %}</a>
         </span>
         {% endif %}
 
@@ -78,7 +80,7 @@
 	
 	{% if exhibits.count > 10 %}
 	<div class="see_all">
-	  <a href="{% url exhibits_by_dataset owner=object.owner.username slug=object.slug %}">{% trans "See all" %}  {{exhibits.count}} views</a>
+	  <a href="{% url 'exhibits_by_dataset' owner=object.owner.username slug=object.slug %}">{% trans "See all" %}  {{exhibits.count}} views</a>
 	</div>
 	
 	{% endif %}
@@ -86,7 +88,7 @@
 
       <div class="about_edit">
 	{% if can_build %}
-	<a href="{% url exhibit_canvas_chooser owner=object.owner.username slug=object.slug %}" id="create_exhibit_button" class="button_link">{% trans "Create a New View" %}</a>
+	<a href="{% url 'exhibit_canvas_chooser' owner=object.owner.username slug=object.slug %}" id="create_exhibit_button" class="button_link">{% trans "Create a New View" %}</a>
 	{% endif %}
       </div>
 

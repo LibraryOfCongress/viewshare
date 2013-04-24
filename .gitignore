@@ -31,5 +31,7 @@ MANIFEST
 /build/*
 .hg/*
 .hgtags
+*~
+*#
 celerybeat-schedule
 celerybeat.pid

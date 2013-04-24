@@ -63,71 +63,17 @@ font-size: 90%;
 .record-controls button {
 }
 
-.data-property-add {
-    float: right;
-    margin-right: 10px;
-    font-size: 70%;
-}
-
 
 .data-record-delete, .data-refresh {
 }
 
-.view-set {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    position:relative;
-}
-
-.view-set {
-    line-height: 1.0;
-    height: 15px;
-}
-
-.view-set li:hover {
-    visibility: inherit; /* fixes IE7 'sticky bug' */
-}
-
-.view-set li {
-    float: left;
-    position: relative;
-}
-
-.view-set a {
-    display: block;
-    position: relative;
-}
-
-.view-set li:hover,
-.view-set li.ui-status-active,
-.view-set a:focus,
-.view-set a:hover,
-.view-set a:active {
-    outline: 0;
-}
-
-
-.view-content {
-    clear: both;
-}
-
-.view-set li {
-    margin-right: 4px;
-}
-
 .view-set .view {
     cursor: move;
-    padding-top: 9px;
-    padding-bottom: 9px;
-    padding-right: 5px;
-    padding-left: 2px;
-    height: 15px;
 }
 
 .view-set .view .label {
-    padding-left: 5px;
-    padding-right: 20px;
+background: none;
+color: black;
 }
 
 #add-facet-table {
@@ -186,8 +132,8 @@ font-size: 90%;
     margin: 1em;
     min-width: 3em;
 }
+
 .facet-header .label {
-    float: left;
     font-weight: bold;
 }
 
@@ -236,25 +182,21 @@ margin-bottom: 10px;
 }
 
 .facet-header .ui-icon, .view-set .view .ui-icon-grip-dotted-vertical  {
-    float: left;
 }
 
 
 .view-set .create-view-button {
-    cursor: pointer;
-    padding-top: 9px;
-    padding-bottom: 9px;
-    padding-right: 30px;
-    padding-left: 10px;
-    height: 15px;
+margin-top: 3px;
+margin-left: 10px;
 }
 
 .view-set .create-view .ui-icon-grip-plus  {
     float: right;
 }
 
-.create-view-button, .create-facet-button {
-font-weight: bold;
+
+.create-facet-button {
+margin-top: 5px;
 }
 
 .view-set .create-view-button .label {
@@ -274,10 +216,6 @@ font-weight: bold;
     margin: 5px 15px;
 }
 
-.create-facet-button {
-    text-align: center;
-}
-
 .freemix-themeable .view-set .create-view {
     padding-left: 0;
 }
@@ -291,6 +229,7 @@ font-weight: bold;
 
 .facet-container .create-facet {
     padding-bottom: 8px;
+    text-align: center;
 }
 
 
@@ -852,10 +791,6 @@ padding-bottom: 12px;
 }
 
 .facet-preview, .view-preview {
-  margin-top: 10px;
-  margin-right: 20px;
-  background-color: #F5F5F5;
-  border: 1px solid lightgrey;
 }
 
 .view-lens-properties {
@@ -868,14 +803,44 @@ padding-bottom: 12px;
 
 
 .facet-preview .facet-edit-body, .view-preview .view-edit-body {
-padding: 20px 10px 0px 10px;
-margin-right: 20px;
+padding: 15px 10px 0px 0px;
 }
 
-.facet-properties .facet-edit-body {
-padding-left: 10px;
-padding-top: 10px;
+.facet-edit {
+  padding: 0px;
+  margin: 0px;
 }
+
+.facet-edit .well, .facet-edit .settings-well {
+padding: 10px;
+}
+
+.facet-edit .settings-well {
+background-color: #FFF9EC;
+}
+
+.facet-edit {
+}
+
+.facet-edit .form-horizontal .control-label {
+  width: 60px;
+}
+
+.facet-edit .form-horizontal .controls {
+  margin-left: 70px;
+}
+
+.facet-properties, .facet-preview {
+   height: 220px;
+}
+
+.facet-properties legend, .facet-preview legend {
+  margin-bottom: 0px;
+  line-height: 25px;
+  font-size: 18px;
+}
+
+
 
 .list-view-editor, .map-view-editor, .scatterplot-view-editor, .table-view-editor, .timeline-view-editor, .piechart-view-editor, .thumbnail-view-editor {
   border: 1px solid lightgrey;

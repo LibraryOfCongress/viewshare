@@ -1,5 +1,6 @@
+{% load url from future %}
 {%  load i18n %}
-<form action="{% url shared_key_create_form owner=form.exhibit.owner slug=form.exhibit.slug %}" method="post">
+<form action="{% url 'shared_key_create_form' owner=form.exhibit.owner slug=form.exhibit.slug %}" method="post">
     {% csrf_token %}
     {{ form.non_field_errors }}
     {{ form.as_p }}

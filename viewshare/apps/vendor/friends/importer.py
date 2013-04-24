@@ -4,7 +4,7 @@ from viewshare.apps.vendor.friends.models import Contact
 
 import vobject
 import ybrowserauth
-import simplejson
+import json
 import gdata.contacts.service
 
 def import_vcards(stream, user):
@@ -42,7 +42,7 @@ def import_yahoo(bbauth_token, user):
     ybbauth = ybrowserauth.YBrowserAuth(settings.BBAUTH_APP_ID, settings.BBAUTH_SHARED_SECRET)
     ybbauth.token = bbauth_token
     address_book_json = ybbauth.makeAuthWSgetCall("http://address.yahooapis.com/v1/searchContacts?format=json&email.present=1&fields=name,email")
-    address_book = simplejson.loads(address_book_json)
+    address_book = json.loads(address_book_json)
     
     total = 0
     imported = 0

@@ -1,21 +1,26 @@
 {% extends "site_base.html" %}
-{% load uni_form_tags %}
+{% load crispy_forms_tags %}
 {% load compress %}
 
 {% load i18n %}
 
 {% block head_title %}{% trans "Sign Up" %}{% endblock %}
 
-{% block head_scripts %}
-    {{ block.super }}
-    {% include "freemix/js_include/jquery_ui.html" %}
+{% block head_css %}
+{{ block.super }}
+<link href="{{STATIC_URL}}viewshare/css/login.css" rel="stylesheet" type="text/css" media="screen,projection" />
+{% endblock %}
 
-        <script type="text/javascript">
-            var org_types = {{ form.org_type_choices|safe }};
-        </script>
-    {% compress js %}
-    <script type="text/javascript" src="{{ STATIC_URL }}registration/js/registration_form.js"></script>
-    {% endcompress %}
+{% block head_scripts %}
+{{ block.super }}
+{% include "freemix/js_include/jquery_ui.html" %}
+
+<script type="text/javascript">
+  var org_types = {{ form.org_type_choices|safe }};
+</script>
+{% compress js %}
+<script type="text/javascript" src="{{ STATIC_URL }}registration/js/registration_form.js"></script>
+{% endcompress %}
 {% endblock %}
 
 {% block body %}
@@ -34,16 +39,8 @@
     <div class="login_options login_request_wrapper">	
       <div class="login_request_text">
               {% with form.helper as helper %}
-                  {% uni_form form helper %}
+                  {% crispy form helper %}
               {% endwith %}
-
-{#          <form action="{{request.path}}" method="post" class="uniForm">#}
-{#                   <fieldset class="inlineLabels">#}
-{#                     {%csrf_token%}#}
-{#                     {{ form|as_uni_form }}#}
-{#                   </fieldset>#}
-{#                   <input type="submit" value="Sign Up"/>#}
-{#         	</form>#}
       </div>
     </div>
     

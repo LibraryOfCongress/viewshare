@@ -124,8 +124,7 @@ INSTALLED_APPS = (
     'django_extensions',
     'pagination',
     'timezones',
-    'uni_form',
-    'django_sorting',
+    'crispy_forms',
     'compressor',
     'south',
 
@@ -156,7 +155,6 @@ INSTALLED_APPS = (
     'viewshare.apps.account',
     'viewshare.apps.discover',
     'viewshare.apps.profiles',
-    'viewshare.apps.site_theme',
     'viewshare.apps.collection_catalog',
     'viewshare.apps.connections',
     'viewshare.apps.upload',
