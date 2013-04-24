@@ -76,7 +76,7 @@ class Exhibit(TitleSlugDescriptionModel, TimeStampedModel):
         return True
 
     def update_from_profile(self, profile):
-        self.theme = get_object_or_404(Theme, slug=profile.get("theme"))
+        self.theme = get_object_or_404(Theme, slug=profile.get("theme", "smoothness"))
         self.profile = profile
         self.save()
 

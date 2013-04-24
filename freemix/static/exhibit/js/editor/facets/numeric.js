@@ -5,7 +5,7 @@
 
     Facet.prototype.facetClass = Exhibit.NumericRangeFacet;
     Facet.prototype.propertyTypes = ["number", "currency"];
-    Facet.prototype.thumbnail = "/static/freemix/img/numeric-facet.png";
+    Facet.prototype.thumbnail = "/static/exhibit/img/numeric-facet.png";
     Facet.prototype.label = "Range";
     Facet.prototype.template_name = "numeric-facet-editor";
 
@@ -66,7 +66,7 @@
 
 
         var select = template.find("#facet_property");
-        var properties = Freemix.facet.generatePropertyList(facet.propertyTypes);
+        var properties = this._generatePropertyList(facet.propertyTypes);
 
         $.each(properties, function () {
             var option = "<option value='" + this.expression + "'>" + this.label + "</option>";

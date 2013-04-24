@@ -3,7 +3,7 @@
 
     var Facet = Freemix.facet.prototypes.text;
 
-    Facet.prototype.thumbnail = "/static/freemix/img/text-facet.png";
+    Facet.prototype.thumbnail = "/static/exhibit/img/text-facet.png";
     Facet.prototype.label = "Text";
 
     Facet.prototype.refresh = function () {

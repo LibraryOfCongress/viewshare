@@ -3,7 +3,7 @@
 
     var Facet = Freemix.facet.prototypes.list;
 
-    Facet.prototype.thumbnail = "/static/freemix/img/list-facet.png";
+    Facet.prototype.thumbnail = "/static/exhibit/img/list-facet.png";
     Facet.prototype.label = "List";
     Facet.prototype.propertyTypes = ["date", "number", "text", "currency"];
 
@@ -12,7 +12,7 @@
     Facet.prototype.setupEditor = function(config, template) {
         var facet = this;
         var select = template.find("#facet_property");
-        var properties = Freemix.facet.generatePropertyList(facet.propertyTypes);
+        var properties = this._generatePropertyList(facet.propertyTypes);
 
         $.each(properties, function() {
             var option = $("<option>").attr("value", this.expression).text(this.label);

@@ -6,13 +6,13 @@
     Facet.prototype.facetClass = Exhibit.CloudFacet;
     Facet.prototype.propertyTypes = ["date", "number", "text", "currency"];
 
-    Facet.prototype.thumbnail = "/static/freemix/img/cloud-facet.png";
+    Facet.prototype.thumbnail = "/static/exhibit/img/cloud-facet.png";
     Facet.prototype.label = "Tag Cloud";
     Facet.prototype.template_name = "tagcloud-facet-editor";
     Facet.prototype.setupEditor = function(config, template) {
         var facet = this;
         var select = template.find("#facet_property");
-        var properties = Freemix.facet.generatePropertyList(facet.propertyTypes);
+        var properties = this._generatePropertyList(facet.propertyTypes);
 
         $.each(properties, function() {
             var option = $("<option>").attr("value", this.expression).text(this.label);

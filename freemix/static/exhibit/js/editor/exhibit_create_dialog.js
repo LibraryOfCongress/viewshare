@@ -26,7 +26,7 @@
             $.get(url).success(function(data) {
                 var dialog = $(data).appendTo("body");
                 setupForm(dialog);
-                dialog.find("#id_profile").val($.toJSON(Freemix.syncMetadata(Freemix.profile)));
+                dialog.find("#id_profile").val($.toJSON(Freemix.serialize()));
                     $(".exhibit-create-form-cancel").click(function() {dialog.modal("hide");});
                 dialog.modal();
 

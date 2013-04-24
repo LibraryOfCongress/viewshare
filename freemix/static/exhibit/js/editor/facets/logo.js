@@ -3,7 +3,7 @@
 
     var Facet = Freemix.facet.prototypes.logo;
 
-    Facet.prototype.thumbnail = "/static/freemix/img/logo-facet.png";
+    Facet.prototype.thumbnail = "/static/exhibit/img/logo-facet.png";
     Facet.prototype.label = "Logo";
     Facet.prototype.showEditor = function(facetContainer) {
         var facet = this;

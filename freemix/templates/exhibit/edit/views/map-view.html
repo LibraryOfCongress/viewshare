@@ -1,125 +1,113 @@
 {% load i18n %}
-<div class="record-view" id="map-view-template">
+
+<script type="text/template" class="record-view" id="map-view-template">
 
   <div class="map-view-editor">
-    
-    <div class="view-properties">
 
-      <div class="view-edit-body">
-        <form class="form-horizontal">
-          <fieldset>
-            <legend>{% trans "Map View Settings" %}</legend>
-            
-            <div id="view_label" class="control-group">
-              <label class="control-label" for="view_label_input">{% trans "Label" %}</label>
-              <div class="controls">
-                <input type="text" id="view_label_input"/>
+    <div class="well view-settings">
+
+      <form class="form-horizontal">
+
+        <fieldset>
+                  
+          <div class="container-fluid">          
+
+            <div class="row-fluid">          
+
+              <div class="span8">
+
+                <legend class="freemix-fieldset-legend">{% trans "Map View Settings" %}</legend>
+
               </div>
-            </div>
-            
-            <div class="control-group">
-              <label class="control-label" for="latlng_property">{% trans "Latitude / Longitude" %}</label>
-              <div class="controls">
-                <select id="latlng_property"></select>
-              </div>
-            </div>
+              
+              <div class="span4">
 
-            <div class="control-group">
-              <label class="control-label" for="color_property">{% trans "Color Key" %}</label>
-              <div class="controls">
-                <select id="color_property"></select>
-              </div>
-            </div>
+                <div class="pull-right">
 
-            <div class="control-group">
-              <label class="control-label" for="zoom_level">{% trans "Zoom Level" %}</label>
-              <div class="controls">
-                <select id="zoom_level">
-                  <option value="">auto</option>
-                  <option value="1">1 (Farthest)</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="8">9</option>
-                  <option value="10">10 (Nearest)</option>
-                </select>
-              </div>
-            </div>
-            
-          </fieldset>
-        </form>
-      </div>
-    </div>
-
-    <div class="record-box view-lens-properties">
-
-      <div class="view-edit-body">
-
-        <form class="form-horizontal">
-          <fieldset>
-            <legend>{% trans "Map Lens Settings" %}</legend>
-            
-            <div class="control-group">
-              <label class="control-label" for="title_property">{% trans "Title" %}</label>
-              <div class="controls">
-                <select id="title_property"></select>
-              </div>
-            </div>
-
-            <div class="control-group">
-              <label class="control-label" for="title_link_property">{% trans "Link" %}</label>
-              <div class="controls">
-                <select id="title_link_property"></select>
-              </div>
-            </div>
-
-          </fieldset>
-        </form>
-        
-        <table class="property-list-table table table-condensed table-striped">
-          <thead class="ui-widget-header ui-corner-top">
-            <tr>
-              <th class="visible">{% trans "Show" %}</th>
-              <th class="property">{% trans "Property" %}</th>
-              <th class="value">{% trans "Value" %}
-                <span class="record-pager btn-group">
-                  <button class="btn btn-small left-record-button" title="{% trans "Previous Record" %}"><i class="icon-arrow-left"></i></button>
-                  <button class="btn btn-small counter disabled" disabled="disabled"><span id="current-record">#p</span> of <span id="record-count">#t</span></button>
-                  <button class="btn btn-small right-record-button" title="{% trans "Next Record" %}"><i class="icon-arrow-right"></i></button>
-                </span>
-              </th>
-            </tr>
-            
-          </thead>
-
-          <tbody></tbody>
-
-          <tfoot>
-            <tr class='table-footer'>
-              <td colspan="3">
-                <div class="record-controls">
-                  <span class="record-pager btn-group">
-                    <button class="btn btn-small left-record-button" title="{% trans "Previous Record" %}"><i class="icon-arrow-left"></i></button>
-                    <button class="btn btn-small counter disabled" disabled="disabled"><span id="current-record">#p</span> of <span id="record-count">#t</span></button>
-                    <button class="btn btn-small right-record-button" title="{% trans "Next Record" %}"><i class="icon-arrow-right"></i></button>
-                  </span>
+                  {%include "exhibit/edit/lenses/lens_selector.html" %}
+                
                 </div>
-              </td>
-            </tr>
-          </tfoot>
+                
+              </div> <!-- end span -->
+            
+            </div> <!-- end row -->
+            
+          </div> <!-- end container -->
 
-        </table>
-      </div>
+          <div class="container-fluid">          
+            
+            <div class="row-fluid">          
+              
+              <div class="span5 view-variables">
+                
+                <div class="control-group">
+                  <label class="control-label" for="view_label_input">{% trans "Label" %}</label>
+                  <div class="controls">
+                    <div class="input-append">
+                      <input type="text" id="view_label_input"/>
+                    </div>
+                    <span class="help-inline">{% trans "Freetext title of view" %}</span>
+                  </div>
+                </div>
+                
+                <div class="control-group">
+                  <div class="control">
+                    <label class="control-label" for="latlng_property">{% trans "Latitude / Longitude" %}</label>
+                    <div class="controls">
+                      <div class="input-append">
+                        <select id="latlng_property"></select>
+                        <button class="btn augment-data" type="button" title="Add Property"><span class="icon-plus"></span></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="control-group">
+                  <label class="control-label" for="color_property">{% trans "Color Key" %}</label>
+                  <div class="controls">
+                    <select id="color_property"></select>
+                  </div>
+                </div>
+                
+                <div class="control-group">
+                  <div class="control">
+                    <label class="control-label" for="zoom_level">{% trans "Zoom" %}</label>
+                    <div class="controls">
+                      <select class="input-small" id="zoom_level">
+                        <option value="">auto</option>
+                        <option value="1">1 (Farthest)</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="8">9</option>
+                        <option value="10">10 (Nearest)</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
 
+              </div> <!-- end view-variables -->
+              
+              <div class="span7 view-preview">
+                  
+                <div class="well view-preview-pane map-view-preview-pane"></div>
+                
+              </div>
+              
+            </div> <!-- end row -->
+            
+          </div> <!-- end container -->
+                
+        </fieldset>
+      </form>
+      
     </div>
-    <!-- end view-lens-property -->
     
-  </div>
-  <!-- end map-view-editor -->
+  </div> <!-- end map-view-editor -->
   
-</div>
+</script>
 

@@ -43,6 +43,13 @@
         this.facetClass.createFromDOM(this.findWidget().find(".facet-content div").get(0), null, exhibit.getUIContext());
     };
 
+    Freemix.facet.BaseFacet.prototype.updatePreview = function(target, config) {
+        var preview = $(this.generateExhibitHTML(config));
+        target.empty().append(preview);
+        var exhibit = Freemix.getBuilderExhibit();
+        this.facetClass.createFromDOM(preview.get(0), null, exhibit.getUIContext());
+    };
+
     Freemix.facet.BaseFacet.prototype.showEditor = function(facetContainer){
         var facet = this;
         var config = $.extend(true, {}, facet.config);

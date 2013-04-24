@@ -4,7 +4,7 @@
     var Facet = Freemix.facet.prototypes.search;
 
     Facet.prototype.facetClass = Exhibit.TextSearchFacet;
-    Facet.prototype.thumbnail = "/static/freemix/img/search-facet.png";
+    Facet.prototype.thumbnail = "/static/exhibit/img/search-facet.png";
     Facet.prototype.label = "Search";
     Facet.prototype.template_name = "search-facet-editor";
 

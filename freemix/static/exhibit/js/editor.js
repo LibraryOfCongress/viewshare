@@ -1,23 +1,23 @@
 /*global jQuery */
 (function($, Freemix) {
+    "use strict";
 
-    $.fn.freemixThumbnails = function(tags, items, clickHandler) {
+    $.fn.freemixThumbnails = function(items, clickHandler) {
         return this.each(function() {
             var list = $("<ul class='thumbnails'></ul>");
-            $.each(tags,function(key, tag) {
-                var item = items[tag];
-                item.id = key;
-                var li = $("<li></li>");
-                var img = "<img src='" + item.thumbnail +
-                                                    "' alt='" + item.label + "' title='" + item.label + "'/>";
+            $.each(items,function(key, type) {
+                var proto = type.prototype;
+                var li = $("<li class='span2'></li>");
+                var img = "<img src='" + proto.thumbnail +
+                    "' alt='" + proto.label + "' title='" + proto.label + "'/>";
                 var label = $("<legend class='chooser-item-name'>" +
-                                    item.label + "</legend>");
-                if (item.isAvailable()) {
-                    var body = $("<a class='thumbnail' href='' title='" + item.label + "'></a>").append(img).append(label);
+                                    proto.label + "</legend>");
+                if (proto.isAvailable()) {
+                    var body = $("<a class='thumbnail' href='' title='" + proto.label + "'></a>").append(img).append(label);
                     body.click(function(e) {
-                        clickHandler(item);
-                        e.preventDefault();
-                    });
+                            e.preventDefault();
+                            clickHandler(type);
+                        });
                     li.append(body);
                 } else {
                     li.addClass("disabled");
@@ -30,7 +30,7 @@
     };
     $.fn.facetContainer = function(properties) {
         return this.each(function() {
-            var facetContainer = $.extend({},Freemix.exhibit.facetContainer);
+            var facetContainer = $.extend({},Freemix.facet.container);
             facetContainer._selector = $(this);
             facetContainer.id = facetContainer.findWidget().attr("id");
 
@@ -66,7 +66,7 @@
 
     $.fn.viewContainer = function(properties) {
         return this.each(function() {
-            var viewContainer = $.extend({}, Freemix.exhibit.viewContainer);
+            var viewContainer = $.extend({}, Freemix.view.container);
             viewContainer.id = $(this).attr("id");
 
             var model = $(this).data("model", viewContainer);
@@ -124,25 +124,33 @@
         return exhibit;
     };
 
-    Freemix.syncMetadata = function(model) {
-        var metadata = {};
-        metadata.theme = model.theme;
+   Freemix.serialize = function() {
+       var metadata = {};
 
-        metadata.facets = {};
-        $(".facet-container", Freemix.getBuilder()).each( function() {
-            var data = $(this).data("model");
-            metadata.facets[$(this).attr("id")] = data.serialize();
-        });
+       metadata.facets = {};
+       $(".facet-container", Freemix.getBuilder()).each( function() {
+           var data = $(this).data("model");
+           metadata.facets[$(this).attr("id")] = data.serialize();
+       });
 
-        metadata.views = {};
-        $(".view-container",Freemix.getBuilder()).each( function() {
-            var data = $(this).data("model");
-            metadata.views[$(this).attr("id")] = data.serialize();
-        });
+       metadata.views = {};
+       $(".view-container",Freemix.getBuilder()).each( function() {
+           var data = $(this).data("model");
+           metadata.views[$(this).attr("id")] = data.serialize();
+       });
 
+       metadata.lenses = [];
 
-        return metadata;
-    };
+       $.each(Freemix.lens._array, function(inx, lens) {
+           metadata.lenses.push(lens.serialize());
+       });
+
+       if (Freemix.lens._default_lens) {
+           metadata.default_lens = Freemix.lens._default_lens.config.id;
+       }
+       return metadata;
+   };
+
 
     $.fn.generateExhibitHTML = function(model) {
         return this.each(function() {
@@ -152,7 +160,7 @@
                 var id = $(this).attr("id");
                 var container = $("<div class='view-panel' ex:role='viewPanel'></div>");
                 $.each(model.views[id], function() {
-                    var view = Freemix.view.createView(this);
+                    var view = new Freemix.view.construct(this.type,this);
                     container.append(view.generateExhibitHTML());
                 });
 
@@ -161,20 +169,17 @@
 
             $.each(model.facets, function(container, facets) {
                 $.each(facets, function() {
-                    var facet = Freemix.facet.createFacet(this);
+                    var facet = Freemix.facet.construct(this.type, this);
                     root.find(".facet-container#" +container).append(facet.generateExhibitHTML());
                 });
             });
         });
     };
 
-
-
     function updatePreview() {
-        var metadata = Freemix.syncMetadata(Freemix.profile);
+        var metadata = Freemix.serialize();
         Freemix.getPreview().empty();
-        $("#canvas-template").clone().appendTo(Freemix.getPreview()).generateExhibitHTML(metadata);
-
+        Freemix.getTemplate("canvas-template").appendTo(Freemix.getPreview()).generateExhibitHTML(metadata);
     }
 
     function updateBuilder() {
@@ -187,80 +192,70 @@
             selected.data("model").select();
         });
     }
-
-
     function build_db() {
         var profile = Freemix.profile;
 
-        Freemix.property.initializeFreemix();
-        // Setup Themeing
-        var theme = Freemix.profile.theme;
-        $("#theme").themeswitcher({
-            loadTheme: Freemix.profile.theme,
-            onSelect: function(theme) {
-                Freemix.profile.theme = theme;
-            }
-        });
-
         var data = Freemix.data || $.map($("link[rel='exhibit/data']"), function(el) {return $(el).attr("href");});
-        
-        var database = Freemix.exhibit.initializeDatabase(data, function() {
+
+        Freemix.exhibit.initializeDatabase(data, function() {
+            Freemix.lens.load(Freemix.profile.lenses, Freemix.profile.default_lens);
+            Freemix.lens.setupEditor();
+
             $(".view-container", Freemix.getBuilder()).viewContainer();
-            $.each(profile.views, function(container, views) {
+            $.each(profile.views, function(key, views) {
                 $.each(views, function() {
-                    var view = Freemix.view.createView(this);
-                    Freemix.view.getViewContainer(container).addView(view);
+                    var view = new Freemix.view.construct(this.type,this);
+                    var container = Freemix.view.getViewContainer(key);
+                    container.addView(view);
                 });
             });
 
             $(".facet-container", Freemix.getBuilder()).facetContainer();
-            $.each(profile.facets, function(container, facets) {
+            $.each(profile.facets, function(key, facets) {
                 $.each(facets, function() {
-                    var facet = Freemix.facet.createFacet(this);
-                    Freemix.facet.getFacetContainer(container).addFacet(facet);
+                    var facet = Freemix.facet.construct(this.type, this);
+                    Freemix.facet.getFacetContainer(key).addFacet(facet);
                 });
             });
 
+            Freemix.getBuilder().collapse("show");
 
-            new Freemix.Identify(database);
-            togglePreview();
-            $("#contents").show();
-            Freemix.getBuilder().trigger("freemix.show-builder");
         });
 
     }
 
-    function togglePreview() {
-        if ($("#preview_toggle").attr("checked")) {
-            updatePreview();
+    function showBuilder() {
+        updateBuilder();
+        $("#builder_button").addClass("active");
+        Freemix.getBuilder().trigger("freemix.show-builder");
+    }
 
-            $("#preview_toggle").button("option", "label", "Show Builder");
-            $("#build, #theme").hide();
-            $("#preview").show().createExhibit();
-        } else {
-            updateBuilder();
+    function hideBuilder() {
+        $("#builder_button").removeClass("active");
+    }
 
-            $("#preview_toggle").button("option", "label", "Show Preview");
-            $("#preview").hide();
-            $("#build,#theme").show();
-        }
+    function showPreview() {
+        $("#preview_button").addClass("active");
 
+        updatePreview();
+        $("#preview").createExhibit();
+
+    }
+
+    function hidePreview() {
+        $("#preview_button").removeClass("active");
     }
 
     function setup_ui() {
-
-        $("#preview_toggle").button();
-        $("#preview_toggle").change(function() {
-            togglePreview();
+        $("#contents>.collapse").collapse({
+            "parent": "#contents",
+            "toggle": false
         });
 
-        $('.ui-state-default').hover(
-            function(){
-                $(this).addClass('ui-state-hover');
-            }, function(){
-                $(this).removeClass('ui-state-hover');
-            }
-        );
+        $("#build").on("show", showBuilder);
+        $("#build").on("hide", hideBuilder);
+        $("#preview").on("show", showPreview);
+        $("#preview").on("hide", hidePreview);
     }
 
     function display() {
@@ -274,16 +269,8 @@
             dataType: "json",
             success: function(p) {
                 Freemix.profile = p;
-                var dp_url = $("link[rel='freemix/dataprofile']").attr("href");
-                $.ajax({
-                    url: dp_url,
-                    type: "GET",
-                    dataType: "json",
-                    success: function(dp) {
-                        Freemix.data_profile=dp;
-                        build_db();
-                    }
-                });
+                build_db();
+
             }
 
         });

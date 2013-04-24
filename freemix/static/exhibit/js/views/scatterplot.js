@@ -1,33 +1,19 @@
-/*global jQuery */
- (function($, Freemix) {
+(function ($, Freemix) {
+    "use strict";
 
-      // Display the view's UI.
-     function display() {
-         var content = this.getContent();
-         var root = Freemix.getTemplate("scatterplot-view-template");
-         var model = this;
-         content.empty();
-         root.appendTo(content);
+    var config = {
+        type:"scatterplot",
+        name: "Scatter Plot",
+        title:undefined,
+        titleLink:undefined,
+        xaxis:undefined,
+        yaxis:undefined,
+        properties:[]
+    };
 
-         model._setupViewForm();
-         model._setupLabelEditor();
-         model._setupTitlePropertyEditor();
-
-         var numbers = Freemix.property.getPropertiesWithTypes(["number"]);
-
-         var xaxis = content.find("#xaxis_property");
-         var yaxis = content.find("#yaxis_property");
-
-         model._setupPropertySelect(xaxis, "xaxis", numbers);
-         model._setupPropertySelect(yaxis, "yaxis", numbers);
-         xaxis.change();
-         yaxis.change();
-         model.findWidget().recordPager();
-
-     }
-
-    function generateExhibitHTML(config) {
+    var render = function (config) {
         config = config || this.config;
+        var expression = Freemix.exhibit.expression;
 
         if (typeof config.xaxis === "undefined" || typeof config.yaxis === "undefined") {
             return $('<div ex:role="view" ex:viewLabel="Axis Missing"></div>');
@@ -35,12 +21,13 @@
 
         var xaxis = config.xaxis;
         var yaxis = config.yaxis;
+        var database = Freemix.exhibit.database;
+
         if (xaxis && yaxis) {
             var minx = 0;
             var maxx = 0;
             var miny = 0;
             var maxy = 0;
-            var database = Freemix.exhibit.database;
             var recordIds = database.getAllItems().toArray();
             for (var i = 0; i < recordIds.length; i++) {
                 var id = recordIds[i];
@@ -70,38 +57,24 @@
 
         var view = $("<div ex:role='view' ex:viewClass='Exhibit.ScatterPlotView'></div>");
         view.attr("ex:viewLabel", config.name);
-        var props = Freemix.property.propertyList;
+        var prop;
         if (xaxis) {
-            view.attr("ex:x", props[xaxis].expression());
-            view.attr("ex:xLabel", props[xaxis].label());
+            prop = database.getProperty(xaxis);
+            view.attr("ex:x", expression(xaxis));
+            view.attr("ex:xLabel", prop.getLabel());
         }
         if (yaxis) {
-            view.attr("ex:y", props[yaxis].expression());
-            view.attr("ex:yLabel", props[yaxis].label());
+            prop = database.getProperty(yaxis);
+            view.attr("ex:y", expression(yaxis));
+            view.attr("ex:yLabel", prop.getLabel());
         }
 
         this._renderFormats(view);
-        view.append(this._renderListLens(config));
+        view.append(this._getLens().generateExhibitHTML());
 
         return view;
-    }
+    };
 
-    Freemix.view.addViewType({
-        propertyTypes: ["number", "currency"],
-
-        label: "Scatter Plot",
-        thumbnail: "/static/exhibit/img/scatterplot-icon.png",
-        display: display,
-        generateExhibitHTML: generateExhibitHTML,
-
-        config: {
-            type: "scatterplot",
-            title: undefined,
-            titleLink: undefined,
-            xaxis: undefined,
-            yaxis: undefined,
-            metadata: []
-        }
-    });
+    Freemix.view.register(config,render);
 
 })(window.Freemix.jQuery, window.Freemix);

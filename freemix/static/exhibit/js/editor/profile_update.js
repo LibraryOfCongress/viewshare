@@ -3,7 +3,7 @@
 
     function setupSaveButton() {
         $("#save_button").click(function() {
-            var metadata = Freemix.syncMetadata(Freemix.profile);
+            var metadata = Freemix.serialize();
             $("#save_message").empty().append("Saving...");
             var xhr = $.ajax({
                  type: "POST",

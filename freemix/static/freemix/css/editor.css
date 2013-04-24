@@ -241,6 +241,47 @@ margin-top: 5px;
 }
 
 
+/* view variables and preview */
+
+.view-variables .control-group { 
+    margin-left: -30px;
+}
+
+.view-preview .view-preview-pane {
+   max-height: 500px;
+   height:500px;
+   overflow:auto;
+}
+
+.lens-preview .lens-preview-pane {
+   max-height: 500px;
+   height:500px;
+   overflow:auto;
+}
+
+#lens_navigator .sidebar>.well {
+    height:500px;
+}
+
+#lens_navigator .sidebar ul.nav {
+    height:430px;
+    max-height:430px;
+    overflow:auto;
+}
+
+#lens_navigator .lens-editor-pane {
+   max-height: 500px;
+   height:500px;
+   overflow:auto;
+}
+
+/* hide scissors in preview mode */
+
+div.exhibit-toolboxWidget-popup {
+ display: none;
+}
+
+
 /* dataset table */
 
 .property-list-table {
