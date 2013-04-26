@@ -1,4 +1,4 @@
-import json
+import simplejson as json
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.http import Http404, HttpResponse
@@ -86,13 +86,18 @@ class JSONResponse(HttpResponse):
         indent = 2 if settings.DEBUG else None
 
         if template:
-            context = {"json": json.dumps(data, indent=indent)}
+            context = {"json": json.dumps(data,
+                                          indent=indent,
+                                          use_decimal=True)
+            }
             if extra_context:
                 context.update(extra_context)
             content = render_to_string(template, context)
             mime = "application/javascript"
         else:
-            content = json.dumps(data, indent=indent)
+            content = json.dumps(data,
+                                 indent=indent,
+                                 use_decimal=True)
             mime = ("text/javascript" if settings.DEBUG
                                   else "application/json")
         super(JSONResponse, self).__init__(
