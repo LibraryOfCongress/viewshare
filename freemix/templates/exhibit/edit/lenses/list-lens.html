@@ -1,0 +1,34 @@
+{% load i18n %}
+
+<script type="text/template" id="list-lens-template">
+  <div class="well record-box list-lens-properties">
+      
+    <form class="form-horizontal">
+      
+      <fieldset>
+
+        <div class="control-group">
+          <label class="control-label" for="title_property">{% trans "Title" %}</label>
+          <div class="controls">
+            <select id="title_property"></select>              
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="title_link_property">{% trans "Link" %}</label>
+          <div class="controls">
+            <select id="title_link_property"></select>
+          </div>
+        </div>
+          <div class="control-group">
+              <label class="control-label" for="property_list">{% trans "Properties" %}</label>
+              <div class="controls">
+                <select id="property_list" multiple="multiple"></select>
+              </div>
+          </div>
+      </fieldset>
+
+    </form>
+
+  </div>
+</script>

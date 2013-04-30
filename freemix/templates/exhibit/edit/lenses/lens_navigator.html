@@ -1,0 +1,47 @@
+{% load i18n %}
+<div class="row-fluid">
+  <div class="span2 sidebar">
+    <div class="well">
+
+      <h5>{% trans "Select Lens" %}</h5>
+
+      <ul class='nav nav-list well well-small'></ul>
+
+      <button class="btn add-lens-button" title="{%trans "Add a new lens" %}"><span class="icon-plus"></span></button>
+      <button class="btn pull-right set-default-lens-button">{% trans "Set Default" %}</button>
+    </div>
+
+  </div>
+  <div class="span5 lens-editor">
+    <div class="well lens-editor-pane">
+
+        <form class="form-horizontal">
+          <fieldset>
+            <legend class="freemix-fieldset-legend">{% trans "Lens Settings" %}</legend>
+
+            <div class="control-group">
+              <label class="control-label" for="lens_label_input">{% trans "Label" %}</label>
+              <div class="controls">
+                <div class="input-append">
+                  <input type="text" id="lens_label_input"/>
+                </div>
+                <span class="help-inline">{% trans "Freetext title of lens" %}</span>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label" for="lens_type_select">{% trans "Lens Type" %}</label>
+              <div class="controls">
+                <select id="lens_type_select"></select>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+
+        <div id="lens_details"></div>
+    
+    </div>
+  </div>
+  <div class="span5 lens-preview"><div class="well lens-preview-pane"></div></div>
+  
+</div>
