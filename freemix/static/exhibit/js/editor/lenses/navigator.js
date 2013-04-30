@@ -137,7 +137,10 @@
 
     Freemix.lens.setupEditor = function() {
         editor.on("show", function() {
-            $("#lens_button").addClass("active");
+            $("#lens_button").addClass("active").siblings().each(function() {
+                var selector = $(this).attr("data-target");
+                $(selector).collapse("hide");
+            });
             var default_lens = Freemix.lens.getDefaultLens();
 
             populateTable();

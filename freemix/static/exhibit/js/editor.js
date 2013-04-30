@@ -225,8 +225,11 @@
     }
 
     function showBuilder() {
+        $("#builder_button").addClass("active").siblings().each(function() {
+            var selector = $(this).attr("data-target");
+            $(selector).collapse("hide");
+        });
         updateBuilder();
-        $("#builder_button").addClass("active");
         Freemix.getBuilder().trigger("freemix.show-builder");
     }
 
@@ -235,11 +238,13 @@
     }
 
     function showPreview() {
-        $("#preview_button").addClass("active");
-
+        $("#preview_button").addClass("active").siblings().each(function() {
+            var selector = $(this).attr("data-target");
+            $(selector).collapse("hide");
+        });
         updatePreview();
         $("#preview").createExhibit();
-
+        hideBuilder();
     }
 
     function hidePreview() {
@@ -277,6 +282,6 @@
 
     }
 
-    $(document).ready(function() {display();});
+    $(document).ready(display);
 
 })(window.Freemix.jQuery, window.Freemix);
