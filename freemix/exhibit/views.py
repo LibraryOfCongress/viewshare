@@ -340,7 +340,11 @@ class StockExhibitProfileJSONView(View):
                 "views": [{
                     "id": str(uuid.uuid4()),
                     "type": "list",
-                    "name": "List"}]}})
+                    "name": "List"
+                }]
+            },
+            "lenses": []
+        })
 
 
 

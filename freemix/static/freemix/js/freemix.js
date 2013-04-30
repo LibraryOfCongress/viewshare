@@ -1,15 +1,10 @@
-/*global jQuery, window, alert, console */
-
-(function (window) {
 var Freemix = window.Freemix || {};
 Freemix.jQuery = window.jQuery;
 window.Freemix = Freemix;
-})(window);
 
-
-
- (function($) {
-     Freemix.getTemplate = function(template) {
-        return $($("#templates div#" + template).html());
-     };
+(function($) {
+    "use strict";
+    Freemix.getTemplate = function (template) {
+        return $($("#" + template).html());
+    };
 })(window.Freemix.jQuery);
