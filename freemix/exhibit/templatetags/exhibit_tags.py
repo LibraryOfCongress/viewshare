@@ -42,15 +42,3 @@ def new_exhibit(context):
 @register.simple_tag
 def simile_painter_url():
     return conf.SIMILE_PAINTER_SERVICE_URL
-
-# Theme tags
-@register.tag
-def theme_list(parser, token):
-    return ThemeListNode("exhibit/theme_list.html" )
-
-class ThemeListNode( template.Node ):
-    def __init__ (self, template):
-        self.template = template
-
-    def render(self, context):
-        return render_to_string(self.template, {"theme_list": models.Theme.objects.filter(enabled=True)})
