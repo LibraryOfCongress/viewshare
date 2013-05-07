@@ -75,6 +75,20 @@ try:
 except ImportError:
     pass
 
+urlpatterns += patterns('',
+
+    # CMS pages that are linked from templates
+    url(r'^tos/$', 'cms.views.details', kwargs={"slug": "tos"}, name="tos"),
+    url(r'^about/community/$', 'cms.views.details', kwargs={"slug": "community"}, name="community"),
+    url(r'^about/help/$', 'cms.views.details', kwargs={"slug": "help"}, name="help"),
+    url(r'^about/faq/$', 'cms.views.details', kwargs={"slug": "faq"}, name="faq"),
+    url(r'^about/userguide/$', 'cms.views.details', kwargs={"slug": "userguide"}, name="userguide"),
+    url(r'^augment/patterns/$', 'cms.views.details', kwargs={"slug": "augment-list-patterns"}, name="augment-list-patterns"),
+
+    # CMS url definition should come after all others
+    (r'^', include('cms.urls')),
+)
+
 if settings.DEBUG:
     urlpatterns += patterns('',
         url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
