@@ -1,7 +1,6 @@
 {% load url from future %}
 {% load i18n %}
 {% load compress %}
-{% load sekizai_tags %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -13,7 +12,6 @@
     {% block head_css %}{% endblock %}
     {% block head_data %}{% endblock %}
     {% block extra_head %}{% endblock %}
-    {% render_block "css" %}
 
     {% compress js %}
     <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.js"></script>
@@ -109,9 +107,7 @@
       
       {% block final %}
       {% endblock %}
-      
-      {% render_block "js" %}
-      
+
     </div> <!-- body container -->
   </body>
 </html>

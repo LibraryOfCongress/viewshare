@@ -17,17 +17,6 @@ Third-party Apps
 * announcements
     * Make site-wide announcements
     * https://github.com/brosner/django-announcements
-* CMS Apps
-    * cms
-    * mptt
-    * menus
-    * sekizai
-    * reversion
-    * cms.plugins.text
-    * cms.plugins.picture
-    * cms.plugins.link
-    * cms.plugins.file
-    * cms.plugins.snippet
 * compressor
     * Compresses linked and inline javascript or CSS into a single cached file.
     * https://github.com/jezdez/django_compressor
@@ -51,9 +40,6 @@ Third-party Apps
 * pagination
     * Break lists into paged results
     * https://github.com/ericflo/django-pagination
-* piston
-    * A framework for creating RESTful APIs
-    * https://bitbucket.org/jespern/django-piston/wiki/Home
 * registration
     * user registration application
     * https://bitbucket.org/ubernostrum/django-registration

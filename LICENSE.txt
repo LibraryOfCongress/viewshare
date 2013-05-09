@@ -339,9 +339,7 @@ The license below applies to the following bundled dependencies:
  * django-pagination:  Copyright (c) 2008, Eric Florenzano
  * django-template-utils:  Copyright (c) 2007, James Bennett
  * django-classy-tags: Copyright (c) 2010, Jonas Obrist
- * django-cms: Copyright (c) 2008, Batiste Bieler
  * django-registration: Copyright (c) 2007-2011, James Bennett
- * django-sekizai: Copyright (c) 2010, Jonas Obrist
 
 
 All rights reserved.
