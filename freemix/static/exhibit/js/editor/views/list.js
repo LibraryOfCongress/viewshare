@@ -14,7 +14,8 @@
         this._setupViewForm();
         this._setupLabelEditor();
         this._setupMultiPropertySortEditor();
-        this._setupLensPicker();
+        this._setupLensEditor();
+//        this._setupLensPicker();
         // this._setupTitlePropertyEditor();
 
         // var property_list = this.getContent().find("#property_list");

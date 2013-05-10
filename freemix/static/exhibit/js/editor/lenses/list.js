@@ -5,12 +5,14 @@
 
     Lens.label = "List";
 
-    Lens.prototype.initializeEditor = function() {
+    Lens.prototype.initializeEditor = function(editor, preview) {
+        this._editor = $(editor || "#lens_navigator #lens_detail");
+        this._preview = $(preview || "#lens_navigator .lens-preview .lens-preview-pane");
         var root = Freemix.getTemplate("list-lens-template");
-        this.getContent().find("#lens_details").empty().append(root);
+        this.getEditor().empty().append(root);
 
         this._setupTitlePropertyEditor();
-        var property_list = this.getContent().find("#property_list");
+        var property_list = this.getEditor().find("#property_list");
         this._setupPropertyMultiSelect(property_list, "properties", true);
         property_list.change();
     };

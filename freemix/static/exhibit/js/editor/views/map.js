@@ -35,8 +35,8 @@
         this._setupSelectPropertyHandler(zoom, "zoom");
         zoom.change();
 
-        this._setupLensPicker();
-
+        this._setupLensEditor();
+//        this._setupLensPicker();
 
         // this._setupTitlePropertyEditor();
 

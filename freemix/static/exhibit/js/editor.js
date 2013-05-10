@@ -199,7 +199,7 @@
 
         Freemix.exhibit.initializeDatabase(data, function() {
             Freemix.lens.load(Freemix.profile.lenses, Freemix.profile.default_lens);
-            Freemix.lens.setupEditor();
+//            Freemix.lens.setupEditor();
 
             $(".view-container", Freemix.getBuilder()).viewContainer();
             $.each(profile.views, function(key, views) {

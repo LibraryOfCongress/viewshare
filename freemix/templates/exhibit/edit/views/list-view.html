@@ -14,22 +14,12 @@
 
             <div class="row-fluid">          
 
-              <div class="span5">
+              <div class="span12">
 
                 <legend class="freemix-fieldset-legend">{% trans "List View Settings" %}</legend>
 
               </div>
-              
-              <div class="span7">
 
-                <div class="pull-right">
-                  
-                  {%include "exhibit/edit/lenses/lens_selector.html" %}
-
-                </div>
-                
-              </div> <!-- end span -->
-            
             </div> <!-- end row -->
             
           </div> <!-- end container -->
@@ -60,6 +50,10 @@
                     </select>
                   </div>
                 </div>
+
+                {%include "exhibit/edit/lenses/inline_editor.html" %}
+
+
                 
               </div> <!-- end view-variables -->
                             

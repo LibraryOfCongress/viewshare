@@ -151,6 +151,13 @@
         }
     };
 
+    BaseView.prototype._setupLensEditor = function(selector) {
+        selector = selector || $("#lens_editor");
+
+        var lens = Freemix.lens.getLens(this.config.lens);
+        lens.initializeEditor(selector);
+    };
+
     BaseView.prototype._setupLensPicker = function(selector) {
         var inx, lens;
         var option = "<option value=''>Default</option>";
