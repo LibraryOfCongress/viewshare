@@ -92,7 +92,7 @@ header, .header, #header{
  -webkit-box-shadow: 3px 3px 4px #999; /* Safari/Chrome */
  box-shadow: 3px 3px 4px #999; /* Opera and other CSS3 supporting browsers */
  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#999999')";/* IE 8 */
- : progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#999999');/* IE 5.5 - 7 */ 
+ : progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#999999');/* IE 5.5 - 7 */
 }
 
 .chooser ul.thumbnails li a:active img {
@@ -156,13 +156,13 @@ div#body.freemix-themeable > div > h2,
 .search-area label {
 padding-right: 5px;
 font-weight: bold;
-}             
+}
 
 .search-area .help-inline .sort-label {
 padding-left: 20px;
 margin-right: -5px;
 font-weight: bold;
-}             
+}
 
 .attraction #identify h1 {
     padding: 0.5em 0.5em;
@@ -384,7 +384,7 @@ height:106px;
   height: 24px;
   margin-left: 15px;
   padding-left: 30px;
-  
+
 }
 
 #about-box .user_counts {
@@ -397,7 +397,7 @@ height:106px;
 .dataset-actions, .exhibit-actions, .shared-key-actions {
      float:right;
 }
-	       
+
 .dataset-description, .exhibit-description {
     padding-bottom: 10px;
 }
@@ -685,3 +685,5 @@ div.notices h2 {
     padding: 20px 0 0;
     text-align: center;
 }
+
+/* builder */

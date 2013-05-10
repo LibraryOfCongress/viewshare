@@ -4,20 +4,20 @@
   
   <div class="table-view-editor">
     
-    <div class="well view-settings">
+    <div class="view-settings">
 
-      <form class="form-horizontal">
+      <form class="form">
         
         <fieldset>
           
-          <legend class="freemix-fieldset-legend">{% trans "Table View Settings" %}</legend>
-
           <div class="container-fluid">          
             
             <div class="row-fluid">          
-              
+
               <div class="span5 view-variables">
-                
+
+                <legend class="freemix-fieldset-legend">{% trans "Table View Settings" %}</legend>
+          
                 <div class="control-group">
                   <label class="control-label" for="view_label_input">{% trans "Label" %}</label>
                   <div class="controls">
@@ -38,14 +38,14 @@
                     </select>
                   </div>
                 </div>
-
+                
                 <div class="control-group">
                   <label class="control-label" for="property_list">{% trans "Columns" %}</label>
                   <div class="controls">
-                      <select id="property_list" multiple="multiple"></select>
+                    <select id="property_list" multiple="multiple"></select>
                   </div>
                 </div>
-
+                
               </div> <!-- end view-variables -->
               
               <div class="span7 view-preview">

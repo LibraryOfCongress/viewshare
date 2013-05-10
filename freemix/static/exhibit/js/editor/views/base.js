@@ -32,18 +32,19 @@
 
     BaseView.prototype.generateWidget = function() {
          var view = this;
-         return $("<li class='view ui-state-default'>" +
+         return $("<li class='view'>" +
+                  "<a href='#'>" + 
                   "<i class='icon-move'></i>" +
                   "<span class='view-label'></span>" +
                   "<i class='icon-remove delete-button'></i>" +
+                  "</a>" + 
                   "</li>")
 
             .attr("id", view.config.id)
             .find("span.view-label").text(view.config.name).end()
             .data("model", view)
-            .hover(function() {$(this).addClass('ui-state-hover');}, function() {$(this).removeClass('ui-state-hover');})
             .click(function() {
-                if (!$(this).hasClass("ui-state-active")) {
+                if (!$(this).hasClass("active")) {
                     $(this).data("model").select();
                 }
                 return false;
@@ -60,10 +61,10 @@
         var control = this.findWidget();
         var view = this;
         var content = this.getContent();
-        $(".view-set>li.view", this.getContainer()).removeClass("ui-state-active")
+        $(".view-set>li.view", this.getContainer()).removeClass("active")
         .find(".popup-button").hide();
 
-        control.addClass("ui-state-active");
+        control.addClass("active");
         control.find('.popup-button').show();
 
         content.off(view.refreshEvent);

@@ -116,6 +116,7 @@ color: black;
     text-align: center;
 }
 
+
 .facet-container ul {
     min-height: 3em;
 }
@@ -239,7 +240,6 @@ margin-top: 5px;
 /* view variables and preview */
 
 .view-variables .control-group { 
-    margin-left: -30px;
 }
 
 .view-preview .view-preview-pane {
@@ -837,6 +837,32 @@ padding-bottom: 12px;
   border: 1px solid lightgrey;
 }
 
+/* styling tabs */
+
+ul.view-set li.view a {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  line-height: 20px;
+  -webkit-border-radius: 4px 4px 0 0;
+     -moz-border-radius: 4px 4px 0 0;
+          border-radius: 4px 4px 0 0;
+  border: 1px solid #ddd;
+  border-bottom-color: transparent;
+
+}
+
+ul.view-set li.view .view-label {
+padding-left: 8px;
+padding-right: 8px;
+}
+
+ul.view-set li.view .icon-move {
+ cursor:move;
+}
+
+ul.view-set li.view .icon-remove {
+ cursor:no-drop;
+}
 
 .facet-preview .facet-edit-body, .view-preview .view-edit-body {
 padding: 15px 10px 0px 0px;
@@ -876,14 +902,17 @@ background-color: #FFF9EC;
   font-size: 18px;
 }
 
+.view-content {
+  background-color: #ffffff;
+  margin-top: -20px;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
 
+}
 
 .list-view-editor, .map-view-editor, .scatterplot-view-editor, .table-view-editor, .timeline-view-editor, .piechart-view-editor, .thumbnail-view-editor {
-  border: 1px solid lightgrey;
-  padding-top: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-bottom: 10px;
+padding-top: 10px;
 }
 
 .view-properties .view-edit-body {
