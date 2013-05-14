@@ -39,10 +39,6 @@
         return $.map(arr, expression).join(",");
     };
 
-    Freemix.view.BaseView.prototype._renderProperty = function(property) {
-        return "<span ex:content='" + expression(property.getID()) + "'/>";
-    };
-
     Freemix.view.BaseView.prototype._renderFormats = function(view, config) {
         config = config || this.config;
         var lens= this._getLens();

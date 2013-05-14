@@ -154,7 +154,15 @@
     BaseView.prototype._setupLensEditor = function(selector) {
         selector = selector || $("#lens_editor");
         var view = this;
-        var lens = Freemix.lens.getLens(this.config.lens);
+        var lens;
+        if (!this.config.lens) {
+            lens = Freemix.lens.copyDefaultLens();
+            this.config.lens = lens.config.id;
+            Freemix.lens.setDefaultLens(lens);
+        } else {
+            lens = Freemix.lens.getLens(this.config.lens);
+        }
+
         lens.initializeEditor(selector);
         lens.getContent().off(lens.refreshEvent).on(lens.refreshEvent, function() {
             view.getContent().trigger(view.refreshEvent);
