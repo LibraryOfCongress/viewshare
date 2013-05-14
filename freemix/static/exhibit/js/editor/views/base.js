@@ -14,7 +14,7 @@
     BaseView.prototype.viewClass = Exhibit.TileView;
 
     BaseView.prototype.showEditor = function(vc) {
-        vc._dialog.dialog("close");
+        vc._dialog.modal("hide");
         vc.addView(this);
         this.select();
     };

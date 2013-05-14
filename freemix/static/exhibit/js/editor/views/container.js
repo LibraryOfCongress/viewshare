@@ -30,14 +30,19 @@
 
     Freemix.view.container.getPopupContent = function() {
         var fc = this;
-        return $("<div class='chooser'></div>")
+
+        var chooserThumbnails = $("<div><div class='modal-header'><button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button><h3 id='addWidgetModalLabel'>Select View Widget</h3></div></div>");
+
+
+        $("<div class='chooser modal-body'></div>")
             .freemixThumbnails(Freemix.view.prototypes, function(View) {
                 var view = new View();
                 if (!view.config.id) {
                     view.config.id = $.make_uuid();
                 }
                 view.showEditor(fc);
-            });
+            }).appendTo(chooserThumbnails);
+        return chooserThumbnails;
     };
 
     Freemix.view.container.getPopupButton = function() {
