@@ -71,7 +71,7 @@
         },
         createBasicLens: function () {
             var lens = this.construct("list", {
-                "properties": Freemix.exhibit.database.getAllProperties(),
+                "properties": Freemix.exhibit.database.getFilteredProperties(),
                 "id": $.make_uuid()
             });
             this.add(lens);

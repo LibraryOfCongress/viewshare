@@ -60,7 +60,7 @@
             selector.append(make_option(value[inx], true));
         }
 
-        var properties = Freemix.exhibit.database.getAllProperties();
+        var properties = Freemix.exhibit.database.getFilteredProperties();
         for (inx = 0 ; inx < properties.length ; inx++) {
             if ($.inArray(properties[inx], value) < 0) {
                 selector.append(make_option(properties[inx], default_all));
