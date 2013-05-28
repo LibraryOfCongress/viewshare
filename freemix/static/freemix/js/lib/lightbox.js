@@ -22,7 +22,7 @@ var Lightbox = {
             if ((window.jQuery && window.jQuery.ui && window.jQuery.ui.dialog) || ($.ui && $.ui.dialog)) {
                 Lightbox.handler = "jqueryui";
             } else {
-                Lightbox.handler = "default";
+                Lightbox.handler = "embedded";
             }
         }
         Lightbox.handlers[Lightbox.handler](img);
@@ -57,7 +57,7 @@ var Lightbox = {
     };
 
     var zIndex = 0;
-    Lightbox.handlers.default = function(img) {
+    Lightbox.handlers.embedded = function(img) {
         if (zIndex == 0) {
             zIndex = Math.max.apply(null,$.map($('body > *'), function(e,n){
                    if($(e).css('position')=='absolute')
