@@ -2,6 +2,7 @@ from django import template
 from django.conf import settings
 from django.template.loader import render_to_string
 from freemix.exhibit import models
+from freemix.exhibit import conf
 
 register = template.Library()
 
@@ -37,6 +38,10 @@ def exhibit_list(context, exhibits, max_count=10, pageable=True):
 @register.inclusion_tag("exhibit/exhibit_create_dialog.html", takes_context=True)
 def new_exhibit(context):
     return {'STATIC_URL': settings.STATIC_URL}
+
+@register.simple_tag
+def simile_painter_url():
+    return conf.SIMILE_PAINTER_SERVICE
 
 # Theme tags
 @register.tag

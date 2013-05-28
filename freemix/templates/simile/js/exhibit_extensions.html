@@ -1,4 +1,5 @@
 {% load compress %}
+{% load exhibit_tags %}
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 
 {% compress js %}
@@ -31,6 +32,8 @@
 <script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/extensions/map/scripts/olmap-view.js"></script>
 {#<script type="text/javascript" src="{{STATIC_URL}}simile/exhibit/extensions/map/locales/en/map-locale.js"></script>#}
 
-
 {% endcompress %}
 
+<script type="text/javascript">
+      Exhibit.OLMapView._markerUrlPrefix = "{% simile_painter_url %}";
+</script>
