@@ -27,21 +27,6 @@ class Canvas(TitleSlugDescriptionModel):
         verbose_name_plural = "Canvases"
 
 
-class Theme(TitleSlugDescriptionModel, models.Model):
-    url = models.URLField(_('url'), unique=False, max_length=100,
-                          help_text=_("Example: '/static/exhibit/css/"
-                                      "smoothness/smoothness.css'"),
-                          default="/static/exhibit/css/"
-                                  "smoothness/smoothness.css")
-    thumbnail = models.ImageField(_('thumbnail'), upload_to='view_theme/img',
-                                  default="static/images/thumbnails"
-                                          "/three-column/smoothness.png")
-    enabled = models.BooleanField(_('enabled'), null=False, default=True)
-
-    def __unicode__(self):
-        return self.title
-
-
 class Exhibit(TitleSlugDescriptionModel, TimeStampedModel):
     owner = models.ForeignKey(User, null=True, blank=True, related_name="exhibits")
 
@@ -50,8 +35,6 @@ class Exhibit(TitleSlugDescriptionModel, TimeStampedModel):
     dataset = models.ForeignKey(Dataset, null=True, blank=True, related_name="exhibits")
 
     canvas = models.ForeignKey(Canvas)
-
-    theme = models.ForeignKey(Theme)
 
     published = models.BooleanField(default=True)
 
@@ -76,7 +59,6 @@ class Exhibit(TitleSlugDescriptionModel, TimeStampedModel):
         return True
 
     def update_from_profile(self, profile):
-        self.theme = get_object_or_404(Theme, slug=profile.get("theme", "smoothness"))
         self.profile = profile
         self.save()
 

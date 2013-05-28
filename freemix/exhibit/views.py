@@ -223,7 +223,7 @@ class ExhibitView(OwnerSlugPermissionMixin, DetailView):
 
 class ExhibitDisplayView(ExhibitView):
 
-    select_related = ("owner", "dataset", "dataset__owner", "theme", "canvas")
+    select_related = ("owner", "dataset", "dataset__owner", "canvas")
 
 
     def delete(self, request, *args, **kwargs):
@@ -334,7 +334,6 @@ class StockExhibitProfileJSONView(View):
             raise Http404
 
         return JSONResponse({
-            "theme": conf.DEFAULT_EXHIBIT_THEME,
             "facets": {},
             "views": {
                 "views": [{

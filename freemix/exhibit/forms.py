@@ -1,6 +1,6 @@
 from django import forms
 from freemix.exhibit import conf
-from freemix.exhibit.models import Exhibit, Theme, Canvas
+from freemix.exhibit.models import Exhibit
 
 class CreateExhibitForm(forms.ModelForm):
 
@@ -15,7 +15,6 @@ class CreateExhibitForm(forms.ModelForm):
         instance.owner = self.owner
         instance.dataset = self.dataset
         instance.canvas = self.canvas
-        instance.theme = Theme.objects.get(slug=instance.profile.get("theme", conf.DEFAULT_EXHIBIT_THEME))
 
         instance.save()
         return instance
