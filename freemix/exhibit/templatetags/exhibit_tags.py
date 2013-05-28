@@ -18,7 +18,7 @@ def exhibit_list_item(context, exhibit):
     can_view = user.has_perm("exhibit.can_view", exhibit)
     can_inspect = user.has_perm("exhibit.can_inspect", exhibit)
 
-    return {"exhibit": exhibit, 
+    return {"exhibit": exhibit,
             "request": request,
             "visible": visible,
             "dataset_available": visible,
@@ -38,7 +38,7 @@ def new_exhibit(context):
 
 @register.simple_tag
 def simile_painter_url():
-    return conf.SIMILE_PAINTER_SERVICE
+    return conf.SIMILE_PAINTER_SERVICE_URL
 
 # Theme tags
 @register.tag
