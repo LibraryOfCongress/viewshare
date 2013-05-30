@@ -4,9 +4,9 @@
 
   <div class="map-view-editor">
 
-    <div class="well view-settings">
+    <div class="view-settings">
 
-      <form class="form-horizontal">
+      <form class="form">
 
         <fieldset>
                   
@@ -19,16 +19,7 @@
                 <legend class="freemix-fieldset-legend">{% trans "Map View Settings" %}</legend>
 
               </div>
-              
-              <div class="span4">
 
-                <div class="pull-right">
-
-                  {%include "exhibit/edit/lenses/lens_selector.html" %}
-                
-                </div>
-                
-              </div> <!-- end span -->
             
             </div> <!-- end row -->
             
@@ -89,6 +80,8 @@
                     </div>
                   </div>
                 </div>
+
+                {%include "exhibit/edit/lenses/inline_editor.html" %}
 
               </div> <!-- end view-variables -->
               

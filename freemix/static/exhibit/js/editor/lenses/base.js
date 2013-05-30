@@ -5,19 +5,29 @@
 
     BaseLens.prototype.refreshEvent = "refresh-preview.lens";
 
-    BaseLens.prototype.initializeEditor = function() {
-        this.getContent().find("#lens_details").empty().append("initializing" + this.config.name);
+    BaseLens.prototype.initializeEditor = function(editor, preview) {
+        this._editor = $(editor || "#lens_navigator #lens_detail");
+        this._preview = $(preview || "#lens_navigator .lens-preview .lens-preview-pane");
+        this._editor.empty().append("initializing " + this.config.name);
+    };
+
+    BaseLens.prototype.getEditor = function() {
+        return this._editor;
     };
 
     BaseLens.prototype.getContent = function() {
-        return $("#lens_navigator");
+        return this.getEditor();
+    };
+
+    BaseLens.prototype.getPreview = function() {
+        return this._preview;
     };
 
     BaseLens.prototype._setupTitlePropertyEditor = function(config) {
         config = config||this.config;
         var links = Freemix.exhibit.database.getPropertiesWithTypes(["image", "url"]);
         var titles = Freemix.exhibit.database.getAllPropertyObjects();
-        var content = this.getContent();
+        var content = this.getEditor();
         var title = content.find("#title_property");
         var title_link = content.find("#title_link_property");
 
@@ -43,7 +53,7 @@
     };
 
     BaseLens.prototype.refreshPreview = function() {
-        var well = this.getContent().find(".lens-preview .lens-preview-pane");
+        var well = this.getPreview();
 
         well.empty();
         $("<div ex:role='view'></div>").append(this.generateExhibitHTML()).appendTo(well);

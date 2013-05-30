@@ -56,6 +56,13 @@
             this._default_lens = lens;
 
         },
+        copyDefaultLens: function() {
+            var config = $.extend(true, {}, this.getDefaultLens().config);
+            config.id = $.make_uuid();
+            var lens = Freemix.lens.construct(config.type, config);
+            Freemix.lens.add(lens);
+            return lens;
+        },
         add: function (lens) {
             if (lens.config.id in this._hash) {
                 for (var inx = 0; inx < this._array.length; inx++) {
@@ -71,7 +78,7 @@
         },
         createBasicLens: function () {
             var lens = this.construct("list", {
-                "properties": Freemix.exhibit.database.getAllProperties(),
+                "properties": Freemix.exhibit.database.getFilteredProperties(),
                 "id": $.make_uuid()
             });
             this.add(lens);

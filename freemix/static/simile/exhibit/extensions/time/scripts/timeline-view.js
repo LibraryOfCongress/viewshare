@@ -169,7 +169,7 @@ Exhibit.TimelineView.prototype._internalValidate = function() {
         }
     }
     if ("selectCoordinator" in this._settings) {
-        var selectCoordinator = exhibit.getComponent(this._settings.selectCoordinator);
+        var selectCoordinator = this._uiContext.getExhibit().getComponent(this._settings.selectCoordinator);
         if (selectCoordinator != null) {
             var self = this;
             this._selectListener = selectCoordinator.addListener(function(o) {

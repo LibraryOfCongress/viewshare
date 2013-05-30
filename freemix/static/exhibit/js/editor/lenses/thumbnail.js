@@ -5,9 +5,11 @@
 
     Lens.propertyTypes = ["image"];
     Lens.label = "Thumbnail";
-    Lens.prototype.initializeEditor = function() {
+    Lens.prototype.initializeEditor = function(target) {
+        this._editor = $(editor || "#lens_navigator #lens_detail");
+        this._preview = $(preview || "#lens_navigator .lens-preview .lens-preview-pane");
         var root = Freemix.getTemplate("thumbnail-lens-template");
-        var content = this.getContent();
+        var content = this.getEditor();
         content.find("#lens_details").empty().append(root);
 
         var images = Freemix.exhibit.database.getPropertiesWithTypes(["image"]);

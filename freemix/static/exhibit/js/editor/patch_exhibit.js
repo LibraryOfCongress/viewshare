@@ -2,7 +2,15 @@
     "use strict";
 
     // patch Exhibit database with editor specific functions
-
+    var filtered_properties = [
+        "id",
+        "label",
+        "modified",
+        "uri",
+        "type",
+        "change",
+        "changedItem"
+    ];
 
     Exhibit.Database._Impl.prototype.getPropertiesWithTypes = function(types) {
         var index = this._freemix_type_index || {};
@@ -21,9 +29,22 @@
         }));
     };
 
+    Exhibit.Database._Impl.prototype.getFilteredProperties = function(filter) {
+        filter = filter || filtered_properties;
+        return $.map(this.getAllProperties(), function(key, index) {
+            if (filter.indexOf(key) != -1) {
+                return null;
+            }
+            return key;
+        });
+    };
+
     Exhibit.Database._Impl.prototype.getAllPropertyObjects = function() {
         var database = this;
         return $.map(database.getAllProperties(),function(key, index) {
+            if (filtered_properties.indexOf(key) != -1) {
+                return null;
+            }
             return database.getProperty(key);
         });
     };

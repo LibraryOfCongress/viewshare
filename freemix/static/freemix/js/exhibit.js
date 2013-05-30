@@ -46,9 +46,6 @@ var exhibit;
             }
             return database;
         },
-        getPropertyList: function() {
-            return Freemix.exhibit.database.getAllProperties();
-        },
         createExhibit: function(root) {
             exhibit = Exhibit.create(Freemix.exhibit.database);
             exhibit.configureFromDOM(root.get(0));

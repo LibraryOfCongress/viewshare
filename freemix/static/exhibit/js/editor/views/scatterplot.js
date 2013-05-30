@@ -32,8 +32,8 @@
         xaxis.change();
         yaxis.change();
 
-        this._setupLensPicker();
-
+        this._setupLensEditor();
+//        this._setupLensPicker();
         // model._setupTitlePropertyEditor();
         // var property_list = this.getContent().find("#property_list");
         // this._setupPropertyMultiSelect(property_list, "properties", true);
