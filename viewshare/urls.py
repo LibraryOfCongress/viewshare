@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import admin
 
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.views.generic import RedirectView, TemplateView
 
 from viewshare.utilities.views import UserHomeView
 from viewshare.utilities import feeds
@@ -77,16 +78,31 @@ except ImportError:
 
 urlpatterns += patterns('',
 
-    # CMS pages that are linked from templates
-    url(r'^tos/$', 'cms.views.details', kwargs={"slug": "tos"}, name="tos"),
-    url(r'^about/community/$', 'cms.views.details', kwargs={"slug": "community"}, name="community"),
-    url(r'^about/help/$', 'cms.views.details', kwargs={"slug": "help"}, name="help"),
-    url(r'^about/faq/$', 'cms.views.details', kwargs={"slug": "faq"}, name="faq"),
-    url(r'^about/userguide/$', 'cms.views.details', kwargs={"slug": "userguide"}, name="userguide"),
-    url(r'^augment/patterns/$', 'cms.views.details', kwargs={"slug": "augment-list-patterns"}, name="augment-list-patterns"),
+    # Help pages that are linked from templates
+    url(r'^about/tos$',
+        TemplateView.as_view(template_name="about/tos.html"),
+        name="tos"),
 
-    # CMS url definition should come after all others
-    (r'^', include('cms.urls')),
+    url(r'^about/community/$',
+        RedirectView.as_view(url="http://viewshare.uservoice.com"),
+        name="community"),
+
+    url(r'^about/help/$',
+        RedirectView.as_view(url="http://viewshare.uservoice.com"),
+        name="help"),
+
+    url(r'^about/faq/$',
+        RedirectView.as_view(url="http://viewshare.uservoice.com"),
+        name="faq"),
+
+    url(r'^about/userguide/$',
+        RedirectView.as_view(url="http://viewshare.uservoice.com"),
+        name="userguide"),
+
+    url(r'^augment/patterns/$',
+        RedirectView.as_view(url="http://viewshare.uservoice.com"),
+        name="augment-list-patterns"),
+
 )
 
 if settings.DEBUG:

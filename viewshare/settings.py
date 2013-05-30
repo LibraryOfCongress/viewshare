@@ -14,9 +14,6 @@ MEDIA_URL = '/media/'
 STATIC_ROOT = path.join(path.dirname(__file__), '..', "static")
 STATIC_URL = '/static/'
 
-CMS_MEDIA_ROOT = path.join(STATIC_ROOT, 'cms/')
-CMS_MEDIA_URL = path.join(STATIC_URL, 'cms/')
-
 FILE_UPLOAD_PATH = path.join(path.dirname(__file__), '..', "upload")
 
 COMPRESS_ROOT = STATIC_ROOT
@@ -75,10 +72,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'pagination.middleware.PaginationMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
-    #'reversion.middleware.RevisionMiddleware',
-    'cms.middleware.page.CurrentPageMiddleware',
-    'cms.middleware.user.CurrentUserMiddleware',
-    'cms.middleware.toolbar.ToolbarMiddleware',
 
     )
 
@@ -102,9 +95,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "viewshare.apps.vendor.announcements.context_processors.site_wide_announcements",
     "viewshare.apps.account.context_processors.account",
     "viewshare.apps.connections.context_processors.invitations",
-    "cms.context_processors.media",
-    'sekizai.context_processors.sekizai',
-
     )
 
 INSTALLED_APPS = (
@@ -127,18 +117,6 @@ INSTALLED_APPS = (
     'crispy_forms',
     'compressor',
     'south',
-
-    # CMS stuff
-    'cms',
-    'mptt',
-    'menus',
-    'sekizai',
-    'reversion',
-    'cms.plugins.text',
-    'cms.plugins.picture',
-    'cms.plugins.link',
-    'cms.plugins.file',
-    'cms.plugins.snippet',
 
     # Freemix specific
     'freemix',
@@ -210,12 +188,6 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
-    )
-
-# django-cms
-CMS_TEMPLATES = (
-    ('template.html', 'Front Page Template'),
-    ('about/template.html', 'About Page Template'),
     )
 
 CACHES = {

@@ -685,11 +685,3 @@ div.notices h2 {
     padding: 20px 0 0;
     text-align: center;
 }
-
-/* Django CMS */
-#cms_toolbar_logo,
-#cms_toolbar_logoutbutton {
-    display: none;
-}
-
-
