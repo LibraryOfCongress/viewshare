@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import admin
 
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from django.views.generic import RedirectView
+from django.views.generic import RedirectView, TemplateView
 
 from viewshare.utilities.views import UserHomeView
 from viewshare.utilities import feeds
@@ -80,7 +80,7 @@ urlpatterns += patterns('',
 
     # Help pages that are linked from templates
     url(r'^about/tos$',
-        RedirectView.as_view(url="http://viewshare.uservoice.com"),
+        TemplateView.as_view(template_name="about/tos.html"),
         name="tos"),
 
     url(r'^about/community/$',
