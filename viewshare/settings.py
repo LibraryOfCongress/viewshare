@@ -117,6 +117,7 @@ INSTALLED_APPS = (
     'crispy_forms',
     'compressor',
     'south',
+    'require',
 
     # Freemix specific
     'freemix',
@@ -189,6 +190,21 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
     )
+
+STATICFILES_STORAGE = 'require.storage.OptimizedStaticFilesStorage'
+
+REQUIRE_BASE_URL = STATIC_URL
+
+REQUIRE_JS = 'freemix/js/lib/require.js'
+
+REQUIRE_STANDALONE_MODULES = {
+        'freemix/js/editor': {
+            'out': 'editor-built.js'
+        }
+}
+
+REQUIRE_DEBUG = DEBUG
+
 
 CACHES = {
     'default': {

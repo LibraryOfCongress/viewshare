@@ -6,6 +6,7 @@
 {% load exhibit_tags %}
 {% load compress %}
 {% load freemix_helpers %}
+{% load require %}
 
 {% block freemix_title %}{% blocktrans %}Data Profile Editor{% endblocktrans %}{% endblock %}
 
@@ -27,6 +28,7 @@
     {% include "simile/js/exhibit.html" %}
 
     {% include "freemix/js_include/viewer.html" %}
+    {% require_module 'freemix/js/main-editor' %}
     {% compress js %}
     <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.form.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.jeditable.js"></script>
