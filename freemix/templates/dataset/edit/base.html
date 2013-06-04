@@ -20,6 +20,7 @@
 {{block.super}}
 <link rel="freemix/dataprofile" href="{{ profileurl }}"/>
 <link rel="exhibit/data" href="{{ dataurl }}"/>
+<link rel="exhibit/data" href="{{ save_url }}"/>
 
 {% endblock %}
 
@@ -109,18 +110,6 @@
 	    {% endifnotequal %}
 	    .
 	  </div>
-	  
-	  {% if request.user.is_authenticated %}
-	  
-	  <div class="dataset-actions dataset-right">
-	    
-	    <div class="dataset-links btn-group">
-	      <a class="btn btn-small action_save_dataset" href="{{ save_url }}" id="save_button">{% trans "Save" %}</a>
-	      <a class="btn btn-small action_cancel_dataset" href="{{ cancel_url }}" id="cancel_button">{% trans "Cancel" %}</a>
-	    </div>
-	  </div>
-	  {% endif %}
-	  
 	</li>
       </ul>
     </div>  

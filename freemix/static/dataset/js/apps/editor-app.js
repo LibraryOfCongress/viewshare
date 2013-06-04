@@ -5,15 +5,17 @@ define(['views/editor-view', 'jquery', 'models/record-collection'],
   var demo = function() {
     var profileURL = $("link[rel='freemix/dataprofile']").attr("href"),
     dataURL = $("link[rel='exhibit/data']").attr("href"),
+    saveURL = $("#save_button").attr("href"),
     records = new RecordCollection({
       profileURL: profileURL,
-      dataURL: dataURL
+      dataURL: dataURL,
+      saveURL: saveURL
     }),
     editor = new EditorView({
       model: records,
       $el: $('#editor')
     });
-    records.sync();
+    records.load();
   };
 
   return demo;

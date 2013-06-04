@@ -29,9 +29,10 @@ define([
       this.model = options.model;
       this.$el = options.$el;
       this.notificationView = new NotificationView({$el: undefined});
-      this.model.Observer('syncSuccess').subscribe(this.render.bind(this));
+      this.model.Observer('loadSuccess').subscribe(this.render.bind(this));
       this.model.Observer('changeCurrentRecord').subscribe(
-      this.changeCurrentRecordNumber.bind(this));
+        this.changeCurrentRecordNumber.bind(this)
+      );
       // bind 'this' to template variables
       this.currentRecordNumber.bind(this);
       this.totalRecords.bind(this);
@@ -42,7 +43,7 @@ define([
 
     /** Add this view to the DOM */
     render: function() {
-      var nextRecord, prevRecord;
+      var nextRecord, prevRecord, save;
       // display EditorView
       this.$el.html(this.template(this));
       // assign element to NotificationView for notification display
@@ -52,6 +53,8 @@ define([
       prevRecord.on('click', this.renderPreviousRecord.bind(this));
       nextRecord = this.$el.find('#next-record');
       nextRecord.on('click', this.renderNextRecord.bind(this));
+      save = this.$el.find('#save_button');
+      save.on('click', this.model.save.bind(this.model));
       this.renderChildrenViews.apply(this, arguments);
     },
 
