@@ -1,0 +1,16 @@
+<td class="name">
+  <input type="text" class="input-medium" value="{{ name }}">
+</td>
+<td class="types">
+  <select class="input-small">
+    <option value="text"{{#if selectedType.text}} selected{{/if}}>Text</option>
+    <option value="url"{{#if selectedType.url}} selected{{/if}}>URL</option>
+    <option value="image"{{#if selectedType.image}} selected{{/if}}>Image</option>
+    <option value="date"{{#if selectedType.date}} selected{{/if}}>Date/Time</option>
+    <option value="location"{{#if selectedType.location}} selected{{/if}}>Location</option>
+    <option value="number"{{#if selectedType.number}} selected{{/if}}>Number</option>
+  </select>
+</td>
+<td class="value">
+  {{ value }}
+</td>
