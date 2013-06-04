@@ -1,11 +1,13 @@
 /*global define */
-define(['views/editor-view', 'jquery', 'models/record-collection', 'urls'],
-       function (EditorView, $, RecordCollection, urls) {
+define(['views/editor-view', 'jquery', 'models/record-collection'],
+       function (EditorView, $, RecordCollection) {
   'use strict';
   var demo = function() {
-    var records = new RecordCollection({
-      profileURL: urls.profile,
-      dataURL: urls.data
+    var profileURL = $("link[rel='freemix/dataprofile']").attr("href"),
+    dataURL = $("link[rel='exhibit/data']").attr("href"),
+    records = new RecordCollection({
+      profileURL: profileURL,
+      dataURL: dataURL
     }),
     editor = new EditorView({
       model: records,

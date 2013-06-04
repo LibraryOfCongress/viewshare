@@ -1,12 +1,15 @@
 require.config({
   paths: {
+    apps: './dataset/js/apps',
+    bootstrap: './freemix/js/lib/bootstrap',
+    freemix: './freemix/js',
     handlebars: './freemix/js/lib/handlebars',
     jquery: './freemix/js/lib/jquery',
-    models: 'models/editor',
-    observer: './freemix/js/observer',
-    templates: './freemix/js/templates/editor',
+    models: './dataset/js/models/editor',
+    observer: './dataset/js/observer',
+    templates: './dataset/js/templates/editor',
     text: './freemix/js/lib/text',
-    views: './freemix/js/views/editor'
+    views: './dataset/js/views/editor'
   },
   shim: {
     handlebars: {
@@ -15,6 +18,7 @@ require.config({
   }
 });
 
-require([], function () {
-    'use strict';
-  });
+require(['apps/editor-app'], function (app) {
+  'use strict';
+  app();
+});
