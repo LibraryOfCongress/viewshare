@@ -25,8 +25,8 @@ define(['jquery', 'observer'], function ($, Observer) {
 
   $.extend(PropertyModel.prototype, PropertyModelObserver, {
     initialize: function(options) {
-      this.name = options.name;
-      this.type = options.type;
+      this._name = options.name;
+      this._type = options.type;
       this.value = options.value;
       this.sync.bind(this);
     },
@@ -38,6 +38,24 @@ define(['jquery', 'observer'], function ($, Observer) {
       // TODO: publish notification on success so that RecordCollection
       // can go through and update all the 'name' and 'type' values
       // for each Record with this Property
+    },
+
+    /** getter/setter method for name */
+    name: function(newName) {
+      if (newName) {
+        this._name = newName;
+      } else {
+        return this._name;
+      }
+    },
+
+    /** getter/setter method for type */
+    type: function(newType) {
+      if (newType) {
+        this._type = newType;
+      } else {
+        return this._type;
+      }
     }
   });
 

@@ -5,8 +5,10 @@ define(
     'jquery',
     'observer',
     'models/record',
+    'freemix.exhibit',
     'freemix.property',
-    'freemix.identify'
+    'freemix.identify',
+    'jquery.csrf'
   ],
   function (
     Freemix,
@@ -43,7 +45,7 @@ define(
      * for this.profileURL and this.dataURL succeeded
      */
     loadSuccess: function(profileJSON, dataJSON) {
-      var h, i, item, items, property, properties, record;
+      var data, h, i, item, items, property, properties, record, type;
       properties = profileJSON[0].properties;
       items = dataJSON[0].items;
       for (i = 0; i < items.length; ++i) {
@@ -51,9 +53,19 @@ define(
         item = items[i];
         for (h = 0; h < properties.length; ++h) {
           property = properties[h];
+          // decipher type
+          if (property.tags.length > 0) {
+            type = property.tags[0];
+            type = type.match(/property:type=(\w+)/);
+            type = type[1];
+          } else if (property.types.length > 0) {
+            type = property.types[0];
+          } else {
+            type = 'text';
+          }
           record.push({
             name: property.label,
-            type: property.types[0],
+            type: type,
             value: item[property.property]
           });
         }
@@ -61,7 +73,8 @@ define(
       }
       Freemix.profile = {"properties": properties};
       Freemix.property.initializeDataProfile();
-      Freemix.exhibit.initializeDatabase(profileJSON);
+      data = dataJSON[0];
+      Freemix.exhibit.initializeDatabase(data);
       this.Observer('loadSuccess').publish(this);
     },
 
@@ -91,13 +104,15 @@ define(
     save: function() {
       var metadata, xhr;
       metadata = $.extend({},  Freemix.exhibit.exportDatabase(Freemix.exhibit.database), Freemix.profile);
-      xhr = $.ajax({
-        type: "POST",
-        url: this.saveURL,
-        data: JSON.stringify(metadata),
-        success: this.saveSuccess.bind(this),
-        error: this.saveError.bind(this)
-      });
+      //TODO: seems like we're creating Freemix.exhibit.database incorrectly. exportDatabase returns an empty object.
+      console.log(metadata);
+//      xhr = $.ajax({
+//        type: "POST",
+//        url: this.saveURL,
+//        data: JSON.stringify(metadata),
+//        success: this.saveSuccess.bind(this),
+//        error: this.saveError.bind(this)
+//      });
     },
 
     /**

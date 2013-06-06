@@ -26,6 +26,16 @@ define(['handlebars', 'jquery', 'text!templates/property.html'],
     /** Compile the template we will use to render the View */
     template: Handlebars.compile(propertyTemplate),
 
+    /** Event handler when a .name input is changed */
+    changeNameHandler: function(event) {
+      this.model.name(event.target.value);
+    },
+
+    /** Event handler when a .types input is changed */
+    changeTypeHandler: function(event) {
+      this.model.type($(event.target).find(':selected').val());
+    },
+
     /** Add this view to the DOM */
     render: function() {
       this.$el.html(this.template(
@@ -33,14 +43,19 @@ define(['handlebars', 'jquery', 'text!templates/property.html'],
           selectedType: this.selectedType()
         })
       ));
+      // bind to DOM events
+      this.$el.find('.name input').on(
+        'change', this.changeNameHandler.bind(this));
+      this.$el.find('.types select').on(
+        'change', this.changeTypeHandler.bind(this));
       return this;
     },
 
     /** Shortcut to PropertyModel.name for easy templating */
-    name: function() { return this.model.name; },
+    name: function() { return this.model.name(); },
 
     /** Shortcut to PropertyModel.type for easy templating */
-    type: function() { return this.model.type; },
+    type: function() { return this.model.type(); },
 
     /** Shortcut to PropertyModel.value for easy templating */
     value: function() { return this.model.value; },

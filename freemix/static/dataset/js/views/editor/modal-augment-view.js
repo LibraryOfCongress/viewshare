@@ -27,8 +27,8 @@ define(['handlebars',
         properties: options.model.properties.sort(
           function (a, b) {
           var
-            a_name = a && a.name || '',
-            b_name = b && b.name || '';
+            a_name = a && a.name() || '',
+            b_name = b && b.name() || '';
             return a_name.localeCompare(b_name);
           }),
         propertyCount: options.model.properties.length
