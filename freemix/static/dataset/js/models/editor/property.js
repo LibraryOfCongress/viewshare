@@ -1,11 +1,25 @@
 /*global define */
-define(['jquery', 'observer'], function ($, Observer) {
+define(
+  [
+    'freemix',
+    'jquery',
+    'observer',
+    'freemix.exhibit',
+    'freemix.property',
+    'freemix.identify',
+  ],
+  function (
+    Freemix,
+    $,
+    Observer
+  ) {
   'use strict';
 
   /**
    * Represents the name, type, and value of a single attribute of a
    * single item in a DataSource
    * @constructor
+   * @param {string} options.id - ID of the property as identified by Freemix
    * @param {string} options.name - Name of the property
    * @param {string} options.type - Type of the property.
    * Current types include:
@@ -21,13 +35,15 @@ define(['jquery', 'observer'], function ($, Observer) {
     PropertyModel = function(options) {
       this.initialize.apply(this, [options]);
     },
-    PropertyModelObserver = Observer();
+    PropertyModelObserver = new Observer();
 
   $.extend(PropertyModel.prototype, PropertyModelObserver, {
     initialize: function(options) {
+      this.id = options.id;
       this._name = options.name;
       this._type = options.type;
       this.value = options.value;
+      this.freemixProperty = Freemix.property.propertyList[this.id];
       this.sync.bind(this);
     },
 
@@ -44,6 +60,7 @@ define(['jquery', 'observer'], function ($, Observer) {
     name: function(newName) {
       if (newName) {
         this._name = newName;
+        this.freemixProperty.label(this._name);
       } else {
         return this._name;
       }
@@ -53,6 +70,7 @@ define(['jquery', 'observer'], function ($, Observer) {
     type: function(newType) {
       if (newType) {
         this._type = newType;
+        this.freemixProperty.type(this._type);
       } else {
         return this._type;
       }

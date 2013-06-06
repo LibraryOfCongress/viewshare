@@ -27,7 +27,7 @@ define(
     RecordCollection = function(options) {
       this.initialize.apply(this, [options]);
     },
-    RecordCollectionObserver = Observer();
+    RecordCollectionObserver = new Observer();
 
   $.extend(RecordCollection.prototype, RecordCollectionObserver, {
     initialize: function(options) {
@@ -47,6 +47,12 @@ define(
     loadSuccess: function(profileJSON, dataJSON) {
       var data, h, i, item, items, property, properties, record, type;
       properties = profileJSON[0].properties;
+      // initialize Freemix
+      data = dataJSON[0];
+      Freemix.profile = {"properties": properties};
+      Freemix.property.initializeDataProfile();
+      Freemix.exhibit.initializeDatabase(data);
+      // create editor models
       items = dataJSON[0].items;
       for (i = 0; i < items.length; ++i) {
         record = [];
@@ -64,6 +70,7 @@ define(
             type = 'text';
           }
           record.push({
+            id: property.property,
             name: property.label,
             type: type,
             value: item[property.property]
@@ -71,10 +78,6 @@ define(
         }
         this.records.push(new RecordModel({properties: record}));
       }
-      Freemix.profile = {"properties": properties};
-      Freemix.property.initializeDataProfile();
-      data = dataJSON[0];
-      Freemix.exhibit.initializeDatabase(data);
       this.Observer('loadSuccess').publish(this);
     },
 
@@ -102,17 +105,17 @@ define(
 
     /** Save JSON data to create and modify a RecordCollection on the server */
     save: function() {
-      var metadata, xhr;
-      metadata = $.extend({},  Freemix.exhibit.exportDatabase(Freemix.exhibit.database), Freemix.profile);
-      //TODO: seems like we're creating Freemix.exhibit.database incorrectly. exportDatabase returns an empty object.
-      console.log(metadata);
-//      xhr = $.ajax({
-//        type: "POST",
-//        url: this.saveURL,
-//        data: JSON.stringify(metadata),
-//        success: this.saveSuccess.bind(this),
-//        error: this.saveError.bind(this)
-//      });
+      var freemixDatabase, metadata, xhr;
+      freemixDatabase = Freemix.exhibit.exportDatabase(
+        Freemix.exhibit.database);
+      metadata = $.extend({}, freemixDatabase, Freemix.profile);
+      xhr = $.ajax({
+        type: "POST",
+        url: this.saveURL,
+        data: JSON.stringify(metadata),
+        success: this.saveSuccess.bind(this),
+        error: this.saveError.bind(this)
+      });
     },
 
     /**

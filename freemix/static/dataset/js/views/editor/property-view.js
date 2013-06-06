@@ -69,7 +69,7 @@ define(['handlebars', 'jquery', 'text!templates/property.html'],
         image: false,
         date: false,
         location: false,
-        number: false}
+        number: false};
       selected[this.type()] = true;
       return selected;
     }

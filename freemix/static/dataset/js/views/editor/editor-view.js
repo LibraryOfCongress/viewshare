@@ -59,7 +59,7 @@ define([
     },
 
     renderChildrenViews: function() {
-      var recordView
+      var recordView;
       // display RecordView
       recordView = new RecordView({
         model: this.model.currentRecord(),
