@@ -687,3 +687,18 @@ div.notices h2 {
 }
 
 /* builder */
+
+/* dataset editor */
+
+#property-list-table .value img {
+    max-height: 100px;
+    max-width: 100px
+}
+
+#augment-properties td.selected {
+    width: 20%;
+}
+
+#augment-properties td.name {
+    width: 80%;
+}
