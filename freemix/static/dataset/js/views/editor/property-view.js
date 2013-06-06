@@ -26,6 +26,15 @@ define(['handlebars', 'jquery', 'text!templates/property.html'],
     /** Compile the template we will use to render the View */
     template: Handlebars.compile(propertyTemplate),
 
+    /** Compile the template we will use to render 'url' values */
+    anchorTemplate: Handlebars.compile('<a href="{{ value }}">{{ value }}</a>'),
+
+    /** Compile the template we will use to render 'image' values */
+    imageTemplate: Handlebars.compile('<img src="{{ value }}" />'),
+
+    /** Compile the template we will use as a default to render  values */
+    textTemplate: Handlebars.compile('{{ value }}'),
+
     /** Event handler when a .name input is changed */
     changeNameHandler: function(event) {
       this.model.name(event.target.value);
@@ -33,7 +42,18 @@ define(['handlebars', 'jquery', 'text!templates/property.html'],
 
     /** Event handler when a .types input is changed */
     changeTypeHandler: function(event) {
-      this.model.type($(event.target).find(':selected').val());
+      var newType = $(event.target).find(':selected').val(),
+      valueEl = this.$el.find('.value'),
+      valueTemplate;
+      this.model.type(newType);
+      // change rendering for this.model.value on certain types
+      if (newType === 'image') {
+        valueEl.html(this.imageTemplate({value: this.model.value}));
+      } else if ( newType === 'url') {
+        valueEl.html(this.anchorTemplate({value: this.model.value}));
+      } else {
+        valueEl.html(this.textTemplate({value: this.model.value}));
+      }
     },
 
     /** Add this view to the DOM */
