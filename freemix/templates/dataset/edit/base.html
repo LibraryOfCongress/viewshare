@@ -1,78 +1,39 @@
 {% extends "dataset/base.html" %}
+
+
 {% load url from future %}
-
-
 {% load i18n %}
 {% load exhibit_tags %}
 {% load compress %}
 {% load freemix_helpers %}
 {% load require %}
 
-{% block freemix_title %}{% blocktrans %}Data Profile Editor{% endblocktrans %}{% endblock %}
+
+{% block freemix_title %}
+{% blocktrans %}Data Profile Editor{% endblocktrans %}
+{% endblock %}
+
 
 {% block rtab_id %}id="builder_tab"{% endblock %}
 {% block body_class %}dataprofile{% endblock %}
 
-{% block subnav %}
-{% endblock %}
 
 {% block freemix_meta %}
 {{block.super}}
 <link rel="freemix/dataprofile" href="{{ profileurl }}"/>
 <link rel="exhibit/data" href="{{ dataurl }}"/>
 <link rel="exhibit/data" href="{{ save_url }}"/>
+{% endblock freemix_meta %}
 
-{% endblock %}
 
 {% block freemix_js %}
-    {{block.super}}
-    {% include "simile/js/exhibit.html" %}
-
-    {% include "freemix/js_include/viewer.html" %}
-    {% require_module 'editor-main' %}
-    {% compress js %}
-    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.form.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.jeditable.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.dataTables.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.uuid.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.cookie.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/freemix.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/lightbox.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/exhibit.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/patch_exhibit.js"></script>
-
-    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/property.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/identify.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/identify-edit.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/new_exhibit_dialog.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}dataset/js/transaction.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}dataset/js/editor.js"></script>
-
-    {% endcompress %}
+  {{block.super}}
+  {% include "simile/js/exhibit.html" %}
+  {% require_module 'editor-main' %}
 {% endblock freemix_js%}
 
-    
-{% block freemix_css %}
-{{ block.super }}
-{% compress css %}
-
-{% include "simile/css/exhibit.html" %}
-{% include "simile/css/exhibit_extensions.html" %}
-
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/layout.css"/>
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/views.css"/>
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/editor.css"/>
-{% endcompress %}
-{% endblock %}
 
 {% block freemix_body %}
-  
-  <div id="loading-transaction" style="display: none">
-    <img src="{{ STATIC_URL }}images/loaderbar.gif" alt="Loading" />
-    {% blocktrans %}
-    Processing your data...
-    {% endblocktrans %}
-  </div>
 
 <div id="contents" class="ui-helper-hidden">
 {% block contents %}
@@ -132,94 +93,18 @@
 
     {% block describe %}
     <div id="editor">
-    {% block editor %} 
-
-    <div id="systemMsg">
-      <ul id="describe_messages" class="messages edit-message">
-        {% block describe_messages %}
-	{% endblock describe_messages %}
-      </ul>
+      <div id="loading-transaction" style="display: none">
+        <img src="{{ STATIC_URL }}images/loaderbar.gif" alt="Loading" />
+        {% blocktrans %}
+        Processing your data...
+        {% endblocktrans %}
+      </div>
     </div>
-
-    <table id="identify-table" class="table table-striped property-list-table">
-
-      <thead class="facet-header ui-widget-header">
-        <tr>
-          <th class="header-enabled">
-              <span class="col-header">{% trans "Enabled" %}</span>
-          </th>
-          <th class="header-name">
-            <span class="col-header">{% trans "Field Name" %}</span>
-              <button class="btn btn-small btn-primary data-property-add pull-right" title="Add a Field"><i class="icon-plus"></i>{% trans "Add" %}</button>
-          </th>
-          <th class="header-types">
-              <span class="col-header">{% trans "Type"%}</span>
-          </th>
-          <th class="header-value" colspan="2">
-             <span class="col-header">{% trans "Value" %}</span>
-
-             <div class="record-pager">
-	       <span id="current-record">#p</span> of <span id="record-count">#t</span>&#160;
-
-               <span class="btn-group">
-                 <button class="btn btn-small left-record-button" title="Previous Record"><i class="icon-arrow-left"></i></button>
-                 <button class="btn btn-small right-record-button" title="Next Record"><i class="icon-arrow-right"></i></button>
-               </span>
-
-               <button class="btn btn-small btn-warning data-record-delete" title="Delete this Record"><i class="icon-remove-sign"></i>{% trans "Delete Record" %}</button>
-
-               <button class="btn btn-small btn-info data-refresh" title="Augment Data"><i class="icon-refresh"></i>{% trans "Augment" %}</button>
-             </div>
-          </th> 
-        </tr>
-      </thead>
-
-      <tbody>
-        
-        <tr class='table-footer'>
-            <td colspan="5">
-            <div class="record-controls ui-helper-clearfix ui-widget-header ui-corner-bottom">            
-            </div>
-          </td>
-        </tr>
-
-      </tbody>
-
-    </table>
-
-    </div>
-        &nbsp;
-
-    {% endblock editor %}
     {% endblock describe %}
     <div class="clear">&nbsp;</div>
-  </div>
+  </div><!-- /.dataset_edit -->
 
   {% endblock contents %}
-</div>
-
-
-<div class="ui-helper-hidden">
-  {% block dataset_edit_hidden %}
-
-  <div id="delete-record-dialog" title="{% trans "Delete This Record" %}">
-      <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
-      {% blocktrans %}
-      You will not be able to recover this record after saving this dataset.
-      Really delete it?
-      {% endblocktrans %}
-  </div>
-
-  <div id="delete-property-dialog" title="Delete Property">
-      <p>
-          <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
-          {% blocktrans %}
-          This property will be permanently deleted and cannot be recovered. Are you sure?
-          {% endblocktrans %}
-      </p>
-  </div>
-
-  {% endblock dataset_edit_hidden %}
-</div>
+</div><!-- /#identify -->
+</div><!-- /#contents -->
 {% endblock %}
-
