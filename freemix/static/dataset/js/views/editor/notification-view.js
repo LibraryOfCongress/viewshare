@@ -27,10 +27,24 @@ define(['handlebars', 'jquery', 'text!templates/notification.html'],
     /** Create a visual notification on a specified observable's event
      * @param {object} observable - Object that extends observer.js
      * @param {string} eventName - Name of the event NotificationView will handle
+     * @return {func} notificationFunc - The function to be fired
+     * on 'eventName'. This is used for removeSubscription.
      */
     addSubscription: function(observable, eventName, notificationLevel, message, lead) {
-      observable.Observer(eventName).subscribe(
-        this.addNotification.bind(this, notificationLevel, message, lead));
+      var notificationFunc = this.addNotification.bind(
+        this, notificationLevel, message, lead);
+      observable.Observer(eventName).subscribe(notificationFunc);
+      return notificationFunc;
+    },
+
+    /** Remove a notification subscription
+     * @param {object} observable - Object that extends observer.js
+     * @param {string} eventName - Name of the event NotificationView will handle
+     * @param {func} notificationFunc - Function that was returned
+     * from addSubscription
+     */
+    removeSubscription: function(observable, eventName, notificationFunc) {
+      observable.Observer(eventName).unsubscribe(notificationFunc);
     },
 
     /**
@@ -54,6 +68,14 @@ define(['handlebars', 'jquery', 'text!templates/notification.html'],
         lead: lead
       });
       this.$el.prepend(notification);
+    },
+
+    /** Remove event bindings, child views, and DOM elements.
+     * Views that call 'addSubscription' are responsible for
+     * calling 'removeSubscription'.
+     */
+    destroy: function() {
+      this.$el.empty();
     }
   });
 

@@ -80,8 +80,8 @@ define(['handlebars', 'jquery', 'text!templates/property.html'],
     /** Shortcut to PropertyModel.value for easy templating */
     value: function() { return this.model.value; },
     
-    /** Our logic-less templates use this to mark a
-     * 'type' <option> as selcted */
+    /** Our logic-less templates use this to mark
+     * a 'type' <option> as selcted */
     selectedType: function() {
       var selected = {
         text: false,
@@ -92,6 +92,15 @@ define(['handlebars', 'jquery', 'text!templates/property.html'],
         number: false};
       selected[this.type()] = true;
       return selected;
+    },
+
+    /** Remove event bindings, child views, and DOM elements */
+    destroy: function() {
+      var inputs = this.$el.find('.name input'),
+      types = this.$el.find('.types select');
+      inputs.off('change');
+      types.off('change');
+      this.$el.empty();
     }
   });
 

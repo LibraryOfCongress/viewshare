@@ -31,7 +31,12 @@ define(['handlebars', 'jquery', 'text!templates/modal.html', 'bootstrap'],
     template: Handlebars.compile(modalTemplate),
 
     /** Add view to the DOM */
-    render: function() { $('body').append(this.$el); }
+    render: function() { $('body').append(this.$el); },
+
+    /** Remove event bindings, child views, and DOM elements */
+    destroy: function() {
+      this.$el.empty();
+    }
   });
 
   return ModalView;

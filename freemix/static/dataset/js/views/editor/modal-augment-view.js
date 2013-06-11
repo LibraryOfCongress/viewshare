@@ -56,6 +56,11 @@ define(['handlebars',
       console.log(event);
       this.newProperty.sync();
       this.$el.modal('hide');
+    },
+
+    /** Remove event bindings, child views, and DOM elements */
+    destroy: function() {
+      this.$el.empty();
     }
   });
 

@@ -28,14 +28,19 @@ define([
     initialize: function(options) {
       this.model = options.model;
       this.$el = options.$el;
+      this.notificationFunc = undefined;
+      // child views
       this.notificationView = new NotificationView({$el: undefined});
-      this.model.Observer('loadSuccess').subscribe(this.render.bind(this));
-      this.model.Observer('changeCurrentRecord').subscribe(
-        this.changeCurrentRecordNumber.bind(this)
-      );
-      // bind 'this' to template variables
+      this.recordView = {destroy: $.noop}
+      // bind 'this' to template variables and event handlers
       this.currentRecordNumber.bind(this);
       this.totalRecords.bind(this);
+      this.render = this.render.bind(this)
+      this.changeCurrentRecordNumber = this.changeCurrentRecordNumber.bind(this)
+      // events
+      this.model.Observer('loadSuccess').subscribe(this.render);
+      this.model.Observer('changeCurrentRecord').subscribe(
+        this.changeCurrentRecordNumber);
     },
 
     /** Compile the template we will use to render the View */
@@ -60,15 +65,14 @@ define([
     },
 
     renderChildrenViews: function() {
-      var recordView;
       // display RecordView
-      recordView = new RecordView({
+      this.recordView = new RecordView({
         model: this.model.currentRecord(),
         $el: this.$el.find('#records')});
-      recordView.render.apply(recordView);
+      this.recordView.render.apply(this.recordView);
       // display notifications on record actions
-      this.notificationView.addSubscription(
-        recordView.augmentModal.newProperty,
+      this.notificationFunc = this.notificationView.addSubscription(
+        this.recordView.augmentModal.newProperty,
         'syncSuccess',
         'success',
         'New data has been created which you can use in your views.',
@@ -98,6 +102,30 @@ define([
       this.model.changeCurrentRecord(1);
       this.renderChildrenViews();
       return false;
+    },
+
+    /** Remove event bindings, child views, and DOM elements */
+    destroy: function() {
+      var prevRecord = this.$el.find('#prev-record'),
+      nextRecord = this.$el.find('#next-record'),
+      save = this.$el.find('#save_button');
+      // remove DOM events
+      prevRecord.off('click');
+      nextRecord.off('click');
+      save.off('click');
+      this.notificationView.removeSubscription(
+        this.recordView.augmentModal.newProperty,
+        'syncSuccess',
+        this.notificationFunc);
+      // remove model events
+      this.model.Observer('loadSuccess').unsubscribe(this.render);
+      this.model.Observer('changeCurrentRecord').unsubscribe(
+        this.changeCurrentRecordNumber);
+      // remove child views
+      this.recordView.destroy();
+      this.notificationView.destroy();
+      // clear DOM
+      this.$el.empty();
     }
   });
   return EditorView;

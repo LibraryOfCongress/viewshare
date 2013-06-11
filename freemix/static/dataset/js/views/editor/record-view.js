@@ -17,6 +17,7 @@ define(['handlebars', 'jquery', 'views/modal-augment-view', 'text!templates/reco
       this.model = options.model;
       this.$el = options.$el;
       this.augmentModal = new ModalAugmentView({model: this.model});
+      this.propertyViews = []
     },
 
     template: Handlebars.compile(recordTemplate),
@@ -37,9 +38,21 @@ define(['handlebars', 'jquery', 'views/modal-augment-view', 'text!templates/reco
           $el: propertyElement,
           model: this.model.properties[i]
         });
+        this.propertyViews.push(propertyView);
         propertyView.render();
       }
       return this;
+    },
+
+    /** Remove event bindings, child views, and DOM elements */
+    destroy: function() {
+      var i;
+      for (i = 0; i < this.propertyViews.length; ++i) {
+        this.propertyViews[i].destroy();
+      }
+      this.augmentModal.destroy();
+
+      this.$el.empty();
     }
   });
 
