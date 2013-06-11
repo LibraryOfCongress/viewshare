@@ -35,7 +35,7 @@ define(['handlebars', 'jquery', 'text!templates/modal.html', 'bootstrap'],
 
     /** Remove event bindings, child views, and DOM elements */
     destroy: function() {
-      this.$el.empty();
+      this.$el.remove();
     }
   });
 

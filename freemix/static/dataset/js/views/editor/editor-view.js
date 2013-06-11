@@ -111,7 +111,6 @@ define([
       var prevRecord = this.$el.find('#prev-record'),
       nextRecord = this.$el.find('#next-record'),
       save = this.$el.find('#save_button');
-      // split into destroyChildren
       // remove DOM events
       prevRecord.off('click');
       nextRecord.off('click');

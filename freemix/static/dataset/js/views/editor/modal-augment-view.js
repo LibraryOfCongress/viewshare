@@ -60,7 +60,7 @@ define(['handlebars',
 
     /** Remove event bindings, child views, and DOM elements */
     destroy: function() {
-      this.$el.empty();
+      this.$el.remove();
     }
   });
 
