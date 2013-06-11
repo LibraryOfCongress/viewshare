@@ -92,6 +92,7 @@ define([
 
     /** Event handler to display the previous record */
     renderPreviousRecord: function(event) {
+      this.destroyChildren();
       this.model.changeCurrentRecord(-1);
       this.renderChildrenViews();
       return false;
@@ -99,6 +100,7 @@ define([
 
     /** Event handler to display the previous record */
     renderNextRecord: function(event) {
+      this.destroyChildren();
       this.model.changeCurrentRecord(1);
       this.renderChildrenViews();
       return false;
@@ -109,23 +111,31 @@ define([
       var prevRecord = this.$el.find('#prev-record'),
       nextRecord = this.$el.find('#next-record'),
       save = this.$el.find('#save_button');
+      // split into destroyChildren
       // remove DOM events
       prevRecord.off('click');
       nextRecord.off('click');
       save.off('click');
-      this.notificationView.removeSubscription(
-        this.recordView.augmentModal.newProperty,
-        'syncSuccess',
-        this.notificationFunc);
       // remove model events
       this.model.Observer('loadSuccess').unsubscribe(this.render);
       this.model.Observer('changeCurrentRecord').unsubscribe(
         this.changeCurrentRecordNumber);
       // remove child views
-      this.recordView.destroy();
       this.notificationView.destroy();
+      this.destroyChildren();
       // clear DOM
       this.$el.empty();
+    },
+
+    /** Remove event bindings, child views, and DOM elements created
+     * in 'renderChildren'
+     */
+    destroyChildren: function() {
+      this.notificationView.removeSubscription(
+        this.recordView.augmentModal.newProperty,
+        'syncSuccess',
+        this.notificationFunc);
+      this.recordView.destroy();
     }
   });
   return EditorView;
