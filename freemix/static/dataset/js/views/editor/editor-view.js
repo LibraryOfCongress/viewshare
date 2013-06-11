@@ -56,6 +56,7 @@ define([
       save = this.$el.find('#save_button');
       save.on('click', this.model.save.bind(this.model));
       this.renderChildrenViews.apply(this, arguments);
+      return this;
     },
 
     renderChildrenViews: function() {
@@ -99,8 +100,5 @@ define([
       return false;
     }
   });
-
-
-
   return EditorView;
 });

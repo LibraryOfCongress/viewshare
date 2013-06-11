@@ -27,28 +27,22 @@
 
 
 {% block freemix_js %}
-  {{block.super}}
-  {% include "simile/js/exhibit.html" %}
-  {% require_module 'editor-main' %}
+{{block.super}}
+{% include "simile/js/exhibit.html" %}
+{% require_module 'editor-main' %}
 {% endblock freemix_js%}
 
 
 {% block freemix_body %}
-
 <div id="contents" class="ui-helper-hidden">
 {% block contents %}
-
-<div id="identify" class="ui-helper-clearfix ui-helper-hidden builder-tab">
-  
-  {%  if dataset %}
-  
+  <div id="identify" class="ui-helper-clearfix ui-helper-hidden builder-tab">
     <div class="dataset_edit">
       <ul class="dataset_list_items">
-	<li class="dataset_list_item result_set_item clearfix {% if dataset.published %}public{% else %}private{% endif %}">
-	  
-	  <div class="dataset-title">{{ dataset.title }}</div>
-
-	  <div class="dataset-description">
+        {%  if dataset %}
+        <li class="dataset_list_item result_set_item clearfix {% if dataset.published %}public{% else %}private{% endif %}">
+          <div class="dataset-title">{{ dataset.title }}</div>
+          <div class="dataset-description">
             {% if dataset.description %}
             {% ifnotequal dataset.description dataset.description|truncatewords:100 %}
             <span class="short-description">
@@ -61,50 +55,41 @@
             {%  else %}
             {{ dataset.description }}
             {% endifnotequal %}
-	    {% endif %}
-	  </div>
-
-	  <div class="dataset-metadata dataset-left">
-	    {% trans "Originally loaded by" %} <span class="dataset-owner"><a href="{% url 'profile_detail' dataset.owner.username %}">{{ dataset.owner|nicename }}</a></span> {% trans "on" %} <span class="dataset-created-data">{{ dataset.created|date:"N j, Y" }}</span>
-	    {% ifnotequal exhibits.count 0 %}
-	    {% trans "and is the basis for" %} <span class="view-count"><a href="{% url 'exhibits_by_dataset' owner=dataset.owner.username slug=dataset.slug %}">{{ exhibits.count }} {% trans "View" %}{{ exhibits.count|pluralize }}</a></span>
-	    {% endifnotequal %}
-	    .
-	  </div>
-	</li>
-      </ul>
-    </div>  
-    {% else %}
-    <div class="dataset_edit">
-      <ul class="dataset_list_items">
-	<li class="dataset_list_item result_set_item clearfix public">
-
-	  <div class="dataset-title">New {{ SITE_NAME }} Dataset</div>
-
-	  <div class="dataset-right">
-	    <div class="dataset-links btn-group">
-	      <a class="btn btn-small action_save_exhibit" href="{{ save_url }}" id="save_button">{% trans "Save" %}</a>
-	      <a class="btn btn-small action_cancel_exhibit" href="{{ cancel_url }}" id="cancel_button">{% trans "Cancel" %}</a>
-	    </div>
-	</li>
-      </ul>
-      </div>
-      {% endif %}
-
-    {% block describe %}
-    <div id="editor">
-      <div id="loading-transaction" style="display: none">
-        <img src="{{ STATIC_URL }}images/loaderbar.gif" alt="Loading" />
-        {% blocktrans %}
-        Processing your data...
-        {% endblocktrans %}
-      </div>
-    </div>
-    {% endblock describe %}
-    <div class="clear">&nbsp;</div>
-  </div><!-- /.dataset_edit -->
-
-  {% endblock contents %}
-</div><!-- /#identify -->
+            {% endif %}
+          </div>
+          <div class="dataset-metadata dataset-left">
+            {% trans "Originally loaded by" %} <span class="dataset-owner"><a href="{% url 'profile_detail' dataset.owner.username %}">{{ dataset.owner|nicename }}</a></span> {% trans "on" %} <span class="dataset-created-data">{{ dataset.created|date:"N j, Y" }}</span>
+            {% ifnotequal exhibits.count 0 %}
+            {% trans "and is the basis for" %} <span class="view-count"><a href="{% url 'exhibits_by_dataset' owner=dataset.owner.username slug=dataset.slug %}">{{ exhibits.count }} {% trans "View" %}{{ exhibits.count|pluralize }}</a></span>
+            {% endifnotequal %}
+            .
+          </div>
+        </li>
+        {% else %}
+        <li class="dataset_list_item result_set_item clearfix public">
+          <div class="dataset-title">New {{ SITE_NAME }} Dataset</div>
+          <div class="dataset-right">
+            <div class="dataset-links btn-group">
+              <a class="btn btn-small action_save_exhibit" href="{{ save_url }}" id="save_button">{% trans "Save" %}</a>
+              <a class="btn btn-small action_cancel_exhibit" href="{{ cancel_url }}" id="cancel_button">{% trans "Cancel" %}</a>
+            </div>
+          </li>
+          {% endif %}
+          <li class="dataset_list_item result_set_item clearfix public">
+            <div id="editor">
+              <div id="loading-transaction">
+                <img src="{{ STATIC_URL }}images/loaderbar.gif" alt="Loading" />
+                {% blocktrans %}
+                Processing your data...
+                {% endblocktrans %}
+              </div>
+            </div>
+          </li>
+        </ul><!-- /.dataset_list_items -->
+      </div><!-- /.dataset-right -->
+      <div class="clear">&nbsp;</div>
+    </div><!-- /.dataset_edit --> 
+  </div><!-- /#identify -->
+{% endblock contents %}
 </div><!-- /#contents -->
-{% endblock %}
+{% endblock freemix_body %}
