@@ -46,7 +46,16 @@ define(
      * for this.profileURL and this.dataURL succeeded
      */
     loadSuccess: function(profileJSON, dataJSON) {
-      var data, h, i, item, items, property, properties, record, type;
+      var data, h, i, item, items, property, properties, record, type,
+      ignored_properties = [
+        'id',
+        'label',
+        'modified',
+        'uri',
+        'type',
+        'change',
+        'changedItem',
+      ];
       properties = profileJSON[0].properties;
       // initialize Freemix
       data = dataJSON[0];
@@ -60,22 +69,25 @@ define(
         item = items[i];
         for (h = 0; h < properties.length; ++h) {
           property = properties[h];
-          // decipher type
-          if (property.tags.length > 0) {
-            type = property.tags[0];
-            type = type.match(/property:type=(\w+)/);
-            type = type[1];
-          } else if (property.types.length > 0) {
-            type = property.types[0];
-          } else {
-            type = 'text';
-          }
-          record.push({
-            id: property.property,
-            name: property.label,
-            type: type,
-            value: item[property.property]
-          });
+          if (ignored_properties.indexOf(property.property) === -1) {
+            // this property is not one of our ignored_properties
+            // decipher type
+            if (property.tags.length > 0) {
+              type = property.tags[0];
+              type = type.match(/property:type=(\w+)/);
+              type = type[1];
+            } else if (property.types.length > 0) {
+              type = property.types[0];
+            } else {
+              type = 'text';
+            }
+            record.push({
+              id: property.property,
+              name: property.label,
+              type: type,
+              value: item[property.property]
+            });
+          } 
         }
         this.records.push(new RecordModel({properties: record}));
       }
