@@ -85,7 +85,8 @@ define(
               id: property.property,
               name: property.label,
               type: type,
-              value: item[property.property]
+              value: item[property.property],
+              composite: property.composite
             });
           } 
         }

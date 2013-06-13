@@ -1,6 +1,23 @@
 /*global define */
-define(['handlebars', 'jquery', 'views/modal-augment-view', 'text!templates/record.html', 'views/property-view'],
-       function (Handlebars, $, ModalAugmentView, recordTemplate, PropertyView) {
+define(
+  [
+    'handlebars',
+    'jquery',
+    'models/composite-property',
+    'text!templates/record.html',
+    'views/composite-property-view',
+    'views/modal-augment-view',
+    'views/property-view'
+  ],
+  function (
+    Handlebars,
+    $,
+    CompositePropertyModel,
+    recordTemplate,
+    CompositePropertyView,
+    ModalAugmentView,
+    PropertyView
+  ) {
   'use strict';
   /**
    * View of properties in a single record
@@ -24,7 +41,7 @@ define(['handlebars', 'jquery', 'views/modal-augment-view', 'text!templates/reco
 
     /** Add this view to the DOM */
     render: function() {
-      var i, propertiesElement, propertyElement, propertyView;
+      var i, propertiesElement, propertyElement, propertyModel, propertyView;
       this.$el.html(this.template());
       this.$el.find('#add-property').on('click', (function() {
         this.augmentModal.$el.modal('show');
@@ -32,12 +49,20 @@ define(['handlebars', 'jquery', 'views/modal-augment-view', 'text!templates/reco
       this.augmentModal.render();
       propertiesElement = this.$el.find('#properties');
       for (i = 0; i < this.model.properties.length; ++i) {
+        propertyModel = this.model.properties[i];
         propertyElement = $('<tr>');
         propertiesElement.append(propertyElement);
-        propertyView = new PropertyView({
-          $el: propertyElement,
-          model: this.model.properties[i]
-        });
+        if (propertyModel instanceof CompositePropertyModel) {
+          propertyView = new CompositePropertyView({
+            $el: propertyElement,
+            model: propertyModel
+          });
+        } else {
+          propertyView = new PropertyView({
+            $el: propertyElement,
+            model: propertyModel
+          });
+        }
         this.propertyViews.push(propertyView);
         propertyView.render();
       }

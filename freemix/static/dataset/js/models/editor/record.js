@@ -1,10 +1,19 @@
 /*global define */
-define(['jquery', 'models/property'], function ($, PropertyModel) {
+define(
+  [
+   'jquery',
+   'models/composite-property',
+   'models/property'
+  ],
+  function (
+    $,
+    CompositePropertyModel,
+    PropertyModel)
+  {
   'use strict';
 
   /**
-   * Represents the collection of properties of a
-   * single item in a DataSource
+   * Represents the collection of properties of a single item in a DataSource
    * @constructor
    * @param {string} options.properties - Array of {name, type, value} objects
    */
@@ -18,7 +27,11 @@ define(['jquery', 'models/property'], function ($, PropertyModel) {
       this.properties = [];
       for(i = 0; i < options.properties.length; i++) {
         property = options.properties[i];
-        this.properties.push(new PropertyModel(property));
+        if (property.composite != null) {
+          this.properties.push(new CompositePropertyModel(property));
+        } else {
+          this.properties.push(new PropertyModel(property));
+        }
       }
     }
   });
