@@ -35,6 +35,7 @@ define([
       // bind 'this' to template variables and event handlers
       this.currentRecordNumber.bind(this);
       this.totalRecords.bind(this);
+      this.refreshURL.bind(this);
       this.render = this.render.bind(this)
       this.changeCurrentRecordNumber = this.changeCurrentRecordNumber.bind(this)
       // events
@@ -51,16 +52,18 @@ define([
       var nextRecord, prevRecord, save;
       // display EditorView
       this.$el.html(this.template(this));
-      // assign element to NotificationView for notification display
-      this.notificationView.$el = this.$el.find('#notifications');
-      // bind to DOM actions
-      prevRecord = this.$el.find('#prev-record');
-      prevRecord.on('click', this.renderPreviousRecord.bind(this));
-      nextRecord = this.$el.find('#next-record');
-      nextRecord.on('click', this.renderNextRecord.bind(this));
-      save = this.$el.find('#save_button');
-      save.on('click', this.model.save.bind(this.model));
-      this.renderChildrenViews.apply(this, arguments);
+      if (this.totalRecords()) {
+        // assign element to NotificationView for notification display
+        this.notificationView.$el = this.$el.find('#notifications');
+        // bind to DOM actions
+        prevRecord = this.$el.find('#prev-record');
+        prevRecord.on('click', this.renderPreviousRecord.bind(this));
+        nextRecord = this.$el.find('#next-record');
+        nextRecord.on('click', this.renderNextRecord.bind(this));
+        save = this.$el.find('#save_button');
+        save.on('click', this.model.save.bind(this.model));
+        this.renderChildrenViews.apply(this, arguments);
+      }
       return this;
     },
 
@@ -90,6 +93,9 @@ define([
     /** Shortcut to EditoryView._currentRecord for easy templating */
     totalRecords: function() { return this.model.records.length; },
 
+    /** Returns URL for refreshing DataSource for easy templating */
+    refreshURL: function() { return this.model.refreshURL; },
+
     /** Event handler to display the previous record */
     renderPreviousRecord: function(event) {
       this.destroyChildren();
@@ -108,20 +114,22 @@ define([
 
     /** Remove event bindings, child views, and DOM elements */
     destroy: function() {
-      var prevRecord = this.$el.find('#prev-record'),
-      nextRecord = this.$el.find('#next-record'),
-      save = this.$el.find('#save_button');
-      // remove DOM events
-      prevRecord.off('click');
-      nextRecord.off('click');
-      save.off('click');
-      // remove model events
-      this.model.Observer('loadSuccess').unsubscribe(this.render);
-      this.model.Observer('changeCurrentRecord').unsubscribe(
-        this.changeCurrentRecordNumber);
-      // remove child views
-      this.notificationView.destroy();
-      this.destroyChildren();
+      if (this.totalRecords()) {
+        var prevRecord = this.$el.find('#prev-record'),
+        nextRecord = this.$el.find('#next-record'),
+        save = this.$el.find('#save_button');
+        // remove DOM events
+        prevRecord.off('click');
+        nextRecord.off('click');
+        save.off('click');
+        // remove model events
+        this.model.Observer('loadSuccess').unsubscribe(this.render);
+        this.model.Observer('changeCurrentRecord').unsubscribe(
+          this.changeCurrentRecordNumber);
+        // remove child views
+        this.notificationView.destroy();
+        this.destroyChildren();
+      }
       // clear DOM
       this.$el.empty();
     },

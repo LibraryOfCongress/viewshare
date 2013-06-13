@@ -34,6 +34,7 @@ define(
       this.profileURL = options.profileURL;
       this.dataURL = options.dataURL;
       this.saveURL = options.saveURL;
+      this.refreshURL = options.refreshURL;
       this.records = [];
       this._currentRecord = 0;
       this.currentRecord.bind(this);
