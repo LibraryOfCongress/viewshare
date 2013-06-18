@@ -10,34 +10,24 @@
 
     View.prototype.viewClass = Exhibit.ScatterPlotView;
 
+    View.prototype.template_name = "scatterplot-view-template";
 
-    // Display the view's UI.
-    View.prototype.display = function () {
-        var content = this.getContent();
-        var root = Freemix.getTemplate("scatterplot-view-template");
-        var model = this;
-        content.empty();
-        root.appendTo(content);
+    View.prototype.setupEditor = function (config, template) {
 
-        model._setupViewForm();
-        model._setupLabelEditor();
+        this._setupViewForm(config, template);
+        this._setupLabelEditor(config, template);
 
         var numbers = Freemix.exhibit.database.getPropertiesWithTypes(["number"]);
 
-        var xaxis = content.find("#xaxis_property");
-        var yaxis = content.find("#yaxis_property");
+        var xaxis = template.find("#xaxis_property");
+        var yaxis = template.find("#yaxis_property");
 
-        model._setupPropertySelect(xaxis, "xaxis", numbers);
-        model._setupPropertySelect(yaxis, "yaxis", numbers);
+        this._setupPropertySelect(config, template, xaxis, "xaxis", numbers);
+        this._setupPropertySelect(config, template, yaxis, "yaxis", numbers);
         xaxis.change();
         yaxis.change();
 
-        this._setupLensEditor();
-//        this._setupLensPicker();
-        // model._setupTitlePropertyEditor();
-        // var property_list = this.getContent().find("#property_list");
-        // this._setupPropertyMultiSelect(property_list, "properties", true);
-        // property_list.change();
+        this._setupLensEditor(config, template);
 
     };
 

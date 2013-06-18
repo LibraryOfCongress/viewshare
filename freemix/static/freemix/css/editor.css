@@ -150,7 +150,7 @@ color: black;
     margin: 3px 0;
 }
 
-.facet-menu {
+.view-menu, .facet-menu {
 
 }
 
@@ -159,12 +159,13 @@ color: black;
     display: inline-block;
 }
 
-.facet-menu a {
+.view-menu a, .facet-menu a {
+    color: #222222;
     opacity: .5;
     text-decoration: none;
 }
 
-.facet-menu a:hover {
+.view-menu a:hover, .facet-menu a:hover {
     opacity: 1;
 }
 

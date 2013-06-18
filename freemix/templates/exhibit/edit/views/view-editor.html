@@ -1,0 +1,46 @@
+{% load i18n %}
+<script type="text/template" id="view-editor">
+  <div class="widget-edit-dialog view-editor">
+
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h3 id="view-editor-title">View Widget</h3>
+    </div>
+
+    <div class="modal-body">
+      <div class="row-fluid">
+
+        <div class="view-edit">
+
+          <div class="span6">
+            <div class="view-properties settings-well well">
+              <div class="view-edit-body">
+                
+              </div>
+            </div>
+          </div>
+
+          <div class="span6">
+            <div class="view-preview well">
+              <form>
+                <fieldset>
+                  <legend>{% trans "Preview" %}</legend>
+                  <div class="view-edit-body">
+                    <div id="view-preview"></div>
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+
+        </div> <!-- view-edit -->
+
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button id="view_save_button" class="btn btn-primary">Save</button>
+    </div>
+
+  </div>
+</script>

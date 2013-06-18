@@ -2,10 +2,6 @@
 
 <script type="text/template" class="record-view" id="scatterplot-view-template">
 
-  <div class="scatterplot-view-editor">
-
-    <div class="view-settings">
-
       <form class="form">
         
         <fieldset>
@@ -55,8 +51,12 @@
                 </div>
 
 
-                {%include "exhibit/edit/lenses/inline_editor.html" %}
+                <div class="control-group">
+                  <label class="control-label" for="lens_editor">{% trans "Lens" %}</label>
+                  <div id="lens_editor">
 
+                  </div>
+                </div>
               </div> <!-- end view-variables -->
                             
               <div class="span7 view-preview">
@@ -71,9 +71,5 @@
                 
 	      </fieldset>
       </form>
-      
-    </div>
-    
-  </div> <!-- end list-view-editor -->
 
 </script>

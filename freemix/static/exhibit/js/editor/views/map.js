@@ -11,38 +11,28 @@
 
     View.prototype.viewClass = Exhibit.OLMapView;
 
-    // Display the view's UI.
-    View.prototype.display = function () {
-        var content = this.getContent();
-        var root = Freemix.getTemplate("map-view-template");
-        var model = this;
-        content.empty();
-        root.appendTo(content);
-        this._setupViewForm();
-        this._setupLabelEditor();
+    View.prototype.template_name = "map-view-template";
+
+    View.prototype.setupEditor = function (config, template) {
+
+        this._setupViewForm(config, template);
+        this._setupLabelEditor(config, template);
 
         var db = Freemix.exhibit.database;
-        var latlng = content.find("#latlng_property");
+        var latlng = template.find("#latlng_property");
         var points = db.getPropertiesWithTypes(["location"]);
-        this._setupPropertySelect(latlng, "latlng", points);
+        this._setupPropertySelect(config, template, latlng, "latlng", points);
         latlng.change();
 
-        var color = content.find("#color_property");
-        this._setupPropertySelect(color, "colorKey", Freemix.exhibit.database.getAllPropertyObjects(), true);
+        var color = template.find("#color_property");
+        this._setupPropertySelect(config, template, color, "colorKey", Freemix.exhibit.database.getAllPropertyObjects(), true);
         color.change();
 
-        var zoom = content.find("#zoom_level");
-        this._setupSelectPropertyHandler(zoom, "zoom");
+        var zoom = template.find("#zoom_level");
+        this._setupSelectPropertyHandler(config, template, zoom, "zoom");
         zoom.change();
 
-        this._setupLensEditor();
-//        this._setupLensPicker();
-
-        // this._setupTitlePropertyEditor();
-
-        // var property_list = this.getContent().find("#property_list");
-        // this._setupPropertyMultiSelect(property_list, "properties", true);
-        // property_list.change();
+        this._setupLensEditor(config, template);
     };
 
 

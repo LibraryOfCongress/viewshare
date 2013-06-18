@@ -8,13 +8,12 @@
         titleLink:undefined,
         orders:[],
         possibleOrders:[],
-        directions:["ascending"],
-        properties:[]
+        directions:["ascending"]
     };
 
     var render = function (config) {
         config = config || this.config;
-        var lens = this._getLens();
+        var lens = this._getLens(config);
         var view = $("<div ex:role='view'></div>");
         view.attr("ex:viewLabel", config.name);
         this._renderOrder(view, config);

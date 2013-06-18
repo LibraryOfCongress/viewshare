@@ -2,10 +2,6 @@
 
 <script type="text/template" class="record-view" id="timeline-view-template">
 
-  <div class="timeline-view-editor">
-
-    <div class="view-settings">
-
       <form class="form">
         
         <fieldset>
@@ -108,9 +104,12 @@
                   </div>
                 </div>
 
+                <div class="control-group">
+                  <label class="control-label" for="lens_editor">{% trans "Lens" %}</label>
+                  <div id="lens_editor">
 
-                {%include "exhibit/edit/lenses/inline_editor.html" %}
-
+                  </div>
+                </div>
               </div> <!-- end view-variables -->
               
               <div class="span7 view-preview">
@@ -125,9 +124,5 @@
 
 	      </fieldset>
       </form>
-      
-      </div>
-     
-  </div> <!-- end timline-view-editor -->
 
 </script>

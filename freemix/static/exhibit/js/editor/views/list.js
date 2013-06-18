@@ -5,22 +5,15 @@
     View.prototype.thumbnail = "/static/exhibit/img/list-icon.png";
     View.prototype.label = "List";
     View.prototype.viewClass = Exhibit.TileView;
-    // Display the view's UI.
-    View.prototype.display = function () {
-        var content = this.getContent();
-        var root = Freemix.getTemplate("list-view-template");
-        content.empty();
-        root.appendTo(content);
-        this._setupViewForm();
-        this._setupLabelEditor();
-        this._setupMultiPropertySortEditor();
-        this._setupLensEditor();
-//        this._setupLensPicker();
-        // this._setupTitlePropertyEditor();
+    View.prototype.template_name = "list-view-template";
 
-        // var property_list = this.getContent().find("#property_list");
-        // this._setupPropertyMultiSelect(property_list, "properties", true);
-        // property_list.change();
+    View.prototype.setupEditor = function(config, template) {
+
+        this._setupViewForm(config, template);
+        this._setupLabelEditor(config, template);
+        this._setupMultiPropertySortEditor(config, template);
+        this._setupLensEditor(config, template);
+
     };
 
 })(window.Freemix.jQuery, window.Freemix, window.Exhibit);
