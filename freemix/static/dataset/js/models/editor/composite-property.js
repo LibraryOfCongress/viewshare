@@ -22,8 +22,8 @@ define(
    * create this CompositeProperty
    */
   var CompositePropertyModel = function(options) {
-      this.initialize.apply(this, [options]);
-    }
+    this.initialize.apply(this, [options]);
+  };
 
   $.extend(CompositePropertyModel.prototype, PropertyModel.prototype, {
     initialize: function(options) {

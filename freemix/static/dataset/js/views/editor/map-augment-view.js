@@ -9,7 +9,7 @@ define(
     Handlebars,
     $,
     CompositePropertyModel,
-    mapAugmentTemplate,
+    mapAugmentTemplate
   ) {
   'use strict';
   /**
@@ -27,9 +27,9 @@ define(
       this.model = options.model;
       this.newCompositeProperty = new CompositePropertyModel({
         id: undefined,
-        name: undefined
+        name: undefined,
         type: 'location',
-        value: undefined
+        value: undefined,
         composite: []
       });
     },

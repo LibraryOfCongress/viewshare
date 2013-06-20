@@ -34,7 +34,7 @@ define(
       this.model = options.model;
       this.$el = options.$el;
       this.augmentModal = new ModalAugmentView({model: this.model});
-      this.propertyViews = []
+      this.propertyViews = [];
     },
 
     template: Handlebars.compile(recordTemplate),

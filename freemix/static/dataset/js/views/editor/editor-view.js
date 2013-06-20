@@ -31,13 +31,13 @@ define([
       this.notificationFunc = undefined;
       // child views
       this.notificationView = new NotificationView({$el: undefined});
-      this.recordView = {destroy: $.noop}
+      this.recordView = {destroy: $.noop};
       // bind 'this' to template variables and event handlers
       this.currentRecordNumber.bind(this);
       this.totalRecords.bind(this);
       this.refreshURL.bind(this);
-      this.render = this.render.bind(this)
-      this.changeCurrentRecordNumber = this.changeCurrentRecordNumber.bind(this)
+      this.render = this.render.bind(this);
+      this.changeCurrentRecordNumber = this.changeCurrentRecordNumber.bind(this);
       // events
       this.model.Observer('loadSuccess').subscribe(this.render);
       this.model.Observer('changeCurrentRecord').subscribe(
