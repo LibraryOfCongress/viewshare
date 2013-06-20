@@ -43,24 +43,23 @@ define(
       this._name = options.name;
       this._type = options.type;
       this.value = options.value;
-      this.freemixProperty = Freemix.property.propertyList[this.id];
-      this.sync.bind(this);
-    },
-
-    /** Send updated 'name' or 'type' values to the server */
-    sync: function() {
-      console.log('TODO: send PropertyModel values to server');
-      this.Observer('syncSuccess').publish(this);
-      // TODO: publish notification on success so that RecordCollection
-      // can go through and update all the 'name' and 'type' values
-      // for each Record with this Property
+      if (Freemix.property.propertyList.hasOwnProperty(this.id)) {
+        // this is an existing Property
+        this.freemixProperty = Freemix.property.propertyList[this.id];
+      } else {
+        // this is a new property
+        this.freemixProperty = undefined;
+      }
     },
 
     /** getter/setter method for name */
     name: function(newName) {
       if (newName) {
         this._name = newName;
-        this.freemixProperty.label(this._name);
+        if (this.freemixProperty) {
+          // This is not a new Property so we can modify it in Freemix
+          this.freemixProperty.label(this._name);
+        }
       } else {
         return this._name;
       }
@@ -70,10 +69,42 @@ define(
     type: function(newType) {
       if (newType) {
         this._type = newType;
-        this.freemixProperty.type(this._type);
+        if (this.freemixProperty) {
+          // This is not a new Property so we can modify it in Freemix
+          this.freemixProperty.type(this._type);
+        }
       } else {
         return this._type;
       }
+    },
+
+    /** Generate an array used to identify tags in Freemix */
+    tags: function() {
+      if (['location'].indexOf(this._type) >= 0) {
+        // certain Property types have a special tags value
+        return ['property:type=' + this.type];
+      } else {
+        return [];
+      }
+    },
+
+    /**
+     * Validate that the data in this Model is in a state where it could
+     * be sent to a server.
+     */
+    validate: function() {
+      // TODO: check that required properties are set
+    },
+
+    /** Create a Freemix Property with our Model's data */
+    createFreemixProperty: function() {
+      var freemixProperty = Freemix.property.createProperty({
+        property: this._name,
+        enabled: true,
+        tags: this.tags(),
+      });
+      this.type(this._type);
+      return freemixProperty;
     }
   });
 

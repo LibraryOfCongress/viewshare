@@ -695,10 +695,10 @@ div.notices h2 {
     max-width: 100px
 }
 
-#augment-properties td.selected {
+.augment-properties td.selected {
     width: 20%;
 }
 
-#augment-properties td.name {
+.augment-properties td.name {
     width: 80%;
 }

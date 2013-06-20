@@ -23,16 +23,7 @@ define(['handlebars',
 
   $.extend(ModalAugmentView.prototype, {
     initialize: function(options) {
-      var body = this.template({
-        properties: options.model.properties.sort(
-          function (a, b) {
-          var
-            a_name = a && a.name() || '',
-            b_name = b && b.name() || '';
-            return a_name.localeCompare(b_name);
-          }),
-        propertyCount: options.model.properties.length
-      });
+      var body = this.template();
       this.$el = new ModalView({
         header: 'Data Augmentation',
         body: body,
@@ -52,6 +43,10 @@ define(['handlebars',
     render: function() { $('body').append(this.$el); },
 
     createProperty: function(event) {
+      // determine active tab
+      // validate tab's view's Model
+      // extend Freemix database with new Model
+      // sync Freemix with server
       console.log(this);
       console.log(event);
       this.newProperty.sync();
@@ -66,4 +61,3 @@ define(['handlebars',
 
   return ModalAugmentView;
 });
-

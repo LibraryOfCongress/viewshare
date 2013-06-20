@@ -28,12 +28,40 @@ define(
   $.extend(CompositePropertyModel.prototype, PropertyModel.prototype, {
     initialize: function(options) {
       PropertyModel.prototype.initialize.apply(this, [options]);
-      this.composite = options.composite;
-      this.tags.bind(this)
+      this._composite = options.composite;
+      if (Freemix.property.propertyList.hasOwnProperty(this.id)) {
+        // this is an existing Property
+        this.freemixProperty = Freemix.property.propertyList[this.id];
+      } else {
+        // this is a new property and doesn't exist in Freemix yet
+        this.freemixProperty = undefined;
+      }
     },
 
-    /** Generate an array used to identify tags in Freemix */
-    tags: function() { return ['property:type=' + this.type];}
+    /** getter/setter method for composite */
+    composite: function(newComposite) {
+      if (newComposite) {
+        this._composite = newComposite;
+        if (this.freemixProperty) {
+          // This is not a new Property so we can modify it in Freemix
+          this.freemixProperty.label(this._composite);
+        }
+      } else {
+        return this._composite;
+      }
+    },
+
+    /** Create a Freemix Property with our Model's data */
+    createFreemixProperty: function() {
+      var freemixProperty = Freemix.property.createProperty({
+        property: this._name,
+        enabled: true,
+        tags: this.tags(),
+        composite: this.composite()
+      });
+      this.type(this._type);
+      return freemixProperty;
+    }
   });
 
   return CompositePropertyModel;

@@ -1,10 +1,13 @@
 <td class="name">
   <input type="text" class="input-large" value="{{ name }}">
+  {{#if composite}}
+  <span>Created from:</span>
   <ul>
   {{#each composite}}
     <li>{{this}}</li>
   {{/each}}
   <ul>
+  {{/if}}
 </td>
 <td class="types">
   {{ type }}

@@ -33,6 +33,12 @@ define(
           this.properties.push(new PropertyModel(property));
         }
       }
+      this.properties.sort(function (a, b) {
+        var
+          a_name = a && a.name() || '',
+          b_name = b && b.name() || '';
+          return a_name.localeCompare(b_name);
+      });
     }
   });
 

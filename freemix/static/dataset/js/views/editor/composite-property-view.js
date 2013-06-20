@@ -63,6 +63,8 @@ define(['handlebars', 'jquery', 'text!templates/composite-property.html'],
 
     /** Remove event bindings, child views, and DOM elements */
     destroy: function() {
+      this.$el.find('.name input').off(
+        'change', this.changeNameHandler.bind(this));
       this.$el.empty();
     }
   });

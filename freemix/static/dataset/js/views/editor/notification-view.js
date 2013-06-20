@@ -1,6 +1,13 @@
 /*global define */
-define(['handlebars', 'jquery', 'text!templates/notification.html'],
-       function (Handlebars, $, notificationTemplate) {
+define([
+       'handlebars',
+       'jquery',
+       'text!templates/notification.html'
+  ], function (
+       Handlebars,
+       $,
+       notificationTemplate
+  ) {
   'use strict';
   /**
    * View to display notifications. Any model that publishes an event that
