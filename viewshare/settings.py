@@ -4,6 +4,7 @@ from imp import find_module
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+REQUIRE_DEBUG = DEBUG
 
 ADMINS = (
 # ('Your Name', 'your_email@domain.com'),
@@ -148,9 +149,7 @@ INSTALLED_APPS = (
 
 module_path = lambda m: path.abspath(find_module(m)[1])
 
-STATICFILES_DIRS = (
-    ('', path.join(module_path('viewshare'), 'static')),
-)
+STATICFILES_DIRS = (path.join(module_path('viewshare'), 'static'),)
 
 ABSOLUTE_URL_OVERRIDES = {
     "auth.user": lambda o: "/profiles/profile/%s/" % o.username,
@@ -193,13 +192,14 @@ STATICFILES_FINDERS = (
 
 STATICFILES_STORAGE = 'require.storage.OptimizedStaticFilesStorage'
 
-REQUIRE_BASE_URL = STATIC_URL
+REQUIRE_BASE_URL = '.'
 
 REQUIRE_JS = 'freemix/js/lib/require.js'
 
 REQUIRE_STANDALONE_MODULES = {
-        'freemix/js/editor': {
-            'out': 'editor-built.js'
+        'editor-main': {
+            'out': 'editor-built.js',
+            'build_profile': 'editor-build.js'
         }
 }
 
