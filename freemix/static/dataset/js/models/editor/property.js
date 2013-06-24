@@ -95,7 +95,7 @@ define(
         enabled: true,
         tags: this.tags(),
       });
-      this.type(this._type);
+      freemixProperty.type(this._type);
       return freemixProperty;
     },
 

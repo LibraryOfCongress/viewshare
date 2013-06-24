@@ -59,7 +59,7 @@ define(
         tags: this.tags(),
         composite: this.composite()
       });
-      this.type(this._type);
+      freemixProperty.type(this._type);
       return freemixProperty;
     },
 

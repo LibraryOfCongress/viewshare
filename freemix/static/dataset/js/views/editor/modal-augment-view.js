@@ -60,19 +60,22 @@ define(['handlebars',
     createProperty: function(event) {
       var activeTab = this.$el.find('.tab-content .active'),
       errorList = this.$el.find('#augment-errors'),
-      errors = {};
+      errors = {},
+      newProperty;
       // validate tab's view's Model
       errorList.empty();
       if (activeTab.attr('id') === 'timeline') {
       } else if (activeTab.attr('id') === 'map') {
-        errors = this.mapView.newCompositeProperty.validate();
+        newProperty = this.mapView.newCompositeProperty;
       } else if (activeTab.attr('id') === 'list') {
       } else {
         console.log(activeTab);
         return false;
       }
+      errors = newProperty.validate();
       if ($.isEmptyObject(errors)) {
-        // TODO: extend Freemix database with new Model by calling Property model's createFreemixProperty()
+        // extend Freemix database with new Model by calling Property model's createFreemixProperty()
+        Freemix.property.add(newProperty.createFreemixProperty());
         // TODO: sync Freemix with server
         console.log(this);
         console.log(event);

@@ -27,7 +27,7 @@ define(
       this.properties = [];
       for(i = 0; i < options.properties.length; i++) {
         property = options.properties[i];
-        if (property.composite !== null) {
+        if (property.composite !== undefined) {
           this.properties.push(new CompositePropertyModel(property));
         } else {
           this.properties.push(new PropertyModel(property));
