@@ -1,14 +1,14 @@
 /*global define */
 define(['handlebars',
         'jquery',
-        'models/property',
         'text!templates/modal-augment.html',
+        'views/map-augment-view',
         'views/modal-view',
         'bootstrap'],
        function (Handlebars,
         $,
-        PropertyModel,
         modalAugmentTemplate,
+        MapAugmentView,
         ModalView) {
   'use strict';
   /**
@@ -24,37 +24,41 @@ define(['handlebars',
   $.extend(ModalAugmentView.prototype, {
     initialize: function(options) {
       var body = this.template();
+      this.model = options.model;
       this.$el = new ModalView({
         header: 'Data Augmentation',
         body: body,
         buttonText: 'Create Property',
         buttonFunction: this.createProperty.bind(this)
       }).$el;
-      this.newProperty = new PropertyModel({
-        name: undefined,
-        type: undefined,
-        value: undefined
+      this.mapView = new MapAugmentView({
+        $el: this.$el.find('#map'),
+        model: options.model
       });
     },
 
     /** Compile the template we will use to render the View */
     template: Handlebars.compile(modalAugmentTemplate),
 
-    render: function() { $('body').append(this.$el); },
+    render: function() {
+      $('body').append(this.$el);
+      // render children
+      this.mapView.render();
+    },
 
     createProperty: function(event) {
-      // determine active tab
-      // validate tab's view's Model
-      // extend Freemix database with new Model
-      // sync Freemix with server
+      // TODO: determine active tab
+      // TODO: validate tab's view's Model
+      // TODO: extend Freemix database with new Model by calling Property model's createFreemixProperty()
+      // TODO: sync Freemix with server
       console.log(this);
       console.log(event);
-      this.newProperty.sync();
       this.$el.modal('hide');
     },
 
     /** Remove event bindings, child views, and DOM elements */
     destroy: function() {
+      this.mapView.destroy();
       this.$el.remove();
     }
   });

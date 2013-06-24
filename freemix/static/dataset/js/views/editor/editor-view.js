@@ -74,12 +74,14 @@ define([
         $el: this.$el.find('#records')});
       this.recordView.render.apply(this.recordView);
       // display notifications on record actions
-      this.notificationFunc = this.notificationView.addSubscription(
-        this.recordView.augmentModal.newProperty,
-        'syncSuccess',
-        'success',
-        'New data has been created which you can use in your views.',
-        'Property created successfully!');
+      // TODO pass this.notificationView to augmentModal to handle
+      // its own notifications
+//      this.notificationFunc = this.notificationView.addSubscription(
+//        this.recordView.augmentModal.newProperty,
+//        'syncSuccess',
+//        'success',
+//        'New data has been created which you can use in your views.',
+//        'Property created successfully!');
     },
 
     changeCurrentRecordNumber: function() {
@@ -138,10 +140,6 @@ define([
      * in 'renderChildren'
      */
     destroyChildren: function() {
-      this.notificationView.removeSubscription(
-        this.recordView.augmentModal.newProperty,
-        'syncSuccess',
-        this.notificationFunc);
       this.recordView.destroy();
     }
   });
