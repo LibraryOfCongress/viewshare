@@ -45,15 +45,48 @@ define(['handlebars',
       // render children
       this.mapView.render();
     },
+    
+    /** Display a validation error
+     * @param {string} errorText - Error text to display
+     */
+    renderValidationError: function(errorText) {
+      var errorList = this.$el.find('#augment-errors'),
+      error = $('<li>');
+      error.html(errorText);
+      errorList.append(error);
+    },
 
+    /** */
     createProperty: function(event) {
-      // TODO: determine active tab
-      // TODO: validate tab's view's Model
-      // TODO: extend Freemix database with new Model by calling Property model's createFreemixProperty()
-      // TODO: sync Freemix with server
-      console.log(this);
-      console.log(event);
-      this.$el.modal('hide');
+      var activeTab = this.$el.find('.tab-content .active'),
+      errorList = this.$el.find('#augment-errors'),
+      errors = {};
+      // validate tab's view's Model
+      errorList.empty();
+      if (activeTab.attr('id') === 'timeline') {
+      } else if (activeTab.attr('id') === 'map') {
+        errors = this.mapView.newCompositeProperty.validate();
+      } else if (activeTab.attr('id') === 'list') {
+      } else {
+        console.log(activeTab);
+        return false;
+      }
+      if ($.isEmptyObject(errors)) {
+        // TODO: extend Freemix database with new Model by calling Property model's createFreemixProperty()
+        // TODO: sync Freemix with server
+        console.log(this);
+        console.log(event);
+        this.$el.modal('hide');
+      } else {
+        // display errors
+        if (errors.hasOwnProperty('name')) {
+          this.renderValidationError(errors['name']);
+        }
+        if (errors.hasOwnProperty('composite')) {
+          this.renderValidationError(errors['composite']);
+        }
+        return false;
+      }
     },
 
     /** Remove event bindings, child views, and DOM elements */

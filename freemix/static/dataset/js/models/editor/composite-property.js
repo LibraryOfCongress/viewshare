@@ -61,6 +61,18 @@ define(
       });
       this.type(this._type);
       return freemixProperty;
+    },
+
+    /**
+     * Validate that the data in this Model is in a state where it could
+     * be sent to a server.
+     */
+    validate: function() {
+      var errors = PropertyModel.prototype.validate.apply(this, []);
+      if (!this._composite.length) {
+        errors['composite'] = 'Please select at least one property.';
+      }
+      return errors;
     }
   });
 

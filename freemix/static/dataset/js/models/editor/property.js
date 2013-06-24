@@ -88,14 +88,6 @@ define(
       }
     },
 
-    /**
-     * Validate that the data in this Model is in a state where it could
-     * be sent to a server.
-     */
-    validate: function() {
-      // TODO: check that required properties are set
-    },
-
     /** Create a Freemix Property with our Model's data */
     createFreemixProperty: function() {
       var freemixProperty = Freemix.property.createProperty({
@@ -105,6 +97,18 @@ define(
       });
       this.type(this._type);
       return freemixProperty;
+    },
+
+    /**
+     * Validate that the data in this Model is in a state where it could
+     * be sent to a server.
+     */
+    validate: function() {
+      var errors = {};
+      if (!this._name) {
+        errors['name'] = 'Please enter a name for the new property.';
+      }
+      return errors;
     }
   });
 

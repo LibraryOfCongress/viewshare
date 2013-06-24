@@ -59,7 +59,7 @@ define(
       this.$el.html(this.template({
         properties: this.model.properties,
       }));
-      this.$el.find('.name input').on(
+      this.$el.find('#new-property-name').on(
         'change', this.changeNameHandler.bind(this));
       this.$el.find('.selected input').on(
         'click', this.changeCompositeHandler.bind(this));
@@ -69,6 +69,8 @@ define(
     destroy: function() {
       this.$el.find('.name input').off(
         'change', this.changeNameHandler.bind(this));
+      this.$el.find('.selected input').off(
+        'click', this.changeCompositeHandler.bind(this));
       this.$el.remove();
     }
   });

@@ -215,6 +215,8 @@
     }
 
     function refresh() {
+      //TODO: this is the function that's run when the augment button is pressed. This is the key of POSTing our data after we've
+      //compiled it into the Freemix database
         function validate(data) {
             if (!data.items) {
                 return false;
