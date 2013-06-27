@@ -1,18 +1,22 @@
 /*global define */
-define([
-       'handlebars',
-       'jquery',
-       'models/record-collection',
-       'views/notification-view',
-       'views/record-view',
-       'text!templates/editor.html'],
-       function (
-         Handlebars,
-         $,
-         RecordCollection,
-         NotificationView,
-         RecordView,
-         editorTemplate) {
+define(
+  [
+    'handlebars',
+    'jquery',
+    'models/record-collection',
+    'views/notification-view',
+    'views/modal-augment-view',
+    'views/record-view',
+    'text!templates/editor.html'
+  ], function (
+    Handlebars,
+    $,
+    RecordCollection,
+    NotificationView,
+    ModalAugmentView,
+    RecordView,
+    editorTemplate
+  ) {
   'use strict';
   /**
    * High-level view of records that have properties that can be edited
@@ -31,6 +35,7 @@ define([
       this.notificationFunc = undefined;
       // child views
       this.notificationView = new NotificationView({$el: undefined});
+      this.augmentModal = new ModalAugmentView({model: this.model});
       this.recordView = {destroy: $.noop};
       // bind 'this' to template variables and event handlers
       this.currentRecordNumber.bind(this);
@@ -55,11 +60,19 @@ define([
       if (this.totalRecords()) {
         // assign element to NotificationView for notification display
         this.notificationView.$el = this.$el.find('#notifications');
+        this.augmentModal.render();
         // bind to DOM actions
         prevRecord = this.$el.find('#prev-record');
         prevRecord.on('click', this.renderPreviousRecord.bind(this));
         nextRecord = this.$el.find('#next-record');
         nextRecord.on('click', this.renderNextRecord.bind(this));
+
+
+        this.$el.find('#add-property').on('click', (function() {
+          this.augmentModal.$el.modal('show');
+        }).bind(this));
+
+
         save = this.$el.find('#save_button');
         save.on('click', this.model.save.bind(this.model));
         this.renderChildrenViews.apply(this, arguments);
@@ -130,6 +143,7 @@ define([
           this.changeCurrentRecordNumber);
         // remove child views
         this.notificationView.destroy();
+        this.augmentModal.destroy();
         this.destroyChildren();
       }
       // clear DOM

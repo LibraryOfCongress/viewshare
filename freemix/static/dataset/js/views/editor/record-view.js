@@ -6,7 +6,6 @@ define(
     'models/composite-property',
     'text!templates/record.html',
     'views/composite-property-view',
-    'views/modal-augment-view',
     'views/property-view'
   ],
   function (
@@ -15,7 +14,6 @@ define(
     CompositePropertyModel,
     recordTemplate,
     CompositePropertyView,
-    ModalAugmentView,
     PropertyView
   ) {
   'use strict';
@@ -33,7 +31,6 @@ define(
     initialize: function(options) {
       this.model = options.model;
       this.$el = options.$el;
-      this.augmentModal = new ModalAugmentView({model: this.model});
       this.propertyViews = [];
     },
 
@@ -43,10 +40,6 @@ define(
     render: function() {
       var i, propertiesElement, propertyElement, propertyModel, propertyView;
       this.$el.html(this.template());
-      this.$el.find('#add-property').on('click', (function() {
-        this.augmentModal.$el.modal('show');
-      }).bind(this));
-      this.augmentModal.render();
       propertiesElement = this.$el.find('#properties');
       for (i = 0; i < this.model.properties.length; ++i) {
         propertyModel = this.model.properties[i];
@@ -75,8 +68,6 @@ define(
       for (i = 0; i < this.propertyViews.length; ++i) {
         this.propertyViews[i].destroy();
       }
-      this.augmentModal.destroy();
-
       this.$el.empty();
     }
   });

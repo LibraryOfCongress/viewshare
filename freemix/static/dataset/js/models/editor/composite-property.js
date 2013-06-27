@@ -29,7 +29,7 @@ define(
     initialize: function(options) {
       PropertyModel.prototype.initialize.apply(this, [options]);
       this._composite = options.composite;
-      if (Freemix.property.propertyList.hasOwnProperty(this.id)) {
+      if (Freemix.property.propertyList && Freemix.property.propertyList.hasOwnProperty(this.id)) {
         // this is an existing Property
         this.freemixProperty = Freemix.property.propertyList[this.id];
       } else {
@@ -53,13 +53,14 @@ define(
 
     /** Create a Freemix Property with our Model's data */
     createFreemixProperty: function() {
-      var freemixProperty = Freemix.property.createProperty({
+      var freemixProperty = {
         property: this._name,
+        label: this._name,
         enabled: true,
         tags: this.tags(),
+        types: [this._type],
         composite: this.composite()
-      });
-      freemixProperty.type(this._type);
+      };
       return freemixProperty;
     },
 

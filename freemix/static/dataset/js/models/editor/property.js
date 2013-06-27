@@ -43,7 +43,7 @@ define(
       this._name = options.name;
       this._type = options.type;
       this.value = options.value;
-      if (Freemix.property.propertyList.hasOwnProperty(this.id)) {
+      if (Freemix.property.propertyList && Freemix.property.propertyList.hasOwnProperty(this.id)) {
         // this is an existing Property
         this.freemixProperty = Freemix.property.propertyList[this.id];
       } else {
@@ -82,7 +82,7 @@ define(
     tags: function() {
       if (['location'].indexOf(this._type) >= 0) {
         // certain Property types have a special tags value
-        return ['property:type=' + this.type];
+        return ['property:type=' + this._type];
       } else {
         return [];
       }
@@ -90,12 +90,13 @@ define(
 
     /** Create a Freemix Property with our Model's data */
     createFreemixProperty: function() {
-      var freemixProperty = Freemix.property.createProperty({
+      var freemixProperty = {
         property: this._name,
+        label: this._name,
         enabled: true,
         tags: this.tags(),
-      });
-      freemixProperty.type(this._type);
+        types: [this._type]
+      };
       return freemixProperty;
     },
 
