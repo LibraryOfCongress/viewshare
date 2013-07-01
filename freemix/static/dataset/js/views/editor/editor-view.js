@@ -4,7 +4,6 @@ define(
     'handlebars',
     'jquery',
     'models/record-collection',
-    'views/notification-view',
     'views/modal-augment-view',
     'views/record-view',
     'text!templates/editor.html'
@@ -12,7 +11,6 @@ define(
     Handlebars,
     $,
     RecordCollection,
-    NotificationView,
     ModalAugmentView,
     RecordView,
     editorTemplate
@@ -23,6 +21,8 @@ define(
    * @constructor
    * @param {string} options.model - instance of a RecordCollection
    * @param {object} options.$el - container Element object for this view
+   * @param {object} options.notificationView - View used to
+   * render notifications
    */
   var EditorView = function(options) {
     this.initialize.apply(this, [options]);
@@ -32,9 +32,8 @@ define(
     initialize: function(options) {
       this.model = options.model;
       this.$el = options.$el;
-      this.notificationFunc = undefined;
+      this.notificationView = options.notificationView;
       // child views
-      this.notificationView = new NotificationView({$el: undefined});
       this.augmentModal = new ModalAugmentView({model: this.model});
       this.recordView = {destroy: $.noop};
       // bind 'this' to template variables and event handlers
@@ -43,30 +42,42 @@ define(
       this.refreshURL.bind(this);
       this.render = this.render.bind(this);
       this.changeCurrentRecordNumber = this.changeCurrentRecordNumber.bind(this);
+      this.renderPreviousRecord = this.renderPreviousRecord.bind(this);
+      this.renderNextRecord = this.renderNextRecord.bind(this);
+      this.handleSaveSuccess = this.handleSaveSuccess.bind(this);
       // events
       this.model.Observer('loadSuccess').subscribe(this.render);
+      this.model.Observer('saveSuccess').subscribe(this.handleSaveSuccess);
+      this.saveSuccessNotification = this.notificationView.addSubscription(
+        this.model,
+        'saveSuccess',
+        'success',
+        'Any changes or augmentations you made to your data have been saved to the server.',
+        'Data saved successfully!');
       this.model.Observer('changeCurrentRecord').subscribe(
-        this.changeCurrentRecordNumber);
+        this.changeCurrentRecordNumber
+      );
     },
 
     /** Compile the template we will use to render the View */
     template: Handlebars.compile(editorTemplate),
 
-    /** Add this view to the DOM */
+    /**
+     * Add this view to the DOM
+     * @param {bool} options.fullRender - There are instances, such as after
+     * a save, where we just want to render the ChildrenViews
+     */
     render: function() {
       var nextRecord, prevRecord, save;
       // display EditorView
       this.$el.html(this.template(this));
       if (this.totalRecords()) {
-        // assign element to NotificationView for notification display
-        this.notificationView.$el = this.$el.find('#notifications');
         this.augmentModal.render();
         // bind to DOM actions
         prevRecord = this.$el.find('#prev-record');
         prevRecord.on('click', this.renderPreviousRecord.bind(this));
         nextRecord = this.$el.find('#next-record');
         nextRecord.on('click', this.renderNextRecord.bind(this));
-
 
         this.$el.find('#add-property').on('click', (function() {
           this.augmentModal.$el.modal('show');
@@ -127,6 +138,14 @@ define(
       return false;
     },
 
+    /** Event handler for a successful save event */
+    handleSaveSuccess: function () {
+      // TODO: loading gif
+      this.destroyChildren();
+      this.model.loadLocal.apply(this.model, [])
+      this.renderChildrenViews();
+    },
+
     /** Remove event bindings, child views, and DOM elements */
     destroy: function() {
       if (this.totalRecords()) {
@@ -141,8 +160,12 @@ define(
         this.model.Observer('loadSuccess').unsubscribe(this.render);
         this.model.Observer('changeCurrentRecord').unsubscribe(
           this.changeCurrentRecordNumber);
+        this.notificationView.removeSubscription(
+          this.model,
+          'saveSuccess',
+          this.saveSuccessNotification
+        );
         // remove child views
-        this.notificationView.destroy();
         this.augmentModal.destroy();
         this.destroyChildren();
       }

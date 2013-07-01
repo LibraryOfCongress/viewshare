@@ -85,8 +85,9 @@ define(
           freemixDatabase.removeObjects(id,p);
         });
       }
-      freemixDatabase.loadData({"items": data.items});
+      freemixDatabase.loadData({'items': data.items});
       // Add augmented data to record-collection
+      this.model.Observer('augmentSuccess').publish(freemixDatabase);
       // Rerender editor
     },
 

@@ -39,14 +39,15 @@ define(
       this._currentRecord = 0;
       this.currentRecord.bind(this);
       this.changeCurrentRecord.bind(this);
+      this.Observer('augmentSuccess').subscribe(
+        this.augmentSuccess.bind(this)
+      );
     },
 
-    /**
-     * Build an array of {name, type, value} objects if our GET requests
-     * for this.profileURL and this.dataURL succeeded
-     */
-    loadSuccess: function(profileJSON, dataJSON) {
-      var data, h, i, item, items, property, properties, record, type,
+    createRecordModels: function(profile, data) {
+      var h, i, item, property, record, type,
+      properties = profile[0].properties,
+      items = data[0].items,
       ignored_properties = [
         'id',
         'label',
@@ -56,14 +57,8 @@ define(
         'change',
         'changedItem',
       ];
-      properties = profileJSON[0].properties;
-      // initialize Freemix
-      data = dataJSON[0];
-      Freemix.profile = {"properties": properties};
-      Freemix.property.initializeDataProfile();
-      Freemix.exhibit.initializeDatabase(data);
+      this.records = [];
       // create editor models
-      items = dataJSON[0].items;
       for (i = 0; i < items.length; ++i) {
         record = [];
         item = items[i];
@@ -92,6 +87,29 @@ define(
         }
         this.records.push(new RecordModel({properties: record}));
       }
+    },
+
+    /**
+     * When a RecordCollection is augmented we need to save the updated data
+     * to the server and trigger a 'chance' event that can be used to render
+     * related views.
+     */
+    augmentSuccess: function(freemixDatabase) {
+      this.save();
+    },
+
+    /**
+     * Build an array of {name, type, value} objects if our GET requests
+     * for this.profileURL and this.dataURL succeeded
+     */
+    loadSuccess: function(profileJSON, dataJSON) {
+      var properties = profileJSON[0].properties,
+      data = dataJSON[0];
+      // initialize Freemix
+      Freemix.profile = {"properties": properties};
+      Freemix.property.initializeDataProfile();
+      Freemix.exhibit.initializeDatabase(data);
+      this.createRecordModels(profileJSON, dataJSON);
       this.Observer('loadSuccess').publish(this);
     },
 
@@ -106,10 +124,16 @@ define(
         .then(this.loadSuccess.bind(this), this.loadError.bind(this));
     },
 
+    /** Load records from the Freemix database */
+    loadLocal: function() {
+      var freemixDatabase = Freemix.exhibit.exportDatabase(
+        Freemix.exhibit.database);
+      this.createRecordModels([Freemix.profile], [freemixDatabase]);
+    },
+
     /** Save new and modified properties to the server */
     saveSuccess: function(data) {
       this.Observer('saveSuccess').publish(this);
-      window.location = $(String(data)).attr("href");
     },
 
     /** Signal that POST request to save has failed */

@@ -1,6 +1,16 @@
 /*global define */
-define(['views/editor-view', 'jquery', 'models/record-collection'],
-       function (EditorView, $, RecordCollection) {
+define(
+  [
+    'jquery',
+    'models/record-collection',
+    'views/editor-view',
+    'views/notification-view'
+  ], function (
+    $,
+    RecordCollection,
+    EditorView,
+    NotificationView
+  ) {
   'use strict';
   var demo = function() {
     var profileURL = $("link[rel='freemix/dataprofile']").attr("href"),
@@ -13,9 +23,11 @@ define(['views/editor-view', 'jquery', 'models/record-collection'],
       refreshURL: refreshURL,
       saveURL: saveURL
     }),
+    notificationView = new NotificationView({$el: $('#notifications')}),
     editor = new EditorView({
       model: records,
-      $el: $('#editor')
+      $el: $('#editor'),
+      notificationView: notificationView
     });
     records.load();
   };
