@@ -39,6 +39,7 @@ define(
       this._currentRecord = 0;
       this.currentRecord.bind(this);
       this.changeCurrentRecord.bind(this);
+      this.handleChangeType = this.handleChangeType.bind(this);
       this.Observer('augmentSuccess').subscribe(
         this.augmentSuccess.bind(this)
       );
@@ -86,6 +87,8 @@ define(
           } 
         }
         this.records.push(new RecordModel({properties: record}));
+        this.records[i].Observer('changeType').subscribe(
+          this.handleChangeType);
       }
     },
 
@@ -169,6 +172,19 @@ define(
         this._currentRecord = current % this.records.length;
       }
       this.Observer('changeCurrentRecord').publish(this.currentRecord());
+    },
+
+    /**
+     * When any RecordModel in this.records has a PropertyModel.type change
+     * then this method is run.
+     * @param {string} published.name - Name of the PropertyModel being changed
+     * @param {string} published.type - New type of the PropertyModel
+     */
+    handleChangeType: function(published) {
+      var i;
+      for (i = 0; i < this.records.length; ++i) {
+        this.records[i].changePropertyType(published.name, published.type);
+      }
     },
 
     currentRecord: function() { return this.records[this._currentRecord]; }
