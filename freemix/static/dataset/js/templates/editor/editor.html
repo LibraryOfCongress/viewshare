@@ -1,0 +1,20 @@
+<div class="span12">
+  {{#if totalRecords}}
+  <div class="text-right">
+    <a id="prev-record" class="btn" href="#"><i class="icon-arrow-left"></i></a>
+    <span>Record <span id="current-record-number">{{ currentRecordNumber }}</span> of {{ totalRecords }}</span>
+    <a id="next-record" class="btn" href="#"><i class="icon-arrow-right"></i></a>
+    <a id="add-property" class="btn btn-success" href="#"><i class="icon-plus-sign"></i> Add Property</a>
+  </div>
+  <div id="records"></div>
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary" id="save_button">Save changes</button>
+    <button type="button" class="btn" id="cancel_button">Cancel</button>
+  </div>
+  {{ else }}
+  <div class="alert alert-block">
+    <h4>Warning!</h2>
+    This data source contains no records! <a href="{{ refreshURL }}">Click here</a> to refresh the data source.
+  </div>
+  {{/if}}
+</div>

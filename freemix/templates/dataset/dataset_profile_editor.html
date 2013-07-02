@@ -4,17 +4,6 @@
 {% load i18n %}
 {% load augment_tags %}
 {% load compress %}
-{% block head_scripts %}
-    {{block.super}}
-    {% compress js %}
-    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/ui.multiselect.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}dataset/augment/js/augment.js"></script>
-
-    <script type="text/javascript" src="{{STATIC_URL}}support/js/base.js"></script>   
-    <script type="text/javascript" src="{{STATIC_URL}}support/js/augment.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}support/js/ignored_fields.js"></script>
-    {% endcompress %}
-{% endblock head_scripts %}
 
 {% block head_data %}
     {{ block.super }}
@@ -23,87 +12,4 @@
     {% endif %}
     <link rel="support/augment" href="{% url 'create_augmentation_issue' %}"/>
 
-{% endblock %}
-
-{% block describe_messages %}
-    {{block.super}}
-
-<li id="augment-location-tip" class="info infoMsg">
-  {% blocktrans %}
-  <strong>Tip:</strong> If you want to view your data on a 
-  Map you need latitude, longitude information. If your data includes 
-  lat/long information modify the type for this field to "location".  
-  If you do not have lat/long data, you can augment your data by specifying 
-  which fields (e.g. city, state, zip) to generate such information 
-  (click "Add+" button next to the Field Name in the top banner).
-  {% endblocktrans %}
-</li>
-
-<li id="augmentation-failure-server" class="error ui-helper-hidden errorMsg">
-  {% blocktrans %}
-  <strong>Attention:</strong>There was a server communication failure while attempting to augment your data. 
-  Please try again. If this problem persists, please report the problem by sending a 
-  message to <a href="mailto:ndippaccess@loc.gov">ndippaccess@loc.gov</a>.
-  {% endblocktrans %} 
-</li>
-
-<li id="augmentation-failure" class="error ui-helper-hidden warningMsg">
-  {% blocktrans %}
-  <strong>Attention:</strong>Some or all of your data did not augment properly. 
-  Please review augmented fields below for more information.
-  {% endblocktrans %}
-</li>
-
-<li id="augmentation-success" class="info ui-helper-hidden successMsg">
-  {% blocktrans %}
-  Success! All of your fields were successfully augmented.
-  {% endblocktrans %}
-</li>
-
-<li id="load-info-unknown-elements" class="info ui-helper-hidden warningMsg">
-  {% blocktrans %}
-  <strong>Warning:</strong>&nbsp;It appears that some elements or attributes in your file were not successfully loaded. <strong><a class="support-link" href="">Click here</a> to review or to request support.</strong>
-  {% endblocktrans %}
-</li>
-
-{% endblock describe_messages %}
-
-{% block describe %}
-    {{block.super}}
-    <div id="augmenting" class="ui-helper-hidden loading">
-        <p>{% trans "Generating new fields.  Please be patient." %}</p>
-    </div>
-    <div id="augment-failure-picker" class="ui-helper-hidden">
-        <h1>{% trans "Augmentation Failures for " %}<span></span></h1>
-        <h2>{% trans "Select an error from the list below to jump to the associated record" %}</h2>
-        <p>
-            <a href="#" id="augment-support-link">{% blocktrans %}Or Submit this dataset to {{SITE_NAME}} support for evaluation{% endblocktrans %}</a>
-        </p>
-        <table>
-            <thead>
-                <tr>
-                    <th>{% trans "Record #" %}</th>
-                    <th>{% trans "Reason" %}</th>
-                    <th>{% trans "Input" %}</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-
-        <button id="back-to-describe">{%trans "Return to Describe" %}</button>
-    </div>
-{% endblock describe %}
-{% block contents %}
-    {{block.super}}
-    <div id="support" class="ui-helper-hidden"></div>
-    <div id="support-spinner" class="ui-helper-hidden loading">
-        <p>{% blocktrans %}Requesting ticket, please be patient.{% endblocktrans %}</p>
-    </div>
-{% endblock contents %}
-
-
-{% block dataset_edit_hidden %}
-    {{block.super}}
-    {% augment_dialogs %}
-    <div id="augment-support-dialog" title="{% trans "Submit This Dataset for Evaluation" %}"></div>
 {% endblock %}
