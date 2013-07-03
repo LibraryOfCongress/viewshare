@@ -43,8 +43,7 @@ define(['handlebars', 'jquery', 'text!templates/property.html'],
     /** Event handler when a .types input is changed */
     changeTypeHandler: function(event) {
       var newType = $(event.target).find(':selected').val(),
-      valueEl = this.$el.find('.value'),
-      valueTemplate;
+      valueEl = this.$el.find('.value');
       this.model.type(newType);
       // change rendering for this.model.value on certain types
       if (newType === 'image') {

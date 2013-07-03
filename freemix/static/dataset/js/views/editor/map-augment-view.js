@@ -19,11 +19,11 @@ define(
    * @param {object} options.model - RecordModel we're augmenting
    * @param {object} options.$el - container Element object for this view
    */
-  var ModalAugmentView = function(options) {
+  var MapAugmentView = function(options) {
     this.initialize.apply(this, [options]);
   };
 
-  $.extend(ModalAugmentView.prototype, {
+  $.extend(MapAugmentView.prototype, {
     initialize: function(options) {
       this.model = options.model;
       this.$el = options.$el;
@@ -75,5 +75,5 @@ define(
     }
   });
 
-  return ModalAugmentView;
+  return MapAugmentView;
 });

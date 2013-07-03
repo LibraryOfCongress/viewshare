@@ -65,13 +65,27 @@ define(
       }
     },
 
-    /** getter/setter method for type */
-    type: function(newType) {
+    /**
+     * getter/setter method for type
+     * @param {string} newType - Type value for this
+     * @param {bool} options.silent - Flag for triggering changeType event
+     */
+    type: function(newType, options) {
+      var silent;
       if (newType) {
+        silent = (options && options.silent) || false;
         this._type = newType;
         if (this.freemixProperty) {
           // This is not a new Property so we can modify it in Freemix
           this.freemixProperty.type(this._type);
+        }
+        // publish event to signal other RecordModels should change the type
+        // for this property
+        if (!silent) {
+          this.Observer('changeType').publish({
+            name: this._name,
+            type: this._type
+          });
         }
       } else {
         return this._type;
