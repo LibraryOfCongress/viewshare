@@ -12,9 +12,9 @@
         return option;
     }
 
-    Freemix.Widget.prototype._setupPropertySelect = function(selector, key, collection, nullable) {
+    Freemix.Widget.prototype._setupPropertySelect = function(config, template, selector, key, collection, nullable) {
         this._populatePropertySelect(selector, collection, nullable);
-        this._setupSelectPropertyHandler(selector, key);
+        this._setupSelectPropertyHandler(config, template, selector, key);
     };
 
     Freemix.Widget.prototype._populatePropertySelect = function(selector, collection, nullable) {
@@ -30,8 +30,7 @@
         }
     };
 
-    Freemix.Widget.prototype._setupSelectPropertyHandler = function(selector, key) {
-        var config = this.config;
+    Freemix.Widget.prototype._setupSelectPropertyHandler = function(config, template, selector, key) {
         var view = this;
         selector.change(function() {
             var value = $(this).val();
@@ -40,7 +39,7 @@
             } else {
                 config[key] = undefined;
             }
-            view.getContent().trigger(view.refreshEvent);
+            template.trigger(view.refreshEvent);
          }).val(config[key]);
 
         if (!selector.val()) {
@@ -48,9 +47,9 @@
         }
     };
 
-    Freemix.Widget.prototype._setupPropertyMultiSelect = function(selector, key, default_all) {
+    Freemix.Widget.prototype._setupPropertyMultiSelect = function(config, template, selector, key, default_all) {
         var view = this;
-        var value = this.config[key] || [];
+        var value = config[key] || [];
         var inx;
 
         if (value.length > 0) {
@@ -68,8 +67,8 @@
         }
 
         selector.parent().on('change', 'select', function() {
-            view.config[key] = $(this).val() || [];
-            view.getContent().trigger(view.refreshEvent);
+            config[key] = $(this).val() || [];
+            template.trigger(view.refreshEvent);
 
         });
         selector.multiselect({width: 400, height: 125, sortable: true});

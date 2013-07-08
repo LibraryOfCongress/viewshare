@@ -7,18 +7,15 @@
     View.prototype.thumbnail = "/static/exhibit/img/piechart-icon.png";
 
     View.prototype.viewClass = Exhibit.PiechartView;
+    View.prototype.template_name = "piechart-view-template";
 
     // Display the view's UI.
-    View.prototype.display = function () {
-        var content = this.getContent();
-        var root = Freemix.getTemplate("piechart-view-template");
-        content.empty();
-        root.appendTo(content);
-        this._setupViewForm();
-        this._setupLabelEditor();
+    View.prototype.setupEditor = function(config, template) {
+        this._setupViewForm(config, template);
+        this._setupLabelEditor(config, template);
 
-        var property_list = this.getContent().find("#property_list");
-        this._setupPropertyMultiSelect(property_list, "properties", true);
+        var property_list = template.find("#property_list");
+        this._setupPropertyMultiSelect(config, template, property_list, "properties", true);
         property_list.change();    
     };
 

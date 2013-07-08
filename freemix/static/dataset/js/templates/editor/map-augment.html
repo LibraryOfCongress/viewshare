@@ -1,0 +1,25 @@
+<form class="form-horizontal">
+  <div class="control-group">
+    <label class="control-label" for="new-property-name">New Property Name</label>
+    <div class="controls">
+      <input type="text" id="new-property-name">
+    </div>
+  </div><!-- /.control-group -->
+  <table class="table table-hover augment-properties">
+    <caption>Base the new date field on your existing data</caption>
+    <thead>
+      <tr>
+        <th>Selected</th>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody id="properties">
+      {{#each properties}}
+      <tr>
+        <td class="selected"><input type="checkbox" value="{{ this.id }}"></td>
+        <td class="name">{{ this.name }}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table><!-- /.augment-properties -->
+</form>

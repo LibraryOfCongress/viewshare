@@ -13,8 +13,7 @@
         topBandUnit:"auto",
         topBandPixelsPerUnit:undefined,
         bottomBandUnit:"auto",
-        bottomBandPixelsPerUnit:undefined,
-        properties:[]
+        bottomBandPixelsPerUnit:undefined
     };
 
 
@@ -23,7 +22,7 @@
 
         config = config || this.config;
 
-        var lens = this._getLens();
+        var lens = this._getLens(config);
 
 
         if (!config.startDate) {
