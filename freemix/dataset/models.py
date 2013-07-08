@@ -15,7 +15,6 @@ from django_extensions.db.models import (
         TimeStampedModel, TitleSlugDescriptionModel)
 from freemix.dataset.transform import AKARA_TRANSFORM_URL
 from freemix.dataset.transform import AkaraTransformClient
-from freemix.models import JSONDataModel
 
 
 logger = logging.getLogger(__name__)
@@ -81,21 +80,27 @@ class Dataset(TitleSlugDescriptionModel, TimeStampedModel):
         profile.save()
 
 
-class DatasetJSONFile(JSONDataModel):
+class DatasetJSONFile(models.Model):
     """
     The data associated with this dataset in the Exhibit JSON format
     """
     dataset = models.OneToOneField(Dataset, related_name="data")
 
+    data =JSONField()
 
-class DatasetProfile(JSONDataModel):
+
+
+class DatasetProfile(models.Model):
     """
     A JSON document representing the properties defined in the dataset
     """
     dataset = models.OneToOneField(Dataset, related_name="profile")
 
+    data =JSONField()
 
-class DatasetPropertiesCache(JSONDataModel):
+
+
+class DatasetPropertiesCache(models.Model):
     """
     An exhibit compatible representation of the properties defined in
     DatasetProfile.
@@ -105,6 +110,8 @@ class DatasetPropertiesCache(JSONDataModel):
     """
 
     dataset = models.OneToOneField(Dataset, related_name="properties_cache")
+
+    data =JSONField()
 
 
 def sync_properties(sender, instance=None, **kwargs):
