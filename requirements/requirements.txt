@@ -1,4 +1,4 @@
-South>=0.7.6
+South>=0.8.1,<2.0
 Django==1.5.1
 pillow==2.0.0
 pytz==2013b
