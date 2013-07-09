@@ -32,7 +32,7 @@
         var data = Freemix.data || $.map($("link[rel='exhibit/data']"), function(el) {return $(el).attr("href");});
 
         Freemix.exhibit.initializeDatabase(data, function() {
-            Freemix.lens.load(profile.lenses, profile.default_lens);
+//            Freemix.lens.setDefaultLens(Freemix.lens.construct(profile.default_lens));
             $("#canvas").generateExhibitHTML(profile).createExhibit();
         });
 

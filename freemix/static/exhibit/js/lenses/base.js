@@ -6,9 +6,12 @@
         prototypes: {},
         _hash: {},
         _array: [],
-        construct: function (type, config) {
-            var Type = Freemix.lens.prototypes[type];
-            return new Type(config);
+        construct: function (config) {
+            if (config) {
+                var Type = Freemix.lens.prototypes[config.type];
+                return new Type(config);
+            }
+            return this.copyDefaultLens();
         },
         register: function (config, render_function) {
             var Lens = function (config) {
@@ -21,19 +24,12 @@
             Freemix.lens.prototypes[type] = Lens;
             return Lens;
         },
-        load: function (collection, default_lens) {
-            $.each(collection, function (inx, config) {
-                var lens = Freemix.lens.construct(config.type, config);
-                Freemix.lens.add(lens);
-            });
-            this.setDefaultLens(this.getLens(default_lens));
-        },
-        getLens: function (id) {
+        getLens: function (config) {
             var lens;
             if (id) {
                 lens = Freemix.lens._hash[id];
             }
-            if (!lens) {
+            if (!config) {
                 lens = this.getDefaultLens();
             }
             return lens;
@@ -42,9 +38,6 @@
             var lens;
             if (this._default_lens) {
                 lens = this._default_lens;
-            } else if (this._array.length > 0) {
-                lens = this._array[0];
-                this.setDefaultLens(lens);
             } else {
                 lens = this.createBasicLens();
                 this.setDefaultLens(lens);
@@ -58,31 +51,13 @@
         },
         copyDefaultLens: function() {
             var config = $.extend(true, {}, this.getDefaultLens().config);
-            config.id = $.make_uuid();
-            var lens = Freemix.lens.construct(config.type, config);
-            Freemix.lens.add(lens);
-            return lens;
-        },
-        add: function (lens) {
-            if (lens.config.id in this._hash) {
-                for (var inx = 0; inx < this._array.length; inx++) {
-                    if (lens.config.id === this._array[inx].config.id) {
-                        this._array[inx] = lens;
-                    }
-                }
-            } else {
-                this._array.push(lens);
-            }
-
-            this._hash[lens.config.id] = lens;
+            return Freemix.lens.construct(config);
         },
         createBasicLens: function () {
-            var lens = this.construct("list", {
-                "properties": Freemix.exhibit.database.getFilteredProperties(),
-                "id": $.make_uuid()
+            return this.construct({
+                "type": "list",
+                "properties": Freemix.exhibit.database.getFilteredProperties()
             });
-            this.add(lens);
-            return lens;
         }
     };
 

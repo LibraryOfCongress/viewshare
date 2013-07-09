@@ -8,26 +8,21 @@
     View.prototype.propertyTypes = ["image"];
 
     View.prototype.viewClass = Exhibit.ThumbnailView;
+    View.prototype.template_name = "thumbnail-view-template";
 
+    View.prototype.setupEditor = function (config, template) {
 
-    // Display the view's UI.
-    View.prototype.display = function () {
-        var content = this.getContent();
-        var root = Freemix.getTemplate("thumbnail-view-template");
-
-        content.empty();
-        content.append(root);
-        this._setupViewForm();
-        this._setupLabelEditor();
+        this._setupViewForm(config, template);
+        this._setupLabelEditor(config, template);
 
         var images = Freemix.exhibit.database.getPropertiesWithTypes(["image"]);
 
-        var image = content.find("#image_property");
+        var image = template.find("#image_property");
 
         // Set up image property selector
-        this._setupPropertySelect(image, "image", images);
-        this._setupTitlePropertyEditor();
-        this._setupMultiPropertySortEditor();
+        this._setupPropertySelect(config, template, image, "image", images);
+        this._setupTitlePropertyEditor(config, template);
+        this._setupMultiPropertySortEditor(config, template);
 
         image.change();
     };

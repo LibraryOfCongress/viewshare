@@ -5,34 +5,30 @@
     View.prototype.label = "Table";
     View.prototype.thumbnail = "/static/exhibit/img/table-icon.png";
     View.prototype.viewClass = Exhibit.TabularView;
+    View.prototype.template_name = "table-view-template";
 
-    // Display the view's UI.
-    View.prototype.display = function () {
-        var model = this;
-        var content = this.getContent();
-        var root = Freemix.getTemplate("table-view-template");
-        content.empty();
-        root.appendTo(content);
-        this._setupViewForm();
+    View.prototype.setupEditor = function (config, template) {
 
-        this._setupLabelEditor();
+        this._setupViewForm(config, template);
+
+        this._setupLabelEditor(config, template);
 
         var props = Freemix.exhibit.database.getAllPropertyObjects();
 
-        var sort = content.find("#sort_property");
-        model._setupPropertySelect(sort, "sortProperty", props, true);
+        var sort = template.find("#sort_property");
+        this._setupPropertySelect(config, template, sort, "sortProperty", props, true);
 
         sort.change();
-        var sort_order = content.find("#sort_order");
-        sort_order.val(model.config.asc.toString());
+        var sort_order = template.find("#sort_order");
+        sort_order.val(config.asc.toString());
         sort_order.change(function (e) {
-            model.config.asc = $(this).val() === 'true';
+            config.asc = $(this).val() === 'true';
         });
 
         sort_order.change();
 
-        var property_list = this.getContent().find("#property_list");
-        this._setupPropertyMultiSelect(property_list, "properties", true);
+        var property_list = template.find("#property_list");
+        this._setupPropertyMultiSelect(config, template, property_list, "properties", true);
         property_list.change();
     };
 

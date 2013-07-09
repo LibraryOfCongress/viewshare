@@ -28,11 +28,12 @@
     Freemix.view.BaseView.prototype = new Freemix.Widget();
 
     Freemix.view.BaseView.prototype.generateExhibitHTML = function(config) {
-        config = config || this.config;
+        var config = config || this.config;
     };
 
-    Freemix.view.BaseView.prototype._getLens = function() {
-        return Freemix.lens.getLens(this.config.lens);
+    Freemix.view.BaseView.prototype._getLens = function(config) {
+        var config = config || this.config;
+        return Freemix.lens.construct(config.lens);
     };
 
     Freemix.view.BaseView.prototype._mapExpressions = function (arr) {
@@ -41,7 +42,7 @@
 
     Freemix.view.BaseView.prototype._renderFormats = function(view, config) {
         config = config || this.config;
-        var lens= this._getLens();
+        var lens= this._getLens(config);
         if (lens && lens.config.title) {
            view.attr("ex:formats", "item {title:expression(" + expression(lens.config.title) + ")}");
         }
@@ -49,7 +50,7 @@
 
     Freemix.view.BaseView.prototype._renderOrder = function(view, config) {
         config = config || this.config;
-        var lens = this._getLens();
+        var lens = this._getLens(config);
         if (config.orders && (config.orders.length > 0)) {
             view.attr("ex:orders", this._mapExpressions(config.orders));
             if (config.directions && (config.directions.length === config.orders.length)) {

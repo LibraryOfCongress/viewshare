@@ -32,7 +32,7 @@
     };
 
     Freemix.facet.container.getPopupContent = function() {
-        var fc = this;
+        var container = this;
 
         var chooserThumbnails = $("<div><div class='modal-header'><button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button><h3 id='addWidgetModalLabel'>Select Facet Widget</h3></div></div>");
 
@@ -42,10 +42,10 @@
             if (!facet.config.id) {
                 facet.config.id = $.make_uuid();
             }
-            fc.findWidget().one("edit-facet", function() {
-                fc.addFacet(facet);
+            container.findWidget().one("edit-facet", function() {
+                container.addFacet(facet);
             });
-            facet.showEditor(fc);
+            facet.showEditor(container);
         }).appendTo(chooserThumbnails);
 
         return chooserThumbnails;

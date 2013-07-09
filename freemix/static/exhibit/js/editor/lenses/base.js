@@ -31,7 +31,7 @@
         var title = content.find("#title_property");
         var title_link = content.find("#title_link_property");
 
-        this._setupPropertySelect(title, "title", titles, true);
+        this._setupPropertySelect(config, content, title, "title", titles, true);
         title.change(function() {
              if (title.val() && links.length > 0) {
                  title_link.removeAttr("disabled");
@@ -43,7 +43,7 @@
         });
 
         if (links.length > 0) {
-             this._setupPropertySelect(title_link, "titleLink", links, true);
+             this._setupPropertySelect(config, content, title_link, "titleLink", links, true);
         } else {
              title_link.attr("disabled", true);
         }
@@ -52,14 +52,5 @@
 
     };
 
-    BaseLens.prototype.refreshPreview = function() {
-        var well = this.getPreview();
-
-        well.empty();
-        $("<div ex:role='view'></div>").append(this.generateExhibitHTML()).appendTo(well);
-
-        var exhibit = Freemix.getBuilderExhibit();
-        Exhibit.TileView.createFromDOM(well.find("div").get(0), null, exhibit.getUIContext());
-    };
 
 })(window.Freemix.jQuery, window.Freemix, window.Exhibit);

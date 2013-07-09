@@ -8,8 +8,7 @@
         title:undefined,
         titleLink:undefined,
         latlng:undefined,
-        colorKey:undefined,
-        properties:[]
+        colorKey:undefined
     };
 
     var render = function (config) {
@@ -33,7 +32,7 @@
         }
         this._renderFormats(view);
 
-        view.append(this._getLens().generateExhibitHTML());
+        view.append(this._getLens(config).generateExhibitHTML());
 
         return view;
     };

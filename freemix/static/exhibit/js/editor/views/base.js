@@ -13,10 +13,34 @@
 
     BaseView.prototype.viewClass = Exhibit.TileView;
 
-    BaseView.prototype.showEditor = function(vc) {
-        vc._dialog.modal("hide");
-        vc.addView(this);
-        this.select();
+    BaseView.prototype.showEditor = function(viewContainer) {
+        var view = this;
+        var config = $.extend(true, {}, view.config);
+        var template = Freemix.getTemplate("view-editor");
+        viewContainer = viewContainer || view.findContainer();
+        var dialog = viewContainer.getDialog();
+        template.data("model", this);
+        var form = Freemix.getTemplate(this.template_name);
+        template.find(".view-properties .view-edit-body").append(form);
+
+        form.submit(function() {return false;});
+
+        template.bind(this.refreshEvent, function() {
+            view.updatePreview(template.find(".view-preview-pane"), config);
+        });
+        this.setupEditor(config, template);
+
+        dialog.empty().append(template);
+        dialog.find("#view_save_button").click(function() {
+           var model = template.data("model");
+           model.config = config;
+           viewContainer.findWidget().trigger("edit-view");
+           model.select();
+           viewContainer.getDialog().modal("hide");
+        });
+        dialog.modal("show");
+        template.trigger(this.refreshEvent);
+        
     };
 
     BaseView.prototype.getContainer = function() {
@@ -25,6 +49,10 @@
         }
         return this._container;
     };
+
+    BaseView.prototype.findContainer = function() {
+        return this.getContainer().data("model");
+    }
 
     BaseView.prototype.getContent = function() {
         return this.getContainer().data("model").getContent();
@@ -61,18 +89,15 @@
         var control = this.findWidget();
         var view = this;
         var content = this.getContent();
-        $(".view-set>li.view", this.getContainer()).removeClass("active")
-        .find(".popup-button").hide();
 
+        $(".view-set>li.view", this.getContainer()).removeClass("active");
         control.addClass("active");
-        control.find('.popup-button').show();
-
-        content.off(view.refreshEvent);
-        view.display();
-        content.on(view.refreshEvent, function() {
-            view.refreshPreview();
+        this.updatePreview(content, this.config);
+        content.prepend("<div class='view-menu'><a href='#' title='Edit this view'><i class='icon-edit'></i> Edit</a><hr/></div>");
+        content.find(".view-menu a").click(function() {
+            view.showEditor();
+            return false;
         });
-        content.trigger(view.refreshEvent);
     };
 
     BaseView.prototype.remove = function() {
@@ -88,49 +113,46 @@
         }
     };
 
-    BaseView.prototype.refreshPreview = function() {
-        var well = this.getContent().find(".view-preview .view-preview-pane");
-        well.empty().append(this.generateExhibitHTML());
+    BaseView.prototype.updatePreview = function(target, config) {
+        config = config || this.config;
+        var preview = $(this.generateExhibitHTML(config));
+        target.empty().append(preview);
         var exhibit = Freemix.getBuilderExhibit();
-        this.viewClass.createFromDOM(well.find("div").get(0), null, exhibit.getUIContext());
+        this.viewClass.createFromDOM(preview.get(0), null, exhibit.getUIContext());
     };
 
     BaseView.prototype.display = function() {};
 
-    BaseView.prototype._setupViewForm = function(config) {
-        config = config || this.config;
-        var content = this.getContent();
+    BaseView.prototype.setupEditor = function() {};
 
-        content.find("form").submit(function() {return false;});
+    BaseView.prototype._setupViewForm = function(config, template) {
+        template.find("form").submit(function() {return false;});
 
     };
 
-    BaseView.prototype._setupLabelEditor = function(config) {
-        config = config||this.config;
+    BaseView.prototype._setupLabelEditor = function(config, template) {
         var view = this;
-        var label = this.getContent().find("#view_label_input");
+        var label = template.find("#view_label_input");
 
         label.val(config.name);
         label.change(function() {
             view.rename($(this).val());
-            view.getContent().trigger(view.refreshEvent);
+            template.trigger(view.refreshEvent);
         });
     };
 
 
 
-    BaseView.prototype._setupMultiPropertySortEditor = function() {
-        var content = this.getContent();
-        var sort = content.find("#sort_property");
-        var order = content.find("#sort_order");
+    BaseView.prototype._setupMultiPropertySortEditor = function(config, template) {
+        var sort = template.find("#sort_property");
+        var order = template.find("#sort_order");
         var props = Freemix.exhibit.database.getAllPropertyObjects();
         this._populatePropertySelect(sort, props, true);
-        this._setupSelectMultiPropertyHandler(sort, "orders");
-        this._setupSelectMultiPropertyHandler(order, "directions");
+        this._setupSelectMultiPropertyHandler(config, template, sort, "orders");
+        this._setupSelectMultiPropertyHandler(config, template, order, "directions");
     };
 
-    BaseView.prototype._setupSelectMultiPropertyHandler = function(selector, key) {
-        var config = this.config;
+    BaseView.prototype._setupSelectMultiPropertyHandler = function(config, template, selector, key) {
         var view = this;
         selector.change(function() {
             var value = $(this).val();
@@ -141,7 +163,7 @@
             } else {
                 config[key] = [];
             }
-            view.getContent().trigger(view.refreshEvent);
+            template.trigger(view.refreshEvent);
         });
 
         if (config[key] && config[key].length > 0) {
@@ -151,56 +173,23 @@
         }
     };
 
-    BaseView.prototype._setupLensEditor = function(selector) {
-        selector = selector || $("#lens_editor");
+    BaseView.prototype._setupLensEditor = function(config, template) {
+        var selector = $("#lens_editor", template);
         var view = this;
         var lens;
-        if (!this.config.lens) {
+        if (!config.lens) {
             lens = Freemix.lens.copyDefaultLens();
-            this.config.lens = lens.config.id;
             Freemix.lens.setDefaultLens(lens);
         } else {
-            lens = Freemix.lens.getLens(this.config.lens);
+            lens = Freemix.lens.construct(config.lens);
         }
 
         lens.initializeEditor(selector);
-        lens.getContent().off(lens.refreshEvent).on(lens.refreshEvent, function() {
-            view.getContent().trigger(view.refreshEvent);
+        selector.off(lens.refreshEvent).on(lens.refreshEvent, function() {
+            config.lens = lens.config;
+            template.trigger(view.refreshEvent);
         });
     };
 
-    BaseView.prototype._setupLensPicker = function(selector) {
-        var inx, lens;
-        var option = "<option value=''>Default</option>";
-        var view = this;
-
-        selector = selector || $("#select-view-lens");
-        selector.empty().append(option);
-
-        for (inx = 0 ; inx < Freemix.lens._array.length ; inx++) {
-            lens = Freemix.lens._array[inx];
-            option = $("<option></option>");
-            option.attr("value", lens.config.id);
-            option.text(lens.config.name);
-            selector.append(option);
-        }
-
-        selector.change(function() {
-            var value = $(this).val();
-            if (value && value !== ( "" || undefined)) {
-                view.config.lens = value;
-            } else if (view.config.lens) {
-                delete view.config.lens;
-            }
-            view.getContent().trigger(view.refreshEvent);
-        });
-
-        if (view.config.lens) {
-            selector.val(view.config.lens);
-        } else {
-            selector.val('');
-        }
-
-    };
 
 })(window.Freemix.jQuery, window.Freemix, window.Exhibit);

@@ -28,8 +28,12 @@
         return this.findWidget().find(".view-set>li.ui-state-active");
     };
 
+    Freemix.view.container.getDialog = function() {
+        return this._dialog;
+    };
+
     Freemix.view.container.getPopupContent = function() {
-        var fc = this;
+        var container = this;
 
         var chooserThumbnails = $("<div><div class='modal-header'><button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button><h3 id='addWidgetModalLabel'>Select View Widget</h3></div></div>");
 
@@ -40,7 +44,11 @@
                 if (!view.config.id) {
                     view.config.id = $.make_uuid();
                 }
-                view.showEditor(fc);
+
+                container.findWidget().one("edit-view", function() {
+                    container.addView(view);
+                });
+                view.showEditor(container);
             }).appendTo(chooserThumbnails);
         return chooserThumbnails;
     };

@@ -5,7 +5,7 @@
 
     Lens.propertyTypes = ["image"];
     Lens.label = "Thumbnail";
-    Lens.prototype.initializeEditor = function(target) {
+    Lens.prototype.initializeEditor = function(editor, preview) {
         this._editor = $(editor || "#lens_navigator #lens_detail");
         this._preview = $(preview || "#lens_navigator .lens-preview .lens-preview-pane");
         var root = Freemix.getTemplate("thumbnail-lens-template");

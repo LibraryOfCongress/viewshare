@@ -198,8 +198,7 @@
         var data = Freemix.data || $.map($("link[rel='exhibit/data']"), function(el) {return $(el).attr("href");});
 
         Freemix.exhibit.initializeDatabase(data, function() {
-            Freemix.lens.load(Freemix.profile.lenses, Freemix.profile.default_lens);
-//            Freemix.lens.setupEditor();
+            Freemix.lens.setDefaultLens(Freemix.lens.construct(Freemix.profile.default_lens));
 
             $(".view-container", Freemix.getBuilder()).viewContainer();
             $.each(profile.views, function(key, views) {

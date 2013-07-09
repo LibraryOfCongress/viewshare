@@ -44,6 +44,7 @@
     };
 
     Freemix.facet.BaseFacet.prototype.updatePreview = function(target, config) {
+        config = config || this.config;
         var preview = $(this.generateExhibitHTML(config));
         target.empty().append(preview);
         var exhibit = Freemix.getBuilderExhibit();
@@ -65,9 +66,10 @@
         template.bind("update-preview", function() {
             facet.updatePreview(template.find("#facet-preview"), config);
         });
+        dialog.empty().append(template);
+
         this.setupEditor(config, template);
 
-        dialog.empty().append(template);
         dialog.find("#facet_save_button").click(function() {
            var model = template.data("model");
            model.config = config;
