@@ -94,7 +94,7 @@ define(
 
     /** Generate an array used to identify tags in Freemix */
     tags: function() {
-      if (['location'].indexOf(this._type) >= 0) {
+      if (['location', 'date'].indexOf(this._type) >= 0) {
         // certain Property types have a special tags value
         return ['property:type=' + this._type];
       } else {
