@@ -3,6 +3,7 @@ from django.db import models
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 from django.template.loader import render_to_string
+from django_extensions.db.fields import AutoSlugField, UUIDField
 from django_extensions.db.fields.json import JSONField
 from django_extensions.db.models import TitleSlugDescriptionModel, TimeStampedModel
 from freemix.dataset.models import Dataset
@@ -26,28 +27,13 @@ class Canvas(TitleSlugDescriptionModel):
         verbose_name_plural = "Canvases"
 
 
-class Exhibit(TitleSlugDescriptionModel, TimeStampedModel):
-    owner = models.ForeignKey(User, null=True, blank=True, related_name="exhibits")
+class Exhibit(TimeStampedModel):
 
     profile = JSONField()
     
     dataset = models.ForeignKey(Dataset, null=True, blank=True, related_name="exhibits")
 
     canvas = models.ForeignKey(Canvas)
-
-    published = models.BooleanField(default=True)
-
-    def natural_key(self):
-        return self.owner, self.slug
-
-    @models.permalink
-    def get_absolute_url(self):
-        return ('exhibit_display', (), {
-            'owner': self.owner.username,
-            'slug': self.slug})
-
-    def __unicode__(self):
-        return self.title
 
     def dataset_available(self, user):
         """True if the provided user is able to view the dataset associated with this exhibit
@@ -61,11 +47,52 @@ class Exhibit(TitleSlugDescriptionModel, TimeStampedModel):
         self.profile = profile
         self.save()
 
+
+class PublishedExhibit(Exhibit):
+
+    is_public = models.BooleanField(default=True)
+    owner = models.ForeignKey(User,
+                                  null=True,
+                                  blank=True,
+                                  related_name="published_exhibits")
+
+    title = models.CharField(_('title'), max_length=255)
+    slug = AutoSlugField(_('slug'), populate_from='title')
+    description = models.TextField(_('description'), blank=True, null=True)
+
+    def natural_key(self):
+        return self.owner, self.slug
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('exhibit_display', (), {
+            'owner': self.owner.username,
+            'slug': self.slug})
+
+    def __unicode__(self):
+        return self.title
+
     class Meta:
         unique_together = ("slug", "owner")
+        ordering = ('-modified', )
+
+
+class DraftExhibit(Exhibit):
+
+    owner = models.ForeignKey(User,
+                                null=True,
+                                blank=True,
+                                related_name="draft_exhibits")
+
+    uuid = UUIDField(version=4)
+
+    parent = models.ForeignKey(PublishedExhibit,
+                               null=True,
+                               blank=True)
+
+    class Meta:
         verbose_name_plural = "Exhibits"
         verbose_name = "Exhibit"
         ordering = ('-modified', )
 
-#class ExhibitProfile(JSONDataModel):
-#    pass
+
