@@ -117,11 +117,16 @@ define(
     /**
      * Validate that the data in this Model is in a state where it could
      * be sent to a server.
+     * @param {array} propertyNames - names that already exist and should not
+     * be duplicated
      */
-    validate: function() {
-      var errors = {};
+    validate: function(propertyNames) {
+      var errors = {},
+      existingNames = propertyNames || [];
       if (!this._name) {
-        errors['name'] = 'Please enter a name for the new property.';
+        errors.name = 'Please enter a name for the new property.';
+      } else if (existingNames.indexOf(this._name) >= 0) {
+        errors.name = 'Please enter a unique property name.';
       }
       return errors;
     }

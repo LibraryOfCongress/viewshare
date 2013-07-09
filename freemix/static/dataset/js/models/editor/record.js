@@ -47,6 +47,15 @@ define(
       });
     },
 
+    /** Return an array of PropertyModel.name values in this Record */
+    propertyNames: function() {
+      var i, names = [];
+      for (i = 0; i < this.properties.length; ++i) {
+        names.push(this.properties[i].name());
+      }
+      return names;
+    },
+
     /**
      * When any PropertyModel.type in this.properties changes this is run.
      * @param {string} published.name - Name of the PropertyModel being changed

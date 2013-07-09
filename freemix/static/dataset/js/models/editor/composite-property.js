@@ -67,11 +67,14 @@ define(
     /**
      * Validate that the data in this Model is in a state where it could
      * be sent to a server.
+     * @param {array} propertyNames - names that already exist and should not
+     * be duplicated
      */
-    validate: function() {
-      var errors = PropertyModel.prototype.validate.apply(this, []);
+    validate: function(propertyNames) {
+      var existingNames = propertyNames || [],
+      errors = PropertyModel.prototype.validate.apply(this, [existingNames]);
       if (!this._composite.length) {
-        errors['composite'] = 'Please select at least one property.';
+        errors.composite = 'Please select at least one property.';
       }
       return errors;
     }
