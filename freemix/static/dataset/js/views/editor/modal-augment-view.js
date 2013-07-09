@@ -7,6 +7,7 @@ define(
     'text!templates/modal-augment.html',
     'views/map-augment-view',
     'views/modal-view',
+    'views/timeline-augment-view',
     'bootstrap',
     'freemix.exhibit',
     'freemix.property',
@@ -18,7 +19,8 @@ define(
     $,
     modalAugmentTemplate,
     MapAugmentView,
-    ModalView
+    ModalView,
+    TimelineAugmentView
   ) {
   'use strict';
   /**
@@ -54,7 +56,12 @@ define(
         $el: this.$el.find('#map'),
         model: this.model.records[0]
       });
+      this.timelineView = new TimelineAugmentView({
+        $el: this.$el.find('#timeline'),
+        model: this.model.records[0]
+      });
       this.mapView.render();
+      this.timelineView.render();
     },
     
     /** Display a validation error
@@ -105,6 +112,7 @@ define(
       // validate tab's view's Model
       errorList.empty();
       if (activeTab.attr('id') === 'timeline') {
+        newProperty = this.timelineView.newCompositeProperty;
       } else if (activeTab.attr('id') === 'map') {
         newProperty = this.mapView.newCompositeProperty;
       } else if (activeTab.attr('id') === 'list') {
@@ -149,6 +157,7 @@ define(
     /** Remove event bindings, child views, and DOM elements */
     destroy: function() {
       this.mapView.destroy();
+      this.timelineView.destroy();
       this.$el.remove();
     }
   });
