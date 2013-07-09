@@ -72,8 +72,8 @@ Custom apps
         * An Exhibit is a visualization of a DataSet. An Exhibit consists of a Theme and a Canvas:
             * Theme - color scheme of the Exhibit
             * Canvas - layout of the Exhibit e.g. "A view container with a facet container to the left"
-    * freemix.exhibit.share
-        * Allows an Exhibit owner to generate a unique URL for their Exhibit.
+    * viewshare.apps.share
+        * Allows an Exhibit owner to generate a unique obfuscated URL for their Exhibit.
 
 * Viewshare specific
     * viewshare.apps.notices

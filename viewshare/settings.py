@@ -124,7 +124,7 @@ INSTALLED_APPS = (
     'freemix.dataset',
     'freemix.exhibit',
     'freemix.dataset.augment',
-    'freemix.exhibit.share',
+    'viewshare.apps.share',
 
     # Viewshare specific
     'viewshare.apps.vendor.notification',
