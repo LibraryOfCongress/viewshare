@@ -28,6 +28,8 @@ define(
    * properties to a dataset.
    * @constructor
    * @param {object} options.model - RecordCollection we're augmenting
+   * @param {object} options.notificationView - View used to
+   * render notifications
    */
   var ModalAugmentView = function(options) {
     this.initialize.apply(this, [options]);
@@ -43,7 +45,9 @@ define(
         buttonText: 'Create Property',
         buttonFunction: this.createProperty.bind(this)
       }).$el;
+      this.notificationView = options.notificationView;
       this.mapView = {destroy: $.noop};
+      this.timelineView = {destroy: $.noop};
     },
 
     /** Compile the template we will use to render the View */
@@ -79,6 +83,9 @@ define(
       var augmentErrors = data.failed || {},
       augmentedProperties = [],
       freemixDatabase = Freemix.exhibit.database,
+      freemixRemoveObjects = function(i, id) {
+          freemixDatabase.removeObjects(id,p);
+      },
       i = 0, p;
       // Add augmented data to Freemix database
       $.each(Freemix.property.propertyList, function(name, prop){
@@ -88,9 +95,7 @@ define(
       });
       for (i; i < augmentedProperties.length ; i++) {
         p = augmentedProperties[i];
-        $.each(freemixDatabase.getAllItems(), function(i, id) {
-          freemixDatabase.removeObjects(id,p);
-        });
+        $.each(freemixDatabase.getAllItems(), freemixRemoveObjects);
       }
       freemixDatabase.loadData({'items': data.items});
       // Add augmented data to record-collection
@@ -100,7 +105,11 @@ define(
 
     /** Actions to take on an augmentation server error */
     augmentFailure: function(XMLHttpRequest, textStatus, errorThrown) {
-      console.log('failure');
+      this.notificationView.addNotification(
+        'error',
+        'There was a server error during the data augmentation. Please try again later.',
+        'Augmentation Error!'
+      );
     },
 
     /** Handle the 'Create Property' button click by augmenting data */
@@ -108,7 +117,7 @@ define(
       var activeTab = this.$el.find('.tab-content .active'),
       errorList = this.$el.find('#augment-errors'),
       errors = {},
-      freemixDatabase, newProperty, postData;
+      freemixDatabase, newProperty, postData, propertyNames;
       // validate tab's view's Model
       errorList.empty();
       if (activeTab.attr('id') === 'timeline') {
@@ -120,7 +129,7 @@ define(
         console.log(activeTab);
         return false;
       }
-      errors = newProperty.validate();
+      errors = newProperty.validate(this.model.records[0].propertyNames());
       if ($.isEmptyObject(errors)) {
         // extend Freemix database with new Model by calling Property model's createFreemixProperty()
         Freemix.property.add(newProperty.createFreemixProperty());
@@ -144,11 +153,12 @@ define(
         this.$el.modal('hide');
       } else {
         // display client-side form validation errors
+        this.$el.find('.modal-body').animate({ scrollTop: 0}, 'fast');
         if (errors.hasOwnProperty('name')) {
-          this.renderValidationError(errors['name']);
+          this.renderValidationError(errors.name);
         }
         if (errors.hasOwnProperty('composite')) {
-          this.renderValidationError(errors['composite']);
+          this.renderValidationError(errors.composite);
         }
         return false;
       }
