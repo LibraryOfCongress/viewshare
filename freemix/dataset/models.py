@@ -161,7 +161,7 @@ class DataSourceTransaction(TimeStampedModel):
        This implementation is temporary, to be replaced with a solution with
        pluggable backends.
     """
-    tx_id = UUIDField()
+    tx_id = UUIDField(version=4)
 
     status = models.IntegerField(
             choices=[(v, k) for k, v in TX_STATUS.iteritems()],
@@ -270,7 +270,7 @@ class DataSource(TimeStampedModel):
             blank=True,
             related_name="source")
 
-    uuid = UUIDField()
+    uuid = UUIDField(version=4)
 
     @models.permalink
     def get_absolute_url(self):
