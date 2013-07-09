@@ -1,5 +1,5 @@
 from django import forms
-from freemix.exhibit.share import models
+from viewshare.apps.share import models
 
 class CreateSharedExhibitKeyForm(forms.ModelForm):
 
