@@ -5,7 +5,7 @@ from django.views.decorators.http import last_modified
 from django.views.generic.detail import DetailView
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import CreateView
-from freemix.exhibit.share import models
+from viewshare.apps.share import models
 
 from freemix.dataset import models as dataset_models
 from freemix.exhibit.models import Exhibit
