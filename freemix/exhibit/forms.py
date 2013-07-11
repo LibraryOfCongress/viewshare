@@ -1,6 +1,6 @@
 from django import forms
 from freemix.exhibit import conf
-from freemix.exhibit.models import Exhibit
+from freemix.exhibit.models import PublishedExhibit
 
 class CreateExhibitForm(forms.ModelForm):
 
@@ -20,17 +20,17 @@ class CreateExhibitForm(forms.ModelForm):
         return instance
 
     class Meta:
-        model = Exhibit
-        fields = ("title", "description", "published", "profile",)
+        model = PublishedExhibit
+        fields = ("title", "description", "is_public", "profile",)
         widgets= {
             "profile": forms.HiddenInput(),
-            "published": forms.RadioSelect(choices=((True, "Public"), (False, "Private")))
+            "is_public": forms.RadioSelect(choices=((True, "Public"), (False, "Private")))
         }
 
 class UpdateExhibitDetailForm(forms.ModelForm):
     class Meta:
-        model = Exhibit
-        fields = ("title", "description", "published",)
+        model = PublishedExhibit
+        fields = ("title", "description", "is_public",)
         widgets = {
-            "published": forms.RadioSelect(choices=((True, "Public"), (False, "Private")))
+            "is_public": forms.RadioSelect(choices=((True, "Public"), (False, "Private")))
         }

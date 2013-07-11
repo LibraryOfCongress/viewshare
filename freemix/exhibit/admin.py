@@ -8,8 +8,15 @@ class CanvasAdmin(admin.ModelAdmin):
 admin.site.register(models.Canvas, CanvasAdmin)
 
 
-class ExhibitAdmin(admin.ModelAdmin):
+class DraftExhibitAdmin(admin.ModelAdmin):
+    list_display = ('uuid', 'owner',)
+    search_fields = ('owner__username', )
+
+admin.site.register(models.DraftExhibit, DraftExhibitAdmin)
+
+
+class PublishedExhibitAdmin(admin.ModelAdmin):
     list_display = ('slug', 'owner',)
     search_fields = ('slug', 'title', 'description', 'owner__username')
 
-admin.site.register(models.Exhibit, ExhibitAdmin)
+admin.site.register(models.PublishedExhibit, PublishedExhibitAdmin)
