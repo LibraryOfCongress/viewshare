@@ -5,6 +5,7 @@ define(
     'handlebars',
     'jquery',
     'text!templates/modal-augment.html',
+    'views/list-augment-view',
     'views/map-augment-view',
     'views/modal-view',
     'views/timeline-augment-view',
@@ -18,6 +19,7 @@ define(
     Handlebars,
     $,
     modalAugmentTemplate,
+    ListAugmentView,
     MapAugmentView,
     ModalView,
     TimelineAugmentView
@@ -46,6 +48,7 @@ define(
         buttonFunction: this.createProperty.bind(this)
       }).$el;
       this.notificationView = options.notificationView;
+      this.listView = {destroy: $.noop};
       this.mapView = {destroy: $.noop};
       this.timelineView = {destroy: $.noop};
     },
@@ -56,6 +59,10 @@ define(
     render: function() {
       $('body').append(this.$el);
       // render children
+      this.listView = new ListAugmentView({
+        $el: this.$el.find('#list'),
+        model: this.model.records[0]
+      });
       this.mapView = new MapAugmentView({
         $el: this.$el.find('#map'),
         model: this.model.records[0]
@@ -64,6 +71,7 @@ define(
         $el: this.$el.find('#timeline'),
         model: this.model.records[0]
       });
+      this.listView.render();
       this.mapView.render();
       this.timelineView.render();
     },
@@ -125,6 +133,7 @@ define(
       } else if (activeTab.attr('id') === 'map') {
         newProperty = this.mapView.newCompositeProperty;
       } else if (activeTab.attr('id') === 'list') {
+        newProperty = this.listView.newCompositeProperty;
       } else {
         console.log(activeTab);
         return false;
@@ -166,6 +175,7 @@ define(
 
     /** Remove event bindings, child views, and DOM elements */
     destroy: function() {
+      this.listView.destroy();
       this.mapView.destroy();
       this.timelineView.destroy();
       this.$el.remove();
