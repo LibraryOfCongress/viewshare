@@ -6,7 +6,7 @@
     </div>
   </div><!-- /.control-group -->
   <table class="table table-hover augment-properties">
-    <caption>Base the new Latitude/Longitude field on your existing data</caption>
+    <caption>Base the new Date/Time field on your existing data</caption>
     <thead>
       <tr>
         <th>Selected</th>
@@ -16,7 +16,7 @@
     <tbody id="properties">
       {{#each properties}}
       <tr>
-        <td class="selected"><input type="checkbox"></td>
+        <td class="selected"><input type="checkbox" value="{{ this.id }}"></td>
         <td class="name">{{ this.name }}</td>
       </tr>
       {{/each}}
