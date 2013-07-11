@@ -5,10 +5,13 @@ from django.views.decorators.http import last_modified
 from django.views.generic.detail import DetailView
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import CreateView
+from freemix.exhibit.share import models
+
 from freemix.dataset import models as dataset_models
 from freemix.exhibit.models import Exhibit
 from freemix.views import BaseJSONView
-from freemix.exhibit.share import models, forms
+from viewshare.apps.share import forms
+
 
 class SharedExhibitDisplayView(DetailView):
 

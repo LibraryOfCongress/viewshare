@@ -5,7 +5,7 @@ from freemix.exhibit.models import Exhibit
 
 class SharedExhibitKey(TimeStampedModel,models.Model):
 
-    slug = UUIDField()
+    slug = UUIDField(version=4)
 
     label = models.TextField(max_length=255, blank=True, null=True, help_text="An optional descriptive label")
 

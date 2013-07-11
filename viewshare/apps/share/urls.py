@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import patterns, url
 from django.views.generic.base import TemplateView
-from freemix.exhibit.share import views
+from viewshare.apps.share import views
 
 
 urlpatterns = patterns('',
