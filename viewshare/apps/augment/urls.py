@@ -1,5 +1,5 @@
 from django.conf.urls.defaults import *
-import views
+from viewshare.apps.augment import views
 
 urlpatterns = patterns('',
     url(r'^transform/$', views.transform, name="akara_augment"),

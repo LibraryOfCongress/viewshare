@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import ListPattern, AugmentationErrorCode
-from .forms import  ListPatternForm
+from .viewshare.apps.augment.models import ListPattern, AugmentationErrorCode
+from .viewshare.apps.augment.forms import  ListPatternForm
 
 class ListPatternAdmin(admin.ModelAdmin):
     form = ListPatternForm

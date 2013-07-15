@@ -1,9 +1,9 @@
-from freemix.dataset.transform import RawTransformView, AkaraTransformClient
 from freemix.dataset.augment import models
-from freemix.dataset.augment import conf
-
 from django.views.generic.base import View
+
+from freemix.dataset.transform import RawTransformView, AkaraTransformClient
 from freemix.views import JSONResponse
+from viewshare.apps.augment import conf
 
 
 class JSONView(View):

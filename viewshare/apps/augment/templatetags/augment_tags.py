@@ -1,8 +1,5 @@
 from django import template
-from django.conf import settings
-from freemix.dataset.augment.models import ListPattern
-from django.template.loader import render_to_string
-from django.template import Variable
+from viewshare.apps.augment.models import ListPattern
 
 register = template.Library()
 
