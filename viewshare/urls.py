@@ -48,7 +48,7 @@ urlpatterns = patterns('',
     # (r'^source/', include('freemix.dataset.urls.datasource')),
 
     (r'^views/', include('freemix.exhibit.urls')),
-    (r'^augment/', include('freemix.dataset.augment.urls')),
+    (r'^augment/', include('viewshare.apps.augment.urls')),
     (r'^share/', include('viewshare.apps.share.urls')),
 
     url(r'^userhome/$', login_required(UserHomeView.as_view()), name="user_home"),

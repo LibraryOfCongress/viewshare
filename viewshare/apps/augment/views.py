@@ -1,4 +1,4 @@
-from freemix.dataset.augment import models
+from viewshare.apps.augment import models
 from django.views.generic.base import View
 
 from freemix.dataset.transform import RawTransformView, AkaraTransformClient
