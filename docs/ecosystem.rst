@@ -60,7 +60,7 @@ Custom apps
 -----------
 * Freemix specific
     * freemix
-    * freemix.dataset
+    * viewshare.apps.legacy.dataset
         * A DataSet can be thought of as a group of information related to uploaded data. A DataSet contains information about:
             * The raw data that was uploaded to Viewshare
             * Descriptions of the columns in uploaded data

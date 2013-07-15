@@ -13,7 +13,7 @@ class Command(NoArgsCommand):
     def handle_noargs(self, **options):
         logging.basicConfig(level=logging.DEBUG, format="%(message)s")
         logging.debug("Deleting expired "
-                      "freemix.dataset.models.DataSource models")
+                      "viewshare.apps.legacy.dataset.models.DataSource models")
         transactions = DataSource.objects.all()
         expired_transactions = [x for x in transactions if x.is_expired()]
         record_count = len(expired_transactions)

@@ -44,8 +44,8 @@ urlpatterns = patterns('',
         name='exhibit_list_by_user_connections'),
 
     (r'^upload/', include('viewshare.apps.upload.urls')),
-    (r'^data/', include('freemix.dataset.urls')),
-    # (r'^source/', include('freemix.dataset.urls.datasource')),
+    (r'^data/', include('viewshare.apps.legacy.dataset.urls')),
+    # (r'^source/', include('viewshare.apps.legacy.dataset.urls.datasource')),
 
     (r'^views/', include('freemix.exhibit.urls')),
     (r'^augment/', include('viewshare.apps.augment.urls')),

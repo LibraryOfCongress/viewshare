@@ -3,11 +3,11 @@ from django.conf.urls.defaults import patterns, include
 
 urlpatterns = patterns('',
 
-    (r'^', include('freemix.dataset.urls.list')),
-    (r'^source/', include('freemix.dataset.urls.datasource')),
-    (r'^', include('freemix.dataset.urls.base')),
-    (r'^', include('freemix.dataset.urls.viewer')),
-    (r'^', include('freemix.dataset.urls.editor')),
+    (r'^', include('viewshare.apps.legacy.dataset.urls.list')),
+    (r'^source/', include('viewshare.apps.legacy.dataset.urls.datasource')),
+    (r'^', include('viewshare.apps.legacy.dataset.urls.base')),
+    (r'^', include('viewshare.apps.legacy.dataset.urls.viewer')),
+    (r'^', include('viewshare.apps.legacy.dataset.urls.editor')),
 
 )
 

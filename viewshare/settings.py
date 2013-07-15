@@ -121,7 +121,7 @@ INSTALLED_APPS = (
 
     # Freemix specific
     'freemix',
-    'freemix.dataset',
+    'viewshare.apps.legacy.dataset',
     'freemix.exhibit',
     'viewshare.apps.augment',
     'viewshare.apps.share',
