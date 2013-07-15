@@ -13,8 +13,8 @@ from django.db import models, transaction as db_tx
 from django_extensions.db.fields.json import JSONField
 from django_extensions.db.models import (
         TimeStampedModel, TitleSlugDescriptionModel)
-from freemix.dataset.transform import AKARA_TRANSFORM_URL
-from freemix.dataset.transform import AkaraTransformClient
+from viewshare.apps.legacy.dataset.transform import AKARA_TRANSFORM_URL
+from viewshare.apps.legacy.dataset.transform import AkaraTransformClient
 
 
 logger = logging.getLogger(__name__)
@@ -204,7 +204,7 @@ class DataSourceTransaction(TimeStampedModel):
                 db_tx.rollback()
                 raise ex
             else:
-                from freemix.dataset.tasks import run_transaction
+                from viewshare.apps.legacy.dataset.tasks import run_transaction
                 run_transaction.delay(self.tx_id)
 
     def run(self):

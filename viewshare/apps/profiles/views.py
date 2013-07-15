@@ -13,7 +13,7 @@ from django.utils.translation import ugettext
 from viewshare.apps.vendor.friends.forms import InviteFriendForm
 from viewshare.apps.vendor.friends.models import (FriendshipInvitation,
                                                   Friendship)
-from freemix.dataset.models import DataSource
+from viewshare.apps.legacy.dataset.models import DataSource
 from freemix.permissions import PermissionsRegistry
 
 from viewshare.apps.profiles.forms import ProfileForm

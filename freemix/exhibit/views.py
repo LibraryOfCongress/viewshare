@@ -1,5 +1,7 @@
-from django.utils.translation import ugettext_lazy as _
+import json
+import uuid
 
+from django.utils.translation import ugettext_lazy as _
 from django.http import *
 from django.views.decorators.http import last_modified
 from django.views.generic.base import View
@@ -11,13 +13,10 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
 
 from freemix.exhibit import models, forms, conf
-from freemix.dataset.models import Dataset
+from viewshare.apps.legacy.dataset.models import Dataset
 from freemix.exhibit.models import Canvas
 from freemix.permissions import PermissionsRegistry
 from freemix.utils import get_site_url
-
-import json
-import uuid
 from freemix.views import JSONResponse, OwnerListView, OwnerSlugPermissionMixin, BaseJSONView
 
 

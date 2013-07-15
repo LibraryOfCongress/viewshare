@@ -1,6 +1,6 @@
 from django.utils.translation import ugettext_lazy as _
 
-from freemix.dataset.models import TX_STATUS
+from viewshare.apps.legacy.dataset.models import TX_STATUS
 
 
 def pretty_print_transaction_status(status_id):

@@ -1,7 +1,7 @@
 from django import forms
 from django.forms.widgets import Select
 from django.utils.translation import ugettext_lazy as _
-from freemix.dataset.models import DataSource
+from viewshare.apps.legacy.dataset.models import DataSource
 from viewshare.apps.upload import models
 
 

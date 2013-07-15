@@ -1,9 +1,9 @@
 from celery.task import task
 from celery.task import periodic_task
-from celery.task.schedules import crontab
 from django.core.management import call_command
 
-from freemix.dataset.models import DataSourceTransaction
+from celery.task.schedules import crontab
+from viewshare.apps.legacy.dataset.models import DataSourceTransaction
 
 
 @task

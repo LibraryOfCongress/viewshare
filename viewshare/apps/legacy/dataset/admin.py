@@ -1,5 +1,6 @@
 from django.contrib import admin
-from . import models
+from viewshare.apps.legacy.dataset import models
+
 
 def make_json_data_inline(m):
     class JSONDataFileInline(admin.TabularInline):

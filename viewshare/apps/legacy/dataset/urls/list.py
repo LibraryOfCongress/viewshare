@@ -1,7 +1,6 @@
-from django.conf import settings
 from django.conf.urls.defaults import url, patterns
 from django.contrib.auth.decorators import login_required
-from freemix.dataset import  views
+from viewshare.apps.legacy.dataset import  views
 
 # Dataset List URLs
 urlpatterns = patterns('',

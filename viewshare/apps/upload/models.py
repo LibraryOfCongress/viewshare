@@ -7,10 +7,10 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from freemix.dataset.models import (DataSource,
+from viewshare.apps.legacy.dataset.models import (DataSource,
                                     URLDataSourceMixin,
                                     make_file_data_source_mixin)
-from freemix.dataset.transform import AkaraTransformClient
+from viewshare.apps.legacy.dataset.transform import AkaraTransformClient
 from viewshare.apps.upload import conf
 
 

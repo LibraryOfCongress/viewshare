@@ -1,5 +1,5 @@
 from django import template
-from freemix.dataset.views import DataSourceRegistry
+from viewshare.apps.legacy.dataset.views import DataSourceRegistry
 
 register = template.Library()
 

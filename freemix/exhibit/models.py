@@ -6,7 +6,7 @@ from django_extensions.db.fields import AutoSlugField, UUIDField
 from django_extensions.db.fields.json import JSONField
 from django_extensions.db.models import (TitleSlugDescriptionModel,
                                          TimeStampedModel)
-from freemix.dataset.models import Dataset
+from viewshare.apps.legacy.dataset.models import Dataset
 
 
 class Canvas(TitleSlugDescriptionModel):

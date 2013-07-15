@@ -1,14 +1,14 @@
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.syndication.views import Feed
 from django.utils.feedgenerator import Atom1Feed
-from freemix.permissions import PermissionsRegistry
+from django.core.urlresolvers import reverse
 
+from freemix.permissions import PermissionsRegistry
 from freemix.utils import get_user
-from freemix.dataset.models import Dataset
+from viewshare.apps.legacy.dataset.models import Dataset
 from freemix.exhibit.models import Exhibit
 from freemix.utils import get_site_url
 
-from django.core.urlresolvers import reverse
 
 class ItemMixin:
     def item_pubdate(self, item):

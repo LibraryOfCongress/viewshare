@@ -1,7 +1,9 @@
 from django import forms
 from django.db import transaction
-from freemix.dataset.models import Dataset
 from django.utils.translation import ugettext_lazy as _
+
+from viewshare.apps.legacy.dataset.models import Dataset
+
 
 published_choices = ((True, "Public"), (False, "Private"))
 

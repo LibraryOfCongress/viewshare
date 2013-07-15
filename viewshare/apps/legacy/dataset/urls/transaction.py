@@ -1,5 +1,7 @@
-from freemix.dataset import views
 from django.conf.urls.defaults import url, patterns
+
+from viewshare.apps.legacy.dataset import views
+
 
 urlpatterns = patterns('',
     url(r'^tx/(?P<tx_id>[a-f0-9-]+)/$', views.ProcessTransactionView.as_view(), name='datasource_transaction'),

@@ -1,7 +1,7 @@
 from django import template
 from django.core.urlresolvers import reverse
 
-from freemix.dataset.utils import pretty_print_transaction_status
+from viewshare.apps.legacy.dataset.utils import pretty_print_transaction_status
 
 register = template.Library()
 

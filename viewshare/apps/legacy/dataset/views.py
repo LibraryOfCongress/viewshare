@@ -18,8 +18,8 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
 
-from freemix.dataset import conf, forms, models
-from freemix.dataset.utils import pretty_print_transaction_status
+from viewshare.apps.legacy.dataset import models
+from viewshare.apps.legacy.dataset.utils import pretty_print_transaction_status
 from freemix.permissions import PermissionsRegistry
 from freemix.views import (
         OwnerListView,
@@ -31,6 +31,8 @@ from freemix.views import (
 
 #----------------------------------------------------------------------------------------------------------------------#
 # Data Profile Views
+from viewshare.apps.legacy.dataset import forms, conf
+
 
 def get_request_instance(request, *args, **kwargs):
     if not hasattr(request, "parent_object"):

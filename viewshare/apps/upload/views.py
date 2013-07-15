@@ -1,15 +1,17 @@
 import logging
+import urllib2
+
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.views.generic.base import View
 from django.views.generic.edit import CreateView
-from freemix.dataset.transform import AkaraTransformClient
-from freemix.dataset.views import DataSourceRegistry
-from freemix.views import JSONResponse
 
+from viewshare.apps.legacy.dataset.transform import AkaraTransformClient
+from viewshare.apps.legacy.dataset.views import DataSourceRegistry
+from freemix.views import JSONResponse
 from viewshare.apps.upload import forms, conf
 from viewshare.apps.upload import models
-import urllib2
+
 
 logger = logging.getLogger(__name__)
 

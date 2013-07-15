@@ -2,7 +2,7 @@ from django.conf.urls.defaults import url, patterns
 from django.contrib.auth.decorators import login_required
 
 # Dataset editor
-from freemix.dataset import views
+from viewshare.apps.legacy.dataset import views
 
 urlpatterns = patterns('',
 

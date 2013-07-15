@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic.base import TemplateView
 
 # Dataset editor
-from freemix.dataset import views
+from viewshare.apps.legacy.dataset import views
 
 urlpatterns = patterns('',
     url(r'^(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/editor/$',

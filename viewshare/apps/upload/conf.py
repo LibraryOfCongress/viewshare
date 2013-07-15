@@ -1,6 +1,9 @@
-from django.conf import settings
 from urlparse import urljoin
-from freemix.dataset.transform import AKARA_URL_PREFIX
+
+from django.conf import settings
+
+from viewshare.apps.legacy.dataset.transform import AKARA_URL_PREFIX
+
 
 AKARA_CONTENTDM_URL = getattr(settings,
     "AKARA_CONTENTDM_URL",

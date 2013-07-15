@@ -2,7 +2,7 @@ import logging
 
 from django.core.management.base import NoArgsCommand
 
-from freemix.dataset.models import DataSource
+from viewshare.apps.legacy.dataset.models import DataSource
 
 
 class Command(NoArgsCommand):

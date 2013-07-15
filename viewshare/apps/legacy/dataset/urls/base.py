@@ -1,5 +1,5 @@
 from django.conf.urls.defaults import url, patterns
-from freemix.dataset import  views
+from viewshare.apps.legacy.dataset import  views
 
 # Dataset parameters
 urlpatterns = patterns('',
