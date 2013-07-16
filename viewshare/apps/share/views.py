@@ -8,6 +8,7 @@ from django.views.generic.edit import CreateView
 from viewshare.apps.share import models
 
 from freemix.exhibit.models import Exhibit
+from viewshare.apps.legacy.dataset import models as dataset_models
 from freemix.views import BaseJSONView
 from viewshare.apps.share import forms
 

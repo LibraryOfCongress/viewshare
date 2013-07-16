@@ -75,7 +75,7 @@ def check_owner(user_obj, obj):
     return user_obj.id == obj.owner_id
 
 def check_published(user_obj, obj):
-    if obj.published:
+    if obj.is_public:
         return True
     return check_owner(user_obj, obj)
 

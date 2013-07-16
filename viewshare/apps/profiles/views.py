@@ -155,7 +155,7 @@ def profile(request, username, template_name="profiles/profile.html",
 
     exhibit_filter = PermissionsRegistry.get_filter("exhibit.can_view",
                                                     request.user)
-    exhibits = other_user.exhibits.filter(exhibit_filter)
+    exhibits = other_user.published_exhibits.filter(exhibit_filter)
     exhibits = exhibits.select_related("owner", "dataset__owner", "dataset")
 
     return render_to_response(template_name, dict({

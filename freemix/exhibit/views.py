@@ -201,7 +201,7 @@ class ExhibitView(OwnerSlugPermissionMixin, DetailView):
     select_related = ("owner", "dataset", "dataset__owner")
 
     def get_queryset(self):
-        return models.Exhibit.objects.select_related(*self.select_related)
+        return models.PublishedExhibit.objects.select_related(*self.select_related)
 
     object_perm = "exhibit.can_view"
     template_name = "exhibit/exhibit_display.html"
@@ -348,8 +348,7 @@ class StockExhibitProfileJSONView(View):
 
 def get_exhibit(request, owner, slug):
     if not hasattr(request, "exhibit"):
-        qs = models.Exhibit.objects.select_related("owner", "dataset")
-        request.exhibit = get_object_or_404(qs, slug=slug, owner__username=owner)
+        request.exhibit = get_object_or_404(models.PublishedExhibit, slug=slug, owner__username=owner)
     return request.exhibit
 
 class ExhibitProfileJSONView(BaseJSONView):
@@ -359,7 +358,7 @@ class ExhibitProfileJSONView(BaseJSONView):
 
     def get_doc(self):
         ex = self.get_parent_object()
-        return models.Exhibit.objects.filter(id=ex.id).values_list("profile", flat=True)[0]
+        return models.PublishedExhibit.objects.filter(id=ex.id).values_list("profile", flat=True)[0]
 
     def check_perms(self):
         return self.request.user.has_perm("exhibit.can_view", self.get_parent_object())
@@ -367,7 +366,7 @@ class ExhibitProfileJSONView(BaseJSONView):
 
     def cache_control_header(self):
         cache_control = super(ExhibitProfileJSONView, self).cache_control_header()
-        if not self.request.exhibit.published:
+        if not self.request.exhibit.is_public:
             cache_control += ", private"
         else:
             cache_control += ", public"

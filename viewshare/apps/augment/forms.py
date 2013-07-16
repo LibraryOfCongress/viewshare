@@ -1,5 +1,5 @@
 from django import forms
-from .viewshare.apps.augment.models import ListPattern
+from viewshare.apps.augment.models import ListPattern
 
 class ListPatternForm(forms.ModelForm):
     
