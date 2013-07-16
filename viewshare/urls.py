@@ -25,7 +25,6 @@ urlpatterns = patterns('',
 
     (r'^invitations/', include('viewshare.apps.connections.urls')),
     (r'^notices/', include('viewshare.apps.vendor.notification.urls')),
-    (r'^announcements/', include('viewshare.apps.vendor.announcements.urls')),
     (r'^admin/', include(admin.site.urls)),
 
     (r'^catalog/', include('viewshare.apps.collection_catalog.urls')),

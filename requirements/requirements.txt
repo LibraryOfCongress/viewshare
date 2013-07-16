@@ -13,6 +13,8 @@ django-pagination==1.0.7
 django-crispy-forms==1.2.4
 django-require==1.0.3
 
+-e git+git://github.com/pinax/django-announcements.git#egg=django-announcements
+
 # django-curation is required by viewshare.apps.discover
 -e git+git://github.com/theatlantic/django-curation.git#egg=django-curation
 
