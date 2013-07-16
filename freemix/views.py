@@ -1,4 +1,5 @@
-import simplejson as json
+import json
+
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.http import Http404, HttpResponse
