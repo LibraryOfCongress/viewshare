@@ -212,7 +212,7 @@ CACHES = {
     }
 }
 
-# Validate the request’s Host header and protect
+# Validate the request's Host header and protect
 # against host-poisoning attacks
 ALLOWED_HOSTS = ('viewshare.org', )
 
