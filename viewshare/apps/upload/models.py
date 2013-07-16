@@ -6,12 +6,44 @@ from django.core.files.storage import FileSystemStorage
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django_extensions.db.models import TimeStampedModel
+from freemix.exhibit.models import Exhibit
 
-from viewshare.apps.legacy.dataset.models import (DataSource,
-                                    URLDataSourceMixin,
-                                    make_file_data_source_mixin)
+from viewshare.apps.legacy.dataset import models as ds_models
+
 from viewshare.apps.legacy.dataset.transform import AkaraTransformClient
 from viewshare.apps.upload import conf
+
+class DataSource(TimeStampedModel):
+    """
+    This class should be extended to define the source from which the data in
+    Datasets are derived.
+
+    Extending subclasses should include any variable parameters that define a
+    dataset.  In addition, they should override the `refresh()` method to
+    simply perform the data generation and return the result.
+    """
+    classname = models.CharField(max_length=32, editable=False, null=True)
+
+    exhibit = models.OneToOneField(Exhibit,
+                                   related_name="source")
+
+    def get_concrete(self):
+        if self.classname == "DataSource":
+            return self
+        return self.__getattribute__(self.classname.lower())
+
+    def is_concrete(self):
+        return self.classname == self.__class__.__name__
+
+
+class ReferenceDataSource(ds_models.DataSource):
+    """
+    A Data Source that references another exhibit
+    """
+
+    referenced = models.ForeignKey(Exhibit,
+                                   related_name="references")
 
 
 def source_upload_path(instance, filename):
@@ -28,16 +60,16 @@ class ViewshareFileStorage(FileSystemStorage):
 
 fs = ViewshareFileStorage(location=conf.FILE_UPLOAD_PATH)
 
-file_datasource_mixin = make_file_data_source_mixin(storage=fs,
+file_datasource_mixin = ds_models.make_file_data_source_mixin(storage=fs,
     upload_to=source_upload_path)
 
 
-class URLDataSource(URLDataSourceMixin, DataSource):
+class URLDataSource(ds_models.URLDataSourceMixin, ds_models.DataSource):
     """Generic URL data source
     """
 
 
-class FileDataSource(file_datasource_mixin, DataSource):
+class FileDataSource(file_datasource_mixin, ds_models.DataSource):
     """Generic File data source
     """
 
@@ -47,7 +79,7 @@ _collection_help_text_ = _("Collection names begin with the "
 _limit_help_text_ = _("The maximum number of records to load")
 
 
-class ContentDMDataSource(URLDataSourceMixin, DataSource):
+class ContentDMDataSource(ds_models.URLDataSourceMixin, ds_models.DataSource):
     """
     Data source for loading data from a particular CONTENTdm site
     based on collection name or query.
@@ -88,7 +120,7 @@ class ContentDMDataSource(URLDataSourceMixin, DataSource):
         return None
 
 
-class OAIDataSource(URLDataSourceMixin, DataSource):
+class OAIDataSource(ds_models.URLDataSourceMixin, ds_models.DataSource):
     """Data source for loading an OAI set.
     """
 
@@ -120,7 +152,7 @@ class OAIDataSource(URLDataSourceMixin, DataSource):
         return "%s (%s, %s)" % (self.title, self.url, self.set)
 
 
-class JSONURLDataSource(URLDataSourceMixin, DataSource):
+class JSONURLDataSource(ds_models.URLDataSourceMixin, ds_models.DataSource):
     """Load JSON from a URL
     """
     path = models.TextField(_("Items Array"))
@@ -140,7 +172,7 @@ class JSONURLDataSource(URLDataSourceMixin, DataSource):
         return "%s (%s)" % (self.url, self.path)
 
 
-class JSONFileDataSource(file_datasource_mixin, DataSource):
+class JSONFileDataSource(file_datasource_mixin, ds_models.DataSource):
     """Load JSON from a file
     """
     path = models.TextField(_("Items Array"))
@@ -186,11 +218,11 @@ class ModsMixin(models.Model):
         return p
 
 
-class ModsURLDataSource(ModsMixin, URLDataSourceMixin, DataSource):
+class ModsURLDataSource(ModsMixin, ds_models.URLDataSourceMixin, ds_models.DataSource):
     """Load XMLMODS from a URL
     """
 
 
-class ModsFileDataSource(ModsMixin, file_datasource_mixin, DataSource):
+class ModsFileDataSource(ModsMixin, file_datasource_mixin, ds_models.DataSource):
     """Load XMLMODS from an uploaded file
     """
