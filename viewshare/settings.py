@@ -212,13 +212,9 @@ CACHES = {
     }
 }
 
-import logging
-
-logging.basicConfig(
-    level=logging.DEBUG,
-    format='%(asctime)s %(levelname)s %(message)s',
-)
-
+# Validate the request’s Host header and protect
+# against host-poisoning attacks
+ALLOWED_HOSTS = ('viewshare.org', )
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
