@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- See: http://chroniclingamerica.loc.gov/about/api/ -->
+<feed xmlns="http://www.w3.org/2005/Atom"
+      xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+
+    <title>Chronicling America Title Search Results</title>
+    <link href="http://chroniclingamerica.loc.gov/search/titles/results/?terms=immigration&amp;format=atom" rel="self" />
+    <id>http://chroniclingamerica.loc.gov/search/titles/results/?terms=immigration&amp;format=atom</id>
+    <updated>2010-08-12T22:33:49-04:00</updated>
+    <opensearch:totalResults>66</opensearch:totalResults>
+    <opensearch:startIndex>1</opensearch:startIndex>
+    <opensearch:itemsPerPage>50</opensearch:itemsPerPage>
+    <link rel="search" type="application/opensearchdescription+xml" href="/search/pages/opensearch.xml" />
+    
+    <link rel="next" type="application/atom+xml" href="http://chroniclingamerica.loc.gov/search/pages/results/?terms=immigration&amp;page=2&amp;format=atom" />
+
+    
+    <entry>
+        <title>The Western immigrant.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn87090597/" />
+        <id>info:lccn/sn87090597</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T16:24:07-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>The Florida immigrant.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn95047410/" />
+        <id>info:lccn/sn95047410</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T15:54:03-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>The Southern immigrant.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn85044631/" />
+        <id>info:lccn/sn85044631</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T16:10:51-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>Southern immigrant.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn85045080/" />
+        <id>info:lccn/sn85045080</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T16:14:23-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>Waterville immigrant.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn88087228/" />
+        <id>info:lccn/sn88087228</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T16:30:30-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>The Immigrant&#39;s guide.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn89066584/" />
+        <id>info:lccn/sn89066584</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T16:32:12-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>The Toledo immigrant.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn90050295/" />
+        <id>info:lccn/sn90050295</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T16:36:55-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>The Immigrant&#39;s guide.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn93066100/" />
+        <id>info:lccn/sn93066100</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T16:46:03-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>Den Norske immigrant.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn85040508/" />
+        <id>info:lccn/sn85040508</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T16:09:35-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>Russkii emigrant = Russian immigrant.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn86071259/" />
+        <id>info:lccn/sn86071259</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T16:16:41-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>Mississippi journal of immigration.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn89071373/" />
+        <id>info:lccn/sn89071373</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T16:33:04-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>South Georgia immigrant.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn91074121/" />
+        <id>info:lccn/sn91074121</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T16:41:19-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>Dakota immigration journal.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn99062833/" />
+        <id>info:lccn/sn99062833</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T17:03:50-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>De Cordova&#39;s herald and immigrant&#39;s guide.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn86089451/" />
+        <id>info:lccn/sn86089451</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T16:20:12-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>Texas real estate and immigration journal.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn87091155/" />
+        <id>info:lccn/sn87091155</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T16:25:48-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>The Illinois gazetteer and immigrants&#39; western guide.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn90053060/" />
+        <id>info:lccn/sn90053060</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T16:36:31-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>Western advance.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn85030096/" />
+        <id>info:lccn/sn85030096</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T16:08:42-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>Kerr City advertiser.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn95026113/" />
+        <id>info:lccn/sn95026113</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T16:53:07-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>Barber County truth.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn83040267/" />
+        <id>info:lccn/sn83040267</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T15:59:45-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>The New north Wisconsin.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn84024394/" />
+        <id>info:lccn/sn84024394</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T16:04:01-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>The Kansas pilot.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn85031231/" />
+        <id>info:lccn/sn85031231</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T16:10:03-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>Der südliche Pionier.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn89059194/" />
+        <id>info:lccn/sn89059194</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T16:31:57-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>Die Suedliche Post.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn91068333/" />
+        <id>info:lccn/sn91068333</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T16:40:00-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>Práce.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn2002061520/" />
+        <id>info:lccn/sn2002061520</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T17:07:25-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>The Independent Arkansian.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn84022941/" />
+        <id>info:lccn/sn84022941</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T17:11:29-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>The new Italy.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn94051381/" />
+        <id>info:lccn/sn94051381</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T16:48:12-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>The monthly bulletin.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn96094023/" />
+        <id>info:lccn/sn96094023</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T16:57:43-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>The Imperial state.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn89067368/" />
+        <id>info:lccn/sn89067368</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T16:33:53-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>Herald and planter.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn83021638/" />
+        <id>info:lccn/sn83021638</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T16:02:18-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>Právo.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn83035324/" />
+        <id>info:lccn/sn83035324</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T15:59:56-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>Il Messaggero = The Messenger.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn93060062/" />
+        <id>info:lccn/sn93060062</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T16:05:26-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>Novai͡a zhiznʹ = New life.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn99060617/" />
+        <id>info:lccn/sn99060617</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T17:04:16-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>Przemyslowa demokracja.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn2002061524/" />
+        <id>info:lccn/sn2002061524</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T17:07:25-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>Cleveland labor chronicle.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn83035117/" />
+        <id>info:lccn/sn83035117</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T15:59:05-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>Hrvatski svijet.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn83045249/" />
+        <id>info:lccn/sn83045249</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T15:58:36-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>New Albany daily tribune.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn84045482/" />
+        <id>info:lccn/sn84045482</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T16:07:08-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>The visitor.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn85029653/" />
+        <id>info:lccn/sn85029653</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T16:11:09-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>Il Nuovo mondo.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn86071645/" />
+        <id>info:lccn/sn86071645</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T17:13:44-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>The Texas journal of commerce.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn86088504/" />
+        <id>info:lccn/sn86088504</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T16:19:14-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>The Rural messenger.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn94059431/" />
+        <id>info:lccn/sn94059431</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T16:38:35-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>Florida New-Yorker.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn95026099/" />
+        <id>info:lccn/sn95026099</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T15:54:03-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>Journal of industry.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn99066773/" />
+        <id>info:lccn/sn99066773</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T17:04:10-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>La Fiaccola.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn2002061467/" />
+        <id>info:lccn/sn2002061467</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T17:07:21-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>Jugoslovenski svijet.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn83045206/" />
+        <id>info:lccn/sn83045206</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T15:58:28-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>Aufbau : Nachrichtenblatt des German-Jewish Club.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn78001536/" />
+        <id>info:lccn/sn78001536</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T15:55:12-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>Narodowiec.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn89020454/" />
+        <id>info:lccn/sn89020454</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T17:23:28-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>L&#39;adunata dei refrattari = Call of the refractaires.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn2002061451/" />
+        <id>info:lccn/sn2002061451</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T16:27:22-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>The Democrat.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn82016408/" />
+        <id>info:lccn/sn82016408</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T17:09:34-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>America.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn83035644/" />
+        <id>info:lccn/sn83035644</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T16:02:02-04:00</updated>
+    </entry>
+    
+    <entry>
+        <title>Mandan pioneer.</title>
+        <link href="http://chroniclingamerica.loc.gov/lccn/sn89074329/" />
+        <id>info:lccn/sn89074329</id>
+        <author><name>Library of Congress</name></author>
+        <updated>2010-04-12T15:54:40-04:00</updated>
+    </entry>
+    
+
+</feed>
+

@@ -1,0 +1,1157 @@
+<?xml-stylesheet type="text/xsl" href="http://www.loc.gov/standards/mods/v3/minerva3.xsl"?>
+<modsCollection xmlns="http://www.loc.gov/mods/v3" xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-2.xsd">
+	<mods version="3.2">
+		<titleInfo>
+			<title>Constitution Finder</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060628</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<physicalDescription>
+			<form authority="marcform">electronic</form>
+			<internetMediaType>text/html</internetMediaType>
+			<digitalOrigin>born digital</digitalOrigin>
+		</physicalDescription>
+		<targetAudience>general</targetAudience>
+		<typeOfResource>text</typeOfResource>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">confinder.richmond.edu/</note>
+		<note type="quality review">Category in Leaderboard is Government - Foreign.  actual constitutions.went to out side links not scoped Constitutions and other laws from more than 200 countries and other entities  Constitution Finder law, government </note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Single Sites Web Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000013</url>
+			</location>
+		</relatedItem>
+		<identifier>mrva0013.0001</identifier>
+		<location>
+			<url usage="primary display">http://hdl.loc.gov/loc.natlib/mrva0013.0001</url>
+		</location>
+		<location>
+			<url usage="primary display">http://webarchives.loc.gov/collections/lcwa0013/*/confinder.richmond.edu/</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Washington D.C., 20540 USA</physicalLocation>
+			<physicalLocation authority="marcorg">dlc</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20090324</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0013.0001</recordIdentifier>
+			<languageOfCataloging>
+				<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+			</languageOfCataloging>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Magyar Nemzeti Bank</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<physicalDescription>
+			<form authority="marcform">electronic</form>
+			<internetMediaType>text/html</internetMediaType>
+			<digitalOrigin>born digital</digitalOrigin>
+		</physicalDescription>
+		<targetAudience>general</targetAudience>
+		<typeOfResource>text</typeOfResource>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">english.mnb.hu/engine.aspx?page=mnben</note>
+		<note type="quality review">Category in Leaderboard is Organizations &amp; Corporate Firms.   Hungarian National Bank. Periodical publications important. banking/business/economics</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Single Sites Web Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000013</url>
+			</location>
+		</relatedItem>
+		<identifier>mrva0013.0002</identifier>
+		<location>
+			<url usage="primary display">http://hdl.loc.gov/loc.natlib/mrva0013.0002</url>
+		</location>
+		<location>
+			<url usage="primary display">http://webarchives.loc.gov/collections/lcwa0013/*/english.mnb.hu/engine.aspx?page=mnben</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Washington D.C., 20540 USA</physicalLocation>
+			<physicalLocation authority="marcorg">dlc</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20090324</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0013.0002</recordIdentifier>
+			<languageOfCataloging>
+				<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+				<languageTerm authority="iso639-2b" type="code">hun</languageTerm>
+			</languageOfCataloging>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Home Page</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060601</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<physicalDescription>
+			<form authority="marcform">electronic</form>
+			<internetMediaType>text/html</internetMediaType>
+			<digitalOrigin>born digital</digitalOrigin>
+		</physicalDescription>
+		<targetAudience>general</targetAudience>
+		<typeOfResource>text</typeOfResource>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">freemasonry.org/jawalkes/</note>
+		<note type="quality review">Category in Leaderboard is Creative Expressions.   only first 2 captures seem to work</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Single Sites Web Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000013</url>
+			</location>
+		</relatedItem>
+		<identifier>mrva0013.0003</identifier>
+		<location>
+			<url usage="primary display">http://hdl.loc.gov/loc.natlib/mrva0013.0003</url>
+		</location>
+		<location>
+			<url usage="primary display">http://webarchives.loc.gov/collections/lcwa0013/*/freemasonry.org/jawalkes/</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Washington D.C., 20540 USA</physicalLocation>
+			<physicalLocation authority="marcorg">dlc</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20090324</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0013.0003</recordIdentifier>
+			<languageOfCataloging>
+				<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+			</languageOfCataloging>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Abraham Lincoln Research Site</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<physicalDescription>
+			<form authority="marcform">electronic</form>
+			<internetMediaType>text/html</internetMediaType>
+			<digitalOrigin>born digital</digitalOrigin>
+		</physicalDescription>
+		<targetAudience>general</targetAudience>
+		<typeOfResource>text</typeOfResource>
+		<genre authority="marcgt">web site</genre>
+		<abstract>This website includes a biography, photographs, and lots of information about Abraham Lincoln including my e-mail address to answer questions about his life.</abstract>
+		<note type="system details">home.att.net/~rjnorton/Lincoln2.html</note>
+		<note type="quality review">Category in Leaderboard is Virtual Exhibitions &amp; Publications.   Virtual exhibition of Abraham Lincoln materials</note>
+		<subject authority="keyword">
+			<topic>Abraham Lincoln, abraham lincoln, assassination, springfield, honest abe, ann rutledge, booth, john wilkes booth, civil war</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Single Sites Web Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000013</url>
+			</location>
+		</relatedItem>
+		<identifier>mrva0013.0004</identifier>
+		<location>
+			<url usage="primary display">http://hdl.loc.gov/loc.natlib/mrva0013.0004</url>
+		</location>
+		<location>
+			<url usage="primary display">http://webarchives.loc.gov/collections/lcwa0013/*/home.att.net/~rjnorton/Lincoln2.html</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Washington D.C., 20540 USA</physicalLocation>
+			<physicalLocation authority="marcorg">dlc</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20090324</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0013.0004</recordIdentifier>
+			<languageOfCataloging>
+				<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+			</languageOfCataloging>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Index of /hun/maps/1910</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060406</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<physicalDescription>
+			<form authority="marcform">electronic</form>
+			<internetMediaType>text/html</internetMediaType>
+			<digitalOrigin>born digital</digitalOrigin>
+		</physicalDescription>
+		<targetAudience>general</targetAudience>
+		<typeOfResource>text</typeOfResource>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">lazarus.elte.hu/hun/maps/1910/</note>
+		<note type="quality review">Category in Leaderboard is Educational/Research Institutions.   Gonczy Collection of Hungarian County Maps</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Single Sites Web Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000013</url>
+			</location>
+		</relatedItem>
+		<identifier>mrva0013.0005</identifier>
+		<location>
+			<url usage="primary display">http://hdl.loc.gov/loc.natlib/mrva0013.0005</url>
+		</location>
+		<location>
+			<url usage="primary display">http://webarchives.loc.gov/collections/lcwa0013/*/lazarus.elte.hu/hun/maps/1910/</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Washington D.C., 20540 USA</physicalLocation>
+			<physicalLocation authority="marcorg">dlc</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20090324</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0013.0005</recordIdentifier>
+			<languageOfCataloging>
+				<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+				<languageTerm authority="iso639-2b" type="code">hun</languageTerm>
+			</languageOfCataloging>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Civil War Women - On-line Archival Exhibits at Duke University</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<physicalDescription>
+			<form authority="marcform">electronic</form>
+			<internetMediaType>text/html</internetMediaType>
+			<digitalOrigin>born digital</digitalOrigin>
+		</physicalDescription>
+		<targetAudience>general</targetAudience>
+		<typeOfResource>text</typeOfResource>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">scriptorium.lib.duke.edu/collections/civil-war-women.html</note>
+		<note type="quality review">Category in Leaderboard is Educational/Research Institutions.   Collection of American Civil War manuscript materials by women.</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Single Sites Web Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000013</url>
+			</location>
+		</relatedItem>
+		<identifier>mrva0013.0006</identifier>
+		<location>
+			<url usage="primary display">http://hdl.loc.gov/loc.natlib/mrva0013.0006</url>
+		</location>
+		<location>
+			<url usage="primary display">http://webarchives.loc.gov/collections/lcwa0013/*/scriptorium.lib.duke.edu/collections/civil-war-women.html</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Washington D.C., 20540 USA</physicalLocation>
+			<physicalLocation authority="marcorg">dlc</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20090324</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0013.0006</recordIdentifier>
+			<languageOfCataloging>
+				<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+			</languageOfCataloging>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Civil War Prisons</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<physicalDescription>
+			<form authority="marcform">electronic</form>
+			<internetMediaType>text/html</internetMediaType>
+			<digitalOrigin>born digital</digitalOrigin>
+		</physicalDescription>
+		<targetAudience>general</targetAudience>
+		<typeOfResource>text</typeOfResource>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">tigger.uic.edu/~rjensen/prisons.htm</note>
+		<note type="quality review">Category in Leaderboard is Virtual Exhibitions &amp; Publications.   ok many links out of scope Virtual exhibition and bibliography of Civil War prisons information</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Single Sites Web Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000013</url>
+			</location>
+		</relatedItem>
+		<identifier>mrva0013.0007</identifier>
+		<location>
+			<url usage="primary display">http://hdl.loc.gov/loc.natlib/mrva0013.0007</url>
+		</location>
+		<location>
+			<url usage="primary display">http://webarchives.loc.gov/collections/lcwa0013/*/tigger.uic.edu/~rjensen/prisons.htm</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Washington D.C., 20540 USA</physicalLocation>
+			<physicalLocation authority="marcorg">dlc</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20090324</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0013.0007</recordIdentifier>
+			<languageOfCataloging>
+				<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+			</languageOfCataloging>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Home | Black Caucus of the American Library Association</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060628</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<physicalDescription>
+			<form authority="marcform">electronic</form>
+			<internetMediaType>text/html</internetMediaType>
+			<digitalOrigin>born digital</digitalOrigin>
+		</physicalDescription>
+		<targetAudience>general</targetAudience>
+		<typeOfResource>text</typeOfResource>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">www.bcala.org/</note>
+		<note type="quality review">Category in Leaderboard is Organizations &amp; Corporate Firms.  </note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Single Sites Web Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000013</url>
+			</location>
+		</relatedItem>
+		<identifier>mrva0013.0008</identifier>
+		<location>
+			<url usage="primary display">http://hdl.loc.gov/loc.natlib/mrva0013.0008</url>
+		</location>
+		<location>
+			<url usage="primary display">http://webarchives.loc.gov/collections/lcwa0013/*/www.bcala.org/</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Washington D.C., 20540 USA</physicalLocation>
+			<physicalLocation authority="marcorg">dlc</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20090324</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0013.0008</recordIdentifier>
+			<languageOfCataloging>
+				<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+			</languageOfCataloging>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Civil War site photos, maps and official records reports</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<physicalDescription>
+			<form authority="marcform">electronic</form>
+			<internetMediaType>text/html</internetMediaType>
+			<digitalOrigin>born digital</digitalOrigin>
+		</physicalDescription>
+		<targetAudience>general</targetAudience>
+		<typeOfResource>text</typeOfResource>
+		<genre authority="marcgt">web site</genre>
+		<abstract>Civil War site modern photos</abstract>
+		<note type="system details">www.civilwaralbum.com/</note>
+		<note type="quality review">Category in Leaderboard is Virtual Exhibitions &amp; Publications.   Virtual exhibition of modern day Civil War battlefield photographs.</note>
+		<subject authority="keyword">
+			<topic>gettysburg,picketts charge,seminary ridge,litle round top,the angle,cashtown inn,culps hill,h.l. hunley,camden,cane hill,ditch bayou,fayetteville,fort smith,arkansas,jenkins ferry,little rock,civil war,civil war sites,civil war photos,pea ridge,prairie grove,st, charles,battle,chickamauga,fort pulaski,antietam,tupelo,enterprise,mississippi,georgia,tennessee,greenwood,yazoo city,wilsons creek,franklin,stones river,thompsons station,fort pillow,lookout mountain,spring hill,port hudson,shiloh,fort donelson,fort henry,fort washita,indian territory,oklahoma,uss cairo,fort mccullock,vicksburg campaign,vicksburg national military park,fort pemberton,arkansas post,big black river,champion hill,chickasaw bayou,duckport canal,lake providence canal,grants canal,grand gulf,grenada,holly springs,jackson,port gibson,snyders bluff,steeles bayou,rolling fork,yazoo pass,deer creek,</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Single Sites Web Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000013</url>
+			</location>
+		</relatedItem>
+		<identifier>mrva0013.0009</identifier>
+		<location>
+			<url usage="primary display">http://hdl.loc.gov/loc.natlib/mrva0013.0009</url>
+		</location>
+		<location>
+			<url usage="primary display">http://webarchives.loc.gov/collections/lcwa0013/*/www.civilwaralbum.com/</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Washington D.C., 20540 USA</physicalLocation>
+			<physicalLocation authority="marcorg">dlc</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20090324</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0013.0009</recordIdentifier>
+			<languageOfCataloging>
+				<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+			</languageOfCataloging>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>The Civil War Archive Home Page</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<physicalDescription>
+			<form authority="marcform">electronic</form>
+			<internetMediaType>text/html</internetMediaType>
+			<digitalOrigin>born digital</digitalOrigin>
+		</physicalDescription>
+		<targetAudience>general</targetAudience>
+		<typeOfResource>text</typeOfResource>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">www.civilwararchive.com/</note>
+		<note type="quality review">Category in Leaderboard is Virtual Exhibitions &amp; Publications .   Online exhibition of Civil War unit histories and other information. A growing collection of Civil War documents, especially useful for its transcribed regimental histories from the standard Civil War source A Compendium of the War of the Rebellion by Frederick Dyer, corps histories, and national list of Civil War Roundtables. In LC OPAC, but no LCCN.</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Single Sites Web Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000013</url>
+			</location>
+		</relatedItem>
+		<identifier>mrva0013.0010</identifier>
+		<location>
+			<url usage="primary display">http://hdl.loc.gov/loc.natlib/mrva0013.0010</url>
+		</location>
+		<location>
+			<url usage="primary display">http://webarchives.loc.gov/collections/lcwa0013/*/www.civilwararchive.com/</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Washington D.C., 20540 USA</physicalLocation>
+			<physicalLocation authority="marcorg">dlc</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20090324</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0013.0010</recordIdentifier>
+			<languageOfCataloging>
+				<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+			</languageOfCataloging>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Coin and Currency Collections at Notre Dame</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<physicalDescription>
+			<form authority="marcform">electronic</form>
+			<internetMediaType>text/html</internetMediaType>
+			<digitalOrigin>born digital</digitalOrigin>
+		</physicalDescription>
+		<targetAudience>general</targetAudience>
+		<typeOfResource>text</typeOfResource>
+		<genre authority="marcgt">web site</genre>
+		<abstract>This page presents brief descriptions and links to numismatic sites based on materials housed in the Department of Special Collections at the University of Notre Dame. The sites currently featured include 'Coins of Colonial and Early America' and 'Colonial Currency' as well as 'Washington Tokens'.</abstract>
+		<note type="system details">www.coins.nd.edu/</note>
+		<note type="quality review">Category in Leaderboard is Virtual Exhibitions &amp; Publications .   History of coins and currency in Colonial America and early USA</note>
+		<subject authority="keyword">
+			<topic>numismatics, numismatists, coin, coins, coinage, currency, money, bills, notes, mint, minting, colonial, colony, colonies, revolutionary war, early american, pre-federal, america, american, washington, federal, washingtonia, confederation, collector, collectors, collectibles, collection, collections, counterfeit, counterfeits, halfpence, halfpenny, tokens, medals, lottery, tickets, fiscal documents, spain, britain, france, canada, washingtoniana</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Single Sites Web Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000013</url>
+			</location>
+		</relatedItem>
+		<identifier>mrva0013.0011</identifier>
+		<location>
+			<url usage="primary display">http://hdl.loc.gov/loc.natlib/mrva0013.0011</url>
+		</location>
+		<location>
+			<url usage="primary display">http://webarchives.loc.gov/collections/lcwa0013/*/www.coins.nd.edu/</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Washington D.C., 20540 USA</physicalLocation>
+			<physicalLocation authority="marcorg">dlc</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20090324</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0013.0011</recordIdentifier>
+			<languageOfCataloging>
+				<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+			</languageOfCataloging>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Comando Supremo: Italy at War</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<physicalDescription>
+			<form authority="marcform">electronic</form>
+			<internetMediaType>text/html</internetMediaType>
+			<digitalOrigin>born digital</digitalOrigin>
+		</physicalDescription>
+		<targetAudience>general</targetAudience>
+		<typeOfResource>text</typeOfResource>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">www.comandosupremo.com/</note>
+		<note type="quality review">Category in Leaderboard is Virtual Exhibitions &amp; Publications.   Comprehensive information on Italy's role in World War II.</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Single Sites Web Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000013</url>
+			</location>
+		</relatedItem>
+		<identifier>mrva0013.0012</identifier>
+		<location>
+			<url usage="primary display">http://hdl.loc.gov/loc.natlib/mrva0013.0012</url>
+		</location>
+		<location>
+			<url usage="primary display">http://webarchives.loc.gov/collections/lcwa0013/*/www.comandosupremo.com/</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Washington D.C., 20540 USA</physicalLocation>
+			<physicalLocation authority="marcorg">dlc</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20090324</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0013.0012</recordIdentifier>
+			<languageOfCataloging>
+				<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+			</languageOfCataloging>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Feldgrau.com - The German Armed Forces 1919-1945</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<physicalDescription>
+			<form authority="marcform">electronic</form>
+			<internetMediaType>text/html</internetMediaType>
+			<digitalOrigin>born digital</digitalOrigin>
+		</physicalDescription>
+		<targetAudience>general</targetAudience>
+		<typeOfResource>text</typeOfResource>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">www.feldgrau.com</note>
+		<note type="quality review">Category in Leaderboard is Virtual Exhibitions &amp; Publications.   Site contains extensive information on the German military 1918-1945. Virtual Exhibitions and Publications. Provides encyclopedic information on the German armed forces 1918-1945.</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Single Sites Web Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000013</url>
+			</location>
+		</relatedItem>
+		<identifier>mrva0013.0013</identifier>
+		<location>
+			<url usage="primary display">http://hdl.loc.gov/loc.natlib/mrva0013.0013</url>
+		</location>
+		<location>
+			<url usage="primary display">http://webarchives.loc.gov/collections/lcwa0013/*/www.feldgrau.com</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Washington D.C., 20540 USA</physicalLocation>
+			<physicalLocation authority="marcorg">dlc</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20090324</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0013.0013</recordIdentifier>
+			<languageOfCataloging>
+				<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+			</languageOfCataloging>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>General Conference</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060601</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<physicalDescription>
+			<form authority="marcform">electronic</form>
+			<internetMediaType>text/html</internetMediaType>
+			<digitalOrigin>born digital</digitalOrigin>
+		</physicalDescription>
+		<targetAudience>general</targetAudience>
+		<typeOfResource>text</typeOfResource>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">www.gcgchram.org/</note>
+		<note type="quality review">Category in Leaderboard is Organizations &amp; Corporate Firms.  </note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Single Sites Web Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000013</url>
+			</location>
+		</relatedItem>
+		<identifier>mrva0013.0014</identifier>
+		<location>
+			<url usage="primary display">http://hdl.loc.gov/loc.natlib/mrva0013.0014</url>
+		</location>
+		<location>
+			<url usage="primary display">http://webarchives.loc.gov/collections/lcwa0013/*/www.gcgchram.org/</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Washington D.C., 20540 USA</physicalLocation>
+			<physicalLocation authority="marcorg">dlc</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20090324</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0013.0014</recordIdentifier>
+			<languageOfCataloging>
+				<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+			</languageOfCataloging>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>The Generals of the American Civil War</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060406</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<physicalDescription>
+			<form authority="marcform">electronic</form>
+			<internetMediaType>text/html</internetMediaType>
+			<digitalOrigin>born digital</digitalOrigin>
+		</physicalDescription>
+		<targetAudience>general</targetAudience>
+		<typeOfResource>text</typeOfResource>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">www.generalsandbrevets.com/</note>
+		<note type="quality review">Category in Leaderboard is Virtual Exhibitions &amp; Publications.   Collection of images of Civil War general officers. Online exhibition of Civil War general officers' images.</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Single Sites Web Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000013</url>
+			</location>
+		</relatedItem>
+		<identifier>mrva0013.0015</identifier>
+		<location>
+			<url usage="primary display">http://hdl.loc.gov/loc.natlib/mrva0013.0015</url>
+		</location>
+		<location>
+			<url usage="primary display">http://webarchives.loc.gov/collections/lcwa0013/*/www.generalsandbrevets.com/</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Washington D.C., 20540 USA</physicalLocation>
+			<physicalLocation authority="marcorg">dlc</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20090324</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0013.0015</recordIdentifier>
+			<languageOfCataloging>
+				<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+			</languageOfCataloging>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Welcome to Give.org</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060406</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<physicalDescription>
+			<form authority="marcform">electronic</form>
+			<internetMediaType>text/html</internetMediaType>
+			<digitalOrigin>born digital</digitalOrigin>
+		</physicalDescription>
+		<targetAudience>general</targetAudience>
+		<typeOfResource>text</typeOfResource>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">www.give.org/</note>
+		<note type="quality review">Category in Leaderboard is Organizations &amp; Corporate Firms.   db of information for public access</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Single Sites Web Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000013</url>
+			</location>
+		</relatedItem>
+		<identifier>mrva0013.0016</identifier>
+		<location>
+			<url usage="primary display">http://hdl.loc.gov/loc.natlib/mrva0013.0016</url>
+		</location>
+		<location>
+			<url usage="primary display">http://webarchives.loc.gov/collections/lcwa0013/*/www.give.org/</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Washington D.C., 20540 USA</physicalLocation>
+			<physicalLocation authority="marcorg">dlc</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20090324</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0013.0016</recordIdentifier>
+			<languageOfCataloging>
+				<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+			</languageOfCataloging>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Migration Policy Institute (MPI) Home Page</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<physicalDescription>
+			<form authority="marcform">electronic</form>
+			<internetMediaType>text/html</internetMediaType>
+			<digitalOrigin>born digital</digitalOrigin>
+		</physicalDescription>
+		<targetAudience>general</targetAudience>
+		<typeOfResource>text</typeOfResource>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">www.migrationpolicy.org/</note>
+		<note type="quality review">Category in Leaderboard is Watchdog, Public Policy, Political Advocacy.   top menu is hidden by the graphic which is pushed down by the banner. site good.  independent think tank - providing analysis of the social and economic effects of migration and refugee policies at the local, national, and international levels. Catpure 4-5 levels to ensure content including research reports and publications are captured.</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Single Sites Web Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000013</url>
+			</location>
+		</relatedItem>
+		<identifier>mrva0013.0017</identifier>
+		<location>
+			<url usage="primary display">http://hdl.loc.gov/loc.natlib/mrva0013.0017</url>
+		</location>
+		<location>
+			<url usage="primary display">http://webarchives.loc.gov/collections/lcwa0013/*/www.migrationpolicy.org/</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Washington D.C., 20540 USA</physicalLocation>
+			<physicalLocation authority="marcorg">dlc</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20090324</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0013.0017</recordIdentifier>
+			<languageOfCataloging>
+				<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+			</languageOfCataloging>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Arkansas African Americans Mosaic Templars Building Preservation Society</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060628</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<physicalDescription>
+			<form authority="marcform">electronic</form>
+			<internetMediaType>text/html</internetMediaType>
+			<digitalOrigin>born digital</digitalOrigin>
+		</physicalDescription>
+		<targetAudience>general</targetAudience>
+		<typeOfResource>text</typeOfResource>
+		<genre authority="marcgt">web site</genre>
+		<abstract>The Mosaic Templars Building Preservation Society celebrates Black achievement in Arkansas and seeks to preserve African American history, heritage, organizations and enterprises in Little Rock's downtown business district on Ninth Street and Broadway.</abstract>
+		<note type="system details">www.mosaictemplarspreservation.org/</note>
+		<note type="quality review">Category in Leaderboard is Organizations &amp; Corporate Firms .  </note>
+		<subject authority="keyword">
+			<topic>Mosaic Templars, arkansas black history, african american culture, black achievement, arkansas african american culture, arkansas history, Arkansas African American Business, black entrepreneur, civil rights movement, african american history, black templars, black culture, History of Mosaic Templars, black fraternity, templars, black heritage, templers, Arkansas African American Achievement, civil rights in arkansas, ninth street black business district, Little Rock history, mosaic templers, black entrepreneurship, Mosaic Templars Building Preservation Society, John Bush, Chester Keatts, Scipio Jones, black fraternal organizations, Arkansas Black History, historic building, historic buildings, Arkansas African American Enterprise, Arkansas African American Fraternal Organizations, Booker T Washington, Negro Business League, Ninth Street, historical artifacts, Black Republicans, Arkansas Civil Rights, Little Rock, Arkansas, History Preservation, Mosaic Templars of America, Separate Coach Law, Elaine Race Riot, Lily White Republicanism, The Line</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Single Sites Web Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000013</url>
+			</location>
+		</relatedItem>
+		<identifier>mrva0013.0018</identifier>
+		<location>
+			<url usage="primary display">http://hdl.loc.gov/loc.natlib/mrva0013.0018</url>
+		</location>
+		<location>
+			<url usage="primary display">http://webarchives.loc.gov/collections/lcwa0013/*/www.mosaictemplarspreservation.org/</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Washington D.C., 20540 USA</physicalLocation>
+			<physicalLocation authority="marcorg">dlc</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20090324</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0013.0018</recordIdentifier>
+			<languageOfCataloging>
+				<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+			</languageOfCataloging>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Project On Emerging Nanotechnologies</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060406</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<physicalDescription>
+			<form authority="marcform">electronic</form>
+			<internetMediaType>text/html</internetMediaType>
+			<digitalOrigin>born digital</digitalOrigin>
+		</physicalDescription>
+		<targetAudience>general</targetAudience>
+		<typeOfResource>text</typeOfResource>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">www.nanotechproject.org/</note>
+		<note type="quality review">Category in Leaderboard is Educational/Research Institutions.  db of information for public access</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Single Sites Web Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000013</url>
+			</location>
+		</relatedItem>
+		<identifier>mrva0013.0019</identifier>
+		<location>
+			<url usage="primary display">http://hdl.loc.gov/loc.natlib/mrva0013.0019</url>
+		</location>
+		<location>
+			<url usage="primary display">http://webarchives.loc.gov/collections/lcwa0013/*/www.nanotechproject.org/</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Washington D.C., 20540 USA</physicalLocation>
+			<physicalLocation authority="marcorg">dlc</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20090324</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0013.0019</recordIdentifier>
+			<languageOfCataloging>
+				<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+			</languageOfCataloging>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Chickenbones</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060426</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<physicalDescription>
+			<form authority="marcform">electronic</form>
+			<internetMediaType>text/html</internetMediaType>
+			<digitalOrigin>born digital</digitalOrigin>
+		</physicalDescription>
+		<targetAudience>general</targetAudience>
+		<typeOfResource>text</typeOfResource>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">www.nathanielturner.com/</note>
+		<note type="quality review">Category in Leaderboard is Creative Expressions .  </note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Single Sites Web Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000013</url>
+			</location>
+		</relatedItem>
+		<identifier>mrva0013.0020</identifier>
+		<location>
+			<url usage="primary display">http://hdl.loc.gov/loc.natlib/mrva0013.0020</url>
+		</location>
+		<location>
+			<url usage="primary display">http://webarchives.loc.gov/collections/lcwa0013/*/www.nathanielturner.com/</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Washington D.C., 20540 USA</physicalLocation>
+			<physicalLocation authority="marcorg">dlc</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20090324</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0013.0020</recordIdentifier>
+			<languageOfCataloging>
+				<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+			</languageOfCataloging>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>EL SENDERO DEL PEJE AL 2006</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060927</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<physicalDescription>
+			<form authority="marcform">electronic</form>
+			<internetMediaType>text/html</internetMediaType>
+			<digitalOrigin>born digital</digitalOrigin>
+		</physicalDescription>
+		<targetAudience>general</targetAudience>
+		<typeOfResource>text</typeOfResource>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">senderodelpeje.blogspot.com</note>
+		<note type="quality review">Category in Leaderboard is Blogs.   Mexico Elections</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Single Sites Web Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000013</url>
+			</location>
+		</relatedItem>
+		<identifier>mrva0013.0021</identifier>
+		<location>
+			<url usage="primary display">http://hdl.loc.gov/loc.natlib/mrva0013.0021</url>
+		</location>
+		<location>
+			<url usage="primary display">http://webarchives.loc.gov/collections/lcwa0013/*/senderodelpeje.blogspot.com</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Washington D.C., 20540 USA</physicalLocation>
+			<physicalLocation authority="marcorg">dlc</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20090324</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0013.0021</recordIdentifier>
+			<languageOfCataloging>
+				<languageTerm authority="iso639-2b" type="code">spa</languageTerm>
+			</languageOfCataloging>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Spanish American War</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<physicalDescription>
+			<form authority="marcform">electronic</form>
+			<internetMediaType>text/html</internetMediaType>
+			<digitalOrigin>born digital</digitalOrigin>
+		</physicalDescription>
+		<targetAudience>general</targetAudience>
+		<typeOfResource>text</typeOfResource>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">www.spanamwar.com/</note>
+		<note type="quality review">Category in Leaderboard is Virtual Exhibitions &amp; Publications.  </note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Single Sites Web Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000013</url>
+			</location>
+		</relatedItem>
+		<identifier>mrva0013.0022</identifier>
+		<location>
+			<url usage="primary display">http://hdl.loc.gov/loc.natlib/mrva0013.0022</url>
+		</location>
+		<location>
+			<url usage="primary display">http://webarchives.loc.gov/collections/lcwa0013/*/www.spanamwar.com/</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Washington D.C., 20540 USA</physicalLocation>
+			<physicalLocation authority="marcorg">dlc</physicalLocation>
+		</location>
+		<accessCondition>Access restricted to on-site users at the Library of Congress</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20090324</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0013.0022</recordIdentifier>
+			<languageOfCataloging>
+				<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+			</languageOfCataloging>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>American Merchant Marine at War - Revolution to World War II to today</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060726</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<physicalDescription>
+			<form authority="marcform">electronic</form>
+			<internetMediaType>text/html</internetMediaType>
+			<digitalOrigin>born digital</digitalOrigin>
+		</physicalDescription>
+		<targetAudience>general</targetAudience>
+		<typeOfResource>text</typeOfResource>
+		<genre authority="marcgt">web site</genre>
+		<abstract>History of U.S. Merchant Marine, U.S. Maritime Service, Army Transport Service, Military Sea Transportation Service, and Military Sealift Command During War</abstract>
+		<note type="system details">www.usmm.org/</note>
+		<note type="quality review">Category in Leaderboard is Virtual Exhibitions &amp; Publications .   ok many links out of scope  Extensive site for Merchant Marine history and lore.</note>
+		<subject authority="keyword">
+			<topic>United States Merchant Marine, U.S. Maritime Service, Army Transport Service, Military Sea Transportation Service,  Military Sealift Command, Prisoners of War POW, American Merchant marines World War II, Revolutionary War privateers, War of 1812, President Franklin D. Roosevelt, Mexican-American War, Civil War, African American mariners, black seamen, Spanish-American War, Korean War Vietnam War, Merchant Marine Cadet Corps Academy, maritime links, nautical books, Hoffman Island Radio Association, Newspaper Articles, Merchant Marine Medals and Ribbons, National Maritime Day Proclamations, merchant ships freighters tankers, mariner veteran status</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Single Sites Web Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000013</url>
+			</location>
+		</relatedItem>
+		<identifier>mrva0013.0023</identifier>
+		<location>
+			<url usage="primary display">http://hdl.loc.gov/loc.natlib/mrva0013.0023</url>
+		</location>
+		<location>
+			<url usage="primary display">http://webarchives.loc.gov/collections/lcwa0013/*/www.usmm.org/</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Washington D.C., 20540 USA</physicalLocation>
+			<physicalLocation authority="marcorg">dlc</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20090324</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0013.0023</recordIdentifier>
+			<languageOfCataloging>
+				<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+			</languageOfCataloging>
+		</recordInfo>
+	</mods>
+</modsCollection>

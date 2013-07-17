@@ -1,0 +1,1825 @@
+<?xml-stylesheet type="text/xsl" href="http://www.loc.gov/standards/mods/v3/minerva3.xsl"?>
+<modsCollection xmlns="http://www.loc.gov/mods/v3" xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-2.xsd">
+	<mods version="3.2">
+		<titleInfo>
+			<title>CALIFORNIA FIRE NEWS</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230025</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230234</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://calfire.blogspot.com/</note>
+		<subject authority="keyword">
+			<topic>fire news, news fire, fire photos, firefighter, firefighter news, firefighting news, fire brigade, truck company, iaff, national fire news, fire service, Calfire, Cal Fire, CDF, fire department, USFS, fire fighter, fire department, wildland, firefighting, firemen, fireman, forest</topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://calfire.blogspot.com/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Battling California's Wildfires</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230042</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://calfires.com/</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://calfires.com/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>cat dirt sez</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230023</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://catdirtsez.blogspot.com/</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://catdirtsez.blogspot.com/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>WELCOME TO CAL FIRE</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230024</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract> WELCOME TO CAL FIRE </abstract>
+		<note type="system details">http://cdfdata.fire.ca.gov/</note>
+		<subject authority="keyword">
+			<topic> </topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://cdfdata.fire.ca.gov/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>The Chronicle of Higher Education</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230023</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://chronicle.com/daily/2007/10/460n.htm</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://chronicle.com/daily/2007/10/460n.htm</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>EO Natural Hazards: Fires in Southern California</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230024</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://earthobservatory.nasa.gov/Naturalhazards/natural_hazards_v2.php3?img_id=14587</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://earthobservatory.nasa.gov/Naturalhazards/natural_hazards_v2.php3?img_id=14587</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>California wildfires of October 2007 - Wikipedia, the free encyclopedia</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230025</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230223</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://en.wikipedia.org/wiki/California_wildfires_of_October_2007</note>
+		<subject authority="keyword">
+			<topic>California wildfires of October 2007,California wildfires by size,California wildfires of October 2007,2003,2004,2007,2007 Western North American heat wave,4S Ranch, California,Agua Dulce, California,Aguanga, California,Alpine, California</topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://en.wikipedia.org/wiki/California_wildfires_of_October_2007</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Ventura County Fire Department Homepage</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230046</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://fire.countyofventura.org/</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://fire.countyofventura.org/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Los Angeles County Fire Department - Emergency Fire Information</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230023</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://fire.lacounty.gov/default.asp</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://fire.lacounty.gov/default.asp</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Wildfires 2007</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230031</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230225</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://fireblog.signonsandiego.com/</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://fireblog.signonsandiego.com/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Firefighter Blog</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230025</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://firefighterblog.blogspot.com/</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://firefighterblog.blogspot.com/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Flickr: San Diego Wildfires 2007</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230023</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230227</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract>Flickr is almost certainly the best online photo management and sharing application in the world. Show off your favorite photos to the world, securely and privately show photos to your friends and family, or blog the photos you take with a cameraphone.</abstract>
+		<note type="system details">http://flickr.com/groups/516947@N24/</note>
+		<subject authority="keyword">
+			<topic>photography, digital photography, cameraphones, camera, hobby photography, photo, digital camera, compactflash, smartmedia, cameras, canon, nikon, olympus, fujifilm</topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://flickr.com/groups/516947@N24/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Flickr: Orange County Fires 2007</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230033</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230225</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract>Flickr is almost certainly the best online photo management and sharing application in the world. Show off your favorite photos to the world, securely and privately show photos to your friends and family, or blog the photos you take with a cameraphone.</abstract>
+		<note type="system details">http://flickr.com/groups/554852@N21/</note>
+		<subject authority="keyword">
+			<topic>photography, digital photography, cameraphones, camera, hobby photography, photo, digital camera, compactflash, smartmedia, cameras, canon, nikon, olympus, fujifilm</topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://flickr.com/groups/554852@N21/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Flickr: San Diego Fire</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230027</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract>Flickr is almost certainly the best online photo management and sharing application in the world. Show off your favorite photos to the world, securely and privately show photos to your friends and family, or blog the photos you take with a cameraphone.</abstract>
+		<note type="system details">http://flickr.com/groups/sandiegofire/</note>
+		<subject authority="keyword">
+			<topic>photography, digital photography, cameraphones, camera, hobby photography, photo, digital camera, compactflash, smartmedia, cameras, canon, nikon, olympus, fujifilm</topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://flickr.com/groups/sandiegofire/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Flickr: KPBS San Diego Wildfires Photo Group</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230029</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230228</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract>Flickr is almost certainly the best online photo management and sharing application in the world. Show off your favorite photos to the world, securely and privately show photos to your friends and family, or blog the photos you take with a cameraphone.</abstract>
+		<note type="system details">http://flickr.com/groups/sandiegofires/</note>
+		<subject authority="keyword">
+			<topic>photography, digital photography, cameraphones, camera, hobby photography, photo, digital camera, compactflash, smartmedia, cameras, canon, nikon, olympus, fujifilm</topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://flickr.com/groups/sandiegofires/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Flickr: Yahoo! News California Wildfires</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230034</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230224</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract>Flickr is almost certainly the best online photo management and sharing application in the world. Show off your favorite photos to the world, securely and privately show photos to your friends and family, or blog the photos you take with a cameraphone.</abstract>
+		<note type="system details">http://flickr.com/groups/ynews_fires/</note>
+		<subject authority="keyword">
+			<topic>photography, digital photography, cameraphones, camera, hobby photography, photo, digital camera, compactflash, smartmedia, cameras, canon, nikon, olympus, fujifilm</topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://flickr.com/groups/ynews_fires/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Battling California's Wildfires</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230046</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://gov.ca.gov/index.php/issue/wildfires/</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://gov.ca.gov/index.php/issue/wildfires/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>InciWeb: California Incidents</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230024</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://inciweb.org/state/5/</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://inciweb.org/state/5/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Jim 2.0’s Blog</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230024</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230223</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://jamesewelch.wordpress.com/</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://jamesewelch.wordpress.com/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Los Angeles Times: Breaking News</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230023</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230231</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract>Los Angeles' leading online source for local, state, national, world, entertainment, and sports news. Plus jobs, real estate, cars and shopping information from the Los Angeles Times.</abstract>
+		<note type="system details">http://latimesblogs.latimes.com/breakingnews/</note>
+		<subject authority="keyword">
+			<topic>kevin bronson, buzz bands, los angeles times, los angeles news, california news, california newspaper, los angeles newspaper, los angeles jobs, los angeles real estate, jobs, real estate</topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://latimesblogs.latimes.com/breakingnews/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Internet Mapping for San Diego FireStorm 2003 and 2007 update, by Department of Geography, SDSU.</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230025</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230228</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://map.sdsu.edu/</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://map.sdsu.edu/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Google Maps</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230023</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://maps.google.com/maps/ms?msa=0&amp;msid=114250687465160386813.00043d08ac31fe3357571</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://maps.google.com/maps/ms?msa=0&amp;msid=114250687465160386813.00043d08ac31fe3357571</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>California Wildfires Full Coverage on Yahoo! News</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230024</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://news.yahoo.com/fc/US/Wildfires_and_Forest_Fires</note>
+		<subject authority="keyword">
+			<topic>California Wildfires</topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://news.yahoo.com/fc/US/Wildfires_and_Forest_Fires</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Port of San Diego</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230024</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://portofsandiego.org/</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://portofsandiego.org/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>San Diego County Water Authority</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230024</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030235430</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://sdcwa.org/</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://sdcwa.org/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Twitter / kpbsnews</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230023</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230229</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://twitter.com/kpbsnews</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://twitter.com/kpbsnews</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Twitter / latimesfires</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230034</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230230</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://twitter.com/latimesfires</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://twitter.com/latimesfires</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Twitter / nateritter</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230036</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://twitter.com/nateritter</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://twitter.com/nateritter</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Welcome to the City of Carlsbad Official Website</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230024</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://www.carlsbadca.gov/</note>
+		<subject authority="keyword">
+			<topic>Carlsbad, California, Southern California, Legoland, Flower Fields, Beaches, Carlsbad 2000, Surfing, Carlsbad, California</topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.carlsbadca.gov/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Southern California Wildfires 2007 - Hot Topics (CA Dept of Education)</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230024</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract>Assistance to schools affected by the wildfires.</abstract>
+		<note type="system details">http://www.cde.ca.gov/nr/re/ht/yr07wildfires10.asp</note>
+		<subject authority="keyword">
+			<topic>wildfire, southern, california, assistance, evacuation, school closures</topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.cde.ca.gov/nr/re/ht/yr07wildfires10.asp</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>City Of Chula Vista</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230023</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://www.ci.chula-vista.ca.us/</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.ci.chula-vista.ca.us/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>City of El Cajon</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230023</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://www.ci.el-cajon.ca.us/</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.ci.el-cajon.ca.us/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>City of Encinitas</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230025</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230237</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://www.ci.encinitas.ca.us/</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.ci.encinitas.ca.us/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>The City of Escondido, California - Official Web Site</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230037</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230230</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://www.ci.escondido.ca.us/</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.ci.escondido.ca.us/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Lemon Grove. CA - Official Website</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230024</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://www.ci.lemon-grove.ca.us/</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.ci.lemon-grove.ca.us/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>City of Malibu: Home Page</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230023</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract>The official web site of Malibu, California.</abstract>
+		<note type="system details">http://www.ci.malibu.ca.us/</note>
+		<subject authority="keyword">
+			<topic>City of Malibu, Malibu, California, City Government, Municipal</topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.ci.malibu.ca.us/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>National City</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230029</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://www.ci.national-city.ca.us/</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.ci.national-city.ca.us/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Welcome to the City of Oceanside</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230023</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://www.ci.oceanside.ca.us/</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.ci.oceanside.ca.us/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>City of Poway : Home</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230024</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://www.ci.poway.ca.us/</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.ci.poway.ca.us/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>City of San Marcos</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230023</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://www.ci.san-marcos.ca.us/</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.ci.san-marcos.ca.us/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>The City of Santee : Home</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230024</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://www.ci.santee.ca.us/</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.ci.santee.ca.us/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>City of Solana Beach California Official Website</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230023</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230223</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://www.ci.solana-beach.ca.us/</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.ci.solana-beach.ca.us/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>City of Imperial Beach -- WELCOME TO OUR CITY WEBSITE</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230024</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230228</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://www.cityofib.com/</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.cityofib.com/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>City of La Mesa, CA - Welcome!</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230024</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230223</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://www.cityoflamesa.com/</note>
+		<subject authority="keyword">
+			<topic>la mesa, city council, city, recreation, law, government, planning, police, fire, streets, road, citizen, oktoberfest  </topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.cityoflamesa.com/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>City of Vista, California</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230037</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230237</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://www.cityofvista.com/</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.cityofvista.com/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>California wildfires: Your e-mails - CNN.com</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230117</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230234</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract>With nearly a million California residents evacuated from their homes, families and friends across the country are wondering if their loved ones are safe. CNN.com asked readers to share their stories.</abstract>
+		<note type="system details">http://www.cnn.com/2007/US/10/22/wildfire.emails/</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.cnn.com/2007/US/10/22/wildfire.emails/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Your stories of heroism amid flames - CNN.com</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230104</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract>As wildfires raged and thousands of Californians evacuated their homes, CNN.com readers shared their stories of heroism, words of thanks and offers of assistance.</abstract>
+		<note type="system details">http://www.cnn.com/2007/US/10/23/your.heroes.irpt/index.html</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.cnn.com/2007/US/10/23/your.heroes.irpt/index.html</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Wildfires: News &amp; Videos about Wildfires - CNN.com</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230114</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230233</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract>The death toll from Southern California's wildfires rose Wednesday, as officials continued what they called an "unprecedented effort" to battle the flames. </abstract>
+		<note type="system details">http://www.cnn.com/SPECIALS/2007/news/wildfires/index.html</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.cnn.com/SPECIALS/2007/news/wildfires/index.html</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title></title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230024</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://www.co.san-diego.ca.us/</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.co.san-diego.ca.us/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>The City of Coronado Official Website</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230023</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://www.coronado.ca.us/</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.coronado.ca.us/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>City of Del Mar - Home Page</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230024</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://www.delmar.ca.us/</note>
+		<subject authority="keyword">
+			<topic>Del Mar</topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.delmar.ca.us/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>U.S. Department of the Interior</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230027</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071031160751</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://www.doi.gov/</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.doi.gov/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Emergency Digital Information Service (EDIS)</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230023</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://www.edis.ca.gov/</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.edis.ca.gov/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>FEMA: Federal Emergency Management Agency Coordinating National Response to California Wildfires</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230024</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://www.fema.gov/news/newsrelease.fema?id=41428</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.fema.gov/news/newsrelease.fema?id=41428</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>WELCOME TO CAL FIRE</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230038</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract> WELCOME TO CAL FIRE </abstract>
+		<note type="system details">http://www.fire.ca.gov/</note>
+		<subject authority="keyword">
+			<topic> </topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.fire.ca.gov/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Flickr: Southern California Fires - 2007</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230024</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract>Flickr is almost certainly the best online photo management and sharing application in the world. Show off your favorite photos to the world, securely and privately show photos to your friends and family, or blog the photos you take with a cameraphone.</abstract>
+		<note type="system details">http://www.flickr.com/groups/528992@N20/</note>
+		<subject authority="keyword">
+			<topic>photography, digital photography, cameraphones, camera, hobby photography, photo, digital camera, compactflash, smartmedia, cameras, canon, nikon, olympus, fujifilm</topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.flickr.com/groups/528992@N20/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>North County Transit District - WE MOVE PEOPLE</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024231743</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract>FW MX 2004 DW MX 2004 HTML</abstract>
+		<note type="system details">http://www.gonctd.com/</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.gonctd.com/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>500,000 Flee Raging California Wildfires | World Latest | Guardian Unlimited</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230024</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230223</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://www.guardian.co.uk/worldlatest/story/0,,-7020336,00.html</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.guardian.co.uk/worldlatest/story/0,,-7020336,00.html</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>North County Times - North San Diego and Southwest Riverside County News - NCTimes.com - Californian.com</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230023</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract>A daily newspaper with News, Business and Sports for San Diego and Riverside Counties.</abstract>
+		<note type="system details">http://www.nctimes.com/</note>
+		<subject authority="keyword">
+			<topic>News, Business, Sports, Events, Photos, Newspaper, Letters, San Diego, Riverside, California, Escondido, Temecula, Oceanside, Carlsbad, Vista, San Marcos, Encinitas, San Marcos, Murrieta, Padres, Chargers, Storm, Firestorm, Fires</topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.nctimes.com/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>U.S. Northern Command</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230041</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://www.northcom.mil/News/2007/Wildfire/index.html</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.northcom.mil/News/2007/Wildfire/index.html</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Ramona Sentinel - reporting the news since 1886!</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230023</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract>Ramona, California's weekly newspaper since 1886.</abstract>
+		<note type="system details">http://www.ramonasentinel.com/</note>
+		<subject authority="keyword">
+			<topic>fire, Witch Creek Fire, San Diego, Ramona California, Ramona, news, newspaper, school, community, equine, rural, california, country town, valley of the sun, san diego country estates, Ramona Unified School District, Nuevo, Mt. Woodson, Highland Valley,</topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.ramonasentinel.com/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>SANDAG ::HOME:: San Diego's Regional Planning Agency</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230124</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract>TransNet or Proposition A, the half-cent sales tax for transportation improvements in San Diego County. Voters countywide approved Proposition A, the 40-year extension of TransNet. Proposition A provides TransNet dollars that are critical to help reduce areas growing traffic congestion. In 1987, San Diego region voters approved Proposition A which initiated the TransNet program  a half-cent sales tax to fund a variety of important transportation projects throughout the region. This 20-year, $3.3 billion transportation program expires in 2008. TransNet funding is combined with state and federal dollars to improve the regions transportation network. The 40-year TransNet extension will help fund major highway expansion projects along Interstates 5, 8, 15, and 805 as well as State Routes 52, 54, 56, 67, 76, 78, 94, 125, and 905. TransNet will support a robust public transportation system, including new Bus Rapid Transit services utilizing new carpool-managed lanes along many of the major freeways.</abstract>
+		<note type="system details">http://www.sandag.org/</note>
+		<subject authority="keyword">
+			<topic>Transnet, Proposition A, TransNet Projects, Sales Tax, Voters Approve Proposition A, Freeways, SANDAG, Highways, Transportation, TransNet Funding, early action programs, Regional Growth, Land Use Planning, Environmental Studies </topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.sandag.org/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>City of San Diego Official Website</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230024</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230223</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://www.sandiego.gov/</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.sandiego.gov/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>City of Santa Clarita, California</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230025</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://www.santa-clarita.com/</note>
+		<subject authority="keyword">
+			<topic>City Of Santa Clarita, Santa Clarita, Newhall, Valencia, Saugus, Canyon Country, Stevenson Ranch, Santa Clarita Jobs, City Jobs, Jobs, community</topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.santa-clarita.com/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>San Diego County Emergency Homepage</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230023</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://www.sdcountyemergency.com/index.html</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.sdcountyemergency.com/index.html</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>San Diego Fires - Information</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230041</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230224</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://www.signonsandiego.com/firemap/</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.signonsandiego.com/firemap/</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>SignOnSanDiego.com &gt; News &gt; Metro -- Emmet Pierce blog: Evacuating Penasquitos</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230024</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract>8:55 a.m. Monday</abstract>
+		<note type="system details">http://www.signonsandiego.com/news/metro/20071022-1001-bn22pierce.html</note>
+		<subject authority="keyword">
+			<topic>San Diego Union-Tribune, SignOnSanDiego, National City, Chula Vista, Imperial Beach, coronado, ocean beach, el cajon, santee, mira mesa, la jolla, pacific beach, san carlos</topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.signonsandiego.com/news/metro/20071022-1001-bn22pierce.html</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Fire Products - Satellite Services Division</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230024</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://www.ssd.noaa.gov/PS/FIRE/fires-sw.html</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.ssd.noaa.gov/PS/FIRE/fires-sw.html</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Technorati Search: california wildfire</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071027230153</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071029230213</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://www.technorati.com/search/california+wildfire?authority=a4</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.technorati.com/search/california+wildfire?authority=a4</url>
+		</location>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>University of California, San Diego</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20071024230024</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20071030230222</dateCaptured>
+		</originInfo>
+		<genre authority="marcgt">web site</genre>
+		<abstract></abstract>
+		<note type="system details">http://www.ucsd.edu/</note>
+		<subject authority="keyword">
+			<topic></topic>
+		</subject>
+		<subject>
+			<topic>California Wildfires, 2007</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>California WildFires Web Archive (Internet Archive and California Digital Library</title>
+			</titleInfo>
+		</relatedItem>
+		<location>
+			<url displayLabel="Archived site">http://wayback.archive-it.org/877/*/http://www.ucsd.edu/</url>
+		</location>
+	</mods>
+</modsCollection>
