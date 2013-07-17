@@ -1,4 +1,4 @@
-include setup.py README MANIFEST.in
+include setup.py README MANIFEST.in geonames.sqlite3
 global-include fixtures/*
 
 graft viewshare/templates

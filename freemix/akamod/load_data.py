@@ -35,15 +35,15 @@ from akara import module_config
 from akara import response
 from akara.caching import cache, make_named_cache
 
-from zen import spreadsheet as spreadsheetlib
-from zen.temporal import smart_parse_date
-from zen.csvhelper import readcsv
-from zen.mods import mods2json#, MODS_NAMESPACE
-#from zen.akamod import geolookup_service
-from zen.whatfile import guess_imt
-from zen.feeds import webfeed
-from zen.exhibit import UNSUPPORTED_IN_EXHIBITKEY
-from zen import ejsonify
+from freemix.akara import spreadsheet as spreadsheetlib
+from freemix.akara.temporal import smart_parse_date
+from freemix.akara.csvhelper import readcsv
+from freemix.akara.mods import mods2json#, MODS_NAMESPACE
+#from freemix.akara.akamod import geolookup_service
+from freemix.akara.whatfile import guess_imt
+from freemix.akara.feeds import webfeed
+from freemix.akara.exhibit import UNSUPPORTED_IN_EXHIBITKEY
+from freemix.akara import ejsonify
 
 from . import __version__ as VERSION
 
@@ -508,6 +508,6 @@ def revision():
     Sample queries:
     * curl http://localhost:8880/freemix.loader.revision
     '''
-    from zen import __version__
-    return 'Freemix data loader ' + VERSION + ' | Zen version: ' + __version__
+    from freemix.akara import __version__
+    return 'Freemix data loader ' + VERSION + ' | freemix.akara version: ' + __version__
 

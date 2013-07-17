@@ -1,13 +1,13 @@
 # -*- encoding: utf-8 -*-
 '''
-@ 2011 by Uche ogbuji <uche@ogbuji.net>
+@ 2008-2013 by Uche ogbuji <uche@ogbuji.net>
 
-This file is part of the open source Akara project,
+This file is part of the open source Freemix project,
 provided under the Apache 2.0 license.
 See the files LICENSE and NOTICE for details.
 Project home, documentation, distributions: http://wiki.xml3k.org/Akara
 
- Module name:: freemix_akara.contentdm
+ Module name:: freemix.akaramod.contentdm
 
 Scrapes collections from a CDM site into JSON form for Freemix
 
@@ -49,9 +49,9 @@ from akara import logger
 from akara import module_config
 from akara.util import find_peer_service
 
-#from zen.akamod import geolookup_service
-from zen.contentdm import read_contentdm
-from zen.exhibit import profile_properties
+#from freemix.akara.akamod import geolookup_service
+from freemix.akara.contentdm import read_contentdm
+from freemix.akara.exhibit import profile_properties
 
 try:
     import objgraph #http://mg.pov.lt/objgraph/

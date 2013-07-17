@@ -1,13 +1,13 @@
 # -*- encoding: utf-8 -*-
 '''
-@ 2011 by Uche ogbuji <uche@ogbuji.net>
+@ 2008-2013 by Uche ogbuji <uche@ogbuji.net>
 
-This file is part of the open source Akara project,
+This file is part of the open source Freemix project,
 provided under the Apache 2.0 license.
 See the files LICENSE and NOTICE for details.
 Project home, documentation, distributions: http://wiki.xml3k.org/Akara
 
- Module name:: freemix_akara.oai
+ Module name:: freemix.akamod.oai
 
 Scrapes collections from a OAI site into JSON form for Freemix
 
@@ -35,7 +35,7 @@ from akara.services import simple_service
 from akara import logger
 from akara import module_config
 
-from zen.oai import oaiservice
+from freemix.akara.oai import oaiservice
 
 LISTSETS_SERVICE_ID = 'http://purl.org/com/zepheira/freemix/services/oai/listsets'
 

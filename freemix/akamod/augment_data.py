@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 # encoding: utf-8
 """
-Copyright 2008-2011 Zepheira LLC
+Copyright 2008-2013 Zepheira LLC
 
 Services for data augmentation
 
 This file is part of the open source Freemix project,
 provided under the Apache 2.0 license.
 See the files LICENSE and NOTICE for details.
-Project home, documentation, distributions: http://foundry.zepheira.com/projects/zen
+Project home, documentation, distributions: http://foundry.zepheira.com/projects/freemix.akara
 
 = Defined REST entry points =
 
@@ -43,10 +43,10 @@ from akara import response
 from akara.caching import cache, make_named_cache
 from akara import module_config
 
-from zen.services import service_proxy
-from zen import augmentation
-from zen.akamod import geolookup_service
-#from zen.geo import local_geonames, US_STATE_FIRST
+from freemix.akara.services import service_proxy
+from freemix.akara import augmentation
+from freemix.akara.akamod import geolookup_service
+#from freemix.akara.geo import local_geonames, US_STATE_FIRST
 
 
 GEONAMES_PLUS_DBFILE = module_config().get('geonames_dbfile')

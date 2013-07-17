@@ -25,3 +25,12 @@ django-cms==2.3.6
 
 # Uncomment for uservoice integration
 # pycrypto==2.3
+
+#Added with freemix_akara merge
+python-dateutil
+feedparser
+xlrd
+
+akara
+amara
+
