@@ -115,7 +115,7 @@ class ModeratedRegistrationAdmin(RegistrationAdmin):
         registration_profile = get_object_or_404(ds, id=id)
 
         args = getattr(request, request.method)
-        ds = models.ModeratedRegistrationProfile.objects
+        ds = models.ViewShareRegistrationProfile.objects
         if "reject" in args:
             ds.reject_profile(registration_profile)
             return HttpResponseRedirect("../../")
