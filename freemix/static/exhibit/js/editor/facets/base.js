@@ -63,9 +63,7 @@
 
         form.submit(function() {return false;});
 
-        template.bind("update-preview", function() {
-            facet.updatePreview(template.find("#facet-preview"), config);
-        });
+
         dialog.empty().append(template);
 
         this.setupEditor(config, template);
@@ -78,6 +76,9 @@
            facetContainer.getDialog().modal("hide");
         });
         dialog.modal("show");
+        template.bind("update-preview", function() {
+            facet.updatePreview(template.find("#facet-preview"), config);
+        });
         template.trigger("update-preview");
     };
 
