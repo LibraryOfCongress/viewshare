@@ -22,8 +22,7 @@
 
         this._setupSelectPropertyHandler(config, template, top_band, "topBandUnit");
         this._setupSelectPropertyHandler(config, template, bottom_band, "bottomBandUnit");
-        top_band.change();
-        bottom_band.change();
+
 
         var db = Freemix.exhibit.database;
 
@@ -33,11 +32,14 @@
         this._setupPropertySelect(config, template, start, "startDate", dates);
         this._setupPropertySelect(config, template, end, "endDate", dates, true);
         this._setupPropertySelect(config, template, color, "colorKey", colors, true);
+        this._setupLensEditor(config, template);
 
+
+        top_band.change();
+        bottom_band.change();
         start.change();
         end.change();
         color.change();
-        this._setupLensEditor(config, template);
     };
 
 })(window.Freemix.jQuery, window.Freemix, window.Exhibit);

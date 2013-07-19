@@ -25,9 +25,7 @@
 
         form.submit(function() {return false;});
 
-        template.bind(this.refreshEvent, function() {
-            view.updatePreview(template.find(".view-preview-pane"), config);
-        });
+
         this.setupEditor(config, template);
 
         dialog.empty().append(template);
@@ -35,10 +33,16 @@
            var model = template.data("model");
            model.config = config;
            viewContainer.findWidget().trigger("edit-view");
-           model.select();
            viewContainer.getDialog().modal("hide");
+           model.select();
+           
         });
         dialog.modal("show");
+
+        template.bind(this.refreshEvent, function() {
+            view.updatePreview(template.find("#view-preview"), config);
+        });
+
         template.trigger(this.refreshEvent);
         
     };

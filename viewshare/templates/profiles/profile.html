@@ -26,6 +26,8 @@
   <script type="text/javascript" src="{{STATIC_URL}}dataset/js/transaction_user_profile.js"></script>
   {% include "freemix/js_include/jquery_ui.html" %}
 
+  {% if is_me %}
+
   <script type="text/javascript">
   $(document).ready(function() {
     var userTransactionView, transactions = $('.transaction');
@@ -37,24 +39,11 @@
     }
     $('#edit_profile_form').load('{% url 'profile_edit' %}', function() {
       var q = $('form.uniForm');
-      if (q.length) {
-        //            q.uniform();
-      }
-    });
-    var opts = {
-      title: "{% trans "Edit Profile" %}",
-      modal: true,
-      autoOpen: false,
-      position: ["top","center"],
-      width: 400
-    };
-    $('#edit_profile_form').dialog(opts);
-    $('#edit-profile-button').click(function() {
-      $('#edit_profile_form').dialog('open');
-      return false;
     });
   });
   </script>
+
+  {% endif %}
 {% endblock head_scripts %}
 
 {# check to see if the user being inspected is user logged in #}

@@ -51,8 +51,16 @@
                           "</div>").appendTo('body');
 
             dialog.modal({
-                    show:false
-                });
+                show:false
+            });
+
+            dialog.on("show", function() {
+                Freemix.getBuilder().hide();
+            });
+
+            dialog.on("hidden", function() {
+                Freemix.getBuilder().show();
+            });
 
             facetContainer._dialog = dialog;
 
@@ -94,8 +102,16 @@
                           "</div>").appendTo('body');
 
             dialog.modal({
-                    show:false
-                });
+                show:false
+            });
+
+            dialog.on("show", function() {
+                Freemix.getBuilder().hide();
+            });
+
+            dialog.on("hidden", function() {
+                Freemix.getBuilder().show();
+            });
 
             viewContainer._dialog = dialog;
 

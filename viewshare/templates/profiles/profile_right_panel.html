@@ -36,7 +36,7 @@
 
 {% else %}
 
-<div class="dataset_list well">
+<div class="dataset_list">
   <h2 class="ui-widget-header">{% blocktrans %}Data{% endblocktrans %}</h2>
   {% dataset_list datasets.all 3 0 %}
 
@@ -48,7 +48,7 @@
 </div>
 
 
-<div class="exhibit_list well">
+<div class="exhibit_list">
   <h2 class="ui-widget-header">{% blocktrans %}Views{% endblocktrans %}</h2>
   {% exhibit_list exhibits.all 3 0 %}
 
