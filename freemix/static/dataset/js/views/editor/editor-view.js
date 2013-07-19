@@ -34,7 +34,10 @@ define(
       this.$el = options.$el;
       this.notificationView = options.notificationView;
       // child views
-      this.augmentModal = new ModalAugmentView({model: this.model});
+      this.augmentModal = new ModalAugmentView({
+        model: this.model,
+        notificationView: this.notificationView
+      });
       this.recordView = {destroy: $.noop};
       // bind 'this' to template variables and event handlers
       this.currentRecordNumber.bind(this);
@@ -142,7 +145,7 @@ define(
     handleSaveSuccess: function () {
       // TODO: loading gif
       this.destroyChildren();
-      this.model.loadLocal.apply(this.model, [])
+      this.model.loadLocal.apply(this.model, []);
       this.renderChildrenViews();
     },
 

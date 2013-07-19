@@ -17,18 +17,18 @@ define(
 
   /**
    * Extends PropertyModel. Represents a property that is created from other
-   * properties such as a Latitude/Longitude pair.
-   * @param {array} options.composite - labels of other properties used to
-   * create this CompositeProperty
+   * properties such an array created from a comma-separated value.
+   * @param {string} options.extract - label of other property used to
+   * create this PatternProperty
    */
-  var CompositePropertyModel = function(options) {
+  var PatternPropertyModel = function(options) {
     this.initialize.apply(this, [options]);
   };
 
-  $.extend(CompositePropertyModel.prototype, PropertyModel.prototype, {
+  $.extend(PatternPropertyModel.prototype, PropertyModel.prototype, {
     initialize: function(options) {
       PropertyModel.prototype.initialize.apply(this, [options]);
-      this._composite = options.composite;
+      this._extract = options.extract;
       if (Freemix.property.propertyList && Freemix.property.propertyList.hasOwnProperty(this.id)) {
         // this is an existing Property
         this.freemixProperty = Freemix.property.propertyList[this.id];
@@ -38,22 +38,25 @@ define(
       }
     },
 
-    /** getter/setter method for composite */
-    composite: function(newComposite) {
-      if (newComposite) {
-        this._composite = newComposite;
+    /**
+     * getter/setter method - extract is the name of the PropertyModel
+     * that this PatternPropertyModel originates from.
+     */
+    extract: function(newPattern) {
+      if (newPattern) {
+        this._extract = newPattern;
         if (this.freemixProperty) {
           // This is not a new Property so we can modify it in Freemix
-          this.freemixProperty.label(this._composite);
+          this.freemixProperty.label(this._extract);
         }
       } else {
-        return this._composite;
+        return this._extract;
       }
     },
 
     /** Generate an array used to identify tags in Freemix */
     tags: function() {
-      return ['property:type=' + this._type];
+      return ['property:type=text', 'property:type=shredded_list'];
     },
 
     /** Create a Freemix Property with our Model's data */
@@ -64,7 +67,7 @@ define(
         enabled: true,
         tags: this.tags(),
         types: [this._type],
-        composite: this.composite()
+        extract: this.extract()
       };
       return freemixProperty;
     },
@@ -78,12 +81,12 @@ define(
     validate: function(propertyNames) {
       var existingNames = propertyNames || [],
       errors = PropertyModel.prototype.validate.apply(this, [existingNames]);
-      if (!this._composite.length) {
-        errors.composite = 'Please select at least one property.';
+      if (!this._extract.length) {
+        errors.extract = 'Please select at least one property.';
       }
       return errors;
     }
   });
 
-  return CompositePropertyModel;
+  return PatternPropertyModel;
 });
