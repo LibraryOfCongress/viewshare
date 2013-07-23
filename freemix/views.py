@@ -87,18 +87,14 @@ class JSONResponse(HttpResponse):
         indent = 2 if settings.DEBUG else None
 
         if template:
-            context = {"json": json.dumps(data,
-                                          indent=indent,
-                                          use_decimal=True)
+            context = {"json": json.dumps(data, indent=indent)
             }
             if extra_context:
                 context.update(extra_context)
             content = render_to_string(template, context)
             mime = "application/javascript"
         else:
-            content = json.dumps(data,
-                                 indent=indent,
-                                 use_decimal=True)
+            content = json.dumps(data, indent=indent)
             mime = ("text/javascript" if settings.DEBUG
                                   else "application/json")
         super(JSONResponse, self).__init__(
