@@ -3,7 +3,6 @@ import hashlib
 from django.conf import settings
 from django.contrib.auth.models import User
 
-from django.contrib.sites.models import Site
 from django.db import models, transaction
 from django.template.loader import render_to_string
 from django_extensions.db.fields import AutoSlugField
@@ -23,6 +22,11 @@ class ModeratedRegistrationManager(RegistrationManager):
 
     @transaction.commit_on_success
     def create_moderated_user(self, *args, **kwargs):
+        """
+        Create an inactive User with a viewshare.apps.Profile. Also create
+        a ModeratedRegistrationProfile that must be reviewed by an admin. Send
+        an email notifying admins that there is a registration for review.
+        """
         username = kwargs["username"]
         password = kwargs["password1"]
         email = kwargs["email"]
@@ -45,7 +49,7 @@ class ModeratedRegistrationManager(RegistrationManager):
         registration_profile = self.create(user=new_user,
                     activation_key=ModeratedRegistrationProfile.PENDING
                     )
-        registration_profile.send_approval_email(kwargs["site"])
+        registration_profile.send_approval_email()
         return new_user
 
     def approve_profile(self, profile):
@@ -68,10 +72,7 @@ class ModeratedRegistrationManager(RegistrationManager):
             user_hash = hashlib.sha1(salt + profile.user.username)
             profile.activation_key = user_hash.hexdigest()
             profile.save()
-
-            current_site = Site.objects.get_current()
-
-            profile.send_activation_email(current_site)
+            profile.send_activation_email()
 
         return False
 
@@ -86,7 +87,7 @@ class ModeratedRegistrationProfile(RegistrationProfile, models.Model):
     class Meta:
         abstract = True
 
-    def send_approval_email(self, site):
+    def send_approval_email(self):
         ctx_dict = {
             'profile': self,
             'SITE_NAME': settings.SITE_NAME,
@@ -108,7 +109,7 @@ class ModeratedRegistrationProfile(RegistrationProfile, models.Model):
 
         send_mail(subject, message, from_addr, to)
 
-    def send_activation_email(self, site):
+    def send_activation_email(self):
         """
         Overrides the base method to add the profile itself to the
         activation templates
@@ -116,7 +117,6 @@ class ModeratedRegistrationProfile(RegistrationProfile, models.Model):
         """
         ctx_dict = {'activation_key': self.activation_key,
                     'expiration_days': settings.ACCOUNT_ACTIVATION_DAYS,
-                    'site': site,
                     'profile': self,
                     'SITE_NAME': settings.SITE_NAME,
                     'CONTACT_EMAIL': settings.CONTACT_EMAIL}

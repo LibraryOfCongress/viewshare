@@ -132,7 +132,7 @@ class ModeratedRegistrationAdmin(RegistrationAdmin):
     def get_urls(self):
         urls = super(ModeratedRegistrationAdmin, self).get_urls()
 
-        return  patterns('',
+        return patterns('',
             url(r'^(?P<id>[\d]+)/moderate/$$',
                 self.admin_site.admin_view(self.approval_view),
                 name="approve_users"),
