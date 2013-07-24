@@ -51,7 +51,6 @@ This software uses code from the following projects:
  * Pinax (http://pinaxproject.com/)
  * pytz (http://pytz.sourceforge.net)
  * Simile (http://simile-widgets.org/)
- * simplejson (http://undefined.org/python/#simplejson)
  * South (http://south.aeracode.org/)
  * ui.multiselect.js (http://www.quasipartikel.at/multiselect/)
 

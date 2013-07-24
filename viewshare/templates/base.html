@@ -1,6 +1,7 @@
 {% load url from future %}
-{% load i18n %}
+{% load announcements_tags %}
 {% load compress %}
+{% load i18n %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -33,19 +34,6 @@
 
       {% block banner %}
       
-      {% if site_wide_announcements %}
-      <div class="alert" id="site_wide_announcements">
-        <ul>
-          {% for announcement in site_wide_announcements %}
-          <li>
-            <a href="{{ announcement.get_absolute_url }}">{{ announcement }}</a>
-            <a href="{% url 'announcement_hide' announcement.pk %}?next={{ request.path }}">{% trans "(hide announcement)" %}</a>
-          </li>
-          {% endfor %}
-        </ul>
-      </div>
-      {% endif %}
-      
       <!-- fixed header across all application -->
       
       <div id="header">
@@ -63,6 +51,15 @@
           </div>
         </div>
       </div>
+      
+      {% announcements as site_wide_announcements %}
+      {% if site_wide_announcements %}
+        {% for announcement in site_wide_announcements %}
+        <div class="alert" id="site_wide_announcements">
+          <strong>{{ announcement.title }}</strong> - {{ announcement.content }}
+        </div>
+        {% endfor %}
+      {% endif %}
       
       {% endblock banner %}
       

@@ -93,7 +93,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     "viewshare.utilities.context_processors.viewshare_settings",
     "viewshare.apps.vendor.notification.context_processors.notification",
-    "viewshare.apps.vendor.announcements.context_processors.site_wide_announcements",
     "viewshare.apps.account.context_processors.account",
     "viewshare.apps.connections.context_processors.invitations",
     )
@@ -130,7 +129,7 @@ INSTALLED_APPS = (
     # Viewshare specific
     'viewshare.apps.vendor.notification',
     'viewshare.apps.vendor.friends',
-    'viewshare.apps.vendor.announcements',
+    'announcements',
 
     'viewshare.apps.account',
     'viewshare.apps.discover',
@@ -212,13 +211,9 @@ CACHES = {
     }
 }
 
-import logging
-
-logging.basicConfig(
-    level=logging.DEBUG,
-    format='%(asctime)s %(levelname)s %(message)s',
-)
-
+# Validate the request's Host header and protect
+# against host-poisoning attacks
+ALLOWED_HOSTS = ('viewshare.org', )
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

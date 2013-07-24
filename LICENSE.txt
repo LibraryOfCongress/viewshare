@@ -75,7 +75,6 @@ The license below applies to the following dependencies:
  * Pinax:  Copyright (c) 2008-2010 James Tauber and contributors
  * pytz:  Copyright (c) 2003-2005 Stuart Bishop <stuart@stuartbishop.net>
  * ui.multiselect.js:  Copyright (c) 2009 Michael Aufreiter, http://www.quasipartikel.at
- * simplejson:  Copyright (c) 2006 Bob Ippolito
 
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
