@@ -6,7 +6,6 @@ from django.views.generic.detail import DetailView
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import CreateView
 from viewshare.apps.share import models
-
 from freemix.exhibit.models import Exhibit
 from viewshare.apps.legacy.dataset import models as dataset_models
 from freemix.views import BaseJSONView
@@ -136,4 +135,3 @@ class SharedKeyCreateFormView(CreateView):
             return HttpResponseForbidden()
         self.object = form.save()
         return HttpResponseRedirect(self.get_success_url())
-        

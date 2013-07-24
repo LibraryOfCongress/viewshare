@@ -9,6 +9,7 @@ from django_extensions.db.models import (TitleSlugDescriptionModel,
 from viewshare.apps.legacy.dataset.models import Dataset
 
 
+
 class Canvas(TitleSlugDescriptionModel):
     """
     A reference to a template that contains the HTML for an Exhibit canvas
