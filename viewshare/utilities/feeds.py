@@ -5,7 +5,6 @@ from django.core.urlresolvers import reverse
 
 from freemix.permissions import PermissionsRegistry
 from freemix.utils import get_user
-from viewshare.apps.legacy.dataset.models import Dataset
 from freemix.exhibit.models import Exhibit
 from freemix.utils import get_site_url
 
@@ -71,52 +70,3 @@ class UserDataViews(ItemMixin, Feed):
 class AtomUserDataViews(UserDataViews):
     feed_type = Atom1Feed
     subtitle = UserDataViews.description
-
-
-
-
-class LatestDatasets(ItemMixin, Feed):
-    title = "Datasets"
-    description = "Latest Datasets"
-
-    link = get_site_url()
-
-    def items(self):
-        u = AnonymousUser()
-        filter = PermissionsRegistry.get_filter('dataset.can_view', u)
-
-        return Dataset.objects.filter(filter).order_by('-created')[:10]
-
-
-class AtomLatestDatasets(LatestDatasets):
-    feed_type = Atom1Feed
-    subtitle = LatestDatasets.description
-
-
-class UserDatasets(ItemMixin, Feed):
-
-    # Parse the username from the URL
-    def get_object(self, request, owner):
-        return get_user(username=owner)
-
-    def title(self, obj):
-        return "Latest Datasets created by %s" % obj.username
-
-    def description(self, obj):
-        return "Latest Datasets for %(user)s" % { 'user': obj.username }
-
-    # Link to user's profile
-    def link(self, obj):
-        return get_site_url(reverse("profile_detail", kwargs={'username':
-                    obj.username}))
-
-    # Return only this user's data.
-    def items(self, obj):
-        filter = PermissionsRegistry.get_filter('dataset.can_view', AnonymousUser())
-        return Dataset.objects.filter(owner=obj).filter(filter).order_by('-created')[:10]
-
-
-class AtomUserDatasets(UserDatasets):
-    feed_type = Atom1Feed
-    subtitle = UserDatasets.description
-
