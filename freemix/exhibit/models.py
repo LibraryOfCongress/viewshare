@@ -6,8 +6,6 @@ from django_extensions.db.fields import AutoSlugField, UUIDField
 from django_extensions.db.fields.json import JSONField
 from django_extensions.db.models import (TitleSlugDescriptionModel,
                                          TimeStampedModel)
-from viewshare.apps.legacy.dataset.models import Dataset
-
 
 
 class Canvas(TitleSlugDescriptionModel):
@@ -38,22 +36,7 @@ class Exhibit(TimeStampedModel):
 
     profile = JSONField()
 
-    dataset = models.ForeignKey(Dataset,
-                                null=True,
-                                blank=True,
-                                related_name="exhibits")
-
     canvas = models.ForeignKey(Canvas)
-
-    def dataset_available(self, user):
-        """
-        True if the provided user is able to view the dataset associated
-        with this exhibit
-        """
-        ds = self.dataset
-        if not ds or not user.has_perm("dataset.can_view", ds):
-            return False
-        return True
 
     def update_from_profile(self, profile):
         self.profile = profile

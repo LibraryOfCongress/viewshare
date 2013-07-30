@@ -6,7 +6,7 @@ from django.views.decorators.cache import cache_page
 from django.views.generic.base import View
 from django.views.generic.edit import CreateView
 
-from viewshare.apps.legacy.dataset.transform import AkaraTransformClient
+from viewshare.apps.upload.transform import AkaraTransformClient
 from viewshare.apps.legacy.dataset.views import DataSourceRegistry
 from freemix.views import JSONResponse
 from viewshare.apps.upload import forms, conf

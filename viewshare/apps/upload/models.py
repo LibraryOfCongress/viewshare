@@ -1,7 +1,7 @@
 import urllib2
 import json
 
-from os.path import join, sep
+from os.path import join, sep, basename
 from django.core.files.storage import FileSystemStorage
 from django.core.urlresolvers import reverse
 from django.db import models
@@ -9,10 +9,10 @@ from django.utils.translation import ugettext_lazy as _
 from django_extensions.db.models import TimeStampedModel
 from freemix.exhibit.models import Exhibit
 
-from viewshare.apps.legacy.dataset import models as ds_models
-
-from viewshare.apps.legacy.dataset.transform import AkaraTransformClient
+from viewshare.apps.upload.transform import (AkaraTransformClient,
+                                             AKARA_TRANSFORM_URL)
 from viewshare.apps.upload import conf
+
 
 class DataSource(TimeStampedModel):
     """
@@ -37,14 +37,13 @@ class DataSource(TimeStampedModel):
         return self.classname == self.__class__.__name__
 
 
-class ReferenceDataSource(ds_models.DataSource):
+class ReferenceDataSource(DataSource):
     """
     A Data Source that references another exhibit
     """
 
     referenced = models.ForeignKey(Exhibit,
                                    related_name="references")
-
 
 def source_upload_path(instance, filename):
     return join(instance.uuid, filename)
@@ -60,16 +59,82 @@ class ViewshareFileStorage(FileSystemStorage):
 
 fs = ViewshareFileStorage(location=conf.FILE_UPLOAD_PATH)
 
-file_datasource_mixin = ds_models.make_file_data_source_mixin(storage=fs,
+
+class TransformMixin(models.Model):
+    """
+    Contains the methods and parameters necessary to create a simple data
+     source that posts to a service and returns the result
+    """
+
+    transform = AkaraTransformClient(AKARA_TRANSFORM_URL)
+
+    class Meta:
+        abstract = True
+
+    def get_transform_params(self):
+        return {}
+
+    def get_transform_body(self):
+        return None
+
+    def refresh(self):
+        return self.transform(
+                body=self.get_transform_body(),
+                params=self.get_transform_params())
+
+
+class URLDataSourceMixin(TransformMixin, models.Model):
+
+    url = models.URLField()
+
+    class Meta:
+        abstract = True
+
+    def get_transform_body(self):
+        r = urllib2.urlopen(self.url)
+        return r.read()
+
+    def __unicode__(self):
+        return self.url
+
+
+def make_file_data_source_mixin(storage, upload_to):
+    """
+    Generate a mixin for a file based data source allowing for custom
+    storage and file path.
+
+        storage -- A django FileStorage implementation
+        upload_to -- the default path for an uploaded file
+    """
+    class FileDataSourceMixin(TransformMixin, models.Model):
+        file = models.FileField(
+                storage=storage,
+                upload_to=upload_to,
+                max_length=255)
+
+        class Meta:
+            abstract = True
+
+        def get_transform_body(self):
+            return self.file.read()
+
+        def get_filename(self):
+            return basename(self.file.name)
+
+        def __unicode__(self):
+            return self.file.name
+    return FileDataSourceMixin
+
+file_datasource_mixin = make_file_data_source_mixin(storage=fs,
     upload_to=source_upload_path)
 
 
-class URLDataSource(ds_models.URLDataSourceMixin, ds_models.DataSource):
+class URLDataSource(URLDataSourceMixin, DataSource):
     """Generic URL data source
     """
 
 
-class FileDataSource(file_datasource_mixin, ds_models.DataSource):
+class FileDataSource(file_datasource_mixin, DataSource):
     """Generic File data source
     """
 
@@ -79,7 +144,7 @@ _collection_help_text_ = _("Collection names begin with the "
 _limit_help_text_ = _("The maximum number of records to load")
 
 
-class ContentDMDataSource(ds_models.URLDataSourceMixin, ds_models.DataSource):
+class ContentDMDataSource(URLDataSourceMixin, DataSource):
     """
     Data source for loading data from a particular CONTENTdm site
     based on collection name or query.
@@ -120,7 +185,7 @@ class ContentDMDataSource(ds_models.URLDataSourceMixin, ds_models.DataSource):
         return None
 
 
-class OAIDataSource(ds_models.URLDataSourceMixin, ds_models.DataSource):
+class OAIDataSource(URLDataSourceMixin, DataSource):
     """Data source for loading an OAI set.
     """
 
@@ -152,7 +217,7 @@ class OAIDataSource(ds_models.URLDataSourceMixin, ds_models.DataSource):
         return "%s (%s, %s)" % (self.title, self.url, self.set)
 
 
-class JSONURLDataSource(ds_models.URLDataSourceMixin, ds_models.DataSource):
+class JSONURLDataSource(URLDataSourceMixin, DataSource):
     """Load JSON from a URL
     """
     path = models.TextField(_("Items Array"))
@@ -172,7 +237,7 @@ class JSONURLDataSource(ds_models.URLDataSourceMixin, ds_models.DataSource):
         return "%s (%s)" % (self.url, self.path)
 
 
-class JSONFileDataSource(file_datasource_mixin, ds_models.DataSource):
+class JSONFileDataSource(file_datasource_mixin, DataSource):
     """Load JSON from a file
     """
     path = models.TextField(_("Items Array"))
@@ -218,11 +283,11 @@ class ModsMixin(models.Model):
         return p
 
 
-class ModsURLDataSource(ModsMixin, ds_models.URLDataSourceMixin, ds_models.DataSource):
+class ModsURLDataSource(ModsMixin, URLDataSourceMixin, DataSource):
     """Load XMLMODS from a URL
     """
 
 
-class ModsFileDataSource(ModsMixin, file_datasource_mixin, ds_models.DataSource):
+class ModsFileDataSource(ModsMixin, file_datasource_mixin, DataSource):
     """Load XMLMODS from an uploaded file
     """
