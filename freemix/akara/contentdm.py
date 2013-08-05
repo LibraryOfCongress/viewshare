@@ -107,7 +107,7 @@ def read_contentdm(site, collection=None, query=None, limit=None, logger=logging
     A generator of CDM records
     First generates header info
 
-    >>> from zen.contentdm import read_contentdm
+    >>> from freemix.akara.contentdm import read_contentdm
     >>> results = read_contentdm('http://digital.library.louisville.edu/cdm4/', collection='/jthom', query=None, limit=None)
     >>> results.next()
     {'basequeryurl': 'http://digital.library.louisville.edu/cdm4/results.php?CISOOP1=any&CISOROOT=%2Fjthom&CISOBOX1=&CISOFIELD1=CISOSEARCHALL'}

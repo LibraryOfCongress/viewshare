@@ -55,7 +55,7 @@ PREFIXES = {u'o': u'http://www.openarchives.org/OAI/2.0/'}
 
 class oaiservice(object):
     """
-    >>> from zen.oai import oaiservice
+    >>> from freemix.akara.oai import oaiservice
     >>> remote = oaiservice('http://dspace.mit.edu/oai/request')
     >>> sets = remote.list_sets()
     >>> sets[0]

@@ -57,19 +57,31 @@ def guess_imt(body):
     process.stdin.close()
     #imt, perr = process.communicate(input=string_body)
     imt = process.stdout.read()
+    returncode = process.wait()
     if not imt:
         #FIXME: L10N
         raise RuntimeError('Empty output from the command line.  Probably a failure.  Command line: "%s"'%cmdline)
         #raise ValueError('Empty output from the command line.  Probably a failure.  Command line: "%s"'%cmdline)
         imt = "application/unknown"
+    if not returncode == 0:
+        # Seeing this on Ubuntu 12.04, not sure why yet
+        raise RuntimeError('Error status code %d from Popen, response: %s. Command line: "%s"'%(returncode,imt,cmdline))
+
     #print >> sys.stderr, imt
     #imt might look like:
     # * foo.dat: text/plain; charset=us-ascii
     # * foo.dat: text/plain charset=us-ascii
-    if 'CDF' in imt:
+    if 'CDF' in imt or "Composite Document File" in imt:
         #Hackaround (see http://foundry.zepheira.com/issues/399)
         return GENERIC_CDF_IMT
-    imt = imt.split(':')[-1].split(';')[0].split()[0].strip()
+
+    imt_pre = imt.split(':')[-1].split(';')[0].split()
+    if len(imt_pre) > 0:
+        imt = imt_pre[0].strip()
+    else:
+        # On Ubuntu 12.04, 'file -i' fails to report any media type for some XLS files
+        imt = "application/octet-stream"
+
     #imt = fileguesser.from_buffer(body)
     return imt
 

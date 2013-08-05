@@ -53,7 +53,7 @@ def augment_location(source, propertyinfo, augmented, failed):
     A few composite examples
 
     >>> from zen import augmentation
-    >>> from zen.geo import local_geonames
+    >>> from freemix.akara.geo import local_geonames
     >>> augmentation.GEOCODER = local_geonames('/Users/uche/.local/lib/akara/geonames.sqlite3')
     >>> augmentation.GEOCODER('Superior, CO')
 

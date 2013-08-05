@@ -1,4 +1,4 @@
-#zen.exhibit
+#freemix.akara.exhibit
 """
 For more on Exhibit JSON conventions see:
 
@@ -49,7 +49,7 @@ def prep(items, schema=None, strict=False):
 
     import string
     from amara.lib.util import mcompose, first_item
-    from zen import exhibit
+    from freemix.akara import exhibit
 
     PIPELINES = { u'atom:entry': {
         u"type": None,
@@ -107,7 +107,7 @@ def profile_properties(items):
     '''
     Create a profile of properties from a collection of Exhibit items
     
-    >>> from zen.exhibit import profile_properties
+    >>> from freemix.akara.exhibit import profile_properties
     >>> items = [{
             "Title": "Introduction for citation,  Marjory Stoneman Douglas,  Fairchild Tropical Botanic Garden,  March 19,  1978  ", 
             "Digital_ID": "asm04710000020001001  ", 

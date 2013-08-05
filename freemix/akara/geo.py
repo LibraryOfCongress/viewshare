@@ -1,75 +1,28 @@
-# -- %< --
-# From geo.py
+'''
+Basic geocoder functions
+'''
 
-import sys, urllib
+import sys, urllib, urllib2
 import logging
 
 from amara.thirdparty import httplib2, json
-
-from akara import logger
-from akara import request
-from akara.caching import cache
-from akara import global_config
-from akara.util import find_peer_service
+from amara.lib.iri import join
 
 from freemix.akara.latlong import latlong
 
-GEOLOOKUP_URI = None
-
-def setup():
-    global GEOLOOKUP_URI, H
-    GEOLOOKUP_URI = find_peer_service(u'http://purl.org/com/zepheira/services/geolookup.json')
-    H = httplib2.Http('/tmp/.cache')
-    return
-
-def geolookup(place):
-    '''
-    A convenience function to call the local/peer geolookup service.
-
-    Can only be called from within an Akara module handler.  E.g. the following sample module:
-    
-    -- %< --
-from akara.services import simple_service
-from zenlib.geo import geolookup
-
-@simple_service("GET", "http://testing/report.get")
-def s(place):
-    return repr(geolookup('Superior,CO'))
-    -- %< --
-    Then test: curl -i "http://localhost:8880/s?place=Superior,CO"
-    '''
-    if not place:
-        return None
-    if isinstance(place, unicode):
-        place = place.encode('utf-8')
-
-    if not GEOLOOKUP_URI: setup()
-    logger.debug('geolookup' + repr((place, GEOLOOKUP_URI)))
-    resp, body = H.request(GEOLOOKUP_URI + '?place=' + urllib.quote(place))
-    try:
-        latlong = json.loads(body).itervalues().next()
-        return latlong
-    except (ValueError, StopIteration), e:
-        logger.debug("Not found: " + repr(place))
-        return None
-
-
-GEOLOOKUP_CACHE = cache(
-    'http://purl.org/com/zepheira/services/geolookup.json', expires=24*60*60)
-
 class local_geonames(object):
     '''
-    >>> from zen.geo import local_geonames
+    >>> from freemix.akara.geo import local_geonames
     >>> lg = local_geonames('/Users/uche/.local/lib/akara/geonames.sqlite3')
     >>> lg('Superior, CO')
     {"Superior, CO": "39.95276,-105.1686"}
     >>> lg('Georgia')
     {"Georgia": "42,43.5"}
     '''
-    def __init__(self, support_dbfile, heuristics=[], logger=logging):
+    def __init__(self, support_dbfile, hooks=[], logger=logging):
         self._support_dbfile = latlong(support_dbfile)
         self._logger = logger
-        for h in heuristics:
+        for h in hooks:
             h(self)
         return
 
@@ -95,7 +48,7 @@ class local_geonames(object):
             return {}
 
 
-#Heuristics functions
+#Built-in hook functions
 def US_STATE_FIRST(lg_obj):
     '''
     This is a ridiculously US centric heuristic, but here it is.
@@ -112,4 +65,41 @@ def US_STATE_FIRST(lg_obj):
             result = lg_obj._support_dbfile.raw_lookup(place)
         return result
     lg_obj._single_name_query = state_first_query
+
+
+GEONAMES_FREE_SERVICE_ENDPOINT = "http://api.geonames.org/searchJSON?"
+
+class geonames_service(object):
+    #http://www.geonames.org/export/geonames-search.html
+    '''
+    >>> from freemix.akara.geo import geonames_service
+    >>> lg = geonames_service(user='moi')
+    >>> lg('Superior, CO')
+    {"Superior, CO": "39.934186,-105.157990"}
+    >>> lg('Georgia')
+    {"Georgia": "41.999981,43.499905"}
+    '''
+    def __init__(self, hooks=[], user=None, logger=logging, servicebase=GEONAMES_FREE_SERVICE_ENDPOINT):
+        self._servicebase = servicebase
+        self._logger = logger
+        self._user = user
+        for h in hooks:
+            h(self)
+        return
+
+    def __call__(self, place):
+        query = urllib.urlencode(dict(username=self._user, q=place.encode('utf-8'), maxRows='2'))
+        #print self._servicebase + query
+        req = self._servicebase + query
+        stream = urllib2.urlopen(req)
+        resultset = json.load(stream)
+        #print resultset.get(u'geonames')
+        if resultset.get(u'geonames'):
+            result = resultset[u'geonames'][0]
+            #lat, long_ = result[u'lat'], result[u'lng']
+            ll = "{lat},{lng}".format(**result)
+            self._logger.debug(u"geolookup via geonames {0} yields: {1}".format(self._servicebase + query, repr((place, ll))))
+            return {place: ll} if ll else {}
+        else:
+            return {}
 
