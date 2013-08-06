@@ -36,9 +36,7 @@ define(
      * TODO: Convert this to create PropertyModels
      */
     createPropertyModels: function(profile) {
-      var h, i, item, property, record, type,
-      properties = profile[0].properties,
-      items = data[0].items,
+      var id, property,
       ignored_properties = [
         'id',
         'label',
@@ -48,37 +46,21 @@ define(
         'change',
         'changedItem',
       ];
-      this.records = [];
+      this.properties = [];
       // create editor models
-      for (i = 0; i < items.length; ++i) {
-        record = [];
-        item = items[i];
-        for (h = 0; h < properties.length; ++h) {
-          property = properties[h];
-          if (ignored_properties.indexOf(property.property) === -1) {
-            // this property is not one of our ignored_properties
-            // decipher type
-            if (property.tags.length > 0) {
-              type = property.tags[0];
-              type = type.match(/property:type=(\w+)/);
-              type = type[1];
-            } else if (property.types.length > 0) {
-              type = property.types[0];
-            } else {
-              type = 'text';
-            }
-            record.push({
-              id: property.property,
-              name: property.label,
-              type: type,
-              value: item[property.property],
-              composite: property.composite
-            });
-          } 
-        }
-        this.records.push(new RecordModel({properties: record}));
-        this.records[i].Observer('changeType').subscribe(
-          this.handleChangeType);
+      for (id in profile) {
+        if (ignored_properties.indexOf(id) === -1) {
+          property = profile[id];
+          // TODO: check for augmented types
+          this.properties.push(new PropertyModel({
+            id: id,
+            label: property.label,
+            type: property.valueType,
+            items: [],
+            owner: this.owner,
+            slug: this.slug
+          }).load());
+        } 
       }
     },
 
