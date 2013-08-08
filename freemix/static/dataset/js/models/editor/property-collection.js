@@ -4,6 +4,7 @@ define(
     'jquery',
     'observer',
     'models/property',
+    'jquery.csrf'
   ],
   function (
     $,
@@ -59,7 +60,7 @@ define(
             items: [],
             owner: this.owner,
             slug: this.slug
-          }).load());
+          }).loadData());
         } 
       }
     },
