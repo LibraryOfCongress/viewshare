@@ -32,11 +32,20 @@ define(
     },
 
     /**
+     * Get JSON data to create a RecordCollection from the server
+     */
+    load: function() {
+      var xhr = $.getJSON(this.profileURL)
+        .done(this.loadSuccess.bind(this))
+        .fail(this.loadError.bind(this));
+      return xhr;
+    },
+
+    /**
      * Given 'profile' JSON describing the attributes all the properties
      * for this view, create Property models.
-     * TODO: Convert this to create PropertyModels
      */
-    createPropertyModels: function(profile) {
+    loadSuccess: function(profile) {
       var id, property,
       ignored_properties = [
         'id',
@@ -63,6 +72,7 @@ define(
           }).loadData());
         } 
       }
+      this.Observer('loadSuccess').publish();
     },
 
     /** Signal that the GET request failed */
@@ -71,21 +81,16 @@ define(
     },
 
     /**
-     * Get JSON data to create a RecordCollection from the server
-     * TODO: define profileURL
-     */
-    load: function() {
-      $.when($.getJSON(this.profileURL))
-        .then(this.createPropertyModels.bind(this), this.loadError.bind(this));
-    },
-
-    /**
      * Change this._currentRecord by 'delta'. The result will always be
      * 0 <= this._currentRecord < this.records.length
      * @param delta {integer} - positive/negative number to increment/decrement
      */
     changeCurrentRecord: function(delta) {
-      this.Observer('changeCurrentRecord').publish(delta);
+      var i;
+      for (i = 0; i < this.properties.length; ++i) {
+        this.properties[i].changeCurrentItem(delta);
+      }
+      this.Observer('changeCurrentRecord').publish();
     },
 
   });

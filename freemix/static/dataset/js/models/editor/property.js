@@ -38,35 +38,36 @@ define(
   $.extend(PropertyModel.prototype, PropertyModelObserver, {
     initialize: function(options) {
       this.id = options.id;
-      this._label = options.label;
-      this._type = options.type;
+      this.label = options.label;
+      this.type = options.type;
       this.items = options.items;
+      this._currentItemIndex = null;
       this.owner = options.owner;
       this.slug = options.slug;
       this.propertyURL = '/view/' + this.owner + '/' + this.slug + '/properties/' + this.id;
       this.dataURL =  + this.propertyURL + '/data/';
     },
 
-    /** getter/setter method for label */
-    label: function(newLabel) {
-      if (newLabel) {
-        this._label = newLabel;
-        this.Observer('updateProperty').publish();
-      } else {
-        return this._label;
-      }
+    /** Return the current value from this.items. */
+    currentItem: function() {
+      return this.items[this._currentItemIndex];
     },
 
     /**
-     * getter/setter method for type
-     * @param {string} newType - Type value for this
+     * Modify this._currentItemIndex based on a delta to this.items
+     * @param {int} delta - Increment/decrement to this.items
      */
-    type: function(newtype) {
-      if (newtype) {
-        this._type = newtype;
-        this.Observer('updateProperty').publish();
+    changeCurrentItem: function(delta) {
+      if (this._currentItemIndex === null) {
+        throw {message: "Current item is null. Call this.loadData()"};
       }
-      return this._type;
+      var current = this._currentItemIndex + delta;
+      if (current < 0) {
+        this._currentItemIndex = this.records.length + current;
+      } else {
+        this._currentItemIndex = current % this.records.length;
+      }
+      this.Observer('changeCurrentItem').publish();
     },
 
     /** Send this Property's attributes to the server to be saved */
@@ -83,7 +84,7 @@ define(
 
     /** 
      * Succeeded in sending property attributes to the server
-     * @param {object} dataJSON - values for this property returned from dataURL
+     * @param {object} successJSON - values for this property returned from dataURL
      */
     updatePropertySuccess: function(successJSON) {
       this.Observer('updatePropertySuccess').publish();
@@ -108,7 +109,16 @@ define(
      * @param {object} dataJSON - values for this property returned from dataURL
      */
     loadDataSuccess: function(dataJSON) {
-      this.items = dataJSON.items;
+      if (this.items.length > 0) {
+        this.items = dataJSON.items;
+      } else {
+        // there are no items for this property
+        this.items = [{
+          label: 'No value',
+          id: 0
+        }];
+      }
+      this._currentItemIndex = 0;
       this.Observer('loadDataSuccess').publish();
     },
 
@@ -139,8 +149,8 @@ define(
     toJSON: function() {
       return {
         id: this.id,
-        valueType: this._type,
-        label: this._label
+        valueType: this.type,
+        label: this.label
       };
     }
   });

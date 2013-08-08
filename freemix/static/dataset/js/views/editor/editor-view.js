@@ -3,21 +3,19 @@ define(
   [
     'handlebars',
     'jquery',
-    'models/record-collection',
     'views/modal-augment-view',
-    'views/record-view',
+    'views/property-view',
     'text!templates/editor.html'
   ], function (
     Handlebars,
     $,
-    RecordCollection,
     ModalAugmentView,
-    RecordView,
+    PropertyView,
     editorTemplate
   ) {
   'use strict';
   /**
-   * High-level view of records that have properties that can be edited
+   * High-level view of properties that can be edited
    * @constructor
    * @param {string} options.model - instance of a RecordCollection
    * @param {object} options.$el - container Element object for this view
