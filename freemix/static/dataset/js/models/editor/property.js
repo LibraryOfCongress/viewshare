@@ -41,7 +41,7 @@ define(
       this.label = options.label;
       this.type = options.type;
       this.items = options.items;
-      this._currentItemIndex = null;
+      this.currentItemIndex = null;
       this.owner = options.owner;
       this.slug = options.slug;
       this.propertyURL = '/view/' + this.owner + '/' + this.slug + '/properties/' + this.id;
@@ -50,22 +50,22 @@ define(
 
     /** Return the current value from this.items. */
     currentItem: function() {
-      return this.items[this._currentItemIndex];
+      return this.items[this.currentItemIndex];
     },
 
     /**
-     * Modify this._currentItemIndex based on a delta to this.items
+     * Modify this.currentItemIndex based on a delta to this.items
      * @param {int} delta - Increment/decrement to this.items
      */
     changeCurrentItem: function(delta) {
-      if (this._currentItemIndex === null) {
+      if (this.currentItemIndex === null) {
         throw {message: "Current item is null. Call this.loadData()"};
       }
-      var current = this._currentItemIndex + delta;
+      var current = this.currentItemIndex + delta;
       if (current < 0) {
-        this._currentItemIndex = this.records.length + current;
+        this.currentItemIndex = this.records.length + current;
       } else {
-        this._currentItemIndex = current % this.records.length;
+        this.currentItemIndex = current % this.records.length;
       }
       this.Observer('changeCurrentItem').publish();
     },
@@ -118,7 +118,7 @@ define(
           id: 0
         }];
       }
-      this._currentItemIndex = 0;
+      this.currentItemIndex = 0;
       this.Observer('loadDataSuccess').publish();
     },
 
