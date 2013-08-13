@@ -96,16 +96,6 @@ class DraftExhibit(Exhibit):
         verbose_name = "Exhibit"
         ordering = ('-modified', )
 
-
-class DataJSONFile(models.Model):
-    """
-    The data associated with this exhibit in the Exhibit JSON format
-    """
-    exhibit = models.OneToOneField(Exhibit, related_name="data")
-
-    json = JSONField()
-
-
 #-----------------------------------------------------------------------------#
 # Exhibit Property Types
 #-----------------------------------------------------------------------------#
@@ -217,6 +207,7 @@ class CompositeProperty(ExhibitProperty):
     def to_dict(self):
         d = super(CompositeProperty, self).to_dict()
         d[self.name]["composite"] = self.properties.to_array()
+        d[self.name]["augmentation"] = "composite"
         return d
 
     def to_profile_dict(self):
@@ -289,6 +280,8 @@ class DelimitedListProperty(ShreddedListProperty):
     def to_dict(self):
         d = super(DelimitedListProperty, self).to_dict()
         d[self.name]["delimiter"] = self.delimiter
+        d[self.name]["augmentation"] = "delimited-list"
+
         return d
 
     def to_profile_dict(self):
@@ -307,9 +300,31 @@ class PatternListProperty(ShreddedListProperty):
     def to_dict(self):
         d = super(PatternListProperty, self).to_dict()
         d[self.name]["pattern"] = self.pattern
+        d[self.name]["augmentation"] = "pattern-list"
+
         return d
 
     def to_profile_dict(self):
         d = super(PatternListProperty, self).to_profile_dict()
         d["pattern"] = self.pattern
         return d
+
+
+class PropertyData(TimeStampedModel):
+    """
+    The data for a particular property in the format:
+    ```
+        [
+            {
+                "id": <id>,
+                "label": <label>,
+                "<property name>": <property value>
+            },
+            ...
+        ]
+    ```
+    """
+
+    exhibit_property = models.OneToOneField(ExhibitProperty,
+                                            related_name="data")
+    json = JSONField()
