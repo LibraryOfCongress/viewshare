@@ -3,7 +3,7 @@ import datetime
 from south.db import db
 from south.v2 import DataMigration
 from django.db import models
-
+from django.db.models.base import ObjectDoesNotExist
 class Migration(DataMigration):
 
     depends_on = (
@@ -19,17 +19,20 @@ class Migration(DataMigration):
             ds = e.dataset
             if ds is None:
                 continue
-            ref = ds.source
-            if ref is None:
-                continue
-            source = orm['upload.ReferenceDataSource'](
-                referenced=ref.exhibit,
-                classname="ReferenceDataSource",
-                exhibit=e,
-                created=e.created,
-                modified=e.modified
-            )
-            source.save()
+            try:
+                ref = ds.source
+                if ref is None:
+                    continue
+                source = orm['upload.ReferenceDataSource'](
+                    referenced=ref.exhibit,
+                    classname="ReferenceDataSource",
+                    exhibit=e,
+                    created=e.created,
+                    modified=e.modified
+                )
+                source.save()
+            except ObjectDoesNotExist:
+                pass
 
 
     def backwards(self, orm):

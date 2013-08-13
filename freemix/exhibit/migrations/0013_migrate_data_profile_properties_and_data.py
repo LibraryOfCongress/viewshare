@@ -7,18 +7,38 @@ from django.db import models
 
 def find_type(p):
     for t in ["location", "text", "image", "date", "url", "number"]:
-        if "property:type=%s"%t in p["tags"]:
+        if "tags" in p.keys() and "property:type=%s"%t in p["tags"]:
             return t
 
     return "text"
 
+def create_property(orm, properties, exhibit, name):
+    prop = orm.ExhibitProperty(classname="ExhibitProperty",
+                        name=name,
+                        label=name,
+                        value_type="text",
+                        exhibit=exhibit)
+    prop.save()
+    properties[name] = prop
+    return prop
+
+
 class Migration(DataMigration):
 
     def forwards(self, orm):
-
         # Migrate Dataset's json files into the new exhibit data model
 
         for exhibit in orm.Exhibit.objects.all():
+
+            # Create a dummy place holder property
+
+            dummy = orm.ExhibitProperty(exhibit = exhibit,
+                                        name="dummy_for_south_migration",
+                                        label="dummy_for_south_migration",
+                                        value_type="text",
+                                        classname="ExhibitProperty")
+            dummy.save()
+
             dataset = exhibit.dataset
             data = orm["dataset.datasetjsonfile"].objects.get(dataset=dataset).data
             profile = orm["dataset.datasetprofile"].objects.get(dataset=dataset).data
@@ -28,31 +48,47 @@ class Migration(DataMigration):
             properties = {}
             second_pass = []
             for p in profile["properties"]:
+
+
                 # Do a first run through the properties to
                 # ensure that all properties exist before
                 # creating references
                 k = p.keys()
+                kw  = {}
                 value_type = find_type(p)
                 name = p["property"]
                 label = p["label"]
 
+                if name in properties.keys():
+                    print("Duplicate property: %s in %d" % (name, exhibit.id))
+                    continue
+
+
                 if "composite" in k:
                     classname = "CompositeProperty"
+
+                    cl = orm.CompositeProperty
                     second_pass.append(p)
                 elif "delimiter" in k:
+                    cl = orm.DelimitedListProperty
                     classname = "DelimitedListProperty"
                     second_pass.append(p)
+                    kw["source"] = dummy
                 elif "pattern" in k:
+                    cl = orm.PatternListProperty
                     classname = "PatternListProperty"
                     second_pass.append(p)
-                else:
-                    classname="ExhibitProperty"
+                    kw["source"] = dummy
 
-                prop = orm.ExhibitProperty(exhibit=exhibit,
-                                           name=name,
-                                           label=label,
-                                           value_type=value_type,
-                                           classname=classname)
+                else:
+                    cl = orm.ExhibitProperty
+                    classname="ExhibitProperty"
+                prop = cl(exhibit=exhibit,
+                           name=name,
+                           label=label,
+                           value_type=value_type,
+                           classname=classname,
+                           **kw)
                 prop.save()
                 properties[name] = prop
 
@@ -60,32 +96,48 @@ class Migration(DataMigration):
                 # Now create the extension objects for augmented properties
 
                 prop = properties[p["property"]]
-
+                k = p.keys()
                 if "composite" in k:
-                    ext = orm.CompositeProperty(exhibitproperty_ptr=prop)
-                    ext.__dict__ = prop.__dict__
-                    ext.save()
                     counter = 1
                     for c in p["composite"]:
-                        ref = orm.PropertyReference(derived=ext,
+
+                        if not c in properties.keys():
+                            print("Property %s not found for Composite property in exhibit %d" % (c, exhibit.id))
+
+                            create_property(orm, properties, exhibit, c)
+                        ref = orm.PropertyReference(derived=prop,
                                                     source=properties[c],
                                                     order=counter)
                         counter += 1
                         ref.save()
 
+
                 elif "delimiter" in k:
-                    ext = orm.DelimitedListProperty(exhibitproperty_ptr=prop,
-                                                    source=properties[p["extract"]],
-                                                    delimiter=p["delimiter"])
-                    ext.__dict__ = prop.__dict__
-                    ext.save()
+
+                    if not p["extract"] in properties.keys():
+                        print ("Property %s not found for delimiter source in exhibit %d" % (p["extract"], exhibit.id))
+                        create_property(orm, properties, exhibit, p["extract"])
+                    prop.source = properties[p["extract"]]
+                    prop.delimiter = p["delimiter"]
+                    prop.save()
+
+
                 elif "pattern" in k:
-                    ext = orm.PatternListProperty(exhibitproperty_ptr=prop,
-                                                  source=properties[p["extract"]],
-                                                  pattern=p["pattern"])
-                    ext.__dict__ = prop.__dict__
-                    ext.save()
+
+                    if not p["extract"] in properties.keys():
+
+                        print ("Property %s not found for pattern source in exhibit %d" % (p["extract"], exhibit.id))
+                        create_property(orm, properties, exhibit, p["extract"])
+
+                    prop.source = properties[p["extract"]]
+                    prop.pattern = p["pattern"]
+                    prop.save()
+
+
+            dummy.delete()
+
             exhibit.save()
+
 
 
     def backwards(self, orm):
@@ -172,7 +224,7 @@ class Migration(DataMigration):
             'json': ('django.db.models.fields.TextField', [], {'default': "'{}'"})
         },
         'exhibit.delimitedlistproperty': {
-            'Meta': {'object_name': 'DelimitedListProperty'},
+            'Meta': {'object_name': 'DelimitedListProperty', '_ormbases': ['exhibit.ExhibitProperty']},
             'delimiter': ('django.db.models.fields.TextField', [], {}),
             'exhibitproperty_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['exhibit.ExhibitProperty']", 'unique': 'True', 'primary_key': 'True'}),
             'source': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'+'", 'to': "orm['exhibit.ExhibitProperty']"})
@@ -203,7 +255,7 @@ class Migration(DataMigration):
             'value_type': ('django.db.models.fields.CharField', [], {'default': "'text'", 'max_length': '10'})
         },
         'exhibit.patternlistproperty': {
-            'Meta': {'object_name': 'PatternListProperty'},
+            'Meta': {'object_name': 'PatternListProperty', '_ormbases': ['exhibit.ExhibitProperty']},
             'exhibitproperty_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['exhibit.ExhibitProperty']", 'unique': 'True', 'primary_key': 'True'}),
             'pattern': ('django.db.models.fields.TextField', [], {}),
             'source': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'+'", 'to': "orm['exhibit.ExhibitProperty']"})

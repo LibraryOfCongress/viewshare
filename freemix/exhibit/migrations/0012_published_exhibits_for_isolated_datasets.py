@@ -25,6 +25,8 @@ class Migration(DataMigration):
                                            dataset=ds)
             exhibit.save()
 
+        orm.Exhibit.objects.filter(dataset=None).delete()
+
     def backwards(self, orm):
         "Write your backwards methods here."
 
@@ -97,7 +99,7 @@ class Migration(DataMigration):
             'json': ('django.db.models.fields.TextField', [], {'default': "'{}'"})
         },
         'exhibit.delimitedlistproperty': {
-            'Meta': {'object_name': 'DelimitedListProperty'},
+            'Meta': {'object_name': 'DelimitedListProperty', '_ormbases': ['exhibit.ExhibitProperty']},
             'delimiter': ('django.db.models.fields.TextField', [], {}),
             'exhibitproperty_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['exhibit.ExhibitProperty']", 'unique': 'True', 'primary_key': 'True'}),
             'source': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'+'", 'to': "orm['exhibit.ExhibitProperty']"})
@@ -128,7 +130,7 @@ class Migration(DataMigration):
             'value_type': ('django.db.models.fields.CharField', [], {'default': "'text'", 'max_length': '10'})
         },
         'exhibit.patternlistproperty': {
-            'Meta': {'object_name': 'PatternListProperty'},
+            'Meta': {'object_name': 'PatternListProperty', '_ormbases': ['exhibit.ExhibitProperty']},
             'exhibitproperty_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['exhibit.ExhibitProperty']", 'unique': 'True', 'primary_key': 'True'}),
             'pattern': ('django.db.models.fields.TextField', [], {}),
             'source': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'+'", 'to': "orm['exhibit.ExhibitProperty']"})

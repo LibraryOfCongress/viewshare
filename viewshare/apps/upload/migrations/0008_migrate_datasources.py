@@ -17,17 +17,6 @@ source_types = (
 
 )
 
-def migrate_datasource(ds):
-    source = orm["upload.DataSource"](
-        classname=ds.classname,
-        created=ds.created,
-        exhibit=ds.exhibit,
-        modified=ds.modified
-    )
-    source.save()
-    ds.new_ds_ptr=source
-    ds.save()
-
 class Migration(DataMigration):
 
     def forwards(self, orm):

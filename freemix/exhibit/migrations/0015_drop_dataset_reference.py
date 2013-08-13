@@ -81,7 +81,7 @@ class Migration(SchemaMigration):
             'json': ('django.db.models.fields.TextField', [], {'default': "'{}'"})
         },
         u'exhibit.delimitedlistproperty': {
-            'Meta': {'object_name': 'DelimitedListProperty'},
+            'Meta': {'object_name': 'DelimitedListProperty', '_ormbases': ['exhibit.ExhibitProperty']},
             'delimiter': ('django.db.models.fields.TextField', [], {}),
             u'exhibitproperty_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['exhibit.ExhibitProperty']", 'unique': 'True', 'primary_key': 'True'}),
             'source': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'+'", 'to': u"orm['exhibit.ExhibitProperty']"})
@@ -111,7 +111,7 @@ class Migration(SchemaMigration):
             'value_type': ('django.db.models.fields.CharField', [], {'default': "'text'", 'max_length': '10'})
         },
         u'exhibit.patternlistproperty': {
-            'Meta': {'object_name': 'PatternListProperty'},
+            'Meta': {'object_name': 'PatternListProperty', '_ormbases': ['exhibit.ExhibitProperty']},
             u'exhibitproperty_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['exhibit.ExhibitProperty']", 'unique': 'True', 'primary_key': 'True'}),
             'pattern': ('django.db.models.fields.TextField', [], {}),
             'source': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'+'", 'to': u"orm['exhibit.ExhibitProperty']"})

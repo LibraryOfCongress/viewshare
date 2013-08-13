@@ -13,66 +13,63 @@ class Migration(SchemaMigration):
 
 
         # Changing field 'ModsURLDataSource.new_ds_ptr'
-        db.alter_column(u'upload_modsurldatasource', 'new_ds_ptr_id', self.gf('django.db.models.fields.related.OneToOneField')(default=0, to=orm['upload.DataSource'], unique=True, primary_key=True))
+        db.alter_column(u'upload_modsurldatasource', 'new_ds_ptr_id', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['upload.DataSource'], unique=True, primary_key=True))
         # Deleting field 'OAIDataSource.datasource_ptr'
         db.delete_column(u'upload_oaidatasource', u'datasource_ptr_id')
 
 
         # Changing field 'OAIDataSource.new_ds_ptr'
-        db.alter_column(u'upload_oaidatasource', 'new_ds_ptr_id', self.gf('django.db.models.fields.related.OneToOneField')(default=0, to=orm['upload.DataSource'], unique=True, primary_key=True))
+        db.alter_column(u'upload_oaidatasource', 'new_ds_ptr_id', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['upload.DataSource'], unique=True, primary_key=True))
         # Deleting field 'URLDataSource.datasource_ptr'
         db.delete_column(u'upload_urldatasource', u'datasource_ptr_id')
 
 
         # Changing field 'URLDataSource.new_ds_ptr'
-        db.alter_column(u'upload_urldatasource', 'new_ds_ptr_id', self.gf('django.db.models.fields.related.OneToOneField')(default=0, to=orm['upload.DataSource'], unique=True, primary_key=True))
+        db.alter_column(u'upload_urldatasource', 'new_ds_ptr_id', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['upload.DataSource'], unique=True, primary_key=True))
         # Deleting field 'JSONFileDataSource.datasource_ptr'
         db.delete_column(u'upload_jsonfiledatasource', u'datasource_ptr_id')
 
 
         # Changing field 'JSONFileDataSource.new_ds_ptr'
-        db.alter_column(u'upload_jsonfiledatasource', 'new_ds_ptr_id', self.gf('django.db.models.fields.related.OneToOneField')(default=0, to=orm['upload.DataSource'], unique=True, primary_key=True))
+        db.alter_column(u'upload_jsonfiledatasource', 'new_ds_ptr_id', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['upload.DataSource'], unique=True, primary_key=True))
         # Deleting field 'ContentDMDataSource.datasource_ptr'
         db.delete_column(u'upload_contentdmdatasource', u'datasource_ptr_id')
 
 
         # Changing field 'ContentDMDataSource.new_ds_ptr'
-        db.alter_column(u'upload_contentdmdatasource', 'new_ds_ptr_id', self.gf('django.db.models.fields.related.OneToOneField')(default=0, to=orm['upload.DataSource'], unique=True, primary_key=True))
+        db.alter_column(u'upload_contentdmdatasource', 'new_ds_ptr_id', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['upload.DataSource'], unique=True, primary_key=True))
         # Deleting field 'JSONURLDataSource.datasource_ptr'
         db.delete_column(u'upload_jsonurldatasource', u'datasource_ptr_id')
 
 
         # Changing field 'JSONURLDataSource.new_ds_ptr'
-        db.alter_column(u'upload_jsonurldatasource', 'new_ds_ptr_id', self.gf('django.db.models.fields.related.OneToOneField')(default=0, to=orm['upload.DataSource'], unique=True, primary_key=True))
+        db.alter_column(u'upload_jsonurldatasource', 'new_ds_ptr_id', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['upload.DataSource'], unique=True, primary_key=True))
         # Deleting field 'FileDataSource.datasource_ptr'
         db.delete_column(u'upload_filedatasource', u'datasource_ptr_id')
 
 
         # Changing field 'FileDataSource.new_ds_ptr'
-        db.alter_column(u'upload_filedatasource', 'new_ds_ptr_id', self.gf('django.db.models.fields.related.OneToOneField')(default=0, to=orm['upload.DataSource'], unique=True, primary_key=True))
+        db.alter_column(u'upload_filedatasource', 'new_ds_ptr_id', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['upload.DataSource'], unique=True, primary_key=True))
         # Deleting field 'ModsFileDataSource.datasource_ptr'
         db.delete_column(u'upload_modsfiledatasource', u'datasource_ptr_id')
 
 
         # Changing field 'ModsFileDataSource.new_ds_ptr'
-        db.alter_column(u'upload_modsfiledatasource', 'new_ds_ptr_id', self.gf('django.db.models.fields.related.OneToOneField')(default=0, to=orm['upload.DataSource'], unique=True, primary_key=True))
+        db.alter_column(u'upload_modsfiledatasource', 'new_ds_ptr_id', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['upload.DataSource'], unique=True, primary_key=True))
         # Deleting field 'ReferenceDataSource.datasource_ptr'
         db.delete_column(u'upload_referencedatasource', u'datasource_ptr_id')
 
 
         # Changing field 'ReferenceDataSource.new_ds_ptr'
-        db.alter_column(u'upload_referencedatasource', 'new_ds_ptr_id', self.gf('django.db.models.fields.related.OneToOneField')(default=0, to=orm['upload.DataSource'], unique=True, primary_key=True))
+        db.alter_column(u'upload_referencedatasource', 'new_ds_ptr_id', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['upload.DataSource'], unique=True, primary_key=True))
 
     def backwards(self, orm):
-
-        # User chose to not deal with backwards NULL issues for 'ModsURLDataSource.datasource_ptr'
-        raise RuntimeError("Cannot reverse this migration. 'ModsURLDataSource.datasource_ptr' and its values cannot be restored.")
 
         # Changing field 'ModsURLDataSource.new_ds_ptr'
         db.alter_column(u'upload_modsurldatasource', u'new_ds_ptr_id', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['upload.DataSource'], unique=True, null=True))
         # Adding field 'OAIDataSource.datasource_ptr'
         db.add_column(u'upload_oaidatasource', u'datasource_ptr',
-                      self.gf('django.db.models.fields.related.OneToOneField')(default=0, to=orm['dataset.DataSource'], unique=True, primary_key=True),
+                      self.gf('django.db.models.fields.related.OneToOneField')(to=orm['dataset.DataSource'], unique=True, primary_key=True),
                       keep_default=False)
 
 
@@ -80,7 +77,7 @@ class Migration(SchemaMigration):
         db.alter_column(u'upload_oaidatasource', u'new_ds_ptr_id', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['upload.DataSource'], unique=True, null=True))
         # Adding field 'URLDataSource.datasource_ptr'
         db.add_column(u'upload_urldatasource', u'datasource_ptr',
-                      self.gf('django.db.models.fields.related.OneToOneField')(default=0, to=orm['dataset.DataSource'], unique=True, primary_key=True),
+                      self.gf('django.db.models.fields.related.OneToOneField')(to=orm['dataset.DataSource'], unique=True, primary_key=True),
                       keep_default=False)
 
 
@@ -88,7 +85,7 @@ class Migration(SchemaMigration):
         db.alter_column(u'upload_urldatasource', u'new_ds_ptr_id', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['upload.DataSource'], unique=True, null=True))
         # Adding field 'JSONFileDataSource.datasource_ptr'
         db.add_column(u'upload_jsonfiledatasource', u'datasource_ptr',
-                      self.gf('django.db.models.fields.related.OneToOneField')(default=0, to=orm['dataset.DataSource'], unique=True, primary_key=True),
+                      self.gf('django.db.models.fields.related.OneToOneField')(to=orm['dataset.DataSource'], unique=True, primary_key=True),
                       keep_default=False)
 
 
@@ -96,7 +93,7 @@ class Migration(SchemaMigration):
         db.alter_column(u'upload_jsonfiledatasource', u'new_ds_ptr_id', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['upload.DataSource'], unique=True, null=True))
         # Adding field 'ContentDMDataSource.datasource_ptr'
         db.add_column(u'upload_contentdmdatasource', u'datasource_ptr',
-                      self.gf('django.db.models.fields.related.OneToOneField')(default=0, to=orm['dataset.DataSource'], unique=True, primary_key=True),
+                      self.gf('django.db.models.fields.related.OneToOneField')(to=orm['dataset.DataSource'], unique=True, primary_key=True),
                       keep_default=False)
 
 
@@ -104,7 +101,7 @@ class Migration(SchemaMigration):
         db.alter_column(u'upload_contentdmdatasource', u'new_ds_ptr_id', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['upload.DataSource'], unique=True, null=True))
         # Adding field 'JSONURLDataSource.datasource_ptr'
         db.add_column(u'upload_jsonurldatasource', u'datasource_ptr',
-                      self.gf('django.db.models.fields.related.OneToOneField')(default=0, to=orm['dataset.DataSource'], unique=True, primary_key=True),
+                      self.gf('django.db.models.fields.related.OneToOneField')(to=orm['dataset.DataSource'], unique=True, primary_key=True),
                       keep_default=False)
 
 
@@ -112,7 +109,7 @@ class Migration(SchemaMigration):
         db.alter_column(u'upload_jsonurldatasource', u'new_ds_ptr_id', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['upload.DataSource'], unique=True, null=True))
         # Adding field 'FileDataSource.datasource_ptr'
         db.add_column(u'upload_filedatasource', u'datasource_ptr',
-                      self.gf('django.db.models.fields.related.OneToOneField')(default=0, to=orm['dataset.DataSource'], unique=True, primary_key=True),
+                      self.gf('django.db.models.fields.related.OneToOneField')(to=orm['dataset.DataSource'], unique=True, primary_key=True),
                       keep_default=False)
 
 
@@ -120,7 +117,7 @@ class Migration(SchemaMigration):
         db.alter_column(u'upload_filedatasource', u'new_ds_ptr_id', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['upload.DataSource'], unique=True, null=True))
         # Adding field 'ModsFileDataSource.datasource_ptr'
         db.add_column(u'upload_modsfiledatasource', u'datasource_ptr',
-                      self.gf('django.db.models.fields.related.OneToOneField')(default=0, to=orm['dataset.DataSource'], unique=True, primary_key=True),
+                      self.gf('django.db.models.fields.related.OneToOneField')(to=orm['dataset.DataSource'], unique=True, primary_key=True),
                       keep_default=False)
 
 
@@ -128,7 +125,7 @@ class Migration(SchemaMigration):
         db.alter_column(u'upload_modsfiledatasource', u'new_ds_ptr_id', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['upload.DataSource'], unique=True, null=True))
         # Adding field 'ReferenceDataSource.datasource_ptr'
         db.add_column(u'upload_referencedatasource', u'datasource_ptr',
-                      self.gf('django.db.models.fields.related.OneToOneField')(default=0, to=orm['dataset.DataSource'], unique=True, primary_key=True),
+                      self.gf('django.db.models.fields.related.OneToOneField')(to=orm['dataset.DataSource'], unique=True, primary_key=True),
                       keep_default=False)
 
 

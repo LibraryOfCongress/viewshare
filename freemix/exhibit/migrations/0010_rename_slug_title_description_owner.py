@@ -14,8 +14,8 @@ class Migration(SchemaMigration):
         # Deleting field 'PublishedExhibit.publisher'
         db.rename_column('exhibit_publishedexhibit', 'publisher_id', 'owner_id')
 
-        db.alter_column('exhibit_publishedexhibit', 'owner_id',
-            self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='published_exhibits', null=True, to=orm['auth.User']))
+        #db.alter_column('exhibit_publishedexhibit', 'owner_id',
+        #    self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='published_exhibits', null=True, to=orm['auth.User']))
 
         # Deleting field 'PublishedExhibit.d'
         db.rename_column('exhibit_publishedexhibit', 'd', 'description')
@@ -43,8 +43,8 @@ class Migration(SchemaMigration):
         # Deleting field 'PublishedExhibit.publisher'
         db.rename_column('exhibit_publishedexhibit', 'owner_id', 'publisher_id')
 
-        db.alter_column('exhibit_publishedexhibit', 'publisher_id',
-            self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='published_exhibits', null=True, to=orm['auth.User']))
+        #db.alter_column('exhibit_publishedexhibit', 'publisher_id',
+        #    self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='published_exhibits', null=True, to=orm['auth.User']))
 
         # Deleting field 'PublishedExhibit.d'
         db.rename_column('exhibit_publishedexhibit', 'description', 'd')
