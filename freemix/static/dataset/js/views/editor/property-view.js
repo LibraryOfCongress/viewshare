@@ -17,10 +17,15 @@ define(['handlebars', 'jquery', 'text!templates/property.html'],
       this.model = options.model;
       this.$el = options.$el;
       // bind 'this' to template variables
-      this.name.bind(this);
+      this.label.bind(this);
       this.type.bind(this);
       this.value.bind(this);
       this.selectedType.bind(this);
+      this.renderValue.bind(this);
+      this.render = this.render.bind(this);
+      this.changeValueHandler = this.changeValueHandler.bind(this);
+      // subscribe to model events
+      this.model.Observer('changeCurrentItem').subscribe(this.changeValueHandler);
     },
 
     /** Compile the template we will use to render the View */
@@ -36,23 +41,39 @@ define(['handlebars', 'jquery', 'text!templates/property.html'],
     textTemplate: Handlebars.compile('{{ value }}'),
 
     /** Event handler when a .name input is changed */
-    changeNameHandler: function(event) {
+    changeLabelHandler: function(event) {
       this.model.name(event.target.value);
+      return this.model.updateProperty();
     },
 
     /** Event handler when a .types input is changed */
     changeTypeHandler: function(event) {
-      var newType = $(event.target).find(':selected').val(),
-      valueEl = this.$el.find('.value');
+      var newType = $(event.target).find(':selected').val();
       this.model.type(newType);
+      this.renderValue();
+      return this.model.updateProperty();
+    },
+
+    /** Event handler for when the current record (value) changes */
+    changeValueHandler: function(event) {
+      this.renderValue();
+      return false;
+    },
+
+    /** Re-render the value of the PropertyModel in this PropertyView */
+    renderValue: function() {
+      var valueType = this.$el.find(':selected').val(),
+        valueEl = this.$el.find('.value');
+      valueEl.fadeOut();
       // change rendering for this.model.value on certain types
-      if (newType === 'image') {
+      if (valueType === 'image') {
         valueEl.html(this.imageTemplate({value: this.model.value}));
-      } else if ( newType === 'url') {
+      } else if ( valueType === 'url') {
         valueEl.html(this.anchorTemplate({value: this.model.value}));
       } else {
         valueEl.html(this.textTemplate({value: this.model.value}));
       }
+      valueEl.fadeIn();
     },
 
     /** Add this view to the DOM */
@@ -64,14 +85,14 @@ define(['handlebars', 'jquery', 'text!templates/property.html'],
       ));
       // bind to DOM events
       this.$el.find('.name input').on(
-        'change', this.changeNameHandler.bind(this));
+        'change', this.changeLabelHandler.bind(this));
       this.$el.find('.types select').on(
         'change', this.changeTypeHandler.bind(this));
       return this;
     },
 
-    /** Shortcut to PropertyModel.name for easy templating */
-    name: function() { return this.model.name(); },
+    /** Shortcut to PropertyModel.label for easy templating */
+    label: function() { return this.model.label(); },
 
     /** Shortcut to PropertyModel.type for easy templating */
     type: function() { return this.model.type(); },
@@ -99,6 +120,7 @@ define(['handlebars', 'jquery', 'text!templates/property.html'],
       types = this.$el.find('.types select');
       inputs.off('change');
       types.off('change');
+      this.model.Observer('changeCurrentItem').unsubscribe(this.changeValueHandler);
       this.$el.empty();
     }
   });
