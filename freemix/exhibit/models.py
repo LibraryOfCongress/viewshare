@@ -2,7 +2,6 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.template.loader import render_to_string
-from django_extensions.db.fields import AutoSlugField, UUIDField
 from django_extensions.db.fields.json import JSONField
 from django_extensions.db.models import (TitleSlugDescriptionModel,
                                          TimeStampedModel)
@@ -38,9 +37,22 @@ class Exhibit(TimeStampedModel):
 
     canvas = models.ForeignKey(Canvas)
 
+    owner = models.ForeignKey(User, null=True)
+
+    slug = models.SlugField(editable=False, blank=True)
+
+    is_draft = models.BooleanField(default=True)
+
+    class Meta:
+        unique_together = ('owner', 'slug', 'is_draft')
+
     def update_from_profile(self, profile):
         self.profile = profile
         self.save()
+
+
+    def natural_key(self):
+        return self.owner, self.slug, self.is_draft
 
 
 class PublishedExhibit(Exhibit):
@@ -49,17 +61,8 @@ class PublishedExhibit(Exhibit):
     """
 
     is_public = models.BooleanField(default=True)
-    owner = models.ForeignKey(User,
-                              null=True,
-                              blank=True,
-                              related_name="published_exhibits")
-
     title = models.CharField(_('title'), max_length=255)
-    slug = AutoSlugField(_('slug'), populate_from='title')
     description = models.TextField(_('description'), blank=True, null=True)
-
-    def natural_key(self):
-        return self.owner, self.slug
 
     @models.permalink
     def get_absolute_url(self):
@@ -71,7 +74,6 @@ class PublishedExhibit(Exhibit):
         return self.title
 
     class Meta:
-        unique_together = ("slug", "owner")
         ordering = ('-modified', )
 
 
@@ -84,12 +86,6 @@ class DraftExhibit(Exhibit):
     draft will be deleted.  If `parent` is null, a new `PublishedExhibit` will
     be created on publication.
     """
-    owner = models.ForeignKey(User,
-                              null=True,
-                              blank=True,
-                              related_name="draft_exhibits")
-
-    uuid = UUIDField(version=4)
 
     parent = models.ForeignKey(PublishedExhibit,
                                null=True,

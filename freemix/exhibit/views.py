@@ -169,8 +169,6 @@ class ExhibitProfileUpdateView(View):
         user = self.request.user
         exhibit = self.exhibit
 
-        context["dataset_available"] = exhibit.dataset_available(user)
-        context["can_edit_dataset"] = user.has_perm("dataset.can_edit", self.dataset)
         context["can_view"] = user.has_perm("exhibit.can_view", exhibit)
         context["can_inspect"] = user.has_perm("exhibit.can_inspect", exhibit)
 
@@ -212,7 +210,6 @@ class ExhibitView(OwnerSlugPermissionMixin, DetailView):
         exhibit = self.get_object()
 
         context["exhibit"] = exhibit
-        context["dataset_available"] = exhibit.dataset_available(user)
         context["can_view"] = user.has_perm("exhibit.can_view", exhibit)
         context["can_inspect"] = user.has_perm("exhibit.can_inspect", exhibit)
 
