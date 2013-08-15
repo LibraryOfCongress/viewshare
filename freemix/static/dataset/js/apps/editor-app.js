@@ -33,7 +33,14 @@ define(
         // set up notifications
         notificationView.addSubscription(
             properties,
-            augmentFailure,
+            'loadFailure',
+            'error',
+            'There was a server error while loading the data. Please try again later.',
+            'Data Error!'
+        );
+        notificationView.addSubscription(
+            properties,
+            'augmentFailure',
             'error',
             'There was a server error during the data augmentation. Please try again later.',
             'Augmentation Error!'

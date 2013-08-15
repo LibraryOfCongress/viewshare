@@ -25,7 +25,6 @@ define(
      * properties to a dataset.
      * @constructor
      * @param {object} options.model - RecordCollection we're augmenting
-     * @param {object} options.notificationView - View used to
      * render notifications
      */
     var ModalAugmentView = function(options) {
@@ -42,7 +41,6 @@ define(
                 buttonText: 'Create Property',
                 buttonFunction: this.createProperty.bind(this)
             }).$el;
-            this.notificationView = options.notificationView;
             this.listView = {destroy: $.noop};
             this.mapView = {destroy: $.noop};
             this.timelineView = {destroy: $.noop};
@@ -113,8 +111,7 @@ define(
                 console.log(activeTab);
                 return false;
             }
-            // TODO: get a list of property names (through .propertyNames?)
-            errors = newProperty.validate(this.model.propertyNames());
+            errors = newProperty.validate(this.model.propertyLabels());
             if ($.isEmptyObject(errors)) {
                 // TODO: post to contracted DraftExhibit API
                 postData = {};

@@ -131,12 +131,12 @@ define(
         /**
          * Validate that the data in this Model is in a state where it could
          * be sent to a server.
-         * @param {array} propertyNames - names that already exist and should
+         * @param {array} propertyLabels - labels that already exist and should
          * not be duplicated
          */
-        validate: function(propertyNames) {
-            var errors = {},
-            existingNames = propertyNames || [];
+        validate: function(propertyLabels) {
+            var errors = {};
+            var existingNames = propertyLabels || [];
             if (!this._name) {
                 errors.name = 'Please enter a name for the new property.';
             } else if (existingNames.indexOf(this._name) >= 0) {

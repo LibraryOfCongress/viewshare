@@ -37,7 +37,7 @@ define(
         load: function() {
             var xhr = $.getJSON(this.profileURL)
             .done(this.loadSuccess.bind(this))
-            .fail(this.loadError.bind(this));
+            .fail(this.loadFailure.bind(this));
             return xhr;
         },
 
@@ -69,15 +69,26 @@ define(
                         items: [],
                         owner: this.owner,
                         slug: this.slug
-                    }).loadData());
+                    }));
                 } 
+            }
+            // sort properties by label
+            this.properties.sort(function (a, b) {
+                var
+                a_label = a && a.label() || '',
+                b_label = b && b.label() || '';
+                return a_label.localeCompare(b_label);
+            });
+            // load PropertyModel values
+            for (i = 0; i < this.properties.length; ++i) {
+                this.properties[i].loadData();
             }
             this.Observer('loadSuccess').publish();
         },
 
         /** Signal that the GET request failed */
-        loadError: function(jqxhr, textStatus, error) {
-            this.Observer('loadError').publish({status: textStatus, error: error});
+        loadFailure: function(jqxhr, textStatus, error) {
+            this.Observer('loadFailure').publish({status: textStatus, error: error});
         },
 
         /**
@@ -92,6 +103,16 @@ define(
             }
             this.Observer('changeCurrentRecord').publish();
         },
+
+        /** Return an array of this.properties labels */
+        propertyLabels: function() {
+            var labels = [];
+            var i;
+            for (i = 0; i < this.properties.length; ++i) {
+                labels.push(this.properties[i].label);
+            }
+            return labels;
+        }
 
     });
     return PropertyCollection;
