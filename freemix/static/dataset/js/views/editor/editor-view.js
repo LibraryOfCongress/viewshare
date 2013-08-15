@@ -3,14 +3,14 @@ define(
   [
     'handlebars',
     'jquery',
-    'views/modal-augment-view',
     'views/property-view',
+    'views/view-interface',
     'text!templates/editor.html'
   ], function (
     Handlebars,
     $,
-    ModalAugmentView,
     PropertyView,
+    ViewInterface,
     editorTemplate
   ) {
   'use strict';
@@ -30,9 +30,6 @@ define(
       this.model = options.model;
       this.$el = options.$el;
       // child views
-      this.augmentModal = new ModalAugmentView({
-        model: this.model,
-      });
       this.propertyViews = [];
       // bind 'this' to template variables and event handlers
       this.currentRecordNumber.bind(this);
@@ -58,7 +55,6 @@ define(
       // display EditorView
       this.$el.html(this.template(this));
       if (this.totalRecords()) {
-        this.augmentModal.render();
         propertiesEl = this.$el.find('#properties');
         for (i = 0; i < this.totalRecords(); ++i) {
           newPropertyEl = $('<div></div>');
@@ -74,7 +70,7 @@ define(
         nextRecord = this.$el.find('#next-record');
         nextRecord.on('click', this.renderNextRecord.bind(this));
         this.$el.find('#add-property').on('click', (function() {
-          this.augmentModal.$el.modal('show');
+          ViewInterface.Observer.publish('showModal');
         }).bind(this));
       }
       return this;
@@ -125,7 +121,6 @@ define(
         this.model.Observer('changeCurrentRecord').unsubscribe(
           this.changeCurrentRecordNumber);
         // remove child views
-        this.augmentModal.destroy();
         for (i = 0; i < this.totalRecords(); ++i) {
           this.propertyViews[i].destroy();
         }

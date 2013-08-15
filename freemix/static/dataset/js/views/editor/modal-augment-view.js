@@ -1,7 +1,6 @@
 /*global define */
 define(
   [
-    'freemix',
     'handlebars',
     'jquery',
     'text!templates/modal-augment.html',
@@ -10,12 +9,8 @@ define(
     'views/modal-view',
     'views/timeline-augment-view',
     'bootstrap',
-    'freemix.exhibit',
-    'freemix.property',
-    'freemix.identify',
     'jquery.csrf'
   ], function (
-    Freemix,
     Handlebars,
     $,
     modalAugmentTemplate,
@@ -51,6 +46,8 @@ define(
       this.listView = {destroy: $.noop};
       this.mapView = {destroy: $.noop};
       this.timelineView = {destroy: $.noop};
+      // events
+      this.model.Observer('loadSuccess').subscribe(this.render);
     },
 
     /** Compile the template we will use to render the View */
@@ -88,44 +85,22 @@ define(
 
     /** Actions to take on a successful augmentation */
     augmentSuccess: function(data, textStatus, XMLHttpRequest) {
-      var augmentErrors = data.failed || {},
-      augmentedProperties = [],
-      freemixDatabase = Freemix.exhibit.database,
-      freemixRemoveObjects = function(i, id) {
-          freemixDatabase.removeObjects(id,p);
-      },
-      i = 0, p;
-      // Add augmented data to Freemix database
-      $.each(Freemix.property.propertyList, function(name, prop){
-        if (prop.config.composite || prop.config.extract) {
-          augmentedProperties.push(name);
-        }
-      });
-      for (i; i < augmentedProperties.length ; i++) {
-        p = augmentedProperties[i];
-        $.each(freemixDatabase.getAllItems(), freemixRemoveObjects);
-      }
-      freemixDatabase.loadData({'items': data.items});
-      // Add augmented data to record-collection
-      this.model.Observer('augmentSuccess').publish(freemixDatabase);
-      // Rerender editor
+      var augmentErrors = data.failed || {};
+      var augmentedProperties = [];
+      this.model.Observer('augmentSuccess').publish();
     },
 
     /** Actions to take on an augmentation server error */
     augmentFailure: function(XMLHttpRequest, textStatus, errorThrown) {
-      this.notificationView.addNotification(
-        'error',
-        'There was a server error during the data augmentation. Please try again later.',
-        'Augmentation Error!'
-      );
+      this.model.Observer('augmentFailure').publish();
     },
 
     /** Handle the 'Create Property' button click by augmenting data */
     createProperty: function(event) {
-      var activeTab = this.$el.find('.tab-content .active'),
-      errorList = this.$el.find('#augment-errors'),
-      errors = {},
-      freemixDatabase, newProperty, postData, propertyNames;
+      var activeTab = this.$el.find('.tab-content .active');
+      var errorList = this.$el.find('#augment-errors');
+      var errors = {};
+      var newProperty, postData;
       // validate tab's view's Model
       errorList.empty();
       if (activeTab.attr('id') === 'timeline') {
@@ -138,17 +113,11 @@ define(
         console.log(activeTab);
         return false;
       }
-      errors = newProperty.validate(this.model.records[0].propertyNames());
+      // TODO: get a list of property names (through .propertyNames?)
+      errors = newProperty.validate(this.model.propertyNames());
       if ($.isEmptyObject(errors)) {
-        // extend Freemix database with new Model by calling Property model's createFreemixProperty()
-        Freemix.property.add(newProperty.createFreemixProperty());
-        freemixDatabase = Freemix.exhibit.exportDatabase(
-          Freemix.exhibit.database);
-        postData = $.extend(
-          {},
-          freemixDatabase,
-          {data_profile: Freemix.profile}
-        );
+        // TODO: post to contracted DraftExhibit API
+        postData = {};
         $.ajax({
           url: "/augment/transform/",
           type: "POST",

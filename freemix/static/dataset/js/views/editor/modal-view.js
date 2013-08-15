@@ -1,6 +1,17 @@
 /*global define */
-define(['handlebars', 'jquery', 'text!templates/modal.html', 'bootstrap'],
-       function (Handlebars, $, modalTemplate) {
+define(
+  [
+    'handlebars',
+    'jquery',
+    'text!templates/modal.html',
+    'views/view-interface',
+    'bootstrap'
+  ], function (
+    Handlebars,
+    $,
+    ViewInterface,
+    modalTemplate
+  ) {
   'use strict';
   /**
    * View to display modals. 
@@ -25,13 +36,20 @@ define(['handlebars', 'jquery', 'text!templates/modal.html', 'bootstrap'],
       if (typeof(options.buttonFunction) == 'function') {
         this.$el.find('#modalButton').on('click', this, options.buttonFunction);
       }
+      // events
+      ViewInterface.Observer('showModal').subscribe(
+        this.handleShowModal.bind(this));
     },
-
     /** Compile the template we will use to render the View */
     template: Handlebars.compile(modalTemplate),
 
     /** Add view to the DOM */
     render: function() { $('body').append(this.$el); },
+
+    /** Make the modal visible */
+    handleShowModal: function() {
+      this.$el.modal('show');
+    },
 
     /** Remove event bindings, child views, and DOM elements */
     destroy: function() {
