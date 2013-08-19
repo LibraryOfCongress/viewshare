@@ -9,7 +9,7 @@ admin.site.register(models.Canvas, CanvasAdmin)
 
 
 class DraftExhibitAdmin(admin.ModelAdmin):
-    list_display = ('uuid', 'owner',)
+    list_display = ('slug', 'owner',)
     search_fields = ('owner__username', )
 
 admin.site.register(models.DraftExhibit, DraftExhibitAdmin)

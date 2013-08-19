@@ -1,28 +1,8 @@
-{% load url from future %}
 {% load i18n %}
 {% load freemix_helpers %}
 {%  with exhibit.owner.username as exhibit_owner_username %}
 
-<li class="exhibit_list_item result_set_item clearfix {% if exhibit.published %}public{% else %}private{% endif %}">
-
-  {% if not visible %}
-  <div class="exhibit-title">{{exhibit.title}}</div>
-
-  <div class="exhibit-left">
-    {% blocktrans %}The dataset is no longer available.{% endblocktrans %}
-  </div>
-  {% if request.user.is_authenticated and request.user.username == exhibit_owner_username %}
-  <div class="exhibit-right">
-    
-    <div class="exhibit-links">
-      <span class="action action_delete_exhibit">
-        <a class="exhibit_delete" href="{{  exhibit.get_absolute_url }}">{% trans "Delete" %}</a>
-      </span>
-    </div>
-  </div>
-  {% endif %}
-
-  {%  else %}
+<li class="exhibit_list_item result_set_item clearfix {% if exhibit.is_public %}public{% else %}private{% endif %}">
 
   <div class="exhibit-title"><a href="{{  exhibit.get_absolute_url }}">{{exhibit.title}}</a></div>
     
@@ -46,7 +26,11 @@
     <div class="span7">
       
       <div class="exhibit-metadata">
-        {% trans "Created by"%} <span class="exhibit-creator"><a href="{% url 'profile_detail' exhibit_owner_username %}">{{exhibit.owner|nicename}}</a></span> {% trans "on" %} <span class="exhibit-created-data">{{exhibit.created|date:"N j, Y"}}</span> {% trans "and based on the" %} <span class="exhibit-dataset-title"><a href="{{exhibit.dataset.get_absolute_url }}" title="{{exhibit.dataset.title}}">{{exhibit.dataset.title}}</a></span> {% trans "data set" %}.
+        {% trans "Created by"%}
+          <span class="exhibit-creator">
+              <a href="{% url 'profile_detail' exhibit_owner_username %}">{{exhibit.owner|nicename}}</a>
+          </span>
+          {% trans "on" %} <span class="exhibit-created-data">{{exhibit.created|date:"N j, Y"}}</span>.
       </div>
 
     </div>
@@ -78,6 +62,5 @@
     
   </div> <!-- row-fluid -->
 
-  {% endif %}
 </li>
 {% endwith %}

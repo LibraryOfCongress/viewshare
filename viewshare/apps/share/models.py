@@ -1,7 +1,8 @@
 from django.db import models
 from django_extensions.db.fields import UUIDField
 from django_extensions.db.models import TimeStampedModel
-from freemix.exhibit.models import Exhibit
+from freemix.exhibit.models import PublishedExhibit
+
 
 class SharedExhibitKey(TimeStampedModel,models.Model):
 
@@ -9,7 +10,7 @@ class SharedExhibitKey(TimeStampedModel,models.Model):
 
     label = models.TextField(max_length=255, blank=True, null=True, help_text="An optional descriptive label")
 
-    exhibit = models.ForeignKey(Exhibit, related_name="shared_keys")
+    exhibit = models.ForeignKey(PublishedExhibit, related_name="shared_keys")
 
     @models.permalink
     def get_absolute_url(self):

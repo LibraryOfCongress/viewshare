@@ -1,6 +1,6 @@
 (function($, Freemix) {
     // this could also be templated instead
-    Freemix.generateEmbedCode = function() {
+    function generateEmbedCode() {
         var uri = document.location.href;
         if (uri.substring(uri.length-1) != "/") {
             uri += "/";
@@ -12,7 +12,7 @@
 
     Freemix.embedWidget = function(el) {
         var jEl = $('#' + el);
-        $('#embedding-code').html(Freemix.generateEmbedCode());
+        $('#embedding-code').html(generateEmbedCode());
         $('#embed-info-close').click(function() {
             $('#embed-info').hide();
             $('#embed-activate').show();

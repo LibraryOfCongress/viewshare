@@ -7,10 +7,9 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic.list import ListView
 
 from viewshare.apps.vendor.friends.models import *
-from viewshare.apps.legacy.dataset.models import Dataset
 from freemix.permissions import PermissionsRegistry
 from freemix.utils import get_user
-from freemix.exhibit.models import Exhibit
+from freemix.exhibit.models import PublishedExhibit
 
 
 def connections(request, template_name="connections/invitations.html"):
@@ -61,56 +60,16 @@ class ConnectionListByUserView(ListView):
 
 connection_list_by_user = ConnectionListByUserView.as_view()
 
-
-
-class DatasetListConnectionsView(ListView):
-    """
-    Returns a list of datasets belonging to the connections of a particular user.
-    """
-
-    template_name="connections/dataset_list_by_user_connections.html"
-    def get_queryset(self):
-        vars = self.request.GET
-        sort = vars.get('sort', None)
-        if sort:
-            if sort not in Dataset._meta.get_all_field_names():
-                raise Http404("%s is not a valid sorting field"%sort)
-
-        user = get_object_or_404(User, username=self.kwargs.get("username"))
-        pre_friend_ids = [i['friend'].id for i in
-                          Friendship.objects.friends_for_user(user)]
-        list = Dataset.objects.filter(owner__pk__in=pre_friend_ids)
-        list = list.select_related("owner",)
-#        list = list.annotate(exhibit_count=Count('exhibits'))
-        list = list.filter(PermissionsRegistry.get_filter("dataset.can_view", self.request.user))
-
-        if sort:
-            dir = vars.get('dir', "desc")
-            order_by = (dir=="desc" and "-" or "") + sort
-            list = list.order_by(order_by)
-
-        return list
-
-    def get_context_data(self, **kwargs):
-        kwargs = super(DatasetListConnectionsView, self).get_context_data(**kwargs)
-
-        kwargs["other_user"] = get_object_or_404(User,
-                                            username=self.kwargs.get("username"))
-        return kwargs
-
-datasets_by_user_connections = DatasetListConnectionsView.as_view()
-
-
 class ExhibitListConnectionsView(ListView):
     """
-    Returns a list of datasets for a particular user on GET.
+    Returns a list of exhibits for a particular user on GET.
     """
     template_name = "connections/exhibit_list_by_user_connections.html"
     def get_queryset(self):
         vars = self.request.GET
         sort = vars.get('sort', None)
         if sort:
-            if sort not in Exhibit._meta.get_all_field_names():
+            if sort not in PublishedExhibit._meta.get_all_field_names():
                 raise Http404("%s is not a valid sorting field"%sort)
 
         user = get_object_or_404(User, username=self.kwargs.get("username"))
@@ -118,8 +77,8 @@ class ExhibitListConnectionsView(ListView):
         pre_friend_ids = [i['friend'].id for i in
                           Friendship.objects.friends_for_user(user)]
         perm_filter = PermissionsRegistry.get_filter("exhibit.can_view", self.request.user)
-        list = Exhibit.objects.filter(owner__pk__in=pre_friend_ids).filter(perm_filter)
-        list = list.select_related("owner", "dataset", "dataset__owner")
+        list = PublishedExhibit.objects.filter(owner__pk__in=pre_friend_ids).filter(perm_filter)
+        list = list.select_related("owner")
         if sort:
             dir = vars.get('dir', "desc")
             order_by = (dir=="desc" and "-" or "") + sort

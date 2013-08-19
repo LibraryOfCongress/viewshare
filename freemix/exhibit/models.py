@@ -41,7 +41,7 @@ class Exhibit(TimeStampedModel):
 
     slug = models.SlugField(editable=False, blank=True)
 
-    is_draft = models.BooleanField(default=True)
+    is_draft = models.BooleanField(default=True, editable=False)
 
     class Meta:
         unique_together = ('owner', 'slug', 'is_draft')
@@ -92,8 +92,6 @@ class DraftExhibit(Exhibit):
                                blank=True)
 
     class Meta:
-        verbose_name_plural = "Exhibits"
-        verbose_name = "Exhibit"
         ordering = ('-modified', )
 
 #-----------------------------------------------------------------------------#

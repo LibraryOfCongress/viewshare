@@ -9,11 +9,11 @@ from django.contrib import messages
 
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ugettext
+from freemix.exhibit.models import DraftExhibit, PublishedExhibit
 
 from viewshare.apps.vendor.friends.forms import InviteFriendForm
 from viewshare.apps.vendor.friends.models import (FriendshipInvitation,
                                                   Friendship)
-from viewshare.apps.legacy.dataset.models import DataSource
 from freemix.permissions import PermissionsRegistry
 
 from viewshare.apps.profiles.forms import ProfileForm
@@ -141,30 +141,25 @@ def profile(request, username, template_name="profiles/profile.html",
                 'to_user': username,
                 'message': ugettext("Let's Connect!"),
             })
-    pending_datasets = None
+    drafts = None
     if is_me:
-        pending_datasets = DataSource.objects\
-                                     .filter(owner=other_user)\
-                                     .filter(dataset__isnull=True)\
-                                     .order_by("-modified")
-
-    dataset_filter = PermissionsRegistry.get_filter("dataset.can_view",
-                                                    request.user)
-    datasets = other_user.datasets.filter(dataset_filter)
-    datasets = datasets.select_related("owner")
+        drafts = (DraftExhibit.objects.filter(owner=other_user)
+                                      .filter(parent__isnull=True)
+                                      .select_related("source")
+                                      .order_by("-modified"))
 
     exhibit_filter = PermissionsRegistry.get_filter("exhibit.can_view",
                                                     request.user)
-    exhibits = other_user.published_exhibits.filter(exhibit_filter)
-    exhibits = exhibits.select_related("owner", "dataset__owner", "dataset")
+    exhibits = (PublishedExhibit.objects
+                                .filter(owner=other_user)
+                                .filter(exhibit_filter))
 
     return render_to_response(template_name, dict({
         "is_me": is_me,
         "is_friend": is_friend,
         "other_user": other_user,
-        "datasets": datasets,
         "exhibits": exhibits,
-        "pending_datasets": pending_datasets,
+        "drafts": drafts,
         "other_friends": other_friends,
         "invite_form": invite_form,
         "previous_invitations_to": previous_invitations_to,

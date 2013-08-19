@@ -25,8 +25,7 @@ class DataSource(TimeStampedModel):
     """
     classname = models.CharField(max_length=32, editable=False, null=True)
 
-    exhibit = models.OneToOneField(Exhibit,
-                                   related_name="source")
+    exhibit = models.OneToOneField(Exhibit, related_name="source")
 
     def get_concrete(self):
         if self.classname == "DataSource":

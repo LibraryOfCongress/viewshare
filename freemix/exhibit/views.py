@@ -378,7 +378,7 @@ class ExhibitListView(OwnerListView):
 
     permission = "exhibit.can_view"
 
-    model = models.Exhibit
+    model = models.PublishedExhibit
 
     related = ("dataset", "dataset__owner", "owner", "owner__profile")
 

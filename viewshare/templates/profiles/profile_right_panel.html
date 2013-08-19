@@ -4,94 +4,52 @@
 {% load pagination_tags %}
 {% load timezone_filters %}
 {% load dataset_tags %}
-{% load datasource_tags %}
 {% load exhibit_tags %}
 
 <div id="user_sections">
 {% with exhibits.count as exhibit_count %}
-{% with datasets.count as dataset_count %}
-{% with pending_datasets.count as pending_dataset_count %}
+{% with drafts.count as draft_count %}
 {% if is_me %}
 
-{% ifnotequal pending_dataset_count 0 %}
-<div class="pending_dataset_list">
-  <h2 class="ui-widget-header">{% blocktrans %}Pending Data{% endblocktrans %}</h2>
-  {% datasource_list pending_datasets 3 0 %}
-  {% if pending_dataset_count > 3 %}
-  <div class="see_all">
-    <a href="{% url 'datasource_list_pending' %}">{% trans "See all" %}  {{ pending_dataset_count }} set{{ pending_dataset_count|pluralize }}</a>
-  </div>
-  {% endif %}
-</div>
-{% endifnotequal %}
+    {% if draft_count > 0 %}
+    <div class="draft_list">
+      <h2 class="ui-widget-header">{% blocktrans %}Draft Views{% endblocktrans %}</h2>
+      {% if draft_count > 3 %}
+      <div class="see_all">
+        <a href="">{% trans "See all" %}  {{ draft_count }} draft{{ draft_count|pluralize }}</a>
+      </div>
+      {% endif %}
+    </div>
+    {% endif %}
+{% endif %}
 
-{% ifequal dataset_count 0 %}
+{% if exhibit_count == 0 and is_me %}
 
-<div class="user_data_upload">
-  <p class="hyper-upload">
-    <a href="{% url 'upload_dataset' %}" class="button_link">Upload&nbsp;Data</a>
-    <p class="center">Add data to your profile to start sharing collections!</p>
-  </p>
-</div>              
+    <div class="user_data_upload">
+      <p class="hyper-upload">
+        <a href="{% url 'upload_dataset' %}" class="button_link">Upload&nbsp;Data</a>
+        <p class="center">Add data to your profile to start sharing collections!</p>
+      </p>
+    </div>
 
-{% else %}
-
-<div class="dataset_list">
-  <h2 class="ui-widget-header">{% blocktrans %}Data{% endblocktrans %}</h2>
-  {% dataset_list datasets.all 3 0 %}
-
-  {% if dataset_count > 3 %}
-  <div class="see_all">
-    <a href="{% url 'dataset_list_by_owner' owner=other_user.username %}">{% trans "See all" %}  {{dataset_count}} set{{ dataset_count|pluralize }}</a>
-  </div>
-  {% endif%}
-</div>
-
-
-<div class="exhibit_list">
-  <h2 class="ui-widget-header">{% blocktrans %}Views{% endblocktrans %}</h2>
-  {% exhibit_list exhibits.all 3 0 %}
-
-  {% if exhibit_count > 3 %}
-  <div class="see_all">
-    <a href="{% url 'exhibit_list_by_owner' other_user.username %}">{% trans "See all" %}  {{exhibit_count}} view{{ exhibit_count|pluralize }}</a>
-  </div>
-
-  {% endif %}
-</div>
-
-{% endifequal %}
+{% elif exhibit_count == 0 %}
 
 {% else %}
 
-{% ifnotequal dataset_count 0 %}
+    <div class="exhibit_list">
+      <h2 class="ui-widget-header">{% blocktrans %}Views{% endblocktrans %}</h2>
+      {% exhibit_list exhibits.all 3 0 %}
 
-<div class="dataset_list well">
-  <h2 class="ui-widget-header">{% blocktrans %}Data{% endblocktrans %}</h2>
-  {% dataset_list datasets.all 3 0 %}
-  {% if dataset_count > 3 %}
-  <div class="see_all">
-    <a href="{% url 'dataset_list_by_owner' owner=other_user.username %}">{% trans "See all" %} {{dataset_count}} set{{ dataset_count|pluralize }}</a>
-  </div>
-  {% endif %}
-</div>
+      {% if exhibit_count > 3 %}
+      <div class="see_all">
+        <a href="{% url 'exhibit_list_by_owner' other_user.username %}">{% trans "See all" %}  {{exhibit_count}} view{{ exhibit_count|pluralize }}</a>
+      </div>
 
-
-<div class="exhibit_list well">
-  <h2 class="ui-widget-header">{% blocktrans %}Views{% endblocktrans %}</h2>
-  {% exhibit_list exhibits.all 3 0 %}
-  {% if exhibit_count > 3 %}
-  <div class="see_all">
-    <a href="{% url 'exhibit_list_by_owner' other_user.username %}">{% trans "See all" %} {{exhibit_count}} view{{ exhibit_count|pluralize }}</a>
-  </div>
-  {% endif %}
-</div>
-
-{% endifnotequal %}
-
+      {% endif %}
+    </div>
 
 {% endif %}
-{% endwith %}
+
 {% endwith %}
 {% endwith %}
 

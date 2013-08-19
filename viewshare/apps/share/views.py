@@ -7,7 +7,6 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import CreateView
 from viewshare.apps.share import models
 from freemix.exhibit.models import Exhibit
-from viewshare.apps.legacy.dataset import models as dataset_models
 from freemix.views import BaseJSONView
 from viewshare.apps.share import forms
 
@@ -21,8 +20,7 @@ class SharedExhibitDisplayView(DetailView):
     def get_object(self, queryset=None):
         if queryset is None:
             queryset = self.get_queryset()
-        queryset = queryset.select_related("exhibit__dataset",
-                                           "exhibit__theme",
+        queryset = queryset.select_related("exhibit__theme",
                                            "exhibit__canvas",
                                            "exhibit__owner")
         obj = get_object_or_404(queryset, slug=self.kwargs.get("slug"))
@@ -43,7 +41,6 @@ class SharedExhibitDisplayView(DetailView):
         context["exhibit"] = key.exhibit
         context["object"] = key
         context["can_view"] = True
-        context["dataset_available"] = key.exhibit.dataset_available(key.exhibit.owner)
         return context
 
 
@@ -56,7 +53,7 @@ def get_shared_key(request, *args, **kwargs):
     """
     if not hasattr(request, "shared_key"):
         slug = kwargs["slug"]
-        qs = models.SharedExhibitKey.objects.select_related("exhibit__owner","dataset")
+        qs = models.SharedExhibitKey.objects.select_related("exhibit__owner")
         request.shared_key = get_object_or_404(qs, slug=slug)
     return request.shared_key
 
@@ -81,9 +78,9 @@ def _dataset_modified(r, *a, **kwa):
     return key.exhibit.dataset.modified
 _lm = last_modified(_dataset_modified)
 
-shared_dataset_profile_json = _lm(SharedKeyDatasetJSONView.as_view(model=dataset_models.DatasetProfile))
-shared_dataset_data_json = _lm(SharedKeyDatasetJSONView.as_view(model=dataset_models.DatasetJSONFile))
-shared_dataset_properties_json = _lm(SharedKeyDatasetJSONView.as_view(model=dataset_models.DatasetPropertiesCache))
+#shared_dataset_profile_json = _lm(SharedKeyDatasetJSONView.as_view(model=dataset_models.DatasetProfile))
+#shared_dataset_data_json = _lm(SharedKeyDatasetJSONView.as_view(model=dataset_models.DatasetJSONFile))
+#shared_dataset_properties_json = _lm(SharedKeyDatasetJSONView.as_view(model=dataset_models.DatasetPropertiesCache))
 
 
 #-----------------------------------------------------------------------------#
