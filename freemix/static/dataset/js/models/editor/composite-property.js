@@ -1,15 +1,10 @@
 /*global define */
 define(
   [
-    'freemix',
     'jquery',
     'models/property',
-    'freemix.exhibit',
-    'freemix.property',
-    'freemix.identify'
   ],
   function (
-    Freemix,
     $,
     PropertyModel
   ) {
@@ -18,6 +13,7 @@ define(
   /**
    * Extends PropertyModel. Represents a property that is created from other
    * properties such as a Latitude/Longitude pair.
+   * @param {string} options.augmentation - augmentation type identifier
    * @param {array} options.composite - labels of other properties used to
    * create this CompositeProperty
    */
@@ -28,45 +24,8 @@ define(
   $.extend(CompositePropertyModel.prototype, PropertyModel.prototype, {
     initialize: function(options) {
       PropertyModel.prototype.initialize.apply(this, [options]);
-      this._composite = options.composite;
-      if (Freemix.property.propertyList && Freemix.property.propertyList.hasOwnProperty(this.id)) {
-        // this is an existing Property
-        this.freemixProperty = Freemix.property.propertyList[this.id];
-      } else {
-        // this is a new property and doesn't exist in Freemix yet
-        this.freemixProperty = undefined;
-      }
-    },
-
-    /** getter/setter method for composite */
-    composite: function(newComposite) {
-      if (newComposite) {
-        this._composite = newComposite;
-        if (this.freemixProperty) {
-          // This is not a new Property so we can modify it in Freemix
-          this.freemixProperty.label(this._composite);
-        }
-      } else {
-        return this._composite;
-      }
-    },
-
-    /** Generate an array used to identify tags in Freemix */
-    tags: function() {
-      return ['property:type=' + this._type];
-    },
-
-    /** Create a Freemix Property with our Model's data */
-    createFreemixProperty: function() {
-      var freemixProperty = {
-        property: this._name,
-        label: this._name,
-        enabled: true,
-        tags: this.tags(),
-        types: [this._type],
-        composite: this.composite()
-      };
-      return freemixProperty;
+      this.augmentation = options.augmentation;
+      this.composite = options.composite;
     },
 
     /**
@@ -78,7 +37,7 @@ define(
     validate: function(propertyNames) {
       var existingNames = propertyNames || [],
       errors = PropertyModel.prototype.validate.apply(this, [existingNames]);
-      if (!this._composite.length) {
+      if (!this.composite.length) {
         errors.composite = 'Please select at least one property.';
       }
       return errors;

@@ -3,12 +3,14 @@ define(
     [
         'jquery',
         'observer',
+        'models/composite-property',
         'models/property',
         'jquery.csrf'
     ],
     function (
         $,
         Observer,
+        CompositePropertyModel
         PropertyModel
     ) {
     'use strict';
@@ -46,8 +48,8 @@ define(
          * for this view, create Property models.
          */
         loadSuccess: function(profile) {
-            var id, property,
-            ignored_properties = [
+            var id, args, property;
+            var ignored_properties = [
                 'id',
                 'label',
                 'modified',
@@ -61,22 +63,31 @@ define(
             for (id in profile) {
                 if (ignored_properties.indexOf(id) === -1) {
                     property = profile[id];
-                    // TODO: check for augmented types
-                    this.properties.push(new PropertyModel({
+                    args = {
                         id: id,
                         label: property.label,
                         type: property.valueType,
                         items: [],
                         owner: this.owner,
                         slug: this.slug
-                    }));
+                    };
+                    if (property.hasOwnProperty('augmentation')) {
+                        if (['date', 'location'].indexOf(property.augmentation) >= 0) {
+                            args.augmentation = property.augmentation;
+                            args.composite = property.composite;
+                            this.properties.push(new CompositePropertyModel(args));
+                        }
+                        // TODO: check for pattern model
+                    } else {
+                        this.properties.push(new PropertyModel(args));
+                    }
                 } 
             }
             // sort properties by label
             this.properties.sort(function (a, b) {
                 var
-                a_label = a && a.label() || '',
-                b_label = b && b.label() || '';
+                a_label = a && a.label || '',
+                b_label = b && b.label || '';
                 return a_label.localeCompare(b_label);
             });
             // load PropertyModel values
