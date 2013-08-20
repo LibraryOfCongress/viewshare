@@ -14,10 +14,10 @@
       </tr>
     </thead>
     <tbody id="properties">
-      {{#each properties}}
+      {{#each propertyOptions}}
       <tr>
         <td class="selected"><input type="checkbox" value="{{ this.id }}"></td>
-        <td class="name">{{ this.name }}</td>
+        <td class="name">{{ this.label }}</td>
       </tr>
       {{/each}}
     </tbody>
