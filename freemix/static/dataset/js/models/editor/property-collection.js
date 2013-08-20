@@ -128,6 +128,19 @@ define(
                 labels.push(this.properties[i].label);
             }
             return labels;
+        },
+
+        /** Return an array of {id: label} objects. Useful for <option> tags */
+        toOptions: function() {
+            var i;
+            var options = [];
+            var option = {};
+            for (i = 0; i < this.properties.length; ++i) {
+                option.id = this.properties[i].id;
+                option.label = this.properties[i].label;
+                options.push(option);
+            }
+            return options;
         }
 
     });

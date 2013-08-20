@@ -56,15 +56,15 @@ define(
             // render children
             this.listView = new ListAugmentView({
                 $el: this.$el.find('#list'),
-                model: this.model.records[0]
+                propertyCollection: this.model
             });
             this.mapView = new MapAugmentView({
                 $el: this.$el.find('#map'),
-                model: this.model.records[0]
+                propertyCollection: this.model
             });
             this.timelineView = new TimelineAugmentView({
                 $el: this.$el.find('#timeline'),
-                model: this.model.records[0]
+                propertyCollection: this.model
             });
             this.listView.render();
             this.mapView.render();
