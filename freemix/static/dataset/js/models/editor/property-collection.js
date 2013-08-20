@@ -4,13 +4,15 @@ define(
         'jquery',
         'observer',
         'models/composite-property',
+        'models/pattern-property',
         'models/property',
         'jquery.csrf'
     ],
     function (
         $,
         Observer,
-        CompositePropertyModel
+        CompositePropertyModel,
+        PatternPropertyModel,
         PropertyModel
     ) {
     'use strict';
@@ -72,12 +74,15 @@ define(
                         slug: this.slug
                     };
                     if (property.hasOwnProperty('augmentation')) {
+                        args.augmentation = property.augmentation;
+                        args.composite = property.composite;
                         if (['date', 'location'].indexOf(property.augmentation) >= 0) {
-                            args.augmentation = property.augmentation;
-                            args.composite = property.composite;
                             this.properties.push(new CompositePropertyModel(args));
+                        } else if (['pattern-list', 'delimited-list'].indexOf(
+                                property.augmentation) >= 0) {
+                            args.composite = property.composite;
+                            this.properties.push(new PatternPropertyModel(args));
                         }
-                        // TODO: check for pattern model
                     } else {
                         this.properties.push(new PropertyModel(args));
                     }

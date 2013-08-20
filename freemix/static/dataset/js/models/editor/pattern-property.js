@@ -1,75 +1,30 @@
 /*global define */
 define(
   [
-    'freemix',
     'jquery',
-    'models/property',
-    'freemix.exhibit',
-    'freemix.property',
-    'freemix.identify'
+    'models/composite-property',
   ],
   function (
-    Freemix,
     $,
-    PropertyModel
+    CompositePropertyModel
   ) {
   'use strict';
 
   /**
-   * Extends PropertyModel. Represents a property that is created from other
-   * properties such an array created from a comma-separated value.
-   * @param {string} options.extract - label of other property used to
-   * create this PatternProperty
+   * Extends CompositePropertyModel. Represents a property that is created
+   * from other properties such an array created from a comma-separated value.
+   * @param {string} options.delimiter - delimiter used to separate values
+   * @param {string} options.pattern - pattern used to separate values
    */
   var PatternPropertyModel = function(options) {
     this.initialize.apply(this, [options]);
   };
 
-  $.extend(PatternPropertyModel.prototype, PropertyModel.prototype, {
+  $.extend(PatternPropertyModel.prototype, CompositePropertyModel.prototype, {
     initialize: function(options) {
-      PropertyModel.prototype.initialize.apply(this, [options]);
-      this._extract = options.extract;
-      if (Freemix.property.propertyList && Freemix.property.propertyList.hasOwnProperty(this.id)) {
-        // this is an existing Property
-        this.freemixProperty = Freemix.property.propertyList[this.id];
-      } else {
-        // this is a new property and doesn't exist in Freemix yet
-        this.freemixProperty = undefined;
-      }
-    },
-
-    /**
-     * getter/setter method - extract is the name of the PropertyModel
-     * that this PatternPropertyModel originates from.
-     */
-    extract: function(newPattern) {
-      if (newPattern) {
-        this._extract = newPattern;
-        if (this.freemixProperty) {
-          // This is not a new Property so we can modify it in Freemix
-          this.freemixProperty.label(this._extract);
-        }
-      } else {
-        return this._extract;
-      }
-    },
-
-    /** Generate an array used to identify tags in Freemix */
-    tags: function() {
-      return ['property:type=text', 'property:type=shredded_list'];
-    },
-
-    /** Create a Freemix Property with our Model's data */
-    createFreemixProperty: function() {
-      var freemixProperty = {
-        property: this._name,
-        label: this._name,
-        enabled: true,
-        tags: this.tags(),
-        types: [this._type],
-        extract: this.extract()
-      };
-      return freemixProperty;
+      CompositePropertyModel.prototype.initialize.apply(this, [options]);
+      this.delimiter = options.delimiter || '';
+      this.pattern = options.pattern || '';
     },
 
     /**
@@ -80,9 +35,9 @@ define(
      */
     validate: function(propertyNames) {
       var existingNames = propertyNames || [],
-      errors = PropertyModel.prototype.validate.apply(this, [existingNames]);
-      if (!this._extract.length) {
-        errors.extract = 'Please select at least one property.';
+      errors = CompositePropertyModel.prototype.validate.apply(this, [existingNames]);
+      if (!this.delimiter || !this.pattern) {
+        errors.delimiter = 'Please select a delimiter or pattern.';
       }
       return errors;
     }
