@@ -245,13 +245,17 @@ h2 img {
    list-style-type: none;
 }
 
-.dataset_list_item, .exhibit_list_item, .shared_key_list_item {
+.dataset_list_item, .exhibit_list_item, .shared_key_list_item, .result_set_item, .notice {
    background: #fff url(../../images/header-background.png) bottom center repeat-x;
-   border: 1px solid #ddd;
+   border: 1px solid #eee;
    list-style-type: none;
    margin: 1em 0;
-   padding: 5px 10px;
+   padding: 10px 10px 10px 10px;
+   margin-left: 10px;
+   margin-right: 10px;
    text-align: left;
+  -moz-border-radius:3px;
+  -webkit-border-radius:3px;
 }
 
 .shared-key-url {
@@ -350,12 +354,6 @@ h2 img {
 height: 100%;
 }
 
-.about_profile .profile_icon {
-background: url(../../images/person-96.png) center center no-repeat;
-width:106px;
-height:106px;
-}
-
 .about_profile .dataset_icon {
 background: url(../../images/dataset-96.png) center center no-repeat;
 width:106px;
@@ -368,14 +366,67 @@ width:106px;
 height:106px;
 }
 
-#about-box .about_edit {
- padding-right: 5px;
- padding-bottom: 5px;
+#about-box .user_avatar {
+  background: url(../../images/user-128.png) center center no-repeat;
+  background-position: center; 
+  width: 128px;
+  height: 128px;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+#about-box .profile_info {
+margin-left: 10px;
+}
+
+.bubble {
+  position: relative;
+  background-color:#eee;
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  padding:10px;  
+  text-align:center;
+  width:180px;
+  -moz-border-radius:10px;
+  -webkit-border-radius:10px;
+  -webkit-box-shadow: 0px 0 3px rgba(0,0,0,0.25);
+  -moz-box-shadow: 0px 0 3px rgba(0,0,0,0.25);
+  box-shadow: 0px 0 3px rgba(0,0,0,0.25); 
+  width: 85%;
+}
+
+.bubble:after {
+  position: absolute;
+  display: block;
+  content: "";  
+  border-color: transparent transparent  #eee transparent;
+  border-style: solid;
+  border-width: 10px;
+  height:0;
+  width:0;
+  position:absolute;
+  top:-19px;
+  left:2em;
 }
 
 #about-box .about_name {
  font-weight: bold;
- font-size: 130%;
+ font-size: 150%;
+ padding-top: 5px;
+}
+
+#about-box .about_location {
+ font-size: 110%;
+ padding-top: 5px;
+}
+
+#about-box .view-count {
+ font-size: 110%;
+}
+
+.profile-actions .profile-links {
+padding: 10px 10px 10px 10px;
 }
 
 #about-box .about_homepage {
@@ -384,7 +435,6 @@ height:106px;
   height: 24px;
   margin-left: 15px;
   padding-left: 30px;
-
 }
 
 #about-box .user_counts {
@@ -394,7 +444,7 @@ height:106px;
 
 /* set width accordingly for appropriate page display */
 
-.dataset-actions, .exhibit-actions, .shared-key-actions {
+.dataset-actions, .exhibit-actions, .shared-key-actions, .profile-actions {
      float:right;
 }
 
@@ -518,20 +568,29 @@ ul.responses li.thread-8 {
 }
 
 
-/* profiles */
+/* widget well */
 
-.info-section {
+.widget-well {
     background: #fff url(../../images/header-background.png) bottom center repeat-x;
     border: 1px solid #eee;
     margin-bottom: 1.5em;
+   -moz-border-radius:5px;
+   -webkit-border-radius:5px;
 }
 
-.profile h2, .dataset_list h2, .exhibit_list h2, .info-section h2, .shared_key_list h2 {
+
+/* profile */
+
+.widget-well h2 {
     background-color: #5582A1;
     color: #fff;
-    font-size: 1.0em;
+    font-size: 1.1em;
     margin: 0;
-    padding: 0.25em;
+    padding-left: 10px;
+   -moz-border-top-left-radius:3px;
+   -moz-border-top-right-radius:3px;
+   -webkit-border-top-left-radius:3px;
+   -webkit-border-top-right-radius:3px;
 }
 
 .about_profile {
@@ -545,6 +604,7 @@ ul.responses li.thread-8 {
     height: 72%;
 }
 
+
 table.about_profile td {
     padding: 5px;
     text-align: left;
@@ -555,10 +615,6 @@ img.photo {
     padding: 5px;
 }
 
-.about_edit {
-    padding-top: 2em;
-    text-align: right;
-}
 
 #about-box {
     background: #fff url(../../images/header-background.png) bottom center repeat-x;
@@ -577,6 +633,7 @@ div.profile_info, div.dataset_info, div.exhibit_info {
 
 
 /* avatar views */
+
 
 /* profile avatar */
 #profile_avatar_container, #inspector_container {
