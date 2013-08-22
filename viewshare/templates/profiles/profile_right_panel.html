@@ -12,8 +12,8 @@
 {% if is_me %}
 
     {% if draft_count > 0 %}
-    <div class="draft_list">
-      <h2 class="ui-widget-header">{% blocktrans %}Draft Views{% endblocktrans %}</h2>
+    <div class="draftview-section widget-well">
+      <h2>{% blocktrans %}Draft Views{% endblocktrans %}</h2>
       {% if draft_count > 3 %}
       <div class="see_all">
         <a href="">{% trans "See all" %}  {{ draft_count }} draft{{ draft_count|pluralize }}</a>
@@ -36,11 +36,11 @@
 
 {% else %}
 
-    <div class="exhibit_list">
-      <h2 class="ui-widget-header">{% blocktrans %}Views{% endblocktrans %}</h2>
-      {% exhibit_list exhibits.all 3 0 %}
+    <div class="view-section widget-well">
+      <h2>{% blocktrans %}Views{% endblocktrans %}</h2>
+      {% exhibit_list exhibits.all 10 0 %}
 
-      {% if exhibit_count > 3 %}
+      {% if exhibit_count > 10 %}
       <div class="see_all">
         <a href="{% url 'exhibit_list_by_owner' other_user.username %}">{% trans "See all" %}  {{exhibit_count}} view{{ exhibit_count|pluralize }}</a>
       </div>
