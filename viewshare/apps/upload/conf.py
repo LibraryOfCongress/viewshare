@@ -32,3 +32,7 @@ FILE_UPLOAD_PATH = getattr(settings,
 SITE_NAME = getattr(settings,
     "SITE_NAME",
     "Viewshare")
+
+FILE_DOWNLOAD_NGINX_OPTIMIZATION = getattr(settings,
+                                           "FILE_DOWNLOAD_NGINX_OPTIMIZATION",
+                                           False)

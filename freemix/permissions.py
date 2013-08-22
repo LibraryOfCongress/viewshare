@@ -2,13 +2,6 @@ from django.db.models.expressions import F
 from django.db.models.query_utils import Q
 
 
-def generate_context_field(context):
-    if len(context) > 0:
-            context += "__"
-    def _f(key):
-        return F(context+key)
-    return _f
-
 def generate_context_filter(context):
     """generates a field filter string based on the passed in context, which should be a
        parent field filter.  For example:
@@ -101,7 +94,6 @@ def exhibit_embed_filter(user, context=""):
 
 def exhibit_view_filter(user, context=""):
     _q = generate_context_filter(context)
-    _f = generate_context_field(context)
 
     owner = owner_filter(user, context)
     published = _q("is_public", True)

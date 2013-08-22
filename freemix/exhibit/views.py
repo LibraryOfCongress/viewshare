@@ -196,7 +196,7 @@ class ExhibitProfileUpdateView(View):
 
 class ExhibitView(OwnerSlugPermissionMixin, DetailView):
 
-    select_related = ("owner", "dataset", "dataset__owner")
+    select_related = ("owner",)
 
     def get_queryset(self):
         return models.PublishedExhibit.objects.select_related(*self.select_related)
@@ -219,7 +219,7 @@ class ExhibitView(OwnerSlugPermissionMixin, DetailView):
 
 class ExhibitDisplayView(ExhibitView):
 
-    select_related = ("owner", "dataset", "dataset__owner", "canvas")
+    select_related = ("owner", "canvas")
 
 
     def delete(self, request, *args, **kwargs):
@@ -230,19 +230,66 @@ class ExhibitDisplayView(ExhibitView):
         return HttpResponseForbidden()
 
     def get_context_data(self, **kwargs):
+
         context = super(ExhibitDisplayView, self).get_context_data(**kwargs)
+
+        exhibit = self.get_object()
+
         user = self.request.user
-        can_embed = user.has_perm("exhibit.can_embed", self.get_object())
+        can_embed = user.has_perm("exhibit.can_embed", exhibit)
         context["can_embed"] = can_embed
-        context["can_share"] = user.has_perm("exhibit.can_share", self.get_object())
+        context["can_share"] = user.has_perm("exhibit.can_share", exhibit)
+
+        context["property_data_urls"] = exhibit.properties.get_data_urls()
 
         if can_embed:
-            context["exhibit_embed_url"] = get_site_url(reverse('exhibit_embed_js',
-                                                    kwargs={
-                                                        "owner": self.get_object().owner,
-                                                        "slug": self.get_object().slug
-                                                    }))
+            url = reverse('exhibit_embed_js',
+                            kwargs={
+                                "owner": exhibit.owner,
+                                "slug": exhibit.slug
+                            })
+            context["exhibit_embed_url"] = get_site_url(url)
         return context
+
+
+class ExhibitJSONView(BaseJSONView):
+
+    def get_doc(self):
+        return None
+
+    def get_parent_object(self):
+        if not hasattr(self.request, "parent_object"):
+            owner = self.kwargs["owner"]
+            slug = self.kwargs["slug"]
+            self.request.parent_object = get_object_or_404(models.PublishedExhibit, owner__username=owner, slug=slug)
+        return self.request.parent_object
+
+    def check_perms(self):
+        if not self.request.user.has_perm("exhibit.can_view", self.get_parent_object()):
+            return False
+        return True
+
+    def cache_control_header(self):
+        cache_control = super(ExhibitJSONView, self).cache_control_header()
+        if not self.get_parent_object().is_public:
+            cache_control += ", private"
+        else:
+            cache_control += ", public"
+        return cache_control
+
+
+class PublishedExhibitPropertiesListView(ExhibitJSONView):
+    def get_doc(self):
+        properties = self.get_parent_object().properties.to_dict()
+        return json.dumps(properties)
+
+
+class PublishedExhibitPropertyDataView(ExhibitJSONView):
+    def get_doc(self):
+        values = models.PropertyData.objects.filter(exhibit_property__exhibit=self.get_parent_object(), exhibit_property__name=self.kwargs["property"]).values_list("json")
+        if len(values) == 0:
+            return '{"items": []}'
+        return '{"items": ' + values[0][0] + "}"
 
 
 class ExhibitDetailView(ExhibitView):
@@ -264,10 +311,10 @@ class ExhibitDetailView(ExhibitView):
         return context
 
 
-def get_published_exhibit(request, owner, slug):
+def get_public_exhibit(request, owner, slug):
     if not hasattr(request, "exhibit"):
-        qs = models.Exhibit.objects.select_related("owner", "dataset")
-        request.exhibit = get_object_or_404(qs, slug=slug, owner__username=owner, published=True)
+        qs = models.PublishedExhibit.objects.select_related("owner")
+        request.exhibit = get_object_or_404(qs, slug=slug, owner__username=owner, is_public=True)
     return request.exhibit
 
 
@@ -279,7 +326,7 @@ class EmbeddedExhibitView(View):
 
     def get(self, request, owner, slug):
         where = request.GET.get('where', 'freemix-embed')
-        exhibit = get_published_exhibit(request, owner, slug)
+        exhibit = get_public_exhibit(request, owner, slug)
 
         metadata = exhibit.profile
 
@@ -308,7 +355,7 @@ class EmbeddedExhibitView(View):
         return response
 
 def lmfunc(r, owner, slug):
-    ex = get_published_exhibit(r, owner, slug)
+    ex = get_public_exhibit(r, owner, slug)
     if ex.modified > ex.dataset.modified:
         return ex.modified
     return ex.dataset.modified
@@ -320,14 +367,6 @@ class StockExhibitProfileJSONView(View):
     """Generate the default profile description of an exhibit for a particular dataset and canvas
     """
     def get(self, request, *args, **kwargs):
-        owner = kwargs["owner"]
-        slug = kwargs["slug"]
-
-        ds = get_object_or_404(models.Dataset, owner__username=owner, slug=slug)
-        user = self.request.user
-
-        if not user.has_perm("dataset.can_view", ds):
-            raise Http404
 
         return JSONResponse({
             "facets": {},
@@ -380,27 +419,7 @@ class ExhibitListView(OwnerListView):
 
     model = models.PublishedExhibit
 
-    related = ("dataset", "dataset__owner", "owner", "owner__profile")
-
-
-class ExhibitsByDatasetListView(ListView):
-    template_name = "exhibit/list/exhibit_list_by_dataset.html"
-
-    def get_dataset(self):
-        slug = self.kwargs["slug"]
-        owner = self.kwargs["owner"]
-        return get_object_or_404(Dataset, slug=slug,owner__username=owner)
-
-    def get_queryset(self):
-        perm_filter = PermissionsRegistry.get_filter("exhibit.can_view", self.request.user)
-
-        return models.Exhibit.objects.filter(dataset=self.get_dataset()).filter(perm_filter)
-
-    def get_context_data(self, **kwargs):
-        kwargs = super(ExhibitsByDatasetListView, self).get_context_data(**kwargs)
-
-        kwargs["dataset"] = self.get_dataset()
-        return kwargs
+    related = ("owner", "owner__profile")
 
 
 class CanvasListView(ListView):

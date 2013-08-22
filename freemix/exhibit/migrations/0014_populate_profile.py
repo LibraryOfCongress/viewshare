@@ -20,7 +20,8 @@ class Migration(DataMigration):
                         "lens": {
                             "properties": names,
                             "type": "list"
-                        }
+                        },
+                        "type": "list"
                     }]
                 },
                 "default_lens": {

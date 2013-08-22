@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.template.loader import render_to_string
@@ -108,6 +109,16 @@ VALUE_TYPES = {
 }
 
 
+def get_data_url(t):
+    """
+    Does on a reverse on the url represented in the provided tuple
+    """
+    return reverse("exhibit_property_data", kwargs={
+        "owner": t[0],
+        "slug": t[1],
+        "property": t[2]
+    })
+
 class ExhibitPropertyManager(models.Manager):
     """
     Utility methods for the filtered properties on a particular exhibit
@@ -131,6 +142,15 @@ class ExhibitPropertyManager(models.Manager):
         qs = self.get_query_set()
         result = [p.get_concrete().to_profile_dict() for p in qs.all()]
         return {"properties": result}
+
+    def get_data_urls(self):
+        """
+        Return a list of data URLs for each property
+        """
+
+        qs = self.get_query_set().exclude(name="id").exclude(name="label")
+        qs = qs.values_list("exhibit__owner__username", "exhibit__slug", "name")
+        return [get_data_url(t) for t in qs]
 
 
 class ExhibitProperty(models.Model):
@@ -193,6 +213,12 @@ class ExhibitProperty(models.Model):
             ]
 
         }
+
+    def get_properties_url(self):
+        return reverse("exhibit_property_list", kwargs={
+            "owner": self.owner,
+            "slug": self.slug
+        })
 
 
 class CompositeProperty(ExhibitProperty):

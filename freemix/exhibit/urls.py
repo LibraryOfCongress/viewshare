@@ -18,6 +18,16 @@ urlpatterns = patterns('',
        views.ExhibitDetailView.as_view(),
        name='exhibit_detail'),
 
+    url(r'^(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/properties/$',
+        views.PublishedExhibitPropertiesListView.as_view(),
+        name='exhibit_property_list'),
+
+    url(r'^(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/properties/(?P<property>[a-zA-Z0-9_.-]+)/data/$',
+        views.PublishedExhibitPropertyDataView.as_view(),
+        name='exhibit_property_data'),
+
+
+
     # list
 
     url(r'^(?P<owner>[a-zA-Z0-9_.-]+)/$',
