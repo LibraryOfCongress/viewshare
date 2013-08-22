@@ -24,7 +24,7 @@ define(
      * Specialized ModalView which displays modal used to add augmented
      * properties to a dataset.
      * @constructor
-     * @param {object} options.model - RecordCollection we're augmenting
+     * @param {object} options.model - PropertyCollection we're augmenting
      * render notifications
      */
     var ModalAugmentView = function(options) {
@@ -81,24 +81,12 @@ define(
             errorList.append(error);
         },
 
-        /** Actions to take on a successful augmentation */
-        augmentSuccess: function(data, textStatus, XMLHttpRequest) {
-            var augmentErrors = data.failed || {};
-            var augmentedProperties = [];
-            this.model.Observer('augmentSuccess').publish();
-        },
-
-        /** Actions to take on an augmentation server error */
-        augmentFailure: function(XMLHttpRequest, textStatus, errorThrown) {
-            this.model.Observer('augmentFailure').publish();
-        },
-
         /** Handle the 'Create Property' button click by augmenting data */
         createProperty: function(event) {
             var activeTab = this.$el.find('.tab-content .active');
             var errorList = this.$el.find('#augment-errors');
             var errors = {};
-            var newProperty, postData;
+            var newProperty;
             // validate tab's view's Model
             errorList.empty();
             if (activeTab.attr('id') === 'timeline') {
@@ -106,25 +94,14 @@ define(
             } else if (activeTab.attr('id') === 'map') {
                 newProperty = this.mapView.newCompositeProperty;
             } else if (activeTab.attr('id') === 'list') {
-                newProperty = this.listView.newCompositeProperty;
+                newProperty = this.listView.newPatternProperty;
             } else {
                 console.log(activeTab);
                 return false;
             }
             errors = newProperty.validate(this.model.propertyLabels());
             if ($.isEmptyObject(errors)) {
-                // TODO: post to contracted DraftExhibit API
-                postData = {};
-                $.ajax({
-                    url: "/augment/transform/",
-                    type: "POST",
-                    contentType: "application/json",
-                    data: JSON.stringify(postData),
-                    success: this.augmentSuccess.bind(this),
-                    error: this.augmentFailure.bind(this),
-                    processData: false,
-                    dataType: "json"
-                });
+                newProperty.augmentData();
                 this.$el.modal('hide');
             } else {
                 // display client-side form validation errors
