@@ -63,7 +63,7 @@ class ExhibitCreateFormView(CreateView):
 class ExhibitDetailEditView(OwnerSlugPermissionMixin, UpdateView):
     form_class = forms.UpdateExhibitDetailForm
     object_perm="exhibit.can_edit"
-    model = models.Exhibit
+    model = models.PublishedExhibit
     template_name = "exhibit/edit/exhibit_metadata_form.html"
 
     def form_valid(self, form):

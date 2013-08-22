@@ -35,7 +35,7 @@
      <div class="exhibit-description">{{ object.description }}</div>
 
      <div class="exhibit-visibility">
-       {% if object.published %}
+       {% if object.is_public %}
        <span class="public">{% trans "This view is publicly available." %}</span>
        {% else %}
        <span class="private">{% trans "This view is private." %}</span>
