@@ -80,7 +80,6 @@ define(
                             this.properties.push(new CompositePropertyModel(args));
                         } else if (['pattern-list', 'delimited-list'].indexOf(
                                 property.augmentation) >= 0) {
-                            args.composite = property.composite;
                             this.properties.push(new PatternPropertyModel(args));
                         }
                     } else {

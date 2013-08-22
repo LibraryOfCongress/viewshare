@@ -27,12 +27,13 @@
       </tr>
     </thead>
     <tbody id="properties">
-      {{#each properties}}
+      {{#each propertyOptions}}
       <tr>
         <td class="selected"><input type="radio" name="list-id" value="{{ this.id }}"></td>
-        <td class="name">{{ this.name }}</td>
+        <td class="name">{{ this.label }}</td>
       </tr>
       {{/each}}
     </tbody>
   </table><!-- /.augment-properties -->
-</form>
+  <!-- TODO: pattern and delimiter form elements -->
+</form><!-- /.form-horizontal -->
