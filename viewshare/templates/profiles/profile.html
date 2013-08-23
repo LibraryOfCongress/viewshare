@@ -46,16 +46,6 @@
 {% endif %}
 {% endblock head_scripts %}
 
-{# check to see if the user being inspected is user logged in #}
-
-{% block yourprofile-tab-selected %}
-{% if is_me %} ui-tabs-selected ui-state-active{% endif %}
-{% endblock %}
-
-{# if user being inspected is not the one logged in, create a hierarchical tab-group for display #}
-
-{% block body_class %}profile{% endblock %}
-
 {% block body %}
 
 <div class="row-fluid">
@@ -95,7 +85,7 @@
       <div class="row-fluid">
 	<div class="span12">
 	  {% if other_user.get_profile.about %}
-	  <div class="bubble">{{ other_user.get_profile.about|linebreaks }}</div>
+	  <div class="bubble">{{ other_user.get_profile.about }}</div>
 	  {% endif %}
 	</div>
       </div>

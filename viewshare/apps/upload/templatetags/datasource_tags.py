@@ -28,7 +28,7 @@ def datasource_list_item(context, datasource):
     template = DataSourceRegistry.get_detail_template(datasource.get_concrete())
     return {"template_name": template,
             "datasource": datasource,
-            "datasource_url": datasource.get_absolute_url(),
+#            "datasource_url": datasource.get_absolute_url(),
             "request": request,
             "can_view": can_view,
             "can_edit": can_edit,

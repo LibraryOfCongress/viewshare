@@ -10,20 +10,12 @@
 
     {%  if can_view %}
     <div class="dataset-actions dataset-right">
-        <div class="dataset-links">
-{#            <span class="action action_inspect_datasource">#}
-{#                <a class="datasource_inspect" href="{% url 'datasource_detail' uuid=datasource.uuid %}">{% trans "Inspect" %}</a>#}
-{#            </span>|#}
+        <div class="dataset-links btn-group">
 
-            <span class="action action_refresh_datasource">
-                <a class="datasource_refresh" href="{% url 'datasource_transaction' uuid=datasource.uuid %}">{% trans "Edit" %}</a>
-            </span>&nbsp;|&nbsp;
-
-            <span class="action action_refresh_datasource">
-                <a class="datasource_refresh" href="{% url 'datasource_update' uuid=datasource.uuid %}">{% trans "Refresh" %}</a>
-            </span>
-
-
+	  <span class="action action_refresh_datasource">
+            <a class="datasource_refresh btn btn-small" href="#todo">{% trans "Refresh" %}</a>
+          </span>
+	  
         </div>
      </div>
     {% endif %}

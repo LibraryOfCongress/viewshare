@@ -1,14 +1,12 @@
 {% extends "exhibit/base.html" %}
-{% load url from future %}
-
 
 {% load i18n %}
 {% load freemix_helpers %}
 {% load exhibit_tags %}
 {% load compress %}
 {% load exhibit_tags %}
-{% load dataset_tags %}
-{% block freemix_title %}{% blocktrans %}Data View{% endblocktrans %}: {{ object.title }}{% endblock %}
+{% load datasource_tags %}
+{% block freemix_title %}{% blocktrans %}View Inspector{% endblocktrans %}: {{ object.title }}{% endblock %}
 
 {% block freemix_css %}
 {{ block.super }}
@@ -34,69 +32,90 @@
 {% endblock %}
 
 {% block body %}
+
+<div class="row-fluid">
+  
+  <div class="span4">    
     
-
-
-    <h1>{{ object.title }}</h1>
-
-    <div class="priority-area">
-      <p>
-        {%  if can_view %}
-        <span class="action action_view_exhibit">
-            <a class="exhibit_view" href="{{ exhibit.get_absolute_url }}">{% trans "View" %}</a>
-        </span>
-        {% endif %}
-        {% if can_share %}
-        <span class="divider">|</span>
-
-        <span class="action action_share_exhibit">
-          <a class="exhibit_share" href="{% url 'shared_key_create_form' owner=exhibit.owner slug=exhibit.slug %}">{% trans "Share" %}</a>
-        </span>
-        {% endif %}
-
-          {% if can_embed %}
-        <span class="divider">|</span>
-
-        <span class="action action_embed_exhibit">
-          <a class="exhibit_embed" href="">{% trans "Embed" %}</a>
-        </span>
-        {% endif %}
-
-        {%  if can_delete %}
-        <span class="divider">|</span>
-        <span class="action action_delete_exhibit">
-            <a class="exhibit_delete" href="{{ exhibit.get_absolute_url }}">{% trans "Delete" %}</a>
-        </span>
-        {% endif %}
-      </p>
-    </div>
-    {% include "exhibit/embed/alert.html" %}
     <div id="exhibit_metadata">
       {% include "exhibit/detail/exhibit_metadata.html" %}
     </div>
+    
+    {% include "exhibit/embed/alert.html" %}
 
-    <div class="right_panel data_panel">
+  </div> <!-- end span4 -->
 
-      {% if can_share and exhibit.shared_keys.all %}
-      <div class="shared_key_list">
-        <h2 class="ui-widget-header">{% blocktrans %}Shared Links{% endblocktrans %}</h2>
+  <div class="span8">
+    
 
-        <ul class="shared_key_list_items">
-          {% for key in exhibit.shared_keys.all %}
-          {% include "share/shared_key_metadata.html" %}
-          {% endfor %}
-        </ul>
+    <div class="sharedkey-section widget-well">
+      
+      <h2>{% blocktrans %}Source Data{% endblocktrans %}</h2>
+
+      <div class="row-fluid">
+	<div class="span12">
+	  {% datasource_list_item object.source %}
+	</div>
+      </div>
+
+      <div class="row-fluid">
+	<div class="span12">
+	  <p>Refresh data button</p>
+	</div>
+      </div>
+
+      {%  if can_refresh %}
+      <div class="row-fluid">
+	<div class="span12">
+	  <div class="pull-right">
+	    <span class="data-actions btn-group">
+              <a class="dataset_refresh btn btn-small" href="{% url 'dataset_source_update' owner=dataset.owner.username slug=dataset.slug %}">{% trans "Refresh" %}</a>
+	    </span>
+	  </div>
+	</div>
       </div>
       {% endif %}
 
     </div>
 
-    {% if can_delete %}
-    {% include "exhibit/exhibit_delete_dialog.html" %}
-    {% endif %}
+    <div class="sharedkey-section widget-well">
+      
+      <h2>{% blocktrans %}Embed{% endblocktrans %}</h2>
+      
+      <div class="row-fluid">
+	<div class="span12">
+	  <p>Test if this is private</p>
+	  	  
+	  <p>{% blocktrans %}Copy the following and paste it into your page where you'd like your data view to be placed.{% endblocktrans %}</p>
 
-    {% if can_share %}
-    {% include "share/shared_key_delete_dialog.html" %}
+	  <input type="text" value="&lt;script id='freemix-embed' src='{{ exhibit_embed_url }}' type='text/javascript'&gt;&lt;/script&gt;"  class="embed-key" readonly="readonly"/>
+	</div>
+      </div>
+
+    </div>
+
+    {% if can_share and exhibit.shared_keys.all %}
+    <div class="sharedkey-section widget-well">
+      
+      <h2>{% blocktrans %}Shared Links{% endblocktrans %}</h2>
+      
+      <ul class="shared_key_list_items">
+        {% for key in exhibit.shared_keys.all %}
+        {% include "share/shared_key_metadata.html" %}
+        {% endfor %}
+      </ul>
+    </div>
     {% endif %}
-    {% new_exhibit %}
+  </div>
+</div>
+
+{% if can_delete %}
+{% include "exhibit/exhibit_delete_dialog.html" %}
+{% endif %}
+
+{% if can_share %}
+{% include "share/shared_key_delete_dialog.html" %}
+{% endif %}
+{% new_exhibit %}
+
 {% endblock %}
