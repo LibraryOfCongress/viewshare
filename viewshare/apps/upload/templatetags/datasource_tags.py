@@ -1,5 +1,5 @@
 from django import template
-from viewshare.apps.legacy.dataset.views import DataSourceRegistry
+from viewshare.apps.upload.views import DataSourceRegistry
 
 register = template.Library()
 
