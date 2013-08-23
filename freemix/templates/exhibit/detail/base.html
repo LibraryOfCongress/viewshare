@@ -58,24 +58,6 @@
 	</div>
       </div>
 
-      <div class="row-fluid">
-	<div class="span12">
-	  <p>Refresh data button</p>
-	</div>
-      </div>
-
-      {%  if can_refresh %}
-      <div class="row-fluid">
-	<div class="span12">
-	  <div class="pull-right">
-	    <span class="data-actions btn-group">
-              <a class="dataset_refresh btn btn-small" href="{% url 'dataset_source_update' owner=dataset.owner.username slug=dataset.slug %}">{% trans "Refresh" %}</a>
-	    </span>
-	  </div>
-	</div>
-      </div>
-      {% endif %}
-
     </div>
 
     <div class="sharedkey-section widget-well">
@@ -84,11 +66,14 @@
       
       <div class="row-fluid">
 	<div class="span12">
-	  <p>Test if this is private</p>
-	  	  
-	  <p>{% blocktrans %}Copy the following and paste it into your page where you'd like your data view to be placed.{% endblocktrans %}</p>
 
-	  <input type="text" value="&lt;script id='freemix-embed' src='{{ exhibit_embed_url }}' type='text/javascript'&gt;&lt;/script&gt;"  class="embed-key" readonly="readonly"/>
+	  <uL class="exhibit_list_items">
+	    <li class="exhibit_list_item">
+	      <p>{% blocktrans %}Copy the following and paste it into your page where you'd like your data view to be placed.{% endblocktrans %}</p>
+	      
+	      <input type="text" value="&lt;script id='freemix-embed' src='{{ exhibit_embed_url }}' type='text/javascript'&gt;&lt;/script&gt;"  class="embed-key" readonly="readonly"/>
+	     </li>
+	  </ul>
 	</div>
       </div>
 

@@ -25,9 +25,9 @@
 	<br />
 	<div class="exhibit-visibility">
 	  {% if object.is_public %}
-	  <span class="public">{% trans "This view is publicly available." %}</span>
+	  <span class="public"><span class="public-icon"></span>{% trans "This view is public" %}</span>
 	  {% else %}
-	  <span class="private">{% trans "This view is private." %}</span>
+	  <span class="private"><span class="private-icon"></span>{% trans "This view is private" %}</span>
 	  {% endif %}
 	</div>
 	
