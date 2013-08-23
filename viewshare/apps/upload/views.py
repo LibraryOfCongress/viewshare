@@ -293,14 +293,16 @@ class FileDataSourceDownloadView(View):
         return response
 
     def get(self, request, *args, **kwargs):
-        uuid = kwargs["uuid"]
-
-        source = get_object_or_404(models.DataSource, uuid=uuid)
+        owner = kwargs["owner"]
+        slug = kwargs["slug"]
+        source = get_object_or_404(models.DataSource,
+                                   exhibit__owner__username=owner,
+                                   exhibit__slug=slug)
         source = source.get_concrete()
         if not hasattr(source, "file"):
             raise Http404
 
-        if not self.request.user.has_perm('datasource.can_edit', source):
+        if not self.request.user.has_perm('datasource.can_view', source):
             raise Http404
 
         if conf.FILE_DOWNLOAD_NGINX_OPTIMIZATION:

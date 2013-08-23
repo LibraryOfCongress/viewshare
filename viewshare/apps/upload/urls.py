@@ -48,4 +48,8 @@ urlpatterns = patterns('',
     url(r'^json.prep',
         views.JSONPrepView.as_view(),
         name="json_prep_view"),
+
+    url(r'^(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/source/file$',
+        login_required(views.FileDataSourceDownloadView.as_view()),
+        name="file_datasource_file_url"),
 )
