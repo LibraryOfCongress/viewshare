@@ -409,6 +409,13 @@ DataSourceRegistry.register(models.JSONURLDataSource,
 create_json_url_view = DataSourceRegistry.create_view(models.JSONURLDataSource)
 
 
+DataSourceRegistry.register(models.ReferenceDataSource,
+                            forms.ReferenceDataSourceForm,
+                            "upload/reference_datasource_form.html",
+                            "upload/reference_datasource_item.html")
+create_reference_url_view = DataSourceRegistry.create_view(models.ReferenceDataSource)
+
+
 class OAISetListView(View):
     transform = AkaraTransformClient(conf.AKARA_OAIPMH_LIST_URL)
 

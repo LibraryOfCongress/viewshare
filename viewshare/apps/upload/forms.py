@@ -95,3 +95,9 @@ class JSONFileDataSourceForm(DataSourceForm):
 
     class Meta(DataSourceForm.Meta):
         model = models.JSONFileDataSource
+
+
+class ReferenceDataSourceForm(DataSourceForm):
+
+    class Meta(DataSourceForm.Meta):
+        model = models.ReferenceDataSource

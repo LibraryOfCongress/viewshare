@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django_extensions.db.models import TimeStampedModel
-from freemix.exhibit.models import Exhibit
+from freemix.exhibit.models import Exhibit, PublishedExhibit
 
 from viewshare.apps.upload.transform import (AkaraTransformClient,
                                              AKARA_TRANSFORM_URL)
@@ -41,7 +41,7 @@ class ReferenceDataSource(DataSource):
     A Data Source that references another exhibit
     """
 
-    referenced = models.ForeignKey(Exhibit,
+    referenced = models.ForeignKey(PublishedExhibit,
                                    related_name="references")
 
 def source_upload_path(instance, filename):
