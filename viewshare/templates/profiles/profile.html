@@ -54,7 +54,9 @@
     
     <div id="about-box" class="info-section widget-well">
 
-      <h2>My Profile</h2>
+      <div class="widget-header">
+	<h2>My Profile</h2>
+      </div>
             
       <div class="row-fluid">
 
@@ -164,8 +166,10 @@
     {% else %}
     
     <div class="info-section widget-well">
-      <h2>{% trans "Add Connection" %}</h2>
-      
+      <div class="widget-header">
+	<h2>{% trans "Add Connection" %}</h2>
+      </div>
+
       <form class="uniForm" method="POST" action="">
         {% csrf_token %}
         <fieldset class="inlineLabels">
@@ -200,7 +204,10 @@
     
     {%  if user.is_authenticated %}
     <div class="connection-section widget-well">
-      <h2>{% blocktrans %}Connections{% endblocktrans %}</h2>
+      <div class="widget-header">
+	<h2>{% blocktrans %}Connections{% endblocktrans %}</h2>
+      </div>
+
       <div class="user_friends">
 	{% if other_friends %}
 	{% connection_list other_friends 3 0 %} 
@@ -222,7 +229,10 @@
     
     {% if is_me %}
     <div class="info-section widget-well">
-      <h2 class="ui-widget-header">{% blocktrans %}Notices{% endblocktrans %}</h2>
+      <div class="widget-header">
+	<h2>{% blocktrans %}Notices{% endblocktrans %}</h2>
+      </div>
+
       <div class="notices">
 	{% notification_summary_list other_user %}
       </div>

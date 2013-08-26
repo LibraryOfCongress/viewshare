@@ -143,13 +143,6 @@ div#body.freemix-themeable > div > h1,
     margin: 0 0 1em;
 }
 
-div#body.freemix-themeable > div > h2,
-.dataprofile .tab-contents h2,
-.dataprofile-viewer h2 {
-    font-size: 1.5em;
-    padding: 0.1em 0.1em;
-    line-height: 30px;
-}
 
 /* Search */
 
@@ -176,29 +169,6 @@ font-weight: bold;
     padding: 0.5em 1.5em;
     margin: -2.3em -26.5px 1em;
     text-align: right;
-}
-
-h2.help {
-    font-size: 1.5em;
-    padding: .4em 30px .4em 0;
-    margin: 0 0 1em 0;
-    border-bottom: 1px solid #e3f5f7;
-    color: darkslategrey;
-}
-
-h3.help {
-    font-size: 1.25em;
-    padding: .4em 0px .4em 0;
-    margin: 0 0 -3em 0;
-    color: darkslategrey;
-}
-
-h2 img {
-    text-align: right;
-    vertical-align: top;
-    height: 40px;
-    width: 40px;
-    margin-top: -25px;
 }
 
 /* Theme switcher */
@@ -476,26 +446,18 @@ padding: 10px 10px 10px 10px;
 .public .exhibit-title {
 }
 
-.exhibit_display .private, .exhibit_edit .private, .dataset_edit .private, .dataset_summary .private, .dataset_list_items .private, .exhibit_list_items .private  {
-   background: url(../../images/lock.png) 99% 5% no-repeat;
-}
-
-.exhibit-visibility .private  {
-   background-image: url(../../images/lock.png);
-   background-repeat: no-repeat;
-   background-position: 0% 50%;
+.private .private-icon {
+   background: url(../../images/lock.png) 0% 50% no-repeat;
    width: 16px;
    height: 16px;
-   padding:15px 5px 10px 25px;
+   padding:15px 0px 10px 25px;
 }
 
-.exhibit-visibility .public .public-icon {
-   background-image: url(../../images/lock.png);
-   background-repeat: no-repeat;
-   background-position: 0% 50%;
+.public .public-icon {
+   background-image: url(../../images/unlock.png) 0% 50% no-repeat;
    width: 16px;
    height: 16px;
-   padding:15px 5px 10px 25px;
+   padding: 15px 0px 10px 25px;
 }
 
 .exhibit-left, .dataset-left, .shared-key-left {
@@ -564,20 +526,31 @@ ul.responses li.thread-8 {
 
 /* profile */
 
-.widget-well h2 {
+.widget-well .widget-header {
+    background: #F8F8F8;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    margin-left: 3px;
+    margin-right: 3px;
+    height: 40px;
+}
+
+.widget-well .widget-header h2 {
     font-family: 'Ubuntu', Helvetica, Arial, sans-serif;	
     font-weight: normal;
     font-size: 1.2em;
-    background: #F8F8F8;
-    margin-top: 3px;
-    margin-left: 3px;
-    margin-right: 3px;
     color: slategrey;
-    padding-left: 10px;
    -moz-border-top-left-radius:3px;
    -moz-border-top-right-radius:3px;
    -webkit-border-top-left-radius:3px;
    -webkit-border-top-right-radius:3px;
+    margin-top: 0px;
+    padding-left: 10px;
+}
+
+.widget-well .widget-header .widget-links {
+   padding-right: 10px;
+   padding-top: 7px;
 }
 
 .about_profile {

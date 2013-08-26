@@ -2,61 +2,58 @@
 {% load freemix_helpers %}
 {%  with exhibit.owner.username as exhibit_owner_username %}
 
-<li class="exhibit_list_item result_set_item clearfix {% if exhibit.is_public %}public{% else %}private{% endif %}">
+<li class="exhibit_list_item result_set_item">
 
-  <div class="exhibit-title"><a href="{{  exhibit.get_absolute_url }}">{{exhibit.title}}</a></div>
+  <div class="row-fluid">
+    <div class="span11">
+      <div class="exhibit-title"><a href="{{  exhibit.get_absolute_url }}">{{exhibit.title}}</a></div>
+    </div>
+  
+    <div class="span1">
+      <div class="pull-right">
+	{% if exhibit.is_public %}
+	<div class="public"><span class="public-icon"></span></div>
+	{% else %}
+	<div class="private"><span class="private-icon"></span></div>
+	{% endif %}
+      </div>
+    </div>
+  </div>
     
   {% if exhibit.description %}
-  {% ifnotequal exhibit.description exhibit.description|truncatewords:20 %}
-  <div class="exhibit-description exhibit-short-description">
-    {{ exhibit.description|truncatewords:20 }}
-    <a class="readmore" href="{{ exhibit.get_absolute_url }}">read more</a>
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="exhibit-description">
+	{{ exhibit.description }}
+      </div>
+    </div>
   </div>
-  <div class="exhibit-description exhibit-long-description ui-helper-hidden">
-    {{ exhibit.description }}
-  </div>
-  {%  else %}
-  <div class="exhibit-description">
-    {{ exhibit.description }}
-  </div>
-  {% endifnotequal %}
   {% endif %}
 
   <div class="row-fluid">
-    <div class="span7">
-      
+    <div class="span7">      
       <div class="exhibit-metadata">
         {% trans "Created by"%}
-          <span class="exhibit-creator">
-              <a href="{% url 'profile_detail' exhibit_owner_username %}">{{exhibit.owner|nicename}}</a>
-          </span>
-          {% trans "on" %} <span class="exhibit-created-data">{{exhibit.created|date:"N j, Y"}}</span>.
+        <span class="exhibit-creator">
+          <a href="{% url 'profile_detail' exhibit_owner_username %}">{{exhibit.owner|nicename}}</a>
+        </span>
+        {% trans "on" %} <span class="exhibit-created-data">{{exhibit.created|date:"N j, Y"}}</span>.
       </div>
-
     </div>
     
     {% if can_inspect %}
-    
     <div class="span5">
-      
       <div class="exhibit-actions">
-        
         <div class="exhibit-links btn-group">
-          
           <a class="btn btn-small exhibit_inspect" href="{% url 'exhibit_detail' owner=exhibit_owner_username slug=exhibit.slug %}">{% trans "Inspect" %}</a>
-          
           {% if can_edit %}
           <a class="btn btn-small exhibit_edit" href="{% url 'exhibit_edit' owner=exhibit_owner_username slug=exhibit.slug %}">{% trans "Edit" %}</a>
 	  {% endif %}
-          
           {% if can_delete %}
           <a class="btn btn-small exhibit_delete" href="{{  exhibit.get_absolute_url }}">{% trans "Delete" %}</a>
 	  {% endif %}
-          
         </div>
-        
       </div>
-      
     </div>
     {% endif %}
     

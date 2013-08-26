@@ -48,9 +48,11 @@
   <div class="span8">
     
 
-    <div class="sharedkey-section widget-well">
+    <div class="sourcedata-section widget-well">
       
-      <h2>{% blocktrans %}Source Data{% endblocktrans %}</h2>
+      <div class="widget-header">
+	<h2>{% blocktrans %}Source Data{% endblocktrans %}</h2>
+      </div>
 
       <div class="row-fluid">
 	<div class="span12">
@@ -60,9 +62,11 @@
 
     </div>
 
-    <div class="sharedkey-section widget-well">
+    <div class="embed-section widget-well">
       
-      <h2>{% blocktrans %}Embed{% endblocktrans %}</h2>
+      <div class="widget-header">
+	<h2>{% blocktrans %}Embed{% endblocktrans %}</h2>
+      </div>
       
       <div class="row-fluid">
 	<div class="span12">
@@ -79,18 +83,35 @@
 
     </div>
 
-    {% if can_share and exhibit.shared_keys.all %}
+    {% if can_share %} 
     <div class="sharedkey-section widget-well">
       
-      <h2>{% blocktrans %}Shared Links{% endblocktrans %}</h2>
-      
+      <div class="widget-header">
+	<div class="row-fluid">
+	  <div class="span10">
+	    <h2>{% blocktrans %}Shared Links{% endblocktrans %}</h2>
+	  </div>
+	  <div class="span2">
+	    <div class="pull-right">
+	      <div class="widget-links btn-group">
+		<a href = "#todo" class="btn btn-small btn-info">Share</a>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+      </div>
+
+      {% if exhibit.shared_keys.all %}      
       <ul class="shared_key_list_items">
         {% for key in exhibit.shared_keys.all %}
         {% include "share/shared_key_metadata.html" %}
         {% endfor %}
       </ul>
+      {% endif %}
+
     </div>
     {% endif %}
+
   </div>
 </div>
 

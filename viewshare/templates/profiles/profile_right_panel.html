@@ -13,7 +13,10 @@
 
     {% if draft_count > 0 %}
     <div class="draftview-section widget-well">
-      <h2>{% blocktrans %}Draft Views{% endblocktrans %}</h2>
+      <div class="widget-header">
+	<h2>{% blocktrans %}Draft Views{% endblocktrans %}</h2>
+      </div>
+
       {% if draft_count > 3 %}
       <div class="see_all">
         <a href="">{% trans "See all" %}  {{ draft_count }} draft{{ draft_count|pluralize }}</a>
@@ -37,7 +40,21 @@
 {% else %}
 
     <div class="view-section widget-well">
-      <h2>{% blocktrans %}Views{% endblocktrans %}</h2>
+      <div class="widget-header">
+	<div class="row-fluid">
+	  <div class="span10">
+	    <h2>{% blocktrans %}Views{% endblocktrans %}</h2>
+	  </div>
+	  <div class="span2">
+	    <div class="pull-right">
+	      <div class="widget-links btn-group">
+		<a href = "#todo" class="btn btn-small btn-info">Create a View</a>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+      </div>
+	
       {% exhibit_list exhibits.all 10 0 %}
 
       {% if exhibit_count > 10 %}
