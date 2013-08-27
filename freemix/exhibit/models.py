@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -74,6 +75,26 @@ class PublishedExhibit(Exhibit):
     def __unicode__(self):
         return self.title
 
+    def get_draft(self):
+        try:
+            return self.draftexhibit
+        except ObjectDoesNotExist:
+            pass
+        draft = DraftExhibit.objects.create(parent=self,
+                                            slug=self.slug,
+                                            profile=self.profile,
+                                            canvas=self.canvas,
+                                            owner=self.owner,
+                                            is_draft=True)
+        draft.save()
+
+        from freemix.exhibit.serializers import ExhibitPropertyListSerializer
+        data = ExhibitPropertyListSerializer(self, queryset=self.properties).data
+        out = ExhibitPropertyListSerializer(draft, data=data)
+        out.save()
+        return draft
+
+
     class Meta:
         ordering = ('-modified', )
 
@@ -88,9 +109,9 @@ class DraftExhibit(Exhibit):
     be created on publication.
     """
 
-    parent = models.ForeignKey(PublishedExhibit,
-                               null=True,
-                               blank=True)
+    parent = models.OneToOneField(PublishedExhibit,
+                                  null=True,
+                                  blank=True)
 
     class Meta:
         ordering = ('-modified', )
@@ -124,24 +145,6 @@ class ExhibitPropertyManager(models.Manager):
     Utility methods for the filtered properties on a particular exhibit
     """
     use_for_related_fields = True
-
-    def to_dict(self):
-        """
-        Return a dict in exhibit JSON format for property descriptions
-        """
-        qs = self.get_query_set()
-        result = dict()
-        for p in qs.all():
-            result.update(p.to_dict())
-        return {"properties": result}
-
-    def to_profile_dict(self):
-        """
-        Return a dict of properties in the legacy freemix data profile format
-        """
-        qs = self.get_query_set()
-        result = [p.get_concrete().to_profile_dict() for p in qs.all()]
-        return {"properties": result}
 
     def get_data_urls(self):
         """
@@ -195,25 +198,6 @@ class ExhibitProperty(models.Model):
     def is_concrete(self):
         return self.classname == self.__class__.__name__
 
-    def to_dict(self):
-        return {
-            self.name: {
-                "label": self.label,
-                "valueType": self.value_type
-            }
-        }
-
-    def to_profile_dict(self):
-        return {
-            "enabled": True,
-            "label": self.label,
-            "property": self.name,
-            "tags": [
-                "property:type=%s" % self.value_type,
-            ]
-
-        }
-
     def get_properties_url(self):
         return reverse("exhibit_property_list", kwargs={
             "owner": self.owner,
@@ -228,30 +212,9 @@ class CompositeProperty(ExhibitProperty):
     source properties is defined using the PropertyReference model.
     """
 
-    def to_dict(self):
-        d = super(CompositeProperty, self).to_dict()
-        d[self.name]["composite"] = self.properties.to_array()
-        d[self.name]["augmentation"] = "composite"
-        return d
-
-    def to_profile_dict(self):
-        d = super(CompositeProperty, self).to_profile_dict()
-        d["composite"] = self.properties.to_array()
-        return d
-
-
-class PropertyReferenceManager(models.Manager):
-    """
-    Utility methods for property references for Composite properties
-    """
-    use_for_related_fields = True
-
-    def to_array(self):
-        """
-        Return a list of the names of all properties in the queryset
-        """
-        qs = self.get_query_set()
-        return [p.source.name for p in qs.all()]
+    composite = models.ManyToManyField(ExhibitProperty,
+                                       through='PropertyReference',
+                                       related_name="+")
 
 
 class PropertyReference(models.Model):
@@ -261,8 +224,6 @@ class PropertyReference(models.Model):
         `source`: The referenced property
         `order`: The referenced property's position in the list of sources
     """
-
-    default_manager = PropertyReferenceManager()
 
     derived = models.ForeignKey('CompositeProperty', related_name="properties")
 
@@ -281,16 +242,6 @@ class ShreddedListProperty(ExhibitProperty):
     """
     source = models.ForeignKey(ExhibitProperty, related_name="+")
 
-    def to_dict(self):
-        d = super(ShreddedListProperty, self).to_dict()
-        d[self.name]["extract"] = self.source.name
-        return d
-
-    def to_profile_dict(self):
-        d = super(ShreddedListProperty, self).to_profile_dict()
-        d["extract"] = self.source.name
-        d["tags"].append("property:type=shredded_list")
-
     class Meta:
         abstract = True
 
@@ -301,18 +252,6 @@ class DelimitedListProperty(ShreddedListProperty):
     """
     delimiter = models.TextField(_("delimiter"))
 
-    def to_dict(self):
-        d = super(DelimitedListProperty, self).to_dict()
-        d[self.name]["delimiter"] = self.delimiter
-        d[self.name]["augmentation"] = "delimited-list"
-
-        return d
-
-    def to_profile_dict(self):
-        d = super(DelimitedListProperty, self).to_profile_dict()
-        d["delimiter"] = self.delimiter
-        return d
-
 
 class PatternListProperty(ShreddedListProperty):
     """
@@ -320,18 +259,6 @@ class PatternListProperty(ShreddedListProperty):
     """
 
     pattern = models.TextField(_("pattern"))
-
-    def to_dict(self):
-        d = super(PatternListProperty, self).to_dict()
-        d[self.name]["pattern"] = self.pattern
-        d[self.name]["augmentation"] = "pattern-list"
-
-        return d
-
-    def to_profile_dict(self):
-        d = super(PatternListProperty, self).to_profile_dict()
-        d["pattern"] = self.pattern
-        return d
 
 
 class PropertyData(TimeStampedModel):

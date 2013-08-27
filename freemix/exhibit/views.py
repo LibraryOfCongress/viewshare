@@ -15,6 +15,7 @@ from django.views.generic.list import ListView
 from freemix.exhibit import models, forms, conf
 from viewshare.apps.legacy.dataset.models import Dataset
 from freemix.exhibit.models import Canvas
+from freemix.exhibit.serializers import ExhibitPropertyListSerializer
 from freemix.permissions import PermissionsRegistry
 from freemix.utils import get_site_url
 from freemix.views import JSONResponse, OwnerListView, OwnerSlugPermissionMixin, BaseJSONView
@@ -280,8 +281,10 @@ class ExhibitJSONView(BaseJSONView):
 
 class PublishedExhibitPropertiesListView(ExhibitJSONView):
     def get_doc(self):
-        properties = self.get_parent_object().properties.to_dict()
-        return json.dumps(properties)
+        qs = self.get_parent_object().properties.all()
+        serializer = ExhibitPropertyListSerializer(self.get_parent_object,
+                                                   queryset=qs)
+        return json.dumps(serializer.data)
 
 
 class PublishedExhibitPropertyDataView(ExhibitJSONView):
