@@ -5,7 +5,7 @@
 {% load freemix_helpers %}
 
 {% block head_title %}{{owner|nicename}}{% blocktrans %}'s Views{% endblocktrans %}{% endblock %}
-{% block head_scripts %}
+{% block extra_scripts %}
 {{block.super}}
 {% include "freemix/js_include/jquery_ui.html" %}
 

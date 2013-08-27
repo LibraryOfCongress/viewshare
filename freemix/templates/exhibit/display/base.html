@@ -22,7 +22,7 @@
 <link rel="freemix/exhibit_profile" href="{% url 'exhibit_profile_json' owner=object.owner.username slug=object.slug %}"/>
 {% endblock %}
 
-{% block head_scripts %}
+{% block extra_scripts %}
     {{ block.super }}
     {% include "freemix/js_include/jquery_ui.html" %}
     {% include "simile/js/exhibit.html" %}
@@ -66,7 +66,7 @@
          })(window.Freemix.jQuery, window.Freemix);
     </script>
     {% endautoescape %}
-{% endblock head_scripts %}
+{% endblock extra_scripts %}
     
     
 {% block head_css %}
