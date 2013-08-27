@@ -6,8 +6,8 @@
     <fieldset>
       {% csrf_token %}
       {{ profile_form|crispy }}
-      <div class="form_block">
-        <button type="submit" class="btn btn-primary">{% trans "Update" %}</button>
+      <div class="form_block">        
+	<button type="submit" class="btn btn-primary">{% trans "Update" %}</button>
       </div>
     </fieldset>
   </form>

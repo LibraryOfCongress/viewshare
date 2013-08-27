@@ -134,13 +134,20 @@ div.exhibit-collectionView-header-sortControls {
 margin-top: 20px;
 }
 
-div#body.freemix-themeable > div > h1,
+.freemix-themeable h1,
 .dataprofile .tab-contents h1,
+#load h1,
 .dataprofile-viewer h1 {
-    border-bottom: 1px solid lightgrey;
+    font-family: 'Ubuntu', Helvetica, Arial, sans-serif;	
+    font-weight: normal;
     font-size: 2.0em;
-    padding: 0.2em 0.1em;
-    margin: 0 0 1em;
+    color: slategrey;
+    background: #F8F8F8;
+    margin-top: 3px;
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-bottom: 20px;
+    padding-left: 20px;
 }
 
 
@@ -346,10 +353,10 @@ height:106px;
 }
 
 #about-box .view_avatar {
-  background: url(../../images/palette-128.png) center center no-repeat;
+  background: url(../../images/palette-112.png) 0% 0% no-repeat; // use smaller avatar
   background-position: center; 
-  width: 128px;
-  height: 128px;
+  width: 112px;
+  height: 112px;
   margin-top: 10px;
   margin-left: 10px;
 }
@@ -454,7 +461,7 @@ padding: 10px 10px 10px 10px;
 }
 
 .public .public-icon {
-   background-image: url(../../images/unlock.png) 0% 50% no-repeat;
+   background: url(../../images/unlock.png) 0% 50% no-repeat;
    width: 16px;
    height: 16px;
    padding: 15px 0px 10px 25px;

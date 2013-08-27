@@ -53,14 +53,14 @@
 
      {% block upload_form_title %}<h1 id="upload-label">{% trans "Load Data"%}</h1>{% endblock %}
 
-     <fieldset class="upload-form">
+     <fieldset class="upload-form form-well well">
        
        <form action="{{ form_url }}" method="post" class="uniForm form" {% block uploadform_enctype %}{% endblock %}>
          {%csrf_token %}
 
          {{ form|crispy }}
 
-         <div class="buttons">
+         <div class="load-actions buttons">
            <input type="submit" value="{% trans "Upload" %}" class="submit btn btn-primary" />
            <a href="{% url 'upload_dataset' %}"><input type="button" value="{% trans "Cancel" %}" class="load-form-cancel negative-button btn btn-danger" /></a>
          </div>

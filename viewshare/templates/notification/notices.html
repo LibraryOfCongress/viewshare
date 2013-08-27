@@ -26,7 +26,8 @@
 {% regroup notices by added.date as notices_by_date %}
   
 {% for date in notices_by_date %}
-<h2 class="ui-widget-header notice_date">{{ date.grouper|naturalday:_("MONTH_DAY_FORMAT")|capfirst }}</h2>
+<h3 class="notice_date">{{ date.grouper|naturalday:_("MONTH_DAY_FORMAT")|capfirst }}</h3>
+
 <div class="notice_set">
   
   {% for notice in date.list %}

@@ -47,27 +47,32 @@ $(document).ready(function() {
           </div>
         </legend>
         {% csrf_token %}	
-
+	
         <div class="control-group">
-        <label class="control-label" for="id_username">Username</label>
-        <div class="controls">
-          <input type="text" id="id_username" placeholder="Username" name="username" required="true"></input>
-        </div>
-
-        <div class="control-group">
-        <label class="control-label" for="id_password">Password</label>
-        <div class="controls">
-          <input type="password" id="id_password" placeholder="Password" name="password" required="true"></input>
-        </div>
-
-        <div class="control-group">
+          <label class="control-label" for="id_username">Username</label>
           <div class="controls">
-            <label class="checkbox" for="id_remember">
-              <input type="checkbox" id="id_remember" name="remember"> Remember me
-            </label>
-            <button type="submit" class="btn">{% trans "Log in" %}</button>
+	    <input type="text" id="id_username" placeholder="Username" name="username" required="true"></input>
           </div>
-        </div>
+	</div>
+	
+        <div class="control-group">
+	  <label class="control-label" for="id_password">Password</label>
+	  <div class="controls">
+	    <input type="password" id="id_password" placeholder="Password" name="password" required="true"></input>
+	  </div>
+	
+          <div class="control-group">
+            <div class="controls">
+	      <label class="checkbox" for="id_remember">
+		<input type="checkbox" id="id_remember" name="remember"> Remember me
+	      </label>
+	      <button type="submit" class="btn">{% trans "Log in" %}</button>
+            </div>
+          </div>
+	
+	</div>
+	
+
       </fieldset>
     </form>
 

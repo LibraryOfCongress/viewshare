@@ -28,84 +28,69 @@
 
   </head>
 
-  <body class="{% block body_class %}{% endblock %}">
+  <body>
 
     <div class="container-fluid">
 
       {% block banner %}
       
       <!-- fixed header across all application -->
-      
-      <div id="header">
-        <div id="tabhead" class="navbar navbar-fixed-top">
-          <div class="navbar-inner">
-            
-            <div class="container">
-              <a href="/" class="brand"><span id="application-logo"></span>
-                <span id="application-status">{{ SITE_NAME_STATUS }}</span></a>            
-              <ul class="nav pull-right">
-                {% block login %}{% endblock %}
-              </ul>
+
+      <div class="row-fluid">
+	
+	<div id="header">
+          <div id="tabhead" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+              
+              <div class="container">
+		<a href="/" class="brand"><span id="application-logo"></span>
+                  <span id="application-status">{{ SITE_NAME_STATUS }}</span></a>            
+		<ul class="nav pull-right">
+                  {% block login %}{% endblock %}
+		</ul>
+              </div>
+              
             </div>
-            
           </div>
-        </div>
+	</div>
+	
       </div>
-      
+
       {% announcements as site_wide_announcements %}
       {% if site_wide_announcements %}
-        {% for announcement in site_wide_announcements %}
-        <div class="alert" id="site_wide_announcements">
-          <strong>{{ announcement.title }}</strong> - {{ announcement.content }}
-        </div>
-        {% endfor %}
+      {% for announcement in site_wide_announcements %}
+      <div class="alert" id="site_wide_announcements">
+        <strong>{{ announcement.title }}</strong> - {{ announcement.content }}
+      </div>
+      {% endfor %}
       {% endif %}
       
       {% endblock banner %}
       
-      <div {% block rtab_id %}{% endblock %}>
+      <div class="container-fluid">
         
-        {% if messages %}
-        <div class="container-fluid">
-          <div id="systemMsg">
-            <ul id="system_messages" class="messages">
-              {% for message in messages %}
-              <li id="message_{{ forloop.counter }}" class="infoMsg">
-                <div class="alert alert-info">
-                  <button type="button" class="close" data-dismiss="alert">&times;</button>
-                  {{ message }}
-                </div>
-              </li>
-              {% endfor %}
-            </ul>
-          </div>
-        </div> <!-- end container -->
-        {% endif %}
-        
-        <div class="container-fluid">
+        <div id="body" class="freemix-themeable">
           
-          <div id="body" class="freemix-themeable">
-            
-            <div id="inner-body">
-              {% block body %}
-              {% endblock %}
-            </div>
+          <div id="inner-body">
+	    {% block body %}
+	    {% endblock %}
           </div>
-          
-        </div> <!-- end container -->
-        
-        <div id="footer">
-          {% block footer %}
-          {% endblock %}
         </div>
         
-        {% block extra_body %}{% endblock %}
+      </div> <!-- end container -->
+      
+      <div id="footer">
+        {% block footer %}
+        {% endblock %}
       </div>
       
-      {% block final %}
-      {% endblock %}
+      {% block extra_body %}{% endblock %}
 
     </div> <!-- body container -->
+
+    {% block final %}
+    {% endblock %}
+    
   </body>
 </html>
 
