@@ -61,14 +61,14 @@ padding-top: 5px;
 }
 
 .user_friends .user_profile_entry .user_data_entry .user_name {
-   background: transparent url(../../images/person-24.png) top left no-repeat;
-   height: 25px;
+   background: transparent url(../../images/user-32.png) top left no-repeat;
+   height: 32px;
    font-size: 100%;
    font-weight: bold;
    position:absolute;
-   margin-top: 5px;
-   padding-bottom: 15px;
-   padding-left: 28px;
+   padding-top: 5px;
+   margin-top: 0px;
+   padding-left: 40px;
 }
 
 .user_friends .user_profile_entry .user_data_entry .user_location {
