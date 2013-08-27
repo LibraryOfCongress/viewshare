@@ -8,6 +8,12 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   {% block rss_feeds %}{% endblock %}
   <title>{% if site_name %}{{ site_name }} : {% endif %}{% block head_title %}{% endblock %}</title>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script>
+    if (!window.jQuery) {
+      document.write('<script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.js"><\/script>');
+    }
+  </script>
   {% block head_css %}{% endblock %}
   {% block head_data %}{% endblock %}
   {% block extra_head %}{% endblock %}
@@ -61,7 +67,6 @@
   </div> <!-- /.container-fluid -->
 
   {% compress js %}
-  <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.js"></script>
   <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.highlight.js"></script>
   <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.csrf.js"></script>
   <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.cookie.js"></script>
