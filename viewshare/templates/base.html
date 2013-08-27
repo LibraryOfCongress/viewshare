@@ -4,93 +4,79 @@
 {% load i18n %}
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    {% block rss_feeds %}{% endblock %}
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  {% block rss_feeds %}{% endblock %}
+  <title>{% if site_name %}{{ site_name }} : {% endif %}{% block head_title %}{% endblock %}</title>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script>
+    if (!window.jQuery) {
+      document.write('<script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.js"><\/script>');
+    }
+  </script>
+  {% block head_css %}{% endblock %}
+  {% block head_data %}{% endblock %}
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+  <div class="container-fluid">
+    {% block banner %}
+    <!-- fixed header across all application -->
+    <div class="row-fluid">
+      <div id="header">
+        <div id="tabhead" class="navbar navbar-fixed-top">
+          <div class="navbar-inner">
+            <div class="container">
+              <a href="/" class="brand">
+                <span id="application-logo"></span>
+                <span id="application-status">{{ SITE_NAME_STATUS }}</span>
+              </a>            
+              <ul class="nav pull-right">
+                {% block login %}{% endblock %}
+              </ul>
+            </div><!-- /.container -->
+          </div><!-- /.navbar-inner -->
+        </div><!-- /.navbar -->
+      </div><!-- /.header -->
+    </div><!-- /.row-fluid -->
 
-    <title>{% if site_name %}{{ site_name }} : {% endif %}{% block head_title %}{% endblock %}</title>
-
-    {% block head_css %}{% endblock %}
-    {% block head_data %}{% endblock %}
-    {% block extra_head %}{% endblock %}
-
-    {% compress js %}
-    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.highlight.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.csrf.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.cookie.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/bootstrap.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}viewshare/js/compatible.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}viewshare/js/ui.js"></script>
-
-    {% endcompress %}
-    {% block head_scripts %}{% endblock %}
-
-  </head>
-
-  <body>
-
-    <div class="container-fluid">
-
-      {% block banner %}
-      
-      <!-- fixed header across all application -->
-
-      <div class="row-fluid">
-	
-	<div id="header">
-          <div id="tabhead" class="navbar navbar-fixed-top">
-            <div class="navbar-inner">
-              
-              <div class="container">
-		<a href="/" class="brand"><span id="application-logo"></span>
-                  <span id="application-status">{{ SITE_NAME_STATUS }}</span></a>            
-		<ul class="nav pull-right">
-                  {% block login %}{% endblock %}
-		</ul>
-              </div>
-              
-            </div>
-          </div>
-	</div>
-	
-      </div>
-
-      {% announcements as site_wide_announcements %}
-      {% if site_wide_announcements %}
+    {% announcements as site_wide_announcements %}
+    {% if site_wide_announcements %}
       {% for announcement in site_wide_announcements %}
       <div class="alert" id="site_wide_announcements">
         <strong>{{ announcement.title }}</strong> - {{ announcement.content }}
       </div>
       {% endfor %}
-      {% endif %}
-      
-      {% endblock banner %}
-      
-      <div class="container-fluid">
-        
-        <div id="body" class="freemix-themeable">
-          
-          <div id="inner-body">
-	    {% block body %}
-	    {% endblock %}
-          </div>
+    {% endif %}
+    {% endblock banner %}
+
+    <div class="container-fluid">
+      <div id="body" class="freemix-themeable">
+        <div id="inner-body">
+          {% block body %}
+          {% endblock %}
         </div>
-        
-      </div> <!-- end container -->
-      
-      <div id="footer">
-        {% block footer %}
-        {% endblock %}
-      </div>
-      
-      {% block extra_body %}{% endblock %}
+      </div><!-- /#body -->
+    </div> <!-- /.container-fluid -->
 
-    </div> <!-- body container -->
+    <div id="footer">
+      {% block footer %}
+      {% endblock %}
+    </div>
+    {% block extra_body %}{% endblock %}
+  </div> <!-- /.container-fluid -->
 
-    {% block final %}
-    {% endblock %}
-    
-  </body>
+  {% compress js %}
+  <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.highlight.js"></script>
+  <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.csrf.js"></script>
+  <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.cookie.js"></script>
+  <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/bootstrap.js"></script>
+  <script type="text/javascript" src="{{STATIC_URL}}viewshare/js/compatible.js"></script>
+  <script type="text/javascript" src="{{STATIC_URL}}viewshare/js/ui.js"></script>
+  {% endcompress %}
+
+  {% block extra_scripts %}{% endblock %}
+  {% block final %}{% endblock %}
+</body>
 </html>
 
