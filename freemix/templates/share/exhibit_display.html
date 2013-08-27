@@ -22,7 +22,7 @@
 
 {% endblock %}
 
-{% block head_scripts %}
+{% block extra_scripts %}
     {{ block.super }}
     {% include "freemix/js_include/jquery_ui.html" %}
     {% include "simile/js/exhibit.html" %}
@@ -34,7 +34,7 @@
     <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/display.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}share/js/shared_exhibit.js"></script>
     {% endcompress %}
-{% endblock head_scripts %}
+{% endblock extra_scripts %}
 
 
 {% block head_css %}

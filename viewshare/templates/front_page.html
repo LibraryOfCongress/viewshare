@@ -14,10 +14,6 @@
 {% endblock %}
 
 
-{% block head_scripts %}
-    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.slides.js"></script>
-{% endblock head_scripts %}
-
 
 {% block tab_id %}id="home_tab"{% endblock %}
 
@@ -91,32 +87,33 @@
 {% endblock %}
 
 
-{% block final %}
-{{ block.super }}
-<script>
-$(function() {
-  $('#slides').slides({
-    preload: true,
-    preloadImage: '{{ STATIC_URL }}images/loading.gif',
-    play: 10000,
-    pause: 2500,
-    hoverPause: true,
-    animationStart: function(current){
-      $('.caption').animate({
-        bottom:-35
-      }, 100);
-    },
-    animationComplete: function(current){
-      $('.caption').animate({
-        bottom:0
-      }, 200);
-    },
-    slidesLoaded: function() {
-      $('.caption').animate({
-        bottom:0
-      }, 200);
-    }
+
+{% block extra_scripts %}
+  <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.slides.js"></script>
+  <script>
+  $(function() {
+    $('#slides').slides({
+      preload: true,
+      preloadImage: '{{ STATIC_URL }}images/loading.gif',
+      play: 10000,
+      pause: 2500,
+      hoverPause: true,
+      animationStart: function(current){
+        $('.caption').animate({
+          bottom:-35
+        }, 100);
+      },
+      animationComplete: function(current){
+        $('.caption').animate({
+          bottom:0
+        }, 200);
+      },
+      slidesLoaded: function() {
+        $('.caption').animate({
+          bottom:0
+        }, 200);
+      }
+    });
   });
-});
-</script>
-{% endblock final %}
+  </script>
+{% endblock extra_scripts %}

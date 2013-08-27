@@ -4,7 +4,7 @@
 {% load exhibit_tags %}
 
 {% block head_title %}{% trans "Views of" %} {{dataset.title}}{% endblock %}
-{% block head_scripts %}
+{% block extra_scripts %}
 {{block.super}}
 {% include "freemix/js_include/jquery_ui.html" %}
 

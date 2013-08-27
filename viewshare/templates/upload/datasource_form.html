@@ -20,7 +20,7 @@
     {% endif %}
 {% endblock %}
 
-{% block head_scripts %}
+{% block extra_scripts %}
     {{ block.super }}
     {% if show_error %}
     {% include "freemix/js_include/jquery_ui.html" %}
