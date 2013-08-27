@@ -39,7 +39,7 @@
 {% endblock head_css %}
 
 
-{% block head_scripts %}
+{% block extra_scripts %}
     {{ block.super }}
     {% include "simile/js/exhibit.html" %}
     {% include "simile/js/exhibit_extensions.html" %}
@@ -57,7 +57,7 @@
 
     {% include "exhibit/widget_js.html" with editor="True" %}
 
-{% endblock head_scripts %}
+{% endblock extra_scripts %}
 
 {% block body %}
 
