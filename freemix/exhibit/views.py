@@ -129,9 +129,7 @@ class ExhibitProfileUpdateView(View):
         return self.request.user.has_perm("exhibit.can_edit", self.exhibit)
 
     def setup(self):
-        qs = models.Exhibit.objects.select_related("dataset",
-                                                   "dataset__owner",
-                                                   "owner")
+        qs = models.Exhibit.objects.select_related("owner")
 
         self.exhibit = get_object_or_404(qs,
                                          owner__username=self.kwargs["owner"],
@@ -335,19 +333,16 @@ class EmbeddedExhibitView(View):
 
         canvas = exhibit.canvas
         canvas_html = render_to_string(canvas.location, {}).replace("\n", " ")
-        dataset = exhibit.dataset
-
-        data_dict = Dataset.objects.filter(id=dataset.id).values("data__data",
-            "profile__data",
-            "properties_cache__data")[0]
-
+        property_serializer = ExhibitPropertyListSerializer(exhibit)
+        data = (models.PropertyData.objects
+                                   .filter(exhibit_property__exhibit=exhibit)
+                                   .values_list("json", flat=True))
         response = render(request, self.template_name, {
-            "data": data_dict["data__data"],
+            "data": data,
             "title": exhibit.title,
             "description": exhibit.description,
             "metadata": json.dumps(metadata),
-            "data_profile": data_dict["profile__data"],
-            "properties": data_dict["properties_cache__data"],
+            "properties": json.dumps(property_serializer.data),
             "where": where,
             "permalink": get_site_url(reverse("exhibit_display",
                                               kwargs={'owner': owner,
@@ -359,9 +354,7 @@ class EmbeddedExhibitView(View):
 
 def lmfunc(r, owner, slug):
     ex = get_public_exhibit(r, owner, slug)
-    if ex.modified > ex.dataset.modified:
-        return ex.modified
-    return ex.dataset.modified
+    return ex.modified
 embedded_exhibit_view = last_modified(lmfunc)(EmbeddedExhibitView.as_view())
 
 # Exhibit Profile Views
