@@ -25,6 +25,21 @@ ul.profile_list li {
     width: 50%;
 }
 
+.user_data_entry .user_name {
+   background: transparent url(../../images/user-32.png) top left no-repeat;
+   height: 32px;
+   font-size: 100%;
+   font-weight: bold;
+   position:absolute;
+   padding-top: 5px;
+   margin-top: 0px;
+   padding-left: 40px;
+}
+
+.user_data_entry .user_name .user_top {
+  padding-bottom: 10px;
+}
+
 .user_data_entry .user_name .value {
     font-weight: bold;
     font-size: 120%;
@@ -57,6 +72,7 @@ ul.profile_list li {
 
 .user_middle, .user_bottom {
     clear: left;
+    padding-top: 30px;
 }
 
 .user_data_entry .user_bottom p {
@@ -67,14 +83,8 @@ ul.profile_list li {
     font-size: 0.9em;
 }
 
-.user_data_entry .user_datasets {
-    background: url(../../images/dataset-24.png) top left no-repeat;
-    padding: 0.25em 0 0.25em 30px;
-    display: block;
-}
-
 .user_data_entry .user_exhibits {
-    background: url(../../images/palette-24.png) top left no-repeat;
+    background: url(../../images/palette-36.png) top left no-repeat;
     padding-left: 30px;
     padding-bottom: 5px;
 }
