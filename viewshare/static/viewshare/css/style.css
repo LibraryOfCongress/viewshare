@@ -134,6 +134,8 @@ div.exhibit-collectionView-header-sortControls {
 margin-top: 20px;
 }
 
+/* main titles */
+
 .freemix-themeable h1,
 .dataprofile .tab-contents h1,
 #load h1,
@@ -147,6 +149,15 @@ margin-top: 20px;
     margin-left: -20px;
     margin-right: -20px;
     margin-bottom: 20px;
+    padding-left: 20px;
+}
+
+.exhibit-title-accordion {
+    font-family: 'Ubuntu', Helvetica, Arial, sans-serif;	
+    font-weight: normal;
+    font-size: 2.0em;
+    color: slategrey;
+    background: #F8F8F8;
     padding-left: 20px;
 }
 
@@ -273,34 +284,14 @@ font-weight: bold;
    padding-left: 30px;
 }
 
-
-.dataset_edit .dataset-title, .dataset_summary .dataset-title {
-   background: transparent url(../../images/dataset-32.png) top left no-repeat;
-   font-size: 140%;
-   font-weight: bold;
-   padding-top: 0.5em;
-   padding-bottom: 0.5em;
-   padding-left: 40px;
-   vertical-align:middle;
-}
-
 .exhibit_edit .exhibit-title, .exhibit_display .exhibit-title {
    background: transparent url(../../images/palette-32.png) top left no-repeat;
    font-size: 140%;
    font-weight: bold;
-   padding-bottom: 0.5em;
-   padding-top: 0.5em;
    padding-left: 40px;
+   padding-top: 10px;
 }
 
-.exhibit_display .shared-key .exhibit-title {
-   background: transparent url(../../images/key-32.png) 0% 25% no-repeat;
-   font-size: 140%;
-   font-weight: bold;
-   padding-bottom: 0.5em;
-   padding-top: 0.5em;
-   padding-left: 40px;
-}
 
 
 /* handle this style due to jquery uithemer base override */
@@ -443,14 +434,6 @@ padding: 10px 10px 10px 10px;
 }
 
 .exhibit-short-description, .exhibit-long-description {
-}
-
-/* policy */
-
-.public .dataset-title {
-}
-
-.public .exhibit-title {
 }
 
 .private .private-icon {
