@@ -195,7 +195,7 @@ class ExhibitProfileUpdateView(View):
 #############################################################################################
 # Display Views
 
-class ExhibitView(OwnerSlugPermissionMixin, DetailView):
+class PublishedExhibitView(OwnerSlugPermissionMixin, DetailView):
 
     select_related = ("owner",)
 
@@ -206,7 +206,7 @@ class ExhibitView(OwnerSlugPermissionMixin, DetailView):
     template_name = "exhibit/exhibit_display.html"
 
     def get_context_data(self, **kwargs):
-        context = super(ExhibitView, self).get_context_data(**kwargs)
+        context = super(PublishedExhibitView, self).get_context_data(**kwargs)
         user = self.request.user
         exhibit = self.get_object()
 
@@ -218,7 +218,7 @@ class ExhibitView(OwnerSlugPermissionMixin, DetailView):
         context["can_delete"] = user.has_perm("exhibit.can_delete", exhibit)
         return context
 
-class ExhibitDisplayView(ExhibitView):
+class PublishedExhibitDisplayView(PublishedExhibitView):
 
     select_related = ("owner", "canvas")
 
@@ -232,7 +232,7 @@ class ExhibitDisplayView(ExhibitView):
 
     def get_context_data(self, **kwargs):
 
-        context = super(ExhibitDisplayView, self).get_context_data(**kwargs)
+        context = super(PublishedExhibitDisplayView, self).get_context_data(**kwargs)
 
         exhibit = self.get_object()
 
@@ -253,7 +253,7 @@ class ExhibitDisplayView(ExhibitView):
         return context
 
 
-class ExhibitJSONView(BaseJSONView):
+class PublishedExhibitJSONView(BaseJSONView):
 
     def get_doc(self):
         return None
@@ -271,7 +271,7 @@ class ExhibitJSONView(BaseJSONView):
         return True
 
     def cache_control_header(self):
-        cache_control = super(ExhibitJSONView, self).cache_control_header()
+        cache_control = super(PublishedExhibitJSONView, self).cache_control_header()
         if not self.get_parent_object().is_public:
             cache_control += ", private"
         else:
@@ -279,7 +279,7 @@ class ExhibitJSONView(BaseJSONView):
         return cache_control
 
 
-class PublishedExhibitPropertiesListView(ExhibitJSONView):
+class PublishedExhibitPropertiesListView(PublishedExhibitJSONView):
     def get_doc(self):
         qs = self.get_parent_object().properties.all()
         serializer = ExhibitPropertyListSerializer(self.get_parent_object,
@@ -287,7 +287,7 @@ class PublishedExhibitPropertiesListView(ExhibitJSONView):
         return json.dumps(serializer.data)
 
 
-class PublishedExhibitPropertyDataView(ExhibitJSONView):
+class PublishedExhibitPropertyDataView(PublishedExhibitJSONView):
     def get_doc(self):
         values = models.PropertyData.objects.filter(exhibit_property__exhibit=self.get_parent_object(), exhibit_property__name=self.kwargs["property"]).values_list("json")
         if len(values) == 0:
@@ -295,12 +295,12 @@ class PublishedExhibitPropertyDataView(ExhibitJSONView):
         return '{"items": ' + values[0][0] + "}"
 
 
-class ExhibitDetailView(ExhibitView):
+class PublishedExhibitDetailView(PublishedExhibitView):
     template_name = "exhibit/exhibit_detail.html"
     object_perm = "exhibit.can_inspect"
 
     def get_context_data(self, **kwargs):
-        context = super(ExhibitDetailView, self).get_context_data(**kwargs)
+        context = super(PublishedExhibitDetailView, self).get_context_data(**kwargs)
         user = self.request.user
         can_embed = user.has_perm("exhibit.can_embed", self.get_object())
         context["can_embed"] = can_embed
@@ -390,7 +390,7 @@ def get_exhibit(request, owner, slug):
         request.exhibit = get_object_or_404(models.PublishedExhibit, slug=slug, owner__username=owner)
     return request.exhibit
 
-class ExhibitProfileJSONView(BaseJSONView):
+class PublishedExhibitProfileJSONView(BaseJSONView):
 
     def get_parent_object(self):
         return get_exhibit(self.request, self.kwargs["owner"], self.kwargs["slug"])
@@ -404,18 +404,18 @@ class ExhibitProfileJSONView(BaseJSONView):
 
 
     def cache_control_header(self):
-        cache_control = super(ExhibitProfileJSONView, self).cache_control_header()
+        cache_control = super(PublishedExhibitProfileJSONView, self).cache_control_header()
         if not self.request.exhibit.is_public:
             cache_control += ", private"
         else:
             cache_control += ", public"
         return cache_control
 lmdec = last_modified(lambda request, *args, **kwargs: get_exhibit(request, kwargs["owner"], kwargs["slug"]).modified)
-exhibit_profile_json_view = lmdec(ExhibitProfileJSONView.as_view())
+exhibit_profile_json_view = lmdec(PublishedExhibitProfileJSONView.as_view())
 
 # List Views
 
-class ExhibitListView(OwnerListView):
+class PublishedExhibitListView(OwnerListView):
     template_name = "exhibit/list/exhibit_list_by_owner.html"
 
     permission = "exhibit.can_view"

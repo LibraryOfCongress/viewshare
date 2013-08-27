@@ -7,15 +7,15 @@ urlpatterns = patterns('',
     #display
 
     url(r"^(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/profile.json$",
-        views.ExhibitProfileJSONView.as_view(),
+        views.PublishedExhibitProfileJSONView.as_view(),
         name="exhibit_profile_json"),
 
     url(r"^(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/$",
-        views.ExhibitDisplayView.as_view(),
+        views.PublishedExhibitDisplayView.as_view(),
         name="exhibit_display"),
 
     url(r'^(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/detail/$',
-       views.ExhibitDetailView.as_view(),
+       views.PublishedExhibitDetailView.as_view(),
        name='exhibit_detail'),
 
     url(r'^(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/properties/$',
@@ -31,7 +31,7 @@ urlpatterns = patterns('',
     # list
 
     url(r'^(?P<owner>[a-zA-Z0-9_.-]+)/$',
-      views.ExhibitListView.as_view(),
+      views.PublishedExhibitListView.as_view(),
       name='exhibit_list_by_owner'),
 
     #embed

@@ -7,6 +7,7 @@ from django.template.loader import render_to_string
 from django_extensions.db.fields.json import JSONField
 from django_extensions.db.models import (TitleSlugDescriptionModel,
                                          TimeStampedModel)
+import json
 
 
 class Canvas(TitleSlugDescriptionModel):
@@ -92,6 +93,12 @@ class PublishedExhibit(Exhibit):
         data = ExhibitPropertyListSerializer(self, queryset=self.properties).data
         out = ExhibitPropertyListSerializer(draft, data=data)
         out.save()
+
+        for t in  (PropertyData.objects
+                    .filter(exhibit_property__exhibit=self)
+                    .values_list("exhibit_property__name", "json")):
+            p = draft.properties.get(name=t[0])
+            PropertyData(exhibit_property=p, json=json.loads(t[1])).save()
         return draft
 
 
@@ -112,6 +119,16 @@ class DraftExhibit(Exhibit):
     parent = models.OneToOneField(PublishedExhibit,
                                   null=True,
                                   blank=True)
+
+    def publish(self):
+        self.parent.canvas=self.canvas
+        self.parent.profile=self.profile
+        self.parent.properties.all().delete()
+        self.parent.modified = self.modified
+        self.parent.save()
+        self.properties.update(exhibit=self.parent)
+
+        self.delete()
 
     class Meta:
         ordering = ('-modified', )
