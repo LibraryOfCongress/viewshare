@@ -156,11 +156,19 @@ margin-top: 20px;
     font-family: 'Ubuntu', Helvetica, Arial, sans-serif;	
     font-weight: normal;
     font-size: 2.0em;
-    color: slategrey;
     background: #F8F8F8;
-    padding-left: 20px;
+    padding: 10px 10px 0px 10px; /* top, right, bottom, left */
+    height: 30px;
 }
 
+.icon-chevron-up, .icon-chevron-down,  {
+    zoom: 1.5;
+    -moz-transform: scale(1.5);  /* Firefox */
+}
+
+#accordion-exhibit .accordion-toggle {
+   padding: 3px 3px 3px 3px;
+}
 
 /* Search */
 
@@ -390,8 +398,26 @@ margin-left: 10px;
 #about-box .about_name {
  font-weight: bold;
  font-size: 150%;
- padding-top: 5px;
 }
+
+#about-box .exhibit-metadata, 
+#about-box .exhibit-acls {
+padding-top: 10px;
+}
+
+#about-box .exhibit-created-by, 
+#about-box .exhibit-created-on, 
+#about-box .exhibit-last-modified {
+ padding-bottom: 3px;
+}
+
+#about-box .property-label {
+ color: slategrey;
+ padding-right: 5px;
+ padding-top: 3px;
+}
+
+
 
 #about-box .about_location {
  font-size: 110%;
@@ -553,6 +579,11 @@ ul.responses li.thread-8 {
     color: #fff;
     height: 72%;
 }
+
+.profile_info .exhibit-title {
+
+}
+
 
 
 table.about_profile td {

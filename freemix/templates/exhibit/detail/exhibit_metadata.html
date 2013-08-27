@@ -6,7 +6,7 @@
 <div id="about-box" class="info-section widget-well">
   
   <div class="widget-header">
-    <h2>{{ object.title }}</h2>
+    <h2>View</h2>
   </div>
   
   <div class="row-fluid">
@@ -17,20 +17,23 @@
     
     <div class="span8">
       <div class="inspector_info profile_info">
-	
-	<div class="exhibit-created-by"><span class="property-label">{% trans "Created by:" %} </span> <a href="{% url 'profile_detail' object.owner.username %}">{{ object.owner|nicename }}</a></div>
-	<div class="exhibit-created-on"><span class="property-label">{% trans "Created on:" %} </span>{{ object.created|date:"N j, Y" }}</div>
-	<div class="exhibit-last-modified"><span class="property-label">{% trans "Last Modified:" %} </span>{{ object.modified|date:"N j, Y" }}</div>
-	
 
-	<br />
-	<br />
+	<div class="about_name"><a href="{{  exhibit.get_absolute_url }}">{{exhibit.title}}</a></div>
+	
+	<div class="exhibit-metadata">
+	  <div class="exhibit-created-by"><span class="property-label">{% trans "Created by:" %} </span> <a href="{% url 'profile_detail' object.owner.username %}">{{ object.owner|nicename }}</a></div>
+	  <div class="exhibit-created-on"><span class="property-label">{% trans "Created on:" %} </span>{{ object.created|date:"N j, Y" }}</div>
+	  <div class="exhibit-last-modified"><span class="property-label">{% trans "Last Modified:" %} </span>{{ object.modified|date:"N j, Y" }}</div>
+	</div>
+
+	<div class="exhibit-acls">
 	  {% if object.is_public %}
 	  <div class="public"><span class="public-icon"></span>{% trans "This view is public" %}</div>
 	  {% else %}
 	  <div class="private"><span class="private-icon"></span>{% trans "This view is private" %}</div>
 	  {% endif %}
-	  
+	</div>
+
       </div>
     </div>
     

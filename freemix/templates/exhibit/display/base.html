@@ -10,7 +10,6 @@
 
 {% block head_title %}{{ object.title }}{% endblock %}
 
-{% block rtab_id %}id="builder_tab"{% endblock %}
 {% block body_class %}main-attraction{% endblock %}
 {% block head_data %}
 {{ block.super }}
@@ -34,6 +33,19 @@
     <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.highlight.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/display.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}exhibit/js/detail.js"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function(){    
+      $('#accordion-exhibit').on('shown', function () {
+      $(".icon-chevron-down").removeClass("icon-chevron-down").addClass("icon-chevron-up");
+      });
+      
+      $('#accordion-exhibit').on('hidden', function () {
+      $(".icon-chevron-up").removeClass("icon-chevron-up").addClass("icon-chevron-down");
+      });
+      });
+    </script>
+    
     {% endcompress %}
 
     {% if can_share %}
@@ -79,7 +91,7 @@
   <div class="accordion-group">
     <div class="accordion-heading">
       <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-exhibit" href="#collapseOne">
-	<div class="exhibit-title-accordion">{{exhibit.title}}</div> 
+	<div class="exhibit-title-accordion">{{exhibit.title}} <i class="icon-chevron-down pull-right"></i></div>
       </a>
     </div>
 
@@ -90,7 +102,7 @@
 	<div class="exhibit_display">
 
 	  <ul class="exhibit_list_items">
-	    <li class="exhibit_list_item result_set_item">
+	    <li class="exhibit_list_item">
 	      
 	      <div class="row-fluid">
 		<div class="span11">
