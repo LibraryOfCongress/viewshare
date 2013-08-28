@@ -29,6 +29,16 @@
     {% compress js %}<script type="text/javascript" src="{{ STATIC_URL }}share/js/share_dialog.js"></script>{% endcompress %}
     {% endif %}
 
+<script type="text/javascript">
+  $(document).ready(function() {
+  var userTransactionView, transactions = $('.transaction');
+  if (transactions.length > 0) {
+  // poll for DataSourceTransaction updates
+  userTransactionsView = new window.UserTransactionsView({
+  transactions: $('.transaction')
+  }).render();
+  }
+</script>
 {% endblock %}
 
 {% block body %}

@@ -1,10 +1,13 @@
 {% load url from future %}
 {%  load i18n %}
 {% load crispy_forms_tags %}
-<form action="{% url 'exhibit_edit_form' owner=object.owner slug=object.slug %}" method="post">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <div class="form_block">
-            <input type="submit" value="{% trans "Update" %}" />
-        </div>
+
+<form class="form-horizontal" method="POST" action="{% url 'exhibit_edit_form' owner=object.owner slug=object.slug %}">
+  <fieldset>
+    {% csrf_token %}
+    {{ form|crispy }}
+  </fieldset>
+  <div class="form_block">
+    <input type="submit" class="btn btn-primary" value="{% trans "Update" %}" />
+  </div>
 </form>

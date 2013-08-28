@@ -22,8 +22,6 @@
 
 {% block extra_scripts %}
 {{block.super}}
-<script type="text/javascript" src="{{STATIC_URL}}dataset/js/transaction.js"></script>
-<script type="text/javascript" src="{{STATIC_URL}}dataset/js/transaction_user_profile.js"></script>
 {% include "freemix/js_include/jquery_ui.html" %}
 
 {% if is_me %}
@@ -37,10 +35,12 @@
   transactions: $('.transaction')
   }).render();
   }
-  $('#edit_profile_form').load('{% url 'profile_edit' %}', function() {
+<!--
+  $('#edit_profile_form_template').load('{% url 'profile_edit' %}', function() {
   var q = $('form.uniForm');
   });
   });
+-->
 </script>
 
 {% endif %}
@@ -100,19 +100,20 @@
 
 	    <div class="profile-actions">
               <div class="profile-links btn-group">
-		<a href="{% url 'profile_edit' %}" data-target="#edit_profile_form" role="button" id="edit-profile-button" class="btn btn-small" data-toggle="modal">{% trans "Edit" %}</a>
+		<a href="{% url 'profile_edit' %}" data-target="#edit-profile-form" role="button" id="edit-profile-button" class="btn btn-small" data-toggle="modal">{% trans "Edit" %}</a>
 	      </div>
 	    </div>
 
 	  </span>
 	  
-	  <div id="edit_profile_form" class="modal hide fade form-dialog" tabindex="-1" role="dialog" aria-labelledby="editProfileFormLabel" aria-hidden="true">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h3 id="editProfileFormLabel">{% trans "Edit Profile" %}</h3>
-            </div>
-            <div class="modal-body">
-            </div>
+	  <div id="edit-profile-form" class="modal modal-fit hide fade form-dialog" tabindex="-1" role="dialog" aria-labelledby="editProfileFormLabel" aria-hidden="true">
+	    <div class="modal-header">
+	      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	      <h3 id="editProfileFormLabel">{% trans "Edit Profile" %}</h3>
+	    </div>
+	    <div class="modal-body">
+	      {% include "profiles/profile_form.html" %}
+	    </div>
 	  </div>
 	  {% endif %}
 	</div>
@@ -250,8 +251,5 @@
   </div> <!-- end span8 -->
   
 </div> <!-- end row-fluid -->
-
-<div id="edit_profile_form" class="form-dialog">
-</div>
 
 {% endblock body %}

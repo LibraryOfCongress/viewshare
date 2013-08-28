@@ -321,11 +321,6 @@ font-weight: bold;
    padding-left: 0px;
 }
 
-.dataset-metadata, .exhibit-metadata {
-    font-size: 90%;
-    padding-left: 0px;
-}
-
 .inspector_info {
 height: 100%;
 }
@@ -398,12 +393,18 @@ margin-left: 10px;
 #about-box .about_name {
  font-weight: bold;
  font-size: 150%;
+ line-height: 110%;
 }
 
-#about-box .exhibit-metadata, 
-#about-box .exhibit-acls {
+#about-box .exhibit-metadata {
 padding-top: 10px;
 }
+
+#about-box .exhibit-acls {
+padding-top: 10px;
+padding-left: 10px;
+}
+
 
 #about-box .exhibit-created-by, 
 #about-box .exhibit-created-on, 
@@ -739,4 +740,35 @@ div.notices h2 {
 
 .augment-properties td.name {
     width: 80%;
+}
+
+/* modals */
+
+.modal-fit {
+}
+
+.modal-fit .modal-body {
+}
+
+.modal-fit .textarea {
+  max-height: 100px;
+}
+
+.modal-fit label {
+ font-weight: bold;
+ color: slategrey;
+}
+
+.modal-fit .form_block {
+padding: 14px 15px 15px 10px;
+margin-bottom: 0;
+text-align: right;
+background-color: #f5f5f5;
+border-top: 1px solid #ddd;
+-webkit-border-radius: 0 0 6px 6px;
+-moz-border-radius: 0 0 6px 6px;
+border-radius: 0 0 6px 6px;
+-webkit-box-shadow: inset 0 1px 0 #ffffff;
+-moz-box-shadow: inset 0 1px 0 #ffffff;
+box-shadow: inset 0 1px 0 #ffffff;
 }
