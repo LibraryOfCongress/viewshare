@@ -6,7 +6,7 @@ from django.views.generic.detail import DetailView
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import CreateView
 from viewshare.apps.share import models
-from freemix.exhibit.models import Exhibit
+from freemix.exhibit.models import Exhibit, PublishedExhibit
 from freemix.views import BaseJSONView
 from viewshare.apps.share import forms
 
@@ -120,7 +120,7 @@ class SharedKeyCreateFormView(CreateView):
 
     def get_form_kwargs(self):
         kwargs = super(SharedKeyCreateFormView, self).get_form_kwargs()
-        exhibit = get_object_or_404(Exhibit,
+        exhibit = get_object_or_404(PublishedExhibit,
                                     slug=self.kwargs["slug"],
                                     owner__username=self.kwargs["owner"])
         kwargs["exhibit"] = exhibit
