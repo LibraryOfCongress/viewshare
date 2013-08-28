@@ -2,7 +2,24 @@ from django import forms
 from freemix.exhibit import conf
 from freemix.exhibit.models import PublishedExhibit
 
+def boolean_coerce(value):
+    # value is received as a unicode string
+   if str(value).lower() in ( '1', 'true' ):
+       return True
+   elif str(value).lower() in ( '0', 'false' ):
+       return False
+   return None
+
 class CreateExhibitForm(forms.ModelForm):
+
+    is_public = forms.TypedChoiceField(
+        label = "",
+        choices = ((True, "Public"), (False, "Private")),
+        coerce = boolean_coerce,
+        widget = forms.RadioSelect,
+        initial = True,
+        required = True,
+    )
 
     def __init__(self, *args, **kwargs):
         self.owner = kwargs.pop('owner')
@@ -26,15 +43,6 @@ class CreateExhibitForm(forms.ModelForm):
             "profile": forms.HiddenInput(),
             "is_public": forms.RadioSelect(choices=((True, "Public"), (False, "Private")))
         }
-
-
-def boolean_coerce(value):
-    # value is received as a unicode string
-   if str(value).lower() in ( '1', 'true' ):
-       return True
-   elif str(value).lower() in ( '0', 'false' ):
-       return False
-   return None
 
 
 class UpdateExhibitDetailForm(forms.ModelForm):
