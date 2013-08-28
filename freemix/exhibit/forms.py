@@ -27,10 +27,27 @@ class CreateExhibitForm(forms.ModelForm):
             "is_public": forms.RadioSelect(choices=((True, "Public"), (False, "Private")))
         }
 
+
+def boolean_coerce(value):
+    # value is received as a unicode string
+   if str(value).lower() in ( '1', 'true' ):
+       return True
+   elif str(value).lower() in ( '0', 'false' ):
+       return False
+   return None
+
+
 class UpdateExhibitDetailForm(forms.ModelForm):
+
+    is_public = forms.TypedChoiceField(
+        label = "",
+        choices = ((True, "Public"), (False, "Private")),
+        coerce = boolean_coerce,
+        widget = forms.RadioSelect,
+        initial = True,
+        required = True,
+    )
+
     class Meta:
         model = PublishedExhibit
         fields = ("title", "description", "is_public",)
-        widgets = {
-            "is_public": forms.RadioSelect(choices=((True, "Public"), (False, "Private")))
-        }
