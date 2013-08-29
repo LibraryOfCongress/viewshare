@@ -103,7 +103,7 @@ class ExhibitPropertySerializer(Serializer):
             "exhibit": self._exhibit,
             "name": self._property_name,
             "label": self.data["label"],
-            "value_type": self.data["valueType"]
+            "value_type": self.data.get("valueType", "text")
         }
 
     def save(self):

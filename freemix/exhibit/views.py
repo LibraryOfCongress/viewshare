@@ -282,7 +282,7 @@ class PublishedExhibitPropertiesListView(PublishedExhibitJSONView):
         qs = self.get_parent_object().properties.all()
         serializer = ExhibitPropertyListSerializer(self.get_parent_object,
                                                    queryset=qs)
-        return json.dumps(serializer.data)
+        return json.dumps({"properties": serializer.data})
 
 
 class PublishedExhibitPropertyDataView(PublishedExhibitJSONView):
