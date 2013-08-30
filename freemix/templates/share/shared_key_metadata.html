@@ -23,7 +23,7 @@
       <input type="text" value="{% site_url display_url %}" class="shared-key-url" readonly="readonly"/>
 
       <div class="shared-key-metadata">
-	{% trans "Created by"%} <span class="exhibit-creator"><a href="{% url 'profile_detail' exhibit.owner.username %}">{{exhibit.owner|nicename}}</a></span>.
+	{% trans "Created by"%} <span class="exhibit-creator"><a href="{% url 'profile_detail' exhibit.owner.username %}">{{exhibit.owner|nicename}}</a> {% trans "on" %} {{key.created|date:"N j, Y"}}.</span>
       </div>
     </div>
   </div>
