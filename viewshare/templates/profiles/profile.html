@@ -1,7 +1,6 @@
 {% extends "profiles/base.html" %}
 {% load url from future %}
 
-
 {% load i18n %}
 {% load crispy_forms_tags %}
 {% load notification_utils %}
@@ -35,12 +34,11 @@
   transactions: $('.transaction')
   }).render();
   }
-<!--
+
   $('#edit_profile_form_template').load('{% url 'profile_edit' %}', function() {
   var q = $('form.uniForm');
   });
-  });
--->
+  );
 </script>
 
 {% endif %}
@@ -97,13 +95,11 @@
 	<div class="span12 pull-right">
 	  {% if is_me %}
 	  <span class="about_edit">
-
 	    <div class="profile-actions">
               <div class="profile-links btn-group">
 		<a href="{% url 'profile_edit' %}" data-target="#edit-profile-form" role="button" id="edit-profile-button" class="btn btn-small" data-toggle="modal">{% trans "Edit" %}</a>
 	      </div>
 	    </div>
-
 	  </span>
 	  
 	  <div id="edit-profile-form" class="modal modal-fit hide fade form-dialog" tabindex="-1" role="dialog" aria-labelledby="editProfileFormLabel" aria-hidden="true">
@@ -111,8 +107,7 @@
 	      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 	      <h3 id="editProfileFormLabel">{% trans "Edit Profile" %}</h3>
 	    </div>
-	    <div class="modal-body">
-	      {% include "profiles/profile_form.html" %}
+	    <div class="profile_edit_form_template modal-body">
 	    </div>
 	  </div>
 	  {% endif %}

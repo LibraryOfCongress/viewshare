@@ -1,6 +1,9 @@
 from django import forms
+from django.conf import settings
 from freemix.exhibit import conf
 from freemix.exhibit.models import PublishedExhibit
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
 
 def boolean_coerce(value):
     # value is received as a unicode string
@@ -59,3 +62,9 @@ class UpdateExhibitDetailForm(forms.ModelForm):
     class Meta:
         model = PublishedExhibit
         fields = ("title", "description", "is_public",)
+
+    def __init__(self, *args, **kwargs):
+        super(UpdateExhibitDetailForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.html5_required = True
+        self.helper.add_input(Submit('Update', "Update"))

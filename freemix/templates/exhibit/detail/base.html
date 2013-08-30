@@ -1,11 +1,13 @@
 {% extends "exhibit/base.html" %}
+{% load url from future %}
 
 {% load i18n %}
-{% load freemix_helpers %}
 {% load exhibit_tags %}
-{% load compress %}
-{% load exhibit_tags %}
+{% load connection_helpers %}
 {% load datasource_tags %}
+{% load freemix_helpers %}
+{% load compress %}
+
 {% block freemix_title %}{% blocktrans %}View Inspector{% endblocktrans %}: {{ object.title }}{% endblock %}
 
 {% block freemix_css %}
@@ -29,16 +31,6 @@
     {% compress js %}<script type="text/javascript" src="{{ STATIC_URL }}share/js/share_dialog.js"></script>{% endcompress %}
     {% endif %}
 
-<script type="text/javascript">
-  $(document).ready(function() {
-  var userTransactionView, transactions = $('.transaction');
-  if (transactions.length > 0) {
-  // poll for DataSourceTransaction updates
-  userTransactionsView = new window.UserTransactionsView({
-  transactions: $('.transaction')
-  }).render();
-  }
-</script>
 {% endblock %}
 
 {% block body %}
@@ -105,10 +97,19 @@
 	  <div class="span2">
 	    <div class="pull-right">
 	      <div class="widget-links btn-group">
-		<a href = "#todo" class="btn btn-small btn-info">Share</a>
+		<a class="exhibit_share btn btn-small btn-info" href="#exhibit-share-form" rel="{% url 'shared_key_create_form' owner=exhibit.owner.username slug=exhibit.slug %}" data-target="#exhibit-share-form" role="button" id="exhibit-share-button" data-toggle="modal">{% trans "Share" %}</a>
 	      </div>
 	    </div>
 	  </div>
+	</div>
+      </div>
+
+      <div id="exhibit-share-form" class="modal modal-fit hide fade form-dialog" tabindex="-1" role="dialog" aria-labelledby="exhibitShareFormLabel" aria-hidden="true">
+	<div class="modal-header">
+	  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	  <h3 id="exhibitShareFormLabel">{% trans "Share View" %}</h3>
+	</div>
+	<div id="share_exhibit_form_template" class="modal-body">
 	</div>
       </div>
 
@@ -118,6 +119,14 @@
         {% include "share/shared_key_metadata.html" %}
         {% endfor %}
       </ul>
+      {% else %}
+      <div class="row-fluid">
+	<div class="offset1 span10">
+	  <div class="alert alert-info">
+	    {% blocktrans %} You can choose to share a view with only a specific set of individuals by creating a shared link. The shared link will include a special shared key in the URL that will only allow people with that URL to access your view. After clicking the "Share" button in the right corner this pane you will be prompted to name and save your link. {% endblocktrans %}
+	  </div>
+	</div>
+      </div>
       {% endif %}
 
     </div>

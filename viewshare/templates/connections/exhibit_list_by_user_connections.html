@@ -17,12 +17,7 @@
 
 {% block body %}
 
-<h1>{% ifequal user.username username %}
-    {% blocktrans %}Your Connections' Views{% endblocktrans %}
-    {% else %}
-    {{other_user|nicename}}{% blocktrans %}'s Connections' Views{% endblocktrans %}
-    {% endifequal %}
-</h1>
+<h1>{{other_user|nicename}}{% blocktrans %}'s Connections' Views{% endblocktrans %} ({{ object_list.count }})</h1>
 
 <div class="view_details">
   <p>

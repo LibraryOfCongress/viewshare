@@ -150,6 +150,9 @@ margin-top: 20px;
     margin-right: -20px;
     margin-bottom: 20px;
     padding-left: 20px;
+   -moz-border-radius:5px;
+   -webkit-border-radius:5px;
+    border: 1px solid #eee;
 }
 
 .exhibit-title-accordion {
@@ -229,8 +232,11 @@ font-weight: bold;
 }
 
 
-/* data views and sets */
+/* views */
 
+.exhibit-view-extended-display {
+   padding-top: 10px;
+}
 .dataset_list, .exhibit_list, .data_details, .exhibit_details, .shared_key_list {
    margin-bottom: 1.5em;
 }
@@ -660,13 +666,24 @@ div.notices h2 {
 /* notices */
 
 .notice, .unseen_notice {
- line-height: 130%;
+}
+
+.notice .notice_block {
+   background: transparent url(../../images/notice-32.png) top left no-repeat;
+   height: 32px;
+   font-size: 100%;
+   font-weight: bold;
+   padding-top: 5px;
+   margin-top: 0px;
+   padding-bottom: 5px;
+   padding-left: 40px;
+   font-weight: normal;
+   line-height: 160%;
 }
 
 .notice .notice_type, .unseen_notice .notice_type {
  display: none;
 }
-
 
 
 /* groups */
@@ -759,7 +776,7 @@ div.notices h2 {
  color: slategrey;
 }
 
-.modal-fit .form_block {
+.modal-fit .form_block, .modal-fit .form-actions {
 padding: 14px 15px 15px 10px;
 margin-bottom: 0;
 text-align: right;
