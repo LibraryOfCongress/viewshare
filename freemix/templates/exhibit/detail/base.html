@@ -97,14 +97,14 @@
 	  <div class="span2">
 	    <div class="pull-right">
 	      <div class="widget-links btn-group">
-		<a class="exhibit_share btn btn-small btn-info" href="#exhibit-share-form" rel="{% url 'shared_key_create_form' owner=exhibit.owner.username slug=exhibit.slug %}" data-target="#exhibit-share-form" role="button" id="exhibit-share-button" data-toggle="modal">{% trans "Share" %}</a>
+		<a class="exhibit_share btn btn-small btn-info" href="#exhibit-share-form" rel="{% url 'shared_key_create_form' owner=exhibit.owner.username slug=exhibit.slug %}" rev="{{ request.build_absolute_uri }}" data-target="#exhibit-share-form" role="button" id="exhibit-share-button" data-toggle="modal">{% trans "Share" %}</a>
 	      </div>
 	    </div>
 	  </div>
 	</div>
       </div>
-
-      <div id="exhibit-share-form" class="modal modal-fit hide fade form-dialog" tabindex="-1" role="dialog" aria-labelledby="exhibitShareFormLabel" aria-hidden="true">
+      
+      <div id="exhibit-share-form" class="modal modal-fit hide fade" tabindex="-1" role="dialog" aria-labelledby="exhibitShareFormLabel" aria-hidden="true">
 	<div class="modal-header">
 	  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 	  <h3 id="exhibitShareFormLabel">{% trans "Share View" %}</h3>

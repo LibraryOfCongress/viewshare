@@ -5,9 +5,6 @@
 	$('#edit_exhibit_form_template').load($("#detail_edit_button").attr("rel"));
     }
 
-    function setupShareDetails() {
-	$('#share_exhibit_form_template').load($("#detail_share_button").attr("rel"));
-    }
 
     function setupEmbed() {
         if ($("#embed").length) {

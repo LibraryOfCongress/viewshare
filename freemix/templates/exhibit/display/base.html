@@ -149,7 +149,6 @@
 		  {% if can_share %}
 		  <a class="exhibit_share btn btn-small" href="#exhibit-share-form" rel="{% url 'shared_key_create_form' owner=exhibit.owner.username slug=exhibit.slug %}" data-target="#exhibit-share-form" role="button" id="exhibit-share-button" data-toggle="modal">{% trans "Share" %}</a>
 
-
 		  <div id="exhibit-share-form" class="modal modal-fit hide fade form-dialog" tabindex="-1" role="dialog" aria-labelledby="exhibitShareFormLabel" aria-hidden="true">
 		    <div class="modal-header">
 		      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
