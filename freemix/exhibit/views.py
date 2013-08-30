@@ -69,11 +69,12 @@ class ExhibitDetailEditView(OwnerSlugPermissionMixin, UpdateView):
 
     def form_valid(self, form):
         self.object = form.save()
-        return render(self.request, "exhibit/detail/exhibit_metadata.html", {
-                "can_edit": True,
-                "object": self.object,
-                "is_saved": True
-            })
+
+        return HttpResponseRedirect(reverse("exhibit_detail",
+                                    kwargs={
+                                        "owner": self.object.owner.username,
+                                        "slug": self.object.slug
+                                    }))
 
 
 class ExhibitCreateView(View):
