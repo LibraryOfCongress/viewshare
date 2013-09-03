@@ -1,13 +1,40 @@
+import json
+import logging
+import uuid
+
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.db import transaction as db_tx
 from django.utils.translation import ugettext_lazy as _
 from django.template.loader import render_to_string
 from django_extensions.db.fields.json import JSONField
 from django_extensions.db.models import (TitleSlugDescriptionModel,
                                          TimeStampedModel)
-import json, uuid
+
+
+TX_STATUS = {
+    "pending": 1,
+    "scheduled": 2,
+    "running": 3,
+    "success": 4,
+    "failure": 5,
+    "cancelled": 6,
+}
+
+#-----------------------------------------------------------------------------#
+# Exhibit Property Types
+#-----------------------------------------------------------------------------#
+
+VALUE_TYPES = {
+    "text": "text",
+    "url": "URL",
+    "image": "image",
+    "date": "date/time",
+    "location": "location",
+    "number": "number"
+}
 
 
 class Canvas(TitleSlugDescriptionModel):
@@ -190,19 +217,6 @@ class DraftExhibit(Exhibit):
         }
         self.save()
 
-#-----------------------------------------------------------------------------#
-# Exhibit Property Types
-#-----------------------------------------------------------------------------#
-
-VALUE_TYPES = {
-    "text": "text",
-    "url": "URL",
-    "image": "image",
-    "date": "date/time",
-    "location": "location",
-    "number": "number"
-}
-
 
 def get_data_url(t):
     """
@@ -213,6 +227,7 @@ def get_data_url(t):
         "slug": t[1],
         "property": t[2]
     })
+
 
 class ExhibitPropertyManager(models.Manager):
     """
@@ -353,3 +368,87 @@ class PropertyData(TimeStampedModel):
     exhibit_property = models.OneToOneField(ExhibitProperty,
                                             related_name="data")
     json = JSONField()
+
+
+class DataTransaction(TimeStampedModel):
+    """
+    Abstract base class to handle potentially long-running data work such as
+    Akara transformations and augmentations.
+    """
+    status = models.IntegerField(
+            choices=[(v, k) for k, v in TX_STATUS.iteritems()],
+            default=TX_STATUS["pending"])
+    source = models.ForeignKey('DataSource', related_name="transactions")
+    is_complete = models.BooleanField(default=False)
+
+    class meta:
+        abstract = True
+
+    def __init__(self, *args, **kwargs):
+        """
+        Give our transaction access to logging.
+        """
+        super(DataTransaction, self).__init__(*args, **kwargs)
+        self.logger = logging.getLogger(__name__)
+
+    def is_expired(self):
+        raise NotImplementedError()
+
+    def is_ready(self):
+        return self.status in (TX_STATUS["success"], TX_STATUS["cancelled"])
+
+    @models.permalink
+    def get_absolute_url(self):
+        """
+        Return a URL to get status updates about this transaction
+        """
+        raise NotImplementedError()
+
+    def start_transaction(self):
+        """
+        Start the asyncronous task for this transaction.
+        """
+        raise NotImplementedError()
+
+    def schedule(self):
+        with db_tx.commit_manually():
+            try:
+                self.status = TX_STATUS["scheduled"]
+                self.save()
+                db_tx.commit()
+            except Exception as ex:
+                self.failure(ex.message)
+            else:
+                self.start_transaction()
+
+    def run(self):
+        with db_tx.commit_manually():
+            try:
+                self.status = TX_STATUS["running"]
+                self.save()
+                self.do_run()
+                db_tx.commit()
+            except Exception as ex:
+                self.failure(ex.message)
+        return self
+
+    def failure(self, message):
+        self.logger.error("Error for transaction %s: %s" % (self.tx_id, message))
+        self.status = TX_STATUS["failure"]
+        self.result = {"message": message}
+        self.save()
+
+    def success(self):
+        self.status = TX_STATUS["success"]
+        self.save()
+
+    def complete(self):
+        self.is_complete = True
+        self.result = None
+        self.save()
+
+    def cancel(self):
+        self.status = TX_STATUS["cancelled"]
+        self.result = None
+        self.is_complete = True
+        self.save()
