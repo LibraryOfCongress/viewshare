@@ -168,6 +168,28 @@ class DraftExhibit(Exhibit):
                                        using=using,
                                        update_fields=update_fields)
 
+    def save_basic_profile(self):
+        self.profile = {
+            "facets": {},
+            "views": {
+                "views": [{
+                    "id": str(uuid.uuid4()),
+                    "type": "list",
+                    "name": "List",
+                    "lens": {
+                        "type": "list",
+                        "properties": [p.name for p in self.properties.all()]
+                    }
+                }],
+            },
+            "default_lens":{
+                "type": "list",
+                "properties":  [p.name for p in self.properties.all()]
+            },
+
+        }
+        self.save()
+
 #-----------------------------------------------------------------------------#
 # Exhibit Property Types
 #-----------------------------------------------------------------------------#
