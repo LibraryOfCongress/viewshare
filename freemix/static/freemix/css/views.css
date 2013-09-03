@@ -37,21 +37,7 @@ ol.exhibit-tileView-body > li {
     height: 100px;
 }
 
-/* Table view */
-table.exhibit-tabularView-body {
-    border-collapse: separate;
-}
-
-table.exhibit-tabularView-body th.exhibit-tabularView-columnHeader,
-table.exhibit-tabularView-body th.exhibit-tabularView-columnHeader-sorted {
-    font-weight: bold;
-}
-
-table.exhibit-tabularView-body th, 
-table.exhibit-tabularView-body td {
-    padding: 0.4em;
-    border-bottom: 1px solid #000;
-}
+/* Table view - set as bootstrap classes */
 
 /* Timeline / Map view */
 #clear-color {
