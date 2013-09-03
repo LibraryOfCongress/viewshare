@@ -97,7 +97,7 @@
         $(".view-set>li.view", this.getContainer()).removeClass("active");
         control.addClass("active");
         this.updatePreview(content, this.config);
-        content.prepend("<div class='view-menu'><a href='#' title='Edit this view'><i class='icon-edit'></i> Edit</a><hr/></div>");
+        content.prepend("<div class='view-menu'><div class='row-fluid'><div class='span12'><div class='pull-right'><a href='#' class='btn btn-small' title='Edit this view'><i class='icon-edit'></i> Edit</a></div></div></div></div>");
         content.find(".view-menu a").click(function() {
             view.showEditor();
             return false;

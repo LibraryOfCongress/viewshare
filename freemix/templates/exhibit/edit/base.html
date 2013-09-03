@@ -1,13 +1,12 @@
 {% extends "site_base.html" %}
 {% load url from future %}
 
-
 {% load i18n %}
 {% load freemix_helpers %}
 {% load exhibit_tags %}
 {% load compress %}
 
-{% block head_title %}{% blocktrans %}Builder{% endblocktrans %}{% endblock %}
+{% block head_title %}{% blocktrans %}Layout{% endblocktrans %}{% endblock %}
 
 {% block rtab_id %}id="builder_tab"{% endblock %}
 {% block body_class %}attraction{% endblock %}
@@ -27,11 +26,11 @@
 {% block head_css %}
 {{block.super}}
 {% compress css %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}exhibit/css/smoothness/smoothness.css"/>
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/layout.css"/>
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/views.css"/>
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/editor.css"/>
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}exhibit/css/canvas.css"/>
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}exhibit/css/smoothness/smoothness.css"/>
 
 {% include "simile/css/exhibit.html" %}
 {% include "simile/css/exhibit_extensions.html" %}
@@ -61,142 +60,85 @@
 
 {% block body %}
 
-{#{% if exhibit %}#}
 <div class="exhibit_edit">
 
-  <ul class="exhibit_list_items">
+  <br />
+  <div class="accordion" id="accordion-exhibit">
 
-    <li class="exhibit_list_item result_set_item clearfix {% if exhibit.published %}public{% elif exhibit %}private{% endif %}">
-      {% if exhibit %}
-        <div class="row-fluild">
-          <div class="span12">
-            <div class="exhibit-title"><a href="{{  exhibit.get_absolute_url }}">{{exhibit.title}}</a></div>
+    <div class="accordion-group">
 
-            {% if exhibit.description %}
-            {% ifnotequal exhibit.description exhibit.description|truncatewords:100 %}
+      <div class="accordion-heading">
+	<div class="accordion-toggle">
+	  {% if exhibit.parent %}
+ 	  <div class="exhibit-title-accordion">{{exhibit.parent.title}} </div>
+	  {% else %}
+	  <div class="exhibit-title-accordion">New View</div>
+	  {% endif %}
+	</div>
+      </div>
 
-            <div class="exhibit-description exhibit-short-description">
-              {{ exhibit.description|truncatewords:100 }}
-              <a class="readmore" href="{{ exhibit.get_absolute_url }}">read more</a>
-            </div>
-            <div class="exhibit-description exhibit-long-description ui-helper-hidden">
-              {{ exhibit.description }}
-            </div>
-            {%  else %}
-            <div class="exhibit-description">
-              {{ exhibit.description }}
-            </div>
-            {% endifnotequal %}
-            {% endif %}
-          </div>
-        </div> <!-- row-fluid -->
+      <div id="collapseOne" class="accordion-body">
 
-        <div class="row-fluid">
-          <div class="span12">
-            <div class="exhibit-metadata">
-              {% trans "Created by"%}
-              <span class="exhibit-creator"><a href="{% url 'profile_detail' exhibit.owner.username %}">{{exhibit.owner|nicename}}</a></span>
-              {% trans "on"%}
-              <span class="exhibit-modified-data">{{exhibit.modified|date:"N j, Y"}}</span>.
-            </div>
-          </div>
-        </div>
-      {% else %}
-        <div class="row-fluid">
-          <div class="span7">
-            <div class="exhibit-title">New View</div>
-          </div>
-        </div>
-      {% endif %}
+	<div class="accordion-inner">
+	
+	  <div class="exhibit-view-extended-display">
+	    
+    	    {% if exhibit.parent.description %}
+	    <div class="row-fluid">
+	      <div class="span12">
+		<div class="exhibit-description exhibit-long-description">
+		  {{ exhibit.parent.description }}
+		</div>
+	      </div>
+	    </div>
+	    {% endif %}
+	    
+	    <div class="row-fluid">
+	      <div class="span6">
+		<div class="exhibit-metadata">
+		  {% trans "Created by"%}
+		  <span class="exhibit-creator"><a href="{% url 'profile_detail' exhibit.owner.username %}">{{exhibit.owner|nicename}}</a></span>
+		  {% trans "on"%}
+		  <span class="exhibit-modified-data">{{exhibit.modified|date:"N j, Y"}}</span>.
+		</div>
+	      </div>
+	      <div class="span6">
+		<div class="btn-toolbar pull-right">
+		  <div class="btn-group" >
+		    <button class="btn btn-small btn-primary" id="edit_button" data-toggle="collapse" data-target="#edit">{% trans "Edit" %}</button>
+		    <button class="btn btn-small btn-primary" id="builder_button" data-toggle="collapse" data-target="#build">{% trans "Layout" %}</button>
+		    <button class="btn btn-small btn-primary" id="preview_button" data-toggle="collapse" data-target="#preview">{% trans "Preview" %}</button>
+		  </div>
+		  <div class="exhibit-actions btn-group">
+		    <button class="btn btn-small" id="save_button">{% trans "Save" %}</button>
+		    <a href="{{ cancel_url }}" class="btn btn-small" id="cancel_button">{% trans "Cancel" %}</a>
+		  </div>
+		</div>
+	      </div> <!-- span6 -->
+	    </div> <!-- row-fluid -->
+	    
+	  </div> <!-- exhibit-display -->
+	  
+	</div> <!-- accordion-inner -->
+	
+      </div> <!-- accordion-body -->
+      
+    </div> <!-- accordion-group -->
+    
+  </div> <!-- accordion -->
 
-      <div class="row-fluid">
-        <div class="span12">
-            <div class="btn-group" >
-                <button class="btn" id="preview_button" data-toggle="collapse" data-target="#preview">{% trans "Preview" %}</button>
-                <button class="btn" id="builder_button" data-toggle="collapse" data-target="#build">{% trans "Builder" %}</button>
-{#                <button class="btn" id="lens_button" data-toggle="collapse" data-target="#lens_navigator">{% trans "Lenses" %}</button>#}
-            </div>
-          <div class="exhibit-actions">
-            <div class="btn-group pull-right">
-              <button class="btn" id="save_button">{% trans "Save" %}</button>
-              <a href="{{ cancel_url }}" class="btn" id="cancel_button">{% trans "Cancel" %}</a>
-            </div>
-          </div>
-        </div>
-      </div> <!-- row-fluid -->
-    </li>
-  </ul>
-</div>
-{#{% else %}#}
-{#<div class="exhibit_edit">#}
-{#  <ul class="exhibit_list_items">#}
-{#    <li class="exhibit_list_item result_set_item clearfix">#}
-{##}
-{#      <div class="row-fluid">#}
-{#        <div class="span7">#}
-{#          <div class="exhibit-title">New View</div>#}
-{#        </div>#}
-{##}
-{#        <div class="span5">#}
-{#          <div class="exhibit-right exhibit-actions">#}
-{#      <div class="exhibit-links btn-group">#}
-{##}
-{#        <div class="btn-group">#}
-{##}
-{#          <div class="btn-group">#}
-{#            <button class="btn btn-info active btn-small">Build</button>#}
-{#            <button class="btn btn-small btn-info dropdown-toggle" data-toggle="dropdown">#}
-{#              <span class="caret"></span>#}
-{#            </button>#}
-{#            <ul class="dropdown-menu">#}
-{#              <li><a href="#">Layout</a></li>#}
-{#              <li><a href="#">Lens</a></li>#}
-{#            </ul>#}
-{#          </div>#}
-{#          <div class="btn-group">#}
-{#            <button class="btn btn-info btn-small">Preview</button>#}
-{#            <button class="btn btn-small btn-info dropdown-toggle" data-toggle="dropdown">#}
-{#              <span class="caret"></span>#}
-{#            </button>#}
-{#            <ul class="dropdown-menu">#}
-{#              <li><a href="#">Darkness</a></li>#}
-{#              <li><a href="#">Pepper Grinder</a></li>#}
-{#              <li><a href="#">Smoothness</a></li>#}
-{#              <li><a href="#">Sunny</a></li>#}
-{#              <li><a href="#">Trontastic</a></li>#}
-{#              <li><a href="#">Humanity</a></li>#}
-{#            </ul>#}
-{#          </div>#}
-{##}
-{#         </div>#}
-{#        <input type="checkbox" class=" btn btn-small action_preview_exhibit" id="preview_toggle"><label for="preview_toggle">{% trans "Preview" %}</label></input>#}
-{##}
-{#	      <a href="" id="save_button" class="btn btn-small action_save_exhibit">{% trans "Save" %}<span id="save_message"></span></a>#}
-{##}
-{#	      <a href="{{ cancel_url }}" id="cancel_button" class="btn btn-small action_cancel_exhibit">{% trans "Cancel" %}</a>#}
-{##}
-{#	    </div>#}
-{#          </div>#}
-{#        </div>#}
-{#      </div> <!-- row-fluid -->#}
-{#    </li>#}
-{#  </ul>#}
-{#</div>#}
-{#{% endif %}#}
-
-
-<div id="contents">
-  <div id="build" class="collapse">
-    <div id="canvas">
+  <div id="contents">
+    <div id="build" class="collapse">
+      <div id="canvas">
         {% include canvas.location %}
+      </div>
     </div>
+    <div id="preview" class="collapse"></div>
   </div>
-  <div id="preview" class="collapse"></div>
-</div>
-
-<script type="text/template" id="canvas-template">
+  
+  <script type="text/template" id="canvas-template">
     {% include canvas.location %}
-</script>
+  </script>
 
 {% block builder_templates %}
 {# facets #}

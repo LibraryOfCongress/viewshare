@@ -47,11 +47,10 @@
         <div class="exhibit-links btn-group">
           <a class="btn btn-small exhibit_inspect" href="{% url 'exhibit_detail' owner=exhibit_owner_username slug=exhibit.slug %}">{% trans "Inspect" %}</a>
           {% if can_edit %}
-          <a class="btn btn-small exhibit_edit" href="{% url 'exhibit_edit' owner=exhibit_owner_username slug=exhibit.slug %}">{% trans "Edit" %}</a>
+          <a class="btn btn-small exhibit_edit" href="{% url 'exhibit_edit' owner=exhibit_owner_username slug=exhibit.slug %}">{% trans "Layout" %}</a>
 	  {% endif %}
           {% if can_delete %}
-          <!-- a class="btn btn-small exhibit_delete" href="\{\{ exhibit.get_absolute_url \}\}" >{% trans "Delete" %}</a> -->
-          <a class="btn btn-small exhibit_delete" href="#deleteModal" role="button" data-toggle="modal" rel="{{ exhibit.get_absolute_url }}">{% trans "Delete" %}</a> -->
+          <a class="btn btn-small exhibit_delete" href="#deleteModal" role="button" data-toggle="modal" rel="{{ exhibit.get_absolute_url }}">{% trans "Delete" %}</a>
 	  {% endif %}
         </div>
       </div>

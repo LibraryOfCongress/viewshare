@@ -155,7 +155,7 @@ margin-top: 20px;
     border: 1px solid #eee;
 }
 
-.exhibit-title-accordion {
+.exhibit-title-accordion, .exhibit-title-edit {
     font-family: 'Ubuntu', Helvetica, Arial, sans-serif;	
     font-weight: normal;
     font-size: 2.0em;
@@ -402,7 +402,7 @@ margin-left: 10px;
  line-height: 110%;
 }
 
-#about-box .exhibit-metadata {
+#about-box .exhibit-metadata, .exhibit_edit .exhibit-metadata {
 padding-top: 10px;
 }
 

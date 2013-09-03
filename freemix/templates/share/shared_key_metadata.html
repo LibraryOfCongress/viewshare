@@ -32,9 +32,11 @@
     <div class="span12">
       <div class="pull-right">
 	<div class="share-links btn-group">
-          <a class="shared_key_delete btn btn-small" href="{{ display_url }}">{% trans "Delete" %}</a>
+          <!-- a class="shared_key_delete btn btn-small" href="\{\{ display_url \}\}">{% trans "Delete" %}</a> -->
+          <a class="btn btn-small shared_key_delete" href="#deleteSharedKeyModal" role="button" data-toggle="modal" rel="{{display_url}}">{% trans "Delete" %}</a>
 	</div>
       </div>
     </div>
   </div>
 </li>
+
