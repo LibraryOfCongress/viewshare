@@ -1,7 +1,9 @@
+import uuid
 from django import forms
 from django.forms.widgets import Select
 from django.utils.translation import ugettext_lazy as _
 from viewshare.apps.upload import models
+from freemix.exhibit import models as exhibit_models
 
 
 class DataSourceForm(forms.ModelForm):
@@ -14,8 +16,17 @@ class DataSourceForm(forms.ModelForm):
     def save(self, commit=True):
         instance = super(DataSourceForm, self).save(commit=False)
 
-        if self.user:
-            instance.owner = self.user
+        if not instance.exhibit:
+            canvas = exhibit_models.Canvas.objects.all()[0]
+            owner = self.user
+            slug = str(uuid.uuid4())
+            profile = exhibit_models.create_default_exhibit_profile()
+            instance.exhibit = exhibit_models.DraftExhibit.objects.create(
+                canvas=canvas,
+                owner=owner,
+                slug=slug,
+                profile=profile
+            )
         instance.save()
         return instance
 
