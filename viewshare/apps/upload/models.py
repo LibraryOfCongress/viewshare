@@ -11,7 +11,13 @@ from django.utils.translation import ugettext_lazy as _
 from django_extensions.db.fields import UUIDField
 from django_extensions.db.models import TimeStampedModel
 
-from freemix.exhibit.models import DataTransaction, Exhibit, PublishedExhibit
+from freemix.exhibit.models import (
+    DataTransaction,
+    Exhibit,
+    ExhibitProperty,
+    PropertyData,
+    PublishedExhibit
+)
 from viewshare.apps.upload.transform import (AkaraTransformClient,
                                              AKARA_TRANSFORM_URL)
 from viewshare.apps.upload import conf
@@ -42,6 +48,11 @@ class DataSource(TimeStampedModel):
     def is_concrete(self):
         return self.classname == self.__class__.__name__
 
+    def save(self, *args, **kwargs):
+        if self.classname is None:
+            self.classname = self.__class__.__name__
+        super(DataSource, self).save(*args, **kwargs)
+
 
 class ReferenceDataSource(DataSource):
     """
@@ -53,15 +64,16 @@ class ReferenceDataSource(DataSource):
 
 
 def source_upload_path(instance, filename):
-    return join(instance.uuid, filename)
+    exhibit = instance.exhibit
+    return join(exhibit.owner.username, exhibit.slug, filename)
 
 
 class ViewshareFileStorage(FileSystemStorage):
 
     def url(self, name):
-        uuid, filename = name.split(sep)
+        owner, slug, filename = name.split(sep)
         return reverse("file_datasource_file_url",
-                       kwargs={"uuid": uuid})
+                       kwargs={"owner": owner, "slug": slug})
 
 
 fs = ViewshareFileStorage(location=conf.FILE_UPLOAD_PATH)
@@ -329,10 +341,33 @@ class UploadTransaction(DataTransaction):
         Validate, parse, and save transformed data. This data is coming
         from Akara.
         """
+        from freemix.exhibit import serializers
         source = self.source.get_concrete()
         result = source.refresh()
-        if len(result.get("items", [])):
-            # TODO: parse and save 'items' into new PropertyData format
+        has_properties = False
+        data_profile = result.get("data_profile", [])
+        if len(data_profile):
+            properties = data_profile.get("properties", [])
+            if len(properties):
+                has_properties = True
+                profile = serializers.legacy_data_profile_to_new(properties)
+                data = serializers.separate_data(result.get("items", []))
+                for k, v in profile.iteritems():
+                    if k not in [u'label', u'id']:
+                        # TODO: where is k == 'label' coming from?
+                        prop = ExhibitProperty(
+                            exhibit=self.source.exhibit,
+                            label=v["label"],
+                            name=k,
+                            value_type=v["valueType"]
+                        )
+                        prop.save()
+                        prop_data = PropertyData(
+                            exhibit_property=prop,
+                            json=data[k]
+                        )
+                        prop_data.save()
+        if has_properties:
             self.success()
         else:
             self.failure("No Data")

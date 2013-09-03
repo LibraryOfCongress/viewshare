@@ -378,7 +378,6 @@ class DataTransaction(TimeStampedModel):
     status = models.IntegerField(
             choices=[(v, k) for k, v in TX_STATUS.iteritems()],
             default=TX_STATUS["pending"])
-    source = models.ForeignKey('DataSource', related_name="transactions")
     is_complete = models.BooleanField(default=False)
 
     class meta:

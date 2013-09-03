@@ -16,7 +16,7 @@ class DataSourceForm(forms.ModelForm):
     def save(self, commit=True):
         instance = super(DataSourceForm, self).save(commit=False)
 
-        if not instance.exhibit:
+        if not hasattr(instance, 'exhibit'):
             canvas = exhibit_models.Canvas.objects.all()[0]
             owner = self.user
             slug = str(uuid.uuid4())
@@ -31,7 +31,7 @@ class DataSourceForm(forms.ModelForm):
 
     class Meta:
         model = models.DataSource
-        exclude = ('owner', 'uuid', 'exhibit')
+        exclude = ('owner', 'exhibit')
 
 
 class FileDataSourceForm(DataSourceForm):
