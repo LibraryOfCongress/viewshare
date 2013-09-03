@@ -123,73 +123,7 @@ class ExhibitCreateView(View):
         })
 
 
-class ExhibitProfileUpdateView(View):
-    template_name="exhibit/exhibit_update.html"
 
-    def check_permissions(self):
-        return self.request.user.has_perm("exhibit.can_edit", self.exhibit)
-
-    def setup(self):
-        qs = models.Exhibit.objects.select_related("owner")
-
-        self.exhibit = get_object_or_404(qs,
-                                         owner__username=self.kwargs["owner"],
-                                         slug=self.kwargs["slug"])
-
-        self.dataset = self.exhibit.dataset
-        self.dataset_args = {"owner": self.dataset.owner.username, "slug": self.dataset.slug}
-
-    def get(self, request, *args, **kwargs):
-        self.setup()
-
-        profile_url = reverse("exhibit_profile_json", kwargs={"owner": self.kwargs["owner"],
-                                                       "slug": self.kwargs["slug"]})
-        dataset_profile_url = reverse("dataset_profile_json", kwargs=self.dataset_args)
-        dataset_properties_cache = reverse("dataset_properties_cache_json", kwargs=self.dataset_args)
-
-        data_url = reverse("dataset_data_json", kwargs=self.dataset_args)
-        canvas = self.exhibit.canvas
-
-        if not self.check_permissions():
-            raise Http404()
-
-        context = {
-            "exhibit_profile_url": profile_url,
-            "dataset_profile_url": dataset_profile_url,
-            "dataset_properties_cache_json": dataset_properties_cache,
-
-            "cancel_url": self.exhibit.get_absolute_url(),
-            "data_url": data_url,
-            "canvas": canvas,
-            "owner": request.user.username,
-            "dataset": self.dataset,
-            "exhibit": self.exhibit
-        }
-
-        user = self.request.user
-        exhibit = self.exhibit
-
-        context["can_view"] = user.has_perm("exhibit.can_view", exhibit)
-        context["can_inspect"] = user.has_perm("exhibit.can_inspect", exhibit)
-
-        context["can_edit"] = user.has_perm("exhibit.can_edit", exhibit)
-        context["can_delete"] = user.has_perm("exhibit.can_delete", exhibit)
-        return render(request, self.template_name, context)
-
-    def post(self, request, *args, **kwargs):
-        self.setup()
-        user = request.user
-
-        if not self.check_permissions():
-            raise Http404()
-
-        contents = json.loads(self.request.raw_post_data)
-        self.exhibit.update_from_profile(contents)
-        url = self.exhibit.get_absolute_url()
-        return render(request, "exhibit/edit/success.html", {
-            "owner": self.exhibit.owner.username,
-            "slug": self.exhibit.slug
-        })
 
 #############################################################################################
 # Display Views
@@ -379,15 +313,18 @@ class StockExhibitProfileJSONView(View):
 
 
 
-def get_exhibit(request, owner, slug):
+def get_published_exhibit(request, owner, slug):
     if not hasattr(request, "exhibit"):
-        request.exhibit = get_object_or_404(models.PublishedExhibit, slug=slug, owner__username=owner)
+        request.exhibit = get_object_or_404(models.PublishedExhibit,
+                                            slug=slug, owner__username=owner)
     return request.exhibit
 
 class PublishedExhibitProfileJSONView(BaseJSONView):
 
     def get_parent_object(self):
-        return get_exhibit(self.request, self.kwargs["owner"], self.kwargs["slug"])
+        return get_published_exhibit(self.request,
+                                     self.kwargs["owner"],
+                                     self.kwargs["slug"])
 
     def get_doc(self):
         ex = self.get_parent_object()
@@ -404,7 +341,7 @@ class PublishedExhibitProfileJSONView(BaseJSONView):
         else:
             cache_control += ", public"
         return cache_control
-lmdec = last_modified(lambda request, *args, **kwargs: get_exhibit(request, kwargs["owner"], kwargs["slug"]).modified)
+lmdec = last_modified(lambda request, *args, **kwargs: get_published_exhibit(request, kwargs["owner"], kwargs["slug"]).modified)
 exhibit_profile_json_view = lmdec(PublishedExhibitProfileJSONView.as_view())
 
 # List Views
@@ -432,3 +369,128 @@ class CanvasListView(ListView):
                                              "slug": self.kwargs["slug"]})
         return kwargs
 
+# Draft Editor Views
+
+class DraftExhibitView(View):
+
+    def check_perms(self):
+        return self.request.user.has_perm("exhibit.can_edit",
+                                          self.get_parent_object())
+
+    def get_parent_object(self):
+
+        owner = self.kwargs["owner"]
+        slug = self.kwargs["slug"]
+
+        try:
+            self.exhibit = models.DraftExhibit.objects.get(owner__username=owner,
+                                                   slug=slug)
+        except models.DraftExhibit.DoesNotExist:
+            published = get_object_or_404(models.PublishedExhibit,
+                                          owner__username=owner,
+                                          slug=slug)
+            self.exhibit = published.get_draft()
+        return self.exhibit
+
+
+class DraftExhibitPropertiesListView(DraftExhibitView, BaseJSONView):
+    def get_doc(self):
+        qs = self.get_parent_object().properties.all()
+        serializer = ExhibitPropertyListSerializer(self.get_parent_object,
+                                                   queryset=qs)
+        return json.dumps({"properties": serializer.data})
+
+
+class DraftExhibitPropertiesJSONView(DraftExhibitView, BaseJSONView):
+    def get(self, request, *args, **kwargs):
+        if not self.check_perms():
+            raise Http404()
+
+    def post(self, request, *args, **kwargs):
+        if not self.check_perms():
+            raise Http404()
+
+    def put(self, request, *args, **kwargs):
+        if not self.check_perms():
+            raise Http404()
+
+        return self.post(request, *args, **kwargs)
+
+
+class DraftExhibitPropertyDataView(DraftExhibitView):
+    def get(self, request, *args, **kwargs):
+        if not self.check_perms():
+            raise Http404()
+
+    def post(self, request, *args, **kwargs):
+        if not self.check_perms():
+            raise Http404()
+
+    def put(self, request, *args, **kwargs):
+        if not self.check_perms():
+            raise Http404()
+        return self.post(request, *args, **kwargs)
+
+class DraftExhibitPropertyDataStatusView(DraftExhibitView):
+    pass
+
+
+class DraftExhibitProfileJSONView(DraftExhibitView, BaseJSONView):
+
+    def get_doc(self):
+        ex = self.get_parent_object()
+        draft = models.DraftExhibit.objects.filter(id=ex.id)
+        return draft.values_list("profile", flat=True)[0]
+
+    def post(self, request, *args, **kwargs):
+        exhibit = self.get_parent_object()
+
+        if not self.check_perms():
+            raise Http404()
+
+        contents = json.loads(self.request.raw_post_data)
+        exhibit.update_from_profile(contents)
+        return HttpResponse()
+
+
+class DraftExhibitUpdateView(DraftExhibitView):
+    template_name="exhibit/exhibit_update.html"
+
+    def get(self, request, *args, **kwargs):
+        exhibit = self.get_parent_object()
+
+        params = {
+            "owner": self.kwargs["owner"],
+            "slug": self.kwargs["slug"]
+        }
+
+        profile_url = reverse("draft_exhibit_profile_json",
+                              kwargs=params)
+        properties_url = reverse('draft_exhibit_property_list',
+                                 kwargs=params)
+
+        data_urls = exhibit.properties.get_data_urls()
+        canvas = exhibit.canvas
+
+        if not self.check_perms():
+            raise Http404()
+
+        context = {
+            "exhibit_profile_url": profile_url,
+            "dataset_properties": properties_url,
+            "cancel_url": self.exhibit.get_absolute_url(),
+            "data_urls": data_urls,
+            "canvas": canvas,
+            "owner": request.user.username,
+            "exhibit": exhibit
+        }
+
+        user = self.request.user
+        exhibit = exhibit
+
+        context["can_view"] = user.has_perm("exhibit.can_view", exhibit)
+        context["can_inspect"] = user.has_perm("exhibit.can_inspect", exhibit)
+
+        context["can_edit"] = user.has_perm("exhibit.can_edit", exhibit)
+        context["can_delete"] = user.has_perm("exhibit.can_delete", exhibit)
+        return render(request, self.template_name, context)

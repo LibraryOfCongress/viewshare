@@ -7,7 +7,7 @@ from django.template.loader import render_to_string
 from django_extensions.db.fields.json import JSONField
 from django_extensions.db.models import (TitleSlugDescriptionModel,
                                          TimeStampedModel)
-import json
+import json, uuid
 
 
 class Canvas(TitleSlugDescriptionModel):
@@ -33,6 +33,20 @@ class Canvas(TitleSlugDescriptionModel):
     class Meta:
         verbose_name_plural = "Canvases"
 
+
+
+def create_default_exhibit_profile():
+    return {
+        "facets": {},
+        "views": {
+            "views": [{
+                "id": str(uuid.uuid4()),
+                "type": "list",
+                "name": "List"
+            }]
+        },
+        "lenses": []
+    }
 
 class Exhibit(TimeStampedModel):
 
@@ -101,6 +115,13 @@ class PublishedExhibit(Exhibit):
             PropertyData(exhibit_property=p, json=json.loads(t[1])).save()
         return draft
 
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        self.is_draft = True
+        super(PublishedExhibit, self).save(force_insert=force_insert,
+                                       force_update=force_update,
+                                       using=using,
+                                       update_fields=update_fields)
 
     class Meta:
         ordering = ('-modified', )
@@ -120,6 +141,12 @@ class DraftExhibit(Exhibit):
                                   null=True,
                                   blank=True)
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('exhibit_edit', (), {
+            'owner': self.owner.username,
+            'slug': self.slug})
+
     def publish(self):
         self.parent.canvas=self.canvas
         self.parent.profile=self.profile
@@ -132,6 +159,14 @@ class DraftExhibit(Exhibit):
 
     class Meta:
         ordering = ('-modified', )
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        self.is_draft = True
+        super(DraftExhibit, self).save(force_insert=force_insert,
+                                       force_update=force_update,
+                                       using=using,
+                                       update_fields=update_fields)
 
 #-----------------------------------------------------------------------------#
 # Exhibit Property Types
