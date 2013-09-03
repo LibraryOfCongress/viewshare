@@ -6,10 +6,18 @@ from django.views.generic.detail import DetailView
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import CreateView
 from viewshare.apps.share import models
-from freemix.exhibit.models import Exhibit, PublishedExhibit
+from freemix.exhibit.models import PublishedExhibit, PropertyData
+from freemix.exhibit.serializers import ExhibitPropertyListSerializer
 from freemix.views import BaseJSONView
 from viewshare.apps.share import forms
+import json
 
+# The last_modified decorator requires a function
+def _exhibit_modified(r, *a, **kwa):
+    qs = models.SharedExhibitKey.objects.filter(slug=kwa["slug"])
+    qs = qs.values_list("exhibit__modified", flat=True)[0]
+    return qs
+_lm = last_modified(_exhibit_modified)
 
 class SharedExhibitDisplayView(DetailView):
 
@@ -37,7 +45,17 @@ class SharedExhibitDisplayView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(SharedExhibitDisplayView, self).get_context_data(**kwargs)
         key = self.object
+        exhibit = key.exhibit
+        props = exhibit.properties.exclude(data=None)
 
+        def data_url(prop_name):
+            return reverse('shared_key_property_data_json',
+                        kwargs={
+                            "slug": key.slug,
+                            "property": prop_name
+                        })
+
+        context["data_urls"] = [data_url(p.name) for p in props]
         context["exhibit"] = key.exhibit
         context["object"] = key
         context["can_view"] = True
@@ -58,29 +76,28 @@ def get_shared_key(request, *args, **kwargs):
     return request.shared_key
 
 
-class SharedKeyDatasetJSONView(BaseJSONView):
-    model = None
-
-    def get_parent_object(self):
-        return get_shared_key(self.request, *self.args, **self.kwargs)
-
+class SharedKeyDataJSONView(BaseJSONView):
     def get_doc(self):
-        key = self.get_parent_object()
-        qs = self.model.objects.filter(dataset=key.exhibit.dataset)
-        return qs.values_list("data", flat=True)[0]
+        prop_name = self.kwargs["property"]
+        key = get_shared_key(self.request, self.args, **self.kwargs)
+        exhibit = key.exhibit
+        qs = PropertyData.objects.filter(exhibit_property__exhibit=exhibit,
+                                         exhibit_property__name=prop_name)
+        values = qs.values_list("json")
+        if len(values) == 0:
+            return '{"items": []}'
+        return '{"items": ' + values[0][0] + "}"
+shared_key_property_data_json = _lm(SharedKeyDataJSONView.as_view())
 
-    def check_perms(self):
-        key = self.get_parent_object()
-        return key.exhibit.dataset_available(key.exhibit.owner)
-
-def _dataset_modified(r, *a, **kwa):
-    key = get_shared_key(r, *a, **kwa)
-    return key.exhibit.dataset.modified
-_lm = last_modified(_dataset_modified)
-
-#shared_dataset_profile_json = _lm(SharedKeyDatasetJSONView.as_view(model=dataset_models.DatasetProfile))
-#shared_dataset_data_json = _lm(SharedKeyDatasetJSONView.as_view(model=dataset_models.DatasetJSONFile))
-#shared_dataset_properties_json = _lm(SharedKeyDatasetJSONView.as_view(model=dataset_models.DatasetPropertiesCache))
+class SharedExhibitPropertyListJSONView(BaseJSONView):
+    def get_doc(self):
+        key = get_shared_key(self.request, self.args, **self.kwargs)
+        exhibit = key.exhibit
+        qs = exhibit.properties.all()
+        serializer = ExhibitPropertyListSerializer(exhibit,
+                                                   queryset=qs)
+        return json.dumps({"properties": serializer.data})
+shared_dataset_properties_list_json = _lm(SharedExhibitPropertyListJSONView.as_view())
 
 
 #-----------------------------------------------------------------------------#
@@ -101,13 +118,8 @@ class SharedExhibitProfileJSONView(BaseJSONView):
             raise Http404
         return qs[0]
 
-# The last_modified decorator requires a function
-def _exhibit_modified(r, *a, **kwa):
-    qs = models.SharedExhibitKey.objects.filter(slug=kwa["slug"])
-    qs = qs.values_list("exhibit__modified", flat=True)[0]
-    return qs
-lm = last_modified(_exhibit_modified)
-shared_exhibit_profile_view = lm(SharedExhibitProfileJSONView.as_view())
+
+shared_exhibit_profile_view = _lm(SharedExhibitProfileJSONView.as_view())
 
 #-----------------------------------------------------------------------------#
 

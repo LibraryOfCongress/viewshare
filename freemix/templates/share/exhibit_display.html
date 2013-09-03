@@ -14,10 +14,11 @@
 
 {% block head_data %}
     {{ block.super }}
-    <link rel="exhibit/data" href="{% url 'shared_dataset_data_json' slug=object.slug %}"/>
-    <link rel="exhibit/data" href="{% url 'shared_dataset_properties_cache_json' slug=object.slug %}"/>
+    {% for url in data_urls %}
+    <link rel="exhibit/data" href="{{ url }}"/>
+    {% endfor %}
+    <link rel="exhibit/data" href="{% url 'shared_dataset_properties_list_json' slug=object.slug %}"/>
 
-    <link rel="freemix/dataprofile" href="{% url 'shared_dataset_profile_json' slug=object.slug %}"/>
     <link rel="freemix/exhibit_profile" href="{% url 'shared_exhibit_profile_json' slug=object.slug %}"/>
 
 {% endblock %}
@@ -49,15 +50,13 @@
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/editor.css"/>
     {% endcompress %}
 
-    <link rel="stylesheet" type="text/css" href="{{ exhibit.theme.url }}" />
-
 {% endblock %}
 
 {% block body %}
 
 <div class="exhibit_display">
   <ul class="exhibit_list_items">
-    <li class="exhibit_list_item result_set_item clearfix shared-key {% if exhibit.published %}public{% else %}private{% endif %}">
+    <li class="exhibit_list_item result_set_item clearfix shared-key {% if exhibit.is_public %}public{% else %}private{% endif %}">
 
       <div class="exhibit-title">{{exhibit.title}}</div>
 
