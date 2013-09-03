@@ -20,12 +20,11 @@ class DataSourceForm(forms.ModelForm):
             canvas = exhibit_models.Canvas.objects.all()[0]
             owner = self.user
             slug = str(uuid.uuid4())
-            profile = exhibit_models.create_default_exhibit_profile()
             instance.exhibit = exhibit_models.DraftExhibit.objects.create(
                 canvas=canvas,
                 owner=owner,
                 slug=slug,
-                profile=profile
+                profile={}
             )
         instance.save()
         return instance
