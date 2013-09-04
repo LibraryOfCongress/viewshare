@@ -191,26 +191,6 @@ font-weight: bold;
     float: right;
 }
 
-/* Groups */
-
-.tribe_left {
-    display: inline;
-    float: left;
-    position: relative;
-    margin-left: 9px; /* changed from 10 ??? */
-    margin-right: 9px; /* changed from 10 ??? */
-    width: 65%;
-}
-
-.tribe_right {
-    display:inline;
-    float: left;
-    position: relative;
-    margin-left: 9px; /* changed from 10 ??? */
-    margin-right: 9px; /* changed from 10 ??? */
-    width: 30%;
-}
-
 
 /* views */
 
@@ -323,7 +303,7 @@ height:106px;
   margin-left: 10px;
 }
 
-#about-box .identicon {
+#about-box .identicon img {
   margin-top: 10px;
   margin-left: 10px;
   padding: 4px;

@@ -38,9 +38,20 @@ ul.profile_list li {
     padding-left: 10px;
 }
 
+
 .user_data_entry .user_location {
     padding: 0 1em;
     font-size: 0.9em;
+}
+
+.user_data_entry .user_description {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.user_data_entry .user-joined, .user_data_entry .user-active {
+   color: grey;	 
+   font-size: 0.9em;
 }
 
 .user_counts .divider {
@@ -52,11 +63,6 @@ ul.profile_list li {
 }
 
 
-.user_data_entry .user_exhibits {
-    background: url(../../images/palette-36.png) top left no-repeat;
-    padding-left: 30px;
-    padding-bottom: 5px;
-}
 
 
 

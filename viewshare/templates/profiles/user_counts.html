@@ -5,11 +5,11 @@
     {% if exhibit_count > 0 %}
     {% if exhibit_count %}
     <span class="user_exhibits">
-      <a class="btn btn-mini" href="{% url 'exhibit_list_by_owner' target_user %}">{{ exhibit_count }} {% trans "View" %}{{ exhibit_count|pluralize }}</a>
+      <a class="btn btn-small" href="{% url 'exhibit_list_by_owner' target_user %}">{{ exhibit_count }} {% trans "View" %}{{ exhibit_count|pluralize }}</a>
     </span>
     {% endif %}
     {% else %}
-    <span class="btn btn-mini disabled no_data">{% trans "No views" %}</span>
+    <span class="btn btn-small disabled no_data">{% trans "No views" %}</span>
     {% endif %}
   </div>
 </div>
