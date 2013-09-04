@@ -110,26 +110,6 @@ header, .header, #header{
 }
 
 
-/* for Exhibits */
-/* Maybe move to a profiles.css? */
-
-.exhibit-collectionView-group-count {
-    display: none;
-}
-
-ol.exhibit-tileView-body > li {
-    list-style: none;
-}
-
-ol.exhibit-tileView-body {
-    margin: 0;
-    padding: 0;
-}
-
-div.exhibit-collectionView-header-sortControls {
-    display: none;
-}
-
 #body {
 margin-top: 20px;
 }
@@ -298,15 +278,6 @@ font-weight: bold;
    padding-left: 30px;
 }
 
-.exhibit_edit .exhibit-title, .exhibit_display .exhibit-title {
-   background: transparent url(../../images/palette-32.png) top left no-repeat;
-   font-size: 140%;
-   font-weight: bold;
-   padding-left: 40px;
-   padding-top: 10px;
-}
-
-
 
 /* handle this style due to jquery uithemer base override */
 
@@ -350,6 +321,18 @@ height:106px;
   height: 128px;
   margin-top: 10px;
   margin-left: 10px;
+}
+
+#about-box .identicon {
+  margin-top: 10px;
+  margin-left: 10px;
+  padding: 4px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+     -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 #about-box .view_avatar {

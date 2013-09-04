@@ -19,11 +19,6 @@ ul.profile_list li {
     color: #333;
 }
 
-.user_data_entry .user_top {
-    float: left;
-    margin-bottom: 0.5em;
-    width: 50%;
-}
 
 .user_data_entry .user_name {
    background: transparent url(../../images/user-32.png) top left no-repeat;
@@ -36,26 +31,16 @@ ul.profile_list li {
    padding-left: 40px;
 }
 
-.user_data_entry .user_name .user_top {
-  padding-bottom: 10px;
-}
 
-.user_data_entry .user_name .value {
+.user_data_entry .user-name {
     font-weight: bold;
     font-size: 120%;
+    padding-left: 10px;
 }
 
 .user_data_entry .user_location {
     padding: 0 1em;
     font-size: 0.9em;
-}
-
-.user_data_entry .user_counts {
-    background: #fff url(../../images/header-background.png) bottom left repeat-x;
-    border: 1px solid #ddd;
-    float: right;
-    margin: 0.5em 0 0.5em 1em;
-    padding: 0.75em;
 }
 
 .user_counts .divider {
@@ -66,36 +51,11 @@ ul.profile_list li {
     color: #666;
 }
 
-.user_counts p {
-	    display:block;
-}
-
-.user_middle, .user_bottom {
-    clear: left;
-    padding-top: 30px;
-}
-
-.user_data_entry .user_bottom p {
-    margin: 0.2em 0;
-}
-
-.user_data_entry .user_bottom  {
-    font-size: 0.9em;
-}
 
 .user_data_entry .user_exhibits {
     background: url(../../images/palette-36.png) top left no-repeat;
     padding-left: 30px;
     padding-bottom: 5px;
-}
-
-.profile_left_panel {
-    float: left;
-}
-
-.profile_right_panel {
-    float: right;
-    width: 88%;
 }
 
 

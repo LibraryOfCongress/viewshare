@@ -9,13 +9,10 @@ ul.connection_list {
     padding: 5px 5px 5px 10px;
 }
 
-div.user_data_entry .user_name .value {
+.user_data_entry .user-name {
     font-weight: bold;
-    font-size: 100%;
-}
-
-div.user_data_entry .user_counts {
-    display: block;
+    font-size: 110%;
+    padding-left: 10px;
 }
 
 div.user_data_entry .user_counts .user_datasets,
@@ -52,31 +49,18 @@ div.user_data_entry .user_bottom {
 .user_profile_entry .user_data_entry {
 }
 
-.user_profile_entry .user_stats {
- font-size: 95%;
-}
-
 .user_friends .user_profile_entry .user_data_entry {
 padding-top: 5px;
-}
-
-.user_friends .user_profile_entry .user_data_entry .user_name {
-   background: transparent url(../../images/user-32.png) top left no-repeat;
-   height: 32px;
-   font-size: 100%;
-   font-weight: bold;
-   position:absolute;
-   padding-top: 5px;
-   margin-top: 0px;
-   padding-left: 40px;
 }
 
 .user_friends .user_profile_entry .user_data_entry .user_location {
  display: none;
 }
 
-.user_friends .user_profile_entry .user_data_entry .user_stats {
- font-size: 90%;
- float: right;
- padding: 5px 10px 5px 10px;
+.connection-section .user-joined, .connection-section .user-active {
+ display:none;
+}
+
+.connection-section .user_data_entry {
+ margin-bottom: -25px;
 }
