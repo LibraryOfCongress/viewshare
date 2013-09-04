@@ -30,11 +30,14 @@ class CreateDataSourceView(CreateView):
 
     def form_valid(self, form):
         self.object = form.save()
-
+        upload_transaction = models.UploadTransaction(source=self.object)
+        upload_transaction.schedule()
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
-        return reverse("datasource_refresh", kwargs={"uuid": self.object.uuid})
+        exhibit = self.object.exhibit
+        return reverse("exhibit_edit",
+                       kwargs={"owner": exhibit.owner, "slug": exhibit.slug})
 
 
 class DataSourceDetailView(DetailView):
