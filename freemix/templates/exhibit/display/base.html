@@ -151,7 +151,7 @@
 		  {% endif %}
 		  
 		  {% if can_embed %} 
-		  <a class="exhibit_embed btn btn-small" href="">{% trans "Embed" %}</a>
+		  <a class="exhibit_embed btn btn-small" href="#embedModal" role="button" data-toggle="modal">{% trans "Embed" %}</a>
 		  {% endif %}
 		  
 		  {% if can_edit %}
@@ -186,18 +186,22 @@
   
 </div> <!-- accordion -->
 
-
 {% if can_embed %}
-<div id="embed">
-  <div id="embed-info" class="hidden ui-widget-content ui-corner-all">
-    <p class="embed-desc"><strong>{% blocktrans %}Copy the following and paste it into your page where you'd like your data view to be placed.{% endblocktrans %}</strong></p>
-    <p id="embedding-code">&lt;script id="freemix-embed" src="{{ exhibit_embed_url }}" type="text/javascript"&gt;&lt;/script&gt;</p>
+<div id="embedModal" class="embed-modal modal hide fade" tabindex="-1" role="dialog" aria-labelledby="embedFormLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="editProfileFormLabel">{% trans "Embed View" %}</h3>
+  </div>
 
-    <p class="buttons">
-      <a id="embed-info-close" class="button">
-        <span class="ui-icon ui-icon-close"></span>
-      </a>
-    </p>
+  <div class="modal-body">
+    <div class="embed-desc">{% blocktrans %}Copy the following and paste it into your page where you'd like your data view to be placed.{% endblocktrans %}</div>
+    <input type="text" id="embedding-code" value="&lt;script id='freemix-embed' src='{{ exhibit_embed_url }}' type='text/javascript'&gt;&lt;/script&gt;" readonly="readonly"/>
+  </div>
+
+  <div class="modal-footer">
+    <div class="btn-group">
+      <a class="btn btn-small btn-primary" role="button" data-dismiss="modal" aria-hidden="true">{% trans "Close" %}</a>
+    </div>
   </div>
 </div>
 {% endif %}
