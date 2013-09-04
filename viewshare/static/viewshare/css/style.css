@@ -110,26 +110,6 @@ header, .header, #header{
 }
 
 
-/* for Exhibits */
-/* Maybe move to a profiles.css? */
-
-.exhibit-collectionView-group-count {
-    display: none;
-}
-
-ol.exhibit-tileView-body > li {
-    list-style: none;
-}
-
-ol.exhibit-tileView-body {
-    margin: 0;
-    padding: 0;
-}
-
-div.exhibit-collectionView-header-sortControls {
-    display: none;
-}
-
 #body {
 margin-top: 20px;
 }
@@ -297,15 +277,6 @@ font-weight: bold;
    padding-bottom: 0.5em;
    padding-left: 30px;
 }
-
-.exhibit_edit .exhibit-title, .exhibit_display .exhibit-title {
-   background: transparent url(../../images/palette-32.png) top left no-repeat;
-   font-size: 140%;
-   font-weight: bold;
-   padding-left: 40px;
-   padding-top: 10px;
-}
-
 
 
 /* handle this style due to jquery uithemer base override */
