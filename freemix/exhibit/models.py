@@ -94,9 +94,13 @@ class Exhibit(TimeStampedModel):
         self.profile = profile
         self.save()
 
-
     def natural_key(self):
         return self.owner, self.slug, self.is_draft
+
+    def get_draft(self):
+        if self.is_draft:
+            return self.draftexhibit
+        return self.publishedexhibit.get_draft()
 
 
 class PublishedExhibit(Exhibit):
@@ -217,12 +221,19 @@ class DraftExhibit(Exhibit):
         }
         self.save()
 
+    def get_draft(self):
+        return self
+
 
 def get_data_url(t):
     """
     Does on a reverse on the url represented in the provided tuple
     """
-    return reverse("exhibit_property_data", kwargs={
+    if t[3]:
+        key = "exhibit_property_data"
+
+    key = "draft_exhibit_property_data" if t[3] else "exhibit_property_data"
+    return reverse(key, kwargs={
         "owner": t[0],
         "slug": t[1],
         "property": t[2]
@@ -240,8 +251,11 @@ class ExhibitPropertyManager(models.Manager):
         Return a list of data URLs for each property
         """
 
-        qs = self.get_query_set().exclude(name="id").exclude(name="label")
-        qs = qs.values_list("exhibit__owner__username", "exhibit__slug", "name")
+        qs = self.get_query_set().exclude(data=None)
+        qs = qs.values_list("exhibit__owner__username",
+                            "exhibit__slug",
+                            "name",
+                            "exhibit__is_draft")
         return [get_data_url(t) for t in qs]
 
 

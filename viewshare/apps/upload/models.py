@@ -344,30 +344,38 @@ class UploadTransaction(DataTransaction):
         from freemix.exhibit import serializers
         source = self.source.get_concrete()
         result = source.refresh()
-        has_properties = False
+        error = None
         data_profile = result.get("data_profile", [])
+        exhibit = self.source.exhibit.get_draft()
+
         if len(data_profile):
+
             properties = data_profile.get("properties", [])
-            if len(properties):
-                has_properties = True
-                profile = serializers.legacy_data_profile_to_new(properties)
-                data = serializers.separate_data(result.get("items", []))
-                for k, v in profile.iteritems():
-                    if k not in [u'label', u'id']:
-                        # TODO: where is k == 'label' coming from?
-                        prop = ExhibitProperty(
-                            exhibit=self.source.exhibit,
-                            label=v["label"],
-                            name=k,
-                            value_type=v["valueType"]
-                        )
-                        prop.save()
-                        prop_data = PropertyData(
-                            exhibit_property=prop,
-                            json=data[k]
-                        )
-                        prop_data.save()
-        if has_properties:
+            profile = serializers.legacy_data_profile_to_new(properties)
+            ser = serializers.ExhibitPropertyListSerializer(exhibit,
+                                                            data=profile)
+
+            data = result.get("items", [])
+            data_ser = serializers.ExhibitDataSerializer(exhibit,
+                                                         data=data)
+            if not len(data):
+                error = "<ul><li>No Data</li></ul>"
+            elif ser.is_valid() and data_ser.is_valid():
+                ser.save()
+                data_ser.save()
+
+                # If this is a new exhibit, ensure that there is a profile
+                if not len(exhibit.profile.keys()):
+                    exhibit.save_basic_profile()
+            else:
+                error = "<ul class='property-load-errors'>"
+                for e in ser.errors:
+                    error += "<li>%s</li>" % e
+                for e in data_ser.errors:
+                    error += "<li>%s</li>" % e
+                error += "</ul>"
+
+        if not error:
             self.success()
         else:
-            self.failure("No Data")
+            self.failure(error)

@@ -288,7 +288,7 @@ class ExhibitPropertyListSerializer(Serializer):
     def __init__(self, exhibit, queryset=None, data=None):
         self.exhibit = exhibit
         if not queryset:
-            queryset = exhibit.properties
+            queryset = exhibit.properties.all()
         self._queryset = queryset
         self._data = data
         self._serializers = None
@@ -330,15 +330,14 @@ class ExhibitPropertyListSerializer(Serializer):
     def is_valid(self):
         result = True
         if self._errors:
-            return len(self._errors.keys()) == 0
+            return len(self._errors) == 0
 
-        self._errors = {}
-
+        self._errors = []
         for key in self.serializers.keys():
             serializer = self.serializers[key]
             if not serializer.is_valid():
                 result = False
-                self._errors[key] = serializer._errors
+                self._errors += serializer.errors
         return result
 
     def save(self):
@@ -352,7 +351,7 @@ class ExhibitPropertyListSerializer(Serializer):
                 for p in serializer.depends_on:
                     process_property(p)
                 serializer.save()
-            elif self.exhibit.properties.filter(name=name).count() == 0:
+            elif not self.exhibit.properties.exists(name=name):
 
                 models.ExhibitProperty(exhibit=self.exhibit,
                                        name=name,
@@ -363,6 +362,104 @@ class ExhibitPropertyListSerializer(Serializer):
 
         for name in self.serializers.keys():
             process_property(name)
+
+
+def separate_data(data):
+
+    properties = {}
+    counter = 0
+    for record in data:
+        ex_id = record.get("id", None)
+        if not ex_id:
+            ex_id = "_%d" % counter
+            counter += 1
+        label = record.get("label", ex_id)
+        for key in record.keys():
+            if key == "id" or key == "label":
+                continue
+
+            arr = properties.get(key, [])
+            arr.append({"id": ex_id, "label": label, key: record[key]})
+            properties[key] = arr
+    return properties
+
+def merge_data(data):
+    records = {}
+
+    for prop in data.keys():
+        for item in data[prop]:
+            key = (item["id"], item["label"])
+            record = records.get(key, None)
+            if not record:
+                record = {"id": item["id"], "label": item["label"]}
+                records[key] = record
+            record[prop] = item[prop]
+    return [records[key] for key in records.keys()]
+
+class ExhibitDataSerializer(Serializer):
+
+    def __init__(self, exhibit,
+                 queryset=None,
+                 data=None):
+        self.exhibit = exhibit
+        if not queryset:
+            queryset = models.PropertyData.objects.filter(exhibit_property__exhibit=exhibit)
+        self._queryset = queryset
+        self._data = data
+        self._processed = False
+        self._errors = None
+
+    def is_valid(self):
+        self._errors = []
+        return True
+
+    @property
+    def data(self):
+        if not self._data:
+            result = dict()
+            for p in (self.exhibit.properties
+                      .exclude(data=None)
+                      .prefetch_related("data__json")):
+                result[p.name] = p.data.json
+            self._data = result
+            self._processed = True
+        elif not self._processed:
+            if isinstance(self._data, dict):
+                self._processed = True
+            elif isinstance(self._data, list):
+                self._data = separate_data(self._data)
+                self._processed = True
+        return self._data
+
+    def save(self):
+        # First update existing data records
+        prop_names = self.data.keys()
+        prop_data = models.PropertyData.objects.filter(exhibit_property__name__in=prop_names,
+                                                       exhibit_property__exhibit=self.exhibit)
+        for rec in prop_data:
+            name = rec.exhibit_property.name
+            rec.json = self._data[name]
+            rec.save()
+            prop_names.remove(name)
+
+        # Create Property Data for existing records
+        props = self.exhibit.properties.filter(name__in=prop_names)
+        for p in props:
+            val = {
+                "exhibit_property": p,
+                "json": self._data[p.name]
+            }
+            models.PropertyData(**val).save()
+            prop_names.remove(p.name)
+
+        # Create any new properties, then save the data
+        if len(prop_names):
+            for name in prop_names:
+                prop = models.ExhibitProperty(name=name,
+                                              label=name,
+                                              value_type="text").save()
+                models.PropertyData(exhibit_property=prop,
+                                    json=self._data[name]).save()
 
 
 #------------------------------------------------------------------------------#
@@ -429,33 +526,3 @@ def new_data_profile_to_legacy(profile):
                 new_record["extract"] = old_record["extract"]
         result.append(new_record)
     return result
-
-
-def separate_data(data):
-
-    properties = {}
-
-    for record in data:
-        ex_id = record["id"]
-        label = record["label"]
-        for key in record.keys():
-            if key == "id" or key == "label":
-                continue
-
-            arr = properties.get(key, [])
-            arr.append({"id": ex_id, "label": label, key: record[key]})
-            properties[key] = arr
-    return properties
-
-def merge_data(data):
-    records = {}
-
-    for prop in data.keys():
-        for item in data[prop]:
-            key = (item["id"], item["label"])
-            record = records.get(key, None)
-            if not record:
-                record = {"id": item["id"], "label": item["label"]}
-                records[key] = record
-            record[prop] = item[prop]
-    return [records[key] for key in records.keys()]

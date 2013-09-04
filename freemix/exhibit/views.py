@@ -1,5 +1,4 @@
 import json
-import uuid
 
 from django.utils.translation import ugettext_lazy as _
 from django.http import *
@@ -18,7 +17,7 @@ from freemix.exhibit.models import Canvas
 from freemix.exhibit.serializers import ExhibitPropertyListSerializer
 from freemix.permissions import PermissionsRegistry
 from freemix.utils import get_site_url
-from freemix.views import JSONResponse, OwnerListView, OwnerSlugPermissionMixin, BaseJSONView
+from freemix.views import OwnerListView, OwnerSlugPermissionMixin, BaseJSONView
 
 
 # Edit Views
@@ -293,26 +292,6 @@ def lmfunc(r, owner, slug):
 embedded_exhibit_view = last_modified(lmfunc)(EmbeddedExhibitView.as_view())
 
 # Exhibit Profile Views
-
-class StockExhibitProfileJSONView(View):
-    """Generate the default profile description of an exhibit for a particular dataset and canvas
-    """
-    def get(self, request, *args, **kwargs):
-
-        return JSONResponse({
-            "facets": {},
-            "views": {
-                "views": [{
-                    "id": str(uuid.uuid4()),
-                    "type": "list",
-                    "name": "List"
-                }]
-            },
-            "lenses": []
-        })
-
-
-
 def get_published_exhibit(request, owner, slug):
     if not hasattr(request, "exhibit"):
         request.exhibit = get_object_or_404(models.PublishedExhibit,
@@ -396,7 +375,7 @@ class DraftExhibitView(View):
 class DraftExhibitPropertiesListView(DraftExhibitView, BaseJSONView):
     def get_doc(self):
         qs = self.get_parent_object().properties.all()
-        serializer = ExhibitPropertyListSerializer(self.get_parent_object,
+        serializer = ExhibitPropertyListSerializer(self.get_parent_object(),
                                                    queryset=qs)
         return json.dumps({"properties": serializer.data})
 
@@ -417,10 +396,12 @@ class DraftExhibitPropertiesJSONView(DraftExhibitView, BaseJSONView):
         return self.post(request, *args, **kwargs)
 
 
-class DraftExhibitPropertyDataView(DraftExhibitView):
-    def get(self, request, *args, **kwargs):
-        if not self.check_perms():
-            raise Http404()
+class DraftExhibitPropertyDataView(DraftExhibitView, BaseJSONView):
+    def get_doc(self):
+        values = models.PropertyData.objects.filter(exhibit_property__exhibit=self.get_parent_object(), exhibit_property__name=self.kwargs["property"]).values_list("json")
+        if len(values) == 0:
+            return '{"items": []}'
+        return '{"items": ' + values[0][0] + "}"
 
     def post(self, request, *args, **kwargs):
         if not self.check_perms():
