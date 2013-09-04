@@ -8,6 +8,9 @@
 {% load freemix_helpers %}
 {% load compress %}
 {% load cache %}
+{% load gravatar %}
+
+
 
 {% block head_title %}{{ other_user|nicename }}{% endblock %}
 
@@ -59,7 +62,10 @@
       <div class="row-fluid">
 
 	<div class="span4">
-	  <div class="user_avatar"></div>
+	  <!-- div class="user_avatar"></div> -->
+	  <div class="identicon img-polariod">
+	    {% gravatar other_user.email|add:"f=t" 112 %}
+	  </div>
 	</div>
       
 	<div class="span8">
