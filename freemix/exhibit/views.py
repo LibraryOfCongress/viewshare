@@ -444,6 +444,16 @@ class DraftExhibitPropertiesJSONView(DraftExhibitView, BaseJSONView):
     def put(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
 
+    def delete(self, request, *args, **kwargs):
+        if not self.check_perms():
+            raise Http404()
+        prop_name = self.kwargs["property"]
+        exhibit = self.get_parent_object()
+
+        prop = get_object_or_404(exhibit.properties.all(), name=prop_name)
+        prop.delete()
+        return HttpResponse("OK")
+
 
 class DraftExhibitPropertyDataView(DraftExhibitView, BaseJSONView):
 
@@ -484,6 +494,12 @@ class DraftExhibitPropertyDataView(DraftExhibitView, BaseJSONView):
 
     def put(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        if not self.check_perms():
+            raise Http404()
+        models.PropertyData.objects.filter(self.get_query_args()).delete()
+        return HttpResponse("OK")
 
 
 class DraftExhibitPropertyDataStatusView(DraftExhibitView):
