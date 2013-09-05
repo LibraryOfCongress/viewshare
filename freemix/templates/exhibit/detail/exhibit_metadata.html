@@ -60,7 +60,7 @@
 	{% endif %}
 	<div class="profile-actions">
           <div class="profile-links btn-group">
-	    <a href="#editExhibitModal" role="button" data-toggle="modal" rel="{% url 'exhibit_edit_form' owner=object.owner slug=object.slug %}" id="detail_edit_button" class="btn btn-small">{% trans "Edit" %}</a>
+	    <a href="#editExhibitModal" role="button" data-toggle="modal" rel="{% url 'exhibit_edit_form' owner=object.owner slug=object.slug %}" id="detail_edit_button" class="btn btn-small"><i class="icon-edit"></i>{% trans " Edit" %}</a>
 	  </div>
 	</div>
       </div>

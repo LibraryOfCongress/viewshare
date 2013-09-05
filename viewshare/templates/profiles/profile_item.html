@@ -47,14 +47,15 @@
     {% if user.date_joined %}
     <div class="row-fluid">
       <div class="span12">
-	<div class="user-joined">
+	<span class="user-joined">
 	  <span class="property">{% trans "Joined" %}</span> <span class="value">{{ user.date_joined|date }}</span>
-	</div>
+	</span>
 
 	{% if user.last_login %}
-	<div class="user-active">
+	<span class="user-active">
+	  <span class="divider">-</span>
 	  <span class="property">{% trans "Last visited" %}</span> <span class="value">{{ user.last_login|date }}</span>
-	</div>
+	</span>
 	{% endif %}
 	
       </div>

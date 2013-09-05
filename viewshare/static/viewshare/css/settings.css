@@ -1,0 +1,43 @@
+/* settings styling */
+
+.settings_wrapper {
+  background-image:url(../../images/settings_bg.png);
+  background-repeat:no-repeat;
+  width:680px;
+  height:450px;
+  color:#333;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+}
+
+.settings_text {
+  padding: 35px 35px;
+  background: url(../../images/settings-icon.png) 90% 90% no-repeat;
+}
+
+.settings_text .form-body, .settings_text .form-block,  {
+}
+
+.settings_text .heading {
+ font-size: 1.5em;
+ margin-top: 25px;
+ margin-bottom: 15px;
+ color: grey;
+}
+
+.settings_text .email-address {
+ font-size: 1.2em;
+}
+
+.settings_text .status {
+ font-size: 1.2em;
+}
+
+.settings_text .verified {
+  color: blue;
+}
+
+.settings_text .unverified {
+  color: red;
+}

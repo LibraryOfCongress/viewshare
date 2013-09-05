@@ -103,7 +103,7 @@
 	  <span class="about_edit">
 	    <div class="profile-actions">
               <div class="profile-links btn-group">
-		<a href="{% url 'profile_edit' %}" data-target="#edit-profile-form" role="button" id="edit-profile-button" class="btn btn-small" data-toggle="modal">{% trans "Edit" %}</a>
+		<a href="{% url 'profile_edit' %}" data-target="#edit-profile-form" role="button" id="edit-profile-button" class="btn btn-small" data-toggle="modal"><i class="icon-edit"></i>{% trans " Edit" %}</a>
 	      </div>
 	    </div>
 	  </span>
@@ -207,7 +207,7 @@
     {%  if user.is_authenticated %}
     <div class="connection-section widget-well">
       <div class="widget-header">
-	<h2>{% blocktrans %}Connections{% endblocktrans %}</h2>
+	<h2>{% blocktrans %}My Connections{% endblocktrans %}</h2>
       </div>
 
       <div class="user_friends">
@@ -232,7 +232,7 @@
     {% if is_me %}
     <div class="info-section widget-well">
       <div class="widget-header">
-	<h2>{% blocktrans %}Notices{% endblocktrans %}</h2>
+	<h2>{% blocktrans %}My Notices{% endblocktrans %}</h2>
       </div>
 
       <div class="notices">
