@@ -25,15 +25,26 @@ $(document).ready(function() {
 {% block body %}
 
 {% if user.is_authenticated %}
-<div class="alert alert-block">
-  {% blocktrans %}You are already logged in as{% endblocktrans %} {{ user|nicename }}.
+<div class="row-fluid logged-in-alert">
+  <div class="span6 offset3">
+    <div class="alert alert-block">
+      {% blocktrans %}You are already logged in as{% endblocktrans %} {{ user|nicename }}.
+    </div>
+  </div>
 </div>
 {% else %}
+
 {% url 'registration_register' as signup_url %}
-<div class="signup alert alert-block span4 center">
-  {% blocktrans %}Don't yet have an account? <a href="{{ signup_url }}">Sign up</a>!{% endblocktrans %}
+
+<div class="row-fluid signin-alert">
+  <div class="span6 offset3">
+    <div class="signup alert alert-block">
+      <p class="center">
+	{% blocktrans %}Don't yet have an account? <a href="{{ signup_url }}">Sign up</a>!{% endblocktrans %}
+      </p>
+    </div>
+  </div>
 </div>
-<br />
 {% endif %}
 
 <div class="login_options login_wrapper">	
@@ -71,21 +82,23 @@ $(document).ready(function() {
           </div>
 	
 	</div>
-	
 
       </fieldset>
     </form>
-
-    <br />
-    <br />
-    <div class="alert alert-info">
-      {% blocktrans %}If you have any trouble logging in to your account, contact us at <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>.{% endblocktrans %}
-    </div>
-   
-  </div>  
+  </div>
 </div>
 
-<div class="clearfix"></div>
+<div class="row-fluid contact-alert">
+  <div class="span6 offset3">
+    <div class="alert alert-info">
+      <p class="center">
+	{% blocktrans %}If you have any trouble logging in to your account, contact us at<br />
+	<a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>.
+	{% endblocktrans %}
+      </p>
+    </div>
+  </div>  
+</div>
 
 
 {% endblock %}
