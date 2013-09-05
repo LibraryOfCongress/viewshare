@@ -135,6 +135,13 @@ margin-top: 20px;
     border: 1px solid #eee;
 }
 
+.freemix-themeable h3 {
+    font-family: 'Ubuntu', Helvetica, Arial, sans-serif;	
+    font-weight: normal;
+    font-size: 1.6em;
+    color: grey;
+}
+
 .exhibit-title-accordion, .exhibit-title-edit {
     font-family: 'Ubuntu', Helvetica, Arial, sans-serif;	
     font-weight: normal;
@@ -207,7 +214,7 @@ font-weight: bold;
    list-style-type: none;
 }
 
-.dataset_list_item, .exhibit_list_item, .shared_key_list_item, .result_set_item, .notice {
+.dataset_list_item, .exhibit_list_item, .shared_key_list_item, .result_set_item, .notice, .invitation {
    background: #fff url(../../images/header-background.png) bottom center repeat-x;
    border: 1px solid #eee;
    list-style-type: none;
@@ -509,6 +516,9 @@ ul.responses li.thread-8 {
    -webkit-border-radius:5px;
 }
 
+.widget-well .alert {
+    margin: 10px 10px 10px 10px;
+}
 
 /* profile */
 
@@ -631,7 +641,7 @@ div.notices h2 {
 .notice, .unseen_notice {
 }
 
-.notice .notice_block {
+.notice_block {
    background: transparent url(../../images/notice-32.png) top left no-repeat;
    height: 32px;
    font-size: 100%;
@@ -648,6 +658,10 @@ div.notices h2 {
  display: none;
 }
 
+/* invitations */
+
+.invitation-item {
+}
 
 /* groups */
 .user_groups_list {

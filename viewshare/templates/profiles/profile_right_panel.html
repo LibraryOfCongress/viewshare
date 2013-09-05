@@ -9,61 +9,93 @@
 <div id="user_sections">
 {% with exhibits.count as exhibit_count %}
 {% with drafts.count as draft_count %}
+
 {% if is_me %}
+{# only show drafts if its me #}
 
-    {% if draft_count > 0 %}
-    <div class="draftview-section widget-well">
-      <div class="widget-header">
-	<h2>{% blocktrans %}My Drafts{% endblocktrans %}</h2>
-      </div>
+{% if draft_count > 0 %}
+<div class="draftview-section widget-well">
+  <div class="widget-header">
+    <h2>{% blocktrans %}My Drafts{% endblocktrans %}</h2>
+  </div>
+  
+  {% if draft_count > 3 %}
+  <div class="see_all">
+    <a href="">{% trans "See all" %}  {{ draft_count }} draft{{ draft_count|pluralize }}</a>
+  </div>
+  {% endif %}
+</div>
+{% endif %}
 
-      {% if draft_count > 3 %}
-      <div class="see_all">
-        <a href="">{% trans "See all" %}  {{ draft_count }} draft{{ draft_count|pluralize }}</a>
-      </div>
-      {% endif %}
-    </div>
-    {% endif %}
 {% endif %}
 
 {% if exhibit_count == 0 and is_me %}
 
-    <div class="user_data_upload">
-      <p class="hyper-upload">
-        <a href="{% url 'upload_dataset' %}" class="button_link">Upload&nbsp;Data</a>
-        <p class="center">Add data to your profile to start sharing collections!</p>
-      </p>
+<div class="view-section widget-well">
+  <div class="widget-header">
+    <div class="row-fluid">
+      <div class="span12">
+	<h2>{% blocktrans %}My Views{% endblocktrans %}</h2>
+      </div>
     </div>
+  </div>
+  
+  <div class="user_data_upload">
+    <div class="hyper-upload">
+      <div class="row-fluid">
+	<div class="span6 offset3">
+          <a href="{% url 'upload_dataset' %}" class="button_link btn btn-primary btn-large">{% blocktrans %}Create A View{% endblocktrans %}</a>
+	  <p class="center">{% blocktrans %}Your one click away from creating your own customized view (interactive maps, timelines, facets, tag clouds) and sharing your digital collections with others.{% endblocktrans %}</p>
+	</div>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% elif exhibit_count == 0 %}
 
+<div class="view-section widget-well">
+  <div class="widget-header">
+    <div class="row-fluid">
+      <div class="span12">
+	<h2>{% blocktrans %}Views{% endblocktrans %}</h2>
+      </div>
+    </div>
+  </div>
+  
+  <div class="alert alert-info">
+    No public views are available at this time.
+  </div>
+</div>
+
 {% else %}
 
-    <div class="view-section widget-well">
-      <div class="widget-header">
-	<div class="row-fluid">
-	  <div class="span10">
-	    <h2>{% blocktrans %}My Views{% endblocktrans %}</h2>
-	  </div>
-	  <div class="span2">
-	    <div class="pull-right">
-	      <div class="widget-links btn-group">
-		<a href = "{% url 'upload_dataset' %}" class="btn btn-small btn-info">Create View</a>
-	      </div>
-	    </div>
+<div class="view-section widget-well">
+  <div class="widget-header">
+    <div class="row-fluid">
+      <div class="span10">
+	<h2>{% blocktrans %}My Views{% endblocktrans %}</h2>
+      </div>
+      <div class="span2">
+	<div class="pull-right">
+	  <div class="widget-links btn-group">
+	    <a href = "{% url 'upload_dataset' %}" class="btn btn-small btn-info">Create View</a>
 	  </div>
 	</div>
       </div>
-	
-      {% exhibit_list exhibits.all 10 0 %}
-
-      {% if exhibit_count > 10 %}
-      <div class="see_all">
-        <a href="{% url 'exhibit_list_by_owner' other_user.username %}">{% trans "See all" %}  {{exhibit_count}} view{{ exhibit_count|pluralize }}</a>
-      </div>
-
-      {% endif %}
     </div>
+  </div>
+	
+  {% exhibit_list exhibits.all 10 0 %}
+  
+  {% if exhibit_count > 10 %}
+  <div class="see_all">
+    <a href="{% url 'exhibit_list_by_owner' other_user.username %}">{% trans "See all" %}  {{exhibit_count}} view{{ exhibit_count|pluralize }}</a>
+  </div>
+  
+  {% endif %}
+
+</div>
 
 {% endif %}
 

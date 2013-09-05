@@ -55,10 +55,16 @@
     
     <div id="about-box" class="info-section widget-well">
 
+      {% if is_me %}
       <div class="widget-header">
 	<h2>My Profile</h2>
       </div>
-            
+      {% else %}
+      <div class="widget-header">
+	<h2>Profile</h2>
+      </div>
+      {% endif %}
+
       <div class="row-fluid">
 
 	<div class="span4">
@@ -128,48 +134,97 @@
     {% if not is_me %}
     
     {% if is_friend %}
-    <p class="center connection_extra">
-      {% blocktrans %}You are connected to {% endblocktrans %}{{ other_user|nicename }}.
-    </p>
-    <form method="POST" action="">
-      {%csrf_token %}
-      <input type="hidden" name="action" value="remove" />
-      <p class="center"><input type="submit" class="negative-button" value="{% trans "Remove Connection" %}"/></p>
-    </form>
-    {% else %}
-    
-    {% if previous_invitations_from %}
-    <div class="invitation connection_extra">
+
+    <div class="info-section widget-well widget-action-well">
       
-      {% for invitation in previous_invitations_from %}
-      <p>{{ other_user|nicename }} {% blocktrans %}requested a connection on{% endblocktrans %} {{ invitation.sent|date }}:</p>
-      <p class="invitation_message">{{ invitation.message }}</p>
-      <form method="post" action="">
-        {%csrf_token %}
-        <input type="hidden" name="invitation" value="{{ invitation.id }}"/>
-        <input type="hidden" name="action" value="accept"/>
-        <input type="submit" value="{% trans 'Accept' %}" />
+      <div class="widget-header">
+	<h2>{% trans "Actions" %}</h2>
+      </div>
+
+      <form class="uniForm" method="POST" action="">
+
+	{% csrf_token %}
+	
+        <fieldset class="inlineLabels">
+	  
+	  <div class="alert alert-block">
+	    <div class="row-fluid">
+	      <div class="span8">
+		{% blocktrans %}You are connected to {% endblocktrans %}{{ other_user|nicename }}.
+	      </div>
+	      <div class="span4">
+		<div class="pull-right">
+		  <input type="hidden" class="btn btn-small" name="action" value="remove" />
+		  <input type="submit" class="btn btn-small negative-button" value="{% trans "Remove" %}"/>
+		</div>
+	      </div>
+	    </div>
+	  </div>
+	  
+	</fieldset>
       </form>
-      <form method="post" action="">
-        {%csrf_token %}
-        <input type="hidden" name="invitation" value="{{ invitation.id }}"/>
-        <input type="hidden" name="action" value="decline"/>
-        <input type="submit" value="{% trans 'Decline' %}" class="negative-button" />
-      </form>
-      {% endfor %}
+      
     </div>
     
     {% else %}
     
+    {% if previous_invitations_from %}
+    
+    <div class="info-section widget-well widget-action-well">
+
+      <div class="widget-header">
+	<h2>{% trans "Actions" %}</h2>
+      </div>
+            
+      <div class="connection_extra">
+      
+	{% for invitation in previous_invitations_from %}
+
+	<div class="alert alert-block">
+	  <div class="row-fluid">
+	    <div class="span8">
+	      {{ other_user|nicename }} {% blocktrans %}requested a connection on{% endblocktrans %} {{ invitation.sent|date }}
+	      {# <p class="invitation_message">{{ invitation.message }}</p> #}
+	    </div>
+	    
+	    <div class="span2">
+	      
+	      <form method="post" action="">
+		{%csrf_token %}
+		
+		<input type="hidden" name="invitation" value="{{ invitation.id }}"/>
+		<input type="hidden" name="action" value="accept"/>
+		<input type="submit" class="btn btn-small" value="{% trans 'Accept' %}" />
+	      </form>
+	    </div>
+	    <div class="span2">
+	      <form method="post" action="">
+		{%csrf_token %}
+		<input type="hidden" name="invitation" value="{{ invitation.id }}"/>
+		<input type="hidden" name="action" value="decline"/>
+		<input type="submit" class="btn btn-small" value="{% trans 'Decline' %}" class="negative-button" />
+	      </form>
+	    </div>
+	  </div>
+	</div>
+	
+	{% endfor %}
+
+      </div>
+    </div>
+
+    {% else %}
+    
     {% if previous_invitations_to %}
     
-    <p class="center">{% trans "Connection request sent." %}</p>
+    <div class="alert alert-success">{% trans "Connection request sent." %}</div>
     
     {% else %}
     
-    <div class="info-section widget-well">
+    <div class="info-section widget-well widget-action-well">
+
       <div class="widget-header">
-	<h2>{% trans "Add Connection" %}</h2>
+	<h2>{% trans "Actions" %}</h2>
       </div>
 
       <form class="uniForm" method="POST" action="">
@@ -179,9 +234,18 @@
 	  {{ invite_form|crispy }}
 	  <div class="form_block">
             <input type="hidden" name="action" value="invite" />
-            <p class="center"><input type="submit" value="{% trans "Invite" %}"/>
-              {{ other_user|nicename }} {% blocktrans %}to connect.{%  endblocktrans %}
-            </p>
+            <div class="alert alert-block">
+	      <div class="row-fluid">
+		<div class="span8">
+		  {% blocktrans %}Send an invitation to connect with {% endblocktrans %} {{ other_user|nicename }} 
+		</div>
+		<div class="span4">
+		  <div class="pull-right">
+		    <input type="submit" class="btn btn-small" value="{% trans "Invite" %}"/>
+		  </div>
+		</div>
+	      </div>
+            </div>
 	  </div>
         </fieldset>
       </form>
@@ -206,9 +270,16 @@
     
     {%  if user.is_authenticated %}
     <div class="connection-section widget-well">
+      
+      {% if is_me %}
       <div class="widget-header">
 	<h2>{% blocktrans %}My Connections{% endblocktrans %}</h2>
       </div>
+      {% else %}
+      <div class="widget-header">
+	<h2>Connections</h2>
+      </div>
+      {% endif %}
 
       <div class="user_friends">
 	{% if other_friends %}
@@ -220,9 +291,21 @@
 	
 	{% if is_me %}
 	{% url 'profile_list' as profile_list_url %}
-	<p class="center">{% blocktrans %}Look at all of the <a href="{{ profile_list_url }}">profiles</a> and see if there's anyone you know.{% endblocktrans %}</p>
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="alert alert-info">
+	      {% blocktrans %}You currently have no connections. Check user <a href="{{ profile_list_url }}">profiles</a> and see if there's anyone you know.{% endblocktrans %}
+	    </div>
+	  </div>
+	</div>
 	{% else %}
-	<p class="center">{% trans "Invite" %} {{ other_user|nicename }} {% blocktrans %}to connect.{% endblocktrans %}</p>
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="alert alert-info">
+	      {{ other_user|nicename }} {% blocktrans %} currently has no connections.{% endblocktrans %}
+	    </div>
+	  </div>
+	</div>
 	{% endif %}
 	
 	{% endif %}
