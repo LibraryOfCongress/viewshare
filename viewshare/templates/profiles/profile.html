@@ -51,7 +51,7 @@
 
 <div class="row-fluid">
   
-  <div class="span4">
+  <div class="span5">
     
     <div id="about-box" class="info-section widget-well">
 
@@ -217,7 +217,15 @@
     
     {% if previous_invitations_to %}
     
-    <div class="alert alert-success">{% trans "Connection request sent." %}</div>
+    <div class="info-section widget-well widget-action-well">
+
+      <div class="widget-header">
+	<h2>{% trans "Actions" %}</h2>
+      </div>
+
+      <div class="alert alert-success">{% trans "Connection request sent." %}</div>
+
+    </div>
     
     {% else %}
     
@@ -328,7 +336,7 @@
     
   </div> <!-- end span4 -->
   
-  <div class="span8">
+  <div class="span7">
     
     {% include "profiles/profile_right_panel.html" %}
     
