@@ -56,6 +56,10 @@ urlpatterns = patterns('',
         login_required(views.DraftExhibitPropertiesListView.as_view()),
         name='draft_exhibit_property_list'),
 
+    url(r'^(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/draft/properties/(?P<property>[a-zA-Z0-9_.-]+)/$',
+        login_required(views.DraftExhibitPropertiesJSONView.as_view()),
+        name='draft_exhibit_property_json'),
+
     url(r'^(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/draft/properties/(?P<property>[a-zA-Z0-9_.-]+)/data/$',
         login_required(views.DraftExhibitPropertyDataView.as_view()),
         name='draft_exhibit_property_data'),

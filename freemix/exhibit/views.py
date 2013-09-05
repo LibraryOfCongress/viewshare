@@ -1,7 +1,8 @@
 import json
 
 from django.utils.translation import ugettext_lazy as _
-from django.http import *
+from django.http import (HttpResponse, Http404, HttpResponseRedirect,
+                         HttpResponseForbidden, HttpResponseBadRequest)
 from django.views.decorators.http import last_modified
 from django.views.generic.base import View
 from django.shortcuts import  get_object_or_404, render
@@ -10,8 +11,9 @@ from django.core.urlresolvers import  reverse
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
+from django.db.models import Q
 
-from freemix.exhibit import models, forms, conf
+from freemix.exhibit import models, forms, conf, serializers
 from viewshare.apps.legacy.dataset.models import Dataset
 from freemix.exhibit.models import Canvas
 from freemix.exhibit.serializers import ExhibitPropertyListSerializer
@@ -194,7 +196,10 @@ class PublishedExhibitJSONView(BaseJSONView):
         if not hasattr(self.request, "parent_object"):
             owner = self.kwargs["owner"]
             slug = self.kwargs["slug"]
-            self.request.parent_object = get_object_or_404(models.PublishedExhibit, owner__username=owner, slug=slug)
+            obj = get_object_or_404(models.PublishedExhibit,
+                                    owner__username=owner,
+                                    slug=slug)
+            self.request.parent_object = obj
         return self.request.parent_object
 
     def check_perms(self):
@@ -221,7 +226,10 @@ class PublishedExhibitPropertiesListView(PublishedExhibitJSONView):
 
 class PublishedExhibitPropertyDataView(PublishedExhibitJSONView):
     def get_doc(self):
-        values = models.PropertyData.objects.filter(exhibit_property__exhibit=self.get_parent_object(), exhibit_property__name=self.kwargs["property"]).values_list("json")
+        q = Q(exhibit_property__exhibit=self.get_parent_object(),
+              exhibit_property__name=self.kwargs["property"])
+        values = models.PropertyData.objects.filter(q).values_list("json")
+
         if len(values) == 0:
             return '{"items": []}'
         return '{"items": ' + values[0][0] + "}"
@@ -379,26 +387,73 @@ class DraftExhibitPropertiesListView(DraftExhibitView, BaseJSONView):
                                                    queryset=qs)
         return json.dumps({"properties": serializer.data})
 
-
-class DraftExhibitPropertiesJSONView(DraftExhibitView, BaseJSONView):
-    def get(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         if not self.check_perms():
             raise Http404()
+        try:
+            data = json.load(request.body)
+        except ValueError:
+            return HttpResponseBadRequest("Not a JSON document")
+        exhibit = self.get_parent_object()
+
+        self.serializer = serializers.ExhibitPropertyListSerializer(exhibit,
+                                                                    data=data)
+        if not self.serializer.is_valid():
+
+            return HttpResponseBadRequest("<br/>".join(self.serializer.errors))
+        self.serializer.save()
+        return HttpResponse("OK")
+
+    def put(self, request, *args, **kwargs):
+        response = self.post(request, *args, **kwargs)
+        if response.status_code == 200:
+            names = [p._instance.name for p in self.serializer.serializers]
+            self.get_parent_object().properties.exclude(name__in=names).delete()
+        return response
+
+
+class DraftExhibitPropertiesJSONView(DraftExhibitView, BaseJSONView):
+    def get_doc(self):
+        # Return the JSON description of the desired property
+
+        prop_name = self.kwargs["property"]
+        exhibit = self.get_parent_object()
+
+        prop = get_object_or_404(exhibit.properties.all(), name=prop_name)
+        serializer_class = serializers.serializer_class_keys[prop.classname]
+        serializer = serializer_class(exhibit, prop_name, instance=prop)
+
+        return json.dumps(serializer.data)
 
     def post(self, request, *args, **kwargs):
         if not self.check_perms():
             raise Http404()
+        try:
+            data = json.load(request.body)
+        except ValueError:
+            return HttpResponseBadRequest("Not a JSON document")
+        exhibit = self.get_parent_object()
+
+        self.serializer = serializers.get_serializer_type_by_dict(data)(exhibit,
+                                                                    data=data)
+        if not self.serializer.is_valid():
+            return HttpResponseBadRequest("<br/>".join(self.serializer.errors))
+        self.serializer.save()
+        return HttpResponse("OK")
 
     def put(self, request, *args, **kwargs):
-        if not self.check_perms():
-            raise Http404()
-
         return self.post(request, *args, **kwargs)
 
 
 class DraftExhibitPropertyDataView(DraftExhibitView, BaseJSONView):
+
+    def get_query_args(self):
+        return Q(exhibit_property__exhibit=self.get_parent_object(),
+                 exhibit_property__name=self.kwargs["property"])
+
     def get_doc(self):
-        values = models.PropertyData.objects.filter(exhibit_property__exhibit=self.get_parent_object(), exhibit_property__name=self.kwargs["property"]).values_list("json")
+        q = self.get_query_args()
+        values = models.PropertyData.objects.filter(q).values_list("json")
         if len(values) == 0:
             return '{"items": []}'
         return '{"items": ' + values[0][0] + "}"
@@ -407,14 +462,33 @@ class DraftExhibitPropertyDataView(DraftExhibitView, BaseJSONView):
         if not self.check_perms():
             raise Http404()
 
+        prop = get_object_or_404(models.ExhibitProperty,
+                                     exhibit=self.get_parent_object(),
+                                     name=self.kwargs["property"])
+
+        try:
+            data = json.load(request.body)
+        except ValueError:
+            return HttpResponseBadRequest("Not a JSON document")
+        items = data.get("items", [])
+
+        if len(items) == 0:
+            return HttpResponseBadRequest("No data")
+        try:
+            prop.data.update(json=items)
+        except models.PropertyData.DoesNotExist:
+            models.PropertyData.objects.create(exhibit_property=prop,
+                                               json=items)
+        return HttpResponse("OK")
+
+
     def put(self, request, *args, **kwargs):
-        if not self.check_perms():
-            raise Http404()
         return self.post(request, *args, **kwargs)
 
-class DraftExhibitPropertyDataStatusView(DraftExhibitView):
-    pass
 
+class DraftExhibitPropertyDataStatusView(DraftExhibitView):
+    def get(self, request, *args, **kwargs):
+        pass
 
 class DraftExhibitProfileJSONView(DraftExhibitView, BaseJSONView):
 

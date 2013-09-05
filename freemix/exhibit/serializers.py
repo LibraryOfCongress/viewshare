@@ -48,12 +48,17 @@ class ExhibitPropertySerializer(Serializer):
         if self._instance:
             expected_class = self.model.__name__
             instance_class = self._instance.__class__.__name__
-            if not isinstance(self._instance, self.model):
-                self._errors.append("Existing property is of type %s "
-                                "while %s was expected" % (instance_class,
+            if expected_class != instance_class:
+                self._errors.append("Existing property %s is of type %s "
+                                "while %s was expected" % (self._property_name,
+                                                           instance_class,
                                                            expected_class))
                 return False
-
+        if self._data:
+            if not isinstance(self._data, dict):
+                self._errors.append("Expected a valid JSON object "
+                                    "for %s" % self._property_name)
+                return False
         return self.validate()
 
     @property
@@ -66,16 +71,6 @@ class ExhibitPropertySerializer(Serializer):
         return self._data
 
     def validate(self):
-        self._errors = []
-
-        if self._instance:
-            expected_class = self.model.__name__
-            instance_class = self._instance.__class__.__name__
-            if expected_class != instance_class:
-                self._errors.append("Existing property is of type %s "
-                                "while %s was expected" % (instance_class,
-                                                           expected_class))
-                return False
         valid = True
         if not "label" in self.data:
             self._errors.append("'label' is required")
@@ -284,6 +279,10 @@ def get_serializer_type_by_dict(data):
 
 
 class ExhibitPropertyListSerializer(Serializer):
+    """
+    A bidirectional serializer that accepts a list of properties and parses them
+    based on their expected property type
+    """
 
     def __init__(self, exhibit, queryset=None, data=None):
         self.exhibit = exhibit
@@ -299,6 +298,9 @@ class ExhibitPropertyListSerializer(Serializer):
         if not self._serializers:
             self._serializers = {}
             if self._data:
+                if not isinstance(self._data, dict):
+                    self._errors.append("Expected a valid JSON object")
+                    return self._serializers
                 for key in self._data.keys():
                     data = self._data[key]
                     serializer_class = get_serializer_type_by_dict(data)
@@ -328,12 +330,23 @@ class ExhibitPropertyListSerializer(Serializer):
         return self._data
 
     def is_valid(self):
+        """
+        Returns true if the provided data is valid
+        """
+
         result = True
         if self._errors:
+            # shortcut for repeated calls
             return len(self._errors) == 0
 
         self._errors = []
-        for key in self.serializers.keys():
+        serializers = self.serializers
+        if len(self._errors) > 0:
+            # generating serializers can create errors
+            return False
+
+        for key in serializers.keys():
+            # Validate each property
             serializer = self.serializers[key]
             if not serializer.is_valid():
                 result = False
