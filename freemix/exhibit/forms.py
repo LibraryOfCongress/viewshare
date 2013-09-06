@@ -25,27 +25,23 @@ class CreateExhibitForm(forms.ModelForm):
     )
 
     def __init__(self, *args, **kwargs):
-        self.owner = kwargs.pop('owner')
-        self.dataset = kwargs.pop('dataset')
-        self.canvas = kwargs.pop('canvas')
+        self.draft = kwargs.pop("draft")
         super(CreateExhibitForm, self).__init__(*args, **kwargs)
 
     def save(self, commit=True):
         instance = super(CreateExhibitForm, self).save(commit=False)
-        instance.owner = self.owner
-        instance.dataset = self.dataset
-        instance.canvas = self.canvas
+        instance.owner = self.draft.owner
+        instance.canvas = self.draft.canvas
 
         instance.save()
+        self.draft.parent = instance
+        self.draft.save()
+        self.draft.publish()
         return instance
 
     class Meta:
         model = PublishedExhibit
-        fields = ("title", "description", "is_public", "profile",)
-        widgets= {
-            "profile": forms.HiddenInput(),
-            "is_public": forms.RadioSelect(choices=((True, "Public"), (False, "Private")))
-        }
+        fields = ("title", "description", "is_public")
 
 
 class UpdateExhibitDetailForm(forms.ModelForm):

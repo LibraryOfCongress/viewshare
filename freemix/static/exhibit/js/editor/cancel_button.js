@@ -10,7 +10,6 @@
                  url: ajax_url,
                  type: "DELETE",
                  success: function(data) {
-                    alert(data);
                     window.location = $(String(data)).attr("href");
                  },
                  error: function (r, textStatus, error) {
