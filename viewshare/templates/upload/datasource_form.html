@@ -53,19 +53,27 @@
 
      {% block upload_form_title %}<h1 id="upload-label">{% trans "Load Data"%}</h1>{% endblock %}
 
-     <fieldset class="upload-form form-well well">
-       
-       <form action="{{ form_url }}" method="post" class="uniForm form" {% block uploadform_enctype %}{% endblock %}>
-         {%csrf_token %}
+     <fieldset class="upload-form form-well">
+              
+       <div class="row-fluid">
+	 <div class="span12 well">
 
-         {{ form|crispy }}
+	   <form action="{{ form_url }}" method="post" class="uniForm form form-horizontal" {% block uploadform_enctype %}{% endblock %}>
+             {%csrf_token %}
+	     
+             {{ form|crispy }}
+	     
+             <div class="load-actions buttons control-group">
+	       <div class="controls">
+		 <input type="submit" value="{% trans "Upload" %}" class="submit btn btn-primary" />
+		 <a href="{% url 'upload_dataset' %}"><input type="button" value="{% trans "Cancel" %}" class="load-form-cancel negative-button btn btn-danger" /></a>
+	       </div>
+             </div>
+	     
+	   </form>
 
-         <div class="load-actions buttons">
-           <input type="submit" value="{% trans "Upload" %}" class="submit btn btn-primary" />
-           <a href="{% url 'upload_dataset' %}"><input type="button" value="{% trans "Cancel" %}" class="load-form-cancel negative-button btn btn-danger" /></a>
-         </div>
-
-       </form>
+	 </div>
+       </div>
 
      </fieldset>
 

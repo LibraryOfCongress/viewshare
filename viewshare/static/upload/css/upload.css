@@ -73,3 +73,13 @@ font-size: 140%;
 padding-top: 20px;
 padding-bottom: 10px;
 }
+
+.upload-form .control-label {
+ font-weight: bold;
+ color: slategrey;
+ font-size: 1.2em;
+}
+
+.upload-form .asteriskField {
+ display: none;
+}
