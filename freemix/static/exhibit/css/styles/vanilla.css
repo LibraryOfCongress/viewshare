@@ -19,7 +19,7 @@
 
 /* include jquery ui match until library removed */
 
-.exhibit-collectionView-group-content .exhibit-title, .exhibit-collectionView-group-content .ui-widget-header {
+.exhibit-collectionView-group-content .exhibit-title, .exhibit-collectionView-group-content .ui-widget-header, .ui-widget-header {
     border: none;
     font-size: 1.3em;
     background: none;
