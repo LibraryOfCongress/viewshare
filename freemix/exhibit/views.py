@@ -549,7 +549,6 @@ class DraftExhibitUpdateView(DraftExhibitView):
         context = {
             "exhibit_profile_url": profile_url,
             "dataset_properties": properties_url,
-            "cancel_url": self.exhibit.get_absolute_url(),
             "data_urls": data_urls,
             "canvas": canvas,
             "owner": request.user.username,
@@ -565,3 +564,21 @@ class DraftExhibitUpdateView(DraftExhibitView):
         context["can_edit"] = user.has_perm("exhibit.can_edit", exhibit)
         context["can_delete"] = user.has_perm("exhibit.can_delete", exhibit)
         return render(request, self.template_name, context)
+
+    def delete(self, request, *args, **kwargs):
+        exhibit = self.get_parent_object()
+
+        if not self.check_perms():
+            raise Http404()
+        if models.Exhibit.objects.filter(is_draft=False,
+                                         owner=exhibit.owner,
+                                         slug=exhibit.slug):
+            url = reverse("exhibit_display", kwargs={
+                "owner": exhibit.owner.username,
+                "slug": exhibit.slug
+            })
+        else:
+            url = reverse("upload_dataset")
+        exhibit.delete()
+
+        return HttpResponse("<a href='%s'></a>" % url)

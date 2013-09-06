@@ -112,7 +112,7 @@
 		  </div>
 		  <div class="exhibit-actions btn-group">
 		    <button class="btn btn-small" id="save_button">{% trans "Save" %}</button>
-		    <a href="{{ cancel_url }}" class="btn btn-small" id="cancel_button">{% trans "Cancel" %}</a>
+        <button class="btn btn-small" id="cancel_button" rel="{% url 'exhibit_edit' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Cancel" %}</button>
 		  </div>
 		</div>
 	      </div> <!-- span6 -->
@@ -166,5 +166,5 @@
 {% include "exhibit/edit/lenses/list-lens.html" %}
 {#{% include "exhibit/edit/lenses/thumbnail-lens.html" %}#}
 {% endblock %}
-
+</div> <!-- exhibit_edit -->
 {% endblock body %}
