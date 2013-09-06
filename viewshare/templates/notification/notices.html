@@ -32,7 +32,7 @@
   
   {% for notice in date.list %}
   {% if notice.is_unseen %}
-  <div class="unseen_notice">
+  <div class="unseen_notice notice alert alert-info">
     {% else %}
     <div class="notice alert alert-info">
       {% endif %}

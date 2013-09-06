@@ -11,81 +11,75 @@
 {% endblock %}
 
 {% block body %}
-<h1>{% trans "Change Email" %}</h1>
+<!-- <h1>{% trans "Change Email" %}</h1> -->
 
 <div class="settings_options settings_wrapper">	
   <div class="settings_text">
-
-      <fieldset>
-        <legend>Email Settings</legend>
-      </fieldset>
-
     
-      {% if user.emailaddress_set.all %}
-      
-      <div class="heading">Current Email Address</div>
-      
-      {% for emailaddress in user.emailaddress_set.all %}
-      
-      <div class="row-fluid">
-	<div class="span4">
-	  <span class="email-address">
-	    {% if emailaddress.primary %}{{ emailaddress.email }}{% else %}{{ emailaddress.email }}{% endif %}
-	  </span>
-	</div>
-	  
-	{% if emailaddress.verified %}
-	<div class="span8">
-	  <span class="verified status">{% trans "verified" %}</span>	    
-	</div>
-	{% else %}
-	<div class="span8">
-	  <span class="unverified status">{% trans "unverified" %}</span>
+    <form method="post" action="" class="uniForm form form-horizontal">
+      <fieldset>
+	<legend>Change Email Settings</legend>
 
-	  <form style="display: none;" id="send_{{ forloop.counter }}" method="post" action="" class="form-inline">
-            {%csrf_token %}
-            <input type="hidden" name="email" value="{{ emailaddress.email }}"/>
-            <input type="hidden" name="action" value="send" class="btn btn-info" />
-	  </form>
+	{%csrf_token%}
 
-	  <a href="#" class="btn btn-info" onclick="$('#send_{{ forloop.counter }}').submit();">{% trans "re-send verification email" %}</a>
-	</div>
-	{% endif %}
+	<br />
+	<div class="row-fluid">
+	  <div class="span8 offset2">
+	    
+	    {% if user.emailaddress_set.all %}
+	    
+	    <div class="control-group">
+              <label class="control-label">Current Email Address</label>
+	      <div class="controls">
+		<span class="email-address">
+		  {% for emailaddress in user.emailaddress_set.all %}
+		  {% if emailaddress.primary %}{{ emailaddress.email }}{% else %}{{ emailaddress.email }}{% endif %}
+		  {% endfor %}
+		</span>
+	      </div>
+	    </div>
+
+	    {% else %} 
+	    
+	    <div class="alert alert-warning warning">{% trans "No Email on file. You should really add one so you can receive notifications, reset your password if you forget it, etc." %}</div>
+	    
+	    {% endif %}
+	    
+            <div class="control-group">
+              <label class="control-label" for="id_username">New Email Address</label>
+              <div class="controls">
+		<input type="text" id="id_email" placeholder="" name="email" required="true"></input>
+              </div>
+	    </div>
+	    
+            <div class="control-group">
+              <div class="controls">
+		<input type="hidden" name="action" value="add" class="btn btn-primary" />
+		<input type="submit" value="{% trans "Change Email" %}" class="btn btn-primary" />
+	      </div>
+	    </div>
+	    
+	    {% if form.non_field_errors %}
+	    <div class="non-field-errors">
+	      {% for err in form.non_field_errors %}
+	      <div class="row-fluid">
+		<div class="span8 offset2">
+		  <div class="alert alert-error">
+		    <p class="center">{{ err }}</p>
+		  </div>
+		</div>
+	      </div>
+	      {% endfor %}
+	    </div>
+	    {% endif %}
+
+
+	  </fieldset>
+	</form>
 
       </div>
-
-      {% endfor %}
-
-      {% else %} 
-
-      {# no user.emailaddress_set.all #}
-
-      <div class="alert alert-warning warning">{% trans "No Email on file. You should really add one so you can receive notifications, reset your password if you forget it, etc." %}</div>
-      {% endif %}
-      
-      <div class="heading">{% trans "Change Email Address" %}</div>
-
-      <form method="post" action="" class="uniForm form form-inline">
-	<fieldset>
-	  {%csrf_token%}
-	  
-          <div class="control-group">
-            <label class="control-label" for="id_username">New Email Address</label>
-            <div class="controls">
-	      <input type="text" id="id_email" placeholder="" name="email" required="true"></input>
-            </div>
-	  </div>
-  
-          <div class="control-group">
-            <div class="controls">
-	      <input type="hidden" name="action" value="add" class="btn btn-primary" />
-	      <input type="submit" value="{% trans "Change" %}" class="btn btn-primary" />
-	    </div>
-	  </div>
-	  
-	</fieldset>
-      </form>
-
+    </div>
+    
   </div>
 </div>
 {% endblock %}

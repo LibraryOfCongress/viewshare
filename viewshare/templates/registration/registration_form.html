@@ -26,22 +26,18 @@
 {% block body %}
 <h1>{% trans "Sign Up" %}</h1>
 
-<fieldset>
-  <div class="fieldtext">
-    
-    <p>{% blocktrans %}Thank you for your interest in {{ SITE_NAME }}!{% endblocktrans %}</p>
-    
-    <p>{% blocktrans %}User accounts for {{ SITE_NAME }} require moderator approval. Please fill in the following details and our team will respond by email within 24 hours with your account
-      activation information.{% endblocktrans %}</p>
+<div class="row-fluid">
+  <div class="span10 offset1">
+    <div class="alert alert-info signup-text">
+      {% blocktrans %}Thank you for your interest in {{ SITE_NAME }}! User accounts require moderator approval. Please fill in the following details and our team will respond by email within 24 hours with your account activation information.{% endblocktrans %}
+    </div>
   </div>
-</fieldset>
-
-<div class="login_options login_request_wrapper">	
-  <div class="login_request_text">
-    {% with form.helper as helper %}
-    {% crispy form helper %}
-    {% endwith %}
-  </div>
+</div>
+  
+<div class="login_text login_request_wrapper">	
+  {% with form.helper as helper %}
+  {% crispy form helper %}
+  {% endwith %}
 </div>
     
 {% endblock body %}

@@ -23,7 +23,6 @@
 
 .login_text {
   padding: 25px 25px;
-  background: url(../../images/login_icon.png) 90% 95% no-repeat;
 }
 
 .login_request_text {
@@ -174,3 +173,7 @@ font-size: 70%;
     text-align:center;
 }
 
+.control-label {
+ font-weight: bold;
+ color: slategrey;
+}

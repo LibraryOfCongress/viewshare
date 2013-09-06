@@ -1,7 +1,6 @@
 {% extends "site_base.html" %}
 {% load url from future %}
 
-
 {% load i18n %}
 {% load crispy_forms_tags %}
 {% load freemix_helpers %}
@@ -57,9 +56,14 @@ $(document).ready(function() {
             <a href="{% url 'acct_passwd_reset' %}">{% trans "Forgot password?" %}</a>
           </div>
         </legend>
+
         {% csrf_token %}	
-	
-        <div class="control-group">
+
+	<br />
+	<div class="row-fluid">
+	  <div class="span6 offset1">
+
+	<div class="control-group">
           <label class="control-label" for="id_username">Username</label>
           <div class="controls">
 	    <input type="text" id="id_username" placeholder="Username" name="username" required="true"></input>
@@ -77,12 +81,31 @@ $(document).ready(function() {
 	      <label class="checkbox" for="id_remember">
 		<input type="checkbox" id="id_remember" name="remember"> Remember me
 	      </label>
-	      <button type="submit" class="btn">{% trans "Log in" %}</button>
+	      <button type="submit" class="btn btn-primary">{% trans "Log in" %}</button>
             </div>
           </div>
-	
-	</div>
 
+	</div>
+	  </div>
+
+	  {% if form.non_field_errors %}
+	  <div class="non-field-errors">
+	    {% for err in form.non_field_errors %}
+	    <div class="row-fluid">
+	      <div class="span8 offset2">
+		<div class="alert alert-error">
+		  <p class="center">{{ err }}</p>
+		</div>
+	      </div>
+	    </div>
+	    {% endfor %}
+	  </div>
+	  {% endif %}
+
+
+
+	</div>
+	
       </fieldset>
     </form>
   </div>

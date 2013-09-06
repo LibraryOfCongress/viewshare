@@ -21,7 +21,6 @@ div.user_data_entry .user_counts .user_exhibits {
 }
 
 div.user_data_entry .user_description {
-    display: none; /* don't display user description of friends */
 }
 
 div.user_data_entry .user_bottom {

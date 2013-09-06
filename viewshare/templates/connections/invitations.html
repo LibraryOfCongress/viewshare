@@ -49,9 +49,7 @@
     <div class="invitation alert alert-info">
       <div class="invitation-item row-fluid">
 	<div class="span12">
-	  <span class="user"><a href="{% url 'profile_detail' invitation.from_user.username %}">{{ invitation.from_user|nicename }}</a></span>
-	  <span class="date">{{ invitation.sent }}</span>
-	  <span class="invitation_{{ invitation.status }}">{{ invitation.get_status_display }}</span>
+	  {% blocktrans %}You have {% endblocktrans %}<span class="invitation_{{ invitation.status }}">{{ invitation.get_status_display }}</span>{% blocktrans %} the invitation to connect from {% endblocktrans %}<span class="user"><a href="{% url 'profile_detail' invitation.from_user.username %}">{{ invitation.from_user|nicename }}</a></span>{% blocktrans %} on {% endblocktrans %}<span class="date">{{ invitation.sent }}</span>
 	</div>
       </div>
     </div>
@@ -103,7 +101,7 @@
   <div class="invitation">
     <div class="invitation-item row-fluid">
       <div class="span12">
-	<div class="alert alert-info message">{% trans "No invitations sent." %}</div>
+	<div class="alert alert-info message">{% trans "No invitations have been sent at this time." %}</div>
       </div>
     </div>
   </div>
