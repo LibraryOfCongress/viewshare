@@ -12,6 +12,7 @@ from django.template.loader import render_to_string
 from django_extensions.db.fields.json import JSONField
 from django_extensions.db.models import (TitleSlugDescriptionModel,
                                          TimeStampedModel)
+from django.template.defaultfilters import slugify
 
 
 TX_STATUS = {
@@ -148,7 +149,28 @@ class PublishedExhibit(Exhibit):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-        self.is_draft = True
+        self.is_draft = False
+
+        if not self.slug and self.title:
+            slug_len = Exhibit._meta.get_field("slug").max_length
+            original_slug = slugify(self.title)
+
+            qs = PublishedExhibit.objects.filter(owner=self.owner)
+            if self.pk:
+                qs.exclude(pk=self.pk)
+            slug=original_slug[:slug_len]
+            next = 2
+            while not slug or qs.filter(slug=slug):
+                slug = original_slug
+                end = '%s%s' % (self.separator, next)
+                end_len = len(end)
+                if slug_len and len(slug) + end_len > slug_len:
+                    slug = slug[:slug_len - end_len]
+                    slug = self._slug_strip(slug)
+                slug = '%s%s' % (slug, end)
+                next += 1
+            self.slug=slug
+
         super(PublishedExhibit, self).save(force_insert=force_insert,
                                        force_update=force_update,
                                        using=using,

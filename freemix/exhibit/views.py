@@ -9,57 +9,15 @@ from django.shortcuts import  get_object_or_404, render
 from django.template.loader import render_to_string
 from django.core.urlresolvers import  reverse
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import UpdateView
 from django.views.generic.list import ListView
 from django.db.models import Q
 
-from freemix.exhibit import models, forms, conf, serializers
-from viewshare.apps.legacy.dataset.models import Dataset
-from freemix.exhibit.models import Canvas
+from freemix.exhibit import models, forms, serializers
 from freemix.exhibit.serializers import ExhibitPropertyListSerializer
 from freemix.permissions import PermissionsRegistry
 from freemix.utils import get_site_url
 from freemix.views import OwnerListView, OwnerSlugPermissionMixin, BaseJSONView
-
-
-# Edit Views
-class ExhibitCreateFormView(CreateView):
-    form_class = forms.CreateExhibitForm
-    template_name = "exhibit/create/exhibit_metadata_form.html"
-
-    def get_success_url(self):
-        owner = getattr(self.object.owner, "username", None)
-        return reverse('exhibit_create_success',
-                       kwargs={"owner": owner,
-                               "slug": self.object.slug})
-
-    def get_context_data(self, **kwargs):
-        ctx = super(ExhibitCreateFormView, self).get_context_data(**kwargs)
-        ctx["owner"] = self.kwargs["owner"]
-        ctx["slug"] = self.kwargs["slug"]
-        ctx["canvas"] = self.kwargs["canvas"]
-        return ctx
-
-    def get_form_kwargs(self):
-        kwargs = super(ExhibitCreateFormView, self).get_form_kwargs()
-        kwargs["owner"] = self.request.user
-        dataset = get_object_or_404(Dataset, owner__username=self.kwargs["owner"], slug=self.kwargs["slug"])
-        kwargs["dataset"] = dataset
-        kwargs["canvas"] = get_object_or_404(Canvas, slug=self.kwargs["canvas"])
-        return kwargs
-
-    def get_initial(self):
-        initial = dict(super(ExhibitCreateFormView, self).get_initial())
-        dataset = get_object_or_404(Dataset, owner__username=self.kwargs["owner"], slug=self.kwargs["slug"])
-
-        initial["title"] = getattr(dataset, "title")
-        return initial
-
-    def form_valid(self, form):
-        if not self.request.user.has_perm("dataset.can_view", form.dataset):
-            return HttpResponseForbidden()
-        self.object = form.save()
-        return HttpResponseRedirect(self.get_success_url())
 
 
 class ExhibitDetailEditView(OwnerSlugPermissionMixin, UpdateView):
@@ -76,54 +34,6 @@ class ExhibitDetailEditView(OwnerSlugPermissionMixin, UpdateView):
                                         "owner": self.object.owner.username,
                                         "slug": self.object.slug
                                     }))
-
-
-class ExhibitCreateView(View):
-
-    template_name="exhibit/exhibit_create.html"
-
-    def check_permissions(self):
-        return self.request.user.has_perm("dataset.can_view", self.dataset)
-
-    def get(self, request, *args, **kwargs):
-        self.dataset_args = {"owner": self.kwargs["owner"], "slug": self.kwargs["slug"]}
-
-        self.dataset = get_object_or_404(Dataset.objects.select_related("owner"),
-                                         owner__username=self.kwargs["owner"],
-                                         slug=self.kwargs["slug"])
-
-        if not self.check_permissions():
-            raise Http404()
-
-        profile_url = reverse("exhibit_profile_template", kwargs=self.dataset_args)
-        dataset_profile_url = reverse("dataset_profile_json", kwargs=self.dataset_args)
-        data_url = reverse("dataset_data_json", kwargs=self.dataset_args)
-        dataset_properties_cache = reverse("dataset_properties_cache_json", kwargs=self.dataset_args)
-
-        canvas_slug = self.request.GET.get("canvas", conf.DEFAULT_EXHIBIT_CANVAS)
-        canvas = get_object_or_404(models.Canvas, slug=canvas_slug)
-
-        save_form_url = reverse("exhibit_create_form", kwargs={
-            "owner": self.dataset.owner,
-            "slug": self.dataset.slug,
-            "canvas": canvas.slug
-        })
-
-        return render(request, self.template_name, {
-            "exhibit_profile_url": profile_url,
-            "dataset_profile_url": dataset_profile_url,
-            "dataset_properties_cache_json": dataset_properties_cache,
-            "cancel_url": self.dataset.get_absolute_url(),
-            "save_form_url": save_form_url,
-            "data_url":data_url,
-            "canvas": canvas,
-            "dataset": self.dataset,
-            "owner": request.user.username,
-            "can_edit_dataset": request.user.has_perm("dataset.can_edit", self.dataset)
-
-        })
-
-
 
 
 #############################################################################################
@@ -582,3 +492,52 @@ class DraftExhibitUpdateView(DraftExhibitView):
         exhibit.delete()
 
         return HttpResponse("<a href='%s'></a>" % url)
+
+
+class PublishExhibitView(DraftExhibitView):
+
+    form_class = forms.CreateExhibitForm
+    template_name = "exhibit/create/exhibit_metadata_form.html"
+
+    def get(self, request, *args, **kwargs):
+
+        if not self.check_perms():
+            raise Http404()
+
+        draft = self.get_parent_object()
+        if draft.parent:
+            url = draft.parent.get_absolute_url()
+            draft.publish()
+            return HttpResponseRedirect(url)
+
+        form = forms.CreateExhibitForm(draft=draft)
+
+        return render(request, self.template_name, {
+            "form": form,
+            "draft": draft
+        })
+
+    def post(self, request, *args, **kwargs):
+
+        if not self.check_perms():
+            raise Http404()
+
+        draft = self.get_parent_object()
+
+        form = self.form_class(request.POST, draft=draft)
+
+        if form.is_valid():
+            form.save()
+            response_url = reverse('exhibit_display',
+                                    kwargs={
+                                        "owner":form.instance.owner,
+                                        "slug":form.instance.slug
+                                    })
+            if request.is_ajax():
+                return HttpResponse("<a rev='%s'></a>" % response_url)
+            return HttpResponseRedirect(response_url)
+        else:
+            return render(request, self.template_name, {
+                "form": form,
+                "draft": draft
+            })

@@ -52,6 +52,10 @@ urlpatterns = patterns('',
         views.DraftExhibitProfileJSONView.as_view(),
         name="draft_exhibit_profile_json"),
 
+    url(r'^(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/draft/publish/$',
+        login_required(views.PublishExhibitView.as_view()),
+        name='exhibit_publish'),
+
     url(r'^(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/draft/properties/$',
         login_required(views.DraftExhibitPropertiesListView.as_view()),
         name='draft_exhibit_property_list'),
@@ -67,6 +71,7 @@ urlpatterns = patterns('',
     url(r'^(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/draft/properties/(?P<property>[a-zA-Z0-9_.-]+)/data/status/$',
         login_required(views.DraftExhibitPropertyDataStatusView.as_view()),
         name='draft_exhibit_property_status'),
+
 
 )
 
