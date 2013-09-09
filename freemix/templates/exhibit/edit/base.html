@@ -57,6 +57,11 @@
 
     {% include "exhibit/widget_js.html" with editor="True" %}
 
+    {% compress js %}
+    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/editor/save_button.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}exhibit/js/editor/cancel_button.js"></script>
+    {% endcompress %}
+
 {% endblock extra_scripts %}
 
 {% block body %}
