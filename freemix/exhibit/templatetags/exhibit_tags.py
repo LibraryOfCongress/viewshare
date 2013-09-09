@@ -1,7 +1,4 @@
 from django import template
-from django.conf import settings
-from django.template.loader import render_to_string
-from freemix.exhibit import models
 from freemix.exhibit import conf
 
 register = template.Library()
@@ -24,17 +21,16 @@ def exhibit_list_item(context, exhibit):
             "can_view": can_view,
             "can_inspect": can_inspect}
 
+
 @register.inclusion_tag("exhibit/exhibit_list.html", takes_context=True)
 def exhibit_list(context, exhibits, max_count=10, pageable=True):
-    return {"object_list": exhibits, "max_count": max_count, "pageable": pageable,
+    return {"object_list": exhibits,
+            "max_count": max_count,
+            "pageable": pageable,
             "request": context['request'],
             "sort": context["request"].GET.get("sort", None),
-            "dir": context["request"].GET.get("dir", "desc"),
-            }
+            "dir": context["request"].GET.get("dir", "desc")}
 
-@register.inclusion_tag("exhibit/exhibit_create_dialog.html", takes_context=True)
-def new_exhibit(context):
-    return {'STATIC_URL': settings.STATIC_URL}
 
 @register.simple_tag
 def simile_painter_url():

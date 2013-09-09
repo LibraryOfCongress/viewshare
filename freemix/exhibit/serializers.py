@@ -1,3 +1,4 @@
+from django.db.models import Q
 from freemix.exhibit import models
 
 
@@ -33,12 +34,11 @@ class ExhibitPropertySerializer(Serializer):
             if len(f) > 0:
                 self._instance = f[0].get_concrete()
             else:
-                self._instance=None
+                self._instance = None
         else:
             self._instance = instance
         self._data = data
         self._errors = None
-
 
     def is_valid(self):
         if self._errors:
@@ -49,10 +49,11 @@ class ExhibitPropertySerializer(Serializer):
             expected_class = self.model.__name__
             instance_class = self._instance.__class__.__name__
             if expected_class != instance_class:
-                self._errors.append("Existing property %s is of type %s "
-                                "while %s was expected" % (self._property_name,
-                                                           instance_class,
-                                                           expected_class))
+                error = ("Existing property %s is of type %s "
+                         "while %s was expected" % (self._property_name,
+                                                    instance_class,
+                                                    expected_class))
+                self._errors.append(error)
                 return False
         if self._data:
             if not isinstance(self._data, dict):
@@ -79,7 +80,6 @@ class ExhibitPropertySerializer(Serializer):
             self._errors.append("'valueType' is required")
             valid = False
         return valid
-
 
     @property
     def depends_on(self):
@@ -149,7 +149,8 @@ class CompositePropertySerializer(ExhibitPropertySerializer):
         self._instance.composite.clear()
         index = 0
 
-        props = self._exhibit.properties.filter(name__in=self.data["composite"])
+        query = Q(name__in=self.data["composite"])
+        props = self._exhibit.properties.filter(query)
         l = []
         for prop in props:
             l.append(models.PropertyReference(derived=self._instance,
@@ -262,6 +263,7 @@ class PatternListPropertySerializer(ShreddedListPropertySerializer):
 serializer_dict_keys = {}
 serializer_class_keys = {}
 
+
 def register_serializer(cls):
     if hasattr(cls, "augmentation_key"):
         serializer_dict_keys[cls.augmentation_key] = cls
@@ -272,6 +274,7 @@ register_serializer(CompositePropertySerializer)
 register_serializer(DelimitedListPropertySerializer)
 register_serializer(PatternListPropertySerializer)
 
+
 def get_serializer_type_by_dict(data):
     if "augmentation" in data and data["augmentation"] in serializer_dict_keys:
         return serializer_dict_keys[data["augmentation"]]
@@ -280,8 +283,8 @@ def get_serializer_type_by_dict(data):
 
 class ExhibitPropertyListSerializer(Serializer):
     """
-    A bidirectional serializer that accepts a list of properties and parses them
-    based on their expected property type
+    A bidirectional serializer that accepts a list of properties and parses
+    them based on their expected property type
     """
 
     def __init__(self, exhibit, queryset=None, data=None):
@@ -372,7 +375,6 @@ class ExhibitPropertyListSerializer(Serializer):
                                        value_type="text").save()
             finished.append(name)
 
-
         for name in self.serializers.keys():
             process_property(name)
 
@@ -396,6 +398,7 @@ def separate_data(data):
             properties[key] = arr
     return properties
 
+
 def merge_data(data):
     records = {}
 
@@ -409,6 +412,7 @@ def merge_data(data):
             record[prop] = item[prop]
     return [records[key] for key in records.keys()]
 
+
 class ExhibitDataSerializer(Serializer):
 
     def __init__(self, exhibit,
@@ -416,7 +420,8 @@ class ExhibitDataSerializer(Serializer):
                  data=None):
         self.exhibit = exhibit
         if not queryset:
-            queryset = models.PropertyData.objects.filter(exhibit_property__exhibit=exhibit)
+            query = Q(exhibit_property__exhibit=exhibit)
+            queryset = models.PropertyData.objects.filter(query)
         self._queryset = queryset
         self._data = data
         self._processed = False
@@ -447,8 +452,11 @@ class ExhibitDataSerializer(Serializer):
     def save(self):
         # First update existing data records
         prop_names = self.data.keys()
-        prop_data = models.PropertyData.objects.filter(exhibit_property__name__in=prop_names,
-                                                       exhibit_property__exhibit=self.exhibit)
+
+        query = Q(exhibit_property__name__in=prop_names,
+                  exhibit_property__exhibit=self.exhibit)
+        prop_data = models.PropertyData.objects.filter(query)
+
         for rec in prop_data:
             name = rec.exhibit_property.name
             rec.json = self._data[name]
@@ -475,14 +483,14 @@ class ExhibitDataSerializer(Serializer):
                                     json=self._data[name]).save()
 
 
-#------------------------------------------------------------------------------#
+#-----------------------------------------------------------------------------#
 # Legacy data and profile transform utilities
 
 def legacy_data_profile_to_new(profile):
 
     def find_type(p):
         for t in ["location", "text", "image", "date", "url", "number"]:
-            if "tags" in p.keys() and "property:type=%s"%t in p["tags"]:
+            if "tags" in p.keys() and "property:type=%s" % t in p["tags"]:
                 return t
 
         return "text"
@@ -512,6 +520,7 @@ def legacy_data_profile_to_new(profile):
         result[prop_name] = new_record
 
     return result
+
 
 def new_data_profile_to_legacy(profile):
     result = []

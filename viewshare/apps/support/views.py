@@ -10,7 +10,6 @@ from viewshare.apps.support.backends import get_support_backend
 
 from viewshare.utilities.views import get_akara_version
 from viewshare.apps.upload.transform import AKARA_URL_PREFIX
-from freemix import __version__ as freemix_version
 from freemix.utils import get_user, get_site_url
 
 from viewshare import __version__ as viewshare_version
@@ -59,7 +58,6 @@ class SupportFormView(View):
 
         info = (settings.SITE_NAME,
                 viewshare_version,
-                freemix_version,
                 get_akara_version(),
                 AKARA_URL_PREFIX,)
         system_info = '%s %s - Freemix %s - Akara %s - Akara Root %s' % info

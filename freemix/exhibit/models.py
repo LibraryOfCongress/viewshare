@@ -62,7 +62,6 @@ class Canvas(TitleSlugDescriptionModel):
         verbose_name_plural = "Canvases"
 
 
-
 def create_default_exhibit_profile():
     return {
         "facets": {},
@@ -75,6 +74,7 @@ def create_default_exhibit_profile():
         },
         "lenses": []
     }
+
 
 class Exhibit(TimeStampedModel):
 
@@ -136,13 +136,13 @@ class PublishedExhibit(Exhibit):
         draft.save()
 
         from freemix.exhibit.serializers import ExhibitPropertyListSerializer
-        data = ExhibitPropertyListSerializer(self, queryset=self.properties).data
+        data = ExhibitPropertyListSerializer(self,
+                                             queryset=self.properties).data
         out = ExhibitPropertyListSerializer(draft, data=data)
         out.save()
 
-        for t in  (PropertyData.objects
-                    .filter(exhibit_property__exhibit=self)
-                    .values_list("exhibit_property__name", "json")):
+        query = PropertyData.objects.filter(exhibit_property__exhibit=self)
+        for t in query.values_list("exhibit_property__name", "json"):
             p = draft.properties.get(name=t[0])
             PropertyData(exhibit_property=p, json=json.loads(t[1])).save()
         return draft
@@ -158,7 +158,7 @@ class PublishedExhibit(Exhibit):
             qs = PublishedExhibit.objects.filter(owner=self.owner)
             if self.pk:
                 qs.exclude(pk=self.pk)
-            slug=original_slug[:slug_len]
+            slug = original_slug[:slug_len]
             next = 2
             while not slug or qs.filter(slug=slug):
                 slug = original_slug
@@ -169,12 +169,12 @@ class PublishedExhibit(Exhibit):
                     slug = self._slug_strip(slug)
                 slug = '%s%s' % (slug, end)
                 next += 1
-            self.slug=slug
+            self.slug = slug
 
         super(PublishedExhibit, self).save(force_insert=force_insert,
-                                       force_update=force_update,
-                                       using=using,
-                                       update_fields=update_fields)
+                                           force_update=force_update,
+                                           using=using,
+                                           update_fields=update_fields)
 
     class Meta:
         ordering = ('-modified', )
@@ -201,9 +201,11 @@ class DraftExhibit(Exhibit):
             'slug': self.slug})
 
     def publish(self):
-        self.parent.canvas=self.canvas
-        self.parent.profile=self.profile
+        self.parent.canvas = self.canvas
+        self.parent.profile = self.profile
+
         self.parent.properties.all().delete()
+
         self.parent.modified = self.modified
         self.parent.save()
         self.properties.update(exhibit=self.parent)
@@ -235,7 +237,7 @@ class DraftExhibit(Exhibit):
                     }
                 }],
             },
-            "default_lens":{
+            "default_lens": {
                 "type": "list",
                 "properties":  [p.name for p in self.properties.all()]
             },
@@ -411,9 +413,10 @@ class DataTransaction(TimeStampedModel):
     Abstract base class to handle potentially long-running data work such as
     Akara transformations and augmentations.
     """
-    status = models.IntegerField(
-            choices=[(v, k) for k, v in TX_STATUS.iteritems()],
-            default=TX_STATUS["pending"])
+
+    choices = [(v, k) for k, v in TX_STATUS.iteritems()]
+    status = models.IntegerField(choices=choices,
+                                 default=TX_STATUS["pending"])
     is_complete = models.BooleanField(default=False)
 
     class meta:
@@ -468,7 +471,8 @@ class DataTransaction(TimeStampedModel):
         return self
 
     def failure(self, message):
-        self.logger.error("Error for transaction %s: %s" % (self.tx_id, message))
+        self.logger.error("Error for transaction %s: %s" %
+                          (self.tx_id, message))
         self.status = TX_STATUS["failure"]
         self.result = {"message": message}
         self.save()
