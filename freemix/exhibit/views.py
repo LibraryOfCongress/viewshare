@@ -175,8 +175,8 @@ class PublishedExhibitDetailView(PublishedExhibitView):
         ctx["can_share"] = user.has_perm("exhibit.can_share",
                                          self.get_object())
         if can_embed:
-            url = reverse('exbibit_embed_js',
-                          kwargs={"owner": self.get_object().owner,
+            url = reverse('exhibit_embed_js',
+                          kwargs={"owner": self.get_object().owner.username,
                                   "slug": self.get_object().slug})
             url = get_site_url(url)
             ctx["exhibit_embed_url"] = url
@@ -538,7 +538,7 @@ class PublishExhibitView(DraftExhibitView):
 
         if form.is_valid():
             form.save()
-            return self.success(request)
+            return self.success(request, form.instance)
 
         else:
             return render(request, self.template_name, {
@@ -554,7 +554,7 @@ class PublishExhibitView(DraftExhibitView):
 
         if draft.parent:
             draft.publish()
-            return self.success(request)
+            return self.success(request, draft.parent)
         form = forms.CreateExhibitForm(draft=draft)
 
         return render(request, self.template_name, {
@@ -562,10 +562,10 @@ class PublishExhibitView(DraftExhibitView):
             "draft": draft
         })
 
-    def success(self, request):
+    def success(self, request, instance):
         response_url = reverse('exhibit_display',
                                kwargs={
-                                   "owner": self.kwargs["owner"],
-                                   "slug": self.kwargs["slug"]
+                                   "owner": instance.owner.username,
+                                   "slug": instance.slug
                                })
         return HttpResponse("<a rev='%s'></a>" % response_url)

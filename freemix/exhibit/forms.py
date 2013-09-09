@@ -27,6 +27,9 @@ class CreateExhibitForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.draft = kwargs.pop("draft")
         super(CreateExhibitForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.html5_required = True
+        self.helper.add_input(Submit('Update', "Update"))
 
     def save(self, commit=True):
         instance = super(CreateExhibitForm, self).save(commit=False)

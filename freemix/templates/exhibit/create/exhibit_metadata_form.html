@@ -2,10 +2,9 @@
 {% load i18n %}
 {% load crispy_forms_tags %}
 
-  <form class="form-horizontal" action="{% url 'exhibit_publish' owner=draft.owner.username slug=draft.slug %}" method="post">
-          {% csrf_token %}
-          {{ form|crispy }}
-        <div class="form_block">
-          <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
-        </div>
-  </form>
+<form class="form-horizontal" method="POST" action="{% url 'exhibit_publish' owner=draft.owner.username slug=draft.slug %}">
+  <fieldset>
+    {% csrf_token %}
+    {% crispy form %}
+  </fieldset>
+</form>

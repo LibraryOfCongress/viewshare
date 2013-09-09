@@ -162,7 +162,7 @@ class PublishedExhibit(Exhibit):
             next = 2
             while not slug or qs.filter(slug=slug):
                 slug = original_slug
-                end = '%s%s' % (self.separator, next)
+                end = '%s%s' % ('-', next)
                 end_len = len(end)
                 if slug_len and len(slug) + end_len > slug_len:
                     slug = slug[:slug_len - end_len]
@@ -211,6 +211,7 @@ class DraftExhibit(Exhibit):
         self.properties.update(exhibit=self.parent)
 
         self.delete()
+        return self.parent
 
     class Meta:
         ordering = ('-modified', )

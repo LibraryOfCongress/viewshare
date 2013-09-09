@@ -112,6 +112,14 @@
             </div>
             <div class="exhibit-actions btn-group">
               <button class="btn btn-small" id="save_button" rel="{% url 'exhibit_publish' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Save" %}</button>
+              <div id="publish-exhibit-modal" class="publish-exhibit-dialog modal modal-fit hide fade" tabindex="-1" role="dialog" aria-labelledby="publish-exhibit-modal-label" aria-hidden="true">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h3 id="publish-exhibit-modal-label">{% trans "Publish View" %}</h3>
+                </div>
+                <div id="publish-exhibit-form-template" class="modal-body">
+                </div>
+              </div>
               <button class="btn btn-small" id="cancel_button" rel="{% url 'exhibit_edit' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Cancel" %}</button>
             </div>
           </div>
