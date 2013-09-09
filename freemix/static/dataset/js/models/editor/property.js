@@ -113,7 +113,7 @@ define(
                 for (var i = 0; i < dataJSON.items.length; ++i) {
                     newItem = {
                         id: dataJSON.items[i].id,
-                        value: dataJSON.items[i][this.label]
+                        value: dataJSON.items[i][this.id]
                     };
                     this.items.push(newItem);
                 }
@@ -125,7 +125,7 @@ define(
                 }];
             }
             this.currentItemIndex = 0;
-            this.Observer('loadDataSuccess').publish({model: this});
+            this.Observer('loadDataSuccess').publish();
         },
 
         /** Failed while retrieving data for this property from the server */

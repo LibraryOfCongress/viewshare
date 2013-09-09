@@ -46,14 +46,14 @@ define(
        anchorTemplate: Handlebars.compile('<a href="{{ value }}">{{ value }}</a>'),
 
        /** Compile the template we will use to render 'image' values */
-       imageTemplate: Handlebars.compile('<img src="{{ value }}" />'),
+       imageTemplate: Handlebars.compile('<img src="{{ value }}" style="height: 50px" />'),
 
        /** Compile the default template for values */
        textTemplate: Handlebars.compile('{{ value }}'),
 
        /** Event handler when a .name input is changed */
        changeLabelHandler: function(event) {
-           this.model.name(event.target.value);
+           this.model.label = event.target.value;
            return this.model.updateProperty();
        },
 
