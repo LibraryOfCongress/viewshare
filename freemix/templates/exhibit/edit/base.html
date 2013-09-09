@@ -111,7 +111,7 @@
               <button class="btn btn-small btn-primary" id="preview_button" data-toggle="collapse" data-target="#preview">{% trans "Preview" %}</button>
             </div>
             <div class="exhibit-actions btn-group">
-              <button class="btn btn-small" id="save_button" rel="{% url 'exhibit_publish' owner=exhibit.owner.username slug=exhibit.owner.slug %}">{% trans "Save" %}</button>
+              <button class="btn btn-small" id="save_button" rel="{% url 'exhibit_publish' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Save" %}</button>
               <button class="btn btn-small" id="cancel_button" rel="{% url 'exhibit_edit' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Cancel" %}</button>
             </div>
           </div>

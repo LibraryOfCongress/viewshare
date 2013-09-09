@@ -20,11 +20,19 @@ from freemix.utils import get_site_url
 from freemix.views import OwnerListView, OwnerSlugPermissionMixin, BaseJSONView
 
 
-def exhibit_last_modified(request, *args, **kwargs):
-    return last_modified(get_published_exhibit(request,
-                                               kwargs["owner"],
-                                               kwargs["slug"]).modified)
+# Exhibit Profile Views
+def get_published_exhibit(request, owner, slug):
+    if not hasattr(request, "exhibit"):
+        request.exhibit = get_object_or_404(models.PublishedExhibit,
+                                            slug=slug, owner__username=owner)
+    return request.exhibit
 
+
+def get_exhibit_modified(request, *args, **kwargs):
+    return get_published_exhibit(request,
+                                 kwargs["owner"],
+                                 kwargs["slug"]).modified
+exhibit_last_modified = last_modified(get_exhibit_modified)
 
 class ExhibitDetailEditView(OwnerSlugPermissionMixin, UpdateView):
     form_class = forms.UpdateExhibitDetailForm
@@ -82,7 +90,7 @@ class PublishedExhibitDisplayView(PublishedExhibitView):
         return HttpResponseForbidden()
 
     def get_context_data(self, **kwargs):
-        s = super(PublishedExhibitDetailView, self)
+        s = super(PublishedExhibitDisplayView, self)
         context = s.get_context_data(**kwargs)
 
         exhibit = self.get_object()
@@ -220,14 +228,6 @@ class EmbeddedExhibitView(View):
 
 
 embedded_exhibit_view = exhibit_last_modified(EmbeddedExhibitView.as_view())
-
-
-# Exhibit Profile Views
-def get_published_exhibit(request, owner, slug):
-    if not hasattr(request, "exhibit"):
-        request.exhibit = get_object_or_404(models.PublishedExhibit,
-                                            slug=slug, owner__username=owner)
-    return request.exhibit
 
 
 class PublishedExhibitProfileJSONView(BaseJSONView):
