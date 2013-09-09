@@ -6,7 +6,17 @@
     <a id="next-record" class="btn" href="#"><i class="icon-arrow-right"></i></a>
     <a id="add-property" class="btn btn-success" href="#"><i class="icon-plus-sign"></i> Add Property</a>
   </div>
-  <div id="properties"></div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Label</th>
+        <th>Type</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody id="properties">
+    </tbody>
+  </table>
   {{ else }}
   <div class="alert alert-block">
     <h4>Warning!</h2>

@@ -522,7 +522,6 @@ class PublishExhibitView(DraftExhibitView):
     template_name = "exhibit/create/exhibit_metadata_form.html"
 
     def post(self, request, *args, **kwargs):
-
         if not self.check_perms():
             raise Http404()
 
@@ -569,3 +568,55 @@ class PublishExhibitView(DraftExhibitView):
                                    "slug": instance.slug
                                })
         return HttpResponse("<a rev='%s'></a>" % response_url)
+
+
+class PropertyEditorView(DraftExhibitView):
+    """
+    TODO: Remove this! Displaying the property editor should be handled
+    in freemix/templates/exhibit/edit/base.html template. I've created
+    this separate View and template as a proof of concept. It was easier
+    to create a separate view and make sure everything in the property editor
+    is working with the DraftExhibit API on it's own before integrating it
+    with the new builder code.
+    To remove:
+        * this view
+        * the property_editor url
+        * freemix/templates/exhibit/edit/property-editor.html 
+    """
+
+    template_name="exhibit/edit/property-editor.html"
+
+    def get(self, request, *args, **kwargs):
+        exhibit = self.get_parent_object()
+
+        params = {
+            "owner": self.kwargs["owner"],
+            "slug": self.kwargs["slug"]
+        }
+
+        profile_url = reverse("draft_exhibit_profile_json",
+                              kwargs=params)
+        properties_url = reverse('draft_exhibit_property_list',
+                                 kwargs=params)
+
+        data_urls = exhibit.properties.get_data_urls()
+        canvas = exhibit.canvas
+        context = {
+            "exhibit_profile_url": profile_url,
+            "dataset_properties": properties_url,
+            "cancel_url": self.exhibit.get_absolute_url(),
+            "data_urls": data_urls,
+            "canvas": canvas,
+            "owner": request.user.username,
+            "exhibit": exhibit
+        }
+
+        user = self.request.user
+        exhibit = exhibit
+
+        context["can_view"] = user.has_perm("exhibit.can_view", exhibit)
+        context["can_inspect"] = user.has_perm("exhibit.can_inspect", exhibit)
+
+        context["can_edit"] = user.has_perm("exhibit.can_edit", exhibit)
+        context["can_delete"] = user.has_perm("exhibit.can_delete", exhibit)
+        return render(request, self.template_name, context)

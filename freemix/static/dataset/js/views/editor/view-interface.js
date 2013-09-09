@@ -6,9 +6,11 @@ define(['observer'], function (Observer) {
     this.initialize.apply(this, [options]);
   };
 
-  ViewInterfaceObserver = new Observer();
+  var ViewInterfaceObserver = new Observer();
 
-  $.extend(ViewInterface.prototype, ViewInterfaceObserver.prototype);
+  $.extend(ViewInterface.prototype, ViewInterfaceObserver.prototype, {
+      initialize: function() {}
+  });
 
   return new ViewInterface();
 });

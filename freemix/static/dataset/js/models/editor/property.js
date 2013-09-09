@@ -29,13 +29,12 @@ define(
      * * number
      * @param {array} options.items - Array of data values
      */
-    var
-    PropertyModel = function(options) {
+    var PropertyModel = function(options) {
+        this.Observer = new Observer().Observer;
         this.initialize.apply(this, [options]);
-    },
-    PropertyModelObserver = new Observer();
+    };
 
-    $.extend(PropertyModel.prototype, PropertyModelObserver, {
+    $.extend(PropertyModel.prototype, {
         initialize: function(options) {
             this.id = options.id;
             this.label = options.label;
@@ -44,8 +43,8 @@ define(
             this.currentItemIndex = null;
             this.owner = options.owner;
             this.slug = options.slug;
-            this.propertyURL = '/view/' + this.owner + '/' + this.slug + '/properties/' + this.id;
-            this.dataURL =  + this.propertyURL + '/data/';
+            this.propertyURL = '/views/' + this.owner + '/' + this.slug + '/draft/properties/' + this.id;
+            this.dataURL = this.propertyURL + '/data/';
         },
 
         /** Return the current value from this.items. */
@@ -63,9 +62,9 @@ define(
             }
             var current = this.currentItemIndex + delta;
             if (current < 0) {
-                this.currentItemIndex = this.records.length + current;
+                this.currentItemIndex = this.items.length + current;
             } else {
-                this.currentItemIndex = current % this.records.length;
+                this.currentItemIndex = current % this.items.length;
             }
             this.Observer('changeCurrentItem').publish();
         },
@@ -109,17 +108,24 @@ define(
          * @param {object} dataJSON - values for this property
          */
         loadDataSuccess: function(dataJSON) {
-            if (this.items.length > 0) {
-                this.items = dataJSON.items;
+            var i, newItem;
+            if (dataJSON.items.length > 0) {
+                for (var i = 0; i < dataJSON.items.length; ++i) {
+                    newItem = {
+                        id: dataJSON.items[i].id,
+                        value: dataJSON.items[i][this.label]
+                    };
+                    this.items.push(newItem);
+                }
             } else {
                 // there are no items for this property
                 this.items = [{
-                    label: 'No value',
+                    value: 'No value',
                     id: 0
                 }];
             }
             this.currentItemIndex = 0;
-            this.Observer('loadDataSuccess').publish();
+            this.Observer('loadDataSuccess').publish({model: this});
         },
 
         /** Failed while retrieving data for this property from the server */

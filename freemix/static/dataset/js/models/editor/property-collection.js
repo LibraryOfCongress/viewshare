@@ -32,6 +32,7 @@ define(
         initialize: function(options) {
             this.owner = options.owner;
             this.slug = options.slug;
+            this.propertiesURL = '/views/' + this.owner + '/' + this.slug + '/draft/properties/';
             this.properties = [];
         },
 
@@ -39,7 +40,7 @@ define(
          * Get JSON data to create a RecordCollection from the server
          */
         load: function() {
-            var xhr = $.getJSON(this.profileURL)
+            var xhr = $.getJSON(this.propertiesURL)
             .done(this.loadSuccess.bind(this))
             .fail(this.loadFailure.bind(this));
             return xhr;
@@ -62,9 +63,9 @@ define(
             ];
             this.properties = [];
             // create editor models
-            for (id in profile) {
+            for (id in profile.properties) {
                 if (ignored_properties.indexOf(id) === -1) {
-                    property = profile[id];
+                    property = profile.properties[id];
                     args = {
                         id: id,
                         label: property.label,
@@ -95,7 +96,7 @@ define(
                 return a_label.localeCompare(b_label);
             });
             // load PropertyModel values
-            for (i = 0; i < this.properties.length; ++i) {
+            for (var i = 0; i < this.properties.length; ++i) {
                 this.properties[i].loadData();
             }
             this.Observer('loadSuccess').publish();

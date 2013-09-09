@@ -73,7 +73,7 @@ define(
         },
 
         render: function() {
-            this.$el.html(this.template({this}));
+            this.$el.html(this.template(this));
             this.$el.find('#new-list-property').on(
                 'change', this.changeNameHandler.bind(this));
             this.$el.find('.selected input').on(

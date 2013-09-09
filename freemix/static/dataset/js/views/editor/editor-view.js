@@ -51,18 +51,19 @@ define(
 
         /** Add this view to the DOM */
         render: function() {
-            var i, newPropertyEl, nextRecord, prevRecord, propertiesEl;
+            var i, newProperty, newPropertyEl, nextRecord, prevRecord, propertiesEl;
             // display EditorView
             this.$el.html(this.template(this));
             if (this.totalRecords()) {
                 propertiesEl = this.$el.find('#properties');
                 for (i = 0; i < this.totalRecords(); ++i) {
-                    newPropertyEl = $('<div></div>');
+                    newPropertyEl = $('<tr></tr>');
                     propertiesEl.append(newPropertyEl);
-                    this.propertyViews.push(new PropertyView({
+                    newProperty = new PropertyView({
                         model: this.model.properties[i],
                         $el: newPropertyEl
-                    }));
+                    });
+                    this.propertyViews.push(newProperty);
                 }
                 // bind to DOM actions
                 prevRecord = this.$el.find('#prev-record');

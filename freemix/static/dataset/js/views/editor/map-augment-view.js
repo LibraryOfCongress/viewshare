@@ -50,7 +50,7 @@ define(
         /** Event handler when a .selcted input is clicked */
         changeCompositeHandler: function(event) {
             var i = 0;
-            var = selected = this.$el.find('.selected input:checked');
+            var selected = this.$el.find('.selected input:checked');
             var composites = [];
             for (i; i < selected.length; ++i) {
                 composites.push(selected[i].value);

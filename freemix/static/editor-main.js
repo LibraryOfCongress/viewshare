@@ -2,10 +2,6 @@ require.config({
   paths: {
     apps: './dataset/js/apps',
     bootstrap: './freemix/js/lib/bootstrap',
-    freemix: './freemix/js/freemix',
-    'freemix.exhibit': './freemix/js/exhibit',
-    'freemix.property': './freemix/js/property',
-    'freemix.identify': './freemix/js/identify',
     handlebars: './freemix/js/lib/handlebars',
     jquery: './freemix/js/lib/jquery',
     'jquery.cookie': './freemix/js/lib/jquery.cookie',
@@ -20,12 +16,6 @@ require.config({
     handlebars: {
       exports: 'Handlebars'
     },
-    freemix: {
-      exports: 'Freemix'
-    },
-    'freemix.exhibit': ['freemix'],
-    'freemix.property': ['freemix'],
-    'freemix.identify': ['freemix'],
     'jquery.cookie': ['jquery'],
     'jquery.csrf': ['jquery', 'jquery.cookie']
   }

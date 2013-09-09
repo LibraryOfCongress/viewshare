@@ -26,14 +26,15 @@ define(
            this.model = options.model;
            this.$el = options.$el;
            // bind 'this' to template variables
-           this.label.bind(this);
-           this.type.bind(this);
+           this.label = this.label.bind(this);
+           this.type = this.type.bind(this);
            this.value.bind(this);
-           this.selectedType.bind(this);
+           this.selectedType = this.selectedType.bind(this);
            this.renderValue.bind(this);
            this.render = this.render.bind(this);
            this.changeValueHandler = this.changeValueHandler.bind(this);
            // subscribe to model events
+           this.model.Observer('loadDataSuccess').subscribe(this.render);
            this.model.Observer('changeCurrentItem').subscribe(
                this.changeValueHandler);
        },
@@ -59,7 +60,7 @@ define(
        /** Event handler when a .types input is changed */
        changeTypeHandler: function(event) {
            var newType = $(event.target).find(':selected').val();
-           this.model.type(newType);
+           this.model.type = newType;
            this.renderValue();
            return this.model.updateProperty();
        },
@@ -87,26 +88,28 @@ define(
        },
 
        /** Add this view to the DOM */
-       render: function() {
-           this.$el.html(this.template(
-               $.extend(this, {selectedType: this.selectedType()})
-           ));
+       render: function(args) {
+           this.$el.html(this.template({
+               label: this.label(),
+               type: this.type(),
+               value: this.value(),
+               selectedType: this.selectedType()
+           }));
            // bind to DOM events
            this.$el.find('.name input').on(
                'change', this.changeLabelHandler.bind(this));
-           this.$el.find('.types select').on(
-               'change', this.changeTypeHandler.bind(this));
+           this.$el.find('.types select').on( 'change', this.changeTypeHandler.bind(this));
            return this;
        },
 
        /** Shortcut to PropertyModel.label for easy templating */
-       label: function() { return this.model.label(); },
+       label: function() { return this.model.label; },
 
        /** Shortcut to PropertyModel.type for easy templating */
-       type: function() { return this.model.type(); },
+       type: function() { return this.model.type; },
 
-       /** Shortcut to PropertyModel.value for easy templating */
-       value: function() { return this.model.value; },
+       /** Shortcut to PropertyModel.currentItem for easy templating */
+       value: function() { return this.model.currentItem().value; },
 
        /** Our logic-less templates use this to mark
         * a 'type' <option> as selcted */
