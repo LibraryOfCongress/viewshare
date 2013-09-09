@@ -23,19 +23,12 @@ h4 {
     margin-bottom: 0.5em;
 }
 
-#array-options-container {
-    float: left;
-    width: 25%;
-}
 
 #selected-sample-container {
-    float: left;
-    margin-left: 4%;
-    width: 70%;
 }
 
 #item-properties-container {
-    max-height: 20em;
+    max-height: 40em;
     overflow: auto;
 }
 
