@@ -6,6 +6,10 @@ from django.db import models
 
 class Migration(SchemaMigration):
 
+    depends_on = (
+        ('dataset', '0001_initial_models'),
+    )
+
     def forwards(self, orm):
         
         # Adding model 'Canvas'

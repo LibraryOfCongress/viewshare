@@ -9,11 +9,13 @@ class Migration(DataMigration):
 
     def forwards(self, orm):
 
-        canvas = orm.Canvas.objects.get(slug='two-column-left')
-
+        canvas = None
         qs = orm['dataset.dataset'].objects.filter(exhibits__publishedexhibit__owner=F('owner'))
 
         for ds in orm['dataset.dataset'].objects.exclude(pk__in=qs.values_list('pk', flat=True)):
+            if not canvas:
+                canvas = orm.Canvas.objects.get(slug='two-column-left')
+
             exhibit = orm.PublishedExhibit(created=ds.created,
                                            modified=ds.modified,
                                            slug=ds.slug,
