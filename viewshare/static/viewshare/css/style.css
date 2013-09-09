@@ -110,45 +110,54 @@ header, .header, #header{
 }
 
 
-/* for Exhibits */
-/* Maybe move to a profiles.css? */
-
-.exhibit-collectionView-group-count {
-    display: none;
-}
-
-ol.exhibit-tileView-body > li {
-    list-style: none;
-}
-
-ol.exhibit-tileView-body {
-    margin: 0;
-    padding: 0;
-}
-
-div.exhibit-collectionView-header-sortControls {
-    display: none;
-}
-
 #body {
 margin-top: 20px;
 }
 
-div#body.freemix-themeable > div > h1,
+/* main titles */
+
+.freemix-themeable h1,
 .dataprofile .tab-contents h1,
+#load h1,
 .dataprofile-viewer h1 {
-    border-bottom: 1px solid lightgrey;
+    font-family: 'Ubuntu', Helvetica, Arial, sans-serif;	
+    font-weight: normal;
     font-size: 2.0em;
-    padding: 0.2em 0.1em;
-    margin: 0 0 1em;
+    color: slategrey;
+    background: #F8F8F8;
+    margin-top: 3px;
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+   -moz-border-radius:5px;
+   -webkit-border-radius:5px;
+    border: 1px solid #eee;
 }
 
-div#body.freemix-themeable > div > h2,
-.dataprofile .tab-contents h2,
-.dataprofile-viewer h2 {
-    font-size: 1.5em;
-    padding: 0.1em 0.1em;
-    line-height: 30px;
+.freemix-themeable h3 {
+    font-family: 'Ubuntu', Helvetica, Arial, sans-serif;	
+    font-weight: normal;
+    font-size: 1.6em;
+    color: grey;
+}
+
+.exhibit-title-accordion, .exhibit-title-edit {
+    font-family: 'Ubuntu', Helvetica, Arial, sans-serif;	
+    font-weight: normal;
+    font-size: 2.0em;
+    background: #F8F8F8;
+    padding: 10px 10px 0px 10px; /* top, right, bottom, left */
+    height: 30px;
+}
+
+.icon-chevron-up, .icon-chevron-down,  {
+    zoom: 1.5;
+    -moz-transform: scale(1.5);  /* Firefox */
+}
+
+#accordion-exhibit .accordion-toggle {
+   padding: 3px 3px 3px 3px;
 }
 
 /* Search */
@@ -178,29 +187,6 @@ font-weight: bold;
     text-align: right;
 }
 
-h2.help {
-    font-size: 1.5em;
-    padding: .4em 30px .4em 0;
-    margin: 0 0 1em 0;
-    border-bottom: 1px solid #e3f5f7;
-    color: darkslategrey;
-}
-
-h3.help {
-    font-size: 1.25em;
-    padding: .4em 0px .4em 0;
-    margin: 0 0 -3em 0;
-    color: darkslategrey;
-}
-
-h2 img {
-    text-align: right;
-    vertical-align: top;
-    height: 40px;
-    width: 40px;
-    margin-top: -25px;
-}
-
 /* Theme switcher */
 #toolbar {
     width: 99%;
@@ -212,29 +198,12 @@ h2 img {
     float: right;
 }
 
-/* Groups */
 
-.tribe_left {
-    display: inline;
-    float: left;
-    position: relative;
-    margin-left: 9px; /* changed from 10 ??? */
-    margin-right: 9px; /* changed from 10 ??? */
-    width: 65%;
+/* views */
+
+.exhibit-view-extended-display {
+   padding-top: 10px;
 }
-
-.tribe_right {
-    display:inline;
-    float: left;
-    position: relative;
-    margin-left: 9px; /* changed from 10 ??? */
-    margin-right: 9px; /* changed from 10 ??? */
-    width: 30%;
-}
-
-
-/* data views and sets */
-
 .dataset_list, .exhibit_list, .data_details, .exhibit_details, .shared_key_list {
    margin-bottom: 1.5em;
 }
@@ -245,16 +214,20 @@ h2 img {
    list-style-type: none;
 }
 
-.dataset_list_item, .exhibit_list_item, .shared_key_list_item {
+.dataset_list_item, .exhibit_list_item, .shared_key_list_item, .result_set_item, .notice, .invitation {
    background: #fff url(../../images/header-background.png) bottom center repeat-x;
-   border: 1px solid #ddd;
+   border: 1px solid #eee;
    list-style-type: none;
    margin: 1em 0;
-   padding: 5px 10px;
+   padding: 10px 10px 10px 10px;
+   margin-left: 10px;
+   margin-right: 10px;
    text-align: left;
+  -moz-border-radius:3px;
+  -webkit-border-radius:3px;
 }
 
-.shared-key-url {
+.embed-key, .shared-key-url {
   width: 98%;
 }
 
@@ -293,35 +266,6 @@ h2 img {
 }
 
 
-.dataset_edit .dataset-title, .dataset_summary .dataset-title {
-   background: transparent url(../../images/dataset-32.png) top left no-repeat;
-   font-size: 140%;
-   font-weight: bold;
-   padding-top: 0.5em;
-   padding-bottom: 0.5em;
-   padding-left: 40px;
-   vertical-align:middle;
-}
-
-.exhibit_edit .exhibit-title, .exhibit_display .exhibit-title {
-   background: transparent url(../../images/palette-32.png) top left no-repeat;
-   font-size: 140%;
-   font-weight: bold;
-   padding-bottom: 0.5em;
-   padding-top: 0.5em;
-   padding-left: 40px;
-}
-
-.exhibit_display .shared-key .exhibit-title {
-   background: transparent url(../../images/key-32.png) 0% 25% no-repeat;
-   font-size: 140%;
-   font-weight: bold;
-   padding-bottom: 0.5em;
-   padding-top: 0.5em;
-   padding-left: 40px;
-}
-
-
 /* handle this style due to jquery uithemer base override */
 
 .exhibit_edit ul.exhibit_list_items, .exhibit_display ul.exhibit_list_items {
@@ -341,19 +285,8 @@ h2 img {
    padding-left: 0px;
 }
 
-.dataset-metadata, .exhibit-metadata {
-    font-size: 90%;
-    padding-left: 0px;
-}
-
 .inspector_info {
 height: 100%;
-}
-
-.about_profile .profile_icon {
-background: url(../../images/person-96.png) center center no-repeat;
-width:106px;
-height:106px;
 }
 
 .about_profile .dataset_icon {
@@ -368,14 +301,112 @@ width:106px;
 height:106px;
 }
 
-#about-box .about_edit {
- padding-right: 5px;
- padding-bottom: 5px;
+#about-box .user_avatar {
+  background: url(../../images/user-128.png) center center no-repeat;
+  background-position: center; 
+  width: 128px;
+  height: 128px;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+#about-box .identicon img {
+  margin-top: 10px;
+  margin-left: 10px;
+  padding: 4px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+     -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+#about-box .view_avatar {
+  background: url(../../images/palette-112.png) 0% 0% no-repeat; // use smaller avatar
+  background-position: center; 
+  width: 112px;
+  height: 112px;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+#about-box .profile_info {
+margin-left: 10px;
+}
+
+.bubble {
+  position: relative;
+  background-color:#eee;
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  padding:10px;  
+  text-align:center;
+  width:180px;
+  -moz-border-radius:10px;
+  -webkit-border-radius:10px;
+  -webkit-box-shadow: 0px 0 3px rgba(0,0,0,0.25);
+  -moz-box-shadow: 0px 0 3px rgba(0,0,0,0.25);
+  box-shadow: 0px 0 3px rgba(0,0,0,0.25); 
+  width: 85%;
+}
+
+.bubble:after {
+  position: absolute;
+  display: block;
+  content: "";  
+  border-color: transparent transparent  #eee transparent;
+  border-style: solid;
+  border-width: 10px;
+  height:0;
+  width:0;
+  position:absolute;
+  top:-19px;
+  left:2em;
 }
 
 #about-box .about_name {
  font-weight: bold;
- font-size: 130%;
+ font-size: 150%;
+ line-height: 110%;
+}
+
+#about-box .exhibit-metadata, .exhibit_edit .exhibit-metadata {
+padding-top: 10px;
+}
+
+#about-box .exhibit-acls {
+padding-top: 10px;
+padding-left: 10px;
+}
+
+
+#about-box .exhibit-created-by, 
+#about-box .exhibit-created-on, 
+#about-box .exhibit-last-modified {
+ padding-bottom: 3px;
+}
+
+#about-box .property-label {
+ color: slategrey;
+ padding-right: 5px;
+ padding-top: 3px;
+}
+
+
+
+#about-box .about_location {
+ font-size: 110%;
+ padding-top: 5px;
+}
+
+#about-box .view-count {
+ font-size: 110%;
+}
+
+.profile-actions .profile-links {
+padding: 10px 10px 10px 10px;
 }
 
 #about-box .about_homepage {
@@ -384,7 +415,6 @@ height:106px;
   height: 24px;
   margin-left: 15px;
   padding-left: 30px;
-
 }
 
 #about-box .user_counts {
@@ -394,7 +424,7 @@ height:106px;
 
 /* set width accordingly for appropriate page display */
 
-.dataset-actions, .exhibit-actions, .shared-key-actions {
+.dataset-actions, .exhibit-actions, .shared-key-actions, .profile-actions {
      float:right;
 }
 
@@ -409,60 +439,18 @@ height:106px;
 .exhibit-short-description, .exhibit-long-description {
 }
 
-/* policy */
-
-.public .dataset-title {
+.private .private-icon {
+   background: url(../../images/lock.png) 0% 50% no-repeat;
+   width: 16px;
+   height: 16px;
+   padding:15px 0px 10px 25px;
 }
 
-.public .exhibit-title {
-}
-
-.exhibit_display .private, .exhibit_edit .private, .dataset_edit .private, .dataset_summary .private, .dataset_list_items .private, .exhibit_list_items .private  {
-   background: #fffcdf url(../../images/lock.png) 99% 5% no-repeat;
-  }
-
-.exhibit-visibility .private {
-   background-image: url(../../images/lock.png);
-   color: #9F6000;
-   background-color: #fffcdf;
-   margin: 20px 0px;
-   padding:15px 15px 15px 40px;
-   background-repeat: no-repeat;
-   background-position: 15px center;
-   border: 1px solid;
-}
-
-.dataset-visibility .private {
-   background-image: url(../../images/lock.png);
-   color: #9F6000;
-   background-color: #fffcdf;
-   margin: 20px 0px;
-   padding:15px 15px 15px 40px;
-   background-repeat: no-repeat;
-   background-position: 15px center;
-   border: 1px solid;
-}
-
-.exhibit-visibility .public {
-   background-image: url(../../images/unlock.png);
-   color: #00529B;
-   background-color: #BDE5F8;
-   margin: 20px 0px;
-   padding:15px 15px 15px 40px;
-   background-repeat: no-repeat;
-   background-position: 15px center;
-   border: 1px solid;
-}
-
-.dataset-visibility .public {
-   background-image: url(../../images/unlock.png);
-   color: #00529B;
-   background-color: #BDE5F8;
-   margin: 20px 0px;
-   padding:15px 15px 15px 40px;
-   background-repeat: no-repeat;
-   background-position: 15px center;
-   border: 1px solid;
+.public .public-icon {
+   background: url(../../images/unlock.png) 0% 50% no-repeat;
+   width: 16px;
+   height: 16px;
+   padding: 15px 0px 10px 25px;
 }
 
 .exhibit-left, .dataset-left, .shared-key-left {
@@ -518,20 +506,47 @@ ul.responses li.thread-8 {
 }
 
 
-/* profiles */
+/* widget well */
 
-.info-section {
+.widget-well {
     background: #fff url(../../images/header-background.png) bottom center repeat-x;
     border: 1px solid #eee;
     margin-bottom: 1.5em;
+   -moz-border-radius:5px;
+   -webkit-border-radius:5px;
 }
 
-.profile h2, .dataset_list h2, .exhibit_list h2, .info-section h2, .shared_key_list h2 {
-    background-color: #5582A1;
-    color: #fff;
-    font-size: 1.0em;
-    margin: 0;
-    padding: 0.25em;
+.widget-well .alert {
+    margin: 10px 10px 10px 10px;
+}
+
+/* profile */
+
+.widget-well .widget-header {
+    background: #F8F8F8;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    margin-left: 3px;
+    margin-right: 3px;
+    height: 40px;
+}
+
+.widget-well .widget-header h2 {
+    font-family: 'Ubuntu', Helvetica, Arial, sans-serif;	
+    font-weight: normal;
+    font-size: 1.2em;
+    color: slategrey;
+   -moz-border-top-left-radius:3px;
+   -moz-border-top-right-radius:3px;
+   -webkit-border-top-left-radius:3px;
+   -webkit-border-top-right-radius:3px;
+    margin-top: 0px;
+    padding-left: 10px;
+}
+
+.widget-well .widget-header .widget-links {
+   padding-right: 10px;
+   padding-top: 7px;
 }
 
 .about_profile {
@@ -545,6 +560,12 @@ ul.responses li.thread-8 {
     height: 72%;
 }
 
+.profile_info .exhibit-title {
+
+}
+
+
+
 table.about_profile td {
     padding: 5px;
     text-align: left;
@@ -555,10 +576,6 @@ img.photo {
     padding: 5px;
 }
 
-.about_edit {
-    padding-top: 2em;
-    text-align: right;
-}
 
 #about-box {
     background: #fff url(../../images/header-background.png) bottom center repeat-x;
@@ -577,6 +594,7 @@ div.profile_info, div.dataset_info, div.exhibit_info {
 
 
 /* avatar views */
+
 
 /* profile avatar */
 #profile_avatar_container, #inspector_container {
@@ -621,14 +639,29 @@ div.notices h2 {
 /* notices */
 
 .notice, .unseen_notice {
- line-height: 130%;
+}
+
+.notice_block {
+   background: transparent url(../../images/notice-32.png) top left no-repeat;
+   height: 32px;
+   font-size: 100%;
+   font-weight: bold;
+   padding-top: 5px;
+   margin-top: 0px;
+   padding-bottom: 5px;
+   padding-left: 40px;
+   font-weight: normal;
+   line-height: 160%;
 }
 
 .notice .notice_type, .unseen_notice .notice_type {
  display: none;
 }
 
+/* invitations */
 
+.invitation-item {
+}
 
 /* groups */
 .user_groups_list {
@@ -701,4 +734,35 @@ div.notices h2 {
 
 .augment-properties td.name {
     width: 80%;
+}
+
+/* modals */
+
+.modal-fit {
+}
+
+.modal-fit .modal-body {
+}
+
+.modal-fit .textarea {
+  max-height: 100px;
+}
+
+.modal-fit label {
+ font-weight: bold;
+ color: slategrey;
+}
+
+.modal-fit .form_block, .modal-fit .form-actions {
+padding: 14px 15px 15px 10px;
+margin-bottom: 0;
+text-align: right;
+background-color: #f5f5f5;
+border-top: 1px solid #ddd;
+-webkit-border-radius: 0 0 6px 6px;
+-moz-border-radius: 0 0 6px 6px;
+border-radius: 0 0 6px 6px;
+-webkit-box-shadow: inset 0 1px 0 #ffffff;
+-moz-box-shadow: inset 0 1px 0 #ffffff;
+box-shadow: inset 0 1px 0 #ffffff;
 }

@@ -1,8 +1,9 @@
+import uuid
 from django import forms
 from django.forms.widgets import Select
 from django.utils.translation import ugettext_lazy as _
-from freemix.dataset.models import DataSource
 from viewshare.apps.upload import models
+from freemix.exhibit import models as exhibit_models
 
 
 class DataSourceForm(forms.ModelForm):
@@ -14,14 +15,23 @@ class DataSourceForm(forms.ModelForm):
 
     def save(self, commit=True):
         instance = super(DataSourceForm, self).save(commit=False)
-        if self.user:
-            instance.owner = self.user
+
+        if not hasattr(instance, 'exhibit'):
+            canvas = exhibit_models.Canvas.objects.all()[0]
+            owner = self.user
+            slug = str(uuid.uuid4())
+            instance.exhibit = exhibit_models.DraftExhibit.objects.create(
+                canvas=canvas,
+                owner=owner,
+                slug=slug,
+                profile={}
+            )
         instance.save()
         return instance
 
     class Meta:
-        model = DataSource
-        exclude = ('owner', 'uuid', 'dataset')
+        model = models.DataSource
+        exclude = ('owner', 'exhibit')
 
 
 class FileDataSourceForm(DataSourceForm):
@@ -95,3 +105,9 @@ class JSONFileDataSourceForm(DataSourceForm):
 
     class Meta(DataSourceForm.Meta):
         model = models.JSONFileDataSource
+
+
+class ReferenceDataSourceForm(DataSourceForm):
+
+    class Meta(DataSourceForm.Meta):
+        model = models.ReferenceDataSource

@@ -1,27 +1,30 @@
 {% load i18n %}
 
-<div class="delete_exhibit_dialog ui-helper-hidden">
-    <div class="delete_exhibit_form">
-      <p>{% blocktrans %}Really delete this <a href="" class="exhibit_url">data view</a>?{% endblocktrans %}</p>
+<div id="deleteModal" class="delete_exhibit_dialog modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myDeleteModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3 id="myDeleteModalLabel">Delete View</h3>
+  </div>
+  
+  <div class="modal-body">
+    <div class="delete_exhibit_form alert alert-warning">
+      <p>{% blocktrans %}Really delete this <a href="" class="exhibit_url">view</a>?{% endblocktrans %}</p>
     </div>
-    
-    <div class="button_group">
-      <a href="#" class='button_link ok-button' title='OK'>OK</a>
-      <a href="#" class='button_link negative-button cancel-button' title='Cancel'>Cancel</a>
+  </div>
+  
+  <div class="modal-footer">
+    <div class="btn-group">
+      <a href="#" class='button_link ok-button btn btn-small btn-danger' title='OK'>Delete</a>
+      <a href="#" class='button_link negative-button cancel-button btn btn-small btn-primary' data-dismiss="modal" class="close" title='Cancel'>Cancel</a>
     </div>
-    
-    <div class='delete_exhibit_failed'>Delete Failed<span class='cancel-button button ui-state-default ui-corner-all' title='OK'>OK</span></div>
+  </div>
+
+  <div class='delete_exhibit_failed'>Delete Failed!</div>
 </div>
 
 <script type="text/javascript">
 $(document).ready(function() {
-    $(".delete_exhibit_dialog").dialog({
-                    autoOpen: false,
-                    modal: true,
-                    draggable: false,
-                    resizable: false,
-                    title: "Delete a Data View"
-    });
+
     $(".delete_exhibit_dialog .ok-button").click(function(e) {
         $.ajax({
             type: "DELETE",
@@ -30,22 +33,16 @@ $(document).ready(function() {
                 window.location.reload( true );
             },
             error: function(xhr, status, error) {
-                $(".delete_exhibit_form").hide();
-                $(".delete_exhibit_form").show();
-
+                $(".delete_exhibit_failed").hide();
+                $(".delete_exhibit_failed").show();
             }
         });
         
         e.preventDefault();
     });
 
-    $(".delete_exhibit_dialog .cancel-button").click(function(e) {
-        $(".delete_exhibit_dialog").dialog("close");
-        e.preventDefault();
-    });
-
     $("a.exhibit_delete").click(function(e) {
-        var url = $(this).attr("href");
+        var url = $(this).attr("rel");
         $(".delete_exhibit_dialog").find("a.exhibit_url").attr("href", url);
         $(".delete_exhibit_failed").hide();
         $(".delete_exhibit_dialog").dialog("open");

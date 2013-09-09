@@ -1,16 +1,16 @@
-from django.contrib.auth.decorators import login_required
+from urllib2 import urlopen
+from urlparse import urljoin
+
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseServerError
 from django.template import loader, RequestContext
-from urllib2 import urlopen
-
 from django.core.cache import cache
-
 from django.conf import settings
-from urlparse import urljoin
 from django.template.response import TemplateResponse
 from django.views.generic.base import RedirectView
-from freemix.dataset.transform import AKARA_URL_PREFIX
+
+from viewshare.apps.upload.transform import AKARA_URL_PREFIX
+
 
 AKARA_VERSION_URL = getattr(settings, "AKARA_VERSION_URL", urljoin(AKARA_URL_PREFIX, "freemix.loader.revision"))
 

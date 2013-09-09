@@ -1,6 +1,9 @@
-from django.conf import settings
 from urlparse import urljoin
-from freemix.dataset.transform import AKARA_URL_PREFIX
+
+from django.conf import settings
+
+from viewshare.apps.upload.transform import AKARA_URL_PREFIX
+
 
 AKARA_CONTENTDM_URL = getattr(settings,
     "AKARA_CONTENTDM_URL",
@@ -29,3 +32,7 @@ FILE_UPLOAD_PATH = getattr(settings,
 SITE_NAME = getattr(settings,
     "SITE_NAME",
     "Viewshare")
+
+FILE_DOWNLOAD_NGINX_OPTIMIZATION = getattr(settings,
+                                           "FILE_DOWNLOAD_NGINX_OPTIMIZATION",
+                                           False)

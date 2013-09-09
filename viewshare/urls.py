@@ -34,22 +34,15 @@ urlpatterns = patterns('',
         'viewshare.apps.connections.views.connection_list_by_user',
         name='connection_list_by_user') ,
 
-    # Lists of connections datasets and views
-    url(r'data/(?P<username>[a-zA-Z0-9_.-]+)/connections/$',
-        'viewshare.apps.connections.views.datasets_by_user_connections',
-        name='datasets_by_user_connections'),
-
     url(r'views/(?P<username>[a-zA-Z0-9_.-]+)/connections/$',
         'viewshare.apps.connections.views.exhibit_list_by_user_connections',
         name='exhibit_list_by_user_connections'),
 
     (r'^upload/', include('viewshare.apps.upload.urls')),
-    (r'^data/', include('freemix.dataset.urls')),
-    # (r'^source/', include('freemix.dataset.urls.datasource')),
 
     (r'^views/', include('freemix.exhibit.urls')),
-    (r'^augment/', include('freemix.dataset.augment.urls')),
-    (r'^share/', include('freemix.exhibit.share.urls')),
+    (r'^augment/', include('viewshare.apps.augment.urls')),
+    (r'^share/', include('viewshare.apps.share.urls')),
 
     url(r'^userhome/$', login_required(UserHomeView.as_view()), name="user_home"),
 
@@ -57,10 +50,6 @@ urlpatterns = patterns('',
     (r'^feeds/latest_views_atom/$', feeds.AtomLatestDataViews()),
     (r'^feeds/views/(?P<owner>[a-zA-Z0-9_.-]+)/$', feeds.UserDataViews()),
     (r'^feeds/views_atom/(?P<owner>[a-zA-Z0-9_.-]+)/$', feeds.AtomUserDataViews()),
-    (r'^feeds/latest_data/$', feeds.LatestDatasets()),
-    (r'^feeds/latest_data_atom/$', feeds.AtomLatestDatasets()),
-    (r'^feeds/data/(?P<owner>[a-zA-Z0-9_.-]+)/$', feeds.UserDatasets()),
-    (r'^feeds/data_atom/(?P<owner>[a-zA-Z0-9_.-]+)/$', feeds.AtomUserDatasets()),
 
     # home page
     url(r'^$', 'viewshare.apps.discover.views.front_page', name="front_page"),

@@ -24,10 +24,6 @@
     {%endcompress %}
 {% endblock head_css %}
 
-{% block head_scripts %}
-
-{% endblock %}
-
 {% block login %}
     {% if user.is_authenticated %}
 
@@ -42,7 +38,7 @@
       </ul>
     </li>
     <li class="dropdown">
-      <a id="nav-users" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">{% trans "Views" %} <b class="caret"></b></a>
+      <a id="nav-views" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">{% trans "Views" %} <b class="caret"></b></a>
       <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
         <li><a href="{% url 'exhibit_list_by_owner' user.username %}">{% trans "My Views" %}</a></li>
         <li><a href="{% url 'exhibit_list_by_user_connections' user.username %}">{% trans "My connections' Views" %}</a></li>
@@ -51,10 +47,15 @@
         <li><a href="{% url 'upload_dataset' %}" class="button_link">{% trans "Create View" %}</a></li>
       </ul>
     </li>
-    <li><a href="{% url 'notification_notices' %}">{% trans "Messages" %} {% if notice_unseen_count %}<span class="badge badge-info">{{ notice_unseen_count }}</span>{% endif %}</a></li>
-    <li><a href="{% url 'acct_email' %}">{% trans "Settings" %}</a></li>
+    <li><a href="{% url 'notification_notices' %}">{% trans "Notices" %} {% if notice_unseen_count %}<span class="badge badge-info">{{ notice_unseen_count }}</span>{% endif %}</a></li>
     <li class="dropdown">
-      <a id="nav-users" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">{% trans "Help" %} <b class="caret"></b></a>
+      <a id="nav-settings" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">{% trans "Settings" %} <b class="caret"></b></a>
+      <ul class="dropdown-menu" role="menu" aria-labelledby="drop0">
+	<li><a href="{% url 'acct_email' %}">{% trans "Change Email" %}</a></li>
+	<li><a href="{% url 'acct_passwd' %}">{% trans "Change Password" %}</a></li>
+      </ul>
+    <li class="dropdown">
+      <a id="nav-help" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">{% trans "Help" %} <b class="caret"></b></a>
       <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
         <li><a href="{% url 'userguide' %}">User's Guide</a></li>
         <li><a href="{% url 'faq' %}">FAQ</a></li>

@@ -1,14 +1,13 @@
-from compressor.base import SOURCE_FILE, SOURCE_HUNK
 from compressor.css import CssCompressor
 from compressor.js import JsCompressor
 from compressor.signals import post_compress
 from compressor.templatetags.compress import CompressorNode
 from compressor.templatetags.compress import compress as base_compress
-from compressor.conf import settings
 
 from django import template
 from django.template.context import Context
 from django.template.loader import render_to_string
+
 
 register = template.Library()
 
@@ -17,7 +16,6 @@ class LabJsCompressor(JsCompressor):
     template_name = "exhibit/embed/js_file.html"
     template_name_inline = "exhibit/embed/js_inline.html"
 
-
     def render_output(self, mode, context=None):
         """
         Renders the compressor output with the appropriate template for
@@ -35,12 +33,11 @@ class LabJsCompressor(JsCompressor):
                            mode=mode, context=final_context)
         return render_to_string("exhibit/embed/%s_%s.html" %
                                 (self.type, mode), final_context)
-
 
 
 class LabCssCompressor(CssCompressor):
-    template_name="exhibit/embed/css_file.html"
-    template_name_inline="exhibit/embed/css_inline.html"
+    template_name = "exhibit/embed/css_file.html"
+    template_name_inline = "exhibit/embed/css_inline.html"
 
     def render_output(self, mode, context=None):
         """
@@ -59,7 +56,6 @@ class LabCssCompressor(CssCompressor):
                            mode=mode, context=final_context)
         return render_to_string("exhibit/embed/%s_%s.html" %
                                 (self.type, mode), final_context)
-
 
     def output(self, *args, **kwargs):
         # Revert to the base output method
@@ -88,4 +84,7 @@ class LabJSCompressorNode(CompressorNode):
 @register.tag
 def compress(parser, token):
     node = base_compress(parser, token)
-    return LabJSCompressorNode(node.nodelist,node.kind,node.mode,node.name)
+    return LabJSCompressorNode(node.nodelist,
+                               node.kind,
+                               node.mode,
+                               node.name)

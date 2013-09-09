@@ -77,14 +77,6 @@ h1 {
     text-align: center;
 }
 
-#embed-info .buttons {
-padding-right: 0.5em;
-padding-bottom: 0.5em;
-position:absolute;
-top:5px;
-right:15px;
-}
-
 #subnav ul.step-menu li a.step-completed {
     background-image: url(../../images/fade-arrow-bg.png) !important;
 }

@@ -18,42 +18,7 @@ h3.grid_title {
 
 .action-set {
     background: #fff url('../img/content-bg-gradient.png') center center repeat-x;
-    border-right: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-    width: 33%;
-    display: inline;
-    float: left;
-    position: relative;
-    margin: 2em 0 0 0;
-}
-
-.first-action-set {
-    clear: left;
-    border-left: 1px solid #ccc;
-}
-
-.action-set ul {
-    list-style: none;
-    margin: 1.5em 0 0;
-    padding-left: 1.5em;
-}
-
-.action-set ul li {
-    min-height: 3em;
-    padding-bottom: 1em;
-}
-
-.action-set .action-item-more {
-    font-size: 0.8em;
-    padding-left: 1em;
-}
-
-.action-set li a img {
-    border: none;
-    vertical-align: middle;
-    width: 24px;
-    height: 24px;
-    padding-right: 0.5em;
+    border: 1px solid #ccc;
 }
 
 .showcased {
@@ -91,95 +56,6 @@ h3.grid_title {
     color: #117011;
 }
 
-/*
-    Slideshow
-*/
-
-
-#slides {
-    float: left;
-}
-
-
-/*
-    Slides container
-    Important:
-    Set the width of your slides container
-    Set to display none, prevents content flash
-*/
-
-.slides_container {
-    width:556px;
-    height:375px;
-    display:none;
-}
-
-/*
-    Each slide
-    Important:
-    Set the width of your slides
-    If height not specified height will be set by the slide content
-    Set to display block
-*/
-
-.slides_container div.slide {
-    width:556px;
-    height:375px;
-    display:block;
-}
-
-.arrows {
-    position: absolute;
-    margin-top: 3px;
-}
-
-#slides .next,#slides .prev {
-    width:24px;
-    height:24px;
-}
-
-.pagination {
-    margin: 10px auto 0;
-    float: right;
-}
-
-.pagination li {
-    float:left;
-    margin:0 1px;
-    list-style:none;
-}
-
-.pagination li a {
-    display:block;
-    width:12px;
-    height:0;
-    padding-top:12px;
-    background-image:url(../img/pagination.png);
-    background-position:0 0;
-    float:left;
-    overflow:hidden;
-}
-
-.pagination li.current a {
-    background-position:0 -12px;
-}
-
-.caption {
-    z-index:500;
-    position:absolute;
-    left:0;
-    height:auto;
-    padding:5px 20px 0 20px;
-    background:#000;
-    background:rgba(0,0,0,.5);
-    width:515px;
-    font-size:1.3em;
-    line-height:1.33;
-    color:#fff;
-    border-top:1px solid #000;
-    text-shadow:none;
-}
-a:hover,a:active {
-    color:#599100;
-    text-decoration:underline;
+.linkblock {
+  padding:1.2em 1em 1em 1em
 }

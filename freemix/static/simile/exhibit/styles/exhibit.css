@@ -168,3 +168,14 @@ div.exhibit-focusDialog-controls {
 .exhibit-busyIndicator-content img {
     vertical-align: middle;
 }
+
+.exhibit-list-table {
+width: 100%;
+}
+.exhibit-property {
+width: 80%;
+}
+
+.exhibit-label {
+width: 20%;
+}

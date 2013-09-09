@@ -5,7 +5,7 @@
 {% load freemix_helpers %}
 
 {% block head_title %}{{owner|nicename}}{% blocktrans %}'s Views{% endblocktrans %}{% endblock %}
-{% block head_scripts %}
+{% block extra_scripts %}
 {{block.super}}
 {% include "freemix/js_include/jquery_ui.html" %}
 
@@ -40,19 +40,7 @@
 
 {% block body %}
 
-<h1>{{owner|nicename}}{% blocktrans %}'s Views{% endblocktrans %}</h1>
-
-  <p>
-  {% ifequal user.username username %}
-    {% trans "You have" %}
-  {% else %}
-    {{ owner|nicename }} {% trans "has" %}
-  {% endifequal %}
-  {% with object_list.count as object_list_count %}
-  {{object_list_count}} {% trans "data view" %}{{ object_list_count|pluralize }}.
-  {% endwith %}
-  </p>
-
+<h1>{{owner|nicename}}{% blocktrans %}'s Views{% endblocktrans %} ({{ object_list.count }})</h1>
 
 <div class="view_details">
     {% exhibit_list object_list %}

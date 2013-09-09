@@ -10,18 +10,19 @@
 
 {% block head_title %}{{ object.title }}{% endblock %}
 
-{% block rtab_id %}id="builder_tab"{% endblock %}
 {% block body_class %}main-attraction{% endblock %}
 {% block head_data %}
 {{ block.super }}
-<link rel="exhibit/data" href="{% url 'dataset_data_json' owner=object.dataset.owner.username slug=object.dataset.slug %}"/>
-<link rel="exhibit/data" href="{% url 'dataset_properties_cache_json' owner=object.dataset.owner.username slug=object.dataset.slug %}"/>
 
-<link rel="freemix/dataprofile" href="{% url 'dataset_profile_json' owner=object.dataset.owner.username slug=object.dataset.slug %}"/>
+{% for data_url in property_data_urls %}
+<link rel="exhibit/data" href="{{ data_url }}"/>
+{% endfor %}
+<link rel="exhibit/data" href="{% url 'exhibit_property_list' owner=object.owner.username slug=object.slug %}"/>
+
 <link rel="freemix/exhibit_profile" href="{% url 'exhibit_profile_json' owner=object.owner.username slug=object.slug %}"/>
 {% endblock %}
 
-{% block head_scripts %}
+{% block extra_scripts %}
     {{ block.super }}
     {% include "freemix/js_include/jquery_ui.html" %}
     {% include "simile/js/exhibit.html" %}
@@ -32,12 +33,25 @@
     <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.highlight.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/display.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}exhibit/js/detail.js"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function(){    
+      $('#accordion-exhibit').on('shown', function () {
+      $(".icon-chevron-down").removeClass("icon-chevron-down").addClass("icon-chevron-up");
+      });
+      
+      $('#accordion-exhibit').on('hidden', function () {
+      $(".icon-chevron-up").removeClass("icon-chevron-up").addClass("icon-chevron-down");
+      });
+      });
+    </script>
+    
     {% endcompress %}
 
     {% if can_share %}
     {% compress js %}
     <script type="text/javascript" src="{{ STATIC_URL }}freemix/js/lib/jquery.form.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}exhibit/share/js/share_dialog.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}share/js/share_dialog.js"></script>
     {% endcompress %}
     {% endif %}
 
@@ -52,7 +66,7 @@
          })(window.Freemix.jQuery, window.Freemix);
     </script>
     {% endautoescape %}
-{% endblock head_scripts %}
+{% endblock extra_scripts %}
     
     
 {% block head_css %}
@@ -67,73 +81,130 @@
 <link href="{{STATIC_URL}}exhibit/css/embed.css" rel="stylesheet" type="text/css" media="screen,projection" />
 {% endcompress %}
 
+<!-- to-do ... connect vanilla.css to exhibit.theme.url -->
+
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}exhibit/css/styles/vanilla.css" />
 <link rel="stylesheet" type="text/css" href="{{ exhibit.theme.url }}" />
 
 {% endblock %}
 
 {% block body %}
 
-<div class="exhibit_display">
-  <ul class="exhibit_list_items">
-    <li class="exhibit_list_item result_set_item clearfix {% if exhibit.published %}public{% else %}private{% endif %}">
+<div class="accordion" id="accordion-exhibit">
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-exhibit" href="#collapseOne">
+	<div class="exhibit-title-accordion">{{exhibit.title}} <i class="icon-chevron-down pull-right"></i></div>
+      </a>
+    </div>
 
-      <div class="row-fluild">
-        <div class="span12">
-          <div class="exhibit-title">{{exhibit.title}}</div>
+    <div id="collapseOne" class="accordion-body collapse out">
 
-          {% if exhibit.description %}
-          <div class="exhibit-description">
-	    {{ exhibit.description }}
-          </div>
-          {% endif %}
-        </div>
-      </div> <!-- row-fluid -->
-      
-      <div class="row-fluid">
-        <div class="span7">
-          <div class="exhibit-metadata">
-            {% trans "Created by"%} <span class="exhibit-creator"><a href="{% url 'profile_detail' exhibit.owner.username %}">{{exhibit.owner|nicename}}</a></span> {% trans "on"%} <span class="exhibit-modified-data">{{exhibit.modified|date:"N j, Y"}}</span> {% trans "and based on the " %}<span class="exhibit-dataset-title"><a href="{{exhibit.dataset.get_absolute_url }}" title="{{exhibit.dataset.title}}">{{exhibit.dataset.title}}</a></span> {% trans "data set." %}
-          </div>
-        </div>
+      <div class="accordion-inner">
+	
+	<div class="exhibit-view-extended-display">
+	      
+	  <div class="row-fluid">
 
-        <div class="span5">
-          
-          <div class="exhibit-actions">
-	    
-	    <div class="exhibit-links btn-group">	  
-              {% if can_inspect %}
-              <a class="exhibit_inspect btn btn-small" href="{% url 'exhibit_detail' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Inspect" %}</a>
+	    <div class="span7">
+	      
+	      {% if exhibit.description %}
+	      <div class="exhibit-description">
+		{{ exhibit.description }}
+	      </div>
 	      {% endif %}
-              
-              {% if can_share %}
-              <a class="exhibit_share btn btn-small" href="{% url 'shared_key_create_form' owner=exhibit.owner slug=exhibit.slug %}">{% trans "Share" %}</a>
-              {% endif %}
-              
-              {% if can_embed %} 
-              <a class="exhibit_embed btn btn-small" href="">{% trans "Embed" %}</a>
-              {% endif %}
-              
-              {% if can_edit %}
-              <a class="exhibit_edit btn btn-small" href="{% url 'exhibit_edit' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Edit" %}</a>
-	      {% endif %}
+	      
 	    </div>
-          </div>
-        </div>
-      </div> <!-- row-fluid -->
-    </li>
-  </ul>
-  </div>
+
+	    <div class="span5">
+	      
+	      <div class="pull-right">
+		{% if exhibit.is_public %}
+		<div class="public"><span class="public-icon"></span> View is public</div>
+		{% else %}
+		<div class="private"><span class="private-icon"></span> View is private</div>
+		{% endif %}
+	      </div>
+
+	    </div>
+	    
+	  </div> <!-- row-fluid -->
+
+	  <div class="row-fluid">
+
+	    <div class="span7">
+
+	      <div class="exhibit-metadata">
+		{% trans "Created by"%} <span class="exhibit-creator"><a href="{% url 'profile_detail' exhibit.owner.username %}">{{exhibit.owner|nicename}}</a></span> {% trans "on"%} <span class="exhibit-modified-data">{{exhibit.modified|date:"N j, Y"}}</span>
+	      </div>
+
+	    </div>
+	    
+	    <div class="span5">
+		  	      
+	      <div class="exhibit-actions pull-right">
+		
+		<div class="exhibit-links btn-group">	  
+		  {% if can_inspect %}
+		  <a class="exhibit_inspect btn btn-small" href="{% url 'exhibit_detail' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Inspect" %}</a>
+		  {% endif %}
+		  
+		  {% if can_share %}
+		  <a class="exhibit_share btn btn-small" href="#exhibit-share-form" rel="{% url 'shared_key_create_form' owner=exhibit.owner.username slug=exhibit.slug %}" data-target="#exhibit-share-form" role="button" id="exhibit-share-button" data-toggle="modal">{% trans "Share" %}</a>
+		  {% endif %}
+		  
+		  {% if can_embed %} 
+		  <a class="exhibit_embed btn btn-small" href="#embedModal" role="button" data-toggle="modal">{% trans "Embed" %}</a>
+		  {% endif %}
+		  
+		  {% if can_edit %}
+		  <a class="exhibit_edit btn btn-small" href="{% url 'exhibit_edit' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Edit" %}</a>
+		  {% endif %}
+		</div>
+		
+		{% if can_share %}
+		<div id="exhibit-share-form" class="modal modal-fit hide fade form-dialog" tabindex="-1" role="dialog" aria-labelledby="exhibitShareFormLabel" aria-hidden="true">
+		  <div class="modal-header">
+		    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		    <h3 id="exhibitShareFormLabel">{% trans "Share View" %}</h3>
+		  </div>
+		  <div id="share_exhibit_form_template" class="modal-body">
+		  </div>
+		</div>
+		{% endif %}
+
+	      </div>
+	      
+	    </div> <!-- span5 -->
+
+	  </div> <!-- row-fluid -->
+	  
+	</div> <!-- exhibit-display -->
+
+      </div> <!-- accordion-inner -->
+	  
+    </div> <!-- accordion-body -->
+    
+  </div> <!-- accordion-group -->
+  
+</div> <!-- accordion -->
 
 {% if can_embed %}
-<div id="embed">
-  <div id="embed-info" class="ui-helper-hidden ui-widget-content ui-corner-all">
-    <p class="embed-desc"><strong>{% blocktrans %}Copy the following and paste it into your page where you'd like your data view to be placed.{% endblocktrans %}</strong></p>
-    <p id="embedding-code">&lt;script id="freemix-embed" src="{{ exhibit_embed_url }}" type="text/javascript"&gt;&lt;/script&gt;</p>
-    <p class="buttons">
-      <a id="embed-info-close" class="button">
-        <span class="ui-icon ui-icon-close"></span>
-      </a>
-    </p>
+<div id="embedModal" class="embed-modal modal hide fade" tabindex="-1" role="dialog" aria-labelledby="embedFormLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="editProfileFormLabel">{% trans "Embed View" %}</h3>
+  </div>
+
+  <div class="modal-body">
+    <div class="embed-desc">{% blocktrans %}Copy the following and paste it into your page where you'd like your data view to be placed.{% endblocktrans %}</div>
+    <input type="text" id="embedding-code" value="&lt;script id='freemix-embed' src='{{ exhibit_embed_url }}' type='text/javascript'&gt;&lt;/script&gt;" readonly="readonly"/>
+  </div>
+
+  <div class="modal-footer">
+    <div class="btn-group">
+      <a class="btn btn-small btn-primary" role="button" data-dismiss="modal" aria-hidden="true">{% trans "Close" %}</a>
+    </div>
   </div>
 </div>
 {% endif %}
@@ -141,7 +212,7 @@
 <div id="contents" class="freemix-themeable">
 
   <div id="canvas">
-      {% include exhibit.canvas.location %}
+    {% include exhibit.canvas.location %}
   </div>                
   
 </div>
@@ -153,6 +224,5 @@
 
 <p class="center">{% trans "Created by" %} <a href="{{ exhibit.owner.get_profile.get_absolute_url }}">{{ exhibit.owner|nicename }}</a> {% trans "based on" %} <a href="{{ exhibit.dataset.get_absolute_url }}">{{ exhibit.dataset.title }}</a>.</p>
 {% endblock %}
-
 
 

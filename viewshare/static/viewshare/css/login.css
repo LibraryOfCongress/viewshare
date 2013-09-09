@@ -8,14 +8,13 @@
   color:#333;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 30px;
 }
 
 .login_request_wrapper {
   background-image:url(../../images/login_request_bg.png);
   background-repeat:no-repeat;
   width:680px;
-  height:1000px;
+  height:1200px;
   color:#333;
   margin-left: auto;
   margin-right: auto;
@@ -24,7 +23,6 @@
 
 .login_text {
   padding: 25px 25px;
-  background: url(../../images/login_icon.png) 90% 55% no-repeat;
 }
 
 .login_request_text {
@@ -40,9 +38,7 @@
 }
 
 .center {
-     float: none;
-     margin-left: auto;
-     margin-right: auto;
+     text-align: center;
 }
 
 .signup {
@@ -170,10 +166,14 @@ font-size: 70%;
     padding-top: 10px;
 }
 
-.login_text .contact {
+.contact-alert {
     padding-top: 30px;
     margin-left: auto;
     margin-right: auto;
     text-align:center;
 }
 
+.control-label {
+ font-weight: bold;
+ color: slategrey;
+}

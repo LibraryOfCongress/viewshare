@@ -4,10 +4,14 @@
 window.Freemix = window.Freemix || {};
 
 window.Freemix.profile = {{ metadata|safe }};
-window.Freemix.data_profile = {{ data_profile|safe }};
+
+var data = [];
+{% for d in data %}
+   data.concat({{d|safe}});
+{% endfor %}
 
 window.Freemix.data ={
-    "items": {{data|safe}}["items"],
+    "items": data,
     "properties": {{properties|safe}}["properties"]
 
 };

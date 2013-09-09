@@ -21,7 +21,7 @@
                  "</div>" +
                  "<div class='facet-body ui-widget-content'>" +
                  "<div class='facet-content'></div>" +
-                 "<div class='facet-menu'><a href='#' title='Edit this facet'><i class='icon-edit'></i> Edit</a></div>" +
+                 "<div class='facet-menu'><div class='row-fluid'><div class='span12'><div class='pull-right'><a href='#' title='Edit this facet' class='btn btn-mini'><i class='icon-edit'></i> Edit</a></div></div></div></div>" +
                  "</div></div>")
         .attr("id", this.config.id)
         .find("span.view-label").text(this.label).end()

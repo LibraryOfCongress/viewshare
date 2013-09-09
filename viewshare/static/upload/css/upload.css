@@ -1,10 +1,3 @@
-#load h1, #upload-label {
-    border-bottom: 1px solid lightgrey;
-    font-size: 2.0em;
-    padding: 0.2em 0.1em;
-    margin: 0 0 1em;
-}
-
 #load .upload-caption {
 font-size: 150%;
 padding-bottom: 30px;
@@ -79,4 +72,14 @@ font-size: 140%;
 .errorMsg-followup {
 padding-top: 20px;
 padding-bottom: 10px;
+}
+
+.upload-form .control-label {
+ font-weight: bold;
+ color: slategrey;
+ font-size: 1.2em;
+}
+
+.upload-form .asteriskField {
+ display: none;
 }
