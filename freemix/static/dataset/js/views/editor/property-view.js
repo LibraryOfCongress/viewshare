@@ -75,16 +75,14 @@ define(
        renderValue: function() {
            var valueType = this.$el.find(':selected').val(),
            valueEl = this.$el.find('.value');
-           valueEl.fadeOut();
            // change rendering for this.model.value on certain types
            if (valueType === 'image') {
-               valueEl.html(this.imageTemplate({value: this.model.value}));
-           } else if ( valueType === 'url') {
-               valueEl.html(this.anchorTemplate({value: this.model.value}));
+               valueEl.html(this.imageTemplate({value: this.value()}));
+           } else if (valueType === 'url') {
+               valueEl.html(this.anchorTemplate({value: this.value()}));
            } else {
-               valueEl.html(this.textTemplate({value: this.model.value}));
+               valueEl.html(this.textTemplate({value: this.value()}));
            }
-           valueEl.fadeIn();
        },
 
        /** Add this view to the DOM */

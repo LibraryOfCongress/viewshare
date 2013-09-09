@@ -9,76 +9,62 @@
 
 {% block body %}
 <div class="exhibit_edit">
-  <div id="notifications"></div>
-
-  <br />
   <div class="accordion" id="accordion-exhibit">
-
     <div class="accordion-group">
-
       <div class="accordion-heading">
-	<div class="accordion-toggle">
-	  {% if exhibit.parent %}
- 	  <div class="exhibit-title-accordion">{{exhibit.parent.title}} </div>
-	  {% else %}
-	  <div class="exhibit-title-accordion">New View</div>
-	  {% endif %}
-	</div>
-      </div>
-
-      <div id="collapseOne" class="accordion-body">
-
-	<div class="accordion-inner">
-	
-	  <div class="exhibit-view-extended-display">
-      {% if exhibit.parent.description %}
-      <div class="row-fluid">
-        <div class="span12">
-          <div class="exhibit-description exhibit-long-description">
-            {{ exhibit.parent.description }}
-          </div>
+        <div class="accordion-toggle">
+          {% if exhibit.parent %}
+          <div class="exhibit-title-accordion">{{exhibit.parent.title}} </div>
+          {% else %}
+          <div class="exhibit-title-accordion">New View</div>
+          {% endif %}
         </div>
       </div>
-	    {% endif %}
-	    
-	    <div class="row-fluid">
-	      <div class="span6">
-		<div class="exhibit-metadata">
-		  {% trans "Created by"%}
-		  <span class="exhibit-creator"><a href="{% url 'profile_detail' exhibit.owner.username %}">{{exhibit.owner|nicename}}</a></span>
-		  {% trans "on"%}
-		  <span class="exhibit-modified-data">{{exhibit.modified|date:"N j, Y"}} POC</span>.
-		</div>
-	      </div>
-	      <div class="span6">
-		<div class="btn-toolbar pull-right">
-		  <div class="btn-group" >
-		    <button class="btn btn-small btn-primary" id="edit_button" data-toggle="collapse" data-target="#edit">{% trans "Edit" %}</button>
-		    <button class="btn btn-small btn-primary" id="builder_button" data-toggle="collapse" data-target="#build">{% trans "Layout" %}</button>
-		    <button class="btn btn-small btn-primary" id="preview_button" data-toggle="collapse" data-target="#preview">{% trans "Preview" %}</button>
-		  </div>
-		  <div class="exhibit-actions btn-group">
-		    <button class="btn btn-small" id="save_button">{% trans "Save" %}</button>
-		    <a href="{{ cancel_url }}" class="btn btn-small" id="cancel_button">{% trans "Cancel" %}</a>
-		  </div>
-		</div>
-	      </div> <!-- span6 -->
-	    </div> <!-- row-fluid -->
-	    
-	  </div> <!-- exhibit-display -->
-	  
-	</div> <!-- accordion-inner -->
-	
+      <div id="collapseOne" class="accordion-body">
+        <div class="accordion-inner">
+          <div class="exhibit-view-extended-display">
+            {% if exhibit.parent.description %}
+            <div class="row-fluid">
+              <div class="span12">
+                <div class="exhibit-description exhibit-long-description">
+                  {{ exhibit.parent.description }}
+                </div>
+              </div>
+            </div>
+            {% endif %}
+            <div class="row-fluid">
+              <div class="span6">
+                <div class="exhibit-metadata">
+                  {% trans "Created by"%}
+                  <span class="exhibit-creator"><a href="{% url 'profile_detail' exhibit.owner.username %}">{{exhibit.owner|nicename}}</a></span>
+                  {% trans "on"%}
+                  <span class="exhibit-modified-data">{{exhibit.modified|date:"N j, Y"}}</span>.
+                </div>
+              </div>
+              <div class="span6">
+                <div class="btn-toolbar pull-right">
+                  <div class="btn-group" >
+                    <button class="btn btn-small btn-primary" id="edit_button" data-toggle="collapse" data-target="#edit">{% trans "Edit" %}</button>
+                    <button class="btn btn-small btn-primary" id="builder_button" data-toggle="collapse" data-target="#build">{% trans "Layout" %}</button>
+                    <button class="btn btn-small btn-primary" id="preview_button" data-toggle="collapse" data-target="#preview">{% trans "Preview" %}</button>
+                  </div>
+                  <div class="exhibit-actions btn-group">
+                    <button class="btn btn-small" id="save_button">{% trans "Save" %}</button>
+                    <a href="{{ cancel_url }}" class="btn btn-small" id="cancel_button">{% trans "Cancel" %}</a>
+                  </div>
+                </div>
+              </div> <!-- span6 -->
+            </div> <!-- row-fluid -->
+          </div> <!-- exhibit-display -->
+        </div> <!-- accordion-inner -->
       </div> <!-- accordion-body -->
-      
     </div> <!-- accordion-group -->
-    
   </div> <!-- accordion -->
 
   <div id="contents">
-      <div id="editor"></div>
+    <div id="notifications"></div>
+    <div id="editor"></div>
   </div>
-
 {% endblock body %}
 
 {% block extra_scripts %}

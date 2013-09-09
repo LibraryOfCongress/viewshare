@@ -24,6 +24,7 @@ define(
      */
     var
     PropertyCollection = function(options) {
+        this.Observer = new Observer().Observer;
         this.initialize.apply(this, [options]);
     },
     PropertyCollectionObserver = new Observer();

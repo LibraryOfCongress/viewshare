@@ -360,13 +360,13 @@ class DraftExhibitPropertiesJSONView(DraftExhibitView, BaseJSONView):
         if not self.check_perms():
             raise Http404()
         try:
-            data = json.load(request.body)
+            data = json.loads(request.body)
         except ValueError:
             return HttpResponseBadRequest("Not a JSON document")
         exhibit = self.get_parent_object()
 
         serializer_class = serializers.get_serializer_type_by_dict(data)
-        self.serializer = serializer_class(exhibit, data=data)
+        self.serializer = serializer_class(exhibit, data['id'], data=data)
 
         if not self.serializer.is_valid():
             return HttpResponseBadRequest("<br/>".join(self.serializer.errors))

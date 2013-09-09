@@ -43,8 +43,8 @@ define(
             this.currentItemIndex = null;
             this.owner = options.owner;
             this.slug = options.slug;
-            this.propertyURL = '/views/' + this.owner + '/' + this.slug + '/draft/properties/' + this.id;
-            this.dataURL = this.propertyURL + '/data/';
+            this.propertyURL = '/views/' + this.owner + '/' + this.slug + '/draft/properties/' + this.id + '/';
+            this.dataURL = this.propertyURL + 'data/';
         },
 
         /** Return the current value from this.items. */
