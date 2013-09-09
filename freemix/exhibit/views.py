@@ -5,9 +5,9 @@ from django.http import (HttpResponse, Http404, HttpResponseRedirect,
                          HttpResponseForbidden, HttpResponseBadRequest)
 from django.views.decorators.http import last_modified
 from django.views.generic.base import View
-from django.shortcuts import  get_object_or_404, render
+from django.shortcuts import get_object_or_404, render
 from django.template.loader import render_to_string
-from django.core.urlresolvers import  reverse
+from django.core.urlresolvers import reverse
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
 from django.views.generic.list import ListView
@@ -20,9 +20,15 @@ from freemix.utils import get_site_url
 from freemix.views import OwnerListView, OwnerSlugPermissionMixin, BaseJSONView
 
 
+def exhibit_last_modified(request, *args, **kwargs):
+    return last_modified(get_published_exhibit(request,
+                                               kwargs["owner"],
+                                               kwargs["slug"]).modified)
+
+
 class ExhibitDetailEditView(OwnerSlugPermissionMixin, UpdateView):
     form_class = forms.UpdateExhibitDetailForm
-    object_perm="exhibit.can_edit"
+    object_perm = "exhibit.can_edit"
     model = models.PublishedExhibit
     template_name = "exhibit/edit/exhibit_metadata_form.html"
 
@@ -36,7 +42,7 @@ class ExhibitDetailEditView(OwnerSlugPermissionMixin, UpdateView):
                                     }))
 
 
-#############################################################################################
+###############################################################################
 # Display Views
 
 class PublishedExhibitView(OwnerSlugPermissionMixin, DetailView):
@@ -44,7 +50,8 @@ class PublishedExhibitView(OwnerSlugPermissionMixin, DetailView):
     select_related = ("owner",)
 
     def get_queryset(self):
-        return models.PublishedExhibit.objects.select_related(*self.select_related)
+        rel = self.select_related
+        return models.PublishedExhibit.objects.select_related(*rel)
 
     object_perm = "exhibit.can_view"
     template_name = "exhibit/exhibit_display.html"
@@ -62,10 +69,10 @@ class PublishedExhibitView(OwnerSlugPermissionMixin, DetailView):
         context["can_delete"] = user.has_perm("exhibit.can_delete", exhibit)
         return context
 
+
 class PublishedExhibitDisplayView(PublishedExhibitView):
 
     select_related = ("owner", "canvas")
-
 
     def delete(self, request, *args, **kwargs):
         exhibit = self.get_object()
@@ -75,8 +82,8 @@ class PublishedExhibitDisplayView(PublishedExhibitView):
         return HttpResponseForbidden()
 
     def get_context_data(self, **kwargs):
-
-        context = super(PublishedExhibitDisplayView, self).get_context_data(**kwargs)
+        s = super(PublishedExhibitDetailView, self)
+        context = s.get_context_data(**kwargs)
 
         exhibit = self.get_object()
 
@@ -89,10 +96,10 @@ class PublishedExhibitDisplayView(PublishedExhibitView):
 
         if can_embed:
             url = reverse('exhibit_embed_js',
-                            kwargs={
-                                "owner": exhibit.owner,
-                                "slug": exhibit.slug
-                            })
+                          kwargs={
+                              "owner": exhibit.owner,
+                              "slug": exhibit.slug
+                          })
             context["exhibit_embed_url"] = get_site_url(url)
         return context
 
@@ -113,12 +120,14 @@ class PublishedExhibitJSONView(BaseJSONView):
         return self.request.parent_object
 
     def check_perms(self):
-        if not self.request.user.has_perm("exhibit.can_view", self.get_parent_object()):
+        if not self.request.user.has_perm("exhibit.can_view",
+                                          self.get_parent_object()):
             return False
         return True
 
     def cache_control_header(self):
-        cache_control = super(PublishedExhibitJSONView, self).cache_control_header()
+        s = super(PublishedExhibitJSONView, self)
+        cache_control = s.cache_control_header()
         if not self.get_parent_object().is_public:
             cache_control += ", private"
         else:
@@ -150,31 +159,36 @@ class PublishedExhibitDetailView(PublishedExhibitView):
     object_perm = "exhibit.can_inspect"
 
     def get_context_data(self, **kwargs):
-        context = super(PublishedExhibitDetailView, self).get_context_data(**kwargs)
+        s = super(PublishedExhibitDetailView, self)
+        ctx = s.get_context_data(**kwargs)
         user = self.request.user
         can_embed = user.has_perm("exhibit.can_embed", self.get_object())
-        context["can_embed"] = can_embed
-        context["can_share"] = user.has_perm("exhibit.can_share", self.get_object())
+        ctx["can_embed"] = can_embed
+        ctx["can_share"] = user.has_perm("exhibit.can_share",
+                                         self.get_object())
         if can_embed:
-            context["exhibit_embed_url"] = get_site_url(reverse('exhibit_embed_js',
-                                                    kwargs={
-                                                        "owner": self.get_object().owner,
-                                                        "slug": self.get_object().slug
-                                                    }))
-        return context
+            url = reverse('exbibit_embed_js',
+                          kwargs={"owner": self.get_object().owner,
+                                  "slug": self.get_object().slug})
+            url = get_site_url(url)
+            ctx["exhibit_embed_url"] = url
+        return ctx
 
 
 def get_public_exhibit(request, owner, slug):
     if not hasattr(request, "exhibit"):
         qs = models.PublishedExhibit.objects.select_related("owner")
-        request.exhibit = get_object_or_404(qs, slug=slug, owner__username=owner, is_public=True)
+        request.exhibit = get_object_or_404(qs,
+                                            slug=slug,
+                                            owner__username=owner,
+                                            is_public=True)
     return request.exhibit
 
 
 class EmbeddedExhibitView(View):
-    """Generate the javascript necessary to embed an exhibit on an external site
     """
-    # The
+    Generate the javascript necessary to embed an exhibit on an external site
+    """
     template_name = "exhibit/embed/show.js"
 
     def get(self, request, owner, slug):
@@ -204,10 +218,9 @@ class EmbeddedExhibitView(View):
         response['Cache-Control'] = "no-cache, must-revalidate, public"
         return response
 
-def lmfunc(r, owner, slug):
-    ex = get_public_exhibit(r, owner, slug)
-    return ex.modified
-embedded_exhibit_view = last_modified(lmfunc)(EmbeddedExhibitView.as_view())
+
+embedded_exhibit_view = exhibit_last_modified(EmbeddedExhibitView.as_view())
+
 
 # Exhibit Profile Views
 def get_published_exhibit(request, owner, slug):
@@ -215,6 +228,7 @@ def get_published_exhibit(request, owner, slug):
         request.exhibit = get_object_or_404(models.PublishedExhibit,
                                             slug=slug, owner__username=owner)
     return request.exhibit
+
 
 class PublishedExhibitProfileJSONView(BaseJSONView):
 
@@ -225,21 +239,26 @@ class PublishedExhibitProfileJSONView(BaseJSONView):
 
     def get_doc(self):
         ex = self.get_parent_object()
-        return models.PublishedExhibit.objects.filter(id=ex.id).values_list("profile", flat=True)[0]
+        f = models.PublishedExhibit.objects.filter(id=ex.id)
+        return f.values_list("profile", flat=True)[0]
 
     def check_perms(self):
-        return self.request.user.has_perm("exhibit.can_view", self.get_parent_object())
-
+        return self.request.user.has_perm("exhibit.can_view",
+                                          self.get_parent_object())
 
     def cache_control_header(self):
-        cache_control = super(PublishedExhibitProfileJSONView, self).cache_control_header()
+        s = super(PublishedExhibitProfileJSONView, self)
+        cache_control = s.cache_control_header()
         if not self.request.exhibit.is_public:
             cache_control += ", private"
         else:
             cache_control += ", public"
         return cache_control
-lmdec = last_modified(lambda request, *args, **kwargs: get_published_exhibit(request, kwargs["owner"], kwargs["slug"]).modified)
-exhibit_profile_json_view = lmdec(PublishedExhibitProfileJSONView.as_view())
+
+
+exhibit_profile_json_view = PublishedExhibitProfileJSONView.as_view()
+exhibit_profile_json_view = exhibit_last_modified(exhibit_profile_json_view)
+
 
 # List Views
 
@@ -254,7 +273,7 @@ class PublishedExhibitListView(OwnerListView):
 
 
 class CanvasListView(ListView):
-    template_name="exhibit/canvas_list.html"
+    template_name = "exhibit/canvas_list.html"
 
     def get_queryset(self):
         return models.Canvas.objects.filter(enabled=True)
@@ -265,6 +284,7 @@ class CanvasListView(ListView):
                                      kwargs={"owner": self.kwargs["owner"],
                                              "slug": self.kwargs["slug"]})
         return kwargs
+
 
 # Draft Editor Views
 
@@ -280,8 +300,8 @@ class DraftExhibitView(View):
         slug = self.kwargs["slug"]
 
         try:
-            self.exhibit = models.DraftExhibit.objects.get(owner__username=owner,
-                                                   slug=slug)
+            query = Q(owner__username=owner, slug=slug)
+            self.exhibit = models.DraftExhibit.objects.get(query)
         except models.DraftExhibit.DoesNotExist:
             published = get_object_or_404(models.PublishedExhibit,
                                           owner__username=owner,
@@ -316,9 +336,10 @@ class DraftExhibitPropertiesListView(DraftExhibitView, BaseJSONView):
 
     def put(self, request, *args, **kwargs):
         response = self.post(request, *args, **kwargs)
+        exhibit = self.get_parent_object()
         if response.status_code == 200:
             names = [p._instance.name for p in self.serializer.serializers]
-            self.get_parent_object().properties.exclude(name__in=names).delete()
+            exhibit.properties.exclude(name__in=names).delete()
         return response
 
 
@@ -344,8 +365,9 @@ class DraftExhibitPropertiesJSONView(DraftExhibitView, BaseJSONView):
             return HttpResponseBadRequest("Not a JSON document")
         exhibit = self.get_parent_object()
 
-        self.serializer = serializers.get_serializer_type_by_dict(data)(exhibit,
-                                                                    data=data)
+        serializer_class = serializers.get_serializer_type_by_dict(data)
+        self.serializer = serializer_class(exhibit, data=data)
+
         if not self.serializer.is_valid():
             return HttpResponseBadRequest("<br/>".join(self.serializer.errors))
         self.serializer.save()
@@ -383,8 +405,8 @@ class DraftExhibitPropertyDataView(DraftExhibitView, BaseJSONView):
             raise Http404()
 
         prop = get_object_or_404(models.ExhibitProperty,
-                                     exhibit=self.get_parent_object(),
-                                     name=self.kwargs["property"])
+                                 exhibit=self.get_parent_object(),
+                                 name=self.kwargs["property"])
 
         try:
             data = json.load(request.body)
@@ -401,7 +423,6 @@ class DraftExhibitPropertyDataView(DraftExhibitView, BaseJSONView):
                                                json=items)
         return HttpResponse("OK")
 
-
     def put(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
 
@@ -415,6 +436,7 @@ class DraftExhibitPropertyDataView(DraftExhibitView, BaseJSONView):
 class DraftExhibitPropertyDataStatusView(DraftExhibitView):
     def get(self, request, *args, **kwargs):
         pass
+
 
 class DraftExhibitProfileJSONView(DraftExhibitView, BaseJSONView):
 
@@ -435,7 +457,7 @@ class DraftExhibitProfileJSONView(DraftExhibitView, BaseJSONView):
 
 
 class DraftExhibitUpdateView(DraftExhibitView):
-    template_name="exhibit/exhibit_update.html"
+    template_name = "exhibit/exhibit_update.html"
 
     def get(self, request, *args, **kwargs):
         exhibit = self.get_parent_object()
@@ -499,17 +521,40 @@ class PublishExhibitView(DraftExhibitView):
     form_class = forms.CreateExhibitForm
     template_name = "exhibit/create/exhibit_metadata_form.html"
 
-    def get(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
 
         if not self.check_perms():
             raise Http404()
 
-        draft = self.get_parent_object()
-        if draft.parent:
-            url = draft.parent.get_absolute_url()
-            draft.publish()
-            return HttpResponseRedirect(url)
+        if request.META["CONTENT_TYPE"] == "application/json":
+            return self.update_profile(request)
+        else:
+            return self.publish_form(request)
 
+    def publish_form(self, request):
+        draft = self.get_parent_object()
+
+        form = self.form_class(request.POST, draft=draft)
+
+        if form.is_valid():
+            form.save()
+            return self.success(request)
+
+        else:
+            return render(request, self.template_name, {
+                "form": form,
+                "draft": draft
+            })
+
+    def update_profile(self, request):
+        draft = self.get_parent_object()
+
+        contents = json.loads(self.request.raw_post_data)
+        draft.update_from_profile(contents)
+
+        if draft.parent:
+            draft.publish()
+            return self.success(request)
         form = forms.CreateExhibitForm(draft=draft)
 
         return render(request, self.template_name, {
@@ -517,27 +562,10 @@ class PublishExhibitView(DraftExhibitView):
             "draft": draft
         })
 
-    def post(self, request, *args, **kwargs):
-
-        if not self.check_perms():
-            raise Http404()
-
-        draft = self.get_parent_object()
-
-        form = self.form_class(request.POST, draft=draft)
-
-        if form.is_valid():
-            form.save()
-            response_url = reverse('exhibit_display',
-                                    kwargs={
-                                        "owner":form.instance.owner,
-                                        "slug":form.instance.slug
-                                    })
-            if request.is_ajax():
-                return HttpResponse("<a rev='%s'></a>" % response_url)
-            return HttpResponseRedirect(response_url)
-        else:
-            return render(request, self.template_name, {
-                "form": form,
-                "draft": draft
-            })
+    def success(self, request):
+        response_url = reverse('exhibit_display',
+                               kwargs={
+                                   "owner": self.kwargs["owner"],
+                                   "slug": self.kwargs["slug"]
+                               })
+        return HttpResponse("<a rev='%s'></a>" % response_url)
