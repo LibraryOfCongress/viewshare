@@ -419,6 +419,7 @@ class DataTransaction(TimeStampedModel):
     status = models.IntegerField(choices=choices,
                                  default=TX_STATUS["pending"])
     is_complete = models.BooleanField(default=False)
+    result = models.TextField(null=True, blank=True)
 
     class meta:
         abstract = True
