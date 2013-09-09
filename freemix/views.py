@@ -9,12 +9,14 @@ from django.views.generic import View
 from django.views.generic.list import ListView
 from freemix.permissions import PermissionsRegistry
 
+
 class OwnerListView(ListView):
-    """A base view for filtering based on the 'owner' of a particular object.  For now, 'owner' is expected to be a
-       username that maps to a Django User.
+    """
+    A base view for filtering based on the 'owner' of a particular object.
+    'owner' is expected to be a username that maps to a Django User.
     """
     permission = None
-    related= None
+    related = None
     defer = None
     owner_field = 'owner'
 
@@ -26,16 +28,16 @@ class OwnerListView(ListView):
         sort = vars.get('sort', None)
         if sort:
             if sort not in self.model._meta.get_all_field_names():
-                raise Http404("%s is not a valid sorting field"%sort)
-
+                raise Http404("%s is not a valid sorting field" % sort)
 
         self.owner = get_object_or_404(User, username=self.kwargs.get("owner"))
         owner_lookup = dict([(self.owner_field, self.owner)])
         list = self.model.objects.filter(**owner_lookup)
 
-
         if self.permission:
-            list = list.filter(PermissionsRegistry.get_filter(self.permission, self.request.user))
+            f = PermissionsRegistry.get_filter(self.permission,
+                                               self.request.user)
+            list = list.filter(f)
 
         if self.related:
             list = list.select_related(*self.related)
@@ -44,7 +46,7 @@ class OwnerListView(ListView):
             list = list.defer(*self.defer)
         if sort:
             dir = vars.get('dir', "desc")
-            order_by = (dir=="desc" and "-" or "") + sort
+            order_by = (dir == "desc" and "-" or "") + sort
             list = list.order_by(order_by)
 
         return list
@@ -65,7 +67,7 @@ class OwnerSlugPermissionMixin:
 
     def filter_by_perm(self, obj):
         if hasattr(self, "object_perm") and \
-            not self.request.user.has_perm(getattr(self, "object_perm"), obj):
+           not self.request.user.has_perm(getattr(self, "object_perm"), obj):
                 raise Http404
         return obj
 
@@ -74,8 +76,8 @@ class OwnerSlugPermissionMixin:
             if queryset is None:
                 queryset = self.get_queryset()
             obj = get_object_or_404(queryset,
-                                     owner__username=self.kwargs.get("owner"),
-                                     slug=self.kwargs.get("slug"))
+                                    owner__username=self.kwargs.get("owner"),
+                                    slug=self.kwargs.get("slug"))
             obj = self.filter_by_perm(obj)
             self._object = obj
         return self._object
@@ -83,12 +85,11 @@ class OwnerSlugPermissionMixin:
 
 class JSONResponse(HttpResponse):
 
-    def __init__(self, data, template=None,**extra_context):
+    def __init__(self, data, template=None, **extra_context):
         indent = 2 if settings.DEBUG else None
 
         if template:
-            context = {"json": json.dumps(data, indent=indent)
-            }
+            context = {"json": json.dumps(data, indent=indent)}
             if extra_context:
                 context.update(extra_context)
             content = render_to_string(template, context)
@@ -96,11 +97,8 @@ class JSONResponse(HttpResponse):
         else:
             content = json.dumps(data, indent=indent)
             mime = ("text/javascript" if settings.DEBUG
-                                  else "application/json")
-        super(JSONResponse, self).__init__(
-            content = content,
-            mimetype = mime,
-        )
+                    else "application/json")
+        super(JSONResponse, self).__init__(content=content, mimetype=mime)
 
 
 class BaseJSONView(View):

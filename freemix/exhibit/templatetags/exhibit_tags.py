@@ -1,7 +1,4 @@
 from django import template
-from django.conf import settings
-from django.template.loader import render_to_string
-from freemix.exhibit import models
 from freemix.exhibit import conf
 
 register = template.Library()
@@ -10,7 +7,6 @@ register = template.Library()
 @register.inclusion_tag("exhibit/exhibit_list_item.html", takes_context=True)
 def exhibit_list_item(context, exhibit):
     request = context['request']
-    visible = exhibit.dataset_available(request.user)
     user = request.user
 
     can_edit = user.has_perm("exhibit.can_edit", exhibit)
@@ -20,24 +16,21 @@ def exhibit_list_item(context, exhibit):
 
     return {"exhibit": exhibit,
             "request": request,
-            "visible": visible,
-            "dataset_available": visible,
             "can_edit": can_edit,
             "can_delete": can_delete,
             "can_view": can_view,
             "can_inspect": can_inspect}
 
+
 @register.inclusion_tag("exhibit/exhibit_list.html", takes_context=True)
 def exhibit_list(context, exhibits, max_count=10, pageable=True):
-    return {"object_list": exhibits, "max_count": max_count, "pageable": pageable,
+    return {"object_list": exhibits,
+            "max_count": max_count,
+            "pageable": pageable,
             "request": context['request'],
             "sort": context["request"].GET.get("sort", None),
-            "dir": context["request"].GET.get("dir", "desc"),
-            }
+            "dir": context["request"].GET.get("dir", "desc")}
 
-@register.inclusion_tag("exhibit/exhibit_create_dialog.html", takes_context=True)
-def new_exhibit(context):
-    return {'STATIC_URL': settings.STATIC_URL}
 
 @register.simple_tag
 def simile_painter_url():

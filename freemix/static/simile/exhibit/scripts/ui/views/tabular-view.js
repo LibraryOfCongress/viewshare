@@ -276,7 +276,7 @@ Exhibit.TabularView.prototype._reconstruct = function() {
          *  Style the table
          */
         var table = document.createElement("table");
-        table.className = "exhibit-tabularView-body";
+        table.className = "exhibit-tabularView-body table table-striped table-bordered table-hover";
         if (this._settings.tableStyler != null) {
             this._settings.tableStyler(table, database);
         } else {

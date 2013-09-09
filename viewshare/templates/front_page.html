@@ -14,10 +14,6 @@
 {% endblock %}
 
 
-{% block head_scripts %}
-    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.slides.js"></script>
-{% endblock head_scripts %}
-
 
 {% block tab_id %}id="home_tab"{% endblock %}
 
@@ -26,97 +22,79 @@
 
 
 {% block body %}
-{% if featured_exhibits %}
-<div id="slides">
-  <div class="slides_container">
-  {% for exhibit in featured_exhibits %}
-    <div class="slide">
-      <a href="{{ exhibit.get_absolute_url }}">
-      {% if exhibit.thumbnail %}
-        <img src="{{ exhibit.thumbnail.url }}" />
-      {% else %}
-        <img src="{{ STATIC_URL }}images/slide_holder.png" />
-      {% endif %}
+<div class="row">
+  <div class="span9">
+    {% if featured_exhibits %}
+    <div id="homeSlide" class="carousel slide">
+      <ol class="carousel-indicators">
+        {% for exhibit in featured_exhibits %}
+        <li data-target="#homeSlide" data-slide-to="{{ forloop.counter0 }}"{% if forloop.counter0 == 0 %} class="active"{% endif %}></li>
+        {% endfor %}
+      </ol>
+      <!-- Carousel items -->
+      <div class="carousel-inner">
+        {% for exhibit in featured_exhibits %}
+        <div class="item{% if forloop.counter0 == 0 %} active{% endif %}">
+          <a href="{{ exhibit.get_absolute_url }}">
+          {% if exhibit.thumbnail %}
+            <img src="{{ exhibit.thumbnail.url }}" />
+          {% else %}
+            <img src="{{ STATIC_URL }}images/slide_holder.png" />
+          {% endif %}
+          </a>
+          <div class="carousel-caption">
+            <p>{{ exhibit.custom_title|safe }}</p>
+          </div>
+        </div><!-- /.item -->
+        {% endfor %}
+      </div><!-- /.carousel-inner -->
+      <!-- Carousel nav -->
+      <a class="carousel-control left" href="#homeSlide" data-slide="prev">&lsaquo;</a>
+      <a class="carousel-control right" href="#homeSlide" data-slide="next">&rsaquo;</a>
+    </div><!-- /#homeSlide -->
+    {% endif %}
+  </div><!-- /.span9 -->
+  <div class="span3">
+    <p class="lead">
+      <strong>{{ SITE_NAME }}</strong> is a <strong>free</strong> platform for generating and customizing views <strong>(interactive maps, timelines, facets, tag clouds)</strong> that allow users to experience your <strong>digital collections</strong>.
+    </p> 
+      <a href="/registration/register/">
+        <div id="first" class="linkblock">Request Free Account</div>
       </a>
-      <div class="caption">
-        <p>{{ exhibit.custom_title|safe }}</p>
-      </div>
-    </div><!-- /.slide -->
-  {% endfor %}
-  </div><!-- /#slides_container -->
-  <div class="arrows">
-    <a href="#" class="prev"><img src="{{ STATIC_URL }}images/arrow-prev.png" width="24" height="24" alt="Arrow Prev"></a>
-    <a href="#" class="next"><img src="{{ STATIC_URL }}images/arrow-next.png" width="24" height="24" alt="Arrow Next"></a>
-  </div><!-- /.arrows -->
-</div><!-- /#slides -->
-{% endif %}
-<div class="primarydisc">
-  <p>
-  <strong>{{ SITE_NAME }}</strong> is a <strong>free</strong> platform for generating and customizing views <strong>(interactive maps, timelines, facets, tag clouds)</strong> that allow users to experience your <strong>digital collections</strong>.
-  </p> 
-  <a href="/registration/register/">
-    <div id="first" class="linkblock">Request Free Account</div>
-  </a>
-  <a href="/screencast">
-    <div id="second" class="linkblock">Watch Screencast</div>
-  </a>
-  <a href="http://recollection.zepheira.com/about/help/">
-    <div id="third" class="linkblock">Get Started</div>
-  </a>
-</div><!-- /.primarydisc -->
-<style type="text/css">
-  .linkblock {
-    padding:1.2em 1em 1em 1em
-  }
-</style>
-
-<div class="action-set first-action-set">
-  <a href="/import"><h3 class="grid_title">Import Collections</h3></a>
-  <div class="stepblock">
-    Ingest collections from <strong>spreadsheets</strong> or <strong><a href="http://www.loc.gov/standards/mods/">MODS</a></strong> records. Upload from your desktop or import them from a URL. 
-  </div>
-</div><!-- /.action-set -->
-<div class="action-set">
-  <a href="generate-views"><h3 class="grid_title">Generate Views</h3></a>
-  <div class="stepblock">
-    Generate distinct interactive visual interfaces to your digital collections, including <strong>maps</strong> and <strong>timelines</strong>, and sophisticated <strong>faceted navigation</strong>.
-  </div>
-</div><!-- /.action-set -->
-<div class="action-set">
-  <a href="/embed-and-share"><h3 class="grid_title">Embed and Share</h3></a>
-  <div class="stepblock">
-    Just <strong>copy-paste to embed</strong> your interface in any webpage. Provide your users with novel and intuitive ways to explore your content    
-  </div>
-</div><!-- /.action-set -->
-{% endblock %}
+      <a href="/screencast">
+        <div id="second" class="linkblock">Watch Screencast</div>
+      </a>
+      <a href="http://recollection.zepheira.com/about/help/">
+        <div id="third" class="linkblock">Get Started</div>
+      </a>
+  </div><!-- /.span3 -->
+</div><!-- /.row -->
 
 
-{% block final %}
-{{ block.super }}
-<script>
-$(function() {
-  $('#slides').slides({
-    preload: true,
-    preloadImage: '{{ STATIC_URL }}images/loading.gif',
-    play: 10000,
-    pause: 2500,
-    hoverPause: true,
-    animationStart: function(current){
-      $('.caption').animate({
-        bottom:-35
-      }, 100);
-    },
-    animationComplete: function(current){
-      $('.caption').animate({
-        bottom:0
-      }, 200);
-    },
-    slidesLoaded: function() {
-      $('.caption').animate({
-        bottom:0
-      }, 200);
-    }
-  });
-});
-</script>
-{% endblock final %}
+<div class="row">
+  <div class="span4 action-set">
+    <a href="/import"><h3 class="grid_title">Import Collections</h3></a>
+    <p class=stepblock>Ingest collections from <strong>spreadsheets</strong> or <strong><a href="http://www.loc.gov/standards/mods/">MODS</a></strong> records. Upload from your desktop or import them from a URL.</p>
+  </div><!-- /.span4 -->
+  <div class="span4 action-set">
+    <a href="generate-views"><h3 class="grid_title">Generate Views</h3></a>
+    <p class=stepblock>
+      Generate distinct interactive visual interfaces to your digital collections, including <strong>maps</strong> and <strong>timelines</strong>, and sophisticated <strong>faceted navigation</strong>.
+    </p>
+  </div><!-- /.span4 -->
+  <div class="span4 action-set">
+    <a href="/embed-and-share"><h3 class="grid_title">Embed and Share</h3></a>
+    <p class=stepblock>
+      Just <strong>copy-paste to embed</strong> your interface in any webpage. Provide your users with novel and intuitive ways to explore your content    
+    </p>
+  </div><!-- /.span4 -->
+</div><!-- /.row -->
+{% endblock body %}
+
+
+
+{% block extra_scripts %}
+  <script>
+  $(function() { $('#homeSlide').carousel(); });
+  </script>
+{% endblock extra_scripts %}

@@ -1,7 +1,6 @@
 {% extends "site_base.html" %}
 {% load url from future %}
 
-
 {% load i18n %}
 {% load crispy_forms_tags %}
 {% load freemix_helpers %}
@@ -13,7 +12,7 @@
 <link href="{{STATIC_URL}}viewshare/css/login.css" rel="stylesheet" type="text/css" media="screen,projection" />
 {% endblock %}
 
-{% block head_scripts %}
+{% block extra_scripts %}
 {{ block.super }}
 <script type="text/javascript">
 $(document).ready(function() {
@@ -25,15 +24,26 @@ $(document).ready(function() {
 {% block body %}
 
 {% if user.is_authenticated %}
-<div class="alert alert-block">
-  {% blocktrans %}You are already logged in as{% endblocktrans %} {{ user|nicename }}.
+<div class="row-fluid logged-in-alert">
+  <div class="span6 offset3">
+    <div class="alert alert-block">
+      {% blocktrans %}You are already logged in as{% endblocktrans %} {{ user|nicename }}.
+    </div>
+  </div>
 </div>
 {% else %}
+
 {% url 'registration_register' as signup_url %}
-<div class="signup alert alert-block span4 center">
-  {% blocktrans %}Don't yet have an account? <a href="{{ signup_url }}">Sign up</a>!{% endblocktrans %}
+
+<div class="row-fluid signin-alert">
+  <div class="span6 offset3">
+    <div class="signup alert alert-block">
+      <p class="center">
+	{% blocktrans %}Don't yet have an account? <a href="{{ signup_url }}">Sign up</a>!{% endblocktrans %}
+      </p>
+    </div>
+  </div>
 </div>
-<br />
 {% endif %}
 
 <div class="login_options login_wrapper">	
@@ -46,41 +56,72 @@ $(document).ready(function() {
             <a href="{% url 'acct_passwd_reset' %}">{% trans "Forgot password?" %}</a>
           </div>
         </legend>
+
         {% csrf_token %}	
 
-        <div class="control-group">
-        <label class="control-label" for="id_username">Username</label>
-        <div class="controls">
-          <input type="text" id="id_username" placeholder="Username" name="username" required="true"></input>
-        </div>
+	<br />
+	<div class="row-fluid">
+	  <div class="span6 offset1">
 
-        <div class="control-group">
-        <label class="control-label" for="id_password">Password</label>
-        <div class="controls">
-          <input type="password" id="id_password" placeholder="Password" name="password" required="true"></input>
-        </div>
-
-        <div class="control-group">
+	<div class="control-group">
+          <label class="control-label" for="id_username">Username</label>
           <div class="controls">
-            <label class="checkbox" for="id_remember">
-              <input type="checkbox" id="id_remember" name="remember"> Remember me
-            </label>
-            <button type="submit" class="btn">{% trans "Log in" %}</button>
+	    <input type="text" id="id_username" placeholder="Username" name="username" required="true"></input>
           </div>
-        </div>
+	</div>
+	
+        <div class="control-group">
+	  <label class="control-label" for="id_password">Password</label>
+	  <div class="controls">
+	    <input type="password" id="id_password" placeholder="Password" name="password" required="true"></input>
+	  </div>
+	
+          <div class="control-group">
+            <div class="controls">
+	      <label class="checkbox" for="id_remember">
+		<input type="checkbox" id="id_remember" name="remember"> Remember me
+	      </label>
+	      <button type="submit" class="btn btn-primary">{% trans "Log in" %}</button>
+            </div>
+          </div>
+
+	</div>
+	  </div>
+
+	  {% if form.non_field_errors %}
+	  <div class="non-field-errors">
+	    {% for err in form.non_field_errors %}
+	    <div class="row-fluid">
+	      <div class="span8 offset2">
+		<div class="alert alert-error">
+		  <p class="center">{{ err }}</p>
+		</div>
+	      </div>
+	    </div>
+	    {% endfor %}
+	  </div>
+	  {% endif %}
+
+
+
+	</div>
+	
       </fieldset>
     </form>
-
-    <br />
-    <br />
-    <div class="alert alert-info">
-      {% blocktrans %}If you have any trouble logging in to your account, contact us at <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>.{% endblocktrans %}
-    </div>
-   
-  </div>  
+  </div>
 </div>
 
-<div class="clearfix"></div>
+<div class="row-fluid contact-alert">
+  <div class="span6 offset3">
+    <div class="alert alert-info">
+      <p class="center">
+	{% blocktrans %}If you have any trouble logging in to your account, contact us at<br />
+	<a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>.
+	{% endblocktrans %}
+      </p>
+    </div>
+  </div>  
+</div>
 
 
 {% endblock %}

@@ -1,0 +1,27 @@
+{% load url from future %}
+{% load i18n %}
+
+<li class="dataset_list_item result_set_item clearfix">
+
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="datasource-description">
+	{% block datasource_description %}
+	 {% include template_name with datasource=datasource.get_concrete %}
+	{% endblock %}
+      </div>
+    </div>
+  </div>
+    
+  {%  if can_view %}
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="pull-right">
+	  <div class="datasource-links btn-group">
+	    <a class="datasource_refresh btn btn-small" href="#todo">{% trans "Refresh" %}</a>
+	  </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+</li>

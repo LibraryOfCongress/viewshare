@@ -6,7 +6,7 @@
 {% load pagination_tags %}
 {% load timezone_filters %}
 
-{% block head_title %}{% trans "Notices" %}{% endblock %}
+{% block head_title %}{% trans "Messages" %}{% endblock %}
 
 {% block extra_head %}
 {{ block.super }}
@@ -26,18 +26,25 @@
 {% regroup notices by added.date as notices_by_date %}
   
 {% for date in notices_by_date %}
-<h2 class="ui-widget-header notice_date">{{ date.grouper|naturalday:_("MONTH_DAY_FORMAT")|capfirst }}</h2>
+<h3 class="notice_date">{{ date.grouper|naturalday:_("MONTH_DAY_FORMAT")|capfirst }}</h3>
+
 <div class="notice_set">
   
   {% for notice in date.list %}
   {% if notice.is_unseen %}
-  <div class="unseen_notice">
+  <div class="unseen_notice notice alert alert-info">
     {% else %}
     <div class="notice alert alert-info">
       {% endif %}
-      <span class="notice_type">[{% trans notice.notice_type.display %}]</span>
-      <span class="notice_message">{{ notice.message|safe }}</span>
-      <span class="notice_time">{{ notice.added|localtime:account.timezone|time:"P" }}</span>
+      <div class="row-fluid">
+	<div class="span12">
+	  <div class="notice_block">
+	    <span class="notice_type">[{% trans notice.notice_type.display %}]</span>
+	    <span class="notice_message">{{ notice.message|safe }}</span>
+	    <span class="notice_time">{{ notice.added|localtime:account.timezone|time:"P" }}</span>
+	  </div>
+	</div>
+      </div>
     </div>
     {% endfor %}
     </div>

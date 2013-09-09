@@ -2,61 +2,9 @@
 {% load i18n %}
 {% load crispy_forms_tags %}
 
-<div class='modal hide fade' tabindex='-1' role='dialog' aria-labelledby='' aria-hidden='true'>
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3 id="new-view-label">Save a New View</h3>
-    </div>
-
-    <div class="modal-body">
-
-      <!--
-    <form action="{% url 'exhibit_create_form' owner=owner slug=slug canvas=canvas %}" method="post" class="uniForm">
-            {% csrf_token %}
-            {{ form|crispy }}
-          <div class="form_block">
-            <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
-          </div>
-    </form>
--->
-      <form action="{% url 'exhibit_create_form' owner=owner slug=slug canvas=canvas %}" class="form form-horizontal"  method="post">
-        {% csrf_token %}
-        
-        <div class="control-group">
-          <label class="control-label" for="id_title">Title</label>
-          <div class="controls">
-            <input type="text" class="input-large" id="id_title" placeholder="View Title" name="title" required="true"></input>
-          </div>
-        </div>
-
-        <div class="control-group">
-          <label class="control-label" for="id_description">Description</label>
-          <div class="controls">
-            <textarea id="id_description" rows="3"></textarea>
-          </div>
-        </div>
-
-        <div class="control-group">
-          <label class="control-label" for="id_published">Published</label>
-          <div class="controls">
-            <label class="radio inline">
-              <input type="radio" name="published" id="id_published_0" value="True" checked="true">Public</input>
-            </label>
-            <label class="radio inline">
-              <input type="radio" name="published" id="id_published_1" value="False">Private</input>
-            </label>
-          </div>
-        </div>
-
-        <input type="hidden" id="id_profile" name="profile"></input>
-
-        <div class="control-group">
-          <div class="controls">
-            <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
-          </div>
-        </div>
-
-      </form>
-
-    </div>
-</div>
+<form class="form-horizontal" method="POST" action="{% url 'exhibit_publish' owner=draft.owner.username slug=draft.slug %}">
+  <fieldset>
+    {% csrf_token %}
+    {% crispy form %}
+  </fieldset>
+</form>

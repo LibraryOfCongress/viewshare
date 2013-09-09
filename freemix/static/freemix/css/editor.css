@@ -69,6 +69,8 @@ font-size: 90%;
 
 .view-set .view {
     cursor: move;
+    background: #F8F8F8;
+    opacity: 80%;
 }
 
 .view-set .view .label {
@@ -151,7 +153,17 @@ color: black;
 }
 
 .view-menu, .facet-menu {
+}
 
+.facet-menu {
+padding-top:5px;
+margin-bottom: -5px;
+}
+
+.view-menu {
+padding-top:5px;
+padding-right:5px;
+border-bottom: 1px solid #eeeee;
 }
 
 .facet-menu .ui-icon.ui-icon-pencil {
@@ -227,8 +239,14 @@ margin-top: 5px;
 .facet-container .create-facet {
     padding-bottom: 8px;
     text-align: center;
+   -moz-border-radius:3px;
+   -webkit-border-radius:3px;
 }
 
+/* override jquery ui to make this more inline w/ rest of style */
+.ui-widget-content {
+    border: 1px solid #eee;
+}
 
 .rename-component-buttons {
     display: block;

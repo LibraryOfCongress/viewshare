@@ -1,0 +1,16 @@
+{% load url from future %}
+{% load i18n %}
+
+{% with filename=datasource.get_filename %}
+<div class="datasource_field">
+    <span class="datasource_label">Referenced Exhibit:</span>
+    <span class="datasource_value">
+        <a href="{% url 'exhibit_display' owner=datasource.referenced.owner.username slug=datasource.referenced.slug %}">{{ datasource.referenced.title }}</a>
+    </span>
+</div>
+{% endwith %}
+
+<div class="datasource_field">
+    <span class="datasource_label">{% trans "Type" %}:</span>
+    <span class="datasource_value">Reference</span>
+</div>

@@ -118,13 +118,14 @@ INSTALLED_APPS = (
     'compressor',
     'south',
     'require',
+    'django_gravatar',
 
     # Freemix specific
     'freemix',
-    'freemix.dataset',
+    'viewshare.apps.legacy.dataset',
     'freemix.exhibit',
-    'freemix.dataset.augment',
-    'freemix.exhibit.share',
+    'viewshare.apps.augment',
+    'viewshare.apps.share',
 
     # Viewshare specific
     'viewshare.apps.vendor.notification',
@@ -145,6 +146,8 @@ INSTALLED_APPS = (
     'registration',
     'viewshare.apps.moderated_registration',
     )
+
+GRAVATAR_DEFAULT_IMAGE = 'identicon'
 
 module_path = lambda m: path.abspath(find_module(m)[1])
 
