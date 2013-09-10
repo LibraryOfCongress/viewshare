@@ -435,7 +435,9 @@ class DataTransaction(TimeStampedModel):
         raise NotImplementedError()
 
     def is_ready(self):
-        return self.status in (TX_STATUS["success"], TX_STATUS["cancelled"])
+        return self.status in (TX_STATUS["success"],
+                               TX_STATUS["cancelled"],
+                               TX_STATUS["failure"])
 
     @models.permalink
     def get_absolute_url(self):
@@ -469,14 +471,15 @@ class DataTransaction(TimeStampedModel):
                 self.do_run()
                 db_tx.commit()
             except Exception as ex:
-                self.failure(ex.message)
+                self.failure("Transformation failed")
         return self
 
     def failure(self, message):
-        self.logger.error("Error for transaction %s: %s" %
-                          (self.tx_id, message))
         self.status = TX_STATUS["failure"]
         self.result = {"message": message}
+
+        self.logger.error("Error for transaction %s: %s" %
+                          (self.tx_id, message))
         self.save()
 
     def success(self):

@@ -23,7 +23,7 @@
 {% block head_data %}
 
     {{ block.super }}
-    <link rel="freemix/support" href="{% url 'upload_issue' source_id=transaction.source.uuid %}">
+    <link rel="freemix/support" href="{% url 'upload_issue' owner=transaction.source.exhibit.owner.username slug=transaction.source.exhibit.slug %}">
 {% endblock %}
 
 {% block rtab_id %}id="data_tab"{% endblock %}
