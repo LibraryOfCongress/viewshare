@@ -108,17 +108,8 @@ def pretty_print_transaction_status(status_id):
 
 # Data Source Transaction Views
 class UploadTransactionView(View):
-    def redirect(self):
-        status = self.transaction.status
-        for key in TX_STATUS.keys():
-            if status == TX_STATUS[key]:
-                return getattr(self, key)()
-        return HttpResponseServerError("Invalid transaction status for %s" %
-                                       self.transaction.tx_id)
 
     def get(self, request, *args, **kwargs):
-
-        print request.META["HTTP_ACCEPT"]
 
         owner = self.kwargs["owner"]
         slug = self.kwargs["slug"]
@@ -130,10 +121,7 @@ class UploadTransactionView(View):
 
         self.transaction = source.open_transaction()
         self.source = source
-        if request.META.get("HTTP_ACCEPT", "").find("application/json") >= 0:
-            return self.json_response()
-
-        return self.redirect()
+        return self.display_transaction_result()
 
     def display_transaction_result(self):
         """
@@ -149,38 +137,22 @@ class UploadTransactionView(View):
             "exhibit": exhibit,
         })
 
-    def get_success_url(self):
-        exhibit = self.source.exhibit
-        kwargs={"owner": exhibit.owner.username, "slug": exhibit.slug}
-        return reverse("exhibit_edit", kwargs=kwargs)
 
-    def success(self):
-        return HttpResponseRedirect(self.get_success_url())
+class UploadTransactionStatusJSONView(View):
 
-    def get_failure_url(self):
-        exhibit = self.source.exhibit
-        kwargs={"owner": exhibit.owner.username, "slug": exhibit.slug}
-        return reverse("update_datasource", kwargs=kwargs)
+    def get(self, request, *args, **kwargs):
 
-    def failure(self):
-        return HttpResponseRedirect(self.get_failure_url())
+        owner = self.kwargs["owner"]
+        slug = self.kwargs["slug"]
+        source = get_object_or_404(models.DataSource,
+                                   exhibit__owner__username=owner,
+                                   exhibit__slug=slug).get_concrete()
+        if not self.request.user.has_perm('datasource.can_edit', source):
+            raise Http404
 
-    def get_cancelled_url(self):
-        return reverse('upload_dataset')
+        self.transaction = source.open_transaction()
+        self.source = source
 
-    def cancelled(self):
-        return  HttpResponseRedirect(self.get_cancelled_url())
-
-    def running(self):
-        return self.display_transaction_result()
-
-    def pending(self):
-        return self.display_transaction_result()
-
-    def scheduled(self):
-        return self.display_transaction_result()
-
-    def json_response(self):
         tx = self.transaction
         status = pretty_print_transaction_status(tx.status)
         response = {
@@ -188,12 +160,15 @@ class UploadTransactionView(View):
             'isReady': tx.is_ready()
         }
         if tx.status == TX_STATUS["failure"]:
-            response["message"] = tx.result
-            response["redirect"] = self.get_cancelled_url()
+            exhibit = self.source.exhibit
+            kwargs={"owner": exhibit.owner.username, "slug": exhibit.slug}
+            response["redirect"] = reverse("update_datasource", kwargs=kwargs)
         elif tx.status == TX_STATUS["success"]:
-            response["redirect"] = self.get_success_url()
+            exhibit = self.source.exhibit
+            kwargs={"owner": exhibit.owner.username, "slug": exhibit.slug}
+            response["redirect"] = reverse("exhibit_edit", kwargs=kwargs)
         elif tx.status == TX_STATUS["cancelled"]:
-            response["redirect"] = self.get_cancelled_url()
+            response["redirect"] = reverse('upload_dataset')
         return JSONResponse(response)
 
 

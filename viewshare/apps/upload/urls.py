@@ -57,6 +57,10 @@ urlpatterns = patterns('',
         login_required(views.UploadTransactionView.as_view()),
         name="upload_transaction_status"),
 
+    url(r'^source/(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/status/ping/$',
+        login_required(views.UploadTransactionStatusJSONView.as_view()),
+        name="upload_transaction_status_json"),
+
     url(r'^source/(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/$',
         login_required(views.UpdateDataSourceView.as_view()),
         name="update_datasource"),

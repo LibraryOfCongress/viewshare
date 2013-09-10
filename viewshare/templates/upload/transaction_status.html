@@ -1,11 +1,11 @@
 {% extends "site_base.html" %}
 {% load i18n %}
-{% block body %}
-<h1 id="upload-label">{% trans "Loading Data" %}</h1>
 
-<div class="progress progress-striped active">
-  <div class="bar" style="width: 100%;"></div>
-</div>
+{% block extra_head %}
+<link rel="upload/ping" href="{% url 'upload_transaction_status_json' owner=exhibit.owner.username slug=exhibit.slug %}"/>
+{% endblock %}
+
+{% block extra_scripts %}
 <script type="text/javascript">
   var intervalId = 0;
 
@@ -18,9 +18,8 @@
                          "Please refresh the page manually");
     }
 
-     $.ajax(window.location.href, {
-         url: window.location.href,
-         type: "json",
+     $.ajax($("link[rel='upload/ping']").attr("href"), {
+         dataType: "json",
          success: function(data) {
              if (!data){
                failure()
@@ -29,7 +28,7 @@
                window.location.href=data.redirect;
              }
          },
-         failure: failure
+         error: failure
      });
   }
 
@@ -39,4 +38,13 @@
 
 
 </script>
+{% endblock %}
+
+{% block body %}
+<h1 id="upload-label">{% trans "Loading Data" %}</h1>
+
+<div class="progress progress-striped active">
+  <div class="bar" style="width: 100%;"></div>
+</div>
+
 {% endblock %}
