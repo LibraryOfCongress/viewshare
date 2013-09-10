@@ -16,11 +16,8 @@
 {% endblock %}
 
 {% block head_data %}
-    {% for url in data_urls %}
-    <link rel="exhibit/data" href="{{ url }}"/>
-    {% endfor %}
-    <link rel="exhibit/data" href="{{dataset_properties}}"/>
-    <link rel="freemix/exhibit_profile" href="{{ exhibit_profile_url }}"/>
+  <link rel="exhibit/owner" href="{{ owner }}"/>
+  <link rel="exhibit/slug" href="{{ exhibit.slug }}"/>
 {% endblock %}
 
 {% block head_css %}
@@ -111,7 +108,7 @@
         <div class="span6">
           <div class="btn-toolbar pull-right">
             <div class="btn-group" >
-              <button class="btn btn-small btn-primary" id="edit_button" data-toggle="collapse" data-target="#edit">{% trans "Edit" %}</button>
+              <a class="btn btn-small btn-primary" id="edit_button" href="{% url 'exhibit_property_editor' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Edit" %}</a>
               <button class="btn btn-small btn-primary" id="builder_button" data-toggle="collapse" data-target="#build">{% trans "Layout" %}</button>
               <button class="btn btn-small btn-primary" id="preview_button" data-toggle="collapse" data-target="#preview">{% trans "Preview" %}</button>
             </div>

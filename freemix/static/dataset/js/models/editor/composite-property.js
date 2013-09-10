@@ -1,89 +1,115 @@
 /*global define */
 define(
-  [
-    'freemix',
-    'jquery',
-    'models/property',
-    'freemix.exhibit',
-    'freemix.property',
-    'freemix.identify'
-  ],
-  function (
-    Freemix,
-    $,
-    PropertyModel
-  ) {
-  'use strict';
-
-  /**
-   * Extends PropertyModel. Represents a property that is created from other
-   * properties such as a Latitude/Longitude pair.
-   * @param {array} options.composite - labels of other properties used to
-   * create this CompositeProperty
-   */
-  var CompositePropertyModel = function(options) {
-    this.initialize.apply(this, [options]);
-  };
-
-  $.extend(CompositePropertyModel.prototype, PropertyModel.prototype, {
-    initialize: function(options) {
-      PropertyModel.prototype.initialize.apply(this, [options]);
-      this._composite = options.composite;
-      if (Freemix.property.propertyList && Freemix.property.propertyList.hasOwnProperty(this.id)) {
-        // this is an existing Property
-        this.freemixProperty = Freemix.property.propertyList[this.id];
-      } else {
-        // this is a new property and doesn't exist in Freemix yet
-        this.freemixProperty = undefined;
-      }
-    },
-
-    /** getter/setter method for composite */
-    composite: function(newComposite) {
-      if (newComposite) {
-        this._composite = newComposite;
-        if (this.freemixProperty) {
-          // This is not a new Property so we can modify it in Freemix
-          this.freemixProperty.label(this._composite);
-        }
-      } else {
-        return this._composite;
-      }
-    },
-
-    /** Generate an array used to identify tags in Freemix */
-    tags: function() {
-      return ['property:type=' + this._type];
-    },
-
-    /** Create a Freemix Property with our Model's data */
-    createFreemixProperty: function() {
-      var freemixProperty = {
-        property: this._name,
-        label: this._name,
-        enabled: true,
-        tags: this.tags(),
-        types: [this._type],
-        composite: this.composite()
-      };
-      return freemixProperty;
-    },
+    [
+        'jquery',
+        'models/property',
+    ],
+    function (
+        $,
+        PropertyModel
+    ) {
+    'use strict';
 
     /**
-     * Validate that the data in this Model is in a state where it could
-     * be sent to a server.
-     * @param {array} propertyNames - names that already exist and should not
-     * be duplicated
+     * Extends PropertyModel. Represents a property that is created from other
+     * properties such as a Latitude/Longitude pair.
+     * @param {string} options.augmentation - augmentation type identifier
+     * @param {array} options.composite - labels of other properties used to
+     * create this CompositeProperty
      */
-    validate: function(propertyNames) {
-      var existingNames = propertyNames || [],
-      errors = PropertyModel.prototype.validate.apply(this, [existingNames]);
-      if (!this._composite.length) {
-        errors.composite = 'Please select at least one property.';
-      }
-      return errors;
-    }
-  });
+    var CompositePropertyModel = function(options) {
+        this.initialize.apply(this, [options]);
+    };
 
-  return CompositePropertyModel;
+    $.extend(CompositePropertyModel.prototype, PropertyModel.prototype, {
+        initialize: function(options) {
+            PropertyModel.prototype.initialize.apply(this, [options]);
+            this.augmentation = options.augmentation;
+            this.composite = options.composite;
+            this.statusURL =  + this.dataURL + '/status/';
+        },
+
+        /**
+         * Request that this Property's attributes be augmented
+         * on the server
+         */
+        augmentData: function() {
+            var xhr = PropertyModel.prototype.loadData.apply(this, [])
+            .done(this.augmentDataSuccess.bind(this))
+            .fail(this.augmentDataFailure.bind(this));
+            return xhr;
+        },
+
+        /** 
+         * Request for augmentation was received successfully.
+         * Now we check for a completion status.
+         * @param {object} successJSON - JSON related to successful request
+         */
+        augmentDataSuccess: function(successJSON) {
+            var xhr = $.getJSON(this.statusURL)
+            .done(this.augmentStatusSuccess.bind(this))
+            .fail(this.augmentStatusFailure.bind(this));
+        },
+
+        /**
+         * Request for status check was successful. Our reaction
+         * depends on the response. We have either:
+         * 1. augmented successfully
+         * 2. augmented with errors
+         * 3. have not finished augmenting
+         */
+        augmentStatusSuccess: function(successJSON) {
+            // TODO: replace the following pseudo-code
+            if ('finished processing successfully' === 'true') {
+                this.Observer('augmentDataSuccess').publish();
+            } else if ('finished processing with errors' === 'true') {
+                // TODO: research how we can error at this point
+                this.Observer('augmentDataFailure').publish(
+                    {status: 'insert status', error: 'insert error'}
+                );
+            } else if ('have not finished processing' === 'true') {
+                // poll for status updates
+                setTimeout(this.augmentDataSuccess.apply(this, []), 5000);
+            }
+        },
+
+        /** Failed to check augmentation status on the server */
+        augmentStatusFailure: function(jqxhr, textStatus, error) {
+            this.Observer('augmentDataFailure').publish(
+                {status: textStatus, error: error}
+            );
+        },
+
+        /** Failed while sending property attributes to the server */
+        augmentDataFailure: function(jqxhr, textStatus, error) {
+            this.Observer('augmentDataFailure').publish(
+                {status: textStatus, error: error}
+            );
+        },
+
+        /**
+        * Validate that the data in this Model is in a state where it could
+        * be sent to a server.
+        * @param {array} propertyNames - names that already exist and should not
+        * be duplicated
+        */
+        validate: function(propertyNames) {
+            var existingNames = propertyNames || [],
+            errors = PropertyModel.prototype.validate.apply(this, [existingNames]);
+            if (!this.composite.length) {
+                errors.composite = 'Please select at least one property.';
+            }
+            return errors;
+        },
+
+        /** Return a simple object representation of this Property */
+        toJSON: function() {
+            var jsonProperty = PropertyModel.prototype.toJSON.apply(this, []);
+            jsonProperty.augmentation = this.augmentation;
+            jsonProperty.composite = this.composite;
+            return jsonProperty;
+        }
+    });
+
+    return CompositePropertyModel;
 });

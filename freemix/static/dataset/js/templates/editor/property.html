@@ -1,5 +1,5 @@
 <td class="name">
-  <input type="text" class="input-large" value="{{ name }}">
+  <input type="text" class="input-large" value="{{ label }}">
 </td>
 <td class="types">
   <select class="input-medium">
@@ -16,7 +16,7 @@
     <a href="{{ value }}">{{ value }}</a>
   {{else}}
     {{#if selectedType.image}}
-      <img src="{{ value }}" height="50px" />
+      <img src="{{ value }}" style="height: 50px" />
     {{else}}
       {{ value }}
     {{/if}}

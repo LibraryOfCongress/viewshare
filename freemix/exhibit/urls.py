@@ -48,6 +48,10 @@ urlpatterns = patterns('',
        login_required(views.DraftExhibitUpdateView.as_view()),
        name='exhibit_edit'),
 
+    url(r'^(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/draft/editor/$',
+        login_required(views.PropertyEditorView.as_view()),
+        name='exhibit_property_editor'),  # TODO: slated for removal see PropertyEditorView
+
     url(r"^(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/draft/profile.json$",
         views.DraftExhibitProfileJSONView.as_view(),
         name="draft_exhibit_profile_json"),

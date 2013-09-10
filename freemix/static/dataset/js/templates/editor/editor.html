@@ -1,16 +1,20 @@
 <div class="span12">
-  {{#if totalRecords}}
+  {{#if propertyCount }}
   <div class="text-right">
-    <a id="prev-record" class="btn" href="#"><i class="icon-arrow-left"></i></a>
-    <span>Record <span id="current-record-number">{{ currentRecordNumber }}</span> of {{ totalRecords }}</span>
-    <a id="next-record" class="btn" href="#"><i class="icon-arrow-right"></i></a>
-    <a id="add-property" class="btn btn-success" href="#"><i class="icon-plus-sign"></i> Add Property</a>
+    <a id="add-property" class="btn btn-success profile-actions" style="margin-left: 5px" href="#"><i class="icon-plus-sign"></i> Add Property</a>
+    <div id="record-nav"></div>
   </div>
-  <div id="records"></div>
-  <div class="form-actions">
-    <button type="submit" class="btn btn-primary" id="save_button">Save changes</button>
-    <button type="button" class="btn" id="cancel_button">Cancel</button>
-  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Label</th>
+        <th>Type</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody id="properties">
+    </tbody>
+  </table>
   {{ else }}
   <div class="alert alert-block">
     <h4>Warning!</h2>
