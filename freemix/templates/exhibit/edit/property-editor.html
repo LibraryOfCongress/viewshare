@@ -45,7 +45,7 @@
                 <div class="btn-toolbar pull-right">
                   <div class="btn-group" >
                     <a class="btn btn-small btn-primary active" id="edit_button" href="{% url 'exhibit_property_editor' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Edit" %}</a>
-                    <button class="btn btn-small btn-primary" id="builder_button" data-toggle="collapse" data-target="#build">{% trans "Layout" %}</button>
+                    <a class="btn btn-small btn-primary" id="edit_button" href="{% url 'exhibit_edit' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Layout" %}</a>
                     <button class="btn btn-small btn-primary" id="preview_button" data-toggle="collapse" data-target="#preview">{% trans "Preview" %}</button>
                   </div>
                   <div class="exhibit-actions btn-group">
