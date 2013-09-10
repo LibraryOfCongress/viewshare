@@ -44,7 +44,7 @@
               <div class="span6">
                 <div class="btn-toolbar pull-right">
                   <div class="btn-group" >
-                    <button class="btn btn-small btn-primary" id="edit_button" data-toggle="collapse" data-target="#edit">{% trans "Edit" %}</button>
+                    <a class="btn btn-small btn-primary active" id="edit_button" href="{% url 'exhibit_property_editor' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Edit" %}</a>
                     <button class="btn btn-small btn-primary" id="builder_button" data-toggle="collapse" data-target="#build">{% trans "Layout" %}</button>
                     <button class="btn btn-small btn-primary" id="preview_button" data-toggle="collapse" data-target="#preview">{% trans "Preview" %}</button>
                   </div>

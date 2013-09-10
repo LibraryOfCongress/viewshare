@@ -62,6 +62,7 @@ define(
                 'change',
                 'changedItem',
             ];
+            var loadDataPromises = [];
             this.properties = [];
             // create editor models
             for (id in profile.properties) {
@@ -91,15 +92,18 @@ define(
             }
             // sort properties by label
             this.properties.sort(function (a, b) {
-                var
-                a_label = a && a.label || '',
-                b_label = b && b.label || '';
+                var a_label = a && a.label || '',
+                    b_label = b && b.label || '';
                 return a_label.localeCompare(b_label);
             });
             // load PropertyModel values
             for (var i = 0; i < this.properties.length; ++i) {
-                this.properties[i].loadData();
+                loadDataPromises.push(this.properties[i].loadData());
             }
+            // publish notification that all properties have loaded their data
+            $.when.apply(null, loadDataPromises).done(function() {
+                this.Observer('allLoadDataSuccess').publish();
+            }.bind(this));
             this.Observer('loadSuccess').publish();
         },
 
