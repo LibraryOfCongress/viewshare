@@ -25,18 +25,13 @@ define(
        initialize: function(options) {
            this.model = options.model;
            this.$el = options.$el;
-           // bind 'this' to template variables
-           this.label = this.label.bind(this);
-           this.type = this.type.bind(this);
-           this.value.bind(this);
-           this.selectedType = this.selectedType.bind(this);
-           this.renderValue.bind(this);
-           this.render = this.render.bind(this);
-           this.changeValueHandler = this.changeValueHandler.bind(this);
            // subscribe to model events
-           this.model.Observer('loadDataSuccess').subscribe(this.render);
+           this.model.Observer('loadDataSuccess').subscribe(
+               this.render.bind(this)
+           );
            this.model.Observer('changeCurrentItem').subscribe(
-               this.changeValueHandler);
+               this.changeValueHandler.bind(this)
+           );
        },
 
        /** Compile the template we will use to render the View */
@@ -73,16 +68,20 @@ define(
 
        /** Re-render the value of the PropertyModel */
        renderValue: function() {
-           var valueType = this.$el.find(':selected').val(),
-           valueEl = this.$el.find('.value');
-           // change rendering for this.model.value on certain types
-           if (valueType === 'image') {
-               valueEl.html(this.imageTemplate({value: this.value()}));
-           } else if (valueType === 'url') {
-               valueEl.html(this.anchorTemplate({value: this.value()}));
-           } else {
-               valueEl.html(this.textTemplate({value: this.value()}));
-           }
+           var animateDuration = 200;
+           var valueType = this.$el.find(':selected').val();
+           var valueEl = this.$el.find('.value');
+           valueEl.fadeOut(animateDuration, function() {
+               // change rendering for this.model.value on certain types
+               if (valueType === 'image') {
+                   valueEl.html(this.imageTemplate({value: this.value()}));
+               } else if (valueType === 'url') {
+                   valueEl.html(this.anchorTemplate({value: this.value()}));
+               } else {
+                   valueEl.html(this.textTemplate({value: this.value()}));
+               }
+               valueEl.fadeIn(animateDuration);
+           }.bind(this));
        },
 
        /** Add this view to the DOM */
