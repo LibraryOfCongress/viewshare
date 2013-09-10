@@ -49,7 +49,20 @@ urlpatterns = patterns('',
         views.JSONPrepView.as_view(),
         name="json_prep_view"),
 
-    url(r'^(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/source/file$',
+    url(r'^source/(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/file/$',
         login_required(views.FileDataSourceDownloadView.as_view()),
         name="file_datasource_file_url"),
+
+    url(r'^source/(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/status/$',
+        login_required(views.UploadTransactionView.as_view()),
+        name="upload_transaction_status"),
+
+    url(r'^source/(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/status/ping/$',
+        login_required(views.UploadTransactionStatusJSONView.as_view()),
+        name="upload_transaction_status_json"),
+
+    url(r'^source/(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/$',
+        login_required(views.UpdateDataSourceView.as_view()),
+        name="update_datasource"),
+
 )
