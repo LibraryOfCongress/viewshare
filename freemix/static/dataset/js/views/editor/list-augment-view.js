@@ -29,7 +29,7 @@ define(
         initialize: function(options) {
             this.propertyOptions = options.propertyCollection.toOptions();
             this.$el = options.$el;
-            this.newPatternProperty = new CompositePropertyModel({
+            this.newPatternProperty = new PatternPropertyModel({
                 id: undefined,
                 label: undefined,
                 type: 'text',

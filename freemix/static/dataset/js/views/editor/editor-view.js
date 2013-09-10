@@ -34,7 +34,9 @@ define(
             this.propertyViews = [];
             this.recordNavView = null;
             // events
-            this.model.Observer('loadSuccess').subscribe(this.render.bind(this));
+            this.model.Observer('loadSuccess').subscribe(
+                this.render.bind(this)
+            );
         },
 
         /** Compile the template we will use to render the View */
@@ -65,7 +67,7 @@ define(
                 }
                 // bind to DOM actions
                 this.$el.find('#add-property').on('click', (function() {
-                    ViewInterface.Observer.publish('showModal');
+                    ViewInterface.Observer('showModal').publish();
                 }).bind(this));
             }
             return this;

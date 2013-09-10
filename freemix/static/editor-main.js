@@ -13,6 +13,7 @@ require.config({
     views: './dataset/js/views/editor'
   },
   shim: {
+    bootstrap: ['jquery'],
     handlebars: {
       exports: 'Handlebars'
     },

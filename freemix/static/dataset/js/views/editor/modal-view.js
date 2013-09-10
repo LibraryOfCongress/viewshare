@@ -9,8 +9,8 @@ define(
     ], function (
         Handlebars,
         $,
-        ViewInterface,
-        modalTemplate
+        modalTemplate,
+        ViewInterface
     ) {
     'use strict';
     /**
@@ -55,6 +55,8 @@ define(
 
         /** Remove event bindings, child views, and DOM elements */
         destroy: function() {
+            ViewInterface.Observer('showModal').unsubscribe(
+                this.handleShowModal.bind(this));
             this.$el.remove();
         }
     });

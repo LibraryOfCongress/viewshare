@@ -92,6 +92,9 @@ define(
             prevRecord.off('click');
             nextRecord.off('click');
             // remove model events
+            this.model.Observer('allLoadDataSuccess').unsubscribe(
+                this.render
+            );
             this.model.Observer('changeCurrentRecord').unsubscribe(
                 this.changeCurrentRecordNumber);
             this.$el.empty();

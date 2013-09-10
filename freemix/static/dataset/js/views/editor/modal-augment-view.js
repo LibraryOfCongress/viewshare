@@ -45,7 +45,9 @@ define(
             this.mapView = {destroy: $.noop};
             this.timelineView = {destroy: $.noop};
             // events
-            this.model.Observer('loadSuccess').subscribe(this.render);
+            this.model.Observer('loadSuccess').subscribe(
+                this.render.bind(this)
+            );
         },
 
         /** Compile the template we will use to render the View */

@@ -4,18 +4,17 @@ define(
         'jquery',
         'models/property-collection',
         'views/editor-view',
-        //'views/modal-augment-view',
+        'views/modal-augment-view',
         'views/notification-view'
     ], function (
         $,
         PropertyCollection,
         EditorView,
-        //ModalAugmentView,
+        ModalAugmentView,
         NotificationView
     ) {
     'use strict';
     var demo = function() {
-        // TODO: Render 'owner' and 'slug' in template on server
         var owner = $("link[rel='exhibit/owner']").attr("href");
         var slug = $("link[rel='exhibit/slug']").attr("href");
         var properties = new PropertyCollection({
@@ -27,9 +26,9 @@ define(
             model: properties,
             $el: $('#editor'),
         });
-//        var augmentModal = new ModalAugmentView({
-//            model: properties
-//        });
+        var augmentModal = new ModalAugmentView({
+            model: properties
+        });
         // set up notifications
         notificationView.addSubscription(
             properties,
