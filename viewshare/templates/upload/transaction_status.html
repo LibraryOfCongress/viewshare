@@ -1,0 +1,42 @@
+{% extends "site_base.html" %}
+{% load i18n %}
+{% block body %}
+<h1 id="upload-label">{% trans "Loading Data" %}</h1>
+
+<div class="progress progress-striped active">
+  <div class="bar" style="width: 100%;"></div>
+</div>
+<script type="text/javascript">
+  var intervalId = 0;
+
+  function checkStatus() {
+
+    function failure() {
+        clearInterval(intervalId);
+        $("#body").empty();
+        $("#body").append("There was an error communicating with the server.&nbsp;" +
+                         "Please refresh the page manually");
+    }
+
+     $.ajax(window.location.href, {
+         url: window.location.href,
+         type: "json",
+         success: function(data) {
+             if (!data){
+               failure()
+             } else if (data.isReady) {
+               clearInterval(intervalId);
+               window.location.href=data.redirect;
+             }
+         },
+         failure: failure
+     });
+  }
+
+    $(document).ready(function() {
+      intervalId = setInterval(checkStatus, 1000);
+    });
+
+
+</script>
+{% endblock %}

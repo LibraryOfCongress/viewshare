@@ -1,4 +1,5 @@
 from django import forms
+from django.core.exceptions import ObjectDoesNotExist
 from freemix.exhibit.models import PublishedExhibit
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
@@ -35,6 +36,20 @@ class CreateExhibitForm(forms.ModelForm):
         instance = super(CreateExhibitForm, self).save(commit=False)
         instance.owner = self.draft.owner
         instance.canvas = self.draft.canvas
+
+        try:
+            # TODO cyclic reference to data source. Perhaps the DataSource
+            # model should be moved into the exhibit app?
+            source = self.draft.source
+
+            if source:
+                source.exhibit = instance
+                source.save()
+        except ObjectDoesNotExist:
+            # TODO perhaps the draft should have a foreign key
+            # to the source and sources should always point to
+            # PublishedExhibit?
+            pass
 
         instance.save()
         self.draft.parent = instance

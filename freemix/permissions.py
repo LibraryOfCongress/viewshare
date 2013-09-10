@@ -59,32 +59,25 @@ class RegistryBackend:
         return pfunc(user_obj, obj)
 
 
-def owner_filter(user, context=""):
+def datasource_owner_filter(user, context=""):
     _c = generate_context_filter(context)
-    return _c("owner", user)
+    return _c("exhibit__owner", user)
 
 
-def check_owner(user_obj, obj):
-    return user_obj.id == obj.owner_id
-
-
-def check_published(user_obj, obj):
-    if obj.is_public:
-        return True
-    return check_owner(user_obj, obj)
-
+def datasource_owner(user, obj):
+    return user.id == obj.exhibit.owner_id
 
 PermissionsRegistry.register('datasource.can_view',
-                             check_owner,
-                             owner_filter)
+                             datasource_owner,
+                             datasource_owner_filter)
 
 PermissionsRegistry.register('datasource.can_edit',
-                             check_owner,
-                             owner_filter)
+                             datasource_owner,
+                             datasource_owner_filter)
 
 PermissionsRegistry.register('datasource.can_delete',
-                             check_owner,
-                             owner_filter)
+                             datasource_owner,
+                             datasource_owner_filter)
 
 
 def exhibit_can_view(user, obj):
@@ -105,6 +98,15 @@ def exhibit_can_embed(user, obj):
 def exhibit_embed_filter(user, context=""):
     _q = generate_context_filter(context)
     return _q("is_public", True)
+
+
+def owner_filter(user, context=""):
+    _c = generate_context_filter(context)
+    return _c("owner", user)
+
+
+def check_owner(user_obj, obj):
+    return user_obj.id == obj.owner_id
 
 
 def exhibit_view_filter(user, context=""):

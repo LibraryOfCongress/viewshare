@@ -16,7 +16,7 @@
 {% block head_data %}
     {{ block.super }}
     {% if show_error %}
-    <link rel="freemix/support" href="{% url 'upload_issue' source_id=transaction.source.uuid %}">
+    <link rel="freemix/support" href="{% url 'upload_issue' owner=source.exhibit.owner.username slug=source.exhibit.slug %}">
     {% endif %}
 {% endblock %}
 
@@ -80,8 +80,9 @@
      </div> <!-- end upload_form_type -->
 
 {%  if show_error %}
-<div id="support" class="ui-helper-hidden"></div>
-<div id="support-spinner" class="ui-helper-hidden loading">
+<div id="support" class="hide"></div>
+<div class="support-spinner progress progress-striped active hide">
+  <div class="bar" style="width: 100%;"></div>
   <p>{% blocktrans %}Requesting ticket, please be patient.{% endblocktrans %}</p>
 </div>
 {% endif %}
