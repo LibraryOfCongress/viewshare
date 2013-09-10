@@ -107,7 +107,7 @@ define(
                 this.$el.modal('hide');
             } else {
                 // display client-side form validation errors
-                this.$el.find('.modal-body').animate({ scrollTop: 0}, 'fast');
+                this.$el.find('.modal-body').animate({scrollTop: 0}, 'fast');
                 if (errors.hasOwnProperty('name')) {
                     this.renderValidationError(errors.name);
                 }

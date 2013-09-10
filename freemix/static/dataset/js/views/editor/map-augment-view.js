@@ -44,7 +44,7 @@ define(
 
         /** Event handler when a .name input is changed */
         changeNameHandler: function(event) {
-            this.newCompositeProperty.name = event.target.value;
+            this.newCompositeProperty.label = event.target.value;
         },
 
         /** Event handler when a .selcted input is clicked */

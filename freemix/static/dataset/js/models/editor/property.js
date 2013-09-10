@@ -143,9 +143,9 @@ define(
         validate: function(propertyLabels) {
             var errors = {};
             var existingNames = propertyLabels || [];
-            if (!this._name) {
+            if (!this.label) {
                 errors.name = 'Please enter a name for the new property.';
-            } else if (existingNames.indexOf(this._name) >= 0) {
+            } else if (existingNames.indexOf(this.label) >= 0) {
                 errors.name = 'Please enter a unique property name.';
             }
             return errors;
