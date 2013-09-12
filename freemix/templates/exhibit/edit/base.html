@@ -16,8 +16,13 @@
 {% endblock %}
 
 {% block head_data %}
-  <link rel="exhibit/owner" href="{{ owner }}"/>
-  <link rel="exhibit/slug" href="{{ exhibit.slug }}"/>
+    {% for url in data_urls %}
+        <link rel="exhibit/data" href="{{ url }}"/>
+    {% endfor %}
+    <link rel="exhibit/data" href="{{ dataset_properties }}"/>
+    <link rel="freemix/exhibit_profile" href="{{ exhibit_profile_url }}"/>
+    <link rel="exhibit/owner" href="{{ owner }}"/>
+    <link rel="exhibit/slug" href="{{ exhibit.slug }}"/>
 {% endblock %}
 
 {% block head_css %}
