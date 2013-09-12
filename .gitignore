@@ -14,7 +14,7 @@ downloads
 .pydevproject
 .settings
 lib/python*
-.Python
+.Pythonpl
 include/python*
 *.egg-info
 *.swp
@@ -35,3 +35,5 @@ MANIFEST
 *#
 celerybeat-schedule
 celerybeat.pid
+.python-version
+.idea
