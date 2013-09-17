@@ -93,7 +93,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     "viewshare.utilities.context_processors.viewshare_settings",
     "viewshare.apps.vendor.notification.context_processors.notification",
-    "viewshare.apps.account.context_processors.account",
     "viewshare.apps.connections.context_processors.invitations",
     )
 
@@ -110,10 +109,8 @@ INSTALLED_APPS = (
 
     # external
     'djcelery',
-    'emailconfirmation',
     'django_extensions',
     'pagination',
-    'timezones',
     'crispy_forms',
     'compressor',
     'south',
@@ -146,8 +143,6 @@ INSTALLED_APPS = (
     'registration',
     'viewshare.apps.moderated_registration',
     )
-
-GRAVATAR_DEFAULT_IMAGE = 'identicon'
 
 module_path = lambda m: path.abspath(find_module(m)[1])
 
@@ -207,6 +202,9 @@ REQUIRE_STANDALONE_MODULES = {
 
 REQUIRE_DEBUG = DEBUG
 
+CRISPY_TEMPLATE_PACK = 'bootstrap'
+
+GRAVATAR_DEFAULT_IMAGE = 'identicon'
 
 CACHES = {
     'default': {
@@ -217,6 +215,10 @@ CACHES = {
 # Validate the request's Host header and protect
 # against host-poisoning attacks
 ALLOWED_HOSTS = ('viewshare.org', )
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+CELERY_ALWAYS_EAGER = True
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

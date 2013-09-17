@@ -451,7 +451,7 @@ class DraftExhibitProfileJSONView(DraftExhibitView, BaseJSONView):
         if not self.check_perms():
             raise Http404()
 
-        contents = json.loads(self.request.raw_post_data)
+        contents = json.loads(self.request.body)
         exhibit.update_from_profile(contents)
         return HttpResponse()
 
@@ -548,7 +548,7 @@ class PublishExhibitView(DraftExhibitView):
     def update_profile(self, request):
         draft = self.get_parent_object()
 
-        contents = json.loads(self.request.raw_post_data)
+        contents = json.loads(self.request.body)
         draft.update_from_profile(contents)
 
         if draft.parent:

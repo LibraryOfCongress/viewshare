@@ -1,17 +1,14 @@
 South>=0.8.1,<2.0
-Django==1.5.1
-pillow==2.0.0
-pytz==2013b
+Django==1.5.4
+pillow==2.1.0
 django-announcements==1.0.2
-django-celery==3.0.17
-django-timezones==0.2
+django-celery==3.0.23
 django-registration==1.0
 django_compressor==1.3
-django-email-confirmation==0.2
-django-extensions==1.1.1
+django-extensions==1.2.1
 django-pagination==1.0.7
-django-crispy-forms==1.2.4
-django-require==1.0.3
+django-crispy-forms==1.4.0
+django-require==1.0.4
 django-gravatar2==1.1.3 
 
 # django-curation is required by viewshare.apps.discover

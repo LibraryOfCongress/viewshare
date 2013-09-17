@@ -1,7 +1,7 @@
 """
 URL patterns for user registration, admin authorization, and activation
 """
-from django.conf.urls.defaults import patterns, url
+from django.conf.urls import patterns, url
 
 from .views import ModeratedActivationView, ModeratedRegistrationView
 

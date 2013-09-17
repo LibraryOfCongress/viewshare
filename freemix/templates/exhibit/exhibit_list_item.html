@@ -35,7 +35,7 @@
       <div class="exhibit-metadata">
         {% trans "Created by"%}
         <span class="exhibit-creator">
-          <a href="{% url 'profile_detail' exhibit_owner_username %}">{{exhibit.owner|nicename}}</a>
+          <a href="{% url 'profile_detail' exhibit_owner_username %}">{{exhibit.owner.username}}</a>
         </span>
         {% trans "on" %} <span class="exhibit-created-data">{{exhibit.created|date:"N j, Y"}}</span>.
       </div>

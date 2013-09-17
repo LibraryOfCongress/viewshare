@@ -73,7 +73,7 @@ class TransformView(View):
 
 class RawTransformView(TransformView):
     def get_body(self):
-        return self.request.raw_post_data
+        return self.request.body
 
     def post(self, request, *args, **kwargs):
         body =  self.get_body()
@@ -83,4 +83,4 @@ class RawTransformView(TransformView):
         return HttpResponseBadRequest()
 
     def get_body(self):
-        return self.request.raw_post_data
+        return self.request.body

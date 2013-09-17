@@ -1,7 +1,6 @@
 {% load url from future %}
 {% load humanize i18n %}
 {% load pagination_tags %}
-{% load timezone_filters %}
 
 {% autopaginate notices %}
     
@@ -28,7 +27,7 @@
 	<div class="notice_block">
 	  <span class="notice_type">[{% trans notice.notice_type.display %}]</span>
 	  <span class="notice_message">{{ notice.message|safe }}</span>
-	  <span class="notice_time">{{ notice.added|localtime:account.timezone|time:"P" }}</span>
+	 <span class="notice_time">{{ notice.added|date }}</span>
 	</div>
       </div>
     </div>

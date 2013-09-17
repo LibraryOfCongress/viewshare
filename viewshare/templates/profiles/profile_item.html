@@ -2,7 +2,6 @@
 {% load i18n %}
 {% load pagination_tags %}
 {% load humanize %}
-{% load timezone_filters %}
 {% load freemix_helpers %}
 {% load connection_helpers %}
 {% load gravatar %}
@@ -17,8 +16,8 @@
 	</span>
 
 	<span class="user-name">
-	  <a href="{% url 'profile_detail' user.username %}" title="{{ user|nicename }}">
-            {{ user|nicename }}
+	  <a href="{% url 'profile_detail' user.username %}" title="{{ user.username }}">
+            {{ user.username }}
 	  </a>
 	</span>
 	

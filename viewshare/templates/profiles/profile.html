@@ -12,7 +12,7 @@
 
 
 
-{% block head_title %}{{ other_user|nicename }}{% endblock %}
+{% block head_title %}{{ other_user.username }}{% endblock %}
 
 {% block head_css %}
 {{ block.super }}
@@ -77,9 +77,9 @@
 	<div class="span8">
 	  <div class="inspector_info profile_info">
             {% if other_user.get_profile.website %}
-            <p class="about_name">{{ other_user|nicename }}<a class="url about_homepage" href="{{ other_user.get_profile.website }}" title="{{ other_user.get_profile.website }}"></a></p>
+            <p class="about_name">{{ other_user.username }}<a class="url about_homepage" href="{{ other_user.get_profile.website }}" title="{{ other_user.get_profile.website }}"></a></p>
             {% else %}
-            <p class="about_name">{{ other_user|nicename }}</p>
+            <p class="about_name">{{ other_user.username }}</p>
             {% endif %}
             {% if other_user.get_profile.location %}
             <p class="about_location">{{ other_user.get_profile.location }}</p>
@@ -150,7 +150,7 @@
 	  <div class="alert alert-block">
 	    <div class="row-fluid">
 	      <div class="span8">
-		{% blocktrans %}You are connected to {% endblocktrans %}{{ other_user|nicename }}.
+		{% blocktrans %}You are connected to {% endblocktrans %}{{ other_user.username }}.
 	      </div>
 	      <div class="span4">
 		<div class="pull-right">
@@ -183,7 +183,7 @@
 	<div class="alert alert-block">
 	  <div class="row-fluid">
 	    <div class="span8">
-	      {{ other_user|nicename }} {% blocktrans %}requested a connection on{% endblocktrans %} {{ invitation.sent|date }}
+	      {{ other_user.username }} {% blocktrans %}requested a connection on{% endblocktrans %} {{ invitation.sent|date }}
 	      {# <p class="invitation_message">{{ invitation.message }}</p> #}
 	    </div>
 	    
@@ -245,7 +245,7 @@
             <div class="alert alert-block">
 	      <div class="row-fluid">
 		<div class="span8">
-		  {% blocktrans %}Send an invitation to connect with {% endblocktrans %} {{ other_user|nicename }} 
+		  {% blocktrans %}Send an invitation to connect with {% endblocktrans %} {{ other_user.username }}
 		</div>
 		<div class="span4">
 		  <div class="pull-right">
@@ -310,7 +310,7 @@
 	<div class="row-fluid">
 	  <div class="span12">
 	    <div class="alert alert-info">
-	      {{ other_user|nicename }} {% blocktrans %} currently has no connections.{% endblocktrans %}
+	      {{ other_user.username }} {% blocktrans %} currently has no connections.{% endblocktrans %}
 	    </div>
 	  </div>
 	</div>

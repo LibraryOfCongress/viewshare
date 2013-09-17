@@ -5,7 +5,7 @@
 {% load freemix_helpers %}
 {% load compress %}
 
-{% block head_title %}{{ other_user|nicename }}{% blocktrans %}'s Connections{% endblocktrans %}{% endblock %}
+{% block head_title %}{{ other_user.username }}{% blocktrans %}'s Connections{% endblocktrans %}{% endblock %}
 
 {% block head_css %}
 {{ block.super }}
@@ -17,7 +17,7 @@
 
 {% block body %}
 
-<h1>{{ other_user|nicename }}{% blocktrans %}'s Connections{% endblocktrans %} ({{ object_list.count }})</h1>
+<h1>{{ other_user.username }}{% blocktrans %}'s Connections{% endblocktrans %} ({{ object_list.count }})</h1>
 
 <div class="view_details">
   {% connection_list object_list  %}

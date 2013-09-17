@@ -5,7 +5,6 @@ from django.shortcuts import get_object_or_404, render
 from django.template import loader, RequestContext
 from django.views.generic import View
 
-from viewshare.apps.legacy.dataset.models import parse_profile_json, DataSource
 from viewshare.apps.support.backends import get_support_backend
 
 from viewshare.utilities.views import get_akara_version

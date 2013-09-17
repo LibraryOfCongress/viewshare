@@ -27,7 +27,7 @@
     <div class="invitation alert alert-info friendship_request">
       <div class="invitation-item row-fluid">
 	<div class="span8">
-	    {% blocktrans %}From{% endblocktrans %} <a href="{% url 'profile_detail' invitation.from_user.username %}">{{ invitation.from_user|nicename }}</a> {% blocktrans %}on{% endblocktrans %} {{ invitation.sent }} 
+	    {% blocktrans %}From{% endblocktrans %} <a href="{% url 'profile_detail' invitation.from_user.username %}">{{ invitation.from_user.username }}</a> {% blocktrans %}on{% endblocktrans %} {{ invitation.sent }}
 	</div>
 	<div class="span4">
 	  <div class="pull-right">
@@ -49,7 +49,7 @@
     <div class="invitation alert alert-info">
       <div class="invitation-item row-fluid">
 	<div class="span12">
-	  {% blocktrans %}You have {% endblocktrans %}<span class="invitation_{{ invitation.status }}">{{ invitation.get_status_display }}</span>{% blocktrans %} the invitation to connect from {% endblocktrans %}<span class="user"><a href="{% url 'profile_detail' invitation.from_user.username %}">{{ invitation.from_user|nicename }}</a></span>{% blocktrans %} on {% endblocktrans %}<span class="date">{{ invitation.sent }}</span>
+	  {% blocktrans %}You have {% endblocktrans %}<span class="invitation_{{ invitation.status }}">{{ invitation.get_status_display }}</span>{% blocktrans %} the invitation to connect from {% endblocktrans %}<span class="user"><a href="{% url 'profile_detail' invitation.from_user.username %}">{{ invitation.from_user.username }}</a></span>{% blocktrans %} on {% endblocktrans %}<span class="date">{{ invitation.sent }}</span>
 	</div>
       </div>
     </div>
@@ -86,7 +86,7 @@
     <div class="invitation-item row-fluid">
       <div class="span12">
 	{% blocktrans %}An invitation to connect was sent to {% endblocktrans %}
-	<span class="user"><a href="{% url 'profile_detail' invitation.to_user.username %}">{{ invitation.to_user|nicename }}</a></span>
+	<span class="user"><a href="{% url 'profile_detail' invitation.to_user.username %}">{{ invitation.to_user.username }}</a></span>
 	{% blocktrans %} on {% endblocktrans %}
 	<span class="date">{{ invitation.sent }}</span>
 	{# <span class="invitation_{{ invitation.status }}">{{ invitation.get_status_display }}</span> #}

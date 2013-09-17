@@ -36,6 +36,7 @@ class CreateExhibitForm(forms.ModelForm):
         instance = super(CreateExhibitForm, self).save(commit=False)
         instance.owner = self.draft.owner
         instance.canvas = self.draft.canvas
+        instance.save()
 
         try:
             # TODO cyclic reference to data source. Perhaps the DataSource
@@ -51,7 +52,6 @@ class CreateExhibitForm(forms.ModelForm):
             # PublishedExhibit?
             pass
 
-        instance.save()
         self.draft.parent = instance
         self.draft.save()
         self.draft.publish()

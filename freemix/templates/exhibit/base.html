@@ -1,7 +1,31 @@
-{% extends "exhibit/template.html" %}
-{% load url from future %}
-
+{% extends "site_base.html" %}
 
 {% load i18n %}
 
 {% block rtab_id %}id="views_tab"{% endblock %}
+
+{% block head_data %}
+    {{ block.super }}
+    {% block freemix_meta %}{% endblock %}
+{% endblock %}
+
+{% block head_title %}
+    {{ block.super }}
+    {% block freemix_title %}{% endblock %}
+{% endblock %}
+
+{% block head_css %}
+    {{ block.super }}
+    {% block freemix_css %}{% endblock %}
+{% endblock %}
+
+{% block extra_scripts %}
+    {{ block.super }}
+    {% block freemix_js %}{% endblock %}
+{% endblock %}
+
+{% block body %}
+    {{ block.super }}
+    {% block freemix_body %}{% endblock freemix_body %}
+{% endblock %}
+

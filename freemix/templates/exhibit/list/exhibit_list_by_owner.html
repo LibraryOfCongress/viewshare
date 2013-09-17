@@ -4,7 +4,7 @@
 {% load exhibit_tags %}
 {% load freemix_helpers %}
 
-{% block head_title %}{{owner|nicename}}{% blocktrans %}'s Views{% endblocktrans %}{% endblock %}
+{% block head_title %}{{owner.username}}{% blocktrans %}'s Views{% endblocktrans %}{% endblock %}
 {% block extra_scripts %}
 {{block.super}}
 {% include "freemix/js_include/jquery_ui.html" %}
@@ -32,7 +32,7 @@
 {% ifnotequal user.username username %}
 <li>
   <ul class="tab-group">
-    <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="">{{ owner|nicename }}</a></li>
+    <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="">{{ owner.username }}</a></li>
   </ul>
 </li>
 {% endifnotequal %}
@@ -40,7 +40,7 @@
 
 {% block body %}
 
-<h1>{{owner|nicename}}{% blocktrans %}'s Views{% endblocktrans %} ({{ object_list.count }})</h1>
+<h1>{{owner.username}}{% blocktrans %}'s Views{% endblocktrans %} ({{ object_list.count }})</h1>
 
 <div class="view_details">
     {% exhibit_list object_list %}
