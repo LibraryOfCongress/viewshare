@@ -14,7 +14,7 @@ from django.core.urlresolvers import reverse
 from django.template import Context
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
-from django.utils.translation import ugettext, get_language, activate
+from django.utils.translation import ugettext
 
 from django.contrib.sites.models import Site
 from django.contrib.auth.models import User
@@ -275,9 +275,7 @@ def send_now(users, label, extra_context=None, on_site=True, sender=None):
         unicode(current_site),
         reverse("notification_notices"),
     )
-    
-    current_language = get_language()
-    
+
     formats = (
         "short.txt",
         "full.txt",
@@ -289,15 +287,7 @@ def send_now(users, label, extra_context=None, on_site=True, sender=None):
         recipients = []
         # get user language for user from language store defined in
         # NOTIFICATION_LANGUAGE_MODULE setting
-        try:
-            language = get_notification_language(user)
-        except LanguageStoreNotAvailable:
-            language = None
-        
-        if language is not None:
-            # activate the user's language
-            activate(language)
-        
+
         # update context with user specific translations
         context = Context({
             "recipient": user,
@@ -327,9 +317,7 @@ def send_now(users, label, extra_context=None, on_site=True, sender=None):
         if should_send(user, notice_type, "1") and user.email and user.is_active: # Email
             recipients.append(user.email)
         send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, recipients)
-    
-    # reset environment to original language
-    activate(current_language)
+
 
 
 def send(*args, **kwargs):
