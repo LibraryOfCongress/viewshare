@@ -42,6 +42,6 @@ class EmailConfirmation(models.Model):
 
     def expired(self):
         expiration_date = self.timestamp + timedelta(
-            days=settings.EMAIL_CONFIRMATION_DAYS)
+            days=EMAIL_CONFIRMATION_DAYS)
         return expiration_date <= datetime.now()
     expired.boolean = True
