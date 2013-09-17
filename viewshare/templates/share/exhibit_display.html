@@ -69,7 +69,7 @@
       {% url 'shared_exhibit_display' slug=object.slug as display_url %}
 
       <div class="exhibit-left exhibit-metadata">
-        {% trans "This view was shared by"%} <span class="exhibit-creator">{{exhibit.owner|nicename}}</span>.
+        {% trans "This view was shared by"%} <span class="exhibit-creator">{{exhibit.owner.username}}</span>.
       </div>
 	
     </li>
