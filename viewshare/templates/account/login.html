@@ -27,7 +27,7 @@ $(document).ready(function() {
 <div class="row-fluid logged-in-alert">
   <div class="span6 offset3">
     <div class="alert alert-block">
-      {% blocktrans %}You are already logged in as{% endblocktrans %} {{ user|nicename }}.
+      {% blocktrans %}You are already logged in as{% endblocktrans %} {{ user.username }}.
     </div>
   </div>
 </div>

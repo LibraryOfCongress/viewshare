@@ -1,0 +1,6 @@
+{% load i18n %}{% blocktrans %}User '{{ user }}' at {{ SITE_NAME }} has given this as an email address.
+
+To confirm this is correct, go to {{ activate_url }}
+{% endblocktrans %}
+
+{%include "account/disclaimer.txt"%}

@@ -27,9 +27,6 @@ Third-party Apps
     * Display sortable data
     * https://github.com/directeur/django-sorting
     * NOTE: Is this being used by users? I see examples of the {% anchor %} templatetag in the templates but don't see these templates on the site
-* emailconfirmation
-    * Confirms that email addresses associated with user accounts are valid
-    * https://github.com/jtauber/django-email-confirmation
 * friends
     * Friendship, contact and invitation management
     * https://github.com/jtauber/django-friends
@@ -43,15 +40,9 @@ Third-party Apps
 * registration
     * user registration application
     * https://bitbucket.org/ubernostrum/django-registration
-* robots
-    * Manages robots.txt files
-    * https://github.com/jezdez/django-robots
 * south
     * Provides schema and data migrations
     * https://bitbucket.org/andrewgodwin/south/
-* timezones
-    * Deal with timezone localization for users
-    * https://github.com/brosner/django-timezones
 * django-crispy-forms
     * Build programmatic reusable layouts out of components, having full control of the rendered HTML
     * http://django-crispy-forms.readthedocs.org/en/latest/

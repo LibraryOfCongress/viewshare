@@ -18,68 +18,68 @@
     
     <form method="post" action="" class="uniForm form form-horizontal">
       <fieldset>
-	<legend>Change Email Settings</legend>
+        <legend>Change Email Settings</legend>
 
-	{%csrf_token%}
+        {%csrf_token%}
 
-	<br />
-	<div class="row-fluid">
-	  <div class="span8 offset2">
-	    
-	    {% if user.emailaddress_set.all %}
-	    
-	    <div class="control-group">
-              <label class="control-label">Current Email Address</label>
-	      <div class="controls">
-		<span class="email-address">
-		  {% for emailaddress in user.emailaddress_set.all %}
-		  {% if emailaddress.primary %}{{ emailaddress.email }}{% else %}{{ emailaddress.email }}{% endif %}
-		  {% endfor %}
-		</span>
-	      </div>
-	    </div>
+        <br />
+        <div class="row-fluid">
+          <div class="span8 offset2">
 
-	    {% else %} 
-	    
-	    <div class="alert alert-warning warning">{% trans "No Email on file. You should really add one so you can receive notifications, reset your password if you forget it, etc." %}</div>
-	    
-	    {% endif %}
-	    
+            {% if user.email %}
+
+            <div class="control-group">
+                  <label class="control-label">Current Email Address</label>
+              <div class="controls">
+                <span class="email-address">
+                {{ user.email }}
+                </span>
+              </div>
+            </div>
+
+            {% else %}
+
+            <div class="alert alert-warning warning">{% trans "No Email on file. You should really add one so you can receive notifications, reset your password if you forget it, etc." %}</div>
+
+            {% endif %}
+
+            {% if outstanding_request %}
+                <div class="alert-success alert">
+                    {% blocktrans %}
+                        An email has been sent to {{ outstanding_request }} for confirmation.
+                    {% endblocktrans %}
+                </div>
+            {% endif %}
             <div class="control-group">
               <label class="control-label" for="id_username">New Email Address</label>
               <div class="controls">
-		<input type="text" id="id_email" placeholder="" name="email" required="true"></input>
+                <input type="text" id="id_email" placeholder="" name="email" required="true"/>
               </div>
-	    </div>
-	    
+            </div>
+
             <div class="control-group">
               <div class="controls">
-		<input type="hidden" name="action" value="add" class="btn btn-primary" />
-		<input type="submit" value="{% trans "Change Email" %}" class="btn btn-primary" />
-	      </div>
-	    </div>
-	    
-	    {% if form.non_field_errors %}
-	    <div class="non-field-errors">
-	      {% for err in form.non_field_errors %}
-	      <div class="row-fluid">
-		<div class="span8 offset2">
-		  <div class="alert alert-error">
-		    <p class="center">{{ err }}</p>
-		  </div>
-		</div>
-	      </div>
-	      {% endfor %}
-	    </div>
-	    {% endif %}
+                <input type="submit" value="{% trans "Change Email" %}" class="btn btn-primary" />
+              </div>
+            </div>
 
-
-	  </fieldset>
-	</form>
-
-      </div>
-    </div>
-    
+            {% if form.non_field_errors %}
+            <div class="non-field-errors">
+              {% for err in form.non_field_errors %}
+                  <div class="row-fluid">
+                      <div class="span8 offset2">
+                        <div class="alert alert-error">
+                            <p class="center">{{ err }}</p>
+                        </div>
+                      </div>
+                  </div>
+              {% endfor %}
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </fieldset>
+    </form>
   </div>
 </div>
 {% endblock %}
