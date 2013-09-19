@@ -10,8 +10,6 @@
 {% load cache %}
 {% load gravatar %}
 
-
-
 {% block head_title %}{{ other_user.username }}{% endblock %}
 
 {% block head_css %}
@@ -51,7 +49,7 @@
 
 <div class="row-fluid">
   
-  <div class="span5">
+  <div class="span5 context-well">
     
     <div id="about-box" class="info-section widget-well">
 
@@ -336,7 +334,7 @@
     
   </div> <!-- end span4 -->
   
-  <div class="span7">
+  <div class="span7 view-well">
     
     {% include "profiles/profile_right_panel.html" %}
     
