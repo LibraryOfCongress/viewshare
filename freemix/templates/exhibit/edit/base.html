@@ -5,6 +5,7 @@
 {% load freemix_helpers %}
 {% load exhibit_tags %}
 {% load compress %}
+{% load humanize %}
 
 {% block head_title %}{% blocktrans %}Layout{% endblocktrans %}{% endblock %}
 
@@ -105,7 +106,7 @@
         <div class="span6">
           <div class="exhibit-metadata">
             {% trans "Created"%}
-            <span class="exhibit-modified-data">{{exhibit.modified|naturalday}}</span>.
+            <span class="exhibit-modified-data">{{exhibit.modified|naturalday}}</span>
             {% trans "by" %}
             <span class="exhibit-creator">
 	      <a href="{% url 'profile_detail' exhibit.owner.username %}">{{exhibit.owner.username}}</a>
