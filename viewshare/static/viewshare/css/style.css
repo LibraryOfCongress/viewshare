@@ -227,6 +227,11 @@ font-weight: bold;
   -webkit-border-radius:3px;
 }
 
+
+
+.responsive-list-item {
+}
+
 .embed-key, .shared-key-url {
   width: 98%;
 }
@@ -503,6 +508,9 @@ ul.responses li.thread-8 {
     border-bottom: solid lightgrey 1px;
     padding-left: 20px;
     margin-bottom: 10px;
+}
+
+.context-well {
 }
 
 
