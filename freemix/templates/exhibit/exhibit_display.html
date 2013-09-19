@@ -156,10 +156,12 @@
                             <div class="span7">
 
                                 <div class="exhibit-metadata">
-                                    {% trans "Created by" %} <span
-                                        class="exhibit-creator"><a
-                                        href="{% url 'profile_detail' exhibit.owner.username %}">{{ exhibit.owner.username }}</a></span> {% trans "on" %}
-                                    <span class="exhibit-modified-data">{{ exhibit.modified|date:"N j, Y" }}</span>
+                                    {% trans "Created" %} 
+                                    <span class="exhibit-modified-data">{{ exhibit.modified|naturalday}}</span>
+                                    {% trans "by" %} 
+				    <span class="exhibit-creator">
+				      <a href="{% url 'profile_detail' exhibit.owner.username %}">{{ exhibit.owner.username }}</a>
+				    </span>
                                 </div>
 
                             </div>

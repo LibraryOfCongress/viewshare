@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load freemix_helpers %}
 {% load connection_helpers %}
+{% load humanize %}
 
 <div id="about-box" class="info-section widget-well">
   
@@ -21,9 +22,9 @@
 	<div class="about_name"><a href="{{  exhibit.get_absolute_url }}">{{exhibit.title}}</a></div>
 	
 	<div class="exhibit-metadata">
-	  <div class="exhibit-created-by"><span class="property-label">{% trans "Created by:" %} </span> <a href="{% url 'profile_detail' object.owner.username %}">{{ object.owner.username }}</a></div>
-	  <div class="exhibit-created-on"><span class="property-label">{% trans "Created on:" %} </span>{{ object.created|date:"N j, Y" }}</div>
-	  <div class="exhibit-last-modified"><span class="property-label">{% trans "Last Modified:" %} </span>{{ object.modified|date:"N j, Y" }}</div>
+	  <div class="exhibit-created-by"><span class="property-label">{% trans "Owner:" %} </span> <a href="{% url 'profile_detail' object.owner.username %}">{{ object.owner.username }}</a></div>
+	  <div class="exhibit-created-on"><span class="property-label">{% trans "Created:" %} </span>{{ object.created|naturalday}}</div>
+	  <div class="exhibit-last-modified"><span class="property-label">{% trans "Last Modified:" %} </span>{{ object.modified|naturalday}}</div>
 	</div>
 
       </div>
