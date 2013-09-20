@@ -7,7 +7,6 @@
 header, .header, #header{
     background-color: #fff;
     width: 100%;
-    padding-top: 40px;
 }
 
 #application-logo {
@@ -18,6 +17,7 @@ header, .header, #header{
     background-repeat: no-repeat;
     background-image: url(../img/viewshare-logo.png);
     width: 228px;
+    min-width: 228px;
 }
 
 #header #application-status {
@@ -28,14 +28,6 @@ header, .header, #header{
     color: red;
     top: 21px;
     left: 270px;
-}
-
-.brand .tagline {
-    position: absolute;
-    left:220px;
-    top: 13px;
-    font-size: 90%;
-    color: slate;
 }
 
 #footer {
@@ -109,9 +101,15 @@ header, .header, #header{
 
 }
 
+@media (min-width: 980px) {
+  body {
+    padding-top: 60px;
+    padding-bottom: 42px;
+  }
+}
 
-#body {
-margin-top: 20px;
+@media screen and (max-width: 768px) {
+    body { padding-top: 0px; }
 }
 
 /* main titles */
