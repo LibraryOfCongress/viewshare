@@ -27,31 +27,43 @@
         <div id="tabhead" class="navbar navbar-fixed-top">
           <div class="navbar-inner">
             <div class="container">
+
+              <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+              </button>
+
               <a href="/" class="brand">
                 <span id="application-logo"></span>
                 <span id="application-status">{{ SITE_NAME_STATUS }}</span>
               </a>            
-              <ul class="nav pull-right">
-                {% block login %}{% endblock %}
-              </ul>
+
+              <div class="nav-collapse collapse">
+		<ul class="nav pull-right">
+                  {% block login %}{% endblock %}
+		</ul>
+	      </div>
             </div><!-- /.container -->
           </div><!-- /.navbar-inner -->
         </div><!-- /.navbar -->
       </div><!-- /.header -->
     </div><!-- /.row-fluid -->
 
-    {% announcements as site_wide_announcements %}
-    {% if site_wide_announcements %}
-      {% for announcement in site_wide_announcements %}
-      <div class="alert" id="site_wide_announcements">
-        <strong>{{ announcement.title }}</strong> - {{ announcement.content }}
-      </div>
-      {% endfor %}
-    {% endif %}
-    {% endblock banner %}
 
     <div class="container-fluid">
       <div id="body" class="freemix-themeable">
+
+	{% announcements as site_wide_announcements %}
+	{% if site_wide_announcements %}
+	{% for announcement in site_wide_announcements %}
+	<div class="alert" id="site_wide_announcements">
+          <strong>{{ announcement.title }}</strong> - {{ announcement.content }}
+	</div>
+	{% endfor %}
+	{% endif %}
+	{% endblock banner %}	
+	
         <div id="inner-body">
           {% block body %}
           {% endblock %}
