@@ -1,6 +1,6 @@
 from django.conf.urls import url, patterns
 from django.contrib.auth.decorators import login_required
-from freemix.exhibit import views
+from viewshare.apps.exhibit import views
 
 urlpatterns = patterns('',
     #display

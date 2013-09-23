@@ -7,8 +7,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic.list import ListView
 
 from viewshare.apps.vendor.friends.models import *
-from freemix.exhibit.permissions import PermissionsRegistry
-from freemix.exhibit.models import PublishedExhibit
+from viewshare.apps.exhibit.permissions import PermissionsRegistry
+from viewshare.apps.exhibit.models import PublishedExhibit
 from viewshare.utilities import get_user
 
 

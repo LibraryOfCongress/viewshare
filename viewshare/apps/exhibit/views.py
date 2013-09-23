@@ -13,8 +13,8 @@ from django.views.generic.edit import UpdateView
 from django.views.generic.list import ListView
 from django.db.models import Q
 
-from freemix.exhibit import models, forms, serializers
-from freemix.exhibit.serializers import ExhibitPropertyListSerializer
+from viewshare.apps.exhibit import models, forms, serializers
+from viewshare.apps.exhibit.serializers import ExhibitPropertyListSerializer
 
 
 # Exhibit Profile Views

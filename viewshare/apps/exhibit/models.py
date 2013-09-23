@@ -135,7 +135,7 @@ class PublishedExhibit(Exhibit):
                                             is_draft=True)
         draft.save()
 
-        from freemix.exhibit.serializers import ExhibitPropertyListSerializer
+        from viewshare.apps.exhibit.serializers import ExhibitPropertyListSerializer
         data = ExhibitPropertyListSerializer(self,
                                              queryset=self.properties).data
         out = ExhibitPropertyListSerializer(draft, data=data)

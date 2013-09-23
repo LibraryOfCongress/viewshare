@@ -1,5 +1,5 @@
 from django.contrib import admin
-from freemix.exhibit import models
+from viewshare.apps.exhibit import models
 
 
 class CanvasAdmin(admin.ModelAdmin):
