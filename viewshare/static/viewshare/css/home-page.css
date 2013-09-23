@@ -9,7 +9,7 @@ h2 {
 }
 
 .fp-wells {
-  margin-top: 40px;
+  margin-top: 20px;
   padding-top: 20px;
   border-top: 1px solid #eee;
 }
@@ -116,13 +116,11 @@ h2 {
 
 .linkblock {
 text-decoration: none; 
-font-size:1.1em;
+font-size:1.0em;
 font-weight:normal;
 width:245px;
 list-style:none; 
 padding:1em;  
-margin-top:.3em; 
-margin-bottom:.3em; 
 }
 
 #first
@@ -134,3 +132,21 @@ margin-bottom:.3em;
 #third
  {background-color:#405777;color:white; }
 
+#homeSlide img {
+ min-height:480px;
+}
+
+#homePage {
+ max-width: 1280px;
+ margin-left: auto;
+ margin-right: auto;
+}
+
+.carousel-indicators li {
+  background-color: #999;
+  background-color: rgba(70,70,70,.25);
+}
+
+.carousel-indicators .active {
+  background-color: #444;
+}
