@@ -11,112 +11,111 @@
 {% endblock %}
 
 {% block body %}
-<div class="container-fluid">
+<div class="container-fluid" id="homePage">
 
-<div class="row-fluid">
+  <div class="row-fluid">
 
-  <div class="span8">
-    
-    {% if featured_exhibits %}
-    <div id="homeSlide" class="carousel slide">
-      <ol class="carousel-indicators">
-        {% for exhibit in featured_exhibits %}
-        <li data-target="#homeSlide" data-slide-to="{{ forloop.counter0 }}"{% if forloop.counter0 == 0 %} class="active"{% endif %}></li>
-        {% endfor %}
-      </ol>
-      <!-- Carousel items -->
-      <div class="carousel-inner">
-        {% for exhibit in featured_exhibits %}
-        <div class="item{% if forloop.counter0 == 0 %} active{% endif %}">
-          <a href="{{ exhibit.get_absolute_url }}">
-          {% if exhibit.thumbnail %}
-            <img src="{{ exhibit.thumbnail.url }}" />
-          {% else %}
-            <img src="{{ STATIC_URL }}images/slide_holder.png" />
-          {% endif %}
-          </a>
-          <div class="carousel-caption">
-            <p>{{ exhibit.custom_title|safe }}</p>
-          </div>
-        </div><!-- /.item -->
-        {% endfor %}
-      </div><!-- /.carousel-inner -->
-      <!-- Carousel nav -->
-      <a class="carousel-control left" href="#homeSlide" data-slide="prev">&lsaquo;</a>
-      <a class="carousel-control right" href="#homeSlide" data-slide="next">&rsaquo;</a>
-    </div><!-- /#homeSlide -->
+    <div class="span8">
+      
+      {% if featured_exhibits %}
+      <div id="homeSlide" class="carousel slide well">
+	<ol class="carousel-indicators">
+          {% for exhibit in featured_exhibits %}
+          <li data-target="#homeSlide" data-slide-to="{{ forloop.counter0 }}"{% if forloop.counter0 == 0 %} class="active"{% endif %}></li>
+          {% endfor %}
+	</ol>
+	<!-- Carousel items -->
+	<div class="carousel-inner">
+          {% for exhibit in featured_exhibits %}
+          <div class="item{% if forloop.counter0 == 0 %} active{% endif %}">
+            <a href="{{ exhibit.get_absolute_url }}">
+              {% if exhibit.thumbnail %}
+              <img src="{{ exhibit.thumbnail.url }}" />
+              {% else %}
+              <img src="{{ STATIC_URL }}images/slide_holder.png" />
+              {% endif %}
+            </a>
+            <div class="carousel-caption">
+              <p>{{ exhibit.custom_title|safe }}</p>
+            </div>
+          </div><!-- /.item -->
+          {% endfor %}
+	</div><!-- /.carousel-inner -->
+	<!-- Carousel nav -->
+	<a class="carousel-control left" href="#homeSlide" data-slide="prev">&lsaquo;</a>
+	<a class="carousel-control right" href="#homeSlide" data-slide="next">&rsaquo;</a>
+      </div><!-- /#homeSlide -->
 
-    {% endif %}
-  </div><!-- /.span8 -->
+      {% endif %}
+    </div><!-- /.span8 -->
 
-  <div class="span4">
+    <div class="span4">
 
-    <div id="front-page-application-logo"></div>
-    
-    <div class="lead">
-      <strong>{{ SITE_NAME }}</strong> is a <strong>free</strong> platform for generating and customizing views <strong>(interactive maps, timelines, facets, tag clouds)</strong> that allow users to experience your <strong>digital collections</strong>.
-    </div> 
+      <div id="front-page-application-logo"></div>
+      
+      <div class="lead">
+	<strong>{{ SITE_NAME }}</strong> is a <strong>free</strong> platform for generating and customizing views <strong>(interactive maps, timelines, facets, tag clouds)</strong> that allow users to experience your <strong>digital collections</strong>.
+      </div> 
 
-    <div class="lead-links">
-      <div class="lead-link">
-	<a href="/registration/register/" class="btn btn-large">
-	  <div id="first" class="linkblock">Request Free Account</div>
-	</a>
+      <div class="lead-links">
+	<div class="lead-link">
+	  <a href="/registration/register/" class="btn btn-large">
+	    <div id="first" class="linkblock">Request Free Account</div>
+	  </a>
+	</div>
+	<div class="lead-link">
+	  <a href="/screencast" class="btn btn-large">
+	    <div id="second" class="linkblock">Watch Screencast</div>
+	  </a>
+	</div>
+	<div class="lead-link">
+	  <a href="http://recollection.zepheira.com/about/help/" class="btn btn-large">
+	    <div id="third" class="linkblock">Get Started</div>
+	  </a>
+	</div>
       </div>
-      <div class="lead-link">
-	<a href="/screencast" class="btn btn-large">
-	  <div id="second" class="linkblock">Watch Screencast</div>
-	</a>
+    </div><!-- /.span3 -->
+
+  </div><!-- /.row -->
+
+
+  <div class="row-fluid fp-wells">
+    <div class="span4">
+      <div class="fp-widget-well">
+	<h2 class="fp-widget-header"><a href="/import">import collections</a></h2>
+	
+	<div class="stepblock">ingest collections from <strong>spreadsheets</strong> or <strong><a href="http://www.loc.gov/standards/mods/">mods</a></strong> records. upload from your desktop or import them from a url.</div>
+	
       </div>
-      <div class="lead-link">
-	<a href="http://recollection.zepheira.com/about/help/" class="btn btn-large">
-	  <div id="third" class="linkblock">Get Started</div>
-	</a>
+    </div><!-- /.span4 -->
+
+    <div class="span4">
+      <div class="fp-widget-well">
+	
+	<h2 class="fp-widget-header"><a href="generate-views">generate views</a></h2>
+
+	<div class="stepblock">
+	  generate distinct interactive visual interfaces to your digital collections, including <strong>maps</strong> and <strong>timelines</strong>, and sophisticated <strong>faceted navigation</strong>.
+	</div>
+	
       </div>
-    </div>
-  </div><!-- /.span3 -->
-
-</div><!-- /.row -->
+    </div><!-- /.span4 -->
 
 
-<div class="row-fluid fp-wells">
-  <div class="span4">
-    <div class="fp-widget-well">
-      <h2 class="fp-widget-header"><a href="/import">import collections</a></h2>
-      
-      <div class="stepblock">ingest collections from <strong>spreadsheets</strong> or <strong><a href="http://www.loc.gov/standards/mods/">mods</a></strong> records. upload from your desktop or import them from a url.</div>
-      
-    </div>
-  </div><!-- /.span4 -->
+    <div class="span4">
 
-  <div class="span4">
-    <div class="fp-widget-well">
-      
-      <h2 class="fp-widget-header"><a href="generate-views">generate views</a></h2>
-
-      <div class="stepblock">
-	generate distinct interactive visual interfaces to your digital collections, including <strong>maps</strong> and <strong>timelines</strong>, and sophisticated <strong>faceted navigation</strong>.
+      <div class="fp-widget-well">
+	
+	<h2 class="fp-widget-header"><a href="/embed-and-share">embed and share</a></h2>
+	
+	<div class="stepblock">
+	  just <strong>copy-paste to embed</strong> your interface in any webpage. provide your users with novel and intuitive ways to explore your content    
+	</div>
+	
       </div>
-      
-    </div>
-  </div><!-- /.span4 -->
+    </div><!-- /.span4 -->
 
-
-  <div class="span4">
-
-    <div class="fp-widget-well">
-      
-      <h2 class="fp-widget-header"><a href="/embed-and-share">embed and share</a></h2>
-      
-      <div class="stepblock">
-	just <strong>copy-paste to embed</strong> your interface in any webpage. provide your users with novel and intuitive ways to explore your content    
-      </div>
-      
-    </div>
-  </div><!-- /.span4 -->
-
-</div><!-- /.row-fluid -->
-
+  </div><!-- /.row-fluid -->
 
 </div><!-- /.container-fluid -->
 
