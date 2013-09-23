@@ -1,7 +1,7 @@
 from django.db import models
 from django_extensions.db.fields import UUIDField
 from django_extensions.db.models import TimeStampedModel
-from freemix.exhibit.models import PublishedExhibit
+from viewshare.apps.exhibit.models import PublishedExhibit
 
 
 class SharedExhibitKey(TimeStampedModel,models.Model):

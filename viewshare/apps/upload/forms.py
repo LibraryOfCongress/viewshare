@@ -3,7 +3,7 @@ from django import forms
 from django.forms.widgets import Select
 from django.utils.translation import ugettext_lazy as _
 from viewshare.apps.upload import models
-from freemix.exhibit import models as exhibit_models
+from viewshare.apps.exhibit import models as exhibit_models
 
 
 class DataSourceForm(forms.ModelForm):

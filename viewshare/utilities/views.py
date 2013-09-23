@@ -10,7 +10,7 @@ from django.template.loader import render_to_string
 from django.template.response import TemplateResponse
 from django.views.generic import View, ListView
 from django.views.generic.base import RedirectView
-from freemix.exhibit.permissions import PermissionsRegistry
+from viewshare.apps.exhibit.permissions import PermissionsRegistry
 
 
 def server_error(request, template_name='500.html'):

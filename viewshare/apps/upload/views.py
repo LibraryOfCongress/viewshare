@@ -11,7 +11,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.views.generic.base import View
 from django.views.generic.edit import CreateView, UpdateView
-from freemix.exhibit.models import TX_STATUS
+from viewshare.apps.exhibit.models import TX_STATUS
 
 from viewshare.apps.upload.transform import AkaraTransformClient
 from viewshare.apps.upload import forms, conf

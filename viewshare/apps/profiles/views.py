@@ -9,12 +9,12 @@ from django.contrib import messages
 
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ugettext
-from freemix.exhibit.models import DraftExhibit, PublishedExhibit
+from viewshare.apps.exhibit.models import DraftExhibit, PublishedExhibit
 
 from viewshare.apps.vendor.friends.forms import InviteFriendForm
 from viewshare.apps.vendor.friends.models import (FriendshipInvitation,
                                                   Friendship)
-from freemix.exhibit.permissions import PermissionsRegistry
+from viewshare.apps.exhibit.permissions import PermissionsRegistry
 
 from viewshare.apps.profiles.forms import ProfileForm
 

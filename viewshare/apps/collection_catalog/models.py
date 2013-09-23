@@ -4,7 +4,7 @@ Models for building the Viewshare collection catalog
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from freemix.exhibit.models import Exhibit
+from viewshare.apps.exhibit.models import Exhibit
 from viewshare.utilities import get_site_url
 
 

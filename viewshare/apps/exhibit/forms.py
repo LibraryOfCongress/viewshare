@@ -1,8 +1,9 @@
 from django import forms
 from django.core.exceptions import ObjectDoesNotExist
-from freemix.exhibit.models import PublishedExhibit
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
+
+from viewshare.apps.exhibit.models import PublishedExhibit
 
 
 def boolean_coerce(value):

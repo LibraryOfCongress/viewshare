@@ -1,3 +1,5 @@
+import json
+
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseForbidden, Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
@@ -5,11 +7,12 @@ from django.views.decorators.http import last_modified
 from django.views.generic.detail import DetailView
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import CreateView
+
 from viewshare.apps.share import models
-from freemix.exhibit.models import PublishedExhibit, PropertyData
-from freemix.exhibit.serializers import ExhibitPropertyListSerializer
+from viewshare.apps.exhibit.models import PublishedExhibit, PropertyData
+from viewshare.apps.exhibit.serializers import ExhibitPropertyListSerializer
 from viewshare.apps.share import forms
-import json
+
 
 # The last_modified decorator requires a function
 from viewshare.utilities.views import BaseJSONView
