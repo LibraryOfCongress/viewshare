@@ -5,7 +5,7 @@
 {% load crispy_forms_tags %}
 {% load notification_utils %}
 {% load connection_helpers %}
-{% load freemix_helpers %}
+{% load viewshare_helpers %}
 {% load compress %}
 {% load cache %}
 {% load gravatar %}
@@ -48,9 +48,9 @@
 {% block body %}
 
 <div class="row-fluid">
-  
+
   <div class="span5 context-well">
-    
+
     <div id="about-box" class="info-section widget-well">
 
       {% if is_me %}
@@ -71,7 +71,7 @@
 	    {% gravatar other_user.email|add:"f=t" 112 %}
 	  </div>
 	</div>
-      
+
 	<div class="span8">
 	  <div class="inspector_info profile_info">
             {% if other_user.get_profile.website %}
@@ -82,7 +82,7 @@
             {% if other_user.get_profile.location %}
             <p class="about_location">{{ other_user.get_profile.location }}</p>
             {% endif %}
-        
+
             <!-- user stats -->
             <div class="view-count">
               {% user_counts other_user %}
@@ -111,7 +111,7 @@
 	      </div>
 	    </div>
 	  </span>
-	  
+
 	  <div id="edit-profile-form" class="modal modal-fit hide fade form-dialog" tabindex="-1" role="dialog" aria-labelledby="editProfileFormLabel" aria-hidden="true">
 	    <div class="modal-header">
 	      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -124,17 +124,17 @@
 	</div>
 
       </div>
-	  
+
     </div> <!-- end about-box -->
-    
+
     {% if user.is_authenticated %}
-    
+
     {% if not is_me %}
-    
+
     {% if is_friend %}
 
     <div class="info-section widget-well widget-action-well">
-      
+
       <div class="widget-header">
 	<h2>{% trans "Actions" %}</h2>
       </div>
@@ -142,9 +142,9 @@
       <form class="uniForm" method="POST" action="">
 
 	{% csrf_token %}
-	
+
         <fieldset class="inlineLabels">
-	  
+
 	  <div class="alert alert-block">
 	    <div class="row-fluid">
 	      <div class="span8">
@@ -158,24 +158,24 @@
 	      </div>
 	    </div>
 	  </div>
-	  
+
 	</fieldset>
       </form>
-      
+
     </div>
-    
+
     {% else %}
-    
+
     {% if previous_invitations_from %}
-    
+
     <div class="info-section widget-well widget-action-well">
 
       <div class="widget-header">
 	<h2>{% trans "Actions" %}</h2>
       </div>
-            
+
       <div class="connection_extra">
-      
+
 	{% for invitation in previous_invitations_from %}
 
 	<div class="alert alert-block">
@@ -184,12 +184,12 @@
 	      {{ other_user.username }} {% blocktrans %}requested a connection on{% endblocktrans %} {{ invitation.sent|date }}
 	      {# <p class="invitation_message">{{ invitation.message }}</p> #}
 	    </div>
-	    
+
 	    <div class="span2">
-	      
+
 	      <form method="post" action="">
 		{%csrf_token %}
-		
+
 		<input type="hidden" name="invitation" value="{{ invitation.id }}"/>
 		<input type="hidden" name="action" value="accept"/>
 		<input type="submit" class="btn btn-small" value="{% trans 'Accept' %}" />
@@ -205,16 +205,16 @@
 	    </div>
 	  </div>
 	</div>
-	
+
 	{% endfor %}
 
       </div>
     </div>
 
     {% else %}
-    
+
     {% if previous_invitations_to %}
-    
+
     <div class="info-section widget-well widget-action-well">
 
       <div class="widget-header">
@@ -224,9 +224,9 @@
       <div class="alert alert-success">{% trans "Connection request sent." %}</div>
 
     </div>
-    
+
     {% else %}
-    
+
     <div class="info-section widget-well widget-action-well">
 
       <div class="widget-header">
@@ -236,7 +236,7 @@
       <form class="uniForm" method="POST" action="">
         {% csrf_token %}
         <fieldset class="inlineLabels">
-	  
+
 	  {{ invite_form|crispy }}
 	  <div class="form_block">
             <input type="hidden" name="action" value="invite" />
@@ -256,27 +256,27 @@
         </fieldset>
       </form>
     </div>
-    
+
     {% endif %} {# previous_invitations_to #}
-    
+
     {% endif %} {# previous_invitations_from #}
-    
+
     {% endif %} {# is_friend #}
-    
+
     {% endif %} {# is me #}
-    
+
     {% else %} {# not user.is_authenticated #}
-    
+
     {% url 'acct_login' as login_url %}
     <p class="center">{% blocktrans %}<a href="{{login_url}}">Log in</a> to add this person as a connection.{% endblocktrans %}</p>
-    
+
     {% endif %}
-  
+
     <!-- my news -->
-    
+
     {%  if user.is_authenticated %}
     <div class="connection-section widget-well">
-      
+
       {% if is_me %}
       <div class="widget-header">
 	<h2>{% blocktrans %}My Connections{% endblocktrans %}</h2>
@@ -289,12 +289,12 @@
 
       <div class="user_friends">
 	{% if other_friends %}
-	{% connection_list other_friends 3 0 %} 
+	{% connection_list other_friends 3 0 %}
 	<div class="see_all">
           <a href="{% url 'connection_list_by_user' other_user.username %}">{% trans "See all" %}</a>
-	</div> 
+	</div>
 	{% else %}
-	
+
 	{% if is_me %}
 	{% url 'profile_list' as profile_list_url %}
 	<div class="row-fluid">
@@ -313,11 +313,11 @@
 	  </div>
 	</div>
 	{% endif %}
-	
+
 	{% endif %}
       </div>
     </div>
-    
+
     {% if is_me %}
     <div class="info-section widget-well">
       <div class="widget-header">
@@ -329,17 +329,17 @@
       </div>
     </div>
     {% endif %}
-    
+
     {% endif %}
-    
+
   </div> <!-- end span4 -->
-  
+
   <div class="span7 view-well">
-    
+
     {% include "profiles/profile_right_panel.html" %}
-    
+
   </div> <!-- end span8 -->
-  
+
 </div> <!-- end row-fluid -->
 
 {% endblock body %}

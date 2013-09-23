@@ -11,9 +11,9 @@ from django.contrib.auth import authenticate, login
 from django.contrib.sites.models import Site
 from django.contrib import messages
 from django.core.mail import send_mail
-from freemix.utils import get_site_url
 
 from viewshare.apps.account import models
+from viewshare.utilities import get_site_url
 
 
 alnum_re = re.compile(r'^\w+$')
@@ -25,7 +25,7 @@ def generate_key(value):
 
 
 class LoginForm(forms.Form):
-    
+
     username = forms.CharField(label=_("Username"),
                                max_length=30,
                                widget=forms.TextInput())
@@ -36,9 +36,9 @@ class LoginForm(forms.Form):
                                   help_text=_("If checked you will stay logged"
                                               " in for 3 weeks"),
                                   required=False)
-    
+
     user = None
-    
+
     def clean(self):
         if self._errors:
             return
@@ -54,7 +54,7 @@ class LoginForm(forms.Form):
             raise forms.ValidationError(_("The username and/or password you "
                                           "specified are not correct."))
         return self.cleaned_data
-    
+
     def login(self, request):
         if self.is_valid():
             login(request, self.user)
@@ -69,7 +69,7 @@ class LoginForm(forms.Form):
 
 
 class UserForm(forms.Form):
-    
+
     def __init__(self, user=None, *args, **kwargs):
         self.user = user
         super(UserForm, self).__init__(*args, **kwargs)
@@ -110,7 +110,7 @@ class SetEmailForm(UserForm):
 
 
 class ChangePasswordForm(UserForm):
-    
+
     oldpassword = forms.CharField(label=_("Current Password"),
                                   widget=forms.PasswordInput(render_value=False))
 
@@ -119,13 +119,13 @@ class ChangePasswordForm(UserForm):
 
     password2 = forms.CharField(label=_("New Password (again)"),
                                 widget=forms.PasswordInput(render_value=False))
-    
+
     def clean_oldpassword(self):
         if not self.user.check_password(self.cleaned_data.get("oldpassword")):
             raise forms.ValidationError(_("Please type your "
                                           "current password."))
         return self.cleaned_data["oldpassword"]
-    
+
     def clean_password2(self):
         if "password1" in self.cleaned_data and \
                 "password2" in self.cleaned_data:
@@ -133,19 +133,19 @@ class ChangePasswordForm(UserForm):
                 raise forms.ValidationError(_("You must type the same password "
                                               "each time."))
         return self.cleaned_data["password2"]
-    
+
     def save(self):
         self.user.set_password(self.cleaned_data['password1'])
         self.user.save()
 
 
 class SetPasswordForm(UserForm):
-    
+
     password1 = forms.CharField(label=_("Password"),
                                 widget=forms.PasswordInput(render_value=False))
     password2 = forms.CharField(label=_("Password (again)"),
                                 widget=forms.PasswordInput(render_value=False))
-    
+
     def clean_password2(self):
 
         password1 = self.cleaned_data.get("password1", None)
@@ -157,25 +157,25 @@ class SetPasswordForm(UserForm):
                 raise forms.ValidationError(_("You must type the same "
                                               "password each time."))
         return password2
-    
+
     def save(self):
         self.user.set_password(self.cleaned_data["password1"])
         self.user.save()
 
 
 class ResetPasswordForm(forms.Form):
-    
+
     email = forms.EmailField(label=_("Email"),
                              required=True,
                              widget=forms.TextInput(attrs={'size': '30'}))
-    
+
     def clean_email(self):
         email = self.cleaned_data["email"]
         if User.objects.filter(email__iexact=email).count() == 0:
             raise forms.ValidationError(_("Email address not verified for any "
                                           "user account"))
         return email
-    
+
     def save(self):
         email = self.cleaned_data["email"]
         for user in User.objects.filter(email__iexact=email):
@@ -184,10 +184,10 @@ class ResetPasswordForm(forms.Form):
             # save it to the password reset model
             password_reset = models.PasswordReset(user=user, temp_key=temp_key)
             password_reset.save()
-            
+
             current_site = Site.objects.get_current()
             domain = unicode(current_site.domain)
-            
+
             #send the password reset email
             subject = _("Password reset email sent")
 
@@ -210,7 +210,7 @@ class ResetPasswordForm(forms.Form):
 
 
 class ResetPasswordKeyForm(forms.Form):
-    
+
     password1 = forms.CharField(label=_("New Password"),
                                 widget=forms.PasswordInput(render_value=False))
 
@@ -218,7 +218,7 @@ class ResetPasswordKeyForm(forms.Form):
                                 widget=forms.PasswordInput(render_value=False))
 
     temp_key = forms.CharField(widget=forms.HiddenInput)
-    
+
     def clean_temp_key(self):
         temp_key = self.cleaned_data.get("temp_key")
         password_reset = models.PasswordReset.objects.filter(temp_key=temp_key,
@@ -226,7 +226,7 @@ class ResetPasswordKeyForm(forms.Form):
         if not (password_reset.count()) >= 1:
             raise forms.ValidationError(_("Temporary key is invalid."))
         return temp_key
-    
+
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1", None)
         password2 = self.cleaned_data.get("password2", None)
@@ -235,14 +235,14 @@ class ResetPasswordKeyForm(forms.Form):
                 raise forms.ValidationError(_("You must type the same "
                                               "password each time."))
         return self.cleaned_data["password2"]
-    
+
     def save(self):
         # get the password_reset object
         temp_key = self.cleaned_data.get("temp_key")
         password_reset = (models.PasswordReset.objects
                           .filter(temp_key__exact=temp_key, reset=False)
                           .order_by("-timestamp"))[0]
-        
+
         # now set the new user password
         user = password_reset.user
         user.set_password(self.cleaned_data["password1"])

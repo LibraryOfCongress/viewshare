@@ -1,7 +1,7 @@
 "Admin helpers for the collection catalog models"
 from django.contrib import admin
 from viewshare.apps.collection_catalog import models
-from freemix.utils import get_username
+from viewshare.utilities import get_username
 
 
 class TopicAdmin(admin.ModelAdmin):

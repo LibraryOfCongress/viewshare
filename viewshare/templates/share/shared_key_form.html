@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 {% load i18n %}
 {% load exhibit_tags %}
-{% load freemix_helpers %}
+{% load viewshare_helpers %}
 
 <form class="form-horizontal" method="POST" action="{% url 'shared_key_create_form' owner=form.exhibit.owner.username slug=form.exhibit.slug %}">
   <fieldset>

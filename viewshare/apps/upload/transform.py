@@ -2,24 +2,26 @@
 import logging
 import uuid
 
-from django.http import  HttpResponseBadRequest
+from django.http import HttpResponseBadRequest
 from django.views.generic.base import View
 import urllib2
 from urllib import urlencode
 
 import json
-from freemix.views import JSONResponse
-
 
 from django.conf import settings
 from urlparse import urljoin
+from viewshare.utilities.views import JSONResponse
 
 
 logger = logging.getLogger(__name__)
 
+AKARA_URL_PREFIX = getattr(settings,
+                           "AKARA_URL_PREFIX",
+                           "http://transformer.zepheira.com:8882")
 
-AKARA_URL_PREFIX = getattr(settings, "AKARA_URL_PREFIX", "http://transformer.zepheira.com:8882")
-AKARA_TRANSFORM_URL = getattr(settings, "AKARA_TRANSFORM_URL", urljoin(AKARA_URL_PREFIX, "freemix.json"))
+AKARA_TRANSFORM_URL = getattr(settings, "AKARA_TRANSFORM_URL",
+                              urljoin(AKARA_URL_PREFIX, "freemix.json"))
 
 
 class AkaraTransformClient(object):
@@ -31,7 +33,7 @@ class AkaraTransformClient(object):
         url = self.url
         if params:
             url = "%s?%s"%(url, urlencode(params))
-        
+
         if self.credentials:
             auth_handler = urllib2.HTTPDigestAuthHandler()
             auth_handler.add_password(realm=self.credentials[0],

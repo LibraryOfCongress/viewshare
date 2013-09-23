@@ -2,12 +2,12 @@
 {% load i18n %}
 {% load pagination_tags %}
 {% load humanize %}
-{% load freemix_helpers %}
+{% load viewshare_helpers %}
 {% load connection_helpers %}
 {% load gravatar %}
 
 <li class="user_profile_entry clearfix result_set_item">
-  
+
   <div class="user_data_entry">
     <div class="row-fluid">
       <div class="span7">
@@ -20,14 +20,14 @@
             {{ user.username }}
 	  </a>
 	</span>
-	
+
 	{% if user.get_profile.location %}
 	<span class="user_location">
 	  <span class="value">{{ user.get_profile.location }}</span>
 	</span>
 	{% endif %}
       </div>
-      
+
       <div class="span5">
 	<div class="pull-right">
 	  {% user_counts user %}
@@ -56,10 +56,10 @@
 	  <span class="property">{% trans "Last visited" %}</span> <span class="value">{{ user.last_login|date }}</span>
 	</span>
 	{% endif %}
-	
+
       </div>
     </div>
     {% endif %}
-  
+
   </div> <!-- end user data -->
 </li>

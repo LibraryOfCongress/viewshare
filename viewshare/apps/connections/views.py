@@ -7,9 +7,9 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic.list import ListView
 
 from viewshare.apps.vendor.friends.models import *
-from freemix.permissions import PermissionsRegistry
-from freemix.utils import get_user
+from freemix.exhibit.permissions import PermissionsRegistry
 from freemix.exhibit.models import PublishedExhibit
+from viewshare.utilities import get_user
 
 
 def connections(request, template_name="connections/invitations.html"):

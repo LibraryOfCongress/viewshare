@@ -1,6 +1,6 @@
 import json
 from django.shortcuts import get_object_or_404
-from freemix.views import BaseJSONView
+from viewshare.utilities.views import BaseJSONView
 
 
 class CatalogListJSONView(BaseJSONView):

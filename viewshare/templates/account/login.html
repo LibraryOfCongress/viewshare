@@ -3,7 +3,7 @@
 
 {% load i18n %}
 {% load crispy_forms_tags %}
-{% load freemix_helpers %}
+{% load viewshare_helpers %}
 
 {% block head_title %}{% trans "Login" %}{% endblock %}
 
@@ -46,7 +46,7 @@ $(document).ready(function() {
 </div>
 {% endif %}
 
-<div class="login_options login_wrapper">	
+<div class="login_options login_wrapper">
   <div class="login_text">
 
     <form class="login user_pass form-horizontal" method="POST">
@@ -57,7 +57,7 @@ $(document).ready(function() {
           </div>
         </legend>
 
-        {% csrf_token %}	
+        {% csrf_token %}
 
 	<br />
 	<div class="row-fluid">
@@ -69,13 +69,13 @@ $(document).ready(function() {
 	    <input type="text" id="id_username" placeholder="Username" name="username" required="true"></input>
           </div>
 	</div>
-	
+
         <div class="control-group">
 	  <label class="control-label" for="id_password">Password</label>
 	  <div class="controls">
 	    <input type="password" id="id_password" placeholder="Password" name="password" required="true"></input>
 	  </div>
-	
+
           <div class="control-group">
             <div class="controls">
 	      <label class="checkbox" for="id_remember">
@@ -105,7 +105,7 @@ $(document).ready(function() {
 
 
 	</div>
-	
+
       </fieldset>
     </form>
   </div>
@@ -120,7 +120,7 @@ $(document).ready(function() {
 	{% endblocktrans %}
       </p>
     </div>
-  </div>  
+  </div>
 </div>
 
 

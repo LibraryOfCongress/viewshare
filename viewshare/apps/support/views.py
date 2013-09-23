@@ -1,21 +1,42 @@
 import logging
+from urllib2 import urlopen
+from urlparse import urljoin
 from django.conf import settings
+from django.core.cache import cache
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404, render
 from django.template import loader, RequestContext
 from django.views.generic import View
 
 from viewshare.apps.support.backends import get_support_backend
+from viewshare.utilities import get_site_url, get_user
 
-from viewshare.utilities.views import get_akara_version
 from viewshare.apps.upload.transform import AKARA_URL_PREFIX
-from freemix.utils import get_user, get_site_url
 
 from viewshare import __version__ as viewshare_version
 from viewshare.apps.support import forms
 
 logger = logging.getLogger(__name__)
 
+AKARA_VERSION_URL = getattr(settings, "AKARA_VERSION_URL",
+                            urljoin(AKARA_URL_PREFIX,
+                                    "freemix.loader.revision"))
+
+
+def get_akara_version():
+    version = cache.get("akara_version")
+    if not version:
+        version = cache_akara_version()
+    return str(version)
+
+
+def cache_akara_version():
+    try:
+        version = urlopen(AKARA_VERSION_URL).read(100)
+    except:
+        version = "Unknown"
+    cache.set("akara_version", version, 60)
+    return version
 
 class SupportFormView(View):
     """
@@ -143,3 +164,5 @@ class DataLoadUploadIssueView(DataLoadIssueView):
     def issue_subject(self, context):
         username = context.get("submitting_user_name")
         return "%s requests data upload support" % username
+
+

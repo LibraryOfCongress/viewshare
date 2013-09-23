@@ -3,10 +3,9 @@ from django.contrib.syndication.views import Feed
 from django.utils.feedgenerator import Atom1Feed
 from django.core.urlresolvers import reverse
 
-from freemix.permissions import PermissionsRegistry
-from freemix.utils import get_user
+from freemix.exhibit.permissions import PermissionsRegistry
 from freemix.exhibit.models import Exhibit
-from freemix.utils import get_site_url
+from viewshare.utilities import get_site_url, get_user
 
 
 class ItemMixin:

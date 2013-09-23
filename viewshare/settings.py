@@ -79,7 +79,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'viewshare.urls'
 
 AUTHENTICATION_BACKENDS = (
-    'freemix.permissions.RegistryBackend',
+    'freemix.exhibit.permissions.RegistryBackend',
     'django.contrib.auth.backends.ModelBackend',
     )
 
@@ -118,7 +118,7 @@ INSTALLED_APPS = (
     'django_gravatar',
 
     # Freemix specific
-    'freemix',
+    'viewshare.utilities',
     'viewshare.apps.legacy.dataset',
     'freemix.exhibit',
     'viewshare.apps.augment',

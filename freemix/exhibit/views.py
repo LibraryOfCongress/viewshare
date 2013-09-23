@@ -15,12 +15,12 @@ from django.db.models import Q
 
 from freemix.exhibit import models, forms, serializers
 from freemix.exhibit.serializers import ExhibitPropertyListSerializer
-from freemix.permissions import PermissionsRegistry
-from freemix.utils import get_site_url
-from freemix.views import OwnerListView, OwnerSlugPermissionMixin, BaseJSONView
 
 
 # Exhibit Profile Views
+from viewshare.utilities.views import BaseJSONView, OwnerSlugPermissionMixin, OwnerListView
+
+
 def get_published_exhibit(request, owner, slug):
     if not hasattr(request, "exhibit"):
         request.exhibit = get_object_or_404(models.PublishedExhibit,
@@ -108,7 +108,7 @@ class PublishedExhibitDisplayView(PublishedExhibitView):
                               "owner": exhibit.owner,
                               "slug": exhibit.slug
                           })
-            context["exhibit_embed_url"] = get_site_url(url)
+            context["exhibit_embed_url"] = self.request.build_absolute_uri(url)
         return context
 
 
@@ -178,7 +178,7 @@ class PublishedExhibitDetailView(PublishedExhibitView):
             url = reverse('exhibit_embed_js',
                           kwargs={"owner": self.get_object().owner.username,
                                   "slug": self.get_object().slug})
-            url = get_site_url(url)
+            url = self.build_absolute_uri(url)
             ctx["exhibit_embed_url"] = url
         return ctx
 
@@ -211,6 +211,11 @@ class EmbeddedExhibitView(View):
         data = (models.PropertyData.objects
                                    .filter(exhibit_property__exhibit=exhibit)
                                    .values_list("json", flat=True))
+        link_url = reverse("exhibit_display", kwargs={
+            'owner': owner,
+            'slug': slug
+        })
+        link_url = request.build_absolute_uri(link_url)
         response = render(request, self.template_name, {
             "data": data,
             "title": exhibit.title,
@@ -218,9 +223,7 @@ class EmbeddedExhibitView(View):
             "metadata": json.dumps(metadata),
             "properties": json.dumps(property_serializer.data),
             "where": where,
-            "permalink": get_site_url(reverse("exhibit_display",
-                                              kwargs={'owner': owner,
-                                                      'slug': slug})),
+            "permalink": link_url,
             "canvas": canvas_html})
         response['Content-Type'] = "application/javascript"
         response['Cache-Control'] = "no-cache, must-revalidate, public"
@@ -581,7 +584,7 @@ class PropertyEditorView(DraftExhibitView):
     To remove:
         * this view
         * the property_editor url
-        * freemix/templates/exhibit/edit/property-editor.html 
+        * freemix/templates/exhibit/edit/property-editor.html
     """
 
     template_name="exhibit/edit/property-editor.html"

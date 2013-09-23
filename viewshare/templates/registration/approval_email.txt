@@ -1,4 +1,4 @@
-{%load freemix_helpers%}
+{%load viewshare_helpers%}
 Email: {{profile.user.email}}
 Username: {{profile.user.username}}
 

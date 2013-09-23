@@ -3,8 +3,8 @@ from django.views.generic.base import View
 from viewshare.apps.augment import models
 
 from viewshare.apps.upload.transform import RawTransformView, AkaraTransformClient
-from freemix.views import JSONResponse
 from viewshare.apps.augment import conf
+from viewshare.utilities.views import JSONResponse
 
 
 class JSONView(View):

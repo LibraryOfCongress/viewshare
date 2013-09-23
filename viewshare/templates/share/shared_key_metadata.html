@@ -1,6 +1,6 @@
 {% load url from future %}
 {% load i18n %}
-{% load freemix_helpers %}
+{% load viewshare_helpers %}
 {% url 'shared_exhibit_display' slug=key.slug as display_url %}
 
 <li class="shared_key_list_item result_set_item clearfix">
@@ -15,7 +15,7 @@
           {% endif %}
 	</a>
       </div>
-    </div>    
+    </div>
   </div>
   <div class="row-fluid">
     <div class="span12">
@@ -23,7 +23,7 @@
       <input type="text" value="{% site_url display_url %}" class="shared-key-url" readonly="readonly"/>
 
       <div class="shared-key-metadata">
-	{% trans "Created"%} 
+	{% trans "Created"%}
 	<div class="key-created-on">{{key.created|date:"N j, Y"}}</div>
 	{% trans "by" %}
 	<span class="exhibit-creator">

@@ -14,7 +14,7 @@ from freemix.exhibit.models import DraftExhibit, PublishedExhibit
 from viewshare.apps.vendor.friends.forms import InviteFriendForm
 from viewshare.apps.vendor.friends.models import (FriendshipInvitation,
                                                   Friendship)
-from freemix.permissions import PermissionsRegistry
+from freemix.exhibit.permissions import PermissionsRegistry
 
 from viewshare.apps.profiles.forms import ProfileForm
 

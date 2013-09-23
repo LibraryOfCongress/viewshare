@@ -3,7 +3,7 @@
 
 
 {% load i18n %}
-{% load freemix_helpers %}
+{% load viewshare_helpers %}
 {% load compress %}
 {% load cache %}
 
@@ -17,7 +17,7 @@
 {% block head_css %}
     {% compress css %}
     <link href="{{STATIC_URL}}freemix/css/bootstrap.css" rel="stylesheet" type="text/css" media="screen,projection" />
-    <link href="{{STATIC_URL}}freemix/css/bootstrap-responsive.css" rel="stylesheet" type="text/css" media="screen,projection" />    
+    <link href="{{STATIC_URL}}freemix/css/bootstrap-responsive.css" rel="stylesheet" type="text/css" media="screen,projection" />
     <link href="{{STATIC_URL}}viewshare/css/style.css" rel="stylesheet" type="text/css" media="screen,projection" />
     <link href="{{STATIC_URL}}viewshare/css/lc.css" rel="stylesheet" type="text/css" media="screen,projection" />
     <link href="{{STATIC_URL}}viewshare/css/base.css" rel="stylesheet" type="text/css" media="screen,projection" />
@@ -62,7 +62,7 @@
         <li><a href="{% url 'profile_detail' 'Guide' %}">Ask the Guide</a></li>
       </ul>
     </li><li class="divider-vertical"></li>
-    {% if user.is_staff %}<li><a href="/admin/" target="_blank"><i class="icon-cog"></i> {% trans "Admin" %}</a></li><li class="divider-vertical"></li>{% endif %} 
+    {% if user.is_staff %}<li><a href="/admin/" target="_blank"><i class="icon-cog"></i> {% trans "Admin" %}</a></li><li class="divider-vertical"></li>{% endif %}
     <li><a href="{% url 'acct_logout' %}">{% trans "Logout" %}</a></li>
     {% else %}
     <li><a href="{% url 'acct_login' %}">{% trans "Login" %}</a></li><li class="divider-vertical"></li>

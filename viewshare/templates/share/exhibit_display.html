@@ -4,7 +4,7 @@
 
 {% load i18n %}
 {% load exhibit_tags %}
-{% load freemix_helpers %}
+{% load viewshare_helpers %}
 {% load compress %}
 
 {% block head_title %}{{ object.title }}{% endblock %}
@@ -71,7 +71,7 @@
       <div class="exhibit-left exhibit-metadata">
         {% trans "This view was shared by"%} <span class="exhibit-creator">{{exhibit.owner.username}}</span>.
       </div>
-	
+
     </li>
   </ul>
 </div>

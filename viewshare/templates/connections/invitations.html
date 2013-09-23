@@ -3,7 +3,7 @@
 
 
 {% load i18n %}
-{% load freemix_helpers %}
+{% load viewshare_helpers %}
 
 {% block head_title %}{% trans "Invitations" %}{% endblock %}
 
@@ -32,7 +32,7 @@
 	<div class="span4">
 	  <div class="pull-right">
             {# <div class="invitation_message">{{ invitation.message }}</div> #}
-	    
+
             <form method="post" action="">
               {% csrf_token %}
               <input type="hidden" name="invitation" value="{{ invitation.id }}"/>
@@ -43,7 +43,7 @@
 	</div>
       </div>
     </div>
-    
+
     {% else %}
 
     <div class="invitation alert alert-info">
@@ -54,14 +54,14 @@
       </div>
     </div>
 
-    {% endifequal %}        
-    
+    {% endifequal %}
+
     {% endfor %}
-    
+
   </div>
-  
+
   {% else %}
-  
+
   <div class="invitation">
     <div class="invitation-item row-fluid">
       <div class="span12">
@@ -69,11 +69,11 @@
       </div>
     </div>
   </div>
-  
+
   {% endif %}
 
 </div>
-    
+
 <h3 class="invitation-header">{% trans "Requests Sent" %}</h3>
 
 <div class="invitation_set">
@@ -81,7 +81,7 @@
   {% if invites_sent %}
 
   {% for invitation in invites_sent %}
-  
+
   <div class="invitation alert alert-info">
     <div class="invitation-item row-fluid">
       <div class="span12">
@@ -93,9 +93,9 @@
       </div>
     </div>
   </div>
-  
+
   {% endfor %}
-  
+
   {% else %}
 
   <div class="invitation">
@@ -105,9 +105,9 @@
       </div>
     </div>
   </div>
-    
+
   {% endif %}
 
 </div>
-    
+
 {% endblock %}

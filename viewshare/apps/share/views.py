@@ -8,11 +8,13 @@ from django.views.generic.edit import CreateView
 from viewshare.apps.share import models
 from freemix.exhibit.models import PublishedExhibit, PropertyData
 from freemix.exhibit.serializers import ExhibitPropertyListSerializer
-from freemix.views import BaseJSONView
 from viewshare.apps.share import forms
 import json
 
 # The last_modified decorator requires a function
+from viewshare.utilities.views import BaseJSONView
+
+
 def _exhibit_modified(r, *a, **kwa):
     qs = models.SharedExhibitKey.objects.filter(slug=kwa["slug"])
     qs = qs.values_list("exhibit__modified", flat=True)[0]

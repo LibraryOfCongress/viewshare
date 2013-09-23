@@ -1,7 +1,7 @@
 from django import template
 from freemix.exhibit.models import PublishedExhibit
 from viewshare.apps.vendor.friends.models import Friendship
-from freemix.permissions import PermissionsRegistry
+from freemix.exhibit.permissions import PermissionsRegistry
 
 
 register = template.Library()

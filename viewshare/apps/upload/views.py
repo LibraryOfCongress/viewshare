@@ -2,7 +2,7 @@ import logging
 import urllib2
 from django.core.urlresolvers import reverse
 from django.http import (Http404, HttpResponseRedirect,
-                         HttpResponseServerError, HttpResponse)
+                         HttpResponse)
 from django.shortcuts import get_object_or_404, render
 from django.utils.translation import ugettext_lazy as _
 
@@ -12,12 +12,11 @@ from django.views.decorators.cache import cache_page
 from django.views.generic.base import View
 from django.views.generic.edit import CreateView, UpdateView
 from freemix.exhibit.models import TX_STATUS
-from freemix.permissions import PermissionsRegistry
 
 from viewshare.apps.upload.transform import AkaraTransformClient
-from freemix.views import JSONResponse
 from viewshare.apps.upload import forms, conf
 from viewshare.apps.upload import models
+from viewshare.utilities.views import JSONResponse
 
 
 class CreateDataSourceView(CreateView):
