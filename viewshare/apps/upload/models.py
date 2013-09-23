@@ -11,11 +11,9 @@ from django.utils.translation import ugettext_lazy as _
 from django_extensions.db.fields import UUIDField
 from django_extensions.db.models import TimeStampedModel
 
-from freemix.exhibit.models import (
+from viewshare.apps.exhibit.models import (
     DataTransaction,
     Exhibit,
-    ExhibitProperty,
-    PropertyData,
     PublishedExhibit
 )
 from viewshare.apps.upload.transform import (AkaraTransformClient,
@@ -373,7 +371,7 @@ class UploadTransaction(DataTransaction):
         Validate, parse, and save transformed data. This data is coming
         from Akara.
         """
-        from freemix.exhibit import serializers
+        from viewshare.apps.exhibit import serializers
         source = self.source.get_concrete()
         try:
 

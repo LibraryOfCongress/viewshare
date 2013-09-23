@@ -40,7 +40,7 @@ urlpatterns = patterns('',
 
     (r'^upload/', include('viewshare.apps.upload.urls')),
 
-    (r'^views/', include('freemix.exhibit.urls')),
+    (r'^views/', include('viewshare.apps.exhibit.urls')),
     (r'^augment/', include('viewshare.apps.augment.urls')),
     (r'^share/', include('viewshare.apps.share.urls')),
 

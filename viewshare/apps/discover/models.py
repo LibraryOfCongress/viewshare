@@ -4,7 +4,7 @@ from django.db import models
 from curation.models import CuratedGroup, CuratedItem
 from curation.fields import CuratedForeignKey
 
-from freemix.exhibit.models import PublishedExhibit
+from viewshare.apps.exhibit.models import PublishedExhibit
 
 
 class CuratedExhibitCollection(CuratedGroup):

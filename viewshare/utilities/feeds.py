@@ -3,8 +3,8 @@ from django.contrib.syndication.views import Feed
 from django.utils.feedgenerator import Atom1Feed
 from django.core.urlresolvers import reverse
 
-from freemix.exhibit.permissions import PermissionsRegistry
-from freemix.exhibit.models import Exhibit
+from viewshare.apps.exhibit.permissions import PermissionsRegistry
+from viewshare.apps.exhibit.models import Exhibit
 from viewshare.utilities import get_site_url, get_user
 
 

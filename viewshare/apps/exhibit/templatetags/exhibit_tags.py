@@ -1,5 +1,5 @@
 from django import template
-from freemix.exhibit import conf
+from viewshare.apps.exhibit import conf
 
 register = template.Library()
 

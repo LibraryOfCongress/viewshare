@@ -1,5 +1,5 @@
 from django.db.models import Q
-from freemix.exhibit import models
+from viewshare.apps.exhibit import models
 
 
 class Serializer(object):

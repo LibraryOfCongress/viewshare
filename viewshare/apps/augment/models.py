@@ -1,11 +1,9 @@
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 from django.conf import settings
 from django.db import models
 from django_extensions.db.models import TitleSlugDescriptionModel
 from django.utils.translation import ugettext_lazy as _
-
-from freemix.exhibit.models import DataTransaction
 
 
 UNSAVED_DATASOURCE_LIFESPAN = getattr(settings, "UNSAVED_DATASOURCE_LIFESPAN",
