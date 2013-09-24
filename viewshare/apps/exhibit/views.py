@@ -178,7 +178,7 @@ class PublishedExhibitDetailView(PublishedExhibitView):
             url = reverse('exhibit_embed_js',
                           kwargs={"owner": self.get_object().owner.username,
                                   "slug": self.get_object().slug})
-            url = self.build_absolute_uri(url)
+            url = self.request.build_absolute_uri(url)
             ctx["exhibit_embed_url"] = url
         return ctx
 
