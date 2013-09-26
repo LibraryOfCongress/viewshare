@@ -3,10 +3,12 @@ define(
     [
         'jquery',
         'models/property',
+        'observer'
     ],
     function (
         $,
-        PropertyModel
+        PropertyModel,
+        Observer
     ) {
     'use strict';
 
@@ -18,6 +20,7 @@ define(
      * create this CompositeProperty
      */
     var CompositePropertyModel = function(options) {
+        this.Observer = new Observer().Observer;
         this.initialize.apply(this, [options]);
     };
 
@@ -26,7 +29,13 @@ define(
             PropertyModel.prototype.initialize.apply(this, [options]);
             this.augmentation = options.augmentation;
             this.composite = options.composite;
-            this.statusURL =  + this.dataURL + '/status/';
+            this.setApiUrls();
+        },
+
+        /** Calculate the URLs used for API calls */
+        setApiUrls: function() {
+            PropertyModel.prototype.setApiUrls.apply(this, []);
+            this.statusURL = this.dataURL + 'status/';
         },
 
         /**
@@ -69,7 +78,7 @@ define(
                 );
             } else if ('have not finished processing' === 'true') {
                 // poll for status updates
-                setTimeout(this.augmentDataSuccess.apply(this, []), 5000);
+                setTimeout(this.augmentDataSuccess.bind(this), 5000);
             }
         },
 

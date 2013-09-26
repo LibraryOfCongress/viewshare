@@ -103,8 +103,9 @@ define(
             }
             errors = newProperty.validate(this.model.propertyLabels());
             if ($.isEmptyObject(errors)) {
-                newProperty.augmentData();
                 this.$el.modal('hide');
+                return newProperty.updateProperty()
+                .done(newProperty.augmentData.bind(newProperty));
             } else {
                 // display client-side form validation errors
                 this.$el.find('.modal-body').animate({scrollTop: 0}, 'fast');

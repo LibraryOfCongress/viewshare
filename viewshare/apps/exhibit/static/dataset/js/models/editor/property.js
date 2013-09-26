@@ -36,15 +36,29 @@ define(
 
     $.extend(PropertyModel.prototype, {
         initialize: function(options) {
-            this.id = options.id;
+            this._id = options.id;
             this.label = options.label;
             this.type = options.type;
             this.items = options.items;
             this.currentItemIndex = null;
             this.owner = options.owner;
             this.slug = options.slug;
-            this.propertyURL = '/views/' + this.owner + '/' + this.slug + '/draft/properties/' + this.id + '/';
+            this.setApiUrls();
+        },
+
+        /** Calculate the URLs used for API calls */
+        setApiUrls: function() {
+            this.propertyURL = '/views/' + this.owner + '/' + this.slug + '/draft/properties/' + this._id + '/';
             this.dataURL = this.propertyURL + 'data/';
+        },
+
+        /** Getter/Setter for this._id */
+        id: function(value) {
+            if (value) {
+                this._id = value;
+                this.setApiUrls();
+            }
+            return this._id;
         },
 
         /** Return the current value from this.items. */
@@ -112,8 +126,8 @@ define(
             if (dataJSON.items.length > 0) {
                 for (var i = 0; i < dataJSON.items.length; ++i) {
                     newItem = {
-                        id: dataJSON.items[i].id,
-                        value: dataJSON.items[i][this.id]
+                        id: dataJSON.items[i]._id,
+                        value: dataJSON.items[i][this._id]
                     };
                     this.items.push(newItem);
                 }
@@ -147,6 +161,8 @@ define(
                 errors.name = 'Please enter a name for the new property.';
             } else if (existingNames.indexOf(this.label) >= 0) {
                 errors.name = 'Please enter a unique property name.';
+            } else if (this.label.match(/[^\sa-zA-Z0-9]/)) {
+                errors.name = 'Property name can only contain letters, numbers, and spaces.';
             }
             return errors;
         },
@@ -154,7 +170,7 @@ define(
         /** Return a simple object representation of this Property */
         toJSON: function() {
             return {
-                id: this.id,
+                id: this._id,
                 valueType: this.type,
                 label: this.label
             };
