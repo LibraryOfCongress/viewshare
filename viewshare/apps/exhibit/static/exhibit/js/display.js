@@ -1,4 +1,4 @@
-(function($, Freemix) {
+define(["freemix/js/lib/jquery", "freemix/js/freemix"], function($, Freemix) {
     "use strict";
 
     $.fn.generateExhibitHTML = function(model) {
@@ -56,4 +56,4 @@
     };
 
 
-})(window.Freemix.jQuery, window.Freemix);
+});

@@ -1,4 +1,4 @@
-(function ($, Freemix, Exhibit) {
+define(["freemix/js/lib/jquery", "exhibit"], function($, Exhibit) {
     "use strict";
 
     // Monkey patch formatters
@@ -67,7 +67,7 @@
     };
 
     // Hide the "Items" tag for item counts
-    $("body").live('rendered.exhibit', function() {
+    $("body").on('rendered.exhibit', function() {
         var extype = window.exhibit._database._types['Item'];
         extype._custom.label = "";
         extype._custom.pluralLabel = "";
@@ -76,4 +76,4 @@
         }).remove();
 
     });
-}(window.Freemix.jQuery, window.Freemix, window.Exhibit));
+});

@@ -1,5 +1,8 @@
 var exhibit;
-(function($, Freemix) {
+
+define([
+    "freemix/js/lib/jquery", "exhibit", "./freemix"
+], function($, Exhibit, Freemix) {
     "use strict";
 
     $.fn.createExhibit = function() {
@@ -7,7 +10,6 @@ var exhibit;
             exhibit = Exhibit.create(Freemix.exhibit.database);
             exhibit.configureFromDOM(this);
             $('body').trigger('rendered.exhibit');
-
         });
     };
 
@@ -96,4 +98,4 @@ var exhibit;
 
         }
     };
-})(window.Freemix.jQuery, window.Freemix);
+});

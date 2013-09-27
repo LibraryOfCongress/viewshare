@@ -1,10 +1,10 @@
-var Freemix = window.Freemix || {};
-Freemix.jQuery = window.jQuery;
-window.Freemix = Freemix;
-
-(function($) {
+define(["freemix/js/lib/jquery"], function($) {
     "use strict";
+    var Freemix = window.Freemix || {};
+    Freemix.jQuery = window.jQuery;
+    window.Freemix = Freemix;
     Freemix.getTemplate = function (template) {
         return $($("#" + template).html());
     };
-})(window.Freemix.jQuery);
+    return Freemix;
+});
