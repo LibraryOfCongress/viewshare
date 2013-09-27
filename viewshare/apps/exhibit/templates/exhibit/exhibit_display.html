@@ -35,8 +35,6 @@
         <script type="text/javascript"
                 src="{{ STATIC_URL }}freemix/js/lib/jquery.highlight.js"></script>
         <script type="text/javascript"
-                src="{{ STATIC_URL }}exhibit/js/display.js"></script>
-        <script type="text/javascript"
                 src="{{ STATIC_URL }}exhibit/js/detail.js"></script>
 
         <script type="text/javascript">
@@ -61,18 +59,6 @@
                     src="{{ STATIC_URL }}share/js/share_dialog.js"></script>
         {% endcompress %}
     {% endif %}
-
-    {% autoescape off %}
-        <script type="text/javascript">
-            (function ($, Freemix) {
-
-                $(document).ready(function () {
-                    Freemix.initialize();
-                });
-
-            })(window.Freemix.jQuery, window.Freemix);
-        </script>
-    {% endautoescape %}
 {% endblock extra_scripts %}
 
 
