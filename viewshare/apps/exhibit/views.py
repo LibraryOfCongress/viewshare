@@ -198,21 +198,17 @@ class EmbeddedExhibitView(View):
 
         canvas = exhibit.canvas
         canvas_html = render_to_string(canvas.location, {}).replace("\n", " ")
-        property_serializer = ExhibitPropertyListSerializer(exhibit)
-        data = (models.PropertyData.objects
-                                   .filter(exhibit_property__exhibit=exhibit)
-                                   .values_list("json", flat=True))
+        data = exhibit.merge_data()
         link_url = reverse("exhibit_display", kwargs={
             'owner': owner,
             'slug': slug
         })
         link_url = request.build_absolute_uri(link_url)
         response = render(request, self.template_name, {
-            "data": data,
-            "title": exhibit.title,
-            "description": exhibit.description,
+            "data": json.dumps(data),
+            "title": json.dumps(exhibit.title),
+            "description": json.dumps(exhibit.description),
             "metadata": json.dumps(metadata),
-            "properties": json.dumps(property_serializer.data),
             "where": where,
             "permalink": link_url,
             "canvas": canvas_html})
