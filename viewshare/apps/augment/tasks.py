@@ -2,14 +2,13 @@ from celery.task import task
 
 
 @task
-def transform_datasource(transaction_id):
+def augment_property(id):
     """
-    Handles creating a DataSourceTransaction for a valid DataSource. Reports
-    updates to dataset.views.DataSourceTransactionView.
+    Runs an augmentation on a particular property
     """
     from .models import AugmentTransaction
     # TODO: get the correct AugmentTransaction
-    tx = AugmentTransaction.objects.get(tx_id=transaction_id)
+    tx = AugmentTransaction.objects.get(id=id)
     tx.run()
     return tx
 
