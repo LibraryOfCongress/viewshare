@@ -32,8 +32,6 @@ define(
                 label: undefined,
                 type: 'location',
                 value: [],
-                owner: options.propertyCollection.owner,
-                slug: options.propertyCollection.slug,
                 augmentation: 'location',
                 composite: []
             });

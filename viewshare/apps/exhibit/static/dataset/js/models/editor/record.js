@@ -4,7 +4,7 @@ define(
    'jquery',
    'models/composite-property',
    'models/property',
-    'observer',
+    'observer'
   ], function (
     $,
     CompositePropertyModel,

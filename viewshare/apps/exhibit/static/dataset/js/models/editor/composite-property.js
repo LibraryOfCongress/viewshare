@@ -35,7 +35,6 @@ define(
         /** Calculate the URLs used for API calls */
         setApiUrls: function() {
             PropertyModel.prototype.setApiUrls.apply(this, []);
-            this.statusURL = this.dataURL + 'status/';
         },
 
         /**
@@ -114,8 +113,8 @@ define(
         /** Return a simple object representation of this Property */
         toJSON: function() {
             var jsonProperty = PropertyModel.prototype.toJSON.apply(this, []);
-            jsonProperty.augmentation = this.augmentation;
-            jsonProperty.composite = this.composite;
+            jsonProperty[this._id].augmentation = this.augmentation;
+            jsonProperty[this._id].composite = this.composite;
             return jsonProperty;
         }
     });

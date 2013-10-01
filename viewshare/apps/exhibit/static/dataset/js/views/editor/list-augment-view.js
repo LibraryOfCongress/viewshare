@@ -34,8 +34,6 @@ define(
                 label: undefined,
                 type: 'text',
                 value: [],
-                owner: options.propertyCollection.owner,
-                slug: options.propertyCollection.slug,
                 augmentation: '',
                 composite: []
             });

@@ -18,8 +18,6 @@ define(
      * @param {string} options.id - ID of the property
      * @param {string} options.label - Label for display purposes
      * @param {string} options.type - Type of the property.
-     * @param {string} options.owner - URL to access type-related data
-     * @param {string} options.slug - URL to access value-related data
      * Current types include:
      * * text
      * * URL
@@ -41,15 +39,15 @@ define(
             this.type = options.type;
             this.items = options.items;
             this.currentItemIndex = null;
-            this.owner = options.owner;
-            this.slug = options.slug;
             this.setApiUrls();
         },
 
         /** Calculate the URLs used for API calls */
         setApiUrls: function() {
-            this.propertyURL = '/views/' + this.owner + '/' + this.slug + '/draft/properties/' + this._id + '/';
-            this.dataURL = this.propertyURL + 'data/';
+            var urls = $("link[rel='freemix/property'][freemix-property='" + this._id + "']");
+            this.propertyURL = urls.attr("href");
+            this.dataURL = urls.attr("freemix-data");
+            this.statusURL = urls.attr("freemix-property-status");
         },
 
         /** Getter/Setter for this._id */
@@ -88,7 +86,7 @@ define(
             var xhr = $.ajax({
                 type: "PUT",
                 url: this.propertyURL,
-                data: JSON.stringify(this.toJSON()),
+                data: JSON.stringify(this.toJSON())
             })
             .done(this.updatePropertySuccess.bind(this))
             .fail(this.updatePropertyError.bind(this));
@@ -169,11 +167,15 @@ define(
 
         /** Return a simple object representation of this Property */
         toJSON: function() {
-            return {
+            var result = {}
+            result[this._id] = {
+
                 id: this._id,
                 valueType: this.type,
                 label: this.label
-            };
+            }
+            return result;
+
         }
     });
 
