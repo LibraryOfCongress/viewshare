@@ -16,9 +16,10 @@ from django.db.models import Q
 from viewshare.apps.exhibit import models, forms, serializers
 from viewshare.apps.exhibit.serializers import ExhibitPropertyListSerializer
 
-
 # Exhibit Profile Views
-from viewshare.utilities.views import BaseJSONView, OwnerSlugPermissionMixin, OwnerListView
+from viewshare.utilities.views import (BaseJSONView,
+                                       OwnerSlugPermissionMixin,
+                                       OwnerListView)
 
 
 def get_published_exhibit(request, owner, slug):
@@ -33,6 +34,7 @@ def get_exhibit_modified(request, *args, **kwargs):
                                  kwargs["owner"],
                                  kwargs["slug"]).modified
 exhibit_last_modified = last_modified(get_exhibit_modified)
+
 
 class ExhibitDetailEditView(OwnerSlugPermissionMixin, UpdateView):
     form_class = forms.UpdateExhibitDetailForm
@@ -100,8 +102,6 @@ class PublishedExhibitDisplayView(PublishedExhibitView):
         context["can_embed"] = can_embed
         context["can_share"] = user.has_perm("exhibit.can_share", exhibit)
 
-        context["property_data_urls"] = exhibit.properties.get_data_urls()
-
         if can_embed:
             url = reverse('exhibit_embed_js',
                           kwargs={
@@ -143,23 +143,14 @@ class PublishedExhibitJSONView(BaseJSONView):
         return cache_control
 
 
-class PublishedExhibitPropertiesListView(PublishedExhibitJSONView):
+class PublishedExhibitDataView(PublishedExhibitJSONView):
+    """
+    Return a cached representation of all exhibit data and properties.
+
+    TODO: Actually implement X-Accel-Redirect caching
+    """
     def get_doc(self):
-        qs = self.get_parent_object().properties.all()
-        serializer = ExhibitPropertyListSerializer(self.get_parent_object,
-                                                   queryset=qs)
-        return json.dumps({"properties": serializer.data})
-
-
-class PublishedExhibitPropertyDataView(PublishedExhibitJSONView):
-    def get_doc(self):
-        q = Q(exhibit_property__exhibit=self.get_parent_object(),
-              exhibit_property__name=self.kwargs["property"])
-        values = models.PropertyData.objects.filter(q).values_list("json")
-
-        if len(values) == 0:
-            return '{"items": []}'
-        return '{"items": ' + values[0][0] + "}"
+        return json.dumps(self.get_parent_object().merge_data())
 
 
 class PublishedExhibitDetailView(PublishedExhibitView):
@@ -346,7 +337,7 @@ class DraftExhibitPropertiesListView(DraftExhibitView, BaseJSONView):
         return response
 
 
-class DraftExhibitPropertiesJSONView(DraftExhibitView, BaseJSONView):
+class DraftExhibitPropertyJSONView(DraftExhibitView, BaseJSONView):
     def get_doc(self):
         # Return the JSON description of the desired property
 
@@ -367,13 +358,18 @@ class DraftExhibitPropertiesJSONView(DraftExhibitView, BaseJSONView):
         except ValueError:
             return HttpResponseBadRequest("Not a JSON document")
         exhibit = self.get_parent_object()
+        prop_name = self.kwargs["property"]
+        description = data.get(prop_name, None)
+        if not description:
+            return HttpResponseBadRequest("No property description "
+                                          "for %s" % prop_name)
 
-        serializer_class = serializers.get_serializer_type_by_dict(data)
-        self.serializer = serializer_class(exhibit, data['id'], data=data)
+        serializer_class = serializers.get_serializer_type_by_dict(description)
+        serializer = serializer_class(exhibit, prop_name, data=description)
 
-        if not self.serializer.is_valid():
-            return HttpResponseBadRequest("<br/>".join(self.serializer.errors))
-        self.serializer.save()
+        if not serializer.is_valid():
+            return HttpResponseBadRequest("<br/>".join(serializer.errors))
+        serializer.save()
         return HttpResponse("OK")
 
     def put(self, request, *args, **kwargs):
@@ -400,8 +396,48 @@ class DraftExhibitPropertyDataView(DraftExhibitView, BaseJSONView):
         q = self.get_query_args()
         values = models.PropertyData.objects.filter(q).values_list("json")
         if len(values) == 0:
-            return '{"items": []}'
+            return None
         return '{"items": ' + values[0][0] + "}"
+
+    def get(self, request, *args, **kwargs):
+        """
+        Return the JSON document representing the data for the property.
+
+        In the event that there is no data, the following will be returned:
+          * For a simple, unaugmentable property: `404`
+          * For an augmentable property, an augmentation transaction will
+            be created and a link to the status of the transaction will
+            be returned in the `Location` header.  The status code of the
+            response will be `202`, indicating ongoing processing.  The
+            status link should be polled until a success or failure is
+            indicated, at which point this URL will return the appropriate
+            response.  In the event of an augmentation failure, this
+            endpoint will return an empty Exhibit data document.
+        """
+        if not self.check_perms():
+            raise Http404
+
+        result = self.get_doc()
+        if not result:
+            #TODO create or retrieve augmentation transaction
+            status_url = reverse('draft_exhibit_property_status',
+                                 kwargs={
+                                     'owner': request.kwargs["owner"],
+                                     'slug': request.kwargs["slug"],
+                                     'property': request.kwargs["property"]
+                                 })
+            content = "{'augmentation_status': %s}" % status_url
+
+            response = HttpResponse(content=content, status=202)
+            response["Content-Type"]
+            response["Location"] = status_url
+        else:
+            response = HttpResponse(result)
+
+        response["Content-Type"] = "application/json"
+        response["Expires"] = 0
+        response["Cache-Control"] = self.cache_control_header()
+        return response
 
     def post(self, request, *args, **kwargs):
         if not self.check_perms():
@@ -434,6 +470,16 @@ class DraftExhibitPropertyDataView(DraftExhibitView, BaseJSONView):
             raise Http404()
         models.PropertyData.objects.filter(self.get_query_args()).delete()
         return HttpResponse("OK")
+
+
+class DraftExhibitAllDataView(DraftExhibitView, BaseJSONView):
+    """
+    Return a cached representation of all exhibit data and properties.
+
+    TODO: Actually implement X-Accel-Redirect caching
+    """
+    def get_doc(self):
+        return json.dumps(self.get_parent_object().merge_data())
 
 
 class DraftExhibitPropertyDataStatusView(DraftExhibitView):
@@ -623,3 +669,4 @@ class PropertyEditorView(DraftExhibitView):
         context["can_edit"] = user.has_perm("exhibit.can_edit", exhibit)
         context["can_delete"] = user.has_perm("exhibit.can_delete", exhibit)
         return render(request, self.template_name, context)
+

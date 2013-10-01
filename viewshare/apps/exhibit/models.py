@@ -102,6 +102,32 @@ class Exhibit(TimeStampedModel):
             return self.draftexhibit
         return self.publishedexhibit.get_draft()
 
+    def merge_data(self):
+        qs = self.properties.all()
+
+        from viewshare.apps.exhibit.serializers import ExhibitPropertyListSerializer
+        serializer = ExhibitPropertyListSerializer(self,
+                                                   queryset=qs)
+
+        q = models.Q(exhibit_property__exhibit=self)
+        data = PropertyData.objects.filter(q)
+
+        records = {}
+
+        for property_data in data.all():
+            prop = property_data.exhibit_property.name
+            for item in property_data.json:
+                key = (item["id"], item["label"])
+                record = records.get(key, None)
+                if not record:
+                    record = {"id": item["id"], "label": item["label"]}
+                    records[key] = record
+                record[prop] = item[prop]
+        return {
+            "properties": serializer.data,
+            "items": [records[key] for key in records.keys()]
+        }
+
 
 class PublishedExhibit(Exhibit):
     """

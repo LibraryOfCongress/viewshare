@@ -39,8 +39,8 @@
                   <span class="exhibit-modified-data">{{exhibit.modified|naturalday}}</span>
                   {% trans "by" %}
                   <span class="exhibit-creator">
-		    <a href="{% url 'profile_detail' exhibit.owner.username %}">{{exhibit.owner.username}}</a>
-		  </span>
+                    <a href="{% url 'profile_detail' exhibit.owner.username %}">{{exhibit.owner.username}}</a>
+                  </span>
                 </div>
               </div>
               <div class="span6">
@@ -67,6 +67,7 @@
     <div id="notifications"></div>
     <div id="editor"></div>
   </div>
+</div> <!-- .exhibit-edit -->
 {% endblock body %}
 
 {% block extra_scripts %}
