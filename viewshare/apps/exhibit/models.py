@@ -421,7 +421,7 @@ class DataTransaction(TimeStampedModel):
     is_complete = models.BooleanField(default=False)
     result = models.TextField(null=True, blank=True)
 
-    class meta:
+    class Meta:
         abstract = True
 
     def __init__(self, *args, **kwargs):
