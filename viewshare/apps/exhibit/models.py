@@ -3,7 +3,6 @@ import logging
 import uuid
 
 from django.contrib.auth.models import User
-from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db import transaction as db_tx
@@ -123,17 +122,19 @@ class PublishedExhibit(Exhibit):
         return self.title
 
     def get_draft(self):
-        try:
-            return self.draftexhibit
-        except ObjectDoesNotExist:
-            pass
-        draft = DraftExhibit.objects.create(parent=self,
-                                            slug=self.slug,
-                                            profile=self.profile,
-                                            canvas=self.canvas,
-                                            owner=self.owner,
-                                            is_draft=True)
-        draft.save()
+
+        defaults = {
+            'slug': self.slug,
+            'profile': self.profile,
+            'canvas': self.canvas,
+            'owner': self.owner,
+            'is_draft': True,
+        }
+
+        draft, created = DraftExhibit.objects.get_or_create(parent=self,
+                                                            defaults=defaults)
+        if not created:
+            return draft
 
         from viewshare.apps.exhibit.serializers import ExhibitPropertyListSerializer
         data = ExhibitPropertyListSerializer(self,
