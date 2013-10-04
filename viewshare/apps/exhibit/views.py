@@ -342,7 +342,8 @@ class DraftExhibitPropertyJSONView(DraftExhibitView, BaseJSONView):
 
         prop = get_object_or_404(exhibit.properties.all(), name=prop_name)
         serializer_class = serializers.serializer_class_keys[prop.classname]
-        serializer = serializer_class(exhibit, prop_name, instance=prop)
+        serializer = serializer_class(exhibit, prop_name,
+                                      instance=prop, draft=True)
 
         return json.dumps(serializer.data)
 
@@ -361,7 +362,9 @@ class DraftExhibitPropertyJSONView(DraftExhibitView, BaseJSONView):
                                           "for %s" % prop_name)
 
         serializer_class = serializers.get_serializer_type_by_dict(description)
-        serializer = serializer_class(exhibit, prop_name, data=description)
+        serializer = serializer_class(exhibit, prop_name,
+                                      data=description,
+                                      draft=True)
 
         if not serializer.is_valid():
             return HttpResponseBadRequest("<br/>".join(serializer.errors))

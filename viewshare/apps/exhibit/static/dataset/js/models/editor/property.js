@@ -37,24 +37,21 @@ define(
             this._id = options.id;
             this.label = options.label;
             this.type = options.type;
-            this.items = options.items;
+            this.items = options.items || [];
             this.currentItemIndex = null;
-            this.setApiUrls();
-        },
-
-        /** Calculate the URLs used for API calls */
-        setApiUrls: function() {
-            var urls = $("link[rel='freemix/property'][freemix-property='" + this._id + "']");
-            this.propertyURL = urls.attr("href");
-            this.dataURL = urls.attr("freemix-data");
-            this.statusURL = urls.attr("freemix-property-status");
+            if (options.hasOwnProperty('property_url')) {
+                this.propertyURL = options.property_url;
+            }
+            if (options.hasOwnProperty('data_url')) {
+                this.dataURL = options.data_url;
+            }
         },
 
         /** Getter/Setter for this._id */
         id: function(value) {
             if (value) {
                 this._id = value;
-                this.setApiUrls();
+//                this.setApiUrls();
             }
             return this._id;
         },

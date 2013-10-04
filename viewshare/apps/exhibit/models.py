@@ -162,9 +162,10 @@ class PublishedExhibit(Exhibit):
         if not created:
             return draft
 
-        from viewshare.apps.exhibit.serializers import ExhibitPropertyListSerializer
+        from .serializers import ExhibitPropertyListSerializer
         data = ExhibitPropertyListSerializer(self,
-                                             queryset=self.properties).data
+                                             queryset=self.properties,
+                                             draft=True).data
         out = ExhibitPropertyListSerializer(draft, data=data)
         out.save()
 
@@ -359,6 +360,14 @@ class ExhibitProperty(models.Model):
             "slug": self.slug
         })
 
+    def get_related_properties(self):
+        """
+        Return the list of all properties that this property depends on
+
+        Augmented property types should override this.
+        """
+        return []
+
 
 class CompositeProperty(ExhibitProperty):
     """
@@ -370,6 +379,9 @@ class CompositeProperty(ExhibitProperty):
     composite = models.ManyToManyField(ExhibitProperty,
                                        through='PropertyReference',
                                        related_name="+")
+
+    def get_related_properties(self):
+        return self.composite.all()
 
 
 class PropertyReference(models.Model):
@@ -399,6 +411,9 @@ class ShreddedListProperty(ExhibitProperty):
 
     class Meta:
         abstract = True
+
+    def get_related_properties(self):
+        return [self.source]
 
 
 class DelimitedListProperty(ShreddedListProperty):

@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.db.models import Q
 from viewshare.apps.exhibit import models
 
@@ -26,7 +27,8 @@ class ExhibitPropertySerializer(Serializer):
 
     model = models.ExhibitProperty
 
-    def __init__(self, exhibit, property_name, instance=None, data=None):
+    def __init__(self, exhibit, property_name, instance=None, data=None,
+                 draft=False):
         self._exhibit = exhibit
         self._property_name = property_name
         if not instance:
@@ -37,6 +39,8 @@ class ExhibitPropertySerializer(Serializer):
                 self._instance = None
         else:
             self._instance = instance
+
+        self._draft = draft or exhibit.is_draft
         self._data = data
         self._errors = None
 
@@ -65,11 +69,28 @@ class ExhibitPropertySerializer(Serializer):
     @property
     def data(self):
         if not self._data:
-            self._data = {
-                "valueType": self._instance.value_type,
-                "label": self._instance.label
-            }
+            self._data = self.filtered_data
+            if self._draft:
+                kwargs = {
+                    "owner": self._exhibit.owner.username,
+                    "slug": self._exhibit.slug,
+                    "property": self._instance.name
+                }
+                property_url = reverse('draft_exhibit_property_json',
+                                       kwargs=kwargs)
+                data_url = reverse('draft_exhibit_property_data',
+                                   kwargs=kwargs)
+                self._data["property_url"] = property_url
+                self._data["data_url"] = data_url
+
         return self._data
+
+    @property
+    def filtered_data(self):
+        return {
+            "valueType": self._instance.value_type,
+            "label": self._instance.label
+        }
 
     def validate(self):
         valid = True
@@ -287,7 +308,7 @@ class ExhibitPropertyListSerializer(Serializer):
     them based on their expected property type
     """
 
-    def __init__(self, exhibit, queryset=None, data=None):
+    def __init__(self, exhibit, queryset=None, data=None, draft=False):
         self.exhibit = exhibit
         if not queryset:
             queryset = exhibit.properties.all()
@@ -295,6 +316,7 @@ class ExhibitPropertyListSerializer(Serializer):
         self._data = data
         self._serializers = None
         self._errors = None
+        self._draft = draft or exhibit.is_draft
 
     @property
     def serializers(self):
@@ -309,7 +331,8 @@ class ExhibitPropertyListSerializer(Serializer):
                     serializer_class = get_serializer_type_by_dict(data)
                     serializer = serializer_class(self.exhibit,
                                                   key,
-                                                  data=data)
+                                                  data=data,
+                                                  draft=self._draft)
                     self._serializers[key] = serializer
             elif self._queryset:
                 for p in self._queryset.all():
@@ -317,7 +340,8 @@ class ExhibitPropertyListSerializer(Serializer):
                     serializer_class = serializer_class_keys[p.classname]
                     serializer = serializer_class(self.exhibit,
                                                   p.name,
-                                                  instance=p)
+                                                  instance=p,
+                                                  draft=self._draft)
                     self._serializers[p.name] = serializer
         return self._serializers
 

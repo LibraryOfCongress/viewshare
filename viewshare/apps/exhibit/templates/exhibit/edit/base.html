@@ -19,14 +19,7 @@
 {% block head_data %}
     <link rel="exhibit/data" href="{% url 'draft_exhibit_all_data' owner=exhibit.owner slug=exhibit.slug %}"/>
     <link rel="freemix/exhibit_profile" href="{{ exhibit_profile_url }}"/>
-    <link rel="freemix/property_list" href="{% url 'draft_exhibit_property_list' owner=exhibit.owner.username slug=exhibit.slug %}"
-    {% for prop in exhibit.properties.all %}
-    <link rel="freemix/property"
-          freemix-property="{{ prop.name }}"
-          href="{% url 'draft_exhibit_property_json' owner=exhibit.owner.username slug=exhibit.slug property=prop.name %}"
-          freemix-data="{% url 'draft_exhibit_property_data' owner=exhibit.owner.username slug=exhibit.slug property=prop.name %}"
-          freemix-property-status="{% url 'draft_exhibit_property_status' owner=exhibit.owner.username slug=exhibit.slug property=prop.name %}"/>
-    {% endfor %}
+    <link rel="freemix/property_list" href="{% url 'draft_exhibit_property_list' owner=exhibit.owner.username slug=exhibit.slug %}"/>
 {% endblock %}
 
 {% block head_css %}

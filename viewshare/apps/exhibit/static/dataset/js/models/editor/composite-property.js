@@ -29,13 +29,13 @@ define(
             PropertyModel.prototype.initialize.apply(this, [options]);
             this.augmentation = options.augmentation;
             this.composite = options.composite;
-            this.setApiUrls();
+//            this.setApiUrls();
         },
 
-        /** Calculate the URLs used for API calls */
-        setApiUrls: function() {
-            PropertyModel.prototype.setApiUrls.apply(this, []);
-        },
+//        /** Calculate the URLs used for API calls */
+//        setApiUrls: function() {
+//            PropertyModel.prototype.setApiUrls.apply(this, []);
+//        },
 
         /**
          * Request that this Property's attributes be augmented

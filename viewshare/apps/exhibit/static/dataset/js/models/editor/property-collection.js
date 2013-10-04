@@ -71,6 +71,12 @@ define(
                         label: property.label,
                         type: property.valueType
                     };
+                    if (property.hasOwnProperty('property_url')) {
+                        args.property_url = property.property_url;
+                    }
+                    if (property.hasOwnProperty('data_url')) {
+                        args.data_url = property.data_url;
+                    }
                     if (property.hasOwnProperty('augmentation')) {
                         args.augmentation = property.augmentation;
                         args.composite = property.composite;

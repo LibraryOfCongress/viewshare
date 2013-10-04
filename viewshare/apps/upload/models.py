@@ -389,7 +389,8 @@ class UploadTransaction(DataTransaction):
             properties = data_profile.get("properties", [])
             profile = serializers.legacy_data_profile_to_new(properties)
             ser = serializers.ExhibitPropertyListSerializer(exhibit,
-                                                            data=profile)
+                                                            data=profile,
+                                                            draft=True)
 
             data = result.get("items", [])
             data_ser = serializers.ExhibitDataSerializer(exhibit,
