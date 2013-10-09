@@ -58,7 +58,7 @@
       <a id="nav-help" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">{% trans "Help" %} <b class="caret"></b></a>
       <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
         <li><a href="{% url 'userguide' %}">User's Guide</a></li>
-        <li><a href="{% url 'faq' %}">FAQ</a></li>
+        <li><a href="http://viewshare.uservoice.com/knowledgebase/articles/240426-faq">FAQ</a></li>
         <li><a href="{% url 'profile_detail' 'Guide' %}">Ask the Guide</a></li>
       </ul>
     </li><li class="divider-vertical"></li>
@@ -77,7 +77,7 @@
 {% cache 3600 footer %}
 <div class="footernav">
 <span class="linknav left">
-    <span class="aboutlink"><a href="{% url 'community' %}">{% trans "About" %} {{ SITE_NAME }}</a></span> <span class="divider">|</span>
+    <span class="aboutlink"><a href="http://viewshare.uservoice.com/knowledgebase/articles/242995-about-viewshare">{% trans "About" %} {{ SITE_NAME }}</a></span> <span class="divider">|</span>
     <span class="helplink"><a href="{% url 'help' %}" target="_blank">{% trans "Help" %}</a></span> <span class="divider">|</span>
     <span class="tos"><a href="{% url 'tos' %}" target="_blank">{% trans "Terms of Service" %}</a></span>
 </span>

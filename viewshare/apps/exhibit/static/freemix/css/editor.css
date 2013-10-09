@@ -1011,7 +1011,7 @@ padding-right: 0px;
 /* remove spurious banner on top of editing pane */
 
 .exhibit_edit {
-margin-top: -22px;
+  margin-top: -22px;
 }
 
 /* Expand widget editor modal full-screen */

@@ -742,6 +742,11 @@ div.notices h2 {
     width: 80%;
 }
 
+#notifications .alert {
+ position: absolute;
+ margin-top: 5px;
+}
+
 /* modals */
 
 .modal-fit {
@@ -771,6 +776,27 @@ border-radius: 0 0 6px 6px;
 -webkit-box-shadow: inset 0 1px 0 #ffffff;
 -moz-box-shadow: inset 0 1px 0 #ffffff;
 box-shadow: inset 0 1px 0 #ffffff;
+}
+
+
+.modal-backdrop.fade {
+opacity: 0;
+filter: alpha(opacity=0);
+}
+.modal-backdrop.in {
+opacity: 0.5;
+filter: alpha(opacity=50);
+}
+
+...to this (added ".fade" between the two classes in the second definition):
+
+.modal-backdrop.fade {
+opacity: 0;
+filter: alpha(opacity=0);
+}
+.modal-backdrop.fade.in {
+opacity: 0.5;
+filter: alpha(opacity=50);
 }
 
 
