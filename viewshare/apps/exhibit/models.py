@@ -518,14 +518,16 @@ class DataTransaction(TimeStampedModel):
 
     def failure(self, message):
         self.status = TX_STATUS["failure"]
-        self.result = {"message": message}
+        self.result = self.get_result_doc(message)
 
         self.logger.error("Error for transaction %s: %s" %
                           (self.tx_id, message))
         self.save()
 
-    def success(self):
+    def success(self, message):
         self.status = TX_STATUS["success"]
+        if message:
+            self.result = self.get_result_doc(message)
         self.save()
 
     def complete(self):
@@ -538,3 +540,8 @@ class DataTransaction(TimeStampedModel):
         self.result = None
         self.is_complete = True
         self.save()
+
+    def get_result_doc(self, message):
+        if isinstance(message, dict):
+            return json.dumps(message)
+        return json.dumps({"message": message})

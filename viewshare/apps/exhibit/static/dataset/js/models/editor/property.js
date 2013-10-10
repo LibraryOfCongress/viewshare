@@ -51,7 +51,6 @@ define(
         id: function(value) {
             if (value) {
                 this._id = value;
-//                this.setApiUrls();
             }
             return this._id;
         },

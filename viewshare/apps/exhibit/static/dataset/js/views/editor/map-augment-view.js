@@ -33,7 +33,8 @@ define(
                 type: 'location',
                 value: [],
                 augmentation: 'location',
-                composite: []
+                composite: [],
+                property_url: options.propertyCollection.propertiesURL
             });
         },
 

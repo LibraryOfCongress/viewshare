@@ -33,7 +33,8 @@ define(
                 type: 'date',
                 value: [],
                 augmentation: 'date',
-                composite: []
+                composite: [],
+                property_url: options.propertyCollection.propertiesURL
             });
         },
 

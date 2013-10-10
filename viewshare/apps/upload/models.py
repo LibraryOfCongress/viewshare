@@ -63,9 +63,9 @@ class DataSource(TimeStampedModel):
             try:
                 # Ensure that existing transactions are marked as complete
                 # when creating a new one
-                UploadTransaction.objects\
-                        .filter(source=self)\
-                        .update(is_complete=True, result=None)
+                (UploadTransaction.objects
+                 .filter(source=self)
+                 .update(is_complete=True, result=None))
                 tx = UploadTransaction(source=self)
                 tx.save()
             except:
@@ -77,8 +77,8 @@ class DataSource(TimeStampedModel):
         return tx
 
     def open_transaction(self):
-        transaction = UploadTransaction.objects.filter(
-                source=self, is_complete=False)[:1]
+        transaction = UploadTransaction.objects.filter(source=self,
+                                                       is_complete=False)[:1]
         if not transaction:
             return self.create_transaction()
         return transaction[0]

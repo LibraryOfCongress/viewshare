@@ -210,7 +210,7 @@ class ShreddedListPropertySerializer(ExhibitPropertySerializer):
     def instance_kwargs(self):
         kwargs = super(ShreddedListPropertySerializer, self).instance_kwargs
         extract = self._exhibit.properties.get(name=self.data["extract"])
-        kwargs["extract"] = extract
+        kwargs["source"] = extract
         return kwargs
 
 
@@ -571,4 +571,5 @@ def new_data_profile_to_legacy(profile):
                 new_record["tags"].append("property:type=shredded_list")
                 new_record["extract"] = old_record["extract"]
         result.append(new_record)
-    return result
+    return {"properties": result}
+

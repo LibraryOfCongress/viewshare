@@ -35,7 +35,8 @@ define(
                 type: 'text',
                 value: [],
                 augmentation: '',
-                composite: []
+                composite: [],
+                property_url: options.propertyCollection.propertiesURL
             });
         },
 
@@ -44,7 +45,7 @@ define(
 
         /** Event handler when a .name input is changed */
         changeNameHandler: function(event) {
-            this.newPatternProperty.name(event.target.value);
+            this.newPatternProperty.id(event.target.value);
         },
 
         /** Event handler when a .selcted input is clicked */

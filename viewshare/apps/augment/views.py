@@ -1,15 +1,13 @@
 from django.views.generic.base import View
 
 from viewshare.apps.augment import models
-
-from viewshare.apps.upload.transform import RawTransformView, AkaraTransformClient
-from viewshare.apps.augment import conf
 from viewshare.utilities.views import JSONResponse
 
 
 class JSONView(View):
 
-    template=None
+    template = None
+
     def get_dict(self, *args, **kwargs):
         return {}
 
@@ -18,13 +16,13 @@ class JSONView(View):
         return JSONResponse(content, self.template)
 
 
-
 class ListPatternJSONView(JSONView):
     def get_dict(self, *args, **kwargs):
         return models.ListPattern.to_dict()
 
 
-pattern_jsonp = ListPatternJSONView.as_view(template="dataset/augment/patterns.js")
+pattern_jsonp = ListPatternJSONView.as_view(template="dataset/augment"
+                                                     "/patterns.js")
 pattern_json = ListPatternJSONView.as_view()
 
 
@@ -34,6 +32,3 @@ class AugmentationErrorJSONView(JSONView):
 
 
 error_json = AugmentationErrorJSONView.as_view()
-
-
-transform = RawTransformView.as_view(transform=AkaraTransformClient(conf.AKARA_AUGMENT_URL))

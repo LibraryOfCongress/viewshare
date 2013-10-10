@@ -12,6 +12,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
 from django.views.generic.list import ListView
 from django.db.models import Q
+from viewshare.apps.augment.models import AugmentTransaction
 
 from viewshare.apps.exhibit import models, forms, serializers
 from viewshare.apps.exhibit.serializers import ExhibitPropertyListSerializer
@@ -341,6 +342,7 @@ class DraftExhibitPropertyJSONView(DraftExhibitView, BaseJSONView):
         exhibit = self.get_parent_object()
 
         prop = get_object_or_404(exhibit.properties.all(), name=prop_name)
+        prop = prop.get_concrete()
         serializer_class = serializers.serializer_class_keys[prop.classname]
         serializer = serializer_class(exhibit, prop_name,
                                       instance=prop, draft=True)
@@ -418,14 +420,21 @@ class DraftExhibitPropertyDataView(DraftExhibitView, BaseJSONView):
 
         result = self.get_doc()
         if not result:
-            #TODO create or retrieve augmentation transaction
+            prop = get_object_or_404(models.ExhibitProperty,
+                                     exhibit=self.get_parent_object(),
+                                     name=self.kwargs["property"])
+
+            AugmentTransaction.objects.filter(property=prop).delete()
+            tx = AugmentTransaction.objects.create(property=prop)
+            tx.start_transaction()
+
             status_url = reverse('draft_exhibit_property_status',
                                  kwargs={
-                                     'owner': request.kwargs["owner"],
-                                     'slug': request.kwargs["slug"],
-                                     'property': request.kwargs["property"]
+                                     'owner': self.kwargs["owner"],
+                                     'slug': self.kwargs["slug"],
+                                     'property': self.kwargs["property"]
                                  })
-            content = "{'augmentation_status': %s}" % status_url
+            content = "{'augmentation_status': '%s'}" % status_url
 
             response = HttpResponse(content=content, status=202)
             response["Content-Type"]
@@ -482,8 +491,45 @@ class DraftExhibitAllDataView(DraftExhibitView, BaseJSONView):
 
 
 class DraftExhibitPropertyDataStatusView(DraftExhibitView):
+    """
+    Status endpoint for a running data augmentation
+    """
     def get(self, request, *args, **kwargs):
-        pass
+        """
+        Checks for an open transaction for the desired property.
+            * If the transaction is complete, a document describing success
+              or failure will be returned with a status of `201 Created`.
+              The URL to retrieve the final document will be provided in the
+              Location header
+            * If the transaction is still running, an empty response will
+              be returned with a `200` status
+
+
+        """
+        lookup = {
+            "property__name":self.kwargs["property"],
+            "property__exhibit": self.get_parent_object()
+        }
+        transaction = get_object_or_404(AugmentTransaction, **lookup)
+
+        if not transaction.status in (models.TX_STATUS["failure"],
+                                      models.TX_STATUS["success"]):
+            return HttpResponse()
+        if transaction.result:
+            body = json.dumps(transaction.result)
+        else:
+            body = '{}'
+        response = HttpResponse(body, status=201)
+        data_url = reverse('draft_exhibit_property_data',
+                           kwargs={
+                           'owner': self.kwargs["owner"],
+                           'slug': self.kwargs["slug"],
+                           'property': self.kwargs["property"]
+                           })
+        response["Location"] = data_url
+        response["Content-Type"] = "application/json"
+        response["Expires"] = 0
+        return response
 
 
 class DraftExhibitProfileJSONView(DraftExhibitView, BaseJSONView):

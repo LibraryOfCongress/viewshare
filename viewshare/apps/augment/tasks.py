@@ -11,4 +11,3 @@ def augment_property(id):
     tx = AugmentTransaction.objects.get(id=id)
     tx.run()
     return tx
-

@@ -1,11 +1,20 @@
 from datetime import timedelta, datetime
+import json
 
 from django.conf import settings
 from django.db import models
+from django.db.models import Q
 from django_extensions.db.fields import UUIDField
 from django_extensions.db.models import TitleSlugDescriptionModel
 from django.utils.translation import ugettext_lazy as _
-from viewshare.apps.exhibit.models import DataTransaction, ExhibitProperty
+from viewshare.apps.augment import conf
+from viewshare.apps.exhibit.models import (DataTransaction,
+                                           ExhibitProperty,
+                                           PropertyData)
+from viewshare.apps.exhibit.serializers import (ExhibitPropertySerializer,
+                                                serializer_class_keys,
+                                                new_data_profile_to_legacy)
+from viewshare.apps.upload.transform import AkaraTransformClient
 
 
 UNSAVED_DATASOURCE_LIFESPAN = getattr(settings, "UNSAVED_DATASOURCE_LIFESPAN",
@@ -57,6 +66,50 @@ class AugmentTransaction(DataTransaction):
 
     property = models.ForeignKey(ExhibitProperty)
 
+    #This field is redundant and exists to ensure that the transaction is
+    #deleted when the data file is deleted.
+    data = models.ForeignKey(PropertyData, null=True, blank=True)
+
+    def get_augmentation_profile(self):
+        """
+        Prepares the data profile document for data augmentation of a
+        particular property
+        """
+        prop = self.property.get_concrete()
+
+        serializer_class = serializer_class_keys[prop.classname]
+        serializer = serializer_class(prop.exhibit, prop.name,
+                                      instance=prop, draft=True)
+
+        properties = {prop.name: serializer.data}
+        related = prop.get_related_properties()
+        for p in related:
+            serializer = ExhibitPropertySerializer(prop.exhibit,
+                                                   p.name,
+                                                   instance=p,
+                                                   draft=False)
+            properties.update({p.name: serializer.data})
+
+        q = Q(exhibit_property_id__in=[p.id for p in related])
+        data = PropertyData.objects.filter(q)
+
+        records = {}
+
+        for property_data in data.all():
+            prop = property_data.exhibit_property.name
+            for item in property_data.json:
+                key = (item["id"], item["label"])
+                record = records.get(key, None)
+                if not record:
+                    record = {"id": item["id"], "label": item["label"]}
+                    records[key] = record
+                record[prop] = item[prop]
+        return {
+            "properties": properties,
+            "data_profile": new_data_profile_to_legacy(properties),
+            "items": [records[key] for key in records.keys()]
+        }
+
     @models.permalink
     def get_absolute_url(self):
         """
@@ -76,20 +129,44 @@ class AugmentTransaction(DataTransaction):
 
     def start_transaction(self):
         """
-        Start the asyncronous task for this transaction.
+        Start the asynchronous task for this transaction.
         """
         from .tasks import augment_property
-        augment_property.delay(self.tx_id)
+        augment_property.delay(self.id)
 
     def do_run(self):
         """
-        Validate, parse, and save transformed data. This data is coming
-        from Akara.
+        POSTs the augmentation profile and parses the response into
+        PropertyData and failures
         """
-        source = self.source.get_concrete()
-        result = source.refresh()
-        if len(result.get("items", [])):
-            # TODO: parse and save 'items' into new PropertyData format
-            self.success()
-        else:
-            self.failure("No Data")
+
+        transform = AkaraTransformClient(conf.AKARA_AUGMENT_URL)
+
+        profile = self.get_augmentation_profile()
+        items = []
+        try:
+            result = transform(body=json.dumps(profile))
+            items = result.get("items", [])
+            p = self.property
+
+            message = {}
+            failures = result.get("failures", [])
+            if len(failures) > 0:
+                message.update({"failures": failures})
+
+            if len(items) > 0:
+                self.success(message or None)
+            else:
+                message.update({"message": "No data"})
+                self.failure(message)
+        except ValueError:
+            self.failure("Invalid response body")
+        except Exception, ex:
+            self.failure(repr(ex))
+        finally:
+
+            PropertyData.objects.filter(exhibit_property=p).delete()
+            data = PropertyData.objects.create(exhibit_property=p,
+                                               json=items)
+            self.data = data
+            self.save()
