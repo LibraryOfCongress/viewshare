@@ -413,6 +413,6 @@ class UploadTransaction(DataTransaction):
                 error += "</ul>"
 
         if not error:
-            self.success()
+            self.success('Upload transformation complete')
         else:
             self.failure(error)

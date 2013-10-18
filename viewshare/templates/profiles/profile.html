@@ -27,19 +27,19 @@
 {% if is_me %}
 
 <script type="text/javascript">
-  $(document).ready(function() {
+$(document).ready(function() {
   var userTransactionView, transactions = $('.transaction');
   if (transactions.length > 0) {
-  // poll for DataSourceTransaction updates
-  userTransactionsView = new window.UserTransactionsView({
-  transactions: $('.transaction')
-  }).render();
+    // poll for DataSourceTransaction updates
+    userTransactionsView = new window.UserTransactionsView({
+      transactions: $('.transaction')
+    }).render();
   }
 
   $('#edit_profile_form_template').load('{% url 'profile_edit' %}', function() {
-  var q = $('form.uniForm');
+    var q = $('form.uniForm');
   });
-  );
+});
 </script>
 
 {% endif %}
