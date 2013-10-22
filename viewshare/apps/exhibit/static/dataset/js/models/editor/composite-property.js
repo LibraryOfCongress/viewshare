@@ -107,8 +107,8 @@ define(
         /** Return a simple object representation of this Property */
         toJSON: function() {
             var jsonProperty = PropertyModel.prototype.toJSON.apply(this, []);
-            jsonProperty[this._id].augmentation = this.augmentation;
-            jsonProperty[this._id].composite = this.composite;
+            jsonProperty.augmentation = this.augmentation;
+            jsonProperty.composite = this.composite;
             return jsonProperty;
         }
     });

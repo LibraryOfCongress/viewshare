@@ -163,14 +163,11 @@ define(
 
         /** Return a simple object representation of this Property */
         toJSON: function() {
-            var result = {}
-            result[this._id] = {
-
+            return {
                 id: this._id,
                 valueType: this.type,
                 label: this.label
             }
-            return result;
         }
     });
 

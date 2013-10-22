@@ -44,8 +44,8 @@ define(
         /** Return a simple object representation of this Property */
         toJSON: function() {
             var jsonProperty = CompositeModel.prototype.toJSON.apply(this, []);
-            jsonProperty[this._id].delimiter = this.delimiter;
-            jsonProperty[this._id].pattern = this.pattern;
+            jsonProperty.delimiter = this.delimiter;
+            jsonProperty.pattern = this.pattern;
             return jsonProperty;
         }
     });

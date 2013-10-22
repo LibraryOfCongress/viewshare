@@ -30,13 +30,13 @@ class ExhibitPropertySerializer(Serializer):
     def __init__(self, exhibit, property_name, instance=None, data=None,
                  draft=False):
         self._exhibit = exhibit
-        self._property_name = property_name
+        self._property_name = property_name or None
         if not instance:
-            f = exhibit.properties.filter(name=property_name)
-            if len(f) > 0:
-                self._instance = f[0].get_concrete()
-            else:
-                self._instance = None
+            self._instance = None
+            if property_name:
+                f = exhibit.properties.filter(name=property_name)
+                if len(f) > 0:
+                    self._instance = f[0].get_concrete()
         else:
             self._instance = instance
 
@@ -115,12 +115,14 @@ class ExhibitPropertySerializer(Serializer):
 
     @property
     def instance_kwargs(self):
-        return {
+        kwargs = {
             "exhibit": self._exhibit,
-            "name": self._property_name,
             "label": self.data["label"],
             "value_type": self.data.get("valueType", "text")
         }
+        if self._property_name:
+            kwargs["name"] = self._property_name
+        return kwargs
 
     def save(self):
         if self._instance:
@@ -129,6 +131,9 @@ class ExhibitPropertySerializer(Serializer):
         else:
             self._instance = self.model(**self.instance_kwargs)
         self._instance.save()
+        if not self._property_name:
+            self._property_name = self._instance.name
+            del self._data
 
 
 class CompositePropertySerializer(ExhibitPropertySerializer):

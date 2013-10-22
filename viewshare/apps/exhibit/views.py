@@ -316,23 +316,16 @@ class DraftExhibitPropertiesListView(DraftExhibitView, BaseJSONView):
         except ValueError:
             return HttpResponseBadRequest("Not a JSON document")
         exhibit = self.get_parent_object()
+        serializer_class = serializers.get_serializer_type_by_dict(data)
+        serializer = serializer_class(exhibit,
+                                      data=data,
+                                      draft=True)
 
-        self.serializer = serializers.ExhibitPropertyListSerializer(exhibit,
-                                                                    data=data)
-        if not self.serializer.is_valid():
+        if not serializer.is_valid():
+            return HttpResponseBadRequest("<br/>".join(serializer.errors))
+        serializer.save()
 
-            return HttpResponseBadRequest("<br/>".join(self.serializer.errors))
-        self.serializer.save()
-        return HttpResponse("OK")
-
-    def put(self, request, *args, **kwargs):
-        response = self.post(request, *args, **kwargs)
-        exhibit = self.get_parent_object()
-        if response.status_code == 200:
-            names = [p._instance.name for p
-                     in self.serializer.serializers.itervalues()]
-            exhibit.properties.exclude(name__in=names).delete()
-        return response
+        return HttpResponse(json.dumps(serializer.data))
 
 
 class DraftExhibitPropertyJSONView(DraftExhibitView, BaseJSONView):
@@ -354,12 +347,11 @@ class DraftExhibitPropertyJSONView(DraftExhibitView, BaseJSONView):
         if not self.check_perms():
             raise Http404()
         try:
-            data = json.loads(request.body)
+            description = json.loads(request.body)
         except ValueError:
             return HttpResponseBadRequest("Not a JSON document")
         exhibit = self.get_parent_object()
         prop_name = self.kwargs["property"]
-        description = data.get(prop_name, None)
         if not description:
             return HttpResponseBadRequest("No property description "
                                           "for %s" % prop_name)
@@ -447,32 +439,6 @@ class DraftExhibitPropertyDataView(DraftExhibitView, BaseJSONView):
         response["Expires"] = 0
         response["Cache-Control"] = self.cache_control_header()
         return response
-
-    def post(self, request, *args, **kwargs):
-        if not self.check_perms():
-            raise Http404()
-
-        prop = get_object_or_404(models.ExhibitProperty,
-                                 exhibit=self.get_parent_object(),
-                                 name=self.kwargs["property"])
-
-        try:
-            data = json.load(request.body)
-        except ValueError:
-            return HttpResponseBadRequest("Not a JSON document")
-        items = data.get("items", [])
-
-        if len(items) == 0:
-            return HttpResponseBadRequest("No data")
-        try:
-            prop.data.update(json=items)
-        except models.PropertyData.DoesNotExist:
-            models.PropertyData.objects.create(exhibit_property=prop,
-                                               json=items)
-        return HttpResponse("OK")
-
-    def put(self, request, *args, **kwargs):
-        return self.post(request, *args, **kwargs)
 
     def delete(self, request, *args, **kwargs):
         if not self.check_perms():

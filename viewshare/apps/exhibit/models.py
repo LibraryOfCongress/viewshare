@@ -328,7 +328,10 @@ class ExhibitProperty(models.Model):
 
     label = models.CharField(_('label'), max_length=255)
 
-    name = models.CharField(_('name'), max_length=255)
+    name = models.SlugField(_('name'),
+                            max_length=255,
+                            editable=True,
+                            blank=False)
 
     value_type = models.CharField(choices=[(k, v) for k, v in
                                            VALUE_TYPES.iteritems()],
@@ -344,6 +347,25 @@ class ExhibitProperty(models.Model):
     def save(self, *args, **kwargs):
         if self.classname is None:
             self.classname = self.__class__.__name__
+        if not self.name:
+            slug_len = self.__class__._meta.get_field("name").max_length
+            original_slug = slugify(self.label)
+
+            qs = self.__class__.objects.filter(exhibit=self.exhibit)
+            if self.pk:
+                qs.exclude(pk=self.pk)
+            slug = original_slug[:slug_len]
+            next = 2
+            while not slug or qs.filter(slug=slug):
+                slug = original_slug
+                end = '%s%s' % ('-', next)
+                end_len = len(end)
+                if slug_len and len(slug) + end_len > slug_len:
+                    slug = slug[:slug_len - end_len]
+                    slug = self._slug_strip(slug)
+                slug = '%s%s' % (slug, end)
+                next += 1
+            self.slug = slug
         return super(ExhibitProperty, self).save(*args, **kwargs)
 
     def get_concrete(self):
