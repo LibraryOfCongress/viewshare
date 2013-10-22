@@ -142,7 +142,7 @@ define(
             var options = [];
             for (i = 0; i < this.properties.length; ++i) {
                 option = {
-                    id: this.properties[i].id,
+                    id: this.properties[i].id(),
                     label: this.properties[i].label
                 }
                 options.push(option);

@@ -312,7 +312,7 @@ class DraftExhibitPropertiesListView(DraftExhibitView, BaseJSONView):
         if not self.check_perms():
             raise Http404()
         try:
-            data = json.load(request.body)
+            data = json.loads(request.body)
         except ValueError:
             return HttpResponseBadRequest("Not a JSON document")
         exhibit = self.get_parent_object()
@@ -329,7 +329,8 @@ class DraftExhibitPropertiesListView(DraftExhibitView, BaseJSONView):
         response = self.post(request, *args, **kwargs)
         exhibit = self.get_parent_object()
         if response.status_code == 200:
-            names = [p._instance.name for p in self.serializer.serializers]
+            names = [p._instance.name for p
+                     in self.serializer.serializers.itervalues()]
             exhibit.properties.exclude(name__in=names).delete()
         return response
 

@@ -171,7 +171,6 @@ define(
                 label: this.label
             }
             return result;
-
         }
     });
 
