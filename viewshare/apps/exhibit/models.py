@@ -319,7 +319,7 @@ class ExhibitProperty(models.Model):
     for reference in published exhibits and basic properties.
     """
 
-    default_manager = ExhibitPropertyManager()
+    objects = ExhibitPropertyManager()
 
     classname = models.CharField(max_length=32, editable=False, null=True)
 
@@ -356,7 +356,7 @@ class ExhibitProperty(models.Model):
                 qs.exclude(pk=self.pk)
             slug = original_slug[:slug_len]
             next = 2
-            while not slug or qs.filter(slug=slug):
+            while not slug or qs.filter(name=slug):
                 slug = original_slug
                 end = '%s%s' % ('-', next)
                 end_len = len(end)
@@ -365,7 +365,7 @@ class ExhibitProperty(models.Model):
                     slug = self._slug_strip(slug)
                 slug = '%s%s' % (slug, end)
                 next += 1
-            self.slug = slug
+            self.name = slug
         return super(ExhibitProperty, self).save(*args, **kwargs)
 
     def get_concrete(self):

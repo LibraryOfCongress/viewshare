@@ -27,10 +27,10 @@ class ExhibitPropertySerializer(Serializer):
 
     model = models.ExhibitProperty
 
-    def __init__(self, exhibit, property_name, instance=None, data=None,
+    def __init__(self, exhibit, property_name=None, instance=None, data=None,
                  draft=False):
         self._exhibit = exhibit
-        self._property_name = property_name or None
+        self._property_name = property_name
         if not instance:
             self._instance = None
             if property_name:
@@ -68,7 +68,7 @@ class ExhibitPropertySerializer(Serializer):
 
     @property
     def data(self):
-        if not self._data:
+        if not hasattr(self, '_data') or not self._data:
             self._data = self.filtered_data
             if self._draft:
                 kwargs = {

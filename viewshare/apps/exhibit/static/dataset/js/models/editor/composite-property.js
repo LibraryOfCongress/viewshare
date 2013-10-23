@@ -31,6 +31,34 @@ define(
             this.composite = options.composite;
         },
 
+        /** Send this Property's attributes to the server to be saved */
+        createProperty: function() {
+            var xhr = $.ajax({
+                type: "POST",
+                url: this.propertyURL,
+                data: JSON.stringify(this.toJSON())
+            })
+            .done(this.createPropertySuccess.bind(this))
+            .fail(this.createPropertyError.bind(this));
+            return xhr;
+        },
+
+        /**
+         * Succeeded in sending property attributes to the server
+         * @param {object} successJSON - values for this property
+         */
+        createPropertySuccess: function(successJSON) {
+            // TODO: set propertyURL and dataURL from successJSON
+            // call augmentData for newly created property
+            this.Observer('createPropertySuccess').publish();
+        },
+
+        /** Failed while sending property attributes to the server */
+        createPropertyError: function(jqxhr, textStatus, error) {
+            this.Observer('createPropertyError').publish(
+                {status: textStatus, error: error});
+        },
+
         /**
          * Request that this Property's attributes be augmented
          * on the server
