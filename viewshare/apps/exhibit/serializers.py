@@ -32,13 +32,13 @@ class ExhibitPropertySerializer(Serializer):
         self._exhibit = exhibit
         self._property_name = property_name
         if not instance:
-            self._instance = None
+            self.instance = None
             if property_name:
                 f = exhibit.properties.filter(name=property_name)
                 if len(f) > 0:
-                    self._instance = f[0].get_concrete()
+                    self.instance = f[0].get_concrete()
         else:
-            self._instance = instance
+            self.instance = instance
 
         self._draft = draft or exhibit.is_draft
         self._data = data
@@ -49,9 +49,9 @@ class ExhibitPropertySerializer(Serializer):
             return len(self._errors) == 0
 
         self._errors = []
-        if self._instance:
+        if self.instance:
             expected_class = self.model.__name__
-            instance_class = self._instance.__class__.__name__
+            instance_class = self.instance.__class__.__name__
             if expected_class != instance_class:
                 error = ("Existing property %s is of type %s "
                          "while %s was expected" % (self._property_name,
@@ -74,7 +74,7 @@ class ExhibitPropertySerializer(Serializer):
                 kwargs = {
                     "owner": self._exhibit.owner.username,
                     "slug": self._exhibit.slug,
-                    "property": self._instance.name
+                    "property": self.instance.name
                 }
                 property_url = reverse('draft_exhibit_property_json',
                                        kwargs=kwargs)
@@ -88,8 +88,8 @@ class ExhibitPropertySerializer(Serializer):
     @property
     def filtered_data(self):
         return {
-            "valueType": self._instance.value_type,
-            "label": self._instance.label
+            "valueType": self.instance.value_type,
+            "label": self.instance.label
         }
 
     def validate(self):
@@ -125,15 +125,14 @@ class ExhibitPropertySerializer(Serializer):
         return kwargs
 
     def save(self):
-        if self._instance:
-            self._instance = self.model(id=self._instance.id,
-                                        **self.instance_kwargs)
+        if self.instance:
+            self.instance = self.model(id=self.instance.id,
+                                       **self.instance_kwargs)
         else:
-            self._instance = self.model(**self.instance_kwargs)
-        self._instance.save()
+            self.instance = self.model(**self.instance_kwargs)
+        self.instance.save()
         if not self._property_name:
-            self._property_name = self._instance.name
-            del self._data
+            self._property_name = self.instance.name
 
 
 class CompositePropertySerializer(ExhibitPropertySerializer):
@@ -146,7 +145,7 @@ class CompositePropertySerializer(ExhibitPropertySerializer):
     def data(self):
         if not self._data:
             result = super(CompositePropertySerializer, self).data
-            refs = self._instance.composite.all()
+            refs = self.instance.composite.all()
 
             result["composite"] = [p.name for p in refs]
             result["augmentation"] = self.augmentation_key
@@ -172,14 +171,14 @@ class CompositePropertySerializer(ExhibitPropertySerializer):
 
     def save(self):
         super(CompositePropertySerializer, self).save()
-        self._instance.composite.clear()
+        self.instance.composite.clear()
         index = 0
 
         query = Q(name__in=self.data["composite"])
         props = self._exhibit.properties.filter(query)
         l = []
         for prop in props:
-            l.append(models.PropertyReference(derived=self._instance,
+            l.append(models.PropertyReference(derived=self.instance,
                                               source=prop,
                                               order=index))
             index += 1
@@ -194,7 +193,7 @@ class ShreddedListPropertySerializer(ExhibitPropertySerializer):
     def data(self):
         if not self._data:
             result = super(ShreddedListPropertySerializer, self).data
-            result["extract"] = self._instance.source.name
+            result["extract"] = self.instance.source.name
             self._data = result
         return self._data
 
@@ -229,7 +228,7 @@ class DelimitedListPropertySerializer(ShreddedListPropertySerializer):
     def data(self):
         if not self._data:
             result = super(DelimitedListPropertySerializer, self).data
-            result["delimiter"] = self._instance.delimiter
+            result["delimiter"] = self.instance.delimiter
             result["augmentation"] = self.augmentation_key
 
             self._data = result
@@ -263,7 +262,7 @@ class PatternListPropertySerializer(ShreddedListPropertySerializer):
     def data(self):
         if not self._data:
             result = super(PatternListPropertySerializer, self).data
-            result["pattern"] = self._instance.pattern
+            result["pattern"] = self.instance.pattern
             result["augmentation"] = self.augmentation_key
             self._data = result
         return self._data

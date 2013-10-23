@@ -324,8 +324,10 @@ class DraftExhibitPropertiesListView(DraftExhibitView, BaseJSONView):
         if not serializer.is_valid():
             return HttpResponseBadRequest("<br/>".join(serializer.errors))
         serializer.save()
-
-        return HttpResponse(json.dumps(serializer.data))
+        out = serializer_class(exhibit,
+                               instance=serializer.instance,
+                               draft=True)
+        return HttpResponse(json.dumps(out.data))
 
 
 class DraftExhibitPropertyJSONView(DraftExhibitView, BaseJSONView):
