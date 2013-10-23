@@ -325,7 +325,10 @@ class DraftExhibitPropertiesListView(DraftExhibitView, BaseJSONView):
             return HttpResponseBadRequest("<br/>".join(serializer.errors))
         serializer.save()
 
-        return HttpResponse(json.dumps(serializer.data))
+        response = HttpResponse(json.dumps(serializer.data))
+        response["Content-Type"] = "application/json"
+        response["Expires"] = 0
+        return response
 
 
 class DraftExhibitPropertyJSONView(DraftExhibitView, BaseJSONView):
@@ -427,7 +430,7 @@ class DraftExhibitPropertyDataView(DraftExhibitView, BaseJSONView):
                                      'slug': self.kwargs["slug"],
                                      'property': self.kwargs["property"]
                                  })
-            content = "{'augmentation_status': '%s'}" % status_url
+            content = json.dumps({'augmentation_status': status_url})
 
             response = HttpResponse(content=content, status=202)
             response["Content-Type"]

@@ -80,7 +80,7 @@ define(
                     if (property.hasOwnProperty('augmentation')) {
                         args.augmentation = property.augmentation;
                         args.composite = property.composite;
-                        if (['date', 'location'].indexOf(property.augmentation) >= 0) {
+                        if (property.augmentation === 'composite') {
                             this.properties.push(new CompositePropertyModel(args));
                         } else if (['pattern-list', 'delimited-list'].indexOf(
                                 property.augmentation) >= 0) {

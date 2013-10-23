@@ -32,7 +32,7 @@ define(
                 label: undefined,
                 type: 'location',
                 value: [],
-                augmentation: 'location',
+                augmentation: 'composite',
                 composite: [],
                 property_url: options.propertyCollection.propertiesURL
             });

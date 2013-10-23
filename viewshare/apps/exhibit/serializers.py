@@ -144,7 +144,7 @@ class CompositePropertySerializer(ExhibitPropertySerializer):
 
     @property
     def data(self):
-        if not self._data:
+        if not hasattr(self, '_data') or not self._data:
             result = super(CompositePropertySerializer, self).data
             refs = self._instance.composite.all()
 
@@ -171,11 +171,12 @@ class CompositePropertySerializer(ExhibitPropertySerializer):
         return result
 
     def save(self):
+        composites = self.data["composite"]
         super(CompositePropertySerializer, self).save()
         self._instance.composite.clear()
         index = 0
 
-        query = Q(name__in=self.data["composite"])
+        query = Q(name__in=composites)
         props = self._exhibit.properties.filter(query)
         l = []
         for prop in props:
@@ -192,7 +193,7 @@ class ShreddedListPropertySerializer(ExhibitPropertySerializer):
 
     @property
     def data(self):
-        if not self._data:
+        if not hasattr(self, '_data') or not self._data:
             result = super(ShreddedListPropertySerializer, self).data
             result["extract"] = self._instance.source.name
             self._data = result
@@ -227,7 +228,7 @@ class DelimitedListPropertySerializer(ShreddedListPropertySerializer):
 
     @property
     def data(self):
-        if not self._data:
+        if not hasattr(self, '_data') or not self._data:
             result = super(DelimitedListPropertySerializer, self).data
             result["delimiter"] = self._instance.delimiter
             result["augmentation"] = self.augmentation_key
@@ -261,7 +262,7 @@ class PatternListPropertySerializer(ShreddedListPropertySerializer):
 
     @property
     def data(self):
-        if not self._data:
+        if not hasattr(self, '_data') or not self._data:
             result = super(PatternListPropertySerializer, self).data
             result["pattern"] = self._instance.pattern
             result["augmentation"] = self.augmentation_key
@@ -352,7 +353,7 @@ class ExhibitPropertyListSerializer(Serializer):
 
     @property
     def data(self):
-        if not self._data:
+        if not hasattr(self, '_data') or not self._data:
             result = dict()
             for p in self._queryset.all():
                 result.update({
