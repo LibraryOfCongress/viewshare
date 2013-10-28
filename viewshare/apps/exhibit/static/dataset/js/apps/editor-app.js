@@ -15,16 +15,16 @@ define(
     ) {
     'use strict';
     var demo = function() {
-        var owner = $("link[rel='exhibit/owner']").attr("href");
-        var slug = $("link[rel='exhibit/slug']").attr("href");
+        var data_url = $("link[rel='exhibit/data']").attr("href");
+        var prop_url = $("link[rel='freemix/property_list']").attr("href");
         var properties = new PropertyCollection({
-            owner: owner,
-            slug: slug
-        });
+            dataURL: data_url,
+            propertiesURL: prop_url
+	    });
         var notificationView = new NotificationView({$el: $('#notifications')});
         var editor = new EditorView({
             model: properties,
-            $el: $('#editor'),
+            $el: $('#editor')
         });
         var augmentModal = new ModalAugmentView({
             model: properties
@@ -67,3 +67,4 @@ define(
 
     return demo;
 });
+

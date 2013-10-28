@@ -13,13 +13,9 @@ urlpatterns = patterns('',
         views.PublishedExhibitDisplayView.as_view(),
         name="exhibit_display"),
 
-    url(r'^(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/properties/$',
-        views.PublishedExhibitPropertiesListView.as_view(),
-        name='exhibit_property_list'),
-
-    url(r'^(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/properties/(?P<property>[a-zA-Z0-9_.-]+)/data/$',
-        views.PublishedExhibitPropertyDataView.as_view(),
-        name='exhibit_property_data'),
+    url(r'^(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/data/$',
+        views.PublishedExhibitDataView.as_view(),
+        name='exhibit_data'),
 
     # details
     url(r'^(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/detail/edit/$',
@@ -60,12 +56,16 @@ urlpatterns = patterns('',
         login_required(views.PublishExhibitView.as_view()),
         name='exhibit_publish'),
 
+    url(r'^(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/draft/data/$',
+        login_required(views.DraftExhibitAllDataView.as_view()),
+        name='draft_exhibit_all_data'),
+
     url(r'^(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/draft/properties/$',
         login_required(views.DraftExhibitPropertiesListView.as_view()),
         name='draft_exhibit_property_list'),
 
     url(r'^(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/draft/properties/(?P<property>[a-zA-Z0-9_.-]+)/$',
-        login_required(views.DraftExhibitPropertiesJSONView.as_view()),
+        login_required(views.DraftExhibitPropertyJSONView.as_view()),
         name='draft_exhibit_property_json'),
 
     url(r'^(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/draft/properties/(?P<property>[a-zA-Z0-9_.-]+)/data/$',

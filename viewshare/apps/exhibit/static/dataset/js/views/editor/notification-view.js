@@ -63,19 +63,30 @@ define([
     addNotification: function(notificationLevel, message, lead) {
       var notification, status = 'alert';
       if (notificationLevel === 'info') {
-        status = 'alert alert-info';
+        status = 'alert alert-info editor-notification';
       } else if (notificationLevel === 'error') {
-        status = 'alert alert-error';
+        status = 'alert alert-error editor-notification';
       } else if (notificationLevel === 'success') {
-        status = 'alert alert-success';
+        status = 'alert alert-success editor-notification';
       }
       notification = this.template({
         status: status,
         message: message,
         lead: lead
       });
-      this.$el.prepend(notification);
-    },
+      /* this.$el.prepend(notification); */
+
+      this.$el.empty().append(notification);
+
+      var editorAlert = this.$el.find(".editor-notification");
+
+      window.setTimeout(function () {
+	      editorAlert.fadeOut(2000, "linear",
+	      function() { 
+		  editorAlert.remove();
+	      });
+	  }, 4000);
+      },
 
     /** Remove event bindings, child views, and DOM elements.
      * Views that call 'addSubscription' are responsible for
@@ -88,3 +99,4 @@ define([
 
   return NotificationView;
 });
+

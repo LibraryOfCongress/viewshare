@@ -1,24 +1,70 @@
-<div class="span12">
-  {{#if propertyCount }}
-  <div class="text-right">
-    <a id="add-property" class="btn btn-success profile-actions" style="margin-left: 5px" href="#"><i class="icon-plus-sign"></i> Add Property</a>
-    <div id="record-nav"></div>
+{{#if propertyCount }}
+
+<div class="table table-editor-controls">
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="btn-toolbar pull-right">
+	<span id="record-nav"></span>
+	<div class="btn-group">
+	  <a id="add-property" class="btn btn-small btn-info profile-actions" style="margin-left: 5px" href="#"><i class="icon-plus"></i> Add Property</a>
+	</div>
+      </div> <!-- /btn-toolbar -->
+    </div>
   </div>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Label</th>
-        <th>Type</th>
-        <th>Value</th>
-      </tr>
-    </thead>
-    <tbody id="properties">
-    </tbody>
-  </table>
-  {{ else }}
-  <div class="alert alert-block">
-    <h4>Warning!</h2>
-    This data source contains no records! <a href="{{ refreshURL }}">Click here</a> to refresh the data source.
-  </div>
-  {{/if}}
 </div>
+
+<div class="row-fluid">
+  <div class="span12">
+    <table id="editor-table" class="table table-editor table-condensed table-hover">
+      <thead>
+	<tr>
+          <th class="table-header-action span1"></th>
+          <th class="table-header-label span3">Label</th>
+          <th class="table-hedaer-types span1">Type</th>
+          <th class="table-header-values span7">Value</th>
+	</tr>
+      </thead>
+      <tbody id="properties">
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- table edit modals ... move to separate file? -->
+
+<div id="deleteEditorRowModal" class="delete_editor_row_dialog modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myEditorDeleteRowModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3 id="myDeleteModalLabel">Delete Row of Data</h3>
+  </div>
+  
+  <div class="modal-body">
+    <div class="delete_exhibit_form alert alert-warning">
+      <p><strong>Warning:</strong> This row of data will be deleted and cannot be recovered. Are you sure you want to delete?</p>
+    </div>
+  </div>
+  
+  <div class="modal-footer">
+    <a href="#" class='button_link ok-button btn btn-small btn-warning' title='OK'>Delete</a>
+    <a href="#" class='button_link negative-button cancel-button btn btn-small btn-primary' data-dismiss="modal" class="close" title='Cancel'>Cancel</a>
+  </div>
+</div>
+
+<!-- change javascript to remove row from table and data from Exhibit database -->
+<!-- set 'this' via rel in modal trigger button (mirror other modal paterns). If 'delete' selected in modal extract rel and remove row from display -->
+
+<script type="text/javascript">
+  function deleteRow(r) 
+  {
+  var i=r.parentNode.parentNode.rowIndex;
+  document.getElementById('editor-table').deleteRow(i);
+  }
+</script>
+
+
+{{ else }}
+<div class="alert alert-block">
+  <h4>Warning!</h2>
+This data source contains no records! <a href="{{ refreshURL }}">Click here</a> to refresh the data source.
+</div>
+{{/if}}
