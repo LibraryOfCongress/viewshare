@@ -428,20 +428,6 @@ def separate_data(data):
     return properties
 
 
-def merge_data(data):
-    records = {}
-
-    for prop in data.keys():
-        for item in data[prop]:
-            key = (item["id"], item["label"])
-            record = records.get(key, None)
-            if not record:
-                record = {"id": item["id"], "label": item["label"]}
-                records[key] = record
-            record[prop] = item[prop]
-    return [records[key] for key in records.keys()]
-
-
 class ExhibitDataSerializer(Serializer):
 
     def __init__(self, exhibit,
@@ -510,71 +496,3 @@ class ExhibitDataSerializer(Serializer):
                                               value_type="text").save()
                 models.PropertyData(exhibit_property=prop,
                                     json=self._data[name]).save()
-
-
-#-----------------------------------------------------------------------------#
-# Legacy data and profile transform utilities
-
-def legacy_data_profile_to_new(profile):
-
-    def find_type(p):
-        for t in ["location", "text", "image", "date", "url", "number"]:
-            if "tags" in p.keys() and "property:type=%s" % t in p["tags"]:
-                return t
-
-        return "text"
-
-    result = {}
-    for old_record in profile:
-        prop_name = old_record["property"]
-        label = old_record["label"]
-        keys = old_record.keys()
-
-        new_record = {
-            "label": label,
-            "valueType": find_type(old_record)
-        }
-
-        if "composite" in keys:
-            new_record["composite"] = old_record["composite"]
-            new_record["augmentation"] = "composite"
-        elif "delimiter" in keys:
-            new_record["augmentation"] = "delimited-list"
-            new_record["extract"] = old_record["extract"]
-            new_record["delimiter"] = old_record["delimiter"]
-        elif "pattern" in keys:
-            new_record["augmentation"] = "pattern-list"
-            new_record["extract"] = old_record["extract"]
-            new_record["pattern"] = old_record["pattern"]
-        result[prop_name] = new_record
-
-    return result
-
-
-def new_data_profile_to_legacy(profile):
-    result = []
-    for prop in profile.keys():
-        old_record = profile[prop]
-        new_record = {
-            "enabled": True,
-            "label": old_record["label"],
-            "property": prop,
-            "tags": [
-                "property:type=%s" % old_record["valueType"]
-            ]
-        }
-        if "augmentation" in old_record.keys():
-            record_type = old_record["augmentation"]
-            if record_type == "composite":
-                new_record["composite"] = old_record["composite"]
-            elif record_type == "delimited-list":
-                new_record["delimiter"] = old_record["delimiter"]
-                new_record["tags"].append("property:type=shredded_list")
-                new_record["extract"] = old_record["extract"]
-            elif record_type == "pattern-list":
-                new_record["pattern"] = old_record["pattern"]
-                new_record["tags"].append("property:type=shredded_list")
-                new_record["extract"] = old_record["extract"]
-        result.append(new_record)
-    return {"properties": result}
-

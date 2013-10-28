@@ -12,8 +12,7 @@ from viewshare.apps.exhibit.models import (DataTransaction,
                                            ExhibitProperty,
                                            PropertyData)
 from viewshare.apps.exhibit.serializers import (ExhibitPropertySerializer,
-                                                serializer_class_keys,
-                                                new_data_profile_to_legacy)
+                                                serializer_class_keys)
 from viewshare.apps.upload.transform import AkaraTransformClient
 
 
@@ -106,7 +105,7 @@ class AugmentTransaction(DataTransaction):
                 record[prop] = item[prop]
         return {
             "properties": properties,
-            "data_profile": new_data_profile_to_legacy(properties),
+            "data_profile": self.new_data_profile_to_legacy(properties),
             "items": [records[key] for key in records.keys()]
         }
 
@@ -170,3 +169,36 @@ class AugmentTransaction(DataTransaction):
                                                json=items)
             self.data = data
             self.save()
+
+    @staticmethod
+    def new_data_profile_to_legacy(profile):
+        """
+        Convert an exhibit property document to the old style
+        data profile for data augmentation
+        TODO: Remove this when akara supports the old version
+        """
+        result = []
+        for prop in profile.keys():
+            old_record = profile[prop]
+            new_record = {
+                "enabled": True,
+                "label": old_record["label"],
+                "property": prop,
+                "tags": [
+                    "property:type=%s" % old_record["valueType"]
+                ]
+            }
+            if "augmentation" in old_record.keys():
+                record_type = old_record["augmentation"]
+                if record_type == "composite":
+                    new_record["composite"] = old_record["composite"]
+                elif record_type == "delimited-list":
+                    new_record["delimiter"] = old_record["delimiter"]
+                    new_record["tags"].append("property:type=shredded_list")
+                    new_record["extract"] = old_record["extract"]
+                elif record_type == "pattern-list":
+                    new_record["pattern"] = old_record["pattern"]
+                    new_record["tags"].append("property:type=shredded_list")
+                    new_record["extract"] = old_record["extract"]
+            result.append(new_record)
+        return {"properties": result}

@@ -387,7 +387,7 @@ class UploadTransaction(DataTransaction):
         if len(data_profile):
 
             properties = data_profile.get("properties", [])
-            profile = serializers.legacy_data_profile_to_new(properties)
+            profile = self.legacy_data_profile_to_new(properties)
             ser = serializers.ExhibitPropertyListSerializer(exhibit,
                                                             data=profile,
                                                             draft=True)
@@ -416,3 +416,44 @@ class UploadTransaction(DataTransaction):
             self.success('Upload transformation complete')
         else:
             self.failure(error)
+
+    @staticmethod
+    def legacy_data_profile_to_new(profile):
+        """
+        Transforms an old style freemix data profile into
+        the extendedexhibit properties format
+
+        TODO: modify akara to return the new style profile and remove this
+        """
+        def find_type(p):
+            for t in ["location", "text", "image", "date", "url", "number"]:
+                if "tags" in p.keys() and "property:type=%s" % t in p["tags"]:
+                    return t
+
+            return "text"
+
+        result = {}
+        for old_record in profile:
+            prop_name = old_record["property"]
+            label = old_record["label"]
+            keys = old_record.keys()
+
+            new_record = {
+                "label": label,
+                "valueType": find_type(old_record)
+            }
+
+            if "composite" in keys:
+                new_record["composite"] = old_record["composite"]
+                new_record["augmentation"] = "composite"
+            elif "delimiter" in keys:
+                new_record["augmentation"] = "delimited-list"
+                new_record["extract"] = old_record["extract"]
+                new_record["delimiter"] = old_record["delimiter"]
+            elif "pattern" in keys:
+                new_record["augmentation"] = "pattern-list"
+                new_record["extract"] = old_record["extract"]
+                new_record["pattern"] = old_record["pattern"]
+            result[prop_name] = new_record
+
+        return result
