@@ -194,28 +194,28 @@ class ShreddedListPropertySerializer(ExhibitPropertySerializer):
     def data(self):
         if not hasattr(self, '_data') or not self._data:
             result = super(ShreddedListPropertySerializer, self).data
-            result["extract"] = self.instance.source.name
+            result["source"] = self.instance.source.name
             self._data = result
         return self._data
 
     def validate(self):
         valid = super(ShreddedListPropertySerializer, self).validate()
-        if not "extract" in self.data:
-            self._errors.append("'extract' is required")
+        if not "source" in self.data:
+            self._errors.append("'source' is required")
             valid = False
         return valid
 
     @property
     def depends_on(self):
         result = super(ShreddedListPropertySerializer, self).depends_on
-        result.append(self.data["extract"])
+        result.append(self.data["source"])
         return result
 
     @property
     def instance_kwargs(self):
         kwargs = super(ShreddedListPropertySerializer, self).instance_kwargs
-        extract = self._exhibit.properties.get(name=self.data["extract"])
-        kwargs["source"] = extract
+        source = self._exhibit.properties.get(name=self.data["source"])
+        kwargs["source"] = source
         return kwargs
 
 

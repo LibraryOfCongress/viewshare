@@ -195,10 +195,10 @@ class AugmentTransaction(DataTransaction):
                 elif record_type == "delimited-list":
                     new_record["delimiter"] = old_record["delimiter"]
                     new_record["tags"].append("property:type=shredded_list")
-                    new_record["extract"] = old_record["extract"]
+                    new_record["extract"] = old_record["source"]
                 elif record_type == "pattern-list":
                     new_record["pattern"] = old_record["pattern"]
                     new_record["tags"].append("property:type=shredded_list")
-                    new_record["extract"] = old_record["extract"]
+                    new_record["extract"] = old_record["source"]
             result.append(new_record)
         return {"properties": result}
