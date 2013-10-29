@@ -35,7 +35,7 @@ define(
         validate: function(propertyNames) {
             var existingNames = propertyNames || [],
             errors = CompositePropertyModel.prototype.validate.apply(this, [existingNames]);
-            if (!this.delimiter || !this.pattern) {
+            if (!this.delimiter && !this.pattern) {
                 errors.delimiter = 'Please select a delimiter or pattern.';
             }
             return errors;
@@ -43,7 +43,7 @@ define(
 
         /** Return a simple object representation of this Property */
         toJSON: function() {
-            var jsonProperty = CompositeModel.prototype.toJSON.apply(this, []);
+            var jsonProperty = CompositePropertyModel.prototype.toJSON.apply(this, []);
             jsonProperty.delimiter = this.delimiter;
             jsonProperty.pattern = this.pattern;
             return jsonProperty;
