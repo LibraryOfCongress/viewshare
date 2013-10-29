@@ -32,7 +32,7 @@ define(
                 label: undefined,
                 type: 'date',
                 value: [],
-                augmentation: 'date',
+                augmentation: 'composite',
                 composite: [],
                 property_url: options.propertyCollection.propertiesURL
             });
