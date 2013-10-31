@@ -223,7 +223,7 @@ class DelimitedListPropertySerializer(ShreddedListPropertySerializer):
 
     model = models.DelimitedListProperty
 
-    augmentation_key = "delimiter-list"
+    augmentation_key = "delimited-list"
 
     @property
     def data(self):

@@ -61,27 +61,26 @@ define(
             this.newPatternProperty.composite = composites;
         },
 
-        /** Modify this.newPatternProperty.delimiter based on user action */
-        changeDelimiterHandler: function(event) {
-            this.augmentation = 'delimited-list';
-            this.newPatternProperty.pattern = null;
-            this.newPatternProperty.augmentation = 'delimited-list';
-        },
-
         /** Modify this.newPatternProperty.pattern based on user action */
         changePatternHandler: function(event) {
-            var newPattern = $(event.target).find(':selected').val();
-            this.newPatternProperty.pattern = newPattern;
             this.newPatternProperty.augmentation = 'pattern-list';
             this.newPatternProperty.delimiter = null;
+        },
+
+        /** Modify this.newPatternProperty.delimiter based on user action */
+        changeDelimiterHandler: function(event) {
+            var newDelimiter = $(event.target).find(':selected').val();
+            this.newPatternProperty.delimiter = newDelimiter;
+            this.newPatternProperty.augmentation = 'delimited-list';
+            this.newPatternProperty.pattern = null;
         },
 
         render: function() {
             this.$el.html(this.template(this));
             this.$el.find('#new-list-property').on(
                 'change', this.changeNameHandler.bind(this));
-            this.$el.find('#new-list-pattern').on(
-                'change', this.changePatternHandler.bind(this));
+            this.$el.find('#new-list-delimiter').on(
+                'change', this.changeDelimiterHandler.bind(this));
             this.$el.find('.selected input').on(
                 'click', this.changeCompositeHandler.bind(this));
         },
@@ -91,7 +90,7 @@ define(
             this.$el.find('#new-list-property').off(
                 'change', this.changeNameHandler.bind(this));
             this.$el.find('#new-list-pattern').off(
-                'change', this.changePatternHandler.bind(this));
+                'change', this.changeDelimiterHandler.bind(this));
             this.$el.find('.selected input').off(
                 'click', this.changeCompositeHandler.bind(this));
             this.$el.remove();

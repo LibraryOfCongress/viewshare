@@ -38,7 +38,7 @@ define(
         validate: function(propertyNames) {
             var existingNames = propertyNames || [],
             errors = CompositePropertyModel.prototype.validate.apply(this, [existingNames]);
-            if (!this.delimiter && !this.pattern) {
+            if (this.delimiter == null && this.pattern == null) {
                 errors.delimiter = 'Please select a delimiter or pattern.';
             }
             return errors;
