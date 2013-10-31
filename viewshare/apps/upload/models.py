@@ -448,11 +448,11 @@ class UploadTransaction(DataTransaction):
                 new_record["augmentation"] = "composite"
             elif "delimiter" in keys:
                 new_record["augmentation"] = "delimited-list"
-                new_record["extract"] = old_record["extract"]
+                new_record["source"] = old_record["extract"]
                 new_record["delimiter"] = old_record["delimiter"]
             elif "pattern" in keys:
                 new_record["augmentation"] = "pattern-list"
-                new_record["extract"] = old_record["extract"]
+                new_record["source"] = old_record["extract"]
                 new_record["pattern"] = old_record["pattern"]
             result[prop_name] = new_record
 

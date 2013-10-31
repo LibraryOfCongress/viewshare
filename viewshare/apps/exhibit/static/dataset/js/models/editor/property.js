@@ -120,11 +120,16 @@ define(
             if (dataJSON.items.length > 0) {
                 for (var i = 0; i < dataJSON.items.length; ++i) {
                     newItem = {
-                        id: dataJSON.items[i]._id,
+                        id: dataJSON.items[i].id,
                         value: dataJSON.items[i][this._id]
                     };
                     this.items.push(newItem);
                 }
+                this.items.sort(function (a, b) {
+                    var a_id = a && a.id || '',
+                        b_id = b && b.id || '';
+                    return a_id.localeCompare(b_id);
+                });
             } else {
                 // there are no items for this property
                 this.items = [{

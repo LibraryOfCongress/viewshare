@@ -45,10 +45,12 @@ define(
 
         /** Event handler when a .name input is changed */
         changeNameHandler: function(event) {
-            this.newPatternProperty.id(event.target.value);
+            this.newPatternProperty.label = event.target.value;
+            this.newPatternProperty.id(
+                event.target.value.replace(' ', '_', 'g'));
         },
 
-        /** Event handler when a .selcted input is clicked */
+        /** Event handler when a .selected input is clicked */
         changeCompositeHandler: function(event) {
             var i = 0,
             selected = this.$el.find('.selected input:checked'),
@@ -56,33 +58,39 @@ define(
             for (i; i < selected.length; ++i) {
                 composites.push(selected[i].value);
             }
-            this.newPatternProperty.composite(composites);
-        },
-
-        /** Modify this.newPatternProperty.delimiter based on user action */
-        changeDelimiterHandler: function(event) {
-            // TODO: Update this.augmentation to 'delimited-list'
-            // Update this.delimiter.
+            this.newPatternProperty.composite = composites;
         },
 
         /** Modify this.newPatternProperty.pattern based on user action */
         changePatternHandler: function(event) {
-            // TODO: Update this.augmentation to 'pattern-list'
-            // Update this.pattern.
+            this.newPatternProperty.augmentation = 'pattern-list';
+            this.newPatternProperty.delimiter = null;
+        },
+
+        /** Modify this.newPatternProperty.delimiter based on user action */
+        changeDelimiterHandler: function(event) {
+            var newDelimiter = $(event.target).find(':selected').val();
+            this.newPatternProperty.delimiter = newDelimiter;
+            this.newPatternProperty.augmentation = 'delimited-list';
+            this.newPatternProperty.pattern = null;
         },
 
         render: function() {
             this.$el.html(this.template(this));
             this.$el.find('#new-list-property').on(
                 'change', this.changeNameHandler.bind(this));
+            this.$el.find('#new-list-delimiter').on(
+                'change', this.changeDelimiterHandler.bind(this));
             this.$el.find('.selected input').on(
                 'click', this.changeCompositeHandler.bind(this));
         },
 
         /** Remove event bindings, child views, and DOM elements */
         destroy: function() {
-            this.$el.find('.name input').off(
+            this.$el.find('#new-list-property').off(
                 'change', this.changeNameHandler.bind(this));
+            this.$el.find('#new-list-pattern').off(
+                'change', this.changeDelimiterHandler.bind(this));
             this.$el.find('.selected input').off(
                 'click', this.changeCompositeHandler.bind(this));
             this.$el.remove();

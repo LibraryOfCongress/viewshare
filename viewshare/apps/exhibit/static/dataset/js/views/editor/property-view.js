@@ -95,7 +95,8 @@ define(
            // bind to DOM events
            this.$el.find('.name input').on(
                'change', this.changeLabelHandler.bind(this));
-           this.$el.find('.types select').on( 'change', this.changeTypeHandler.bind(this));
+           this.$el.find('.types select').on(
+               'change', this.changeTypeHandler.bind(this));
            return this;
        },
 
