@@ -114,6 +114,9 @@ define(
                 if (errors.hasOwnProperty('composite')) {
                     this.renderValidationError(errors.composite);
                 }
+                if (errors.hasOwnProperty('delimiter')) {
+                    this.renderValidationError(errors.delimiter);
+                }
                 return false;
             }
         },

@@ -2,11 +2,13 @@
 define(
     [
         'jquery',
-        'models/composite-property'
+        'models/composite-property',
+        'observer'
     ],
     function (
         $,
-        CompositePropertyModel
+        CompositePropertyModel,
+        Observer
     ) {
     'use strict';
     /**
@@ -16,6 +18,7 @@ define(
      * @param {string} options.pattern - pattern used to separate values
      */
     var PatternPropertyModel = function(options) {
+        this.Observer = new Observer().Observer;
         this.initialize.apply(this, [options]);
     };
 
@@ -35,7 +38,7 @@ define(
         validate: function(propertyNames) {
             var existingNames = propertyNames || [],
             errors = CompositePropertyModel.prototype.validate.apply(this, [existingNames]);
-            if (!this.delimiter || !this.pattern) {
+            if (!this.delimiter && !this.pattern) {
                 errors.delimiter = 'Please select a delimiter or pattern.';
             }
             return errors;
@@ -43,9 +46,13 @@ define(
 
         /** Return a simple object representation of this Property */
         toJSON: function() {
-            var jsonProperty = CompositeModel.prototype.toJSON.apply(this, []);
+            var jsonProperty = CompositePropertyModel.prototype.toJSON.apply(this, []);
             jsonProperty.delimiter = this.delimiter;
             jsonProperty.pattern = this.pattern;
+            if (this.composite.length > 0 && this.source == null) {
+                this.source = this.composite[0];
+            }
+            jsonProperty.source = this.source;
             return jsonProperty;
         }
     });
