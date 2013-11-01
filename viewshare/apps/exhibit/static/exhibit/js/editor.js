@@ -49,7 +49,7 @@
                 "<button class='create-facet-button btn btn-small btn-info' href='#addWidgetModal_" + container_id + "' data-toggle='modal'><i class='icon-plus'></i> Add a Widget</button>" +
                 "</div>");
 
-            var dialog =$("<div id='addWidgetModal_" + container_id + "' class='modal hide fade' tabindex='-1' role='dialog' aria-labelledby='addWidgetModalLabel' aria-hidden='true'>" +
+            var dialog =$("<div id='addWidgetModal_" + container_id + "' class='widget-editor modal hide fade' tabindex='-1' role='dialog' aria-labelledby='addWidgetModalLabel' aria-hidden='true'>" +
                           "</div>").appendTo('body');
 
             dialog.modal({
@@ -100,7 +100,7 @@
                        "<button class='create-view-button btn btn-small btn-info' href='#addViewModal' data-toggle='modal'><i class='icon-plus'></i> Add a View</button>" +
                        "</li>");
 
-            var dialog =$("<div id='addViewModal' class='modal hide fade' tabindex='-1' role='dialog' aria-labelledby='addViewModalLabel' aria-hidden='true'>" +
+            var dialog =$("<div id='addViewModal' class='widget-editor modal hide fade' tabindex='-1' role='dialog' aria-labelledby='addViewModalLabel' aria-hidden='true'>" +
                           "</div>").appendTo('body');
 
             dialog.modal({
