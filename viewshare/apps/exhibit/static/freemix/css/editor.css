@@ -1019,18 +1019,18 @@ padding-right: 0px;
 
 /* Expand widget editor modal full-screen */
 
-#addViewModal, #addWidgetModal {
+.widget-editor {
     /*display: block;*/
     width: 100% !important;
     left: 0 !important;
     margin: 0 !important;
     height: 100% !important;
-    margin-top: 0!important;
+    margin-top: 0 !important;
     top: 0!important;
 
 }
 
-#addViewModal .modal-body, #addWidgetModal .modal-body{
+.widget-editor .modal-body {
     max-height: 800px !important;
 }
 
