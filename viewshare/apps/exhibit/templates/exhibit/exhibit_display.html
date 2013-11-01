@@ -281,8 +281,7 @@
     </div>
 
     <p class="center">{% trans "Created by" %}
-        <a href="{{ exhibit.owner.get_profile.get_absolute_url }}">{{ exhibit.owner.username }}</a> {% trans "based on" %}
-        <a href="{{ exhibit.dataset.get_absolute_url }}">{{ exhibit.dataset.title }}</a>.
+        <a href="{{ exhibit.owner.get_profile.get_absolute_url }}">{{ exhibit.owner.username }}</a>.
     </p>
 {% endblock %}
 
