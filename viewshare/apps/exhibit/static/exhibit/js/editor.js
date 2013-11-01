@@ -29,7 +29,9 @@
         });
     };
     $.fn.facetContainer = function(properties) {
+        var container_id = 0;
         return this.each(function() {
+            container_id += 1;
             var facetContainer = $.extend({},Freemix.facet.container);
             facetContainer._selector = $(this);
             facetContainer.id = facetContainer.findWidget().attr("id");
@@ -44,10 +46,10 @@
             w.data("model", facetContainer);
             w.addClass("ui-widget-content").addClass("facet-container");
             w.append("<div class='create-facet'>" +
-                "<button class='create-facet-button btn btn-small btn-info' href='#addWidgetModal' data-toggle='modal'><i class='icon-plus'></i> Add a Widget</button>" +
+                "<button class='create-facet-button btn btn-small btn-info' href='#addWidgetModal_" + container_id + "' data-toggle='modal'><i class='icon-plus'></i> Add a Widget</button>" +
                 "</div>");
 
-            var dialog =$("<div id='addWidgetModal' class='modal hide fade' tabindex='-1' role='dialog' aria-labelledby='addWidgetModalLabel' aria-hidden='true'>" +
+            var dialog =$("<div id='addWidgetModal_" + container_id + "' class='modal hide fade' tabindex='-1' role='dialog' aria-labelledby='addWidgetModalLabel' aria-hidden='true'>" +
                           "</div>").appendTo('body');
 
             dialog.modal({
@@ -98,7 +100,7 @@
                        "<button class='create-view-button btn btn-small btn-info' href='#addViewModal' data-toggle='modal'><i class='icon-plus'></i> Add a View</button>" +
                        "</li>");
 
-            var dialog =$("<div id='addViewModal' class='modal hide fade' tabindex='-1' role='dialog' aria-labelledby='addViewModalLabel' aria-hidden='true'>" + 
+            var dialog =$("<div id='addViewModal' class='modal hide fade' tabindex='-1' role='dialog' aria-labelledby='addViewModalLabel' aria-hidden='true'>" +
                           "</div>").appendTo('body');
 
             dialog.modal({
