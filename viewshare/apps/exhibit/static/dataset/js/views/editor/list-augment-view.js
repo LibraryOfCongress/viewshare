@@ -47,7 +47,7 @@ define(
         changeNameHandler: function(event) {
             this.newPatternProperty.label = event.target.value;
             this.newPatternProperty.id(
-                event.target.value.replace(' ', '_', 'g'));
+                event.target.value.replace(' ', '_', 'g').toLowerCase());
         },
 
         /** Event handler when a .selected input is clicked */

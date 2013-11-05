@@ -35,8 +35,9 @@ define(
             this.recordNavView = null;
             // events
             this.model.Observer('loadSuccess').subscribe(
-                this.render.bind(this)
-            );
+                this.render.bind(this));
+            this.model.Observer('newProperty').subscribe(
+                this.addProperty.bind(this));
         },
 
         /** Compile the template we will use to render the View */
@@ -71,6 +72,32 @@ define(
                 }).bind(this));
             }
             return this;
+        },
+
+        /** Add a new Property to the DOM */
+        addProperty: function(newPropertyModel) {
+            var nameInput, newProperty, propertyEl;
+            var newPropertyEl = $('<tr></tr>');
+            var propertiesEl = this.$el.find('#properties tr');
+            var propertyTr = null;
+            for (var i = 0; i < propertiesEl.length; i++) {
+                propertyEl = $(propertiesEl[i]);
+                nameInput = propertyEl.find('td.name input');
+                if (nameInput.val().localeCompare(newPropertyModel.label) >= 0) {
+                    propertyTr = propertyEl;
+                    break;
+                }
+            }
+            newProperty = new PropertyView({
+                model: newPropertyModel,
+                $el: newPropertyEl
+            });
+            this.propertyViews.push(newProperty);
+            if (propertyTr == null) {
+                propertiesEl[propertiesEl.length - 1].after(newPropertyEl).animate();
+            } else {
+                propertyTr.before(newPropertyEl).animate();
+            }
         },
 
         /** Shortcut to properties.length for this model */
