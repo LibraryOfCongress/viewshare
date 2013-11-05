@@ -17,13 +17,9 @@
 {% endblock %}
 
 {% block head_data %}
-    {% for url in data_urls %}
-        <link rel="exhibit/data" href="{{ url }}"/>
-    {% endfor %}
-    <link rel="exhibit/data" href="{{ dataset_properties }}"/>
+    <link rel="exhibit/data" href="{% url 'draft_exhibit_all_data' owner=exhibit.owner slug=exhibit.slug %}"/>
     <link rel="freemix/exhibit_profile" href="{{ exhibit_profile_url }}"/>
-    <link rel="exhibit/owner" href="{{ owner }}"/>
-    <link rel="exhibit/slug" href="{{ exhibit.slug }}"/>
+    <link rel="freemix/property_list" href="{% url 'draft_exhibit_property_list' owner=exhibit.owner.username slug=exhibit.slug %}"/>
 {% endblock %}
 
 {% block head_css %}
@@ -105,7 +101,7 @@
       <div class="row-fluid">
         <div class="span6">
           <div class="exhibit-metadata">
-            {% trans "Created"%}
+            {% trans "Last Modified"%}
             <span class="exhibit-modified-data">{{exhibit.modified|naturalday}}</span>
             {% trans "by" %}
             <span class="exhibit-creator">

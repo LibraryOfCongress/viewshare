@@ -14,11 +14,8 @@
 {% block head_data %}
     {{ block.super }}
 
-    {% for data_url in property_data_urls %}
-        <link rel="exhibit/data" href="{{ data_url }}"/>
-    {% endfor %}
     <link rel="exhibit/data"
-          href="{% url 'exhibit_property_list' owner=object.owner.username slug=object.slug %}"/>
+          href="{% url 'exhibit_data' owner=object.owner.username slug=object.slug %}"/>
 
     <link rel="freemix/exhibit_profile"
           href="{% url 'exhibit_profile_json' owner=object.owner.username slug=object.slug %}"/>
@@ -146,9 +143,9 @@
                                     {% trans "Created" %}
                                     <span class="exhibit-modified-data">{{ exhibit.modified|naturalday}}</span>
                                     {% trans "by" %}
-				    <span class="exhibit-creator">
-				      <a href="{% url 'profile_detail' exhibit.owner.username %}">{{ exhibit.owner.username }}</a>
-				    </span>
+                                    <span class="exhibit-creator">
+                                      <a href="{% url 'profile_detail' exhibit.owner.username %}">{{ exhibit.owner.username }}</a>
+                                    </span>
                                 </div>
 
                             </div>
@@ -270,8 +267,7 @@
     </div>
 
     <p class="center">{% trans "Created by" %}
-        <a href="{{ exhibit.owner.get_profile.get_absolute_url }}">{{ exhibit.owner.username }}</a> {% trans "based on" %}
-        <a href="{{ exhibit.dataset.get_absolute_url }}">{{ exhibit.dataset.title }}</a>.
+        <a href="{{ exhibit.owner.get_profile.get_absolute_url }}">{{ exhibit.owner.username }}</a>.
     </p>
 {% endblock %}
 

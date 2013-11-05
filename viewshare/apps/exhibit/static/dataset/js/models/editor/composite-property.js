@@ -3,10 +3,12 @@ define(
     [
         'jquery',
         'models/property',
+        'observer'
     ],
     function (
         $,
-        PropertyModel
+        PropertyModel,
+        Observer
     ) {
     'use strict';
 
@@ -18,6 +20,7 @@ define(
      * create this CompositeProperty
      */
     var CompositePropertyModel = function(options) {
+        this.Observer = new Observer().Observer;
         this.initialize.apply(this, [options]);
     };
 
@@ -26,7 +29,41 @@ define(
             PropertyModel.prototype.initialize.apply(this, [options]);
             this.augmentation = options.augmentation;
             this.composite = options.composite;
-            this.statusURL =  + this.dataURL + '/status/';
+        },
+
+        /** Send this Property's attributes to the server to be saved */
+        createProperty: function() {
+            var xhr = $.ajax({
+                type: "POST",
+                url: this.propertyURL,
+                data: JSON.stringify(this.toJSON())
+            })
+            .done(this.createPropertySuccess.bind(this))
+            .fail(this.createPropertyError.bind(this));
+            return xhr;
+        },
+
+        /**
+         * Succeeded in sending property attributes to the server
+         * @param {object} successJSON - values for this property
+         */
+        createPropertySuccess: function(successJSON) {
+            var augmentXhr;
+            if (successJSON.hasOwnProperty('property_url')) {
+                this.propertyURL = successJSON.property_url;
+            }
+            if (successJSON.hasOwnProperty('data_url')) {
+                this.dataURL = successJSON.data_url;
+            }
+            this.Observer('createPropertySuccess').publish();
+            augmentXhr = this.augmentData();
+            return augmentXhr;
+        },
+
+        /** Failed while sending property attributes to the server */
+        createPropertyError: function(jqxhr, textStatus, error) {
+            this.Observer('createPropertyError').publish(
+                {status: textStatus, error: error});
         },
 
         /**
@@ -34,7 +71,7 @@ define(
          * on the server
          */
         augmentData: function() {
-            var xhr = PropertyModel.prototype.loadData.apply(this, [])
+            var xhr = $.getJSON(this.dataURL)
             .done(this.augmentDataSuccess.bind(this))
             .fail(this.augmentDataFailure.bind(this));
             return xhr;
@@ -46,9 +83,14 @@ define(
          * @param {object} successJSON - JSON related to successful request
          */
         augmentDataSuccess: function(successJSON) {
-            var xhr = $.getJSON(this.statusURL)
+            var xhr;
+            if ( successJSON && successJSON.hasOwnProperty('augmentation_status')) {
+                this.statusURL = successJSON.augmentation_status;
+            }
+            xhr = $.getJSON(this.statusURL)
             .done(this.augmentStatusSuccess.bind(this))
             .fail(this.augmentStatusFailure.bind(this));
+            return xhr;
         },
 
         /**
@@ -56,20 +98,23 @@ define(
          * depends on the response. We have either:
          * 1. augmented successfully
          * 2. augmented with errors
-         * 3. have not finished augmenting
+         * 3. not finished augmenting
          */
-        augmentStatusSuccess: function(successJSON) {
-            // TODO: replace the following pseudo-code
-            if ('finished processing successfully' === 'true') {
+        augmentStatusSuccess: function(successJSON, textStatus, xhr) {
+            if (xhr.status === 201) {
+                // data returned as expected and is available
+                // at xhr.getHeader('location') we should probably
+                // react to 'augmentDataSuccess' in the EditorView
                 this.Observer('augmentDataSuccess').publish();
-            } else if ('finished processing with errors' === 'true') {
-                // TODO: research how we can error at this point
-                this.Observer('augmentDataFailure').publish(
-                    {status: 'insert status', error: 'insert error'}
-                );
-            } else if ('have not finished processing' === 'true') {
+                // TODO: remove this and show augmented data in the view
+                location.reload();
+            } else if (xhr.status === 200) {
                 // poll for status updates
-                setTimeout(this.augmentDataSuccess.apply(this, []), 5000);
+                setTimeout(this.augmentDataSuccess.bind(this), 5000);
+            } else {
+                // something unexpected happened
+                this.augmentStatusFailure(
+                    xhr, textStatus, 'Unexpected augmentStatusSuccess()');
             }
         },
 

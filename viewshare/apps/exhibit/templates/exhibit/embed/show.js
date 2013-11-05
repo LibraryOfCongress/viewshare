@@ -5,16 +5,7 @@ window.Freemix = window.Freemix || {};
 
 window.Freemix.profile = {{ metadata|safe }};
 
-var data = [];
-{% for d in data %}
-   data.concat({{d|safe}});
-{% endfor %}
-
-window.Freemix.data ={
-    "items": data,
-    "properties": {{properties|safe}}["properties"]
-
-};
+window.Freemix.data ={{data|safe}};
 var FreemixEmbed = {};
 FreemixEmbed.insert = function(tag, type, attrs) {
     var ans = document.createElement(tag);
@@ -58,8 +49,10 @@ function load() {
 
             var randTmpId = 'freemix-embed-shell-' + Math.round(Math.random()*1000);
             var title_html = "<div id='titles' class='colhead'>" +
-                            "<h1 id='title' title='Title'>{{ title }}</h1>" +
-                            "<h2 id='subtitle' title='Subtitle'>{{ description }}</h2>" +
+                            "<h1 id='title' title='Title'>" +
+                            {{ title|safe }} + "</h1>" +
+                            "<h2 id='subtitle' title='Subtitle'>" +
+                            {{ description|safe }} + "</h2>" +
                             "</div>";
             $('#{{where}}').after('<div id="' + randTmpId + '" class="freemix-embed-shell freemix-themeable container_12">' +
                     '<div class="ui-widget-content ui-helper-clearfix"><div class="freemix-themeable">' +

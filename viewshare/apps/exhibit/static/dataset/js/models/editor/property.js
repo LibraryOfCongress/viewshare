@@ -18,8 +18,6 @@ define(
      * @param {string} options.id - ID of the property
      * @param {string} options.label - Label for display purposes
      * @param {string} options.type - Type of the property.
-     * @param {string} options.owner - URL to access type-related data
-     * @param {string} options.slug - URL to access value-related data
      * Current types include:
      * * text
      * * URL
@@ -36,15 +34,25 @@ define(
 
     $.extend(PropertyModel.prototype, {
         initialize: function(options) {
-            this.id = options.id;
+            this._id = options.id;
             this.label = options.label;
             this.type = options.type;
-            this.items = options.items;
+            this.items = options.items || [];
             this.currentItemIndex = null;
-            this.owner = options.owner;
-            this.slug = options.slug;
-            this.propertyURL = '/views/' + this.owner + '/' + this.slug + '/draft/properties/' + this.id + '/';
-            this.dataURL = this.propertyURL + 'data/';
+            if (options.hasOwnProperty('property_url')) {
+                this.propertyURL = options.property_url;
+            }
+            if (options.hasOwnProperty('data_url')) {
+                this.dataURL = options.data_url;
+            }
+        },
+
+        /** Getter/Setter for this._id */
+        id: function(value) {
+            if (value) {
+                this._id = value;
+            }
+            return this._id;
         },
 
         /** Return the current value from this.items. */
@@ -74,7 +82,7 @@ define(
             var xhr = $.ajax({
                 type: "PUT",
                 url: this.propertyURL,
-                data: JSON.stringify(this.toJSON()),
+                data: JSON.stringify(this.toJSON())
             })
             .done(this.updatePropertySuccess.bind(this))
             .fail(this.updatePropertyError.bind(this));
@@ -113,10 +121,15 @@ define(
                 for (var i = 0; i < dataJSON.items.length; ++i) {
                     newItem = {
                         id: dataJSON.items[i].id,
-                        value: dataJSON.items[i][this.id]
+                        value: dataJSON.items[i][this._id]
                     };
                     this.items.push(newItem);
                 }
+                this.items.sort(function (a, b) {
+                    var a_id = a && a.id || '',
+                        b_id = b && b.id || '';
+                    return a_id.localeCompare(b_id);
+                });
             } else {
                 // there are no items for this property
                 this.items = [{
@@ -147,6 +160,8 @@ define(
                 errors.name = 'Please enter a name for the new property.';
             } else if (existingNames.indexOf(this.label) >= 0) {
                 errors.name = 'Please enter a unique property name.';
+            } else if (this.label.match(/[^\sa-zA-Z0-9]/)) {
+                errors.name = 'Property name can only contain letters, numbers, and spaces.';
             }
             return errors;
         },
@@ -154,10 +169,10 @@ define(
         /** Return a simple object representation of this Property */
         toJSON: function() {
             return {
-                id: this.id,
+                id: this._id,
                 valueType: this.type,
                 label: this.label
-            };
+            }
         }
     });
 

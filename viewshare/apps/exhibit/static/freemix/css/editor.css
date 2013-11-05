@@ -474,8 +474,14 @@ a.identify-type-selector:hover {
 /* Multiselect
 ----------------------------------*/
 
+/* multiselect styles */
+
 .ui-multiselect {
-    border: solid 1px; font-size: 0.8em;
+  font-size: 1.0em;
+  -webkit-border-radius: 4px 4px 0 0;
+     -moz-border-radius: 4px 4px 0 0;
+          border-radius: 4px 4px 0 0;
+  border: 1px solid #ddd;
 }
 
 .ui-multiselect ul {
@@ -488,9 +494,9 @@ a.identify-type-selector:hover {
     margin: 0;
     padding: 0;
     cursor: default;
-    line-height: 20px;
-    height: 20px;
-    font-size: 11px;
+    line-height: 30px;
+    height: 30px;
+    font-size: 12px;
     list-style: none;
 }
 
@@ -534,7 +540,8 @@ a.identify-type-selector:hover {
     margin: 0;
     border: 0;
     float:left;
-    border-left: 1px solid;
+    width: 250px;
+    border-left: 1px solid #ddd;
 }
 
 .ui-multiselect ul.available {
@@ -566,7 +573,7 @@ a.identify-type-selector:hover {
 
 .ui-multiselect .ui-widget-header {
     border: none;
-    font-size: 11px;
+    font-size: 12px;
     margin-bottom: 1px;
 }
  
@@ -588,6 +595,7 @@ a.identify-type-selector:hover {
 .ui-multiselect li span.ui-icon-arrowthick-2-n-s {
     position: absolute;
     left: 2px;
+    margin-top: 5px;
 }
 
 .ui-multiselect li a.action {
@@ -598,11 +606,11 @@ a.identify-type-selector:hover {
 
 .ui-multiselect input.search {
     float: left;
-    height: 13px;
+    height: 20px;
     opacity: 0.9;
     padding: 1px;
     margin: 4px;
-    width: 90px;
+    width: 120px;
 }
 
 form.uniForm .ctrlHolder.multiselect ul li {
@@ -643,11 +651,6 @@ form.uniForm .ctrlHolder.multiselect ul li {
     color: #555;
 }
 
-/* multiselect styles */
-.multiselect {
-    width: 460px;
-    height: 200px;
-}
 
 a.field_type {
     text-decoration: none;
@@ -1011,23 +1014,23 @@ padding-right: 0px;
 /* remove spurious banner on top of editing pane */
 
 .exhibit_edit {
-margin-top: -22px;
+  margin-top: -22px;
 }
 
 /* Expand widget editor modal full-screen */
 
-#addViewModal, #addWidgetModal {
+.widget-editor {
     /*display: block;*/
     width: 100% !important;
     left: 0 !important;
     margin: 0 !important;
     height: 100% !important;
-    margin-top: 0!important;
+    margin-top: 0 !important;
     top: 0!important;
 
 }
 
-#addViewModal .modal-body, #addWidgetModal .modal-body{
+.widget-editor .modal-body {
     max-height: 800px !important;
 }
 

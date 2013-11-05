@@ -1,3 +1,5 @@
-<a id="prev-record" class="btn" href="#"><i class="icon-arrow-left"></i></a>
-<span>Record <span id="current-record-number">{{ currentRecordNumber }}</span> of {{ totalRecordCount }}</span>
-<a id="next-record" class="btn" href="#"><i class="icon-arrow-right"></i></a>
+<div class="btn-group">
+  <button id="prev-record" class="btn btn-small" href="#"><i class="icon-arrow-left"></i></button>
+  <button class="btn btn-small disabled">Record <span id="current-record-number">{{ currentRecordNumber }}</span> of {{ totalRecordCount }}</button>
+  <button id="next-record" class="btn btn-small" href="#"><i class="icon-arrow-right"></i></button>
+</div>

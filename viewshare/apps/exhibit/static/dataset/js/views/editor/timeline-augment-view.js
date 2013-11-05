@@ -32,10 +32,9 @@ define(
                 label: undefined,
                 type: 'date',
                 value: [],
-                owner: options.propertyCollection.owner,
-                slug: options.propertyCollection.slug,
-                augmentation: 'date',
-                composite: []
+                augmentation: 'composite',
+                composite: [],
+                property_url: options.propertyCollection.propertiesURL
             });
         },
 

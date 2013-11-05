@@ -3,7 +3,6 @@ import logging
 import uuid
 
 from django.contrib.auth.models import User
-from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db import transaction as db_tx
@@ -103,6 +102,32 @@ class Exhibit(TimeStampedModel):
             return self.draftexhibit
         return self.publishedexhibit.get_draft()
 
+    def merge_data(self):
+        qs = self.properties.all()
+
+        from viewshare.apps.exhibit.serializers import ExhibitPropertyListSerializer
+        serializer = ExhibitPropertyListSerializer(self,
+                                                   queryset=qs)
+
+        q = models.Q(exhibit_property__exhibit=self)
+        data = PropertyData.objects.filter(q)
+
+        records = {}
+
+        for property_data in data.all():
+            prop = property_data.exhibit_property.name
+            for item in property_data.json:
+                key = (item["id"], item["label"])
+                record = records.get(key, None)
+                if not record:
+                    record = {"id": item["id"], "label": item["label"]}
+                    records[key] = record
+                record[prop] = item[prop]
+        return {
+            "properties": serializer.data,
+            "items": [records[key] for key in records.keys()]
+        }
+
 
 class PublishedExhibit(Exhibit):
     """
@@ -123,21 +148,24 @@ class PublishedExhibit(Exhibit):
         return self.title
 
     def get_draft(self):
-        try:
-            return self.draftexhibit
-        except ObjectDoesNotExist:
-            pass
-        draft = DraftExhibit.objects.create(parent=self,
-                                            slug=self.slug,
-                                            profile=self.profile,
-                                            canvas=self.canvas,
-                                            owner=self.owner,
-                                            is_draft=True)
-        draft.save()
 
-        from viewshare.apps.exhibit.serializers import ExhibitPropertyListSerializer
+        defaults = {
+            'slug': self.slug,
+            'profile': self.profile,
+            'canvas': self.canvas,
+            'owner': self.owner,
+            'is_draft': True,
+        }
+
+        draft, created = DraftExhibit.objects.get_or_create(parent=self,
+                                                            defaults=defaults)
+        if not created:
+            return draft
+
+        from .serializers import ExhibitPropertyListSerializer
         data = ExhibitPropertyListSerializer(self,
-                                             queryset=self.properties).data
+                                             queryset=self.properties,
+                                             draft=True).data
         out = ExhibitPropertyListSerializer(draft, data=data)
         out.save()
 
@@ -291,7 +319,7 @@ class ExhibitProperty(models.Model):
     for reference in published exhibits and basic properties.
     """
 
-    default_manager = ExhibitPropertyManager()
+    objects = ExhibitPropertyManager()
 
     classname = models.CharField(max_length=32, editable=False, null=True)
 
@@ -300,7 +328,10 @@ class ExhibitProperty(models.Model):
 
     label = models.CharField(_('label'), max_length=255)
 
-    name = models.CharField(_('name'), max_length=255)
+    name = models.SlugField(_('name'),
+                            max_length=255,
+                            editable=True,
+                            blank=False)
 
     value_type = models.CharField(choices=[(k, v) for k, v in
                                            VALUE_TYPES.iteritems()],
@@ -316,6 +347,25 @@ class ExhibitProperty(models.Model):
     def save(self, *args, **kwargs):
         if self.classname is None:
             self.classname = self.__class__.__name__
+        if not self.name:
+            slug_len = self.__class__._meta.get_field("name").max_length
+            original_slug = slugify(self.label)
+
+            qs = self.__class__.objects.filter(exhibit=self.exhibit)
+            if self.pk:
+                qs.exclude(pk=self.pk)
+            slug = original_slug[:slug_len]
+            next = 2
+            while not slug or qs.filter(name=slug):
+                slug = original_slug
+                end = '%s%s' % ('-', next)
+                end_len = len(end)
+                if slug_len and len(slug) + end_len > slug_len:
+                    slug = slug[:slug_len - end_len]
+                    slug = self._slug_strip(slug)
+                slug = '%s%s' % (slug, end)
+                next += 1
+            self.name = slug
         return super(ExhibitProperty, self).save(*args, **kwargs)
 
     def get_concrete(self):
@@ -332,6 +382,14 @@ class ExhibitProperty(models.Model):
             "slug": self.slug
         })
 
+    def get_related_properties(self):
+        """
+        Return the list of all properties that this property depends on
+
+        Augmented property types should override this.
+        """
+        return []
+
 
 class CompositeProperty(ExhibitProperty):
     """
@@ -343,6 +401,9 @@ class CompositeProperty(ExhibitProperty):
     composite = models.ManyToManyField(ExhibitProperty,
                                        through='PropertyReference',
                                        related_name="+")
+
+    def get_related_properties(self):
+        return self.composite.all()
 
 
 class PropertyReference(models.Model):
@@ -372,6 +433,9 @@ class ShreddedListProperty(ExhibitProperty):
 
     class Meta:
         abstract = True
+
+    def get_related_properties(self):
+        return [self.source]
 
 
 class DelimitedListProperty(ShreddedListProperty):
@@ -421,7 +485,7 @@ class DataTransaction(TimeStampedModel):
     is_complete = models.BooleanField(default=False)
     result = models.TextField(null=True, blank=True)
 
-    class meta:
+    class Meta:
         abstract = True
 
     def __init__(self, *args, **kwargs):
@@ -476,14 +540,16 @@ class DataTransaction(TimeStampedModel):
 
     def failure(self, message):
         self.status = TX_STATUS["failure"]
-        self.result = {"message": message}
+        self.result = self.get_result_doc(message)
 
         self.logger.error("Error for transaction %s: %s" %
                           (self.tx_id, message))
         self.save()
 
-    def success(self):
+    def success(self, message):
         self.status = TX_STATUS["success"]
+        if message:
+            self.result = self.get_result_doc(message)
         self.save()
 
     def complete(self):
@@ -496,3 +562,8 @@ class DataTransaction(TimeStampedModel):
         self.result = None
         self.is_complete = True
         self.save()
+
+    def get_result_doc(self, message):
+        if isinstance(message, dict):
+            return json.dumps(message)
+        return json.dumps({"message": message})

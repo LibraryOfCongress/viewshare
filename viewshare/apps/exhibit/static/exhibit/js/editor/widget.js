@@ -71,7 +71,7 @@
             template.trigger(view.refreshEvent);
 
         });
-        selector.multiselect({width: 400, height: 125, sortable: true});
+        selector.multiselect({width: 500, height: 250, sortable: true});
 
     };
 

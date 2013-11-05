@@ -19,8 +19,8 @@ define(
     /**
      * Represents the collection of Properties in a view
      * @constructor
-     * @param {string} options.owner - URL to access type-related data
-     * @param {string} options.slug - URL to access value-related data
+     * @param {string} options.dataURL - URL to complete dataset
+     * @param {string} options.propertiesURL - URL to the list of all properties
      */
     var
     PropertyCollection = function(options) {
@@ -31,9 +31,7 @@ define(
 
     $.extend(PropertyCollection.prototype, PropertyCollectionObserver, {
         initialize: function(options) {
-            this.owner = options.owner;
-            this.slug = options.slug;
-            this.propertiesURL = '/views/' + this.owner + '/' + this.slug + '/draft/properties/';
+            this.propertiesURL = options.propertiesURL;
             this.properties = [];
         },
 
@@ -60,7 +58,7 @@ define(
                 'uri',
                 'type',
                 'change',
-                'changedItem',
+                'changedItem'
             ];
             var loadDataPromises = [];
             this.properties = [];
@@ -71,15 +69,18 @@ define(
                     args = {
                         id: id,
                         label: property.label,
-                        type: property.valueType,
-                        items: [],
-                        owner: this.owner,
-                        slug: this.slug
+                        type: property.valueType
                     };
+                    if (property.hasOwnProperty('property_url')) {
+                        args.property_url = property.property_url;
+                    }
+                    if (property.hasOwnProperty('data_url')) {
+                        args.data_url = property.data_url;
+                    }
                     if (property.hasOwnProperty('augmentation')) {
                         args.augmentation = property.augmentation;
                         args.composite = property.composite;
-                        if (['date', 'location'].indexOf(property.augmentation) >= 0) {
+                        if (property.augmentation === 'composite') {
                             this.properties.push(new CompositePropertyModel(args));
                         } else if (['pattern-list', 'delimited-list'].indexOf(
                                 property.augmentation) >= 0) {
@@ -141,7 +142,7 @@ define(
             var options = [];
             for (i = 0; i < this.properties.length; ++i) {
                 option = {
-                    id: this.properties[i].id,
+                    id: this.properties[i].id(),
                     label: this.properties[i].label
                 }
                 options.push(option);

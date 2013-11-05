@@ -32,10 +32,9 @@ define(
                 label: undefined,
                 type: 'location',
                 value: [],
-                owner: options.propertyCollection.owner,
-                slug: options.propertyCollection.slug,
-                augmentation: 'location',
-                composite: []
+                augmentation: 'composite',
+                composite: [],
+                property_url: options.propertyCollection.propertiesURL
             });
         },
 
@@ -45,6 +44,8 @@ define(
         /** Event handler when a .name input is changed */
         changeNameHandler: function(event) {
             this.newCompositeProperty.label = event.target.value;
+            this.newCompositeProperty.id(
+                event.target.value.replace(' ', '_', 'g'));
         },
 
         /** Event handler when a .selcted input is clicked */

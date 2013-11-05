@@ -1,8 +1,8 @@
 /*global jQuery */
 (function($) {
-    
+
     function setupEditDetails() {
-	$('#edit_exhibit_form_template').load($("#detail_edit_button").attr("rel"));
+        $('#edit_exhibit_form_template').load($("#detail_edit_button").attr("rel"));
     }
 
 

@@ -9,6 +9,7 @@
 
 {% block body %}
 <div class="exhibit_edit">
+ <br />
   <div class="accordion" id="accordion-exhibit">
     <div class="accordion-group">
       <div class="accordion-heading">
@@ -35,12 +36,12 @@
             <div class="row-fluid">
               <div class="span6">
                 <div class="exhibit-metadata">
-                  {% trans "Created"%}
+                  {% trans "Last Modified"%}
                   <span class="exhibit-modified-data">{{exhibit.modified|naturalday}}</span>
                   {% trans "by" %}
                   <span class="exhibit-creator">
-		    <a href="{% url 'profile_detail' exhibit.owner.username %}">{{exhibit.owner.username}}</a>
-		  </span>
+                    <a href="{% url 'profile_detail' exhibit.owner.username %}">{{exhibit.owner.username}}</a>
+                  </span>
                 </div>
               </div>
               <div class="span6">
@@ -64,13 +65,17 @@
   </div> <!-- accordion -->
 
   <div id="contents">
-    <div id="notifications"></div>
+    <div id="notifications">
+      <div class="editor-notification"></div>
+    </div>
     <div id="editor"></div>
   </div>
+</div> <!-- .exhibit-edit -->
 {% endblock body %}
 
 {% block extra_scripts %}
     {% require_module 'editor-main' %}
+
 {% endblock %}
 
 {% block builder_templates %}{% endblock %}
