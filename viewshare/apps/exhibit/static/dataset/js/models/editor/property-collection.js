@@ -148,6 +148,12 @@ define(
                 options.push(option);
             }
             return options;
+        },
+
+        /** Add a new property to this.properties */
+        addProperty: function(newProperty) {
+            this.properties.push(newProperty);
+            this.Observer('newProperty').publish(newProperty);
         }
 
     });

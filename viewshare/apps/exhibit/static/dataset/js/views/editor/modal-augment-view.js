@@ -104,6 +104,8 @@ define(
             errors = newProperty.validate(this.model.propertyLabels());
             if ($.isEmptyObject(errors)) {
                 this.$el.modal('hide');
+                newProperty.Observer('loadDataSuccess').subscribe(
+                    this.model.addProperty.bind(this.model));
                 return newProperty.createProperty();
             } else {
                 // display client-side form validation errors
