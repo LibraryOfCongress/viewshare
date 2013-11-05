@@ -77,6 +77,28 @@ define(
             this.Observer('changeCurrentItem').publish();
         },
 
+        /** Pull this Property's attributes from the server */
+        loadProperty: function() {
+            var xhr = $.getJSON(this.propertyURL)
+            .done(this.loadPropertySuccess.bind(this))
+            .fail(this.loadPropertyError.bind(this));
+            return xhr;
+        },
+
+        /**
+         * Succeeded in getting property attributes from the server
+         * @param {object} successJSON - values for this property
+         */
+        loadPropertySuccess: function(successJSON) {
+            this.Observer('loadPropertySuccess').publish();
+        },
+
+        /** Failed while getting property attributes to the server */
+        loadPropertyError: function(jqxhr, textStatus, error) {
+            this.Observer('loadPropertyError').publish(
+                {status: textStatus, error: error});
+        },
+
         /** Send this Property's attributes to the server to be saved */
         updateProperty: function() {
             var xhr = $.ajax({
@@ -138,7 +160,7 @@ define(
                 }];
             }
             this.currentItemIndex = 0;
-            this.Observer('loadDataSuccess').publish();
+            this.Observer('loadDataSuccess').publish(this);
         },
 
         /** Failed while retrieving data for this property from the server */

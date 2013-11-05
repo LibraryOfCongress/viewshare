@@ -35,8 +35,9 @@ define(
             this.recordNavView = null;
             // events
             this.model.Observer('loadSuccess').subscribe(
-                this.render.bind(this)
-            );
+                this.render.bind(this));
+            this.model.Observer('newProperty').subscribe(
+                this.addProperty.bind(this));
         },
 
         /** Compile the template we will use to render the View */
@@ -73,6 +74,34 @@ define(
             return this;
         },
 
+        /** Add a new Property to the DOM */
+        addProperty: function(newPropertyModel) {
+            var nameInput, newProperty, propertyEl;
+            var newPropertyEl = $('<tr></tr>');
+            var propertiesEl = this.$el.find('#properties tr');
+            var propertyTr = null;
+            for (var i = 0; i < propertiesEl.length; i++) {
+                propertyEl = $(propertiesEl[i]);
+                nameInput = propertyEl.find('td.name input');
+                if (nameInput.val().localeCompare(newPropertyModel.label) >= 0) {
+                    propertyTr = propertyEl;
+                    break;
+                }
+            }
+            newProperty = new PropertyView({
+                model: newPropertyModel,
+                $el: newPropertyEl
+            });
+            this.propertyViews.push(newProperty);
+            newPropertyEl.css( "display", "none" );
+            if (propertyTr == null) {
+                propertiesEl[propertiesEl.length - 1].after(newPropertyEl);
+            } else {
+                propertyTr.before(newPropertyEl);
+            }
+            newPropertyEl.fadeIn(600);
+        },
+
         /** Shortcut to properties.length for this model */
         propertyCount: function() { return this.model.properties.length; },
 
@@ -83,6 +112,7 @@ define(
         destroy: function() {
             // remove model events
             this.model.Observer('loadSuccess').unsubscribe(this.render);
+            this.model.Observer('newProperty').unsubscribe(this.addProperty);
             // remove child views
             for (i = 0; i < this.propertyCount(); ++i) {
                 this.propertyViews[i].destroy();

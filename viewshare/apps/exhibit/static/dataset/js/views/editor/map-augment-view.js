@@ -45,7 +45,7 @@ define(
         changeNameHandler: function(event) {
             this.newCompositeProperty.label = event.target.value;
             this.newCompositeProperty.id(
-                event.target.value.replace(' ', '_', 'g'));
+                event.target.value.replace(' ', '_', 'g').toLowerCase());
         },
 
         /** Event handler when a .selcted input is clicked */
