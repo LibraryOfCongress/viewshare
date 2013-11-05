@@ -101,7 +101,6 @@ define(
          * 3. not finished augmenting
          */
         augmentStatusSuccess: function(successJSON, textStatus, xhr) {
-            var location;
             if (xhr.status === 201) {
                 // data returned as expected and is available
                 // at xhr.getHeader('location') we should probably
