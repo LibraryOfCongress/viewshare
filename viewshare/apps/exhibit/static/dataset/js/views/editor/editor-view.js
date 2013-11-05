@@ -93,11 +93,13 @@ define(
                 $el: newPropertyEl
             });
             this.propertyViews.push(newProperty);
+            newPropertyEl.css( "display", "none" );
             if (propertyTr == null) {
-                propertiesEl[propertiesEl.length - 1].after(newPropertyEl).animate();
+                propertiesEl[propertiesEl.length - 1].after(newPropertyEl);
             } else {
-                propertyTr.before(newPropertyEl).animate();
+                propertyTr.before(newPropertyEl);
             }
+            newPropertyEl.fadeIn(600);
         },
 
         /** Shortcut to properties.length for this model */
