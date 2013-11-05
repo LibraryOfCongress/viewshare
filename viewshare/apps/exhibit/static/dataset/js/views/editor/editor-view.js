@@ -110,6 +110,7 @@ define(
         destroy: function() {
             // remove model events
             this.model.Observer('loadSuccess').unsubscribe(this.render);
+            this.model.Observer('newProperty').unsubscribe(this.addProperty);
             // remove child views
             for (i = 0; i < this.propertyCount(); ++i) {
                 this.propertyViews[i].destroy();
