@@ -7,7 +7,7 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
+
         # Adding model 'OrganizationType'
         db.create_table('moderated_registration_organizationtype', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
@@ -22,14 +22,14 @@ class Migration(SchemaMigration):
             ('is_approved', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('organization', self.gf('django.db.models.fields.CharField')(max_length=100)),
             ('org_type', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('org_state', self.gf('django.contrib.localflavor.us.models.USStateField')(max_length=2, blank=True)),
+            ('org_state', self.gf('django_localflavor_us.models.USStateField')(max_length=2, blank=True)),
             ('reason', self.gf('django.db.models.fields.TextField')()),
         ))
         db.send_create_signal('moderated_registration', ['ViewShareRegistrationProfile'])
 
 
     def backwards(self, orm):
-        
+
         # Deleting model 'OrganizationType'
         db.delete_table('moderated_registration_organizationtype')
 
@@ -83,7 +83,7 @@ class Migration(SchemaMigration):
         'moderated_registration.viewshareregistrationprofile': {
             'Meta': {'object_name': 'ViewShareRegistrationProfile'},
             'is_approved': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'org_state': ('django.contrib.localflavor.us.models.USStateField', [], {'max_length': '2', 'blank': 'True'}),
+            'org_state': ('django_localflavor_us.models.USStateField', [], {'max_length': '2', 'blank': 'True'}),
             'org_type': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'organization': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'reason': ('django.db.models.fields.TextField', [], {}),

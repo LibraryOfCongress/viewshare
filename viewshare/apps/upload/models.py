@@ -320,7 +320,8 @@ class ModsMixin(models.Model):
     """Data source for loading XMLMODS data.
     """
     diagnostics = models.BooleanField(_("Verify Data"),
-                                      help_text=_(cdm_help_text))
+                                      help_text=_(cdm_help_text),
+                                      default=False)
 
     class Meta:
         abstract = True

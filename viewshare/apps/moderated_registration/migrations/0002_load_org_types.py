@@ -60,7 +60,7 @@ class Migration(DataMigration):
         'moderated_registration.viewshareregistrationprofile': {
             'Meta': {'object_name': 'ViewShareRegistrationProfile'},
             'is_approved': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'org_state': ('django.contrib.localflavor.us.models.USStateField', [], {'max_length': '2', 'blank': 'True'}),
+            'org_state': ('django_localflavor_us.models.USStateField', [], {'max_length': '2', 'blank': 'True'}),
             'org_type': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'organization': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'reason': ('django.db.models.fields.TextField', [], {}),
