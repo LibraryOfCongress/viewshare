@@ -142,7 +142,7 @@ define(
         loadDataSuccess: function(dataJSON) {
             var i, newItem;
             if (dataJSON.items.length > 0) {
-                for (var i = 0; i < dataJSON.items.length; ++i) {
+                for (i = 0; i < dataJSON.items.length; ++i) {
                     newItem = {
                         id: dataJSON.items[i].id,
                         value: dataJSON.items[i][this._id]
@@ -195,7 +195,7 @@ define(
                 id: this._id,
                 valueType: this.type,
                 label: this.label
-            }
+            };
         }
     });
 

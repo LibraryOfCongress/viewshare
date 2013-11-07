@@ -20,7 +20,7 @@ define(
         var properties = new PropertyCollection({
             dataURL: data_url,
             propertiesURL: prop_url
-	    });
+        });
         var notificationView = new NotificationView({$el: $('#notifications')});
         var editor = new EditorView({
             model: properties,

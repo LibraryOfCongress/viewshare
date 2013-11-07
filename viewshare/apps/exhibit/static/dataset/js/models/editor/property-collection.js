@@ -22,12 +22,11 @@ define(
      * @param {string} options.dataURL - URL to complete dataset
      * @param {string} options.propertiesURL - URL to the list of all properties
      */
-    var
-    PropertyCollection = function(options) {
+    var PropertyCollection = function(options) {
         this.Observer = new Observer().Observer;
         this.initialize.apply(this, [options]);
-    },
-    PropertyCollectionObserver = new Observer();
+    };
+    var PropertyCollectionObserver = new Observer();
 
     $.extend(PropertyCollection.prototype, PropertyCollectionObserver, {
         initialize: function(options) {
@@ -112,12 +111,12 @@ define(
                 for (i = 0; i < this.properties.length; ++i) {
                     for (j = 0; j < this.properties[i].items.length; j++) {
                         item = this.properties[i].items[j];
-                        if (this.itemIds.length == 0) {
+                        if (this.itemIds.length === 0) {
                             this.itemIds.push(item.id);
                         } else {
                             for (k = 0; k < this.itemIds.length; k++) {
                                 itemId = this.itemIds[k];
-                                compare = itemId.localeCompare(item.id)
+                                compare = itemId.localeCompare(item.id);
                                 if (compare < 0) {
                                     // itemId < item.id
                                     if (k === this.itemIds.length - 1) {
@@ -192,7 +191,7 @@ define(
                 option = {
                     id: this.properties[i].id(),
                     label: this.properties[i].label
-                }
+                };
                 options.push(option);
             }
             return options;

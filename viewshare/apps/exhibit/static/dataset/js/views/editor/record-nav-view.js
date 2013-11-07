@@ -71,7 +71,7 @@ define(
             for (var i = 0; i < properties.length; i++) {
                 itemsLength = properties[i].items.length;
                 if (itemsLength > count) {
-                    count = itemsLength
+                    count = itemsLength;
                 }
             }
             return count;
