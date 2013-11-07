@@ -526,6 +526,19 @@ ul.responses li.thread-8 {
     margin: 10px 10px 10px 10px;
 }
 
+/* widget edit */
+
+.widget-edit-dialog .view-widget-option {
+  background: transparent url(../../images/notice-32.png) top left no-repeat;
+  height: 32px;
+  font-size: 130%;
+  padding-top: 7px;
+  margin-top: 0px;
+  padding-bottom: 5px;
+  padding-left: 40px;  
+}
+
+
 /* profile */
 
 .widget-well .widget-header {
@@ -819,5 +832,11 @@ filter: alpha(opacity=50);
   padding-bottom: 10px;
 }
 
+
+/* form */
+
+.form-inline {
+display: inline;
+}
 
 

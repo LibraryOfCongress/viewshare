@@ -24,27 +24,26 @@
             
             <div class="row-fluid">          
               
-              <div class="span5 view-variables">
-                
+              <div class="view-variables">                
                 <div class="control-group">
                   <label class="control-label" for="view_label_input">{% trans "Label" %}</label>
                   <div class="controls">
                     <div class="input-append">
                       <input type="text" id="view_label_input"/>
                     </div>
-                    <span class="help-inline">{% trans "Freetext title of view" %}</span>
+                    <span class="help-inline">{% trans "Free text title of view" %}</span>
                   </div>
                 </div>
                 
                 <div class="control-group">
                   <label class="control-label" for="sort_property">{% trans "Sort By" %}</label>
-                  <div class="controls">
-                    <select id="sort_property"></select>
-                    <select id="sort_order" name="sort_order" class="sort-order input-medium inline">
-                      <option value="ascending">{% trans "Ascending" %}</option>
-                      <option value="descending">{% trans "Descending" %}</option>
-                    </select>
-                  </div>
+                  <div class="controls form-inline">
+		    <select class="input-medium" id="sort_property"></select>
+		    <select id="sort_order" name="sort_order" class="sort-order input-medium">
+		      <option value="ascending">{% trans "Ascending" %}</option>
+		      <option value="descending">{% trans "Descending" %}</option>
+		    </select>
+		  </div>
                 </div>
 
                 <div class="control-group">
