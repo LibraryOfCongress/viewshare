@@ -13,7 +13,7 @@
 	
 	<div class="view-design-widget-header">
 
-	  <ul class="nav nav-pills">
+	  <ul class="nav nav-tabs">
 	    <li class="active">
 	      <a href="#"><span class="view-widget-option-list view-widget-option">List</span></a>
 	    </li>
@@ -31,11 +31,47 @@
 	<div class="row-fluid">
           <div class="span6">
             <div class="view-properties settings-well well">
-	      <div class="view-edit-body">
-		<!-- inject view-edit body here -->
-	      </div>
+
+	      <div class="accordion" id="view-accordion">
+		<div class="accordion-group">
+		  <div class="accordion-heading">
+		    <a class="accordion-toggle" data-toggle="collapse" data-parent="#view-accordion" href="#collapseViewSetting">
+		      {% trans "View Settings" %}
+		    </a>
+		  </div>
+		    
+		  <div id="collapseViewSetting" class="accordion-body collapse in">
+		    <div class="accordion-inner">
+
+		      <div class="view-edit-body">
+			<!-- inject view-edit body here -->
+		      </div>
+
+		    </div> <!-- accordion-inner -->
+		  </div> <!-- collapseViewSetting -->
+		</div> <!-- accordion-group -->
+
+		<div class="accordion-group">
+		  <div class="accordion-heading">
+		    <a class="accordion-toggle" data-toggle="collapse" data-parent="#view-accordion" href="#collapseAugmentationSetting">
+		      {% trans "Augmentation Settings" %}
+		    </a>
+		  </div>
+	  
+		  <div id="collapseAugmentationSetting" class="accordion-body collapse">
+		    <div class="accordion-inner">
+		      
+		      {% include "exhibit/edit/views/map-augment.html" %}
+		      
+		    </div> <!-- end accordion-inner -->
+		  </div> <!-- end accordion-body -->
+		</div> <!-- end accordion-group -->
+
+	      </div> <!-- end accordion -->
+
             </div>
           </div>
+
           <div class="span6">
             <div class="view-preview well">
 	      <form>
@@ -53,12 +89,8 @@
 
         </div> <!-- view-design-widget -->
 	  
-
-	</div>
-    </div>
-
-    <div class="modal-footer">
-      <button id="view_save_button" class="btn btn-primary">Save</button>
+	
+      </div>
     </div>
 
   </div>
