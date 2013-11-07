@@ -148,6 +148,15 @@ define(
                 options.push(option);
             }
             return options;
+        },
+
+        /** Add a new property to this.properties */
+        addProperty: function(newProperty) {
+            if (this.properties.length > 0) {
+                newProperty.currentItemIndex = this.properties[0].currentItemIndex;
+            }
+            this.properties.push(newProperty);
+            this.Observer('newProperty').publish(newProperty);
         }
 
     });
