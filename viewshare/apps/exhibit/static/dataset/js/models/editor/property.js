@@ -57,22 +57,24 @@ define(
 
         /** Return the current value from this.items. */
         currentItem: function() {
-            return this.items[this.currentItemIndex];
+            if (this.currentItemIndex === null) {
+                return {id: null, value: ""};
+            } else {
+                return this.items[this.currentItemIndex];
+            }
         },
 
         /**
-         * Modify this.currentItemIndex based on a delta to this.items
-         * @param {int} delta - Increment/decrement to this.items
+         * Filter a value from this.items with a specific id
+         * @param {int} id - id of the this.items we wish to display
          */
-        changeCurrentItem: function(delta) {
-            if (this.currentItemIndex === null) {
-                throw {message: "Current item is null. Call this.loadData()"};
-            }
-            var current = this.currentItemIndex + delta;
-            if (current < 0) {
-                this.currentItemIndex = this.items.length + current;
-            } else {
-                this.currentItemIndex = current % this.items.length;
+        changeCurrentItem: function(id) {
+            this.currentItemIndex = null;
+            for (var i = 0; i < this.items.length; i++) {
+                if (this.items[i].id == id) {
+                    this.currentItemIndex = i;
+                    break;
+                }
             }
             this.Observer('changeCurrentItem').publish();
         },
@@ -159,7 +161,6 @@ define(
                     id: 0
                 }];
             }
-            this.currentItemIndex = 0;
             this.Observer('loadDataSuccess').publish(this);
         },
 

@@ -57,7 +57,7 @@ define(
         /** Returns current record number for easy templating */
         currentRecordNumber: function() {
             if (this.model.properties.length > 0) {
-                return this.model.properties[0].currentItemIndex + 1;
+                return this.model.currentItemIndex + 1;
             } else {
                 return 0;
             }
@@ -66,9 +66,12 @@ define(
         /** Returns total record count for easy templating */
         totalRecordCount: function() {
             var count = 0;
-            if (this.model.properties.length > 0) {
-                if (this.model.properties[0].items.length > 0) {
-                    count = this.model.properties[0].items.length;
+            var properties = this.model.properties;
+            var itemsLength;
+            for (var i = 0; i < properties.length; i++) {
+                itemsLength = properties[i].items.length;
+                if (itemsLength > count) {
+                    count = itemsLength
                 }
             }
             return count;
