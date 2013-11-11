@@ -29,12 +29,9 @@
         });
     };
     $.fn.facetContainer = function(properties) {
-        var container_id = 0;
         return this.each(function() {
-            container_id += 1;
-            var facetContainer = $.extend({},Freemix.facet.container);
-            facetContainer._selector = $(this);
-            facetContainer.id = facetContainer.findWidget().attr("id");
+            var id = $(this).attr("id");
+            var facetContainer = new Freemix.facet.Container(id);
 
             var w = facetContainer.findWidget();
             w.sortable({
@@ -46,10 +43,10 @@
             w.data("model", facetContainer);
             w.addClass("ui-widget-content").addClass("facet-container");
             w.append("<div class='create-facet'>" +
-                "<button class='create-facet-button btn btn-small btn-info' href='#addWidgetModal_" + container_id + "' data-toggle='modal'><i class='icon-plus'></i> Add a Widget</button>" +
+                "<button class='create-facet-button btn btn-small btn-info' href='#addWidgetModal_" + id + "' data-toggle='modal'><i class='icon-plus'></i> Add a Widget</button>" +
                 "</div>");
 
-            var dialog =$("<div id='addWidgetModal_" + container_id + "' class='widget-editor modal hide fade' tabindex='-1' role='dialog' aria-labelledby='addWidgetModalLabel' aria-hidden='true'>" +
+            var dialog =$("<div id='addWidgetModal_" + id + "' class='widget-editor modal hide fade' tabindex='-1' role='dialog' aria-labelledby='addWidgetModalLabel' aria-hidden='true'>" +
                           "</div>").appendTo('body');
 
             dialog.modal({
@@ -76,9 +73,9 @@
 
     $.fn.viewContainer = function(properties) {
         return this.each(function() {
-            var viewContainer = $.extend({}, Freemix.view.container);
-            viewContainer.id = $(this).attr("id");
 
+            var id = $(this).attr("id");
+            var viewContainer = new Freemix.view.Container(id);
             var model = $(this).data("model", viewContainer);
             model.append("<ul class='view-set nav nav-tabs'></ul>");
             model.append("<div class='view-content'></div>");
