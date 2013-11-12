@@ -1,4 +1,5 @@
-(function ($, Freemix) {
+define(["freemix/js/lib/jquery", "exhibit/js/views/registry"],
+    function ($, ViewRegistry) {
     "use strict";
 
     var config = {
@@ -14,14 +15,14 @@
     var render = function (config) {
         config = config || this.config;
         var lens = this._getLens(config);
-        var view = $("<div ex:role='view'></div>");
-        view.attr("ex:viewLabel", config.name);
+        var view = $("<div data-ex-role='view'></div>");
+        view.attr("data-ex-view-label", config.name);
         this._renderOrder(view, config);
         this._renderFormats(view);
         view.append(lens.generateExhibitHTML());
         return view;
     };
 
-    Freemix.view.register(config,render);
+    return ViewRegistry.register(config,render);
 
-})(window.Freemix.jQuery, window.Freemix);
+});

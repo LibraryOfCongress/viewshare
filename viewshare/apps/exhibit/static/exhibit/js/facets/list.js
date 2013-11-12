@@ -1,5 +1,7 @@
-(function ($, Freemix) {
-    "use strict";
+define(["freemix/js/lib/jquery",
+        "exhibit/js/facets/registry"],
+    function ($, FacetRegistry) {
+        "use strict";
 
     var config = {
         type:"list",
@@ -17,16 +19,16 @@
 
         config = config || this.config;
 
-        var result = $("<div ex:role='facet' class='exhibit-facet'></div>");
-        result.attr("ex:expression", config.expression);
+        var result = $("<div data-ex-role='facet' class='exhibit-facet'></div>");
+        result.attr("data-ex-expression", config.expression);
         if (config.name && config.name.length > 0) {
-            result.attr("ex:facetLabel", config.name);
+            result.attr("data-ex-facet-label", config.name);
         }
         return result;
 
     };
 
-    Freemix.facet.register(config,render);
+    return FacetRegistry.register(config,render);
 
 
-})(window.Freemix.jQuery, window.Freemix);
+});

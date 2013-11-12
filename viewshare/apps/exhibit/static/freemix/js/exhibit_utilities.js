@@ -16,20 +16,20 @@ define([
     var expressionCache = {};
 
     function createDatabase() {
-        var database = Exhibit.Database.create();
-        if (database._properties) {
-            var ns = "http://simile.mit.edu/2006/11/exhibit#";
-            var ps = database._properties;
-            if (ps.change && typeof ps.change._uri == 'undefined') {
-                database._properties.change._uri=ns+"changed";
-            }
-            if (ps.changedItem && typeof ps.changedItem._uri == 'undefined') {
-                database._properties.changedItem._uri=ns+"changedItem";
-            }
-            if (ps.modified && typeof ps.modified._uri == 'undefined') {
-                database._properties.modified._uri=ns+"modified";
-            }
-        }
+        var database = Exhibit.DatabaseUtilities.create();
+//        if (database._properties) {
+//            var ns = "http://simile.mit.edu/2006/11/exhibit#";
+//            var ps = database._properties;
+//            if (ps.change && typeof ps.change._uri == 'undefined') {
+//                database._properties.change._uri=ns+"changed";
+//            }
+//            if (ps.changedItem && typeof ps.changedItem._uri == 'undefined') {
+//                database._properties.changedItem._uri=ns+"changedItem";
+//            }
+//            if (ps.modified && typeof ps.modified._uri == 'undefined') {
+//                database._properties.modified._uri=ns+"modified";
+//            }
+//        }
         return database;
 
     }
@@ -41,7 +41,11 @@ define([
             var database = Freemix.exhibit.database = createDatabase();
 
             if (data.constructor == Array) {
-                database._loadLinks(data, database, fDone);
+                if (fDone) {
+                    $(document.body).one(fDone);
+                }
+                database._loadLinks(data, database);
+
             } else {
                 database.loadData(data);
                 if (fDone) fDone();

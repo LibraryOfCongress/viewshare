@@ -5,11 +5,11 @@ define(["freemix/js/lib/jquery", "exhibit"], function($, Exhibit) {
 
     // The list formatter should output a ul
     Exhibit.Formatter._ListFormatter.prototype.formatList = function (values, count, valueType, appender) {
-        var uiContext = this._uiContext,
-            ul;
-
+        var uiContext, self, index;
+        uiContext = this._uiContext;
+        self = this;
         if (count === 0) {
-            if (this._emptyText !== undefined && this._emptyText.length > 0) {
+            if (typeof this._emptyText !== "undefined" && this._emptyText !== null && this._emptyText.length > 0) {
                 appender(document.createTextNode(this._emptyText));
             }
         } else if (count === 1) {
@@ -17,17 +17,17 @@ define(["freemix/js/lib/jquery", "exhibit"], function($, Exhibit) {
                 uiContext.format(v, valueType, appender);
             });
         } else {
-            ul = document.createElement("ul");
+            var ul = $("<ul>");
 
             values.visit(function (v) {
 
-                var li = document.createElement("li");
+                var li = $("<li>");
                 uiContext.format(v, valueType, function (n) {
-                    li.appendChild(n);
+                    li.append($(n));
                 });
-                ul.appendChild(li);
+                ul.append(li);
             });
-            appender(ul);
+            appender(ul.get(0));
 
         }
     };

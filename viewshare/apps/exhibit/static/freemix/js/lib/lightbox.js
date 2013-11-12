@@ -8,15 +8,18 @@
  * <a class="lightbox" href="big.jpg"><img src="small.jpg" /></a>
  *
  */
-var Lightbox = {
-    defaults: {
-        width: 900,
-        height: 550
-    },
-    adjusted: { },
-    handlers: { }
-};
-(function($) {
+
+define(["freemix/js/lib/jquery"], function($) {
+
+    var Lightbox = {
+        defaults: {
+            width: 900,
+            height: 550
+        },
+        adjusted: { },
+        handlers: { }
+    };
+
     function show_image(img) {
         if (!Lightbox.handler) {
             if ((window.jQuery && window.jQuery.ui && window.jQuery.ui.dialog) || ($.ui && $.ui.dialog)) {
@@ -122,4 +125,4 @@ var Lightbox = {
             e.preventDefault();
         });
     });
-})(window.Freemix.jQuery);
+});

@@ -1,4 +1,8 @@
-define(["freemix/js/lib/jquery", "freemix/js/freemix"], function($, Freemix) {
+define(["freemix/js/lib/jquery",
+        "exhibit/js/views/registry",
+        "exhibit/js/facets/registry",
+        "freemix/js/freemix"],
+    function($, ViewRegistry, FacetRegistry, Freemix) {
     "use strict";
 
     $.fn.generateExhibitHTML = function(model) {
@@ -8,9 +12,9 @@ define(["freemix/js/lib/jquery", "freemix/js/freemix"], function($, Freemix) {
 
             root.find(".view-container").each(function() {
                 var id = $(this).attr("id");
-                var container = $("<div class='view-panel' ex:role='viewPanel'></div>");
+                var container = $("<div class='view-panel' data-ex-role='viewPanel'></div>");
                 $.each(model.views[id], function() {
-                    var view = new Freemix.view.construct(this.type,this);
+                    var view = new ViewRegistry.construct(this.type,this);
                     container.append(view.generateExhibitHTML());
                 });
 
@@ -19,7 +23,7 @@ define(["freemix/js/lib/jquery", "freemix/js/freemix"], function($, Freemix) {
 
             $.each(model.facets, function(container, facets) {
                 $.each(facets, function() {
-                    var facet = Freemix.facet.construct(this.type, this);
+                    var facet = FacetRegistry.construct(this.type, this);
                     root.find(".facet-container#" +container).append(facet.generateExhibitHTML());
                 });
             });
@@ -29,16 +33,18 @@ define(["freemix/js/lib/jquery", "freemix/js/freemix"], function($, Freemix) {
     };
 
     function run_init(profile, nextFn) {
-        var data = Freemix.data || $.map($("link[rel='exhibit/data']"), function(el) {return $(el).attr("href");});
+        var data = $("link[rel='exhibit/data']").toArray();
+        var url = $("link[rel='exhibit/data']").attr("href");
+        $.getJSON(url, function(data) {
+            Freemix.exhibit.initializeDatabase(data, function() {
+    //            Freemix.lens.setDefaultLens(Freemix.lens.construct(profile.default_lens));
+                $("#canvas").generateExhibitHTML(profile).createExhibit();
+            });
 
-        Freemix.exhibit.initializeDatabase(data, function() {
-//            Freemix.lens.setDefaultLens(Freemix.lens.construct(profile.default_lens));
-            $("#canvas").generateExhibitHTML(profile).createExhibit();
+            if (typeof nextFn != "undefined") {
+                nextFn();
+            }
         });
-
-        if (typeof nextFn != "undefined") {
-            nextFn();
-        }
     }
 
     Freemix.initialize = function(callback) {

@@ -1,5 +1,6 @@
-(function ($, Freemix) {
-    "use strict";
+define(["freemix/js/lib/jquery", "exhibit/js/views/registry"],
+    function ($, ViewRegistry) {
+        "use strict";
 
     var config = {
         type:"scatterplot",
@@ -15,7 +16,7 @@
         var expression = Freemix.exhibit.expression;
 
         if (typeof config.xaxis === "undefined" || typeof config.yaxis === "undefined") {
-            return $('<div ex:role="view" ex:viewLabel="Axis Missing"></div>');
+            return $('<div data-ex-role="view" data-ex-view-label="Axis Missing"></div>');
         }
 
         var xaxis = config.xaxis;
@@ -47,25 +48,25 @@
                 }
             }
             if (maxx - minx <= 1 && maxx - minx > 0) {
-                return $("<div ex:role='view' ex:viewLabel='Unsupported Range Values'></div>");
+                return $("<div data-ex-role='view' data-ex-view-label='Unsupported Range Values'></div>");
             }
             if (maxy - miny <= 1 && maxy - miny > 0) {
-                return $("<div ex:role='view' ex:viewLabel='Unsupported Range Values'></div>");
+                return $("<div data-ex-role='view' data-ex-view-label='Unsupported Range Values'></div>");
             }
         }
 
-        var view = $("<div ex:role='view' ex:viewClass='Exhibit.ScatterPlotView'></div>");
-        view.attr("ex:viewLabel", config.name);
+        var view = $("<div data-ex-role='view' data-ex-view-class='Exhibit.ScatterPlotView'></div>");
+        view.attr("data-ex-view-label", config.name);
         var prop;
         if (xaxis) {
             prop = database.getProperty(xaxis);
-            view.attr("ex:x", expression(xaxis));
-            view.attr("ex:xLabel", prop.getLabel());
+            view.attr("data-ex-x", expression(xaxis));
+            view.attr("data-ex-x-label", prop.getLabel());
         }
         if (yaxis) {
             prop = database.getProperty(yaxis);
-            view.attr("ex:y", expression(yaxis));
-            view.attr("ex:yLabel", prop.getLabel());
+            view.attr("data-ex-y", expression(yaxis));
+            view.attr("data-ex-y-label", prop.getLabel());
         }
 
         this._renderFormats(view);
@@ -74,6 +75,6 @@
         return view;
     };
 
-    Freemix.view.register(config,render);
+    return ViewRegistry.register(config,render);
 
-})(window.Freemix.jQuery, window.Freemix);
+});

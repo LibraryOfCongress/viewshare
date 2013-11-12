@@ -173,7 +173,7 @@
 
             root.find(".view-container").each(function() {
                 var id = $(this).attr("id");
-                var container = $("<div class='view-panel' ex:role='viewPanel'></div>");
+                var container = $("<div class='view-panel' data-ex-role='viewPanel'></div>");
                 $.each(model.views[id], function() {
                     var view = new Freemix.view.construct(this.type,this);
                     container.append(view.generateExhibitHTML());

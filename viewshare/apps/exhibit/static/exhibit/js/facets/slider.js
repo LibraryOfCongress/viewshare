@@ -1,5 +1,8 @@
-(function ($, Freemix) {
-    "use strict";
+define(["freemix/js/lib/jquery",
+        "exhibit/js/facets/registry"],
+    function ($, FacetRegistry) {
+        "use strict";
+
 
     var config = {
         type:"Slider",
@@ -13,18 +16,18 @@
     var render = function (config) {
         config = config || this.config;
 
-        var result = $("<div ex:role='facet' ex:facetClass='Slider' class='exhibit-facet'></div>");
+        var result = $("<div data-ex-role='facet' data-ex-facet-class='Slider' class='exhibit-facet'></div>");
 
-        result.attr("ex:expression", config.expression);
-        result.attr("ex:height", config.height);
-        result.attr("ex:histogram", config.histogram);
-        result.attr("ex:horizontal", config.horizontal);
+        result.attr("data-ex-expression", config.expression);
+        result.attr("data-ex-height", config.height);
+        result.attr("data-ex-histogram", config.histogram);
+        result.attr("data-ex-horizontal", config.horizontal);
         if (config.name && config.name.length > 0) {
-            result.attr("ex:facetLabel", config.name);
+            result.attr("data-ex-facet-abel", config.name);
         }
         return result;
     };
 
-    Freemix.facet.register(config,render);
+    return FacetRegistry.register(config,render);
 
-})(window.Freemix.jQuery, window.Freemix);
+});

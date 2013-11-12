@@ -1,6 +1,6 @@
-(function ($, Freemix) {
-    "use strict";
-
+define(["freemix/js/lib/jquery", "exhibit/js/views/registry"],
+    function ($, ViewRegistry) {
+        "use strict";
     var config = {
         type: "piechart",
         name: "Pie Chart",
@@ -10,13 +10,13 @@
     var render = function (config) {
         config = config || this.config;
 
-        var view = $("<div ex:role='view' ex:viewClass='Piechart'></div>");
-        view.attr("ex:viewLabel", config.name);
-        view.attr("ex:groupProperties", config.properties.join(', '));
+        var view = $("<div data-ex-role='view' data-ex-view-class='Piechart'></div>");
+        view.attr("data-ex-view-label", config.name);
+        view.attr("data-ex-group-properties", config.properties.join(', '));
         return view;
     };
 
 
-    Freemix.view.register(config, render);
+    return ViewRegistry.register(config, render);
 
-})(window.Freemix.jQuery, window.Freemix);
+});
