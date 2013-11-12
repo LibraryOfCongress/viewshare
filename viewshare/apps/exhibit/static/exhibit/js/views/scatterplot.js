@@ -24,33 +24,32 @@ define(["freemix/js/lib/jquery", "exhibit/js/views/registry"],
         var database = Freemix.exhibit.database;
 
         if (xaxis && yaxis) {
-            var minx = 0;
-            var maxx = 0;
-            var miny = 0;
-            var maxy = 0;
-            var recordIds = database.getAllItems().toArray();
-            for (var i = 0; i < recordIds.length; i++) {
-                var id = recordIds[i];
-                var record = database.getItem(id);
+            var minx = NaN;
+            var maxx = NaN;
+            var miny = NaN;
+            var maxy = NaN;
+
+            var records = database.getAllItems();
+            records.visit(function(record) {
                 var x = parseFloat(record[xaxis]);
                 var y = parseFloat(record[yaxis]);
-                if (minx > x || i === 0) {
+                if (minx > x || minx == NaN) {
                     minx = x;
                 }
-                if (maxx < x || i === 0) {
+                if (maxx < x || maxx == NaN) {
                     maxx = x;
                 }
-                if (miny > y || i === 0) {
+                if (miny > y || miny == NaN) {
                     miny = y;
                 }
-                if (maxy < y || i === 0) {
+                if (maxy < y || maxy == NaN) {
                     maxy = y;
                 }
-            }
-            if (maxx - minx <= 1 && maxx - minx > 0) {
-                return $("<div data-ex-role='view' data-ex-view-label='Unsupported Range Values'></div>");
-            }
-            if (maxy - miny <= 1 && maxy - miny > 0) {
+            });
+
+            if ((maxx - minx <= 1 && maxx - minx > 0)
+                || (maxy - miny <= 1 && maxy - miny > 0)
+                || (maxx == NaN || maxy == NaN || minx == NaN || miny == NaN)) {
                 return $("<div data-ex-role='view' data-ex-view-label='Unsupported Range Values'></div>");
             }
         }
