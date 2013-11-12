@@ -184,6 +184,7 @@
         if (!config.lens) {
             lens = Freemix.lens.copyDefaultLens();
             Freemix.lens.setDefaultLens(lens);
+            config.lens = lens.config;
         } else {
             lens = Freemix.lens.construct(config.lens);
         }
