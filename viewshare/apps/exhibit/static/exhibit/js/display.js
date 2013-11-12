@@ -1,8 +1,9 @@
 define(["freemix/js/lib/jquery",
         "exhibit/js/views/registry",
         "exhibit/js/facets/registry",
+        "exhibit/js/lenses/registry",
         "freemix/js/freemix"],
-    function($, ViewRegistry, FacetRegistry, Freemix) {
+    function($, ViewRegistry, FacetRegistry, LensRegistry, Freemix) {
     "use strict";
 
     $.fn.generateExhibitHTML = function(model) {
@@ -37,10 +38,12 @@ define(["freemix/js/lib/jquery",
         var url = $("link[rel='exhibit/data']").attr("href");
         $.getJSON(url, function(data) {
             Freemix.exhibit.initializeDatabase(data, function() {
-    //            Freemix.lens.setDefaultLens(Freemix.lens.construct(profile.default_lens));
+                if (profile.default_lens) {
+                    LensRegistry.setDefaultLens(LensRegistry.construct(profile.default_lens));
+                }
                 $("#canvas").generateExhibitHTML(profile).createExhibit();
             });
-
+            
             if (typeof nextFn != "undefined") {
                 nextFn();
             }

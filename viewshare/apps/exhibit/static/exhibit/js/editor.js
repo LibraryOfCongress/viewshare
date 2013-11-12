@@ -161,7 +161,7 @@
        });
 
        if (Freemix.lens._default_lens) {
-           metadata.default_lens = Freemix.lens._default_lens.config.id;
+           metadata.default_lens = Freemix.lens._default_lens.config;
        }
        return metadata;
    };
