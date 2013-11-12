@@ -42,27 +42,44 @@ define(["freemix/js/lib/jquery", "exhibit"], function($, Exhibit) {
     // Fork the ImageFormatter to
     // Wrap the img in a link and add the classes for lightbox
     Exhibit.Formatter._ImageFormatter.prototype.format = function (value, appender) {
-        var img = document.createElement("img");
         if (Exhibit.params.safe) {
-            /*jshint scripturl:true*/
-            value = value.trim().startsWith("javascript:") ? "" : value;
+            value = Exhibit.Util.isUnsafeLink(value.trim()) ? "" : value;
         }
 
-        img.src = value;
+        var img = $("<img>").attr("src", value);
 
-        if (this._tooltip !== undefined) {
+        if (this._tooltip !== null && this._tooltip !== undefined) {
             if (typeof this._tooltip === "string") {
-                img.title = this._tooltip;
+                img.attr("title", this._tooltip);
             } else {
-                var itemID = this._uiContext.getSetting("itemID");
-                var database = this._uiContext.getDatabase();
-                img.title = this._tooltip.evaluateSingleOnItem(itemID, database).value;
+                img.attr("title",
+                         this._tooltip.evaluateSingleOnItem(
+                             this._uiContext.getSetting("itemID"),
+                             this._uiContext.getDatabase()
+                         ).value);
             }
         }
-        var a = document.createElement("a");
-        a.href = value;
-        a.className = "dialog-thumb lightbox";
-        a.appendChild(img);
+        var a = $("<a>");
+        a.attr("href", value);
+        a.addClass("dialog-thumb lightbox");
+        a.append(img);
+        appender(a);
+    };
+
+    /**
+     * @param {String} value
+     * @param {Function} appender
+     */
+    Exhibit.Formatter._URLFormatter.prototype.format = function(value, appender) {
+        var a = $("<a>").attr("href", value).html(value);
+
+        if (this._target !== null) {
+            a.attr("target", this._target);
+        }
+        // Unused
+        //if (this._externalIcon !== null) {
+        //
+        //}
         appender(a);
     };
 
