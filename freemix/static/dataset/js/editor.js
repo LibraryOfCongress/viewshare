@@ -62,14 +62,11 @@
      * @param {string} data - Data returned from successful jquery ajax request
      */
     LoadingTransactionView.prototype.pollSuccess = function(data) {
-      if ($.isEmptyObject(data)) {
-        this.el.show();
-        setTimeout($.proxy(this.render, this), 5000);
-      } else if (data.hasOwnProperty('message')) {
+      if (data.hasOwnProperty('message')) {
         if (data.message === 'No Data' || data.message === '') {
           window.location.reload(true);
         }
-      }else {
+      } else {
         this.el.hide();
         var editor = new Freemix.DatasetEditor();
         editor.setData(data);
@@ -91,6 +88,7 @@
       var success = $.proxy(this.pollSuccess, this)
       var error = $.proxy(this.pollError, this)
 
+      this.el.show();
       this.transaction.sync({
         success: success,
         error: error
@@ -156,8 +154,12 @@
     };
 
     $(document).ready(function() {
-        var profileURL = $("link[rel='freemix/dataprofile']").attr("href"),
-          transaction = new window.FreemixTransaction({profileURL: profileURL});
+        var profileURL = $("link[rel='freemix/dataprofile']").attr("href");
+        var statusURL = $("link[rel='freemix/transaction_status']").attr("href");
+        var transaction = new window.FreemixTransaction({
+            profileURL: profileURL,
+            statusURL: statusURL
+        });
 
         setupCreateExhibitButton();
 
