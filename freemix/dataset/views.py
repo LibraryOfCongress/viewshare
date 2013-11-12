@@ -439,6 +439,8 @@ class DataSourceTransactionView(View):
                     kwargs={'uuid': source.uuid}
                     )
             cancel_url = reverse('upload_dataset', kwargs={})
+        dataset_transaction_status_url = reverse(
+            "datasource_transaction_status", kwargs={"uuid": source.uuid})
         dataurl = reverse(
                 'datasource_transaction_result',
                 kwargs={'uuid': source.uuid}
@@ -449,6 +451,7 @@ class DataSourceTransactionView(View):
             "save_url": save_url,
             "dataurl": dataurl,
             "profileurl": profile_url,
+            "dataset_transaction_status_url": dataset_transaction_status_url,
             "cancel_url": cancel_url
         })
 

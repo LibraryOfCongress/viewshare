@@ -7,7 +7,7 @@ from . import models
 
 class SupportIssueForm(forms.Form):
     """
-    Base form for recollection support
+    Base form for Viewshare support
 
     >>> f = SupportIssueForm({'contact_type':'email',
     ...                       'contact_email':'test@example.com'})

@@ -1,4 +1,4 @@
-Recollection Base README
+Viewshare Base README
 
 For UNIX-like systems, including Mac OS X and Linux:
 
@@ -7,14 +7,14 @@ Requires:
 * virtualenv 1.4.3+ (easy_install2.6 virtualenv)
 
 To build:
-> virtualenv --no-site-packages --distribute recollection
-> cd recollection
+> virtualenv --no-site-packages --distribute viewshare
+> cd viewshare
 > source bin/activate
-> pip install -e git+git://loc-recollect.git.sourceforge.net/gitroot/loc-recollect/loc-recollect#egg=recollection
-> pip install -r src/recollection/requirements/develop.txt
+> pip install -e git+git://loc-recollect.git.sourceforge.net/gitroot/loc-recollect/loc-recollect#egg=viewshare
+> pip install -r src/viewshare/requirements/develop.txt
 
 To create the database:
-> cd src/recollection/example_project/
+> cd src/viewshare/example_project/
 > manage.py syncdb
 > manage.py migrate
 
@@ -67,15 +67,15 @@ as opposed to unknown commands).
 
 At the prompt, run:
 > easy_install virtualenv
-> virtualenv --no-site-packages --distribute recollection
-> cd recollection/Scripts
+> virtualenv --no-site-packages --distribute viewshare
+> cd viewshare/Scripts
 > activate.bat
 > cd ..
-> pip install -e git+git://loc-recollect.git.sourceforge.net/gitroot/loc-recollect/loc-recollect#egg=recollection
-> pip install -r src/recollection/requirements/requirements.txt
+> pip install -e git+git://loc-recollect.git.sourceforge.net/gitroot/loc-recollect/loc-recollect#egg=viewshare
+> pip install -r src/viewshare/requirements/requirements.txt
 
 To create the database:
-> cd src/recollection/example_project/
+> cd src/viewshare/example_project/
 > python manage.py syncdb
 > python manage.py migrate
 

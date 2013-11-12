@@ -1,4 +1,4 @@
-"""Admin helpers for the recollection support models"""
+"""Admin helpers for the Viewshare support models"""
 from django.contrib import admin
 from . import models
 
