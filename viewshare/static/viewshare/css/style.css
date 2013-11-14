@@ -528,14 +528,23 @@ ul.responses li.thread-8 {
 
 /* widget edit */
 
-.widget-edit-dialog .view-widget-option {
-  background: transparent url(../../images/notice-32.png) top left no-repeat;
-  height: 32px;
-  font-size: 130%;
-  padding-top: 7px;
-  margin-top: 0px;
-  padding-bottom: 5px;
-  padding-left: 40px;  
+.widget-edit-dialog .view-widget-option .view-widget-label {
+    display:block;		    
+}
+
+.view-properties .accordion-group {
+  border: none;
+  margin-bottom: 0px;
+}
+
+.view-properties .accordion-inner {
+  padding: 0px 0px;
+  margin-left: -20px;
+  border-top: none;
+}
+
+.view-properties .accordion-heading .accordion-toggle {
+  padding: 0px 0px;
 }
 
 

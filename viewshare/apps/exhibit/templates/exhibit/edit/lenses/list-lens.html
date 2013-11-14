@@ -6,33 +6,28 @@
     <form class="form">
       
       <fieldset>
-
-	<div class="row-fluid">
-	  
-	  <div class="span6">
-            <div class="control-group">
-              <label class="control-label" for="title_property">{% trans "Title" %}</label>
-              <div class="controls">
-		<select id="title_property"></select>              
-              </div>
-            </div>
-	  </div>
-	  <div class="span6">
-            <div class="control-group">
-              <label class="control-label" for="title_link_property">{% trans "Link" %}</label>
-              <div class="controls">
-		<select id="title_link_property"></select>
-              </div>
-            </div>
-	  </div>
-	  
-          <div class="control-group">
-            <label class="control-label" for="property_list">{% trans "Display Properties" %}</label>
-            <div class="controls">
-              <select id="property_list" multiple="multiple"></select>
-            </div>
+	
+        <div class="control-group input-append">
+          <label class="control-label" for="title_property">{% trans "Title" %}</label>
+          <div class="controls">
+	    <select class="input-medium" id="title_property"></select>              
           </div>
-
+        </div>
+	
+        <div class="control-group input-append">
+          <label class="control-label" for="title_link_property">{% trans "Link" %}</label>
+          <div class="controls">
+	    <select class="input-medium" id="title_link_property"></select>
+          </div>
+        </div>
+	
+        <div class="control-group">
+          <label class="control-label" for="property_list">{% trans "Display Properties" %}</label>
+          <div class="controls">
+            <select id="property_list" multiple="multiple"></select>
+          </div>
+        </div>
+	
       </fieldset>
 
     </form>
