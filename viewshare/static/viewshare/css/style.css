@@ -532,9 +532,8 @@ ul.responses li.thread-8 {
     display:block;		    
 }
 
-.view-properties .accordion-group {
-  border: none;
-  margin-bottom: 0px;
+.widget-edit-dialog .view-properties, .widget-edit-dialog .view-preview {
+     height: 800px;		
 }
 
 .view-properties .accordion-inner {
@@ -547,6 +546,9 @@ ul.responses li.thread-8 {
   padding: 0px 0px;
 }
 
+.view-properties .accordion-group {
+  border: none;
+}
 
 /* profile */
 
