@@ -1,4 +1,5 @@
 from datetime import timedelta, datetime
+from urllib2 import URLError
 import json
 
 from django.conf import settings
@@ -158,17 +159,19 @@ class AugmentTransaction(DataTransaction):
             else:
                 message.update({"message": "No data"})
                 self.failure(message)
+        except URLError:
+            self.failure("Connection Refused: Akara is not responding.")
+            raise
         except ValueError:
             self.failure("Invalid response body")
+            raise
         except Exception, ex:
             self.failure(repr(ex))
-        finally:
-
-            PropertyData.objects.filter(exhibit_property=p).delete()
-            data = PropertyData.objects.create(exhibit_property=p,
-                                               json=items)
-            self.data = data
-            self.save()
+        PropertyData.objects.filter(exhibit_property=p).delete()
+        data = PropertyData.objects.create(exhibit_property=p,
+                                           json=items)
+        self.data = data
+        self.save()
 
     @staticmethod
     def new_data_profile_to_legacy(profile):

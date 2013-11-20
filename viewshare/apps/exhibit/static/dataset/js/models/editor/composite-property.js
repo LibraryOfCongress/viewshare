@@ -107,7 +107,13 @@ define(
                 this.loadData();
             } else if (xhr.status === 200) {
                 // poll for status updates
-                setTimeout(this.augmentDataSuccess.bind(this), 5000);
+                if ($.isEmptyObject(successJSON)) {
+                    setTimeout(this.augmentDataSuccess.bind(this), 5000);
+                } else {
+                    // Server has failed gracefully unable to connect to Akara
+                    this.Observer('augmentDataFailure').publish(
+                        {status: textStatus, error: successJSON});
+                }
             } else {
                 // something unexpected happened
                 this.augmentStatusFailure(

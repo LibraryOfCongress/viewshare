@@ -47,33 +47,17 @@ class DataSource(TimeStampedModel):
         return self.classname == self.__class__.__name__
 
     def save(self, *args, **kwargs):
-        with db_tx.commit_manually():
-            try:
-                if self.classname is None:
-                    self.classname = self.__class__.__name__
-                super(DataSource, self).save(*args, **kwargs)
-            except:
-                db_tx.rollback()
-                raise
-            else:
-                db_tx.commit()
+        if self.classname is None:
+            self.classname = self.__class__.__name__
+        super(DataSource, self).save(*args, **kwargs)
 
     def create_transaction(self):
-        with db_tx.commit_manually():
-            try:
-                # Ensure that existing transactions are marked as complete
-                # when creating a new one
-                (UploadTransaction.objects
-                 .filter(source=self)
-                 .update(is_complete=True, result=None))
-                tx = UploadTransaction(source=self)
-                tx.save()
-            except:
-                db_tx.rollback()
-                raise
-            else:
-                db_tx.commit()
-                tx.schedule()
+        (UploadTransaction.objects
+         .filter(source=self)
+         .update(is_complete=True, result=None))
+        tx = UploadTransaction(source=self)
+        tx.save()
+        tx.schedule()
         return tx
 
     def open_transaction(self):
@@ -375,7 +359,6 @@ class UploadTransaction(DataTransaction):
         from viewshare.apps.exhibit import serializers
         source = self.source.get_concrete()
         try:
-
             result = source.refresh()
         except:
             self.failure("Transformation failed")

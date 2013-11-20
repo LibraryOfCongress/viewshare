@@ -517,25 +517,14 @@ class DataTransaction(TimeStampedModel):
         raise NotImplementedError()
 
     def schedule(self):
-        with db_tx.commit_manually():
-            try:
-                self.status = TX_STATUS["scheduled"]
-                self.save()
-                db_tx.commit()
-            except Exception as ex:
-                self.failure(ex.message)
-            else:
-                self.start_transaction()
+        self.status = TX_STATUS["scheduled"]
+        self.save()
+        self.start_transaction()
 
     def run(self):
-        with db_tx.commit_manually():
-            try:
-                self.status = TX_STATUS["running"]
-                self.save()
-                self.do_run()
-                db_tx.commit()
-            except Exception as ex:
-                self.failure("Transformation failed")
+        self.status = TX_STATUS["running"]
+        self.save()
+        self.do_run()
         return self
 
     def failure(self, message):
