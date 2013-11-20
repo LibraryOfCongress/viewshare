@@ -22,17 +22,18 @@ define(
      * @param {string} options.dataURL - URL to complete dataset
      * @param {string} options.propertiesURL - URL to the list of all properties
      */
-    var
-    PropertyCollection = function(options) {
+    var PropertyCollection = function(options) {
         this.Observer = new Observer().Observer;
         this.initialize.apply(this, [options]);
-    },
-    PropertyCollectionObserver = new Observer();
+    };
+    var PropertyCollectionObserver = new Observer();
 
     $.extend(PropertyCollection.prototype, PropertyCollectionObserver, {
         initialize: function(options) {
             this.propertiesURL = options.propertiesURL;
             this.properties = [];
+            this.currentItemIndex = null;
+            this.itemIds = null;
         },
 
         /**
@@ -50,7 +51,7 @@ define(
          * for this view, create Property models.
          */
         loadSuccess: function(profile) {
-            var id, args, property;
+            var args, i, id, property;
             var ignored_properties = [
                 'id',
                 'label',
@@ -98,11 +99,46 @@ define(
                 return a_label.localeCompare(b_label);
             });
             // load PropertyModel values
-            for (var i = 0; i < this.properties.length; ++i) {
+            this.currentItemIndex = 0;
+            for (i = 0; i < this.properties.length; ++i) {
                 loadDataPromises.push(this.properties[i].loadData());
             }
             // publish notification that all properties have loaded their data
             $.when.apply(null, loadDataPromises).done(function() {
+                // build an array of sorted, unique property item ids
+                var compare, item, itemId, j, k;
+                this.itemIds = [];
+                for (i = 0; i < this.properties.length; ++i) {
+                    for (j = 0; j < this.properties[i].items.length; j++) {
+                        item = this.properties[i].items[j];
+                        if (this.itemIds.length === 0) {
+                            this.itemIds.push(item.id);
+                        } else {
+                            for (k = 0; k < this.itemIds.length; k++) {
+                                itemId = this.itemIds[k];
+                                compare = itemId.localeCompare(item.id);
+                                if (compare < 0) {
+                                    // itemId < item.id
+                                    if (k === this.itemIds.length - 1) {
+                                        // We're at the last iteration
+                                        this.itemIds.push(item.id);
+                                    } else {
+                                        continue;
+                                    }
+                                } else if (compare > 0) {
+                                    // itemId > item.id
+                                    this.itemIds.splice(k, 0, item.id);
+                                    break;
+                                } else {
+                                    // itemId == item.id
+                                    break;
+                                }
+
+                            }
+                        }
+                    }
+                }
+                this.changeCurrentRecord(0);
                 this.Observer('allLoadDataSuccess').publish();
             }.bind(this));
             this.Observer('loadSuccess').publish();
@@ -119,9 +155,20 @@ define(
          * @param delta {integer} - positive/negative number to increment/decrement
          */
         changeCurrentRecord: function(delta) {
-            var i;
+            var current, i;
+            if (this.currentItemIndex === null || this.itemIds === null) {
+                throw {message: "Current item is null. Call this.loadData()"};
+            }
+            current = this.currentItemIndex + delta;
+            if (current < 0) {
+                this.currentItemIndex = this.itemIds.length + current;
+            } else {
+                this.currentItemIndex = current % this.itemIds.length;
+            }
+
             for (i = 0; i < this.properties.length; ++i) {
-                this.properties[i].changeCurrentItem(delta);
+                this.properties[i].changeCurrentItem(
+                    this.itemIds[this.currentItemIndex]);
             }
             this.Observer('changeCurrentRecord').publish();
         },
@@ -144,7 +191,7 @@ define(
                 option = {
                     id: this.properties[i].id(),
                     label: this.properties[i].label
-                }
+                };
                 options.push(option);
             }
             return options;
