@@ -11,53 +11,100 @@
 	
       <div class="view-design-widget">
 	
-	<div class="view-design-widget-header">
-
-	  <ul class="nav nav-tabs">
-	    <li class="active">
-	      <a href="#"><span class="view-widget-option-list view-widget-option">List</span></a>
-	    </li>
-	    <li><a href="#"><span class="view-widget-option-map view-widget-option">Map</span></a></li>
-	    <li><a href="#"><span class="view-widget-option-scatter-plot view-widget-option">Scatter Plot</span></a></li>
-	    <li><a href="#"><span class="view-widget-option-table view-widget-option">Table</span></a></li>
-	    <li><a href="#"><span class="view-widget-option-timeline view-widget-option">Timeline</span></a></li>
-	    <li><a href="#"><span class="view-widget-option-pie view-widget-option">Pie Chart</span></a></li>
-	    <li><a href="#"><span class="view-widget-option-bar view-widget-option">Bar Chart</span></a></li>
-	    <li><a href="#"><span class="view-widget-option-gallery view-widget-option">Gallery</span></a></li>
-	  </ul>
-
-	</div>
-	
 	<div class="row-fluid">
-          <div class="span6">
-            <div class="view-properties settings-well well">
 
+	  <div class="span1">
+	    <div class="view-design-widget-options tabbable tabs-left">
+	      <ul class="nav nav-tabs">
+		<li class="active">
+		  <a href="#">
+		    <span class="view-widget-option-list view-widget-option">
+		      <i class="fa fa-list fa-3x"></i><span class="view-widget-label">List</span>
+		    </span>
+		  </a>
+		</li>
+		<li>
+		  <a href="#">
+		    <span class="view-widget-option-map view-widget-option">
+		      <i class="fa fa-globe fa-3x"></i><span class="view-widget-label">Map</span>
+		    </span>
+		  </a>
+		</li>
+		<li>
+		  <a href="#">
+		    <span class="view-widget-option-scatter-plot view-widget-option">
+		      <i class="fa fa-building-o fa-rotate-90 fa-3x"></i><span class="view-widget-label">Scatter Plot</span>
+		    </span>
+		  </a>
+		</li>
+		<li>
+		  <a href="#">
+		    <span class="view-widget-option-table view-widget-option">
+		      <i class="fa fa-table fa-3x"></i><span class="view-widget-label">Table</span>
+		    </span>
+		  </a>
+		</li>
+		<li>
+		  <a href="#">
+		    <span class="view-widget-option-timeline view-widget-option">
+		      <i class="fa fa-align-center fa-3x"></i><span class="view-widget-label">Timeline</span>
+		    </span>
+		  </a>
+		</li>
+		<li>
+		  <a href="#">
+		    <span class="view-widget-option-pie view-widget-option">
+		      <i class="fa fa-adjust fa-3x"></i><span class="view-widget-label">Pie Chart</span>
+		    </span>
+		  </a>
+		</li>
+		<li>
+		  <a href="#">
+		    <span class="view-widget-option-bar view-widget-option">
+		      <i class="fa fa-bar-chart-o fa-3x"></i><span class="view-widget-label">Bar Chart</span>
+		    </span>
+		  </a>
+		</li>
+		<li>
+		  <a href="#">
+		    <span class="view-widget-option-gallery view-widget-option">
+		      <i class="fa fa-camera-retro fa-3x"></i><span class="view-widget-label">Gallery</span>
+		    </span>
+		  </a>
+		</li>
+	      </ul>
+	    </div>
+	  </div>
+	  
+          <div class="span5">
+            <div class="view-properties settings-well well">
+	      
 	      <div class="accordion" id="view-accordion">
 		<div class="accordion-group">
 		  <div class="accordion-heading">
 		    <a class="accordion-toggle" data-toggle="collapse" data-parent="#view-accordion" href="#collapseViewSetting">
-		      {% trans "View Settings" %}
+		      <legend>{% trans "View Settings" %}</legend>
 		    </a>
 		  </div>
-		    
+		  
 		  <div id="collapseViewSetting" class="accordion-body collapse in">
 		    <div class="accordion-inner">
-
+		      
 		      <div class="view-edit-body">
 			<!-- inject view-edit body here -->
 		      </div>
-
+		      
 		    </div> <!-- accordion-inner -->
 		  </div> <!-- collapseViewSetting -->
 		</div> <!-- accordion-group -->
-
+		
 		<div class="accordion-group">
 		  <div class="accordion-heading">
 		    <a class="accordion-toggle" data-toggle="collapse" data-parent="#view-accordion" href="#collapseAugmentationSetting">
-		      {% trans "Augmentation Settings" %}
+		      <legend>{% trans "Augmentation Settings" %}</legend>	  
 		    </a>
 		  </div>
-	  
+		  
 		  <div id="collapseAugmentationSetting" class="accordion-body collapse">
 		    <div class="accordion-inner">
 		      
@@ -66,12 +113,12 @@
 		    </div> <!-- end accordion-inner -->
 		  </div> <!-- end accordion-body -->
 		</div> <!-- end accordion-group -->
-
+		
 	      </div> <!-- end accordion -->
-
+	      
             </div>
           </div>
-
+	  
           <div class="span6">
             <div class="view-preview well">
 	      <form>
@@ -85,13 +132,14 @@
                 </fieldset>
 	      </form>
             </div>
+	    
           </div> <!-- row-fluid -->
-
-        </div> <!-- view-design-widget -->
 	  
+        </div> <!-- view-design-widget -->
+	
 	
       </div>
     </div>
-
+    
   </div>
 </script>
