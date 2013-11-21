@@ -40,7 +40,8 @@ requirejs.config({
         "ext": "extensions",
         "exlib": "lib",
         "fmlib": "freemix/js/lib",
-        "fmexlib": "exhibit/js/lib"
+        "fmexlib": "exhibit/js/lib",
+        "openlayers": "simile/exhibit/extensions/openlayers/lib/OpenLayers"
     },
     "shim": {
         "exlib/jquery": {
@@ -70,6 +71,9 @@ requirejs.config({
         },
         "exhibit/js/lib/creole": {
             "exports": "Parse"
+        },
+        "openlayers": {
+            "exports": "OpenLayers"
         }
     }
 });

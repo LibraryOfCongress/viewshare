@@ -32,8 +32,6 @@
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/editor.css"/>
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}exhibit/css/canvas.css"/>
 
-{% include "simile/css/exhibit.html" %}
-{% include "simile/css/exhibit_extensions.html" %}
 {% endcompress %}
 {% endblock head_css %}
 
@@ -41,7 +39,6 @@
 {% block extra_scripts %}
     {{ block.super }}
     {% include "simile/js/exhibit.html" %}
-    {% include "simile/js/exhibit_extensions.html" %}
     {% compress js %}
 
     <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery-ui.js"></script>

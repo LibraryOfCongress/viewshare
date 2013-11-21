@@ -25,7 +25,6 @@
     {{ block.super }}
     {% include "freemix/js_include/jquery_ui.html" %}
     {% include "simile/js/exhibit.html" %}
-    {% include "simile/js/exhibit_extensions.html" %}
 
     {% compress js %}
         <script type="text/javascript"
@@ -61,8 +60,6 @@
 {% block head_css %}
     {{ block.super }}
     {% compress css %}
-        {% include "simile/css/exhibit.html" %}
-        {% include "simile/css/exhibit_extensions.html" %}
         <link rel="stylesheet" type="text/css"
               href="{{ STATIC_URL }}freemix/css/layout.css"/>
         <link rel="stylesheet" type="text/css"
