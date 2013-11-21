@@ -48,21 +48,29 @@ define(
             // set up notificationView's PropertyModel subscriptions
             var i;
             for (i = 0; i < properties.properties.length; ++i) {
-                notificationView.addSubscription(
-                    properties.properties[i],
-                    'updatePropertySuccess',
-                    'success',
-                    'Your change has been saved to a draft on the server.',
-                    'Data saved successfully!');
-                notificationView.addSubscription(
-                    properties.properties[i],
-                    'updatePropertyError',
-                    'error',
-                    'Changes you made were not able to save to the server.',
-                    'There was a problem!');
+                addPropertyNotifications(
+                    notificationView, properties.properties[i]);
             }
         });
+        properties.Observer('newProperty').subscribe(function(newProperty) {
+            addPropertyNotifications(notificationView, newProperty);
+        });
         properties.load();
+    };
+
+    var addPropertyNotifications = function(notificationView, property) {
+        notificationView.addSubscription(
+            property,
+            'updatePropertySuccess',
+            'success',
+            'Your change has been saved to a draft on the server.',
+            'Data saved successfully!');
+        notificationView.addSubscription(
+            property,
+            'updatePropertyError',
+            'error',
+            'Changes you made were not able to save to the server.',
+            'There was a problem!');
     };
 
     return demo;
