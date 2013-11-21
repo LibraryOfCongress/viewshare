@@ -14,11 +14,7 @@
 
 {% block head_data %}
     {{ block.super }}
-    {% for url in data_urls %}
-    <link rel="exhibit/data" href="{{ url }}"/>
-    {% endfor %}
-    <link rel="exhibit/data" href="{% url 'shared_dataset_properties_list_json' slug=object.slug %}"/>
-
+    <link rel="exhibit/data" href="{{ data_url }}"/>
     <link rel="freemix/exhibit_profile" href="{% url 'shared_exhibit_profile_json' slug=object.slug %}"/>
 
 {% endblock %}
@@ -27,13 +23,6 @@
     {{ block.super }}
     {% include "freemix/js_include/jquery_ui.html" %}
     {% include "simile/js/exhibit.html" %}
-    {% include "exhibit/widget_js.html" %}
-
-    {% compress js %}
-    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.highlight.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/display.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}share/js/shared_exhibit.js"></script>
-    {% endcompress %}
 {% endblock extra_scripts %}
 
 

@@ -8,11 +8,7 @@ urlpatterns = patterns('',
         views.SharedExhibitDisplayView.as_view(),
         name="shared_exhibit_display"),
 
-    url(r"^(?P<slug>[a-zA-Z0-9_.-]+)/properties.json$",
-        views.shared_dataset_properties_list_json,
-        name="shared_dataset_properties_list_json"),
-
-    url(r'^(?P<slug>[a-zA-Z0-9_.-]+)/properties/(?P<property>[a-zA-Z0-9_.-]+)/data/$',
+    url(r'^(?P<slug>[a-zA-Z0-9_.-]+)/data/$',
         views.shared_key_property_data_json,
         name="shared_key_property_data_json"),
 
