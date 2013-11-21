@@ -98,7 +98,6 @@ define(
             } else if (activeTab.attr('id') === 'list') {
                 newProperty = this.listView.newPatternProperty;
             } else {
-                console.log(activeTab);
                 return false;
             }
             errors = newProperty.validate(this.model.propertyLabels());
