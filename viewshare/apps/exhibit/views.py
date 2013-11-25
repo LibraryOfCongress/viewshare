@@ -303,7 +303,9 @@ class DraftExhibitView(View):
 
 class DraftExhibitPropertiesListView(DraftExhibitView, BaseJSONView):
     def get_doc(self):
-        qs = self.get_parent_object().properties.all()
+        # Return ExhibitProperty models that have PropertyData
+        qs = self.get_parent_object().properties\
+                .filter(data__isnull=False).all()
         serializer = ExhibitPropertyListSerializer(self.get_parent_object(),
                                                    queryset=qs)
         return json.dumps({"properties": serializer.data})

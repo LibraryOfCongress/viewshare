@@ -144,10 +144,10 @@ class AugmentTransaction(DataTransaction):
 
         profile = self.get_augmentation_profile()
         items = []
+        p = self.property
         try:
             result = transform(body=json.dumps(profile))
             items = result.get("items", [])
-            p = self.property
 
             message = {}
             failures = result.get("failures", [])

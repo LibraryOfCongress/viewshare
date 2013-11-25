@@ -68,8 +68,7 @@ define(
          * (notificationView for example).
          */
         augmentDataFailureHandler: function(failure) {
-            this.propertyCollection.Observer('augmentDataFailure')
-                .publish(failure);
+            this.propertyCollection.publishAugmentDataFailure(failure);
         },
 
         render: function() {

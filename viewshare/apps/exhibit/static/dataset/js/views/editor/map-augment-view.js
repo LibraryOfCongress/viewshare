@@ -25,6 +25,7 @@ define(
 
     $.extend(MapAugmentView.prototype, {
         initialize: function(options) {
+            this.propertyCollection = options.propertyCollection;
             this.propertyOptions = options.propertyCollection.toOptions();
             this.$el = options.$el;
             this.newCompositeProperty = new CompositePropertyModel({
@@ -36,6 +37,8 @@ define(
                 composite: [],
                 property_url: options.propertyCollection.propertiesURL
             });
+            this.newCompositeProperty.Observer('augmentDataFailure')
+                .subscribe(this.augmentDataFailureHandler.bind(this));
         },
 
         /** Compile the template we will use to render the View */
@@ -57,6 +60,15 @@ define(
                 composites.push(selected[i].value);
             }
             this.newCompositeProperty.composite = composites;
+        },
+
+        /**
+         * Bubble up the 'augmentDataFailure' event from our
+         * newCompositeProperty to anything that might be interested
+         * (notificationView for example).
+         */
+        augmentDataFailureHandler: function(failure) {
+            this.propertyCollection.publishAugmentDataFailure(failure);
         },
 
         render: function() {
