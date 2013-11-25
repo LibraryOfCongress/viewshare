@@ -52,7 +52,7 @@ The license below applies to the following dependencies:
       Eric Seidel - eric@webkit.org
       The Mozilla Foundation (contributions from Henri Sivonen since 2008)
  * httplib2:  Copyright (c) 2006 by Joe Gregorio
- * jquery.autocomplete.js:  Copyright (c) 2009 Jörn Zaefferer
+ * jquery.autocomplete.js:  Copyright (c) 2009 Jï¿½rn Zaefferer
  * jquery.bgiframe.min.js:  Copyright 2010, Brandon Aaron (http://brandonaaron.net/)
  * jquery.form.js:  Contributors list taken from http://malsup.com/jquery/form/#download:
       John Resig
@@ -61,7 +61,7 @@ The license below applies to the following dependencies:
       Klaus Hartl
       Matt Grimm
       Yehuda Katz
-      Jörn Zaefferer
+      Jï¿½rn Zaefferer
       Sam Collett
       Gilles van den Hoven
       Kevin Glowacz
@@ -69,7 +69,6 @@ The license below applies to the following dependencies:
  * jquery.highlight.js:  Johann Burkard <http://johannburkard.de>
  * jquery.jeditable.js:  Copyright (c) 2006-2009 Mika Tuupola, Dylan Verheul
  * jquery.json.js:  Brantley Harris (2009-08-14)
- * jquery.machineTag.js:  Copyright (c) 2009 Gabriel Horner
  * jquery-1.4.2.js:  Copyright (c) 2011 John Resig, http://jquery.com/
  * jquery-ui-1.8.min.js:  Copyright (c) 2011 Paul Bakaus, http://jqueryui.com/
  * Pinax:  Copyright (c) 2008-2010 James Tauber and contributors

@@ -1,4 +1,4 @@
-define(["freemix/js/lib/jquery", "exhibit/js/widget"], function ($, Widget) {
+define(["jquery", "exhibit/js/widget"], function ($, Widget) {
     "use strict";
 
     var BaseLens = function (config) {

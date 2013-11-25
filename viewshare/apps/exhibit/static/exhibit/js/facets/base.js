@@ -1,4 +1,4 @@
-define(["freemix/js/lib/jquery", "exhibit/js/widget"],
+define(["jquery", "exhibit/js/widget"],
     function ($, Widget) {
     "use strict";
 

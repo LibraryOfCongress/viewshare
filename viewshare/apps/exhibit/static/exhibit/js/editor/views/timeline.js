@@ -1,7 +1,8 @@
-(function ($, Freemix, Exhibit) {
-    "use strict";
-
-    var View = Freemix.view.prototypes["timeline"];
+define(["jquery",
+        "exhibit/js/views/timeline",
+        "exhibit"],
+        function ($, View, Exhibit) {
+        "use strict"
 
     View.prototype.label = "Timeline";
     View.prototype.thumbnail = "/static/exhibit/img/timeline-icon.png";
@@ -42,4 +43,5 @@
         color.change();
     };
 
-})(window.Freemix.jQuery, window.Freemix, window.Exhibit);
+    return View;
+});

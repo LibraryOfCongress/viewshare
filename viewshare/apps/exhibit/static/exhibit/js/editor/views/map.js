@@ -1,7 +1,8 @@
-(function ($, Freemix, Exhibit) {
-    "use strict";
-
-    var View = Freemix.view.prototypes["map"];
+define(["jquery",
+        "exhibit/js/views/map",
+        "exhibit"],
+        function ($, View, Exhibit) {
+        "use strict"
 
     View.prototype.propertyTypes = ["location"];
 
@@ -34,7 +35,5 @@
 
         this._setupLensEditor(config, template);
     };
-
-
-
-})(window.Freemix.jQuery, window.Freemix, window.Exhibit);
+    return View;
+});

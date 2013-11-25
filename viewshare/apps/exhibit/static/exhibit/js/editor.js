@@ -1,5 +1,20 @@
-/*global jQuery */
-(function($, Freemix) {
+define(["jquery",
+        "exhibit/js/views/registry",
+        "exhibit/js/facets/registry",
+        "exhibit/js/lenses/registry",
+        "exhibit/js/editor/views/container",
+        "exhibit/js/editor/facets/container",
+        "exhibit/js/editor/save_button",
+        "exhibit/js/editor/cancel_button",
+        "freemix/js/freemix",
+        "jquery-ui",
+        "bootstrap"],
+    function($, ViewRegistry, FacetRegistry,
+             LensRegistry, ViewContainer,
+             FacetContainer,
+             setup_save_button,
+             setup_cancel_button,
+             Freemix) {
     "use strict";
 
     $.fn.freemixThumbnails = function(items, clickHandler) {
@@ -31,7 +46,7 @@
     $.fn.facetContainer = function(properties) {
         return this.each(function() {
             var id = $(this).attr("id");
-            var facetContainer = new Freemix.facet.Container(id);
+            var facetContainer = new FacetContainer(id);
 
             var w = facetContainer.findWidget();
             w.sortable({
@@ -75,7 +90,7 @@
         return this.each(function() {
 
             var id = $(this).attr("id");
-            var viewContainer = new Freemix.view.Container(id);
+            var viewContainer = new ViewContainer(id);
             var model = $(this).data("model", viewContainer);
             model.append("<ul class='view-set nav nav-tabs'></ul>");
             model.append("<div class='view-content'></div>");
@@ -156,12 +171,12 @@
 
        metadata.lenses = [];
 
-       $.each(Freemix.lens._array, function(inx, lens) {
+       $.each(LensRegistry._array, function(inx, lens) {
            metadata.lenses.push(lens.serialize());
        });
 
-       if (Freemix.lens._default_lens) {
-           metadata.default_lens = Freemix.lens._default_lens.config;
+       if (LensRegistry._default_lens) {
+           metadata.default_lens = LensRegistry._default_lens.config;
        }
        return metadata;
    };
@@ -175,7 +190,7 @@
                 var id = $(this).attr("id");
                 var container = $("<div class='view-panel' data-ex-role='viewPanel'></div>");
                 $.each(model.views[id], function() {
-                    var view = new Freemix.view.construct(this.type,this);
+                    var view = ViewRegistry.construct(this.type,this);
                     container.append(view.generateExhibitHTML());
                 });
 
@@ -184,7 +199,7 @@
 
             $.each(model.facets, function(container, facets) {
                 $.each(facets, function() {
-                    var facet = Freemix.facet.construct(this.type, this);
+                    var facet = FacetRegistry.construct(this.type, this);
                     root.find(".facet-container#" +container).append(facet.generateExhibitHTML());
                 });
             });
@@ -210,16 +225,17 @@
     function build_db() {
         var profile = Freemix.profile;
 
-        var data = Freemix.data || $.map($("link[rel='exhibit/data']"), function(el) {return $(el).attr("href");});
-
+        var data = $("link[rel='exhibit/data']").toArray();
         Freemix.exhibit.initializeDatabase(data, function() {
-            Freemix.lens.setDefaultLens(Freemix.lens.construct(Freemix.profile.default_lens));
+            LensRegistry.setDefaultLens(LensRegistry.construct(Freemix.profile.default_lens));
 
             $(".view-container", Freemix.getBuilder()).viewContainer();
             $.each(profile.views, function(key, views) {
                 $.each(views, function() {
-                    var view = new Freemix.view.construct(this.type,this);
-                    var container = Freemix.view.getViewContainer(key);
+                    var view = ViewRegistry.construct(this.type,this);
+
+                    var container = $(".view-container#" + key, Freemix.getBuilder()).data("model");
+
                     container.addView(view);
                 });
             });
@@ -227,8 +243,10 @@
             $(".facet-container", Freemix.getBuilder()).facetContainer();
             $.each(profile.facets, function(key, facets) {
                 $.each(facets, function() {
-                    var facet = Freemix.facet.construct(this.type, this);
-                    Freemix.facet.getFacetContainer(key).addFacet(facet);
+                    var facet =  FacetRegistry.construct(this.type, this);
+                    var container = $(".facet-container#" + key, Freemix.getBuilder()).data("model");
+
+                    container.addFacet(facet);
                 });
             });
 
@@ -280,7 +298,8 @@
     function display() {
 
         setup_ui();
-
+        setup_save_button();
+        setup_cancel_button();
         var profile_url = $("link[rel='freemix/exhibit_profile']").attr("href");
         $.ajax({
             url: profile_url,
@@ -294,8 +313,9 @@
 
         });
 
+
+
     }
 
-    $(document).ready(display);
-
-})(window.Freemix.jQuery, window.Freemix);
+    return display;
+});

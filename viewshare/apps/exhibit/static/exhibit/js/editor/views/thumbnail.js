@@ -1,7 +1,8 @@
-(function ($, Freemix, Exhibit) {
-    "use strict";
-
-    var View = Freemix.view.prototypes["thumbnail"];
+define(["jquery",
+        "exhibit/js/views/thumbnail",
+        "exhibit"],
+        function ($, View, Exhibit) {
+        "use strict"
 
     View.prototype.label = "Gallery";
     View.prototype.thumbnail = "/static/exhibit/img/gallery.png";
@@ -27,4 +28,5 @@
         image.change();
     };
 
-})(window.Freemix.jQuery, window.Freemix, window.Exhibit);
+    return View;
+});

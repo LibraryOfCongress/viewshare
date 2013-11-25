@@ -42,7 +42,6 @@ This software uses code from the following projects:
  * jquery.highlight.js (http://johannburkard.de/blog/programming/javascript/highlight-javascript-text-higlighting-jquery-plugin.html)
  * jquery.jeditable.js (http://www.appelsiini.net/projects/jeditable)
  * jquery.json.js (http://code.google.com/p/jquery-json/)
- * jquery.machineTag.js (http://tagaholic.me/2009/04/14/i-am-machine-tag-and-so-can-you.html)
  * jquery (http://jquery.com/)
  * jquery UI (http://jqueryui.com/)
  * lightbox.js (http://www.huddletogether.com/projects/lightbox/)

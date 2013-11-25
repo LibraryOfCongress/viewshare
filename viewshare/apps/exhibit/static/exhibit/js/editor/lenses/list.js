@@ -1,7 +1,7 @@
-(function($, Freemix, Exhibit) {
-    "use strict";
+define(["jquery", "exhibit/js/lenses/list"],
+        function ($, Lens) {
 
-    var Lens = Freemix.lens.prototypes.list;
+    "use strict";
 
     Lens.label = "List";
 
@@ -18,5 +18,6 @@
         property_list.change();
     };
 
+    return Lens;
 
-})(window.Freemix.jQuery, window.Freemix, window.Exhibit);
+})

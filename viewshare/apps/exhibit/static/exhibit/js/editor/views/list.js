@@ -1,7 +1,8 @@
-(function ($, Freemix, Exhibit) {
-    "use strict";
-
-    var View = Freemix.view.prototypes["list"];
+define(["jquery",
+        "exhibit/js/views/list",
+        "exhibit"],
+        function ($, View, Exhibit) {
+        "use strict"
     View.prototype.thumbnail = "/static/exhibit/img/list-icon.png";
     View.prototype.label = "List";
     View.prototype.viewClass = Exhibit.TileView;
@@ -15,5 +16,5 @@
         this._setupLensEditor(config, template);
 
     };
-
-})(window.Freemix.jQuery, window.Freemix, window.Exhibit);
+    return View;
+});

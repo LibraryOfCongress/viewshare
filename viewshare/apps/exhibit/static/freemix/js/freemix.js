@@ -1,7 +1,6 @@
-define(["freemix/js/lib/jquery"], function($) {
+define(["jquery"], function($) {
     "use strict";
     var Freemix = window.Freemix || {};
-    Freemix.jQuery = window.jQuery;
     window.Freemix = Freemix;
     Freemix.getTemplate = function (template) {
         return $($("#" + template).html());

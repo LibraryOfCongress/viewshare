@@ -1,7 +1,8 @@
-(function ($, Freemix, Exhibit) {
-    "use strict";
-    var View = Freemix.view.prototypes["scatterplot"];
-
+define(["jquery",
+        "exhibit/js/views/scatterplot",
+        "exhibit"],
+        function ($, View, Exhibit) {
+        "use strict"
 
     View.prototype.propertyTypes = ["number", "currency"];
 
@@ -31,4 +32,5 @@
 
     };
 
-})(window.Freemix.jQuery, window.Freemix, window.Exhibit);
+    return View;
+});

@@ -1,4 +1,4 @@
-define(["freemix/js/lib/jquery", "exhibit"], function($, Exhibit) {
+define(["jquery", "exhibit"], function($, Exhibit) {
     "use strict";
 
     // Monkey patch formatters

@@ -1,7 +1,7 @@
 {% extends "site_base.html" %}
 {% load url from future %}
 
-
+{% load require %}
 {% load i18n %}
 {% load exhibit_tags %}
 {% load viewshare_helpers %}
@@ -16,13 +16,12 @@
     {{ block.super }}
     <link rel="exhibit/data" href="{{ data_url }}"/>
     <link rel="freemix/exhibit_profile" href="{% url 'shared_exhibit_profile_json' slug=object.slug %}"/>
-
 {% endblock %}
 
 {% block extra_scripts %}
     {{ block.super }}
     {% include "freemix/js_include/jquery_ui.html" %}
-    {% include "simile/js/exhibit.html" %}
+    {% require_module 'exhibit-display-main' %}
 {% endblock extra_scripts %}
 
 

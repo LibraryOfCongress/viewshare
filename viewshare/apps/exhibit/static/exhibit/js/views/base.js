@@ -1,4 +1,4 @@
-define(["freemix/js/lib/jquery",
+define(["jquery",
         "exhibit/js/widget",
         "exhibit/js/lenses/registry",
         "freemix/js/freemix"],

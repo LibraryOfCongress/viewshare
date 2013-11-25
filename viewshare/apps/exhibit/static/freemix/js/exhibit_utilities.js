@@ -1,7 +1,7 @@
 var exhibit;
 
 define([
-    "freemix/js/lib/jquery", "exhibit", "./freemix"
+    "jquery", "exhibit", "./freemix"
 ], function($, Exhibit, Freemix) {
     "use strict";
 
@@ -42,7 +42,7 @@ define([
 
             if (data.constructor == Array) {
                 if (fDone) {
-                    $(document.body).one(fDone);
+                    $(document.body).one("dataload.exhibit", fDone);
                 }
                 database._loadLinks(data, database);
 

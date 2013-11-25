@@ -1,4 +1,4 @@
-define(["freemix/js/lib/jquery",
+define(["jquery",
         "freemix/js/freemix",
         "exhibit/js/lenses/registry"],
     function($, Freemix, LensRegistry) {
@@ -57,6 +57,6 @@ define(["freemix/js/lib/jquery",
 
     };
 
-    LensRegistry.register(config, render);
+    return LensRegistry.register(config, render);
 
 });

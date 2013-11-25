@@ -1,4 +1,4 @@
-define(["freemix/js/lib/jquery",
+define(["jquery",
         "exhibit/js/views/registry",
         "exhibit/js/facets/registry",
         "exhibit/js/lenses/registry",
@@ -15,7 +15,7 @@ define(["freemix/js/lib/jquery",
                 var id = $(this).attr("id");
                 var container = $("<div class='view-panel' data-ex-role='viewPanel'></div>");
                 $.each(model.views[id], function() {
-                    var view = new ViewRegistry.construct(this.type,this);
+                    var view = ViewRegistry.construct(this.type,this);
                     container.append(view.generateExhibitHTML());
                 });
 
@@ -63,6 +63,6 @@ define(["freemix/js/lib/jquery",
 
 
     };
-
+    return Freemix.initialize;
 
 });

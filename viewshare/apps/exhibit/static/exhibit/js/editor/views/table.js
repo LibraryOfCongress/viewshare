@@ -1,6 +1,8 @@
-(function ($, Freemix, Exhibit) {
-    "use strict";
-    var View = Freemix.view.prototypes["table"];
+define(["jquery",
+        "exhibit/js/views/table",
+        "exhibit"],
+        function ($, View, Exhibit) {
+        "use strict"
 
     View.prototype.label = "Table";
     View.prototype.thumbnail = "/static/exhibit/img/table-icon.png";
@@ -34,5 +36,5 @@
         sort_order.change();
         property_list.change();
     };
-
-})(window.Freemix.jQuery, window.Freemix, window.Exhibit);
+    return View;
+});

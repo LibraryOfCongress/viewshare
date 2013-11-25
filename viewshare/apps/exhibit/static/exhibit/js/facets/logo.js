@@ -1,4 +1,4 @@
-define(["freemix/js/lib/jquery",
+define(["jquery",
         "exhibit/js/facets/registry"],
     function ($, FacetRegistry) {
         "use strict";

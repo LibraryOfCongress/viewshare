@@ -1,7 +1,8 @@
-(function ($, Freemix, Exhibit) {
-    "use strict";
-
-    var View = Freemix.view.prototypes["piechart"];
+define(["jquery",
+        "exhibit/js/views/piechart",
+        "exhibit"],
+        function ($, View, Exhibit) {
+        "use strict"
 
     View.prototype.label = "Pie Chart";
     View.prototype.thumbnail = "/static/exhibit/img/piechart-icon.png";
@@ -18,5 +19,5 @@
         this._setupPropertyMultiSelect(config, template, property_list, "properties", true);
         property_list.change();    
     };
-
-})(window.Freemix.jQuery, window.Freemix, window.Exhibit);
+    return View;
+});

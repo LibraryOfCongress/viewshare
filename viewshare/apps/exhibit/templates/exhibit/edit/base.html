@@ -6,7 +6,7 @@
 {% load exhibit_tags %}
 {% load compress %}
 {% load humanize %}
-
+{% load require %}
 {% block head_title %}{% blocktrans %}Layout{% endblocktrans %}{% endblock %}
 
 {% block rtab_id %}id="builder_tab"{% endblock %}
@@ -15,6 +15,9 @@
 {% block subnav %}
 
 {% endblock %}
+
+{% block head_jquery %}{% endblock %}
+
 
 {% block head_data %}
     <link rel="exhibit/data" href="{% url 'draft_exhibit_all_data' owner=exhibit.owner slug=exhibit.slug %}"/>
@@ -35,28 +38,11 @@
 {% endcompress %}
 {% endblock head_css %}
 
-
+{% block base_scripts %}{% endblock %}
 {% block extra_scripts %}
     {{ block.super }}
-    {% include "simile/js/exhibit.html" %}
-    {% compress js %}
 
-    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery-ui.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/ui.multiselect.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.form.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.jeditable.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/hoverIntent.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.uuid.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.cookie.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.json.js"></script>
-    {% endcompress %}
-
-    {% include "exhibit/widget_js.html" with editor="True" %}
-
-    {% compress js %}
-    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/editor/save_button.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}exhibit/js/editor/cancel_button.js"></script>
-    {% endcompress %}
+    {% require_module 'exhibit-builder-main' %}
 
 {% endblock extra_scripts %}
 

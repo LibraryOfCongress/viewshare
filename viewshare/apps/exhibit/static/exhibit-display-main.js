@@ -80,7 +80,7 @@ requirejs.config({
 
 require(["simile/exhibit/exhibit-api"], function() {
     require([
-        "freemix/js/lib/jquery",
+        "jquery",
         "exhibit",
         "freemix/js/freemix",
         "freemix/js/patch_exhibit",

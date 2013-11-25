@@ -1,10 +1,10 @@
-define(["freemix/js/lib/jquery",
+define(["jquery",
         "exhibit/js/facets/registry",
         "exhibit/js/lib/creole"],
     function ($, FacetRegistry, Parse) {
-        "use strict";
+    "use strict";
 
-        var creole = new Parse.Simple.Creole({
+    var creole = new Parse.Simple.Creole({
         forIE:document.all,
         interwiki:{
 

@@ -1,14 +1,13 @@
-define(["freemix/js/lib/jquery", "exhibit/js/lenses/base", "freemix/js/freemix"],
+define(["jquery", "exhibit/js/lenses/base", "freemix/js/freemix"],
     function($, BaseLens, Freemix) {
     "use strict";
 
-    var prototypes = {};
-
     return {
+        prototypes: {},
         _array: [],
         construct: function (config) {
             if (config) {
-                var Type = prototypes[config.type];
+                var Type = this.prototypes[config.type];
                 return new Type(config);
             }
             return this.copyDefaultLens();
@@ -21,7 +20,7 @@ define(["freemix/js/lib/jquery", "exhibit/js/lenses/base", "freemix/js/freemix"]
             Lens.prototype.config = config;
             Lens.prototype.generateExhibitHTML = render_function;
             var type = config.type;
-            prototypes[type] = Lens;
+            this.prototypes[type] = Lens;
             return Lens;
         },
         getDefaultLens: function () {

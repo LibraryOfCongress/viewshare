@@ -1,4 +1,4 @@
-define(["freemix/js/lib/jquery"], function ($) {
+define(["jquery"], function ($) {
     "use strict";
 
     var Widget = function(config) {

@@ -9,7 +9,7 @@
  *
  */
 
-define(["freemix/js/lib/jquery"], function($) {
+define(["jquery"], function($) {
 
     var Lightbox = {
         defaults: {
