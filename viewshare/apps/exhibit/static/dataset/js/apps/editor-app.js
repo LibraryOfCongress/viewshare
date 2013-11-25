@@ -39,7 +39,7 @@ define(
         );
         notificationView.addSubscription(
             properties,
-            'augmentFailure',
+            'augmentDataFailure',
             'error',
             'There was a server error during the data augmentation. Please try again later.',
             'Augmentation Error!'
