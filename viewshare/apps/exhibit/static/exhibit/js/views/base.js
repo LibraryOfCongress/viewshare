@@ -1,7 +1,8 @@
 define(["jquery",
         "exhibit/js/widget",
         "exhibit/js/lenses/registry",
-        "freemix/js/freemix"],
+        "freemix/js/freemix",
+        "freemix/js/exhibit_utilities"],
     function ($, Widget, LensRegistry, Freemix) {
     "use strict";
 
