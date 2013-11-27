@@ -1,7 +1,7 @@
 define(["jquery",
         "exhibit/js/views/map",
-        "exhibit"],
-        function ($, View, Exhibit) {
+        "ext/openlayers/scripts/openlayers-view"],
+        function ($, View, OLMapView) {
         "use strict"
 
     View.prototype.propertyTypes = ["location"];
@@ -10,7 +10,7 @@ define(["jquery",
 
     View.prototype.thumbnail = "/static/exhibit/img/map-icon.png";
 
-    View.prototype.viewClass = Exhibit.OLMapView;
+    View.prototype.viewClass = OLMapView;
 
     View.prototype.template_name = "map-view-template";
 

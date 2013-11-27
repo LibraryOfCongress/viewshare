@@ -1,7 +1,7 @@
 define(["jquery",
         "exhibit/js/views/scatterplot",
-        "exhibit"],
-        function ($, View, Exhibit) {
+        "ext/flot/scripts/scatterplot-view"],
+        function ($, View, ScatterPlotView) {
         "use strict"
 
     View.prototype.propertyTypes = ["number", "currency"];
@@ -9,7 +9,7 @@ define(["jquery",
     View.prototype.label = "Scatter Plot";
     View.prototype.thumbnail = "/static/exhibit/img/scatterplot-icon.png";
 
-    View.prototype.viewClass = Exhibit.ScatterPlotView;
+    View.prototype.viewClass = ScatterPlotView;
 
     View.prototype.template_name = "scatterplot-view-template";
 

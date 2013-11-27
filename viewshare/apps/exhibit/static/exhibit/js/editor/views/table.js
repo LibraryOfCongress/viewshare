@@ -1,12 +1,12 @@
 define(["jquery",
         "exhibit/js/views/table",
-        "exhibit"],
-        function ($, View, Exhibit) {
+        "scripts/ui/views/tabular-view"],
+        function ($, View, TabularView) {
         "use strict"
 
     View.prototype.label = "Table";
     View.prototype.thumbnail = "/static/exhibit/img/table-icon.png";
-    View.prototype.viewClass = Exhibit.TabularView;
+    View.prototype.viewClass = TabularView;
     View.prototype.template_name = "table-view-template";
 
     View.prototype.setupEditor = function (config, template) {
