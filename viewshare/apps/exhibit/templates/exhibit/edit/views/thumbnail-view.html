@@ -6,13 +6,10 @@
         
         <fieldset>
           
-          <legend class="freemix-fieldset-legend">{% trans "Gallery View Settings" %}</legend>
-
           <div class="container-fluid">          
             
             <div class="row-fluid">          
-              
-              <div class="span5 view-variables">
+              <div class="view-variables">
                 
                 <div class="control-group">
                   <label class="control-label" for="view_label_input">{% trans "Label" %}</label>
@@ -27,7 +24,7 @@
                 <div class="control-group">
                   <label class="control-label" for="sort_property">{% trans "Sort By" %}</label>
                   <div class="controls">
-                    <select id="sort_property"></select>
+                    <select class="input-medium" id="sort_property"></select>
                     <select id="sort_order" name="sort_order" class="sort-order input-medium inline">
                       <option value="ascending">{% trans "Ascending" %}</option>
                       <option value="descending">{% trans "Descending" %}</option>
@@ -35,8 +32,7 @@
                   </div>
                 </div>
 
-
-              <legend class="freemix-fieldset-legend">{% trans "Lens Settings" %}</legend>
+   	      <legend class="freemix-fieldset-legend">{% trans "Lens Settings" %}</legend>
 
               <div class="control-group">
                 <label class="control-label" for="image_property">{% trans "Image" %}</label>

@@ -561,6 +561,13 @@ ul.responses li.thread-8 {
   border: none;
 }
 
+.view-properties .lens-settings-label {
+    padding-bottom: 0px;
+    padding-top: 5px;
+    margin-bottom: 20px;
+    margin-left: -10px;
+}
+
 /* profile */
 
 .widget-well .widget-header {
@@ -861,4 +868,18 @@ filter: alpha(opacity=50);
 display: inline;
 }
 
+/* buttons */
 
+.btn-supermini {
+   padding: 0 3px;
+   -webkit-border-radius: 4px !important;
+   -moz-border-radius: 4px !important;
+   border-radius: 4px !important;
+}
+
+/* bootstrap overrides */
+
+legend + .control-group {
+  margin-top: 0px;
+  -webkit-margin-top-collapse: separate;
+}
