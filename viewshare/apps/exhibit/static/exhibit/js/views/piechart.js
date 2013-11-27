@@ -1,5 +1,8 @@
-define(["jquery", "exhibit/js/views/registry"],
-    function ($, ViewRegistry) {
+define(["jquery",
+        "exhibit",
+        "exhibit/js/views/registry",
+        "ext/flot/flot-extension"],
+    function ($, Exhibit, ViewRegistry, FlotExtension) {
         "use strict";
     var config = {
         type: "piechart",
@@ -16,7 +19,7 @@ define(["jquery", "exhibit/js/views/registry"],
         return view;
     };
 
-
+    FlotExtension.register(Exhibit);
     return ViewRegistry.register(config, render);
 
 });

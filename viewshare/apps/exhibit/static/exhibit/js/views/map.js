@@ -1,5 +1,5 @@
-define(["jquery", "exhibit/js/views/registry"],
-    function ($, ViewRegistry) {
+define(["jquery", "exhibit", "exhibit/js/views/registry", "ext/openlayers/openlayers-extension"],
+    function ($, Exhibit, ViewRegistry, MapExtension) {
         "use strict";
 
     var config = {
@@ -36,9 +36,8 @@ define(["jquery", "exhibit/js/views/registry"],
 
         return view;
     };
-
+    MapExtension.register(Exhibit);
     var View = ViewRegistry.register(config,render);
-    View.prototype.viewClass = "Map";
     return View;
 
 });

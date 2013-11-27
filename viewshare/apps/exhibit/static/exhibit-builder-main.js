@@ -123,14 +123,7 @@ require(["simile/exhibit/exhibit-api"], function() {
         "exhibit",
         "exhibit/js/editor/patch_exhibit",
         "exhibit/js/editor",
-        "freemix/js/freemix",
         "freemix/js/patch_exhibit",
-
-        "freemix/js/exhibit_utilities",
-        "freemix/js/lib/lightbox",
-        "exhibit/js/lenses/registry",
-        "exhibit/js/views/registry",
-        "exhibit/js/facets/registry",
 
         "exhibit/js/editor/widget",
         "exhibit/js/editor/facets/container",
@@ -163,8 +156,6 @@ require(["simile/exhibit/exhibit-api"], function() {
         "jquery.uuid",
         "jquery.json"
     ], function($, Exhibit, _, initialize) {
-        $(document).ready(function() {
-            initialize();
-        });
+        initialize();
     });
 });

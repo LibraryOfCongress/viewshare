@@ -1,6 +1,9 @@
-define(["jquery", "exhibit/js/views/registry",
+define(["jquery",
+        "exhibit",
+        "exhibit/js/views/registry",
+        "ext/time/time-extension",
         "freemix/js/exhibit_utilities"],
-    function ($, ViewRegistry) {
+    function ($, Exhibit, ViewRegistry, TimeExtension) {
         "use strict";
 
 
@@ -66,7 +69,7 @@ define(["jquery", "exhibit/js/views/registry",
 
         return view;
     };
-
+    TimeExtension.register(Exhibit);
     return ViewRegistry.register(config, render);
 
 });

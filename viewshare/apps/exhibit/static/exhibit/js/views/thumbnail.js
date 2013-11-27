@@ -1,5 +1,6 @@
 define(["jquery", "exhibit/js/views/registry",
-        "freemix/js/exhibit_utilities"],
+        "freemix/js/exhibit_utilities",
+        "freemix/js/lib/lightbox"],
     function ($, ViewRegistry) {
         "use strict";
 

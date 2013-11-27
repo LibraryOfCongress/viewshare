@@ -80,15 +80,8 @@ requirejs.config({
 
 require(["simile/exhibit/exhibit-api"], function() {
     require([
-        "jquery",
-        "exhibit",
-        "freemix/js/freemix",
+        "exhibit/js/display",
         "freemix/js/patch_exhibit",
-        "freemix/js/exhibit_utilities",
-        "freemix/js/lib/lightbox",
-        "exhibit/js/lenses/registry",
-        "exhibit/js/views/registry",
-        "exhibit/js/facets/registry",
 
         "exhibit/js/lenses/list",
         "exhibit/js/lenses/thumbnail",
@@ -108,10 +101,7 @@ require(["simile/exhibit/exhibit-api"], function() {
         "exhibit/js/facets/logo",
         "exhibit/js/lib/creole",
         "exhibit/js/facets/text",
-        "exhibit/js/display"
-    ], function($, Exhibit, Freemix) {
-        $(document).ready(function() {
-            Freemix.initialize();
-        });
+    ], function(initialize) {
+        initialize();
     });
 });
