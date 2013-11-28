@@ -14,7 +14,7 @@ define(["jquery", "exhibit", "exhibit/js/views/registry", "ext/openlayers/openla
     var render = function (config) {
         config = config || this.config;
         if (!config.latlng) {
-            return $("<div data-ex-role='view' data-ex-view-class='OLMap' ex:viewLabel='Location Missing'></div>");
+            return $("<div data-ex-role='view' data-ex-view-class='OLMap' data-view=label='Location Missing'></div>");
         }
         var latlng = config.latlng;
         var colorKey = config.colorKey;

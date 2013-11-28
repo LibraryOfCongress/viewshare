@@ -1,14 +1,14 @@
 define(["jquery",
-        "exhibit/js/views/piechart",
-        "ext/flot/scripts/piechart-view"],
-        function ($, View, PiechartView) {
+        "exhibit/js/views/barchart",
+        "ext/flot/scripts/barchart-view"],
+        function ($, View, BarChartView) {
         "use strict"
 
-    View.prototype.label = "Pie Chart";
+    View.prototype.label = "Bar Chart";
     View.prototype.thumbnail = "/static/exhibit/img/piechart-icon.png";
 
-    View.prototype.viewClass = PiechartView;
-    View.prototype.template_name = "piechart-view-template";
+    View.prototype.viewClass = BarChartView;
+    View.prototype.template_name = "barchart-view-template";
 
     // Display the view's UI.
     View.prototype.setupEditor = function(config, template) {

@@ -88,6 +88,7 @@ require(["simile/exhibit/exhibit-api"], function() {
         "exhibit/js/views/list",
         "exhibit/js/views/map",
         "exhibit/js/views/piechart",
+        "exhibit/js/views/barchart",
         "exhibit/js/views/scatterplot",
         "exhibit/js/views/table",
         "exhibit/js/views/timeline",

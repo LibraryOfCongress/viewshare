@@ -6,8 +6,8 @@ define(["jquery",
     function ($, Exhibit, Freemix, ViewRegistry, FlotExtension) {
         "use strict";
     var config = {
-        type: "piechart",
-        name: "Pie Chart",
+        type: "barchart",
+        name: "Bar Chart",
         properties: [],
         grouping: undefined
     };
@@ -18,10 +18,9 @@ define(["jquery",
         config = config || this.config;
         var expression = Freemix.exhibit.expression;
 
-        var view = $("<div data-ex-role='view' data-ex-view-class='PieChart'></div>");
+        var view = $("<div data-ex-role='view' data-ex-view-class='BarChart'></div>");
         view.attr("data-ex-label", config.name);
         view.attr("data-ex-grouping", expression(config.grouping));
-
 
         this._renderFormats(view);
         view.append(this._getLens(config).generateExhibitHTML());

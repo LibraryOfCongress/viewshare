@@ -1,6 +1,8 @@
-define(["jquery", "exhibit/js/views/registry",
+define(["jquery",
+        "freemix/js/freemix",
+        "exhibit/js/views/registry",
         "freemix/js/exhibit_utilities"],
-    function ($, ViewRegistry) {
+    function ($,Freemix, ViewRegistry) {
         "use strict";
 
     var config = {
@@ -55,7 +57,7 @@ define(["jquery", "exhibit/js/views/registry",
             }
         }
 
-        var view = $("<div data-ex-role='view' data-ex-view-class='Exhibit.ScatterPlotView'></div>");
+        var view = $("<div data-ex-role='view' data-ex-view-class='ScatterPlot'></div>");
         view.attr("data-ex-view-label", config.name);
         var prop;
         if (xaxis) {

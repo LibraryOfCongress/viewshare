@@ -137,6 +137,7 @@ require(["simile/exhibit/exhibit-api"], function() {
         "exhibit/js/editor/views/list",
         "exhibit/js/editor/views/map",
         "exhibit/js/editor/views/piechart",
+        "exhibit/js/editor/views/barchart",
         "exhibit/js/editor/views/scatterplot",
         "exhibit/js/editor/views/table",
         "exhibit/js/editor/views/timeline",
