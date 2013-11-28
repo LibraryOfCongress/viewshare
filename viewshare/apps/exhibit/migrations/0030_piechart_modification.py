@@ -14,13 +14,16 @@ class Migration(DataMigration):
             for view in profile.get("views", {}).get("views", {}):
 
                 if view.get("type", None) == "piechart":
-                    properties = view.get("properties", [])
-                    if len(properties) > 0:
-                        view["grouping"] = properties[0]
-                    else:
-                        view["grouping"] = None
+                    if  not "grouping" in view:
+                        properties = view.get("properties", [])
+                        if len(properties) > 0:
+                            view["grouping"] = properties[0]
+                        else:
+                            view["grouping"] = None
 
-                    del view["properties"]
+                        del view["properties"]
+                    if not "lens" in view:
+                        view["lens"] = dict(profile["default_lens"])
             exhibit.profile = json.dumps(profile)
             exhibit.save()
 
