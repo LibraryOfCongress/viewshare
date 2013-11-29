@@ -244,15 +244,18 @@ font-weight: bold;
 }
 
 .exhibit_list_item .exhibit-title {
-   background: transparent url(../../images/palette-24.png) top left no-repeat;
-   font-size: 115%;
-   font-weight: bold;
-   padding-bottom: 15px;
-   padding-left: 30px;
+/*   background: transparent url(../../images/palette-24.png) top left no-repeat; */
+}
+
+.exhibit_list_item .exhibit-title .view-label {
+  padding-left: 8px;
+  font-size: 130%;
+  font-weight: bold;
+  padding-bottom: 15px;
 }
 
 .shared_key_list_item .shared-key-label {
-   background: transparent url(../../images/key-24.png) top left no-repeat;
+/*   background: transparent url(../../images/key-24.png) top left no-repeat; */
    font-size: 115%;
    font-weight: bold;
    padding-bottom: 0.4em;
@@ -326,12 +329,9 @@ height:106px;
 }
 
 #about-box .view_avatar {
-  background: url(../../images/palette-112.png) 0% 0% no-repeat; // use smaller avatar
-  background-position: center; 
-  width: 112px;
-  height: 112px;
-  margin-top: 10px;
-  margin-left: 10px;
+  margin-top: 20px;
+  margin-left: 20px;
+  color: darkgrey;
 }
 
 #about-box .profile_info {
@@ -413,11 +413,14 @@ padding: 10px 10px 10px 10px;
 }
 
 #about-box .about_homepage {
+/*
   background: url(../../images/home.png) bottom left no-repeat;
+ */
   width: 24px;
   height: 24px;
-  margin-left: 15px;
-  padding-left: 30px;
+  margin-left: 5px;
+  padding-left: 5px;
+
 }
 
 #about-box .user_counts {
@@ -443,17 +446,23 @@ padding: 10px 10px 10px 10px;
 }
 
 .private .private-icon {
-   background: url(../../images/lock.png) 0% 50% no-repeat;
+/*
+   background: url(../../images/lock.png) 0% 50% no-repeat; 
    width: 16px;
    height: 16px;
    padding:15px 0px 10px 25px;
+*/
+   color: black;
 }
 
 .public .public-icon {
-   background: url(../../images/unlock.png) 0% 50% no-repeat;
+/*
+   background: url(../../images/unlock.png) 0% 50% no-repeat; 
    width: 16px;
    height: 16px;
    padding: 15px 0px 10px 25px;
+*/
+   color: darkgrey;
 }
 
 .exhibit-left, .dataset-left, .shared-key-left {
@@ -537,7 +546,6 @@ ul.responses li.thread-8 {
      overflow: auto;
 }
 
-
 .widget-edit-dialog .view-widget-option .view-widget-label {
     display:block;		    
 }
@@ -545,6 +553,29 @@ ul.responses li.thread-8 {
 .widget-edit-dialog .view-properties, .widget-edit-dialog .view-preview {
      height: 800px;		
      overflow: auto;
+}
+
+.widget-edit-dialog .view-edit-body #view-preview {
+     height: 800px;		
+     overflow: auto;
+}
+
+.widget-edit-dialog .widget-edit-nav {
+     max-width: 120px;
+     float:left;
+}		    
+
+.widget-edit-dialog .widget-edit-view {
+     width: 520px;
+     float:left;
+}		    
+
+.widget-edit-dialog .widget-edit-preview {
+  padding-left: 640px;
+}		    
+
+.view-widget-option-scatter-plot i {
+ margin-left: 5px;
 }
 
 .view-properties .accordion-inner {
@@ -690,16 +721,19 @@ div.notices h2 {
 }
 
 .notice_block {
-   background: transparent url(../../images/notice-32.png) top left no-repeat;
+/*   background: transparent url(../../images/notice-32.png) top left no-repeat; */
    height: 32px;
    font-size: 100%;
    font-weight: bold;
    padding-top: 5px;
    margin-top: 0px;
    padding-bottom: 5px;
-   padding-left: 40px;
    font-weight: normal;
    line-height: 160%;
+}
+
+.notice_block .notice-label {
+padding-left: 8px;
 }
 
 .notice .notice_type, .unseen_notice .notice_type {
@@ -882,4 +916,16 @@ display: inline;
 legend + .control-group {
   margin-top: 0px;
   -webkit-margin-top-collapse: separate;
+}
+
+/* font-awesome updates */
+
+.app-offset {
+padding-left: 2px;
+margin-top: -3px;
+}
+
+.app-offset-lg {
+padding-left: 2px;
+margin-top: -15px;
 }

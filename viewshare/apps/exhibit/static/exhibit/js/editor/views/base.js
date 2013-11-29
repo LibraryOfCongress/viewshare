@@ -66,9 +66,9 @@
          var view = this;
          return $("<li class='view'>" +
                   "<a href='#'>" + 
-                  "<i class='icon-move'></i>" +
+                  "<i class='fa fa-arrows'></i>" +
                   "<span class='view-label'></span>" +
-                  "<i class='icon-remove delete-button'></i>" +
+                  "<i class='fa fa-times delete-button'></i>" +
                   "</a>" + 
                   "</li>")
 
@@ -97,7 +97,7 @@
         $(".view-set>li.view", this.getContainer()).removeClass("active");
         control.addClass("active");
         this.updatePreview(content, this.config);
-        content.prepend("<div class='view-menu'><div class='row-fluid'><div class='span12'><div class='pull-right'><a href='#' class='btn btn-small' title='Edit this view'><i class='icon-edit'></i> Edit</a></div></div></div></div>");
+        content.prepend("<div class='view-menu'><div class='row-fluid'><div class='span12'><div class='pull-right'><a href='#' class='btn btn-small' title='Edit this view'><i class='fa fa-edit fa-lg'></i> Edit</a></div></div></div></div>");
         content.find(".view-menu a").click(function() {
             view.showEditor();
             return false;

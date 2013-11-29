@@ -46,7 +46,7 @@
             w.data("model", facetContainer);
             w.addClass("ui-widget-content").addClass("facet-container");
             w.append("<div class='create-facet'>" +
-                "<button class='create-facet-button btn btn-small btn-info' href='#addWidgetModal_" + container_id + "' data-toggle='modal'><i class='icon-plus'></i> Add a Widget</button>" +
+                "<button class='create-facet-button btn btn-small btn-info' href='#addWidgetModal_" + container_id + "' data-toggle='modal'><i class='fa fa-plus'></i><span class='widget-label'>Add a Widget</span></button>" +
                 "</div>");
 
             var dialog =$("<div id='addWidgetModal_" + container_id + "' class='widget-editor modal hide fade' tabindex='-1' role='dialog' aria-labelledby='addWidgetModalLabel' aria-hidden='true'>" +
@@ -97,7 +97,7 @@
                     }
                 });
             set.append("<li class='create-view'>" +
-                       "<button class='create-view-button btn btn-small btn-info' href='#addViewModal' data-toggle='modal'><i class='icon-plus'></i> Add a View</button>" +
+                       "<button class='create-view-button btn btn-small btn-info' href='#addViewModal' data-toggle='modal'><i class='fa fa-plus'></i><span class='widget-label'>Add a View</span></button>" +
                        "</li>");
 
             var dialog =$("<div id='addViewModal' class='widget-editor modal hide fade' tabindex='-1' role='dialog' aria-labelledby='addViewModalLabel' aria-hidden='true'>" +
