@@ -234,6 +234,9 @@ font-weight: bold;
   width: 98%;
 }
 
+.embed-desc {
+  padding-bottom: 10px;
+}
 
 .dataset_list_item .dataset-title {
    background: transparent url(../../images/dataset-24.png) top left no-repeat;
@@ -382,7 +385,7 @@ padding-top: 10px;
 
 #about-box .exhibit-acls {
 padding-top: 10px;
-padding-left: 10px;
+padding-left: 20px;
 }
 
 
@@ -735,8 +738,13 @@ div.notices h2 {
    line-height: 160%;
 }
 
+.notice_block .notice_message {
+   color: darkgrey;
+}
+
 .notice_block .notice-label {
 padding-left: 8px;
+color: black;
 }
 
 .notice .notice_type, .unseen_notice .notice_type {

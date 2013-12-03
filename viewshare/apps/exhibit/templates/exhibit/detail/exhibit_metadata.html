@@ -50,9 +50,9 @@
     <div class="span10">
       <div class="exhibit-acls">
 	{% if object.is_public %}
-	<div class="public"><span class="public-icon"></span>{% trans "This view is public" %}</div>
+	<div class="public"><span class="public-icon"><i class="fa fa-unlock-alt fa-lg"></i></span><span class="view-label">{% trans "This view is public" %}</span></div>
 	{% else %}
-	<div class="private"><span class="private-icon"></span>{% trans "This view is private" %}</div>
+	<div class="private"><span class="private-icon"><i class="fa fa-lock fa-lg"></i></span><span class="view-label">{% trans "This view is private" %}</span></div>
 	{% endif %}
       </div>
     </div>
