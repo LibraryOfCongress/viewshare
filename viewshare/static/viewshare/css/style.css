@@ -388,6 +388,10 @@ padding-top: 10px;
 padding-left: 20px;
 }
 
+.exhibit-acls .view-label {
+padding-left: 10px;
+}
+
 
 #about-box .exhibit-created-by, 
 #about-box .exhibit-created-on, 
