@@ -244,7 +244,7 @@ font-weight: bold;
 }
 
 .exhibit_list_item .exhibit-title {
-/*   background: transparent url(../../images/palette-24.png) top left no-repeat; */
+   color: darkgrey;
 }
 
 .exhibit_list_item .exhibit-title .view-label {
@@ -255,22 +255,23 @@ font-weight: bold;
 }
 
 .shared_key_list_item .shared-key-label {
-/*   background: transparent url(../../images/key-24.png) top left no-repeat; */
-   font-size: 115%;
-   font-weight: bold;
-   padding-bottom: 0.4em;
-   padding-left: 30px;
 }
 
-.shared-link-notice {
-   background: transparent url(../../images/key-24.png) top left no-repeat;
-   font-size: 100%;
-   line-height: 140%;
-   font-weight: bold;
-   padding-bottom: 0.5em;
-   padding-left: 30px;
+.shared-link-notice, .shared_key_list_item {
+    padding-bottom: 10px;		    
 }
 
+.shared-link-notice .notice-icon, .shared-key-label .notice-icon {
+    color: darkgrey;
+}
+
+.shared-link-notice .view-label, .shared-key-label .view-label {
+    font-weight: bold;
+}
+
+.shared_key_list_item .shared-key-prose {
+   padding-bottom: 10px;
+}
 
 /* handle this style due to jquery uithemer base override */
 
@@ -453,6 +454,7 @@ padding: 10px 10px 10px 10px;
    padding:15px 0px 10px 25px;
 */
    color: black;
+   font-size: 120%;
 }
 
 .public .public-icon {
@@ -463,6 +465,7 @@ padding: 10px 10px 10px 10px;
    padding: 15px 0px 10px 25px;
 */
    color: darkgrey;
+   font-size: 120%;
 }
 
 .exhibit-left, .dataset-left, .shared-key-left {
@@ -921,11 +924,11 @@ legend + .control-group {
 /* font-awesome updates */
 
 .app-offset {
-padding-left: 2px;
-margin-top: -3px;
+padding-left: 1px;
+margin-top: -5px;
 }
 
 .app-offset-lg {
 padding-left: 2px;
-margin-top: -15px;
+margin-top: -18px;
 }
