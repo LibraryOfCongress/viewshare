@@ -33,6 +33,8 @@ define(["jquery",
            model.config = config;
            viewContainer.findWidget().trigger("edit-view");
            viewContainer.getDialog().modal("hide");
+
+           view.findWidget().find("span.view-label").text(model.config.name);
            model.select();
            
         });
@@ -139,7 +141,7 @@ define(["jquery",
 
         label.val(config.name);
         label.change(function() {
-            view.rename($(this).val());
+            config.name = $(this).val();
             template.trigger(view.refreshEvent);
         });
     };

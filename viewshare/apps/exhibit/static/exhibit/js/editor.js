@@ -70,11 +70,11 @@ define(["jquery",
             });
 
             dialog.on("show", function() {
-                Freemix.getBuilder().hide();
+                //Freemix.getBuilder().hide();
             });
 
             dialog.on("hidden", function() {
-                Freemix.getBuilder().show();
+                //Freemix.getBuilder().show();
             });
 
             facetContainer._dialog = dialog;
@@ -121,11 +121,11 @@ define(["jquery",
             });
 
             dialog.on("show", function() {
-                Freemix.getBuilder().hide();
+                //Freemix.getBuilder().hide();
             });
 
             dialog.on("hidden", function() {
-                Freemix.getBuilder().show();
+                //Freemix.getBuilder().show();
             });
 
             viewContainer._dialog = dialog;

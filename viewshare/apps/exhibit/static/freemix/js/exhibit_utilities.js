@@ -1,5 +1,3 @@
-var exhibit;
-
 define([
     "jquery", "exhibit", "./freemix"
 ], function($, Exhibit, Freemix) {
@@ -7,9 +5,9 @@ define([
 
     $.fn.createExhibit = function() {
         return this.each(function() {
-            exhibit = Exhibit.create(Freemix.exhibit.database);
+            var exhibit = Exhibit.create(Freemix.exhibit.database);
             exhibit.configureFromDOM(this);
-            $('body').trigger('rendered.exhibit');
+            $('body').trigger('rendered.exhibit', [exhibit]);
         });
     };
 
@@ -53,6 +51,7 @@ define([
             return database;
         },
         createExhibit: function(root) {
+            var exhibit;
             exhibit = Exhibit.create(Freemix.exhibit.database);
             exhibit.configureFromDOM(root.get(0));
             return exhibit;

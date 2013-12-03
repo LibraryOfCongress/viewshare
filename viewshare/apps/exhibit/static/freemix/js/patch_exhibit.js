@@ -84,8 +84,8 @@ define(["jquery", "exhibit"], function($, Exhibit) {
     };
 
     // Hide the "Items" tag for item counts
-    $("body").on('rendered.exhibit', function() {
-        var extype = window.exhibit._database._types['Item'];
+    $("body").on('rendered.exhibit', function(evt, exhibit) {
+        var extype = exhibit._database._types['Item'];
         extype._custom.label = "";
         extype._custom.pluralLabel = "";
         $('.exhibit-collectionSummaryWidget-count').parent().contents().filter(function(){

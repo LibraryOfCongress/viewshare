@@ -97,11 +97,6 @@ define(["jquery",
         this.findWidget().remove();
     };
 
-    Widget.prototype.rename = function(name) {
-        this.config.name = name;
-        this.findWidget().find("span.view-label").text(name);
-    };
-
     Widget.prototype.propertyTypes = ["text", "image", "currency", "url", "location", "date", "number"];
 
     Widget.prototype.isAvailable = function() {

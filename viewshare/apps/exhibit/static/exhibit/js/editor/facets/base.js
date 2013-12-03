@@ -1,7 +1,8 @@
 define(["jquery",
         "exhibit",
         "exhibit/js/facets/base",
-        "freemix/js/freemix"],
+        "freemix/js/freemix",
+        "freemix/js/exhibit_utilities"],
     function($, Exhibit, BaseFacet, Freemix) {
     "use strict";
 

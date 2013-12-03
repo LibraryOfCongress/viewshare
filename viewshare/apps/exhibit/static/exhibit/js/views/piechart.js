@@ -2,7 +2,8 @@ define(["jquery",
         "exhibit",
         "freemix/js/freemix",
         "exhibit/js/views/registry",
-        "ext/flot/flot-extension"],
+        "ext/flot/flot-extension",
+        "freemix/js/exhibit_utilities"],
     function ($, Exhibit, Freemix, ViewRegistry, FlotExtension) {
         "use strict";
     var config = {
