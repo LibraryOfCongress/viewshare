@@ -7,6 +7,7 @@
 {% load viewshare_helpers %}
 {% load compress %}
 {% load humanize %}
+{% load require %}
 
 {% block head_title %}{{ object.title }}{% endblock %}
 
@@ -23,16 +24,11 @@
 
 {% block extra_scripts %}
     {{ block.super }}
-    {% include "freemix/js_include/jquery_ui.html" %}
-    {% include "simile/js/exhibit.html" %}
-    {% include "simile/js/exhibit_extensions.html" %}
-    {% include "exhibit/widget_js.html" %}
+    {% require_module 'exhibit-display-main' %}
 
     {% compress js %}
         <script type="text/javascript"
                 src="{{ STATIC_URL }}freemix/js/lib/jquery.highlight.js"></script>
-        <script type="text/javascript"
-                src="{{ STATIC_URL }}exhibit/js/display.js"></script>
         <script type="text/javascript"
                 src="{{ STATIC_URL }}exhibit/js/detail.js"></script>
 
@@ -58,26 +54,12 @@
                     src="{{ STATIC_URL }}share/js/share_dialog.js"></script>
         {% endcompress %}
     {% endif %}
-
-    {% autoescape off %}
-        <script type="text/javascript">
-            (function ($, Freemix) {
-
-                $(document).ready(function () {
-                    Freemix.initialize();
-                });
-
-            })(window.Freemix.jQuery, window.Freemix);
-        </script>
-    {% endautoescape %}
 {% endblock extra_scripts %}
 
 
 {% block head_css %}
     {{ block.super }}
     {% compress css %}
-        {% include "simile/css/exhibit.html" %}
-        {% include "simile/css/exhibit_extensions.html" %}
         <link rel="stylesheet" type="text/css"
               href="{{ STATIC_URL }}freemix/css/layout.css"/>
         <link rel="stylesheet" type="text/css"

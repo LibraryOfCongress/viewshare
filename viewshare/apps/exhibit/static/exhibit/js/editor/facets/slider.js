@@ -1,7 +1,6 @@
-(function ($, Freemix, Exhibit) {
-    "use strict";
-
-    var Facet = Freemix.facet.prototypes.Slider;
+define(["jquery", "exhibit/js/facets/slider", "exhibit"],
+        function ($, Facet, Exhibit) {
+        "use strict"
 
     Facet.prototype.facetClass = Exhibit.SliderFacet;
     Facet.prototype.propertyTypes = ["number", "currency"];
@@ -38,4 +37,5 @@
         });
     };
 
-})(window.Freemix.jQuery, window.Freemix, window.Exhibit);
+    return Facet;
+});

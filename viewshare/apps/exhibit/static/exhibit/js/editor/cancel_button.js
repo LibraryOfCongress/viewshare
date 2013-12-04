@@ -1,5 +1,6 @@
-/*global jQuery */
-(function($, Freemix) {
+define(["jquery", "jquery.csrf"],
+    function($) {
+    "use strict";
 
     function setupCancelButton() {
         $("#cancel_button").click(function() {
@@ -20,6 +21,5 @@
         });
 
     }
-    $(document).ready(setupCancelButton);
-
-})(window.Freemix.jQuery, window.Freemix);
+    return setupCancelButton;
+});

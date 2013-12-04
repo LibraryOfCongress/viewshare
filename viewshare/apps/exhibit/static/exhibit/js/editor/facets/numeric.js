@@ -1,7 +1,6 @@
-(function ($, Freemix, Exhibit) {
-    "use strict";
-
-    var Facet = Freemix.facet.prototypes.NumericRange;
+define(["jquery", "exhibit/js/facets/numeric", "exhibit"],
+        function ($, Facet, Exhibit) {
+        "use strict"
 
     Facet.prototype.facetClass = Exhibit.NumericRangeFacet;
     Facet.prototype.propertyTypes = ["number", "currency"];
@@ -113,4 +112,5 @@
 
     };
 
-})(window.Freemix.jQuery, window.Freemix, window.Exhibit);
+    return Facet;
+});

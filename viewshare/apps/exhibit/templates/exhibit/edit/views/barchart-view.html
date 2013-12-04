@@ -1,0 +1,52 @@
+{% load i18n %}
+
+<script type="text/template" class="record-view" id="barchart-view-template">
+
+      <form class="form">
+
+        <fieldset>
+
+          <legend class="freemix-fieldset-legend">{% trans "Bar Chart View Settings" %}</legend>
+
+          <div class="container-fluid">
+
+            <div class="row-fluid">
+
+              <div class="span5 view-variables">
+
+                <div class="control-group">
+                  <label class="control-label" for="view_label_input">{% trans "Label" %}</label>
+                  <div class="controls">
+                    <div class="input-append">
+                      <input type="text" id="view_label_input"/>
+                    </div>
+                    <span class="help-inline">{% trans "Freetext title of view" %}</span>
+                  </div>
+                </div>
+
+                  <div class="control-group">
+                      <label class="control-label" for="property_list">{% trans "Properties" %}</label>
+                      <div class="controls">
+                          <select id="property_list"></select>
+                      </div>
+                  </div>
+
+
+                <div class="control-group">
+                  <label class="control-label" for="lens_editor">{% trans "Lens" %}</label>
+                  <div id="lens_editor">
+
+                  </div>
+                </div>
+              </div> <!-- end view-variables -->
+
+
+            </div> <!-- end row -->
+
+          </div> <!-- end container -->
+
+        </fieldset>
+
+      </form>
+
+</script>

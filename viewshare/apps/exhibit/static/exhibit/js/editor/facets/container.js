@@ -1,6 +1,9 @@
-(function($, Freemix) {
+define(["jquery",
+        "exhibit/js/facets/registry",
+        "freemix/js/freemix",
+        "jquery.uuid"],
+    function($, FacetRegistry, Freemix) {
     "use strict";
-
 
     var Container = function(id) {
         if (id) {
@@ -42,7 +45,7 @@
 
         var chooserThumbnails = $("<div><div class='modal-header'><button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button><h3 id='addWidgetModalLabel'>Select Facet Widget</h3></div></div>");
 
-        $("<div class='chooser modal-body'></div>").freemixThumbnails(Freemix.facet.prototypes, function(Facet) {
+        $("<div class='chooser modal-body'></div>").freemixThumbnails(FacetRegistry.prototypes, function(Facet) {
             var facet = new Facet();
 
             if (!facet.config.id) {
@@ -57,7 +60,5 @@
         return chooserThumbnails;
     };
 
-
-    Freemix.facet.Container = Container;
-
-})(window.Freemix.jQuery, window.Freemix);
+    return Container;
+});

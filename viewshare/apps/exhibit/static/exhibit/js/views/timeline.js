@@ -1,5 +1,10 @@
-(function ($, Freemix) {
-    "use strict";
+define(["jquery",
+        "exhibit",
+        "exhibit/js/views/registry",
+        "ext/time/time-extension",
+        "freemix/js/exhibit_utilities"],
+    function ($, Exhibit, ViewRegistry, TimeExtension) {
+        "use strict";
 
 
     var config = {
@@ -26,37 +31,37 @@
 
 
         if (!config.startDate) {
-            return $("<div ex:role='view' ex:viewLabel='Range Missing'></div>");
+            return $("<div data-ex-role='view' data-ex-view-label='Range Missing'></div>");
         }
         var colorKey = config.colorKey;
-        var view = $("<div ex:role='view' ex:viewClass='Timeline'></div>");
-        view.attr("ex:viewLabel", config.name);
+        var view = $("<div data-ex-role='view' data-ex-view-class='Timeline'></div>");
+        view.attr("data-ex-view-label", config.name);
         if (colorKey) {
-            view.attr("ex:colorKey", expression(colorKey));
+            view.attr("data-ex-color-key", expression(colorKey));
         }
         if (config.name) {
-            view.attr("ex:label", config.name);
+            view.attr("data-ex-label", config.name);
         }
         if (lens.config.title) {
-            view.attr("ex:eventLabel", expression(lens.config.title));
+            view.attr("data-ex-event-label", expression(lens.config.title));
         }
         if (config.startDate) {
-            view.attr("ex:start", expression(config.startDate));
+            view.attr("data-ex-start", expression(config.startDate));
         }
         if (config.endDate) {
-            view.attr("ex:end", expression(config.endDate));
+            view.attr("data-ex-end", expression(config.endDate));
         }
         if (config.topBandUnit && config.topBandUnit.length > 0 && config.topBandUnit !== "auto") {
-            view.attr("ex:topBandUnit", config.topBandUnit);
+            view.attr("data-ex-top-band-unit", config.topBandUnit);
         }
         if (config.bottomBandUnit && config.bottomBandUnit.length > 0 && config.bottomBandUnit !== "auto") {
-            view.attr("ex:bottomBandUnit", config.bottomBandUnit);
+            view.attr("data-ex-bottom-band-unit", config.bottomBandUnit);
         }
         if (config.topBandPixelsPerUnit) {
-            view.attr("ex:topBandPixelsPerUnit", expression(config.topBandPixelsPerUnit));
+            view.attr("data-ex-top-band-pixels-per-unit", expression(config.topBandPixelsPerUnit));
         }
         if (config.bottomBandPixelsPerUnit) {
-            view.attr("ex:bottomBandUnitsPerPixel", expression(config.bottomBandPixelsPerUnit));
+            view.attr("data-ex-bottom-band-units-per-pixel", expression(config.bottomBandPixelsPerUnit));
         }
 
         this._renderFormats(view);
@@ -64,7 +69,7 @@
 
         return view;
     };
+    TimeExtension.register(Exhibit);
+    return ViewRegistry.register(config, render);
 
-    Freemix.view.register(config, render);
-
-})(window.Freemix.jQuery, window.Freemix);
+});

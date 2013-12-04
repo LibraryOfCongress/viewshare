@@ -1,7 +1,6 @@
-(function($, Freemix, Exhibit) {
+define(["jquery", "exhibit/js/lenses/base"],
+    function ($, BaseLens) {
     "use strict";
-
-    var BaseLens = Freemix.lens.BaseLens;
 
     BaseLens.prototype.refreshEvent = "refresh-preview.lens";
 
@@ -52,5 +51,5 @@
 
     };
 
-
-})(window.Freemix.jQuery, window.Freemix, window.Exhibit);
+    return BaseLens;
+});

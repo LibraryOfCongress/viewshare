@@ -1,6 +1,9 @@
-/*global jQuery */
-(function($, Freemix) {
-
+define(["jquery",
+        "freemix/js/freemix",
+        "bootstrap",
+        "jquery.csrf"],
+    function($, Freemix) {
+    "use strict";
 
     function setupForm(root) {
         root.find("form").ajaxForm({
@@ -54,7 +57,5 @@
         });
 
     }
-
-    $(document).ready(setupSaveButton)
-
-})(window.Freemix.jQuery, window.Freemix);
+    return setupSaveButton;
+});

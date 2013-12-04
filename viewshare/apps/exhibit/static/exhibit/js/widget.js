@@ -1,16 +1,15 @@
-(function($, Freemix) {
+define(["jquery"], function ($) {
     "use strict";
 
-    Freemix.exhibit = Freemix.exhibit || {};
-
-    Freemix.Widget = function(config) {
+    var Widget = function(config) {
         this.config = $.extend(true, {}, this.config, config);
     };
 
-    Freemix.Widget.prototype = {
+    Widget.prototype = {
         config: {
             name: ""
         }
     };
 
-})(window.Freemix.jQuery, window.Freemix);
+    return Widget;
+});

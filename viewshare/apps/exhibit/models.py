@@ -5,7 +5,6 @@ import uuid
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import models
-from django.db import transaction as db_tx
 from django.utils.translation import ugettext_lazy as _
 from django.template.loader import render_to_string
 from django_extensions.db.fields.json import JSONField
@@ -517,25 +516,21 @@ class DataTransaction(TimeStampedModel):
         raise NotImplementedError()
 
     def schedule(self):
-        with db_tx.commit_manually():
-            try:
-                self.status = TX_STATUS["scheduled"]
-                self.save()
-                db_tx.commit()
-            except Exception as ex:
-                self.failure(ex.message)
-            else:
-                self.start_transaction()
+        try:
+            self.status = TX_STATUS["scheduled"]
+            self.save()
+        except Exception as ex:
+            self.failure(ex.message)
+        else:
+            self.start_transaction()
 
     def run(self):
-        with db_tx.commit_manually():
-            try:
-                self.status = TX_STATUS["running"]
-                self.save()
-                self.do_run()
-                db_tx.commit()
-            except Exception as ex:
-                self.failure("Transformation failed")
+        try:
+            self.status = TX_STATUS["running"]
+            self.save()
+            self.do_run()
+        except Exception as ex:
+            self.failure("Transformation failed")
         return self
 
     def failure(self, message):

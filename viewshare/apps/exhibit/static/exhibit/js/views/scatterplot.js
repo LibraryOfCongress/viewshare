@@ -1,5 +1,9 @@
-(function ($, Freemix) {
-    "use strict";
+define(["jquery",
+        "freemix/js/freemix",
+        "exhibit/js/views/registry",
+        "freemix/js/exhibit_utilities"],
+    function ($,Freemix, ViewRegistry) {
+        "use strict";
 
     var config = {
         type:"scatterplot",
@@ -15,7 +19,7 @@
         var expression = Freemix.exhibit.expression;
 
         if (typeof config.xaxis === "undefined" || typeof config.yaxis === "undefined") {
-            return $('<div ex:role="view" ex:viewLabel="Axis Missing"></div>');
+            return $('<div data-ex-role="view" data-ex-view-label="Axis Missing"></div>');
         }
 
         var xaxis = config.xaxis;
@@ -23,49 +27,48 @@
         var database = Freemix.exhibit.database;
 
         if (xaxis && yaxis) {
-            var minx = 0;
-            var maxx = 0;
-            var miny = 0;
-            var maxy = 0;
-            var recordIds = database.getAllItems().toArray();
-            for (var i = 0; i < recordIds.length; i++) {
-                var id = recordIds[i];
-                var record = database.getItem(id);
+            var minx = NaN;
+            var maxx = NaN;
+            var miny = NaN;
+            var maxy = NaN;
+
+            var records = database.getAllItems();
+            records.visit(function(record) {
                 var x = parseFloat(record[xaxis]);
                 var y = parseFloat(record[yaxis]);
-                if (minx > x || i === 0) {
+                if (minx > x || minx == NaN) {
                     minx = x;
                 }
-                if (maxx < x || i === 0) {
+                if (maxx < x || maxx == NaN) {
                     maxx = x;
                 }
-                if (miny > y || i === 0) {
+                if (miny > y || miny == NaN) {
                     miny = y;
                 }
-                if (maxy < y || i === 0) {
+                if (maxy < y || maxy == NaN) {
                     maxy = y;
                 }
-            }
-            if (maxx - minx <= 1 && maxx - minx > 0) {
-                return $("<div ex:role='view' ex:viewLabel='Unsupported Range Values'></div>");
-            }
-            if (maxy - miny <= 1 && maxy - miny > 0) {
-                return $("<div ex:role='view' ex:viewLabel='Unsupported Range Values'></div>");
+            });
+
+            if ((maxx - minx <= 1 && maxx - minx > 0)
+                || (maxy - miny <= 1 && maxy - miny > 0)
+                || (maxx == NaN || maxy == NaN || minx == NaN || miny == NaN)) {
+                return $("<div data-ex-role='view' data-ex-view-label='Unsupported Range Values'></div>");
             }
         }
 
-        var view = $("<div ex:role='view' ex:viewClass='Exhibit.ScatterPlotView'></div>");
-        view.attr("ex:viewLabel", config.name);
+        var view = $("<div data-ex-role='view' data-ex-view-class='ScatterPlot'></div>");
+        view.attr("data-ex-view-label", config.name);
         var prop;
         if (xaxis) {
             prop = database.getProperty(xaxis);
-            view.attr("ex:x", expression(xaxis));
-            view.attr("ex:xLabel", prop.getLabel());
+            view.attr("data-ex-x", expression(xaxis));
+            view.attr("data-ex-x-label", prop.getLabel());
         }
         if (yaxis) {
             prop = database.getProperty(yaxis);
-            view.attr("ex:y", expression(yaxis));
-            view.attr("ex:yLabel", prop.getLabel());
+            view.attr("data-ex-y", expression(yaxis));
+            view.attr("data-ex-y-label", prop.getLabel());
         }
 
         this._renderFormats(view);
@@ -74,6 +77,6 @@
         return view;
     };
 
-    Freemix.view.register(config,render);
+    return ViewRegistry.register(config,render);
 
-})(window.Freemix.jQuery, window.Freemix);
+});

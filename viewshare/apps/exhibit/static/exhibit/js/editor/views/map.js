@@ -1,7 +1,8 @@
-(function ($, Freemix, Exhibit) {
-    "use strict";
-
-    var View = Freemix.view.prototypes["map"];
+define(["jquery",
+        "exhibit/js/views/map",
+        "ext/openlayers/scripts/openlayers-view"],
+        function ($, View, OLMapView) {
+        "use strict"
 
     View.prototype.propertyTypes = ["location"];
 
@@ -9,7 +10,7 @@
 
     View.prototype.thumbnail = "/static/exhibit/img/map-icon.png";
 
-    View.prototype.viewClass = Exhibit.OLMapView;
+    View.prototype.viewClass = OLMapView;
 
     View.prototype.template_name = "map-view-template";
 
@@ -34,7 +35,5 @@
 
         this._setupLensEditor(config, template);
     };
-
-
-
-})(window.Freemix.jQuery, window.Freemix, window.Exhibit);
+    return View;
+});

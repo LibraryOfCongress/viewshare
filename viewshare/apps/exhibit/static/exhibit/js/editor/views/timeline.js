@@ -1,12 +1,13 @@
-(function ($, Freemix, Exhibit) {
-    "use strict";
-
-    var View = Freemix.view.prototypes["timeline"];
+define(["jquery",
+        "exhibit/js/views/timeline",
+        "ext/time/scripts/timeline-view"],
+        function ($, View, TimelineView) {
+        "use strict"
 
     View.prototype.label = "Timeline";
     View.prototype.thumbnail = "/static/exhibit/img/timeline-icon.png";
     View.prototype.propertyTypes = ["date"];
-    View.prototype.viewClass = Exhibit.TimelineView;
+    View.prototype.viewClass = TimelineView;
     View.prototype.template_name = "timeline-view-template";
 
 
@@ -42,4 +43,5 @@
         color.change();
     };
 
-})(window.Freemix.jQuery, window.Freemix, window.Exhibit);
+    return View;
+});

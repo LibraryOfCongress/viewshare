@@ -1,7 +1,7 @@
 {% extends "site_base.html" %}
 {% load url from future %}
 
-
+{% load require %}
 {% load i18n %}
 {% load exhibit_tags %}
 {% load viewshare_helpers %}
@@ -14,37 +14,20 @@
 
 {% block head_data %}
     {{ block.super }}
-    {% for url in data_urls %}
-    <link rel="exhibit/data" href="{{ url }}"/>
-    {% endfor %}
-    <link rel="exhibit/data" href="{% url 'shared_dataset_properties_list_json' slug=object.slug %}"/>
-
+    <link rel="exhibit/data" href="{{ data_url }}"/>
     <link rel="freemix/exhibit_profile" href="{% url 'shared_exhibit_profile_json' slug=object.slug %}"/>
-
 {% endblock %}
 
 {% block extra_scripts %}
     {{ block.super }}
     {% include "freemix/js_include/jquery_ui.html" %}
-    {% include "simile/js/exhibit.html" %}
-    {% include "simile/js/exhibit_extensions.html" %}
-    {% include "exhibit/widget_js.html" %}
-
-    {% compress js %}
-    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.highlight.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/display.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}share/js/shared_exhibit.js"></script>
-    {% endcompress %}
+    {% require_module 'exhibit-display-main' %}
 {% endblock extra_scripts %}
 
 
 {% block head_css %}
 {{block.super}}
     {% compress css %}
-
-    {% include "simile/css/exhibit.html" %}
-    {% include "simile/css/exhibit_extensions.html" %}
-
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/layout.css"/>
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/views.css"/>
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/editor.css"/>

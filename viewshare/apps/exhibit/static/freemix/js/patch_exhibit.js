@@ -1,15 +1,15 @@
-(function ($, Freemix, Exhibit) {
+define(["jquery", "exhibit"], function($, Exhibit) {
     "use strict";
 
     // Monkey patch formatters
 
     // The list formatter should output a ul
     Exhibit.Formatter._ListFormatter.prototype.formatList = function (values, count, valueType, appender) {
-        var uiContext = this._uiContext,
-            ul;
-
+        var uiContext, self, index;
+        uiContext = this._uiContext;
+        self = this;
         if (count === 0) {
-            if (this._emptyText !== undefined && this._emptyText.length > 0) {
+            if (typeof this._emptyText !== "undefined" && this._emptyText !== null && this._emptyText.length > 0) {
                 appender(document.createTextNode(this._emptyText));
             }
         } else if (count === 1) {
@@ -17,17 +17,17 @@
                 uiContext.format(v, valueType, appender);
             });
         } else {
-            ul = document.createElement("ul");
+            var ul = $("<ul>");
 
             values.visit(function (v) {
 
-                var li = document.createElement("li");
+                var li = $("<li>");
                 uiContext.format(v, valueType, function (n) {
-                    li.appendChild(n);
+                    li.append($(n));
                 });
-                ul.appendChild(li);
+                ul.append(li);
             });
-            appender(ul);
+            appender(ul.get(0));
 
         }
     };
@@ -42,33 +42,50 @@
     // Fork the ImageFormatter to
     // Wrap the img in a link and add the classes for lightbox
     Exhibit.Formatter._ImageFormatter.prototype.format = function (value, appender) {
-        var img = document.createElement("img");
         if (Exhibit.params.safe) {
-            /*jshint scripturl:true*/
-            value = value.trim().startsWith("javascript:") ? "" : value;
+            value = Exhibit.Util.isUnsafeLink(value.trim()) ? "" : value;
         }
 
-        img.src = value;
+        var img = $("<img>").attr("src", value);
 
-        if (this._tooltip !== undefined) {
+        if (this._tooltip !== null && this._tooltip !== undefined) {
             if (typeof this._tooltip === "string") {
-                img.title = this._tooltip;
+                img.attr("title", this._tooltip);
             } else {
-                var itemID = this._uiContext.getSetting("itemID");
-                var database = this._uiContext.getDatabase();
-                img.title = this._tooltip.evaluateSingleOnItem(itemID, database).value;
+                img.attr("title",
+                         this._tooltip.evaluateSingleOnItem(
+                             this._uiContext.getSetting("itemID"),
+                             this._uiContext.getDatabase()
+                         ).value);
             }
         }
-        var a = document.createElement("a");
-        a.href = value;
-        a.className = "dialog-thumb lightbox";
-        a.appendChild(img);
+        var a = $("<a>");
+        a.attr("href", value);
+        a.addClass("dialog-thumb lightbox");
+        a.append(img);
+        appender(a);
+    };
+
+    /**
+     * @param {String} value
+     * @param {Function} appender
+     */
+    Exhibit.Formatter._URLFormatter.prototype.format = function(value, appender) {
+        var a = $("<a>").attr("href", value).html(value);
+
+        if (this._target !== null) {
+            a.attr("target", this._target);
+        }
+        // Unused
+        //if (this._externalIcon !== null) {
+        //
+        //}
         appender(a);
     };
 
     // Hide the "Items" tag for item counts
-    $("body").live('rendered.exhibit', function() {
-        var extype = window.exhibit._database._types['Item'];
+    $("body").on('rendered.exhibit', function(evt, exhibit) {
+        var extype = exhibit._database._types['Item'];
         extype._custom.label = "";
         extype._custom.pluralLabel = "";
         $('.exhibit-collectionSummaryWidget-count').parent().contents().filter(function(){
@@ -76,4 +93,4 @@
         }).remove();
 
     });
-}(window.Freemix.jQuery, window.Freemix, window.Exhibit));
+});

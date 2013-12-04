@@ -1,7 +1,6 @@
-(function ($, Freemix) {
-    "use strict";
-
-    var Facet = Freemix.facet.prototypes.logo;
+define(["jquery", "exhibit/js/facets/logo", "exhibit"],
+        function ($, Facet, Exhibit) {
+        "use strict"
 
     Facet.prototype.thumbnail = "/static/exhibit/img/logo-facet.png";
     Facet.prototype.label = "Logo";
@@ -112,4 +111,6 @@
         return div;
     };
 
-})(window.Freemix.jQuery, window.Freemix);
+    return Facet;
+});
+

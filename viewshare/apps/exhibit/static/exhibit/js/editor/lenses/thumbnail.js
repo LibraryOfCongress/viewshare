@@ -1,7 +1,6 @@
-(function($, Freemix, Exhibit) {
+define(["jquery", "exhibit/js/lenses/thumbnail"],
+        function ($, Lens) {
     "use strict";
-
-    var Lens = Freemix.lens.prototypes.thumbnail;
 
     Lens.propertyTypes = ["image"];
     Lens.label = "Thumbnail";
@@ -21,4 +20,6 @@
         this._setupTitlePropertyEditor();
         image.change();
     };
-})(window.Freemix.jQuery, window.Freemix, window.Exhibit);
+
+    return Lens;
+});

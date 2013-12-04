@@ -1,7 +1,9 @@
-(function ($, Freemix) {
-    "use strict";
+define(["jquery",
+        "exhibit/js/facets/registry"],
+    function ($, FacetRegistry) {
+        "use strict";
 
-    var config = {
+        var config = {
         type:"logo",
         name: "Logo",
         src:undefined,
@@ -40,6 +42,6 @@
         return p.html();
     };
 
-    Freemix.facet.register(config,render);
+    return FacetRegistry.register(config,render);
 
-})(window.Freemix.jQuery, window.Freemix);
+});

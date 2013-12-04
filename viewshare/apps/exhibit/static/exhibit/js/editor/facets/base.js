@@ -1,17 +1,19 @@
-(function($, Freemix, Exhibit) {
+define(["jquery",
+        "exhibit",
+        "exhibit/js/facets/base",
+        "freemix/js/freemix",
+        "freemix/js/exhibit_utilities"],
+    function($, Exhibit, BaseFacet, Freemix) {
     "use strict";
 
     var expression = Freemix.exhibit.expression;
 
-    Freemix.facet.getFacetContainer = function(id) {
-        return $(".facet-container#" + id, Freemix.getBuilder()).data("model");
-    };
+    BaseFacet.prototype.facetClass = Exhibit.ListFacet;
 
-    Freemix.facet.BaseFacet.prototype.facetClass = Exhibit.ListFacet;
-    Freemix.facet.BaseFacet.prototype.findContainer = function() {
+    BaseFacet.prototype.findContainer = function() {
         return this.findWidget().parents(".facet-container").data("model");
     };
-    Freemix.facet.BaseFacet.prototype.generateWidget = function() {
+    BaseFacet.prototype.generateWidget = function() {
         var facet = this;
         return $("<div class='facet ui-draggable'>" +
                  "<div class='facet-header ui-state-default ui-helper-clearfix ui-dialog-titlebar' title='Click and drag to move to any other facet sidebar or to reorder facets'>" +
@@ -37,13 +39,13 @@
 
     };
 
-    Freemix.facet.BaseFacet.prototype.refresh = function() {
+    BaseFacet.prototype.refresh = function() {
         this.findWidget().find(".facet-content").empty().append(this.generateExhibitHTML());
         var exhibit = Freemix.getBuilderExhibit();
         this.facetClass.createFromDOM(this.findWidget().find(".facet-content div").get(0), null, exhibit.getUIContext());
     };
 
-    Freemix.facet.BaseFacet.prototype.updatePreview = function(target, config) {
+    BaseFacet.prototype.updatePreview = function(target, config) {
         config = config || this.config;
         var preview = $(this.generateExhibitHTML(config));
         target.empty().append(preview);
@@ -51,7 +53,7 @@
         this.facetClass.createFromDOM(preview.get(0), null, exhibit.getUIContext());
     };
 
-    Freemix.facet.BaseFacet.prototype.showEditor = function(facetContainer){
+    BaseFacet.prototype.showEditor = function(facetContainer){
         var facet = this;
         var config = $.extend(true, {}, facet.config);
         var template = Freemix.getTemplate("facet-editor");
@@ -104,7 +106,7 @@
         return bIsCandidate ? 1: -1;
     }
 
-    Freemix.facet.BaseFacet.prototype._generatePropertyList = function(types) {
+    BaseFacet.prototype._generatePropertyList = function(types) {
         var properties = [];
         var database = Freemix.exhibit.database;
         var proplist = types? database.getPropertiesWithTypes(types) : database.getAllPropertyObjects();
@@ -115,5 +117,6 @@
         return properties;
     };
 
+    return BaseFacet;
 
-})(window.Freemix.jQuery, window.Freemix, window.Exhibit);
+});

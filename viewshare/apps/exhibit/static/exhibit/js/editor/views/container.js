@@ -1,5 +1,10 @@
-(function($, Freemix) {
-    "use strict";
+define(["jquery",
+        "exhibit/js/views/registry",
+        "exhibit/js/facets/registry",
+        "exhibit/js/lenses/registry",
+        "freemix/js/freemix",
+        "jquery.uuid"],
+    function($, ViewRegistry, FacetRegistry, LensRegistry, Freemix) {    "use strict";
 
     var Container = function (id) {
         if (id) {
@@ -45,7 +50,7 @@
 
 
         $("<div class='chooser modal-body'></div>")
-            .freemixThumbnails(Freemix.view.prototypes, function(View) {
+            .freemixThumbnails(ViewRegistry.prototypes, function(View) {
                 var view = new View();
                 if (!view.config.id) {
                     view.config.id = $.make_uuid();
@@ -59,6 +64,6 @@
         return chooserThumbnails;
     };
 
-    Freemix.view.Container = Container;
+    return Container;
 
-})(window.Freemix.jQuery, window.Freemix);
+});

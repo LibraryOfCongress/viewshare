@@ -1,13 +1,14 @@
-(function ($, Freemix, Exhibit) {
-    "use strict";
-
-    var View = Freemix.view.prototypes["thumbnail"];
+define(["jquery",
+        "exhibit/js/views/thumbnail",
+        "scripts/ui/views/thumbnail-view"],
+        function ($, View, ThumbnailView) {
+        "use strict"
 
     View.prototype.label = "Gallery";
     View.prototype.thumbnail = "/static/exhibit/img/gallery.png";
     View.prototype.propertyTypes = ["image"];
 
-    View.prototype.viewClass = Exhibit.ThumbnailView;
+    View.prototype.viewClass = ThumbnailView;
     View.prototype.template_name = "thumbnail-view-template";
 
     View.prototype.setupEditor = function (config, template) {
@@ -27,4 +28,5 @@
         image.change();
     };
 
-})(window.Freemix.jQuery, window.Freemix, window.Exhibit);
+    return View;
+});
