@@ -208,9 +208,7 @@ define(["jquery",
     };
 
     function updatePreview() {
-        var metadata = Freemix.serialize();
-        Freemix.getPreview().empty();
-        Freemix.getTemplate("canvas-template").appendTo(Freemix.getPreview()).generateExhibitHTML(metadata);
+
     }
 
     function updateBuilder() {
@@ -275,8 +273,13 @@ define(["jquery",
             var selector = $(this).attr("data-target");
             $(selector).collapse("hide");
         });
-        updatePreview();
-        $("#preview").createExhibit();
+
+        var metadata = Freemix.serialize();
+        var template = Freemix.getTemplate("canvas-template");
+        Freemix.getPreview().empty().append(template);
+        template.generateExhibitHTML(metadata);
+        Freemix.exhibit.createExhibit(template);
+
         hideBuilder();
     }
 

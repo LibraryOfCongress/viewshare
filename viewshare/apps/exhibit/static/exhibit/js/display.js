@@ -42,7 +42,8 @@ define(["jquery",
                 if (profile.default_lens) {
                     LensRegistry.setDefaultLens(LensRegistry.construct(profile.default_lens));
                 }
-                $("#canvas").generateExhibitHTML(profile).createExhibit();
+                $("#canvas").generateExhibitHTML(profile);
+                Freemix.exhibit.createExhibit($("#canvas"));
             });
             
             if (typeof nextFn != "undefined") {
