@@ -9,8 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import CreateView
 
 from viewshare.apps.share import models
-from viewshare.apps.exhibit.models import PublishedExhibit, PropertyData
-from viewshare.apps.exhibit.serializers import ExhibitPropertyListSerializer
+from viewshare.apps.exhibit.models import PublishedExhibit
 from viewshare.apps.share import forms
 
 
@@ -23,6 +22,7 @@ def _exhibit_modified(r, *a, **kwa):
     qs = qs.values_list("exhibit__modified", flat=True)[0]
     return qs
 _lm = last_modified(_exhibit_modified)
+
 
 class SharedExhibitDisplayView(DetailView):
 
@@ -50,17 +50,10 @@ class SharedExhibitDisplayView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(SharedExhibitDisplayView, self).get_context_data(**kwargs)
         key = self.object
-        exhibit = key.exhibit
-        props = exhibit.properties.exclude(data=None)
 
-        def data_url(prop_name):
-            return reverse('shared_key_property_data_json',
-                        kwargs={
-                            "slug": key.slug,
-                            "property": prop_name
-                        })
+        context["data_url"] = reverse('shared_key_property_data_json',
+                                      kwargs={"slug": key.slug})
 
-        context["data_urls"] = [data_url(p.name) for p in props]
         context["exhibit"] = key.exhibit
         context["object"] = key
         context["can_view"] = True
@@ -83,31 +76,15 @@ def get_shared_key(request, *args, **kwargs):
 
 class SharedKeyDataJSONView(BaseJSONView):
     def get_doc(self):
-        prop_name = self.kwargs["property"]
         key = get_shared_key(self.request, self.args, **self.kwargs)
         exhibit = key.exhibit
-        qs = PropertyData.objects.filter(exhibit_property__exhibit=exhibit,
-                                         exhibit_property__name=prop_name)
-        values = qs.values_list("json")
-        if len(values) == 0:
-            return '{"items": []}'
-        return '{"items": ' + values[0][0] + "}"
-shared_key_property_data_json = _lm(SharedKeyDataJSONView.as_view())
 
-class SharedExhibitPropertyListJSONView(BaseJSONView):
-    def get_doc(self):
-        key = get_shared_key(self.request, self.args, **self.kwargs)
-        exhibit = key.exhibit
-        qs = exhibit.properties.all()
-        serializer = ExhibitPropertyListSerializer(exhibit,
-                                                   queryset=qs)
-        return json.dumps({"properties": serializer.data})
-shared_dataset_properties_list_json = _lm(SharedExhibitPropertyListJSONView.as_view())
+        return json.dumps(exhibit.merge_data())
+shared_key_property_data_json = _lm(SharedKeyDataJSONView.as_view())
 
 
 #-----------------------------------------------------------------------------#
 # Shared exhibit profile json
-
 class SharedExhibitProfileJSONView(BaseJSONView):
     """
     Returns the exhibit profile associated with a particular shared key.

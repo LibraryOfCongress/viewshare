@@ -1,14 +1,15 @@
-(function ($, Freemix, Exhibit) {
-    "use strict";
-    var View = Freemix.view.prototypes["scatterplot"];
-
+define(["jquery",
+        "exhibit/js/views/scatterplot",
+        "ext/flot/scripts/scatterplot-view"],
+        function ($, View, ScatterPlotView) {
+        "use strict"
 
     View.prototype.propertyTypes = ["number", "currency"];
 
     View.prototype.label = "Scatter Plot";
     View.prototype.thumbnail = "/static/exhibit/img/scatterplot-icon.png";
 
-    View.prototype.viewClass = Exhibit.ScatterPlotView;
+    View.prototype.viewClass = ScatterPlotView;
 
     View.prototype.template_name = "scatterplot-view-template";
 
@@ -31,4 +32,5 @@
 
     };
 
-})(window.Freemix.jQuery, window.Freemix, window.Exhibit);
+    return View;
+});

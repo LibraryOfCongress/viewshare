@@ -1,19 +1,5 @@
 {% load compress %}
 
-{% compress js %}
-    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/freemix.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/lightbox.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/exhibit_utilities.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/patch_exhibit.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/widget.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/lenses/base.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/views/base.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/views/container.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/facets/base.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/facets/container.js"></script>
-
-{% endcompress %}
-
 {% if editor %}{% compress js %}
 
     <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/editor/patch_exhibit.js"></script>
@@ -25,33 +11,6 @@
     <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/editor/facets/container.js"></script>
 
 {% endcompress %}{% endif %}
-
-{% compress js %}
-    {# Lenses #}
-    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/lenses/list.js"></script>
-{#    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/lenses/thumbnail.js"></script>#}
-
-    {# Views #}
-    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/views/map.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/views/list.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/views/scatterplot.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/views/table.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/views/timeline.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/views/piechart.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/views/thumbnail.js"></script>
-
-
-    {# Facets #}
-    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/facets/search.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/facets/list.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/facets/tagcloud.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/facets/slider.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/facets/numeric.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/facets/logo.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/lib/creole.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}exhibit/js/facets/text.js"></script>
-
-{% endcompress %}
 
 {% if editor %}{% compress js %}
 

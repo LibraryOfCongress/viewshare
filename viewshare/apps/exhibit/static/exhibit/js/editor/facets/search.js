@@ -1,7 +1,6 @@
-(function ($, Freemix, Exhibit) {
-    "use strict";
-
-    var Facet = Freemix.facet.prototypes.search;
+define(["jquery", "exhibit/js/facets/search", "exhibit"],
+        function ($, Facet, Exhibit) {
+        "use strict"
 
     Facet.prototype.facetClass = Exhibit.TextSearchFacet;
     Facet.prototype.thumbnail = "/static/exhibit/img/search-facet.png";
@@ -19,4 +18,6 @@
         });
 
     };
-})(window.Freemix.jQuery, window.Freemix, window.Exhibit);
+
+    return Facet;
+});

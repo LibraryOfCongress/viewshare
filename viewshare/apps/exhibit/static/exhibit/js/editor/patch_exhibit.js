@@ -1,5 +1,6 @@
-(function ($, Freemix, Exhibit) {
-    "use strict";
+define(["jquery", "scripts/data/database/local"],
+        function ($, LocalImpl) {
+            "use strict";
 
     // patch Exhibit database with editor specific functions
     var filtered_properties = [
@@ -12,7 +13,7 @@
         "changedItem"
     ];
 
-    Exhibit.Database._Impl.prototype.getPropertiesWithTypes = function(types) {
+    LocalImpl.prototype.getPropertiesWithTypes = function(types) {
         var index = this._freemix_type_index || {};
         var db = this;
         if ($.isEmptyObject(index)) {
@@ -29,7 +30,7 @@
         }));
     };
 
-    Exhibit.Database._Impl.prototype.getFilteredProperties = function(filter) {
+    LocalImpl.prototype.getFilteredProperties = function(filter) {
         filter = filter || filtered_properties;
         return $.map(this.getAllProperties(), function(key, index) {
             if (filter.indexOf(key) != -1) {
@@ -39,7 +40,7 @@
         });
     };
 
-    Exhibit.Database._Impl.prototype.getAllPropertyObjects = function() {
+    LocalImpl.prototype.getAllPropertyObjects = function() {
         var database = this;
         return $.map(database.getAllProperties(),function(key, index) {
             if (filtered_properties.indexOf(key) != -1) {
@@ -48,4 +49,5 @@
             return database.getProperty(key);
         });
     };
-}(window.Freemix.jQuery, window.Freemix, window.Exhibit));
+    return LocalImpl;
+});

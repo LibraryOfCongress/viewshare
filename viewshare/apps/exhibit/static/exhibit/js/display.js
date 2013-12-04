@@ -1,4 +1,10 @@
-(function($, Freemix) {
+define(["jquery",
+        "exhibit/js/views/registry",
+        "exhibit/js/facets/registry",
+        "exhibit/js/lenses/registry",
+        "freemix/js/freemix",
+        "freemix/js/exhibit_utilities"],
+    function($, ViewRegistry, FacetRegistry, LensRegistry, Freemix) {
     "use strict";
 
     $.fn.generateExhibitHTML = function(model) {
@@ -8,9 +14,9 @@
 
             root.find(".view-container").each(function() {
                 var id = $(this).attr("id");
-                var container = $("<div class='view-panel' ex:role='viewPanel'></div>");
+                var container = $("<div class='view-panel' data-ex-role='viewPanel'></div>");
                 $.each(model.views[id], function() {
-                    var view = new Freemix.view.construct(this.type,this);
+                    var view = ViewRegistry.construct(this.type,this);
                     container.append(view.generateExhibitHTML());
                 });
 
@@ -19,7 +25,7 @@
 
             $.each(model.facets, function(container, facets) {
                 $.each(facets, function() {
-                    var facet = Freemix.facet.construct(this.type, this);
+                    var facet = FacetRegistry.construct(this.type, this);
                     root.find(".facet-container#" +container).append(facet.generateExhibitHTML());
                 });
             });
@@ -29,18 +35,21 @@
     };
 
     function run_init(profile, nextFn) {
-        var data = Freemix.data || $.map($("link[rel='exhibit/data']"), function(el) {return $(el).attr("href");});
-
-        Freemix.exhibit.initializeDatabase(data, function() {
-            if (profile.default_lens) {
-                Freemix.lens.setDefaultLens(Freemix.lens.construct(profile.default_lens));
+        var data = $("link[rel='exhibit/data']").toArray();
+        var url = $("link[rel='exhibit/data']").attr("href");
+        $.getJSON(url, function(data) {
+            Freemix.exhibit.initializeDatabase(data, function() {
+                if (profile.default_lens) {
+                    LensRegistry.setDefaultLens(LensRegistry.construct(profile.default_lens));
+                }
+                $("#canvas").generateExhibitHTML(profile);
+                Freemix.exhibit.createExhibit($("#canvas"));
+            });
+            
+            if (typeof nextFn != "undefined") {
+                nextFn();
             }
-            $("#canvas").generateExhibitHTML(profile).createExhibit();
         });
-
-        if (typeof nextFn != "undefined") {
-            nextFn();
-        }
     }
 
     Freemix.initialize = function(callback) {
@@ -56,6 +65,6 @@
 
 
     };
+    return Freemix.initialize;
 
-
-})(window.Freemix.jQuery, window.Freemix);
+});

@@ -6,7 +6,7 @@ from os.path import join, sep, basename
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from django.core.urlresolvers import reverse
-from django.db import models, transaction as db_tx
+from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django_extensions.db.fields import UUIDField
 from django_extensions.db.models import TimeStampedModel
@@ -47,33 +47,23 @@ class DataSource(TimeStampedModel):
         return self.classname == self.__class__.__name__
 
     def save(self, *args, **kwargs):
-        with db_tx.commit_manually():
-            try:
-                if self.classname is None:
-                    self.classname = self.__class__.__name__
-                super(DataSource, self).save(*args, **kwargs)
-            except:
-                db_tx.rollback()
-                raise
-            else:
-                db_tx.commit()
+        if self.classname is None:
+            self.classname = self.__class__.__name__
+        super(DataSource, self).save(*args, **kwargs)
 
     def create_transaction(self):
-        with db_tx.commit_manually():
-            try:
-                # Ensure that existing transactions are marked as complete
-                # when creating a new one
-                (UploadTransaction.objects
-                 .filter(source=self)
-                 .update(is_complete=True, result=None))
-                tx = UploadTransaction(source=self)
-                tx.save()
-            except:
-                db_tx.rollback()
-                raise
-            else:
-                db_tx.commit()
-                tx.schedule()
+        try:
+            # Ensure that existing transactions are marked as complete
+            # when creating a new one
+            (UploadTransaction.objects
+             .filter(source=self)
+             .update(is_complete=True, result=None))
+            tx = UploadTransaction(source=self)
+            tx.save()
+        except:
+            raise
+        else:
+            tx.schedule()
         return tx
 
     def open_transaction(self):

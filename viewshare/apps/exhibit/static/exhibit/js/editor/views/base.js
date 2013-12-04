@@ -1,12 +1,11 @@
-(function($, Freemix, Exhibit) {
-    "use strict";
+define(["jquery",
+        "exhibit",
+        "exhibit/js/views/base",
+        "exhibit/js/lenses/registry",
+        "freemix/js/freemix"],
+    function($, Exhibit, BaseView, LensRegistry, Freemix) {
+    "use strict"
 
-    Freemix.view.getViewContainer = function(id) {
-        return $(".view-container#" + id, Freemix.getBuilder()).data("model");
-     };
-
-    var BaseView = Freemix.view.BaseView;
-    
     BaseView.prototype.refreshEvent = "refresh-preview.view";
 
     BaseView.prototype.propertyTypes = ["text", "image", "currency", "url", "location", "date", "number"];
@@ -34,6 +33,8 @@
            model.config = config;
            viewContainer.findWidget().trigger("edit-view");
            viewContainer.getDialog().modal("hide");
+
+           view.findWidget().find("span.view-label").text(model.config.name);
            model.select();
            
         });
@@ -140,7 +141,7 @@
 
         label.val(config.name);
         label.change(function() {
-            view.rename($(this).val());
+            config.name = $(this).val();
             template.trigger(view.refreshEvent);
         });
     };
@@ -182,11 +183,11 @@
         var view = this;
         var lens;
         if (!config.lens) {
-            lens = Freemix.lens.copyDefaultLens();
-            Freemix.lens.setDefaultLens(lens);
+            lens = LensRegistry.copyDefaultLens();
+            LensRegistry.setDefaultLens(lens);
             config.lens = lens.config;
         } else {
-            lens = Freemix.lens.construct(config.lens);
+            lens = LensRegistry.construct(config.lens);
         }
 
         lens.initializeEditor(selector);
@@ -196,5 +197,6 @@
         });
     };
 
+    return BaseView;
 
-})(window.Freemix.jQuery, window.Freemix, window.Exhibit);
+});

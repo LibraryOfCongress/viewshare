@@ -1,15 +1,26 @@
-(function($, Freemix) {
-    "use strict";
+define(["jquery",
+        "exhibit/js/views/registry",
+        "exhibit/js/facets/registry",
+        "exhibit/js/lenses/registry",
+        "freemix/js/freemix",
+        "jquery.uuid"],
+    function($, ViewRegistry, FacetRegistry, LensRegistry, Freemix) {    "use strict";
 
-    Freemix.view.container.findWidget = function() {
+    var Container = function (id) {
+        if (id) {
+            this.id = id;
+        }
+    };
+
+    Container.prototype.findWidget = function() {
         return $(".view-container#" + this.id, Freemix.getBuilder());
     };
 
-    Freemix.view.container.getContent = function() {
+    Container.prototype.getContent = function() {
         return $(".view-content", this.findWidget());
     };
 
-    Freemix.view.container.serialize = function() {
+    Container.prototype.serialize = function() {
         var config = [];
         $("ul.view-set>li", this.findWidget()).each(function() {
             if (!$(this).hasClass("create-view")) {
@@ -20,26 +31,26 @@
         return config;
     };
 
-    Freemix.view.container.addView = function(view) {
+    Container.prototype.addView = function(view) {
         $('.view-set li.create-view', this.findWidget()).before(view.findWidget());
     };
 
-    Freemix.view.container.getSelected = function() {
+    Container.prototype.getSelected = function() {
         return this.findWidget().find(".view-set>li.ui-state-active");
     };
 
-    Freemix.view.container.getDialog = function() {
+    Container.prototype.getDialog = function() {
         return this._dialog;
     };
 
-    Freemix.view.container.getPopupContent = function() {
+    Container.prototype.getPopupContent = function() {
         var container = this;
 
         var chooserThumbnails = $("<div><div class='modal-header'><button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button><h3 id='addWidgetModalLabel'>Select View Widget</h3></div></div>");
 
 
         $("<div class='chooser modal-body'></div>")
-            .freemixThumbnails(Freemix.view.prototypes, function(View) {
+            .freemixThumbnails(ViewRegistry.prototypes, function(View) {
                 var view = new View();
                 if (!view.config.id) {
                     view.config.id = $.make_uuid();
@@ -53,8 +64,6 @@
         return chooserThumbnails;
     };
 
-    Freemix.view.container.getPopupButton = function() {
-        return this.findWidget().find(".create-view-button");
-    };
+    return Container;
 
-})(window.Freemix.jQuery, window.Freemix);
+});

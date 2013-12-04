@@ -1,7 +1,5 @@
-(function ($, Freemix, Exhibit) {
-    "use strict";
-
-    var Facet = Freemix.facet.prototypes.list;
+define(["jquery", "exhibit/js/facets/list"],
+        function ($, Facet) {
 
     Facet.prototype.thumbnail = "/static/exhibit/img/list-facet.png";
     Facet.prototype.label = "List";
@@ -36,4 +34,6 @@
             template.trigger("update-preview");
         });
     }
-})(window.Freemix.jQuery, window.Freemix, window.Exhibit);
+
+    return Facet;
+});

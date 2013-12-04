@@ -1,4 +1,7 @@
-(function($, Freemix) {
+define(["jquery",
+        "exhibit/js/widget",
+        "ui.multiselect"],
+    function ($, Widget) {
     "use strict";
 
     function make_option(property_name, selected) {
@@ -12,12 +15,12 @@
         return option;
     }
 
-    Freemix.Widget.prototype._setupPropertySelect = function(config, template, selector, key, collection, nullable) {
+    Widget.prototype._setupPropertySelect = function(config, template, selector, key, collection, nullable) {
         this._populatePropertySelect(selector, collection, nullable);
         this._setupSelectPropertyHandler(config, template, selector, key);
     };
 
-    Freemix.Widget.prototype._populatePropertySelect = function(selector, collection, nullable) {
+    Widget.prototype._populatePropertySelect = function(selector, collection, nullable) {
         $.each(collection, function(inx, value) {
             var option = $("<option></option>");
             option.attr("value", value.getID());
@@ -30,7 +33,7 @@
         }
     };
 
-    Freemix.Widget.prototype._setupSelectPropertyHandler = function(config, template, selector, key) {
+    Widget.prototype._setupSelectPropertyHandler = function(config, template, selector, key) {
         var view = this;
         selector.change(function() {
             var value = $(this).val();
@@ -47,7 +50,7 @@
         }
     };
 
-    Freemix.Widget.prototype._setupPropertyMultiSelect = function(config, template, selector, key, default_all) {
+    Widget.prototype._setupPropertyMultiSelect = function(config, template, selector, key, default_all) {
         var view = this;
         var value = config[key] || [];
         var inx;
@@ -75,34 +78,29 @@
 
     };
 
-    Freemix.Widget.prototype.findWidget = function() {
+    Widget.prototype.findWidget = function() {
         if (!this._selector) {
             this._selector = this.generateWidget();
         }
         return this._selector;
     };
 
-    Freemix.Widget.prototype.serialize = function() {
+    Widget.prototype.serialize = function() {
         return $.extend(true, {}, this.config);
     };
 
-    Freemix.Widget.prototype.generateWidget = function() {
+    Widget.prototype.generateWidget = function() {
         return $("<div>");
     };
 
-    Freemix.Widget.prototype.remove = function() {
+    Widget.prototype.remove = function() {
         this.findWidget().remove();
     };
 
-    Freemix.Widget.prototype.rename = function(name) {
-        this.config.name = name;
-        this.findWidget().find("span.view-label").text(name);
-    };
+    Widget.prototype.propertyTypes = ["text", "image", "currency", "url", "location", "date", "number"];
 
-    Freemix.Widget.prototype.propertyTypes = ["text", "image", "currency", "url", "location", "date", "number"];
-
-    Freemix.Widget.prototype.isAvailable = function() {
+    Widget.prototype.isAvailable = function() {
         return Freemix.exhibit.database.getPropertiesWithTypes(this.propertyTypes).length > 0;
     };
 
-})(window.Freemix.jQuery, window.Freemix);
+});

@@ -37,3 +37,5 @@ celerybeat-schedule
 celerybeat.pid
 .python-version
 .idea
+Vagrantfile
+.vagrant

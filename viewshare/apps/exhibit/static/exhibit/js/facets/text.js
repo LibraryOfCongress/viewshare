@@ -1,5 +1,9 @@
-(function ($, Freemix, Parse) {
+define(["jquery",
+        "exhibit/js/facets/registry",
+        "exhibit/js/lib/creole"],
+    function ($, FacetRegistry, Parse) {
     "use strict";
+
     var creole = new Parse.Simple.Creole({
         forIE:document.all,
         interwiki:{
@@ -26,6 +30,6 @@
         return $("<div class='text-facet exhibit-facet'>").creole(this.config.text);
     };
 
-    Freemix.facet.register(config,render);
+    return FacetRegistry.register(config,render);
 
-})(window.Freemix.jQuery, window.Freemix, window.Parse);
+});

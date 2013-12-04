@@ -8,52 +8,20 @@
  * <a class="lightbox" href="big.jpg"><img src="small.jpg" /></a>
  *
  */
-var Lightbox = {
-    defaults: {
-        width: 900,
-        height: 550
-    },
-    adjusted: { },
-    handlers: { }
-};
-(function($) {
-    function show_image(img) {
-        if (!Lightbox.handler) {
-            if ((window.jQuery && window.jQuery.ui && window.jQuery.ui.dialog) || ($.ui && $.ui.dialog)) {
-                Lightbox.handler = "jqueryui";
-            } else {
-                Lightbox.handler = "embedded";
-            }
-        }
-        Lightbox.handlers[Lightbox.handler](img);
+
+define(["jquery"], function($) {
+
+    var Lightbox = {
+        defaults: {
+            width: 900,
+            height: 550
+        },
+        adjusted: { },
+        handlers: { }
     };
 
-    Lightbox.handlers.jqueryui = function(img) {
-        if (!this._$) {
-            if ($.ui && $.ui.dialog) {
-                this._$ = $;
-            } else {
-                this._$ = window.jQuery;
-            }
-        }
-
-        (function($) {
-            Lightbox.adjusted.width = Lightbox.defaults.width > $(window).width()-40 ? $(window).width()-40 : Lightbox.defaults.width;
-            Lightbox.adjusted.height = Lightbox.defaults.height > $(window).height()-40 ? $(window).height()-40 : Lightbox.defaults.height;
-            $('<p class="center"><img src="' + img.src + '" /></p>').dialog({
-                modal: true,
-                closeOnEscape: true,
-                dialogClass: 'freemix-themeable',
-                maxWidth: $(window).width() - 50,
-                maxHeight: $(window).height() - 50,
-                width: img.width + 40 > Lightbox.adjusted.width ? Lightbox.adjusted.width : img.width + 40,
-                height: img.height + 65 > Lightbox.adjusted.height ? Lightbox.adjusted.height : img.height + 65,
-                close: function(event, ui) {
-                    $(this).dialog('destroy');
-                    $(this).remove();
-                }
-            });
-        })(this._$);
+    function show_image(img) {
+        Lightbox.handlers["embedded"](img);
     };
 
     var zIndex = 0;
@@ -122,4 +90,4 @@ var Lightbox = {
             e.preventDefault();
         });
     });
-})(window.Freemix.jQuery);
+});

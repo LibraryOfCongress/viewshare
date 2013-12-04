@@ -1,7 +1,9 @@
-(function ($, Freemix) {
-    "use strict";
-
-    var Facet = Freemix.facet.prototypes.text;
+define(["jquery",
+        "exhibit/js/facets/text",
+        "exhibit",
+        "exhibit/js/lib/creole"],
+        function ($, Facet, Exhibit) {
+        "use strict"
 
     Facet.prototype.thumbnail = "/static/exhibit/img/text-facet.png";
     Facet.prototype.label = "Text";
@@ -30,4 +32,5 @@
         target.empty().creole(config.text);
     };
 
-})(window.Freemix.jQuery, window.Freemix);
+    return Facet;
+});

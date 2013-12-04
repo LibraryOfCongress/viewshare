@@ -1,7 +1,6 @@
-(function ($, Freemix, Exhibit) {
-    "use strict";
-
-    var Facet = Freemix.facet.prototypes.tagcloud;
+define(["jquery", "exhibit/js/facets/tagcloud", "exhibit"],
+        function ($, Facet, Exhibit) {
+        "use strict"
 
     Facet.prototype.facetClass = Exhibit.CloudFacet;
     Facet.prototype.propertyTypes = ["date", "number", "text", "currency"];
@@ -38,4 +37,5 @@
 
     };
 
-})(window.Freemix.jQuery, window.Freemix, window.Exhibit);
+    return Facet;
+});
