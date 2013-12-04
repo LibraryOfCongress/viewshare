@@ -234,6 +234,9 @@ font-weight: bold;
   width: 98%;
 }
 
+.embed-desc {
+  padding-bottom: 10px;
+}
 
 .dataset_list_item .dataset-title {
    background: transparent url(../../images/dataset-24.png) top left no-repeat;
@@ -244,30 +247,34 @@ font-weight: bold;
 }
 
 .exhibit_list_item .exhibit-title {
-   background: transparent url(../../images/palette-24.png) top left no-repeat;
-   font-size: 115%;
-   font-weight: bold;
-   padding-bottom: 15px;
-   padding-left: 30px;
+   color: darkgrey;
+}
+
+.exhibit_list_item .exhibit-title .view-label {
+  padding-left: 8px;
+  font-size: 130%;
+  font-weight: bold;
+  padding-bottom: 15px;
 }
 
 .shared_key_list_item .shared-key-label {
-   background: transparent url(../../images/key-24.png) top left no-repeat;
-   font-size: 115%;
-   font-weight: bold;
-   padding-bottom: 0.4em;
-   padding-left: 30px;
 }
 
-.shared-link-notice {
-   background: transparent url(../../images/key-24.png) top left no-repeat;
-   font-size: 100%;
-   line-height: 140%;
-   font-weight: bold;
-   padding-bottom: 0.5em;
-   padding-left: 30px;
+.shared-link-notice, .shared_key_list_item {
+    padding-bottom: 10px;		    
 }
 
+.shared-link-notice .notice-icon, .shared-key-label .notice-icon {
+    color: darkgrey;
+}
+
+.shared-link-notice .view-label, .shared-key-label .view-label {
+    font-weight: bold;
+}
+
+.shared_key_list_item .shared-key-prose {
+   padding-bottom: 10px;
+}
 
 /* handle this style due to jquery uithemer base override */
 
@@ -326,12 +333,9 @@ height:106px;
 }
 
 #about-box .view_avatar {
-  background: url(../../images/palette-112.png) 0% 0% no-repeat; // use smaller avatar
-  background-position: center; 
-  width: 112px;
-  height: 112px;
-  margin-top: 10px;
-  margin-left: 10px;
+  margin-top: 20px;
+  margin-left: 20px;
+  color: darkgrey;
 }
 
 #about-box .profile_info {
@@ -381,6 +385,10 @@ padding-top: 10px;
 
 #about-box .exhibit-acls {
 padding-top: 10px;
+padding-left: 20px;
+}
+
+.exhibit-acls .view-label {
 padding-left: 10px;
 }
 
@@ -413,11 +421,14 @@ padding: 10px 10px 10px 10px;
 }
 
 #about-box .about_homepage {
+/*
   background: url(../../images/home.png) bottom left no-repeat;
+ */
   width: 24px;
   height: 24px;
-  margin-left: 15px;
-  padding-left: 30px;
+  margin-left: 5px;
+  padding-left: 5px;
+
 }
 
 #about-box .user_counts {
@@ -443,17 +454,25 @@ padding: 10px 10px 10px 10px;
 }
 
 .private .private-icon {
-   background: url(../../images/lock.png) 0% 50% no-repeat;
+/*
+   background: url(../../images/lock.png) 0% 50% no-repeat; 
    width: 16px;
    height: 16px;
    padding:15px 0px 10px 25px;
+*/
+   color: black;
+   font-size: 120%;
 }
 
 .public .public-icon {
-   background: url(../../images/unlock.png) 0% 50% no-repeat;
+/*
+   background: url(../../images/unlock.png) 0% 50% no-repeat; 
    width: 16px;
    height: 16px;
    padding: 15px 0px 10px 25px;
+*/
+   color: darkgrey;
+   font-size: 120%;
 }
 
 .exhibit-left, .dataset-left, .shared-key-left {
@@ -526,7 +545,16 @@ ul.responses li.thread-8 {
     margin: 10px 10px 10px 10px;
 }
 
-/* widget edit */
+/* facet and widget edit */
+
+.widget-edit-dialog .view-facet-option .view-facet-label {
+    display:block;		    
+}
+
+.widget-edit-dialog .facet-properties, .widget-edit-dialog .facet-preview {
+     height: 500px;		
+     overflow: auto;
+}
 
 .widget-edit-dialog .view-widget-option .view-widget-label {
     display:block;		    
@@ -534,6 +562,30 @@ ul.responses li.thread-8 {
 
 .widget-edit-dialog .view-properties, .widget-edit-dialog .view-preview {
      height: 800px;		
+     overflow: auto;
+}
+
+.widget-edit-dialog .view-edit-body #view-preview {
+     height: 800px;		
+     overflow: auto;
+}
+
+.widget-edit-dialog .widget-edit-nav {
+     max-width: 120px;
+     float:left;
+}		    
+
+.widget-edit-dialog .widget-edit-view {
+     width: 520px;
+     float:left;
+}		    
+
+.widget-edit-dialog .widget-edit-preview {
+  padding-left: 640px;
+}		    
+
+.view-widget-option-scatter-plot i {
+ margin-left: 5px;
 }
 
 .view-properties .accordion-inner {
@@ -548,6 +600,13 @@ ul.responses li.thread-8 {
 
 .view-properties .accordion-group {
   border: none;
+}
+
+.view-properties .lens-settings-label {
+    padding-bottom: 0px;
+    padding-top: 5px;
+    margin-bottom: 20px;
+    margin-left: -10px;
 }
 
 /* profile */
@@ -672,16 +731,24 @@ div.notices h2 {
 }
 
 .notice_block {
-   background: transparent url(../../images/notice-32.png) top left no-repeat;
+/*   background: transparent url(../../images/notice-32.png) top left no-repeat; */
    height: 32px;
    font-size: 100%;
    font-weight: bold;
    padding-top: 5px;
    margin-top: 0px;
    padding-bottom: 5px;
-   padding-left: 40px;
    font-weight: normal;
    line-height: 160%;
+}
+
+.notice_block .notice_message {
+   color: darkgrey;
+}
+
+.notice_block .notice-label {
+padding-left: 8px;
+color: black;
 }
 
 .notice .notice_type, .unseen_notice .notice_type {
@@ -850,4 +917,30 @@ filter: alpha(opacity=50);
 display: inline;
 }
 
+/* buttons */
 
+.btn-supermini {
+   padding: 0 3px;
+   -webkit-border-radius: 4px !important;
+   -moz-border-radius: 4px !important;
+   border-radius: 4px !important;
+}
+
+/* bootstrap overrides */
+
+legend + .control-group {
+  margin-top: 0px;
+  -webkit-margin-top-collapse: separate;
+}
+
+/* font-awesome updates */
+
+.app-offset {
+padding-left: 1px;
+margin-top: -5px;
+}
+
+.app-offset-lg {
+padding-left: 2px;
+margin-top: -18px;
+}

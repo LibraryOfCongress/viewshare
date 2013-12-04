@@ -7,15 +7,23 @@
 
   <div class="row-fluid">
     <div class="span11">
-      <div class="exhibit-title"><a href="{{  exhibit.get_absolute_url }}">{{exhibit.title}}</a></div>
+      <div class="exhibit-title">
+	<span class="fa-stack exhibit-icon">
+	  <i class="fa fa-desktop fa-stack-2x"></i>
+	  <i class="fa fa-list fa-stack-1x app-offset"></i>
+	</span>
+	<a href="{{  exhibit.get_absolute_url }}">
+	  <span class="view-label">{{exhibit.title}}</span>
+	</a>
+      </div>
     </div>
 
     <div class="span1">
       <div class="pull-right">
 	{% if exhibit.is_public %}
-	<div class="public"><span class="public-icon"></span></div>
+	<div class="public"><span class="public-icon"><i class="fa fa-unlock-alt fa-lg"></i></span></div>
 	{% else %}
-	<div class="private"><span class="private-icon"></span></div>
+	<div class="private"><span class="private-icon"><i class="fa fa-lock fa-lg"></i></span></div>
 	{% endif %}
       </div>
     </div>

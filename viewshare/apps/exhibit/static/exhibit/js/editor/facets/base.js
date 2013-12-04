@@ -15,13 +15,13 @@
         var facet = this;
         return $("<div class='facet ui-draggable'>" +
                  "<div class='facet-header ui-state-default ui-helper-clearfix ui-dialog-titlebar' title='Click and drag to move to any other facet sidebar or to reorder facets'>" +
-                 "<i class='icon-move'></i>" +
+                 "<i class='fa fa-arrows'></i>" +
                  "<span class='view-label'/>" +
-                 "<i class='icon-remove delete-button pull-right'></i>" +
+                 "<i class='fa fa-times delete-button pull-right'></i>" +
                  "</div>" +
                  "<div class='facet-body ui-widget-content'>" +
                  "<div class='facet-content'></div>" +
-                 "<div class='facet-menu'><div class='row-fluid'><div class='span12'><div class='pull-right'><a href='#' title='Edit this facet' class='btn btn-mini'><i class='icon-edit'></i> Edit</a></div></div></div></div>" +
+                 "<div class='facet-menu'><div class='row-fluid'><div class='span12'><div class='pull-right'><a href='#' title='Edit this facet' class='btn btn-mini'><i class='fa fa-edit fa-lg'></i> Edit</a></div></div></div></div>" +
                  "</div></div>")
         .attr("id", this.config.id)
         .find("span.view-label").text(this.label).end()

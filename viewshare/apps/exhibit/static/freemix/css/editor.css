@@ -136,10 +136,13 @@ color: black;
     min-width: 3em;
 }
 
-.facet-header .label {
+.facet-header .view-label {
     font-weight: bold;
 }
 
+.facet-header i {
+ padding: 4px 4px 4px 4px;
+}
 
 
 .facet-body {
@@ -610,7 +613,7 @@ a.identify-type-selector:hover {
     opacity: 0.9;
     padding: 1px;
     margin: 4px;
-    width: 120px;
+    width: 100px;
 }
 
 form.uniForm .ctrlHolder.multiselect ul li {
@@ -871,6 +874,16 @@ ul.view-set li.view a {
   border: 1px solid #ddd;
   border-bottom-color: transparent;
 
+}
+
+ul.view-set li.view .view-label {
+padding-left: 8px;
+padding-right: 8px;
+}
+
+.widget-label, .view-label {
+padding-left: 8px;
+padding-right: 8px;
 }
 
 ul.view-set li.view .view-label {

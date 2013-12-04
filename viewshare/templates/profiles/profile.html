@@ -75,7 +75,7 @@ $(document).ready(function() {
 	<div class="span8">
 	  <div class="inspector_info profile_info">
             {% if other_user.get_profile.website %}
-            <p class="about_name">{{ other_user.username }}<a class="url about_homepage" href="{{ other_user.get_profile.website }}" title="{{ other_user.get_profile.website }}"></a></p>
+            <p class="about_name">{{ other_user.username }}<a class="url about_homepage" href="{{ other_user.get_profile.website }}" title="{{ other_user.get_profile.website }}"><i class="fa fa-home fa-lg"></i></a></p>
             {% else %}
             <p class="about_name">{{ other_user.username }}</p>
             {% endif %}
@@ -107,7 +107,7 @@ $(document).ready(function() {
 	  <span class="about_edit">
 	    <div class="profile-actions">
               <div class="profile-links btn-group">
-		<a href="{% url 'profile_edit' %}" data-target="#edit-profile-form" role="button" id="edit-profile-button" class="btn btn-small" data-toggle="modal"><i class="icon-edit"></i>{% trans " Edit" %}</a>
+		<a href="{% url 'profile_edit' %}" data-target="#edit-profile-form" role="button" id="edit-profile-button" class="btn btn-small" data-toggle="modal"><i class="fa fa-edit fa-lg"></i>{% trans " Edit" %}</a>
 	      </div>
 	    </div>
 	  </span>

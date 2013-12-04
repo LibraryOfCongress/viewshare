@@ -130,20 +130,16 @@
 
                             <div class="span5">
 
-                                <div class="pull-right">
-                                    {% if exhibit.is_public %}
-                                        <div class="public"><span
-                                                class="public-icon"></span> View
-                                            is public
-                                        </div>
-                                    {% else %}
-                                        <div class="private"><span
-                                                class="private-icon"></span>
-                                            View is private
-                                        </div>
-                                    {% endif %}
-                                </div>
-
+                              <div class="pull-right">
+				<div class="exhibit-acls">
+                                  {% if exhibit.is_public %}
+				  <div class="public"><span class="public-icon"><i class="fa fa-unlock-alt fa-lg"></i></span><span class="view-label">{% trans "This view is public" %}</span></div>
+                                  {% else %}
+				  <div class="private"><span class="private-icon"><i class="fa fa-lock fa-lg"></i></span><span class="view-label">{% trans "This view is private" %}</span></div>
+                                  {% endif %}
+				</div>
+                              </div>
+			      
                             </div>
 
                         </div>

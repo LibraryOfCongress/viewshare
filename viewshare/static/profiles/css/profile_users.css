@@ -30,8 +30,9 @@ ul.profile_list li {
 
 .user_data_entry .user-name {
     font-weight: bold;
-    font-size: 120%;
+    font-size: 130%;
     padding-left: 10px;
+    padding-top: 5px;
 }
 
 
