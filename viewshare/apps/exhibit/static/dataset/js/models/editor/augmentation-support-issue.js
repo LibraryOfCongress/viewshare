@@ -20,8 +20,6 @@ define(['jquery', 'observer'], function ($, Observer) {
     $.extend(AugmentationSupportIssueModel.prototype, {
         initialize: function(options) {
             PropertyModel.prototype.initialize.apply(this, [options]);
-            this.augmentation = options.augmentation;
-            this.composite = options.composite;
             this.preferredContact = options.preferredContact;
             this.contactEmail = options.contactEmail;
             this.contactPhone = options.contactPhone;

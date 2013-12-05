@@ -3,12 +3,14 @@ define(
     [
         'jquery',
         'models/property-collection',
+        'views/augmentation-support-issue-view',
         'views/editor-view',
         'views/modal-augment-view',
         'views/notification-view'
     ], function (
         $,
         PropertyCollection,
+        AugmentationSupportIssueView,
         EditorView,
         ModalAugmentView,
         NotificationView
@@ -19,15 +21,15 @@ define(
         var prop_url = $("link[rel='freemix/property_list']").attr("href");
         var properties = new PropertyCollection({
             dataURL: data_url,
-            propertiesURL: prop_url
-        });
+            propertiesURL: prop_url});
         var notificationView = new NotificationView({$el: $('#notifications')});
         var editor = new EditorView({
             model: properties,
-            $el: $('#editor')
-        });
-        var augmentModal = new ModalAugmentView({
-            model: properties
+            $el: $('#editor')});
+        var augmentModal = new ModalAugmentView({model: properties});
+        var augmentationErrorView = new AugmentationSupportIssueView({
+            $el: undefined,
+            model: undefined
         });
         // set up notifications
         notificationView.addSubscription(
@@ -35,15 +37,14 @@ define(
             'loadFailure',
             'error',
             'There was a server error while loading the data. Please try again later.',
-            'Data Error!'
-        );
+            'Data Error!');
         notificationView.addSubscription(
             properties,
             'augmentDataFailure',
             'error',
-            'There was a server error during the data augmentation. Please try again later.',
-            'Augmentation Error!'
-        );
+            augmentationErrorView,
+            'Augmentation Error!',
+            false);
         properties.Observer('loadSuccess').subscribe(function() {
             // set up notificationView's PropertyModel subscriptions
             var i;
