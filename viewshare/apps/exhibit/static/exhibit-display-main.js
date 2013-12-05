@@ -40,7 +40,7 @@ requirejs.config({
         "ext": "extensions",
         "exlib": "lib",
         "fmlib": "freemix/js/lib",
-        "fmexlib": "exhibit/js/lib",
+        "fmexlib": "freemix/js/lib",
         "openlayers": "simile/exhibit/extensions/openlayers/lib/OpenLayers"
     },
     "shim": {
@@ -69,7 +69,7 @@ requirejs.config({
         "freemix/js/lib/jquery": {
             "exports": "jQuery"
         },
-        "exhibit/js/lib/creole": {
+        "freemix/js/lib/creole": {
             "exports": "Parse"
         },
         "openlayers": {
@@ -80,28 +80,28 @@ requirejs.config({
 
 require(["simile/exhibit/exhibit-api"], function() {
     require([
-        "exhibit/js/display",
+        "freemix/js/display",
         "freemix/js/patch_exhibit",
 
-        "exhibit/js/lenses/list",
-        "exhibit/js/lenses/thumbnail",
-        "exhibit/js/views/list",
-        "exhibit/js/views/map",
-        "exhibit/js/views/piechart",
-        "exhibit/js/views/barchart",
-        "exhibit/js/views/scatterplot",
-        "exhibit/js/views/table",
-        "exhibit/js/views/timeline",
-        "exhibit/js/views/thumbnail",
+        "freemix/js/lenses/list",
+        "freemix/js/lenses/thumbnail",
+        "freemix/js/views/list",
+        "freemix/js/views/map",
+        "freemix/js/views/piechart",
+        "freemix/js/views/barchart",
+        "freemix/js/views/scatterplot",
+        "freemix/js/views/table",
+        "freemix/js/views/timeline",
+        "freemix/js/views/thumbnail",
 
-        "exhibit/js/facets/search",
-        "exhibit/js/facets/list",
-        "exhibit/js/facets/tagcloud",
-        "exhibit/js/facets/slider",
-        "exhibit/js/facets/numeric",
-        "exhibit/js/facets/logo",
-        "exhibit/js/lib/creole",
-        "exhibit/js/facets/text",
+        "freemix/js/facets/search",
+        "freemix/js/facets/list",
+        "freemix/js/facets/tagcloud",
+        "freemix/js/facets/slider",
+        "freemix/js/facets/numeric",
+        "freemix/js/facets/logo",
+        "freemix/js/lib/creole",
+        "freemix/js/facets/text",
     ], function(initialize) {
         initialize();
     });

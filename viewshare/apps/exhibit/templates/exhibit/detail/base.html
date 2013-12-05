@@ -25,7 +25,7 @@
 {% block freemix_js %}
     {{ block.super }}
     <script type="text/javascript" src="{{ STATIC_URL }}freemix/js/lib/jquery.form.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}exhibit/js/detail.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}freemix/js/../../../static/freemix/js/detail.js"></script>
 
     {% if can_share %}
     {% compress js %}<script type="text/javascript" src="{{ STATIC_URL }}share/js/share_dialog.js"></script>{% endcompress %}
