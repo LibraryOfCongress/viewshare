@@ -104,9 +104,6 @@ define([
             if (isView) {
                 message.$el = this.$el.find('#notificationMsg');
                 message.render();
-                this.$el.animate({
-                    height: message.$el.height() + 20
-                }, 200);
             }
 
             if (shouldFade === true) {

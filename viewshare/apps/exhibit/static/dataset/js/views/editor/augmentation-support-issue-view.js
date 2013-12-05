@@ -33,6 +33,13 @@ define(
         render: function() {
            this.$el.html(this.template({
            }));
+           this.$el.find('a').on(
+               'click', this.showFormHandler.bind(this));
+        },
+
+        /* */
+        showFormHandler: function() {
+            this.$el.find('#augmentationIssue').show();
         },
 
         /** Remove event bindings, child views, and DOM elements */
