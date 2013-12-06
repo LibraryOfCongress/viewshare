@@ -30,7 +30,7 @@
         <script type="text/javascript"
                 src="{{ STATIC_URL }}freemix/js/lib/jquery.highlight.js"></script>
         <script type="text/javascript"
-                src="{{ STATIC_URL }}freemix/js/../../static/freemix/js/detail.js"></script>
+                src="{{ STATIC_URL }}freemix/js/detail.js"></script>
 
         <script type="text/javascript">
             $(document).ready(function () {
@@ -65,17 +65,17 @@
         <link rel="stylesheet" type="text/css"
               href="{{ STATIC_URL }}freemix/css/views.css"/>
         <link rel="stylesheet" type="text/css"
-              href="{{ STATIC_URL }}exhibit/css/canvas.css"/>
+              href="{{ STATIC_URL }}freemix/css/../../static/freemix/css/canvas.css"/>
         <link href="{{ STATIC_URL }}freemix/css/inspector.css" rel="stylesheet"
               type="text/css" media="screen,projection"/>
-        <link href="{{ STATIC_URL }}exhibit/css/embed.css" rel="stylesheet"
+        <link href="{{ STATIC_URL }}freemix/css/../../static/freemix/css/embed.css" rel="stylesheet"
               type="text/css" media="screen,projection"/>
     {% endcompress %}
 
     <!-- to-do ... connect vanilla.css to exhibit.theme.url -->
 
     <link rel="stylesheet" type="text/css"
-          href="{{ STATIC_URL }}exhibit/css/styles/vanilla.css"/>
+          href="{{ STATIC_URL }}freemix/css/../../static/freemix/css/styles/vanilla.css"/>
     <link rel="stylesheet" type="text/css" href="{{ exhibit.theme.url }}"/>
 
 {% endblock %}

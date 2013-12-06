@@ -5,7 +5,7 @@ define(["jquery", "freemix/js/facets/tagcloud", "exhibit"],
     Facet.prototype.facetClass = Exhibit.CloudFacet;
     Facet.prototype.propertyTypes = ["date", "number", "text", "currency"];
 
-    Facet.prototype.thumbnail = "/static/exhibit/img/cloud-facet.png";
+    Facet.prototype.thumbnail = "/static/freemix/img/cloud-facet.png";
     Facet.prototype.label = "Tag Cloud";
     Facet.prototype.template_name = "tagcloud-facet-editor";
     Facet.prototype.setupEditor = function(config, template) {

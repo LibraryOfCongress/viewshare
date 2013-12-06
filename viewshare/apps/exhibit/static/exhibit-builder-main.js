@@ -45,7 +45,7 @@ requirejs.config({
         "jquery-ui": "freemix/js/lib/jquery-ui",
         "ui.multiselect": "freemix/js/lib/ui.multiselect",
         "bootstrap": "freemix/js/lib/bootstrap",
-        "jquery": 'freemix/js/lib/jquery',
+//        "jquery": 'freemix/js/lib/jquery',
         "jquery.cookie": "freemix/js/lib/jquery.cookie",
         "jquery.csrf": "freemix/js/lib/jquery.csrf",
         "jquery.highlight": "freemix/js/lib/jquery.highlight",

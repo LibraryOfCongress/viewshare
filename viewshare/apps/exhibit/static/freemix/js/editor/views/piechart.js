@@ -5,7 +5,7 @@ define(["jquery",
         "use strict"
 
     View.prototype.label = "Pie Chart";
-    View.prototype.thumbnail = "/static/exhibit/img/piechart-icon.png";
+    View.prototype.thumbnail = "/static/freemix/img/piechart-icon.png";
 
     View.prototype.viewClass = PiechartView;
     View.prototype.template_name = "piechart-view-template";

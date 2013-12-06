@@ -8,7 +8,7 @@ define(["jquery",
 
     View.prototype.label = "Map";
 
-    View.prototype.thumbnail = "/static/exhibit/img/map-icon.png";
+    View.prototype.thumbnail = "/static/freemix/img/map-icon.png";
 
     View.prototype.viewClass = OLMapView;
 

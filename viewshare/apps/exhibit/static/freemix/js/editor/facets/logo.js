@@ -2,7 +2,7 @@ define(["jquery", "freemix/js/facets/logo", "exhibit"],
         function ($, Facet, Exhibit) {
         "use strict"
 
-    Facet.prototype.thumbnail = "/static/exhibit/img/logo-facet.png";
+    Facet.prototype.thumbnail = "/static/freemix/img/logo-facet.png";
     Facet.prototype.label = "Logo";
     Facet.prototype.template_name = "logo-facet-editor";
 

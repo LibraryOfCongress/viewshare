@@ -5,7 +5,7 @@ define(["jquery", "freemix/js/facets/slider", "exhibit"],
     Facet.prototype.facetClass = Exhibit.SliderFacet;
     Facet.prototype.propertyTypes = ["number", "currency"];
 
-    Facet.prototype.thumbnail = "/static/exhibit/img/slider-facet.png";
+    Facet.prototype.thumbnail = "/static/freemix/img/slider-facet.png";
     Facet.prototype.label = "Slider";
     Facet.prototype.template_name = "slider-facet-editor";
 

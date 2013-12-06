@@ -5,7 +5,7 @@ define(["jquery",
         "use strict"
 
     View.prototype.label = "Table";
-    View.prototype.thumbnail = "/static/exhibit/img/table-icon.png";
+    View.prototype.thumbnail = "/static/freemix/img/table-icon.png";
     View.prototype.viewClass = TabularView;
     View.prototype.template_name = "table-view-template";
 

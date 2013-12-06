@@ -112,7 +112,7 @@ class Migration(DataMigration):
             'slug': ('django_extensions.db.fields.AutoSlugField', [], {'allow_duplicates': 'False', 'max_length': '50', 'separator': "u'-'", 'blank': 'True', 'populate_from': "'title'", 'overwrite': 'False'}),
             'thumbnail': ('django.db.models.fields.files.ImageField', [], {'default': "'static/images/thumbnails/three-column/smoothness.png'", 'max_length': '100'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
-            'url': ('django.db.models.fields.URLField', [], {'default': "'/static/exhibit/css/smoothness/smoothness.css'", 'max_length': '100'})
+            'url': ('django.db.models.fields.URLField', [], {'default': "'/static/freemix/css/smoothness/smoothness.css'", 'max_length': '100'})
         }
     }
 

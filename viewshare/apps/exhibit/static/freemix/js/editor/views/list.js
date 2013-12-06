@@ -3,7 +3,7 @@ define(["jquery",
         "scripts/ui/views/tile-view"],
         function ($, View, TileView) {
         "use strict"
-    View.prototype.thumbnail = "/static/exhibit/img/list-icon.png";
+    View.prototype.thumbnail = "/static/freemix/img/list-icon.png";
     View.prototype.label = "List";
     View.prototype.viewClass = TileView;
     View.prototype.template_name = "list-view-template";

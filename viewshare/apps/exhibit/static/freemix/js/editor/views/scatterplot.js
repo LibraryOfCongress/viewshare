@@ -7,7 +7,7 @@ define(["jquery",
     View.prototype.propertyTypes = ["number", "currency"];
 
     View.prototype.label = "Scatter Plot";
-    View.prototype.thumbnail = "/static/exhibit/img/scatterplot-icon.png";
+    View.prototype.thumbnail = "/static/freemix/img/scatterplot-icon.png";
 
     View.prototype.viewClass = ScatterPlotView;
 

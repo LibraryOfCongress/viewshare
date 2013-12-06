@@ -5,7 +5,7 @@ define(["jquery",
         "use strict"
 
     View.prototype.label = "Gallery";
-    View.prototype.thumbnail = "/static/exhibit/img/gallery.png";
+    View.prototype.thumbnail = "/static/freemix/img/gallery.png";
     View.prototype.propertyTypes = ["image"];
 
     View.prototype.viewClass = ThumbnailView;

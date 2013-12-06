@@ -4,7 +4,7 @@ define(["jquery", "freemix/js/facets/numeric", "exhibit"],
 
     Facet.prototype.facetClass = Exhibit.NumericRangeFacet;
     Facet.prototype.propertyTypes = ["number", "currency"];
-    Facet.prototype.thumbnail = "/static/exhibit/img/numeric-facet.png";
+    Facet.prototype.thumbnail = "/static/freemix/img/numeric-facet.png";
     Facet.prototype.label = "Range";
     Facet.prototype.template_name = "numeric-facet-editor";
 
