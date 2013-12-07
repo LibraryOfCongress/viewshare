@@ -3,14 +3,6 @@ define([
 ], function($, Exhibit, Freemix) {
     "use strict";
 
-    $.fn.createExhibit = function() {
-        return this.each(function() {
-            var exhibit = Exhibit.create(Freemix.exhibit.database);
-            exhibit.configureFromDOM(this);
-            $('body').trigger('rendered.exhibit', [exhibit]);
-        });
-    };
-
     var expressionCache = {};
 
     function createDatabase() {

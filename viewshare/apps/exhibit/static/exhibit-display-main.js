@@ -80,28 +80,28 @@ requirejs.config({
 
 require(["simile/exhibit/exhibit-api"], function() {
     require([
-        "freemix/js/display",
+        "freemix/js/display/display",
         "freemix/js/patch_exhibit",
 
-        "freemix/js/lenses/list",
-        "freemix/js/lenses/thumbnail",
-        "freemix/js/views/list",
-        "freemix/js/views/map",
-        "freemix/js/views/piechart",
-        "freemix/js/views/barchart",
-        "freemix/js/views/scatterplot",
-        "freemix/js/views/table",
-        "freemix/js/views/timeline",
-        "freemix/js/views/thumbnail",
+        "freemix/js/display/lenses/list",
+        "freemix/js/display/lenses/thumbnail",
+        "freemix/js/display/views/list",
+        "freemix/js/display/views/map",
+        "freemix/js/display/views/piechart",
+        "freemix/js/display/views/barchart",
+        "freemix/js/display/views/scatterplot",
+        "freemix/js/display/views/table",
+        "freemix/js/display/views/timeline",
+        "freemix/js/display/views/thumbnail",
 
-        "freemix/js/facets/search",
-        "freemix/js/facets/list",
-        "freemix/js/facets/tagcloud",
-        "freemix/js/facets/slider",
-        "freemix/js/facets/numeric",
-        "freemix/js/facets/logo",
+        "freemix/js/display/facets/search",
+        "freemix/js/display/facets/list",
+        "freemix/js/display/facets/tagcloud",
+        "freemix/js/display/facets/slider",
+        "freemix/js/display/facets/numeric",
+        "freemix/js/display/facets/logo",
         "freemix/js/lib/creole",
-        "freemix/js/facets/text",
+        "freemix/js/display/facets/text",
     ], function(initialize) {
         initialize();
     });
