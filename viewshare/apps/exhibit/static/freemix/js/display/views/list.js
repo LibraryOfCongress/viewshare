@@ -9,7 +9,8 @@ define(["jquery", "freemix/js/display/views/registry"],
         titleLink:undefined,
         orders:[],
         possibleOrders:[],
-        directions:["ascending"]
+        directions:["ascending"],
+        paginate: true
     };
 
     var render = function (config) {
@@ -17,6 +18,8 @@ define(["jquery", "freemix/js/display/views/registry"],
         var lens = this._getLens(config);
         var view = $("<div data-ex-role='view'></div>");
         view.attr("data-ex-view-label", config.name);
+        view.attr("data-ex-showAll", false);
+        view.attr("data-ex-grouped", false);
         this._renderOrder(view, config);
         this._renderFormats(view);
         view.append(lens.generateExhibitHTML());
