@@ -51,7 +51,8 @@ requirejs.config({
         "jquery.highlight": "freemix/js/lib/jquery.highlight",
         "jquery.form": "freemix/js/lib/jquery.form",
         "jquery.uuid": "freemix/js/lib/jquery.uuid",
-        "jquery.json": "freemix/js/lib/jquery.json"
+        "jquery.json": "freemix/js/lib/jquery.json",
+        "text": 'freemix/js/lib/text'
 
 
     },

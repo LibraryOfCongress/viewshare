@@ -16,7 +16,7 @@ define(["jquery",
 
     var render = function(config) {
         config = config || this.config;
-        var result = $("<div data-exerole='facet' data-ex-facet-class='Cloud'  class='exhibit-facet exhibit-cloudFacet'></div>");
+        var result = $("<div data-ex-role='facet' data-ex-facet-class='Cloud'  class='exhibit-facet exhibit-cloudFacet'></div>");
         result.attr("data-ex-expression", config.expression);
         if (config.name && config.name.length > 0) {
             result.attr("data-ex-facetLabel", config.name);

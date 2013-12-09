@@ -16,7 +16,7 @@ define(["jquery",
 
     var render = function (config) {
         config = config || this.config;
-        var expression = Freemix.exhibit.expression;
+        var expression = function(property){return "." + property;};
 
         if (typeof config.xaxis === "undefined" || typeof config.yaxis === "undefined") {
             return $('<div data-ex-role="view" data-ex-view-label="Axis Missing"></div>');

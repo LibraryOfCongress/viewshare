@@ -6,7 +6,7 @@ define(["jquery",
     function($, Exhibit, BaseFacet, Freemix) {
     "use strict";
 
-    var expression = Freemix.exhibit.expression;
+    var expression = function(property){return "." + property;};
 
     BaseFacet.prototype.facetClass = Exhibit.ListFacet;
 
@@ -106,12 +106,38 @@ define(["jquery",
         return bIsCandidate ? 1: -1;
     }
 
+    var expressionCache = {};
+
+    function getExpressionCount(expression, name) {
+            var label = name || expression;
+
+            var expressionCount = expressionCache[expression];
+            if (!expressionCount) {
+                var database = Freemix.exhibit.database;
+                var items = database.getAllItems();
+
+                var facet_cache = new Exhibit.FacetUtilities.Cache(database,
+                Exhibit.Collection.createAllItemsCollection("default", database),
+                Exhibit.ExpressionParser.parse(expression));
+
+                var counts = facet_cache.getValueCountsFromItems(items);
+                var missing = facet_cache.countItemsMissingValue(items);
+                expressionCount = {
+                    expression: expression,
+                    values: counts.entries.length,
+                    missing: missing
+                };
+                expressionCache[expression] = expressionCount;
+            }
+            return $.extend({}, expressionCount, {label: label});
+        }
+
     BaseFacet.prototype._generatePropertyList = function(types) {
         var properties = [];
         var database = Freemix.exhibit.database;
         var proplist = types? database.getPropertiesWithTypes(types) : database.getAllPropertyObjects();
         $.each(proplist, function(inx, prop) {
-            properties.push(Freemix.exhibit.getExpressionCount(expression(prop.getID()), prop.getLabel()));
+            properties.push(getExpressionCount(expression(prop.getID()), prop.getLabel()));
         });
         properties.sort(sorter);
         return properties;

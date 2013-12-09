@@ -13,7 +13,7 @@ define(["jquery",
         properties: []
     };
 
-    var expression = Freemix.exhibit.expression;
+    var expression = function(property){return "." + property;};
 
     var render = function(config) {
         config = config || this.config;

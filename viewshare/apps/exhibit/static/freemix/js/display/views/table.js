@@ -23,7 +23,7 @@ define(["jquery", "freemix/js/display/views/registry",
         $.each(config.properties, function (index, p) {
             var property = Freemix.exhibit.database.getProperty(p);
             labels[labels.length] = property.getLabel();
-            columns[columns.length] = Freemix.exhibit.expression(property.getID());
+            columns[columns.length] = function(property){return "." + property;}(property.getID());
 
             if (config.sortProperty && config.sortProperty === p) {
                 view.attr("data-ex-sort-column", index);

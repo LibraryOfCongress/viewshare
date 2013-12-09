@@ -15,7 +15,7 @@
 {% block head_data %}
     {{ block.super }}
 
-    <link rel="exhibit/data"
+    <link rel="exhibit-data"
           href="{% url 'exhibit_data' owner=object.owner.username slug=object.slug %}"/>
 
     <link rel="freemix/exhibit_profile"
@@ -242,18 +242,7 @@
         </div>
     {% endif %}
 
-    <div id="contents" class="freemix-themeable">
-
-        <div id="canvas">
-            {% include exhibit.canvas.location %}
-        </div>
-
-    </div>
-
-    <div class="ui-helper-hidden">
-        <div id="templates">
-        </div>
-    </div>
+    <div id="contents" class="freemix-themeable"></div>
 
     <p class="center">{% trans "Created by" %}
         <a href="{{ exhibit.owner.get_profile.get_absolute_url }}">{{ exhibit.owner.username }}</a>.

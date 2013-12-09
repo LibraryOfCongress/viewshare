@@ -17,7 +17,7 @@ define(["jquery",
 
     var render = function (config) {
         config = config || this.config;
-        var expression = Freemix.exhibit.expression;
+        var expression = function(property){return "." + property;};
 
         var view = $("<div data-ex-role='view' data-ex-view-class='BarChart'></div>");
         view.attr("data-ex-label", config.name);

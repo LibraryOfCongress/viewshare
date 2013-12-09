@@ -16,7 +16,7 @@ define(["jquery", "freemix/js/display/views/registry",
     };
 
     function thumbnailLens(config) {
-        var expression = Freemix.exhibit.expression;
+        var expression = function(property){return "." + property;};
 
 
         var lens = $("<div data-ex-role='lens' style='display:none;' class='image-thumbnail ui-state-highlight'></div>");

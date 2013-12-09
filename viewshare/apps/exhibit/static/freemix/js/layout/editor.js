@@ -4,6 +4,7 @@ define(["jquery",
         "freemix/js/display/lenses/registry",
         "freemix/js/layout/views/container",
         "freemix/js/layout/facets/container",
+        "freemix/js/display/exhibit-html-view",
         "freemix/js/layout/save_button",
         "freemix/js/layout/cancel_button",
         "freemix/js/freemix",
@@ -13,6 +14,7 @@ define(["jquery",
     function($, ViewRegistry, FacetRegistry,
              LensRegistry, ViewContainer,
              FacetContainer,
+             generateExhibitHTML,
              setup_save_button,
              setup_cancel_button,
              Freemix) {
@@ -207,10 +209,6 @@ define(["jquery",
         });
     };
 
-    function updatePreview() {
-
-    }
-
     function updateBuilder() {
         $(".view-container", Freemix.getBuilder()).each(function() {
             var container = $(this).data("model");
@@ -224,7 +222,7 @@ define(["jquery",
     function build_db() {
         var profile = Freemix.profile;
 
-        var data = $("link[rel='exhibit/data']").toArray();
+        var data = $("link[rel='exhibit-data']").toArray();
         Freemix.exhibit.initializeDatabase(data, function() {
             LensRegistry.setDefaultLens(LensRegistry.construct(Freemix.profile.default_lens));
 
@@ -275,9 +273,8 @@ define(["jquery",
         });
 
         var metadata = Freemix.serialize();
-        var template = Freemix.getTemplate("canvas-template");
+        var template = generateExhibitHTML(metadata);
         Freemix.getPreview().empty().append(template);
-        template.generateExhibitHTML(metadata);
         Freemix.exhibit.createExhibit(template);
 
         hideBuilder();

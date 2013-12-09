@@ -39,9 +39,9 @@ requirejs.config({
         "i18n": "lib/i18n",
         "ext": "extensions",
         "exlib": "lib",
-        "fmlib": "freemix/js/lib",
-        "fmexlib": "freemix/js/lib",
-        "openlayers": "simile/exhibit/extensions/openlayers/lib/OpenLayers"
+        "openlayers": "simile/exhibit/extensions/openlayers/lib/OpenLayers",
+        "text": 'freemix/js/lib/text'
+
     },
     "shim": {
         "exlib/jquery": {
@@ -100,7 +100,6 @@ require(["simile/exhibit/exhibit-api"], function() {
         "freemix/js/display/facets/slider",
         "freemix/js/display/facets/numeric",
         "freemix/js/display/facets/logo",
-        "freemix/js/lib/creole",
         "freemix/js/display/facets/text",
     ], function(initialize) {
         initialize();

@@ -14,7 +14,7 @@
 
 {% block head_data %}
     {{ block.super }}
-    <link rel="exhibit/data" href="{{ data_url }}"/>
+    <link rel="exhibit-data" href="{{ data_url }}"/>
     <link rel="freemix/exhibit_profile" href="{% url 'shared_exhibit_profile_json' slug=object.slug %}"/>
 {% endblock %}
 

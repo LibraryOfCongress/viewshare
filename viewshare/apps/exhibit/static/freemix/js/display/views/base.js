@@ -6,7 +6,7 @@ define(["jquery",
     function ($, Widget, LensRegistry, Freemix) {
     "use strict";
 
-    var expression = Freemix.exhibit.expression;
+    var expression = function(property){return "." + property;};
 
 
     var BaseView = function(config) {
