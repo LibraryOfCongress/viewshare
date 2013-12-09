@@ -6,6 +6,10 @@
 {% load i18n %}
 {% load require %}
 
+{% block head_data %}
+    {{ block.super }}
+    <link rel="freemix/property_list" href="{% url 'draft_exhibit_property_list' owner=exhibit.owner.username slug=exhibit.slug %}"/>
+{% endblock %}
 
 {% block body %}
 <div class="exhibit_edit">
