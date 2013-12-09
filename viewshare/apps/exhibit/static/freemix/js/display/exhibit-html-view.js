@@ -6,11 +6,16 @@ define(["jquery",
              wrapper) {
     "use strict";
 
-    function render_facets(root, model) {
-        $.each(model, function() {
-            var facet = FacetRegistry.construct(this.type, this);
-            root.append(facet.generateExhibitHTML());
-        });
+    function render_container(selector, registry, model, span) {
+        if (model.length > 0) {
+            $.each(model, function() {
+                var facet = registry.construct(this.type, this);
+                selector.append(facet.generateExhibitHTML());
+            });
+            selector.wrap("<div class='span" + span + "'>");
+        } else {
+            selector.remove();
+        }
     }
 
     return function(model) {
@@ -20,34 +25,35 @@ define(["jquery",
         var left_facets = model.facets["left-facets"] || [];
         var views = model.views.views;
 
-        if (top_facets.length > 0) {
-            var root = result.find("#top-facets");
-            render_facets(root, top_facets);
+        var view_span, facet_span;
+        if (left_facets.length ==0 && right_facets.length == 0) {
+            view_span = 12;
+        } else if (left_facets.length > 0 && right_facets.length > 0) {
+            view_span = 8;
+            facet_span = 2;
         } else {
-            result.find("#top-facets").parent().remove();
+            view_span = 9;
+            facet_span = 3;
         }
+        render_container(result.find("#top-facets"),
+                         FacetRegistry,
+                         top_facets,
+                         12);
 
-        var view_span = 12;
-        if (left_facets.length > 0) {
-            view_span -=2;
-            render_facets(result.find("#left-facets"), left_facets);
-        } else {
-            result.find("#left-facets").remove();
-        }
+        render_container(result.find("#left-facets"),
+                         FacetRegistry,
+                         left_facets,
+                         facet_span);
 
-        if (right_facets.length > 0) {
-            view_span -=2;
-            render_facets(result.find("#right-facets"), right_facets);
-        } else {
-            result.find("#right-facets").remove();
-        }
+        render_container(result.find("#right-facets"),
+                         FacetRegistry,
+                         right_facets,
+                         facet_span);
 
-        var container = result.find("#views")
-        $.each(views, function() {
-            var view = ViewRegistry.construct(this.type,this);
-            container.append(view.generateExhibitHTML());
-            container.addClass("span" + view_span);
-        });
+        render_container(result.find("#views"),
+                         ViewRegistry,
+                         views,
+                         view_span);
 
         return result;
 
