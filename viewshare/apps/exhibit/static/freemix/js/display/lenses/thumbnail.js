@@ -1,6 +1,6 @@
 define(["jquery",
     "freemix/js/freemix",
-    "freemix/js/display/lenses/registry",
+    "display/lenses/registry",
     "freemix/js/exhibit_utilities",
     "freemix/js/lib/lightbox"
 ],

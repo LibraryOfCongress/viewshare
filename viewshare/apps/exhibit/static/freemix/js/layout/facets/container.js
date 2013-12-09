@@ -1,5 +1,5 @@
 define(["jquery",
-        "freemix/js/display/facets/registry",
+        "display/facets/registry",
         "freemix/js/freemix",
         "jquery.uuid"],
     function($, FacetRegistry, Freemix) {

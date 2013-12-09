@@ -1,6 +1,6 @@
 define(["jquery",
         "freemix/js/widget",
-        "freemix/js/display/lenses/registry",
+        "display/lenses/registry",
         "freemix/js/freemix",
         "freemix/js/exhibit_utilities"],
     function ($, Widget, LensRegistry, Freemix) {

@@ -1,4 +1,4 @@
-define(["jquery", "freemix/js/display/facets/tagcloud", "exhibit"],
+define(["jquery", "display/facets/tagcloud", "exhibit"],
         function ($, Facet, Exhibit) {
         "use strict"
 

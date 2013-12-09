@@ -1,4 +1,4 @@
-define(["jquery", "freemix/js/display/facets/search", "exhibit"],
+define(["jquery", "display/facets/search", "exhibit"],
         function ($, Facet, Exhibit) {
         "use strict"
 

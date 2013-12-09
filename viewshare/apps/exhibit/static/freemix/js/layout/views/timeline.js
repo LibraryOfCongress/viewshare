@@ -1,5 +1,5 @@
 define(["jquery",
-        "freemix/js/display/views/timeline",
+        "display/views/timeline",
         "ext/time/scripts/timeline-view"],
         function ($, View, TimelineView) {
         "use strict"

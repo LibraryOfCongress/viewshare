@@ -1,5 +1,5 @@
 define(["jquery",
-        "freemix/js/display/facets/text",
+        "display/facets/text",
         "exhibit",
         "freemix/js/lib/creole"],
         function ($, Facet, Exhibit) {

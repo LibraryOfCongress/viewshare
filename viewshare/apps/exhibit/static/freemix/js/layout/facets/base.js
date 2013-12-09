@@ -1,6 +1,6 @@
 define(["jquery",
         "exhibit",
-        "freemix/js/display/facets/base",
+        "display/facets/base",
         "freemix/js/freemix",
         "freemix/js/exhibit_utilities"],
     function($, Exhibit, BaseFacet, Freemix) {

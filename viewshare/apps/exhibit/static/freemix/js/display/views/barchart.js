@@ -1,7 +1,7 @@
 define(["jquery",
         "exhibit",
         "freemix/js/freemix",
-        "freemix/js/display/views/registry",
+        "display/views/registry",
         "ext/flot/flot-extension",
         "freemix/js/exhibit_utilities"],
     function ($, Exhibit, Freemix, ViewRegistry, FlotExtension) {

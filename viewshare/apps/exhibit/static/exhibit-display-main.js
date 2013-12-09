@@ -40,7 +40,9 @@ requirejs.config({
         "ext": "extensions",
         "exlib": "lib",
         "openlayers": "simile/exhibit/extensions/openlayers/lib/OpenLayers",
-        "text": 'freemix/js/lib/text'
+        "text": 'freemix/js/lib/text',
+        "display": "freemix/js/display"
+
 
     },
     "shim": {
@@ -80,27 +82,27 @@ requirejs.config({
 
 require(["simile/exhibit/exhibit-api"], function() {
     require([
-        "freemix/js/display/display",
+        "display/display",
         "freemix/js/patch_exhibit",
 
-        "freemix/js/display/lenses/list",
-        "freemix/js/display/lenses/thumbnail",
-        "freemix/js/display/views/list",
-        "freemix/js/display/views/map",
-        "freemix/js/display/views/piechart",
-        "freemix/js/display/views/barchart",
-        "freemix/js/display/views/scatterplot",
-        "freemix/js/display/views/table",
-        "freemix/js/display/views/timeline",
-        "freemix/js/display/views/thumbnail",
+        "display/lenses/list",
+        "display/lenses/thumbnail",
+        "display/views/list",
+        "display/views/map",
+        "display/views/piechart",
+        "display/views/barchart",
+        "display/views/scatterplot",
+        "display/views/table",
+        "display/views/timeline",
+        "display/views/thumbnail",
 
-        "freemix/js/display/facets/search",
-        "freemix/js/display/facets/list",
-        "freemix/js/display/facets/tagcloud",
-        "freemix/js/display/facets/slider",
-        "freemix/js/display/facets/numeric",
-        "freemix/js/display/facets/logo",
-        "freemix/js/display/facets/text",
+        "display/facets/search",
+        "display/facets/list",
+        "display/facets/tagcloud",
+        "display/facets/slider",
+        "display/facets/numeric",
+        "display/facets/logo",
+        "display/facets/text",
     ], function(initialize) {
         initialize();
     });

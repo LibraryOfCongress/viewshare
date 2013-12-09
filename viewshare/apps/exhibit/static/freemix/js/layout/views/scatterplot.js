@@ -1,5 +1,5 @@
 define(["jquery",
-        "freemix/js/display/views/scatterplot",
+        "display/views/scatterplot",
         "ext/flot/scripts/scatterplot-view"],
         function ($, View, ScatterPlotView) {
         "use strict"

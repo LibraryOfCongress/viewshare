@@ -899,7 +899,7 @@ ul.view-set li.view .icon-remove {
  cursor:no-drop;
 }
 
-.facet-preview .facet-edit-body, .view-preview .view-edit-body {
+.widget-preview .edit-body {
 padding: 15px 10px 0px 0px;
 }
 

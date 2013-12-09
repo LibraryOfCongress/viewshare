@@ -1,4 +1,4 @@
-define(["jquery", "exhibit", "freemix/js/display/views/registry", "ext/openlayers/openlayers-extension"],
+define(["jquery", "exhibit", "display/views/registry", "ext/openlayers/openlayers-extension"],
     function ($, Exhibit, ViewRegistry, MapExtension) {
         "use strict";
 

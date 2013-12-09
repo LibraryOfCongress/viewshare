@@ -1,4 +1,4 @@
-define(["jquery", "freemix/js/display/views/registry"],
+define(["jquery", "display/views/registry"],
     function ($, ViewRegistry) {
     "use strict";
 

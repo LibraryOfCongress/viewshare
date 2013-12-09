@@ -1,5 +1,5 @@
 define(["jquery",
-        "freemix/js/display/views/thumbnail",
+        "display/views/thumbnail",
         "scripts/ui/views/thumbnail-view"],
         function ($, View, ThumbnailView) {
         "use strict"

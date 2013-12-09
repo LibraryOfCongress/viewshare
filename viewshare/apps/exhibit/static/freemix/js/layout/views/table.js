@@ -1,5 +1,5 @@
 define(["jquery",
-        "freemix/js/display/views/table",
+        "display/views/table",
         "scripts/ui/views/tabular-view"],
         function ($, View, TabularView) {
         "use strict"

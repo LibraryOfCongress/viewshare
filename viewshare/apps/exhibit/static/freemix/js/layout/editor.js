@@ -1,18 +1,20 @@
 define(["jquery",
-        "freemix/js/display/views/registry",
-        "freemix/js/display/facets/registry",
-        "freemix/js/display/lenses/registry",
-        "freemix/js/layout/views/container",
-        "freemix/js/layout/facets/container",
-        "freemix/js/display/exhibit-html-view",
-        "freemix/js/layout/save_button",
-        "freemix/js/layout/cancel_button",
+        "display/views/registry",
+        "display/facets/registry",
+        "display/lenses/registry",
+        "layout/views/container",
+        "layout/facets/container",
+        "display/exhibit-html-view",
+        "layout/save_button",
+        "layout/cancel_button",
         "freemix/js/freemix",
         "freemix/js/exhibit_utilities",
         "jquery-ui",
         "bootstrap"],
-    function($, ViewRegistry, FacetRegistry,
-             LensRegistry, ViewContainer,
+    function($, ViewRegistry,
+             FacetRegistry,
+             LensRegistry,
+             ViewContainer,
              FacetContainer,
              generateExhibitHTML,
              setup_save_button,
@@ -183,31 +185,6 @@ define(["jquery",
        }
        return metadata;
    };
-
-
-    $.fn.generateExhibitHTML = function(model) {
-        return this.each(function() {
-            var root = $(this);
-
-            root.find(".view-container").each(function() {
-                var id = $(this).attr("id");
-                var container = $("<div class='view-panel' data-ex-role='viewPanel'></div>");
-                $.each(model.views[id], function() {
-                    var view = ViewRegistry.construct(this.type,this);
-                    container.append(view.generateExhibitHTML());
-                });
-
-                root.find(".view-container#" + id).append(container);
-            });
-
-            $.each(model.facets, function(container, facets) {
-                $.each(facets, function() {
-                    var facet = FacetRegistry.construct(this.type, this);
-                    root.find(".facet-container#" +container).append(facet.generateExhibitHTML());
-                });
-            });
-        });
-    };
 
     function updateBuilder() {
         $(".view-container", Freemix.getBuilder()).each(function() {

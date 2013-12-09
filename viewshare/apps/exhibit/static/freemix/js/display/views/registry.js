@@ -1,4 +1,4 @@
-define(["jquery", "freemix/js/display/views/base"],
+define(["jquery", "display/views/base"],
     function ($, BaseView) {
     "use strict";
 

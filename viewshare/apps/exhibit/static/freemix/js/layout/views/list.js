@@ -1,5 +1,5 @@
 define(["jquery",
-        "freemix/js/display/views/list",
+        "display/views/list",
         "scripts/ui/views/tile-view"],
         function ($, View, TileView) {
         "use strict"

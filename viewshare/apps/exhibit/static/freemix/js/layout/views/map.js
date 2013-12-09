@@ -1,5 +1,5 @@
 define(["jquery",
-        "freemix/js/display/views/map",
+        "display/views/map",
         "ext/openlayers/scripts/openlayers-view"],
         function ($, View, OLMapView) {
         "use strict"

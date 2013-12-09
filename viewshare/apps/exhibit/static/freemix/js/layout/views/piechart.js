@@ -1,5 +1,5 @@
 define(["jquery",
-        "freemix/js/display/views/piechart",
+        "display/views/piechart",
         "ext/flot/scripts/piechart-view"],
         function ($, View, PiechartView) {
         "use strict"

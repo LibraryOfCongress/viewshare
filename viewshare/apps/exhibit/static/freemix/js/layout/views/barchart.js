@@ -1,5 +1,5 @@
 define(["jquery",
-        "freemix/js/display/views/barchart",
+        "display/views/barchart",
         "ext/flot/scripts/barchart-view"],
         function ($, View, BarChartView) {
         "use strict"

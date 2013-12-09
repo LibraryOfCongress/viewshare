@@ -1,4 +1,4 @@
-define(["jquery", "freemix/js/display/facets/list"],
+define(["jquery", "display/facets/list"],
         function ($, Facet) {
 
     Facet.prototype.thumbnail = "/static/freemix/img/list-facet.png";

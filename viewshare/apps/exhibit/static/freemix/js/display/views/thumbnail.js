@@ -1,4 +1,4 @@
-define(["jquery", "freemix/js/display/views/registry",
+define(["jquery", "display/views/registry",
         "freemix/js/exhibit_utilities",
         "freemix/js/lib/lightbox"],
     function ($, ViewRegistry) {

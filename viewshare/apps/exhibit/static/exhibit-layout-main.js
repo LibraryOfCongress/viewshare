@@ -52,7 +52,13 @@ requirejs.config({
         "jquery.form": "freemix/js/lib/jquery.form",
         "jquery.uuid": "freemix/js/lib/jquery.uuid",
         "jquery.json": "freemix/js/lib/jquery.json",
-        "text": 'freemix/js/lib/text'
+        "text": 'freemix/js/lib/text',
+        "handlebars": "freemix/js/lib/handlebars",
+        "templates": "freemix/js/templates",
+        "models": "freemix/js/models",
+        "layout": "freemix/js/layout",
+        "display": "freemix/js/display"
+
 
 
     },
@@ -114,41 +120,44 @@ requirejs.config({
         },
         "jquery.json": {
             "deps": ["jquery"]
+        },
+        "handlebars": {
+            "exports": "Handlebars"
         }
     }
 });
 
 require(["simile/exhibit/exhibit-api"], function() {
     require([
-        "freemix/js/layout/editor",
-        "freemix/js/layout/patch_exhibit",
+        "layout/editor",
+        "layout/patch_exhibit",
         "freemix/js/patch_exhibit",
 
-        "freemix/js/layout/widget",
-        "freemix/js/layout/facets/container",
-        "freemix/js/layout/views/container",
-        "freemix/js/layout/facets/base",
-        "freemix/js/layout/views/base",
-        "freemix/js/layout/lenses/base",
+        "layout/widget",
+        "layout/facets/container",
+        "layout/views/container",
+        "layout/facets/base",
+        "layout/views/base",
+        "layout/lenses/base",
 
-        "freemix/js/layout/lenses/list",
-        "freemix/js/layout/lenses/thumbnail",
-        "freemix/js/layout/views/list",
-        "freemix/js/layout/views/map",
-        "freemix/js/layout/views/piechart",
-        "freemix/js/layout/views/barchart",
-        "freemix/js/layout/views/scatterplot",
-        "freemix/js/layout/views/table",
-        "freemix/js/layout/views/timeline",
-        "freemix/js/layout/views/thumbnail",
+        "layout/lenses/list",
+        "layout/lenses/thumbnail",
+        "layout/views/list",
+        "layout/views/map",
+        "layout/views/piechart",
+        "layout/views/barchart",
+        "layout/views/scatterplot",
+        "layout/views/table",
+        "layout/views/timeline",
+        "layout/views/thumbnail",
 
-        "freemix/js/layout/facets/search",
-        "freemix/js/layout/facets/list",
-        "freemix/js/layout/facets/tagcloud",
-        "freemix/js/layout/facets/slider",
-        "freemix/js/layout/facets/numeric",
-        "freemix/js/layout/facets/logo",
-        "freemix/js/layout/facets/text",
+        "layout/facets/search",
+        "layout/facets/list",
+        "layout/facets/tagcloud",
+        "layout/facets/slider",
+        "layout/facets/numeric",
+        "layout/facets/logo",
+        "layout/facets/text",
         "jquery.form",
         "jquery.uuid",
         "jquery.json"

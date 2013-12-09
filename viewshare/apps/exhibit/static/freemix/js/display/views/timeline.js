@@ -1,6 +1,6 @@
 define(["jquery",
         "exhibit",
-        "freemix/js/display/views/registry",
+        "display/views/registry",
         "ext/time/time-extension",
         "freemix/js/exhibit_utilities"],
     function ($, Exhibit, ViewRegistry, TimeExtension) {

@@ -1,7 +1,7 @@
 define(["jquery",
-        "freemix/js/display/views/registry",
-        "freemix/js/display/facets/registry",
-        "freemix/js/display/lenses/registry",
+        "display/views/registry",
+        "display/facets/registry",
+        "display/lenses/registry",
         "freemix/js/freemix",
         "jquery.uuid"],
     function($, ViewRegistry, FacetRegistry, LensRegistry, Freemix) {    "use strict";

@@ -1,5 +1,5 @@
 define(["jquery",
-        "freemix/js/display/facets/registry"],
+        "display/facets/registry"],
     function ($, FacetRegistry) {
         "use strict";
 

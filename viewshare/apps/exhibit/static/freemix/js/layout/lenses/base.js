@@ -1,4 +1,4 @@
-define(["jquery", "freemix/js/display/lenses/base"],
+define(["jquery", "display/lenses/base"],
     function ($, BaseLens) {
     "use strict";
 

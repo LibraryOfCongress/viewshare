@@ -1,6 +1,6 @@
 define(["jquery",
-        "freemix/js/display/views/registry",
-        "freemix/js/display/facets/registry",
+        "display/views/registry",
+        "display/facets/registry",
         "text!freemix/js/templates/exhibit-wrapper.html"],
     function($, ViewRegistry, FacetRegistry,
              wrapper) {
