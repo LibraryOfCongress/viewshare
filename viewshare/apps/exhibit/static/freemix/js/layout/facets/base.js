@@ -2,9 +2,11 @@ define(["jquery",
         "exhibit",
         "display/facets/base",
         "freemix/js/freemix",
+        "display/facets/registry",
+        "layout/widget_editor",
         "text!templates/layout/facet-widget.html",
         "freemix/js/exhibit_utilities"],
-    function($, Exhibit, BaseFacet, Freemix, facet_widget_template) {
+    function($, Exhibit, BaseFacet, Freemix, FacetRegistry, WidgetEditor, facet_widget_template) {
     "use strict";
 
     var expression = function(property){return "." + property;};
@@ -25,7 +27,20 @@ define(["jquery",
                         return false;
                     }).end()
                 .find(".facet-menu a").click(function() {
-                        facet.showEditor();
+                        var editor = new WidgetEditor({
+                            "title": "Add Widget",
+                            "registry": FacetRegistry,
+                            "element": facet.findContainer().getDialog(),
+                            "switchable": false,
+                            "model": facet
+                        });
+
+                        editor.render();
+                        facet.findContainer().getDialog().modal("show");
+                        facet.findContainer().getDialog().one("edit-widget", function() {
+                            facet.findContainer().getDialog().modal("hide");
+                            facet.refresh();
+                        });
                         return false;
                     }).end();
 
