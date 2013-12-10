@@ -1,4 +1,5 @@
 define(["jquery",
+        "handlebars",
         "display/views/registry",
         "display/facets/registry",
         "display/lenses/registry",
@@ -7,11 +8,18 @@ define(["jquery",
         "display/exhibit-html-view",
         "layout/save_button",
         "layout/cancel_button",
+        "text!templates/layout/add-view-button.html",
+        "text!templates/layout/add-view-modal.html",
+        "text!templates/layout/add-facet-button.html",
+        "text!templates/layout/add-facet-modal.html",
         "freemix/js/freemix",
+
         "freemix/js/exhibit_utilities",
         "jquery-ui",
         "bootstrap"],
-    function($, ViewRegistry,
+    function($,
+             Handlebars,
+             ViewRegistry,
              FacetRegistry,
              LensRegistry,
              ViewContainer,
@@ -19,6 +27,10 @@ define(["jquery",
              generateExhibitHTML,
              setup_save_button,
              setup_cancel_button,
+             add_view_button_template,
+             add_view_modal_template,
+             add_facet_button_template,
+             add_facet_modal_template,
              Freemix) {
     "use strict";
 
@@ -48,6 +60,11 @@ define(["jquery",
             list.appendTo($(this));
         });
     };
+    var add_view_button = Handlebars.compile(add_view_button_template);
+    var add_view_modal = Handlebars.compile(add_view_modal_template);
+    var add_facet_button = Handlebars.compile(add_facet_button_template);
+    var add_facet_modal = Handlebars.compile(add_facet_modal_template);
+
     $.fn.facetContainer = function(properties) {
         return this.each(function() {
             var id = $(this).attr("id");
@@ -62,31 +79,18 @@ define(["jquery",
             });
             w.data("model", facetContainer);
             w.addClass("ui-widget-content").addClass("facet-container");
-            w.append("<div class='create-facet'>" +
-                "<button class='create-facet-button btn btn-small btn-info' href='#addWidgetModal_" + id + "' data-toggle='modal'><i class='fa fa-plus'></i><span class='widget-label'>Add a Widget</span></button>" +
-                "</div>");
+            w.append(add_facet_button({"id": id}));
 
-            var dialog =$("<div id='addWidgetModal_" + id + "' class='widget-editor modal hide fade' tabindex='-1' role='dialog' aria-labelledby='addWidgetModalLabel' aria-hidden='true'>" +
-                          "</div>").appendTo('body');
+            var dialog =$(add_facet_modal({id: id})).appendTo('body');
 
             dialog.modal({
                 show:false
             });
 
-            dialog.on("show", function() {
-                //Freemix.getBuilder().hide();
-            });
-
-            dialog.on("hidden", function() {
-                //Freemix.getBuilder().show();
-            });
-
             facetContainer._dialog = dialog;
 
             w.find(".create-facet").click(function() {
-                dialog.empty();
-                dialog.append(facetContainer.getPopupContent());
-
+                facetContainer.getPopupContent();
             });
         });
     };
@@ -113,23 +117,12 @@ define(["jquery",
                         $(ui.item).data("model")._container = undefined;
                     }
                 });
-            set.append("<li class='create-view'>" +
-                       "<button class='create-view-button btn btn-small btn-info' href='#addViewModal' data-toggle='modal'><i class='fa fa-plus'></i><span class='widget-label'>Add a View</span></button>" +
-                       "</li>");
+            set.append(add_view_button());
 
-            var dialog =$("<div id='addViewModal' class='widget-editor modal hide fade' tabindex='-1' role='dialog' aria-labelledby='addViewModalLabel' aria-hidden='true'>" +
-                          "</div>").appendTo('body');
+            var dialog =$(add_view_modal()).appendTo('body');
 
             dialog.modal({
                 show:false
-            });
-
-            dialog.on("show", function() {
-                //Freemix.getBuilder().hide();
-            });
-
-            dialog.on("hidden", function() {
-                //Freemix.getBuilder().show();
             });
 
             viewContainer._dialog = dialog;

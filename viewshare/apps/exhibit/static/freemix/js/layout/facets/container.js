@@ -1,8 +1,9 @@
 define(["jquery",
         "display/facets/registry",
+        "layout/widget_editor",
         "freemix/js/freemix",
         "jquery.uuid"],
-    function($, FacetRegistry, Freemix) {
+    function($, FacetRegistry, WidgetEditor, Freemix) {
     "use strict";
 
     var Container = function(id) {
@@ -42,22 +43,42 @@ define(["jquery",
 
     Container.prototype.getPopupContent = function() {
         var container = this;
+        this._dialog.empty();
+        var editor = new WidgetEditor({
+            "title": "Add Widget",
+            "registry": FacetRegistry,
+            "element": container._dialog,
+            "switchable": true
+        });
 
-        var chooserThumbnails = $("<div><div class='modal-header'><button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button><h3 id='addWidgetModalLabel'>Select Facet Widget</h3></div></div>");
+        editor.render();
 
-        $("<div class='chooser modal-body'></div>").freemixThumbnails(FacetRegistry.prototypes, function(Facet) {
-            var facet = new Facet();
+        this._dialog.one("edit-widget", function(evt, facet) {
+            var model = editor.model;
+            this.modal("hide");
+            container.addFacet(model);
+        }.bind(this._dialog));
 
-            if (!facet.config.id) {
-                facet.config.id = $.make_uuid();
-            }
-            container.findWidget().one("edit-facet", function() {
-                container.addFacet(facet);
-            });
-            facet.showEditor(container);
-        }).appendTo(chooserThumbnails);
+//        this._dialog.one("hide", function() {
+//            editor.destroy();
+//        });
+//
 
-        return chooserThumbnails;
+//        var chooserThumbnails = $("<div><div class='modal-header'><button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button><h3 id='addWidgetModalLabel'>Select Facet Widget</h3></div></div>");
+//
+//        $("<div class='chooser modal-body'></div>").freemixThumbnails(FacetRegistry.prototypes, function(Facet) {
+//            var facet = new Facet();
+//
+//            if (!facet.config.id) {
+//                facet.config.id = $.make_uuid();
+//            }
+//            container.findWidget().one("edit-facet", function() {
+//                container.addFacet(facet);
+//            });
+//            facet.showEditor(container);
+//        }).appendTo(chooserThumbnails);
+//
+//        return chooserThumbnails;
     };
 
     return Container;

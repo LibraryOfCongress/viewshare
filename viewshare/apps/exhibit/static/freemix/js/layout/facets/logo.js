@@ -11,11 +11,11 @@ define(["jquery", "display/facets/logo", "exhibit"],
 
         function validate() {
             if (config.src && config.src.length > 0) {
-                template.find("#facet_save_button").removeAttr("disabled").removeClass("disabled");
+                template.find("#widget_save_button").removeAttr("disabled").removeClass("disabled");
                 template.find(".help-inline").addClass("hidden").parent(".control-group").removeClass("warning");
 
             } else {
-                template.find("#facet_save_button").attr("disabled", "disabled").addClass("disabled");
+                template.find("#widget_save_button").attr("disabled", "disabled").addClass("disabled");
                 template.find(".help-inline").removeClass("hidden").parent(".control-group").addClass("warning");
             }
             template.trigger("update-preview");

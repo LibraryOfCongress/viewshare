@@ -2,8 +2,9 @@ define(["jquery",
         "exhibit",
         "display/facets/base",
         "freemix/js/freemix",
+        "text!templates/layout/facet-widget.html",
         "freemix/js/exhibit_utilities"],
-    function($, Exhibit, BaseFacet, Freemix) {
+    function($, Exhibit, BaseFacet, Freemix, facet_widget_template) {
     "use strict";
 
     var expression = function(property){return "." + property;};
@@ -15,27 +16,18 @@ define(["jquery",
     };
     BaseFacet.prototype.generateWidget = function() {
         var facet = this;
-        return $("<div class='facet ui-draggable'>" +
-                 "<div class='facet-header ui-state-default ui-helper-clearfix ui-dialog-titlebar' title='Click and drag to move to any other facet sidebar or to reorder facets'>" +
-                 "<i class='fa fa-arrows'></i>" +
-                 "<span class='view-label'/>" +
-                 "<i class='fa fa-times delete-button pull-right'></i>" +
-                 "</div>" +
-                 "<div class='facet-body ui-widget-content'>" +
-                 "<div class='facet-content'></div>" +
-                 "<div class='facet-menu'><div class='row-fluid'><div class='span12'><div class='pull-right'><a href='#' title='Edit this facet' class='btn btn-mini'><i class='fa fa-edit fa-lg'></i> Edit</a></div></div></div></div>" +
-                 "</div></div>")
-        .attr("id", this.config.id)
-        .find("span.view-label").text(this.label).end()
-        .data("model", this)
-        .find(".delete-button").click(function() {
-                facet.remove();
-                return false;
-            }).end()
-        .find(".facet-menu a").click(function() {
-                facet.showEditor();
-                return false;
-            }).end();
+        return $(facet_widget_template)
+                .attr("id", this.config.id)
+                .find("span.view-label").text(this.label).end()
+                .data("model", this)
+                .find(".delete-button").click(function() {
+                        facet.remove();
+                        return false;
+                    }).end()
+                .find(".facet-menu a").click(function() {
+                        facet.showEditor();
+                        return false;
+                    }).end();
 
     };
 
@@ -53,36 +45,26 @@ define(["jquery",
         this.facetClass.createFromDOM(preview.get(0), null, exhibit.getUIContext());
     };
 
-    BaseFacet.prototype.showEditor = function(facetContainer){
-        var facet = this;
-        var config = $.extend(true, {}, facet.config);
-        var template = Freemix.getTemplate("facet-editor");
-        facetContainer = facetContainer || facet.findContainer();
-        var dialog = facetContainer.getDialog();
-        template.data("model", this);
+    BaseFacet.prototype.showEditor = function(template){
+        var model = this;
+        var config = $.extend(true, {}, model.config);
         var form = Freemix.getTemplate(this.template_name);
-        template.find(".facet-properties .facet-edit-body").append(form);
+        template.find(".widget-edit-settings-body").empty().append(form);
 
         form.submit(function() {return false;});
 
-
-        dialog.empty().append(template);
-
         this.setupEditor(config, template);
 
-        dialog.find("#facet_save_button").click(function() {
-           var model = template.data("model");
+        template.find("#widget_save_button").off("click").click(function() {
            model.config = config;
-           facetContainer.findWidget().trigger("edit-facet");
-           model.refresh();
-           facetContainer.getDialog().modal("hide");
+           template.trigger("edit-widget");
         });
-        dialog.modal("show");
         template.bind("update-preview", function() {
-            facet.updatePreview(template.find("#facet-preview"), config);
+            model.updatePreview(template.find(".widget-preview-body"), config);
         });
         template.trigger("update-preview");
     };
+
 
     function isFacetCandidate(prop) {
         return (prop.values > 1 && prop.values + prop.missing !== Freemix.exhibit.database.getAllItemsCount());
