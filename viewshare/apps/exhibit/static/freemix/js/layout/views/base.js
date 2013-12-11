@@ -2,8 +2,12 @@ define(["jquery",
         "exhibit",
         "display/views/base",
         "display/lenses/registry",
-        "freemix/js/freemix"],
-    function($, Exhibit, BaseView, LensRegistry, Freemix) {
+        "display/views/registry",
+        "layout/widget_editor",
+        "freemix/js/freemix",
+        "text!templates/layout/view-widget.html",
+        "text!templates/layout/view-menu.html"
+], function($, Exhibit, BaseView, LensRegistry, ViewRegistry, WidgetEditor, Freemix, widget_template, menu_template) {
     "use strict"
 
     BaseView.prototype.refreshEvent = "refresh-preview.view";
@@ -12,36 +16,29 @@ define(["jquery",
 
     BaseView.prototype.viewClass = Exhibit.TileView;
 
-    BaseView.prototype.showEditor = function(viewContainer) {
-        var view = this;
-        var config = $.extend(true, {}, view.config);
-        var template = Freemix.getTemplate("view-editor");
-        viewContainer = viewContainer || view.findContainer();
-        var dialog = viewContainer.getDialog();
-        template.data("model", this);
+    BaseView.prototype.showEditor = function(template) {
+        var model = this;
+        var config = $.extend(true, {}, model.config);
+
         var form = Freemix.getTemplate(this.template_name);
-        template.find(".view-properties .view-edit-body").append(form);
+        template.find(".widget-edit-settings-body").empty().append(form);
 
         form.submit(function() {return false;});
 
 
         this.setupEditor(config, template);
 
-        dialog.empty().append(template);
-        dialog.find("#view_save_button").click(function() {
-           var model = template.data("model");
+        template.find("#widget_save_button").off("click").click(function() {
            model.config = config;
-           viewContainer.findWidget().trigger("edit-view");
-           viewContainer.getDialog().modal("hide");
+           template.trigger("edit-widget");
 
-           view.findWidget().find("span.view-label").text(model.config.name);
+           model.findWidget().find("span.view-label").text(model.config.name);
            model.select();
            
         });
-        dialog.modal("show");
 
         template.bind(this.refreshEvent, function() {
-            view.updatePreview(template.find("#view-preview"), config);
+            model.updatePreview(template.find(".widget-preview-body"), config);
         });
 
         template.trigger(this.refreshEvent);
@@ -65,14 +62,7 @@ define(["jquery",
 
     BaseView.prototype.generateWidget = function() {
          var view = this;
-         return $("<li class='view'>" +
-                  "<a href='#'>" + 
-                  "<i class='fa fa-arrows'></i>" +
-                  "<span class='view-label'></span>" +
-                  "<i class='fa fa-times delete-button'></i>" +
-                  "</a>" + 
-                  "</li>")
-
+         return $(widget_template)
             .attr("id", view.config.id)
             .find("span.view-label").text(view.config.name).end()
             .data("model", view)
@@ -98,9 +88,22 @@ define(["jquery",
         $(".view-set>li.view", this.getContainer()).removeClass("active");
         control.addClass("active");
         this.updatePreview(content, this.config);
-        content.prepend("<div class='view-menu'><div class='row-fluid'><div class='span12'><div class='pull-right'><a href='#' class='btn btn-small' title='Edit this view'><i class='fa fa-edit fa-lg'></i> Edit</a></div></div></div></div>");
-        content.find(".view-menu a").click(function() {
-            view.showEditor();
+        content.prepend(menu_template);
+        content.find(".view-menu a").off("click").click(function() {
+            var editor = new WidgetEditor({
+                "title": "Add View",
+                "registry": ViewRegistry,
+                "element": view.findContainer().getDialog(),
+                "switchable": false,
+                "model": view
+            });
+
+            editor.render();
+            view.findContainer().getDialog().modal("show");
+            view.findContainer().getDialog().one("edit-widget", function() {
+                view.findContainer().getDialog().modal("hide");
+                view.select();
+            });
             return false;
         });
     };

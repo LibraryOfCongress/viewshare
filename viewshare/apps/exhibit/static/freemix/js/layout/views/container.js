@@ -2,9 +2,11 @@ define(["jquery",
         "display/views/registry",
         "display/facets/registry",
         "display/lenses/registry",
+        "layout/widget_editor",
         "freemix/js/freemix",
         "jquery.uuid"],
-    function($, ViewRegistry, FacetRegistry, LensRegistry, Freemix) {    "use strict";
+    function($, ViewRegistry, FacetRegistry, LensRegistry, WidgetEditor, Freemix) {
+    "use strict";
 
     var Container = function (id) {
         if (id) {
@@ -45,23 +47,22 @@ define(["jquery",
 
     Container.prototype.getPopupContent = function() {
         var container = this;
+        this._dialog.empty();
+        var editor = new WidgetEditor({
+            "title": "Add View",
+            "registry": ViewRegistry,
+            "element": container._dialog,
+            "switchable": true
+        });
 
-        var chooserThumbnails = $("<div><div class='modal-header'><button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button><h3 id='addWidgetModalLabel'>Select View Widget</h3></div></div>");
+        editor.render();
 
+        this._dialog.one("edit-widget", function(evt) {
+            var model = editor.model;
+            this.modal("hide");
+            container.addView(model);
+        }.bind(this._dialog));
 
-        $("<div class='chooser modal-body'></div>")
-            .freemixThumbnails(ViewRegistry.prototypes, function(View) {
-                var view = new View();
-                if (!view.config.id) {
-                    view.config.id = $.make_uuid();
-                }
-
-                container.findWidget().one("edit-view", function() {
-                    container.addView(view);
-                });
-                view.showEditor(container);
-            }).appendTo(chooserThumbnails);
-        return chooserThumbnails;
     };
 
     return Container;

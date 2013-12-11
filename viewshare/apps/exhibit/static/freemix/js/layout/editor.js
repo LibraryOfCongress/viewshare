@@ -34,32 +34,6 @@ define(["jquery",
              Freemix) {
     "use strict";
 
-    $.fn.freemixThumbnails = function(items, clickHandler) {
-        return this.each(function() {
-            var list = $("<ul class='thumbnails'></ul>");
-            $.each(items,function(key, type) {
-                var proto = type.prototype;
-                var li = $("<li class='span2'></li>");
-                var img = "<img src='" + proto.thumbnail +
-                    "' alt='" + proto.label + "' title='" + proto.label + "'/>";
-                var label = $("<legend class='chooser-item-name'>" +
-                                    proto.label + "</legend>");
-                if (proto.isAvailable()) {
-                    var body = $("<a class='thumbnail' href='' title='" + proto.label + "'></a>").append(img).append(label);
-                    body.click(function(e) {
-                            e.preventDefault();
-                            clickHandler(type);
-                        });
-                    li.append(body);
-                } else {
-                    li.addClass("disabled");
-                    li.append(img).append(label);
-                }
-                li.appendTo(list);
-            });
-            list.appendTo($(this));
-        });
-    };
     var add_view_button = Handlebars.compile(add_view_button_template);
     var add_view_modal = Handlebars.compile(add_view_modal_template);
     var add_facet_button = Handlebars.compile(add_facet_button_template);

@@ -53,32 +53,12 @@ define(["jquery",
 
         editor.render();
 
-        this._dialog.one("edit-widget", function(evt, facet) {
+        this._dialog.one("edit-widget", function(evt) {
             var model = editor.model;
             this.modal("hide");
             container.addFacet(model);
         }.bind(this._dialog));
 
-//        this._dialog.one("hide", function() {
-//            editor.destroy();
-//        });
-//
-
-//        var chooserThumbnails = $("<div><div class='modal-header'><button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button><h3 id='addWidgetModalLabel'>Select Facet Widget</h3></div></div>");
-//
-//        $("<div class='chooser modal-body'></div>").freemixThumbnails(FacetRegistry.prototypes, function(Facet) {
-//            var facet = new Facet();
-//
-//            if (!facet.config.id) {
-//                facet.config.id = $.make_uuid();
-//            }
-//            container.findWidget().one("edit-facet", function() {
-//                container.addFacet(facet);
-//            });
-//            facet.showEditor(container);
-//        }).appendTo(chooserThumbnails);
-//
-//        return chooserThumbnails;
     };
 
     return Container;
