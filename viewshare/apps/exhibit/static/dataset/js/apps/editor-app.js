@@ -2,6 +2,7 @@
 define(
     [
         'jquery',
+        'models/augmentation-support-issue',
         'models/property-collection',
         'views/augmentation-support-issue-view',
         'views/editor-view',
@@ -9,6 +10,7 @@ define(
         'views/notification-view'
     ], function (
         $,
+        AugmentationSupportIssue,
         PropertyCollection,
         AugmentationSupportIssueView,
         EditorView,
@@ -27,9 +29,12 @@ define(
             model: properties,
             $el: $('#editor')});
         var augmentModal = new ModalAugmentView({model: properties});
+        var augmentationError = new AugmentationSupportIssue({
+            email: ''
+        });
         var augmentationErrorView = new AugmentationSupportIssueView({
             $el: undefined,
-            model: undefined
+            model: augmentationError
         });
         // set up notifications
         notificationView.addSubscription(
