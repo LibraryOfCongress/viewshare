@@ -8,9 +8,11 @@ define(['jquery', 'observer'], function ($, Observer) {
      * @param {string} options.contactType - 'email'|'phone'
      * @param {string} options.contactEmail - contact's email address
      * @param {string} options.contactPhone - contact's phone number
-     * @param {string} options.profileJSON - JSON of related field
-     * @param {string} options.fieldName - label of related field
      * @param {string} options.comments - additional comments
+     * @param {string} options.compositeName - name of failed augmentation
+     * @param {string} options.compositeType - type of failed augmentation
+     * @param {array} options.compositeProperties - composites of
+     * failed augmentation
      */
     var AugmentationSupportIssueModel = function(options) {
         this.Observer = new Observer().Observer;
@@ -22,9 +24,10 @@ define(['jquery', 'observer'], function ($, Observer) {
             this.contactType = options.contactType || 'email';
             this.contactEmail = options.contactEmail;
             this.contactPhone = options.contactPhone;
-            this.profileJSON = options.profileJSON || '{}';
-            this.fieldName = options.fieldName;
             this.comments = options.comments;
+            this.compositeName = options.compositeName;
+            this.compositeType = options.compositeType;
+            this.compositeProperties = options.compositeProperties;
         },
 
         /** Send this Property's attributes to the server to be saved */
@@ -53,15 +56,22 @@ define(['jquery', 'observer'], function ($, Observer) {
                 {status: textStatus, error: error});
         },
 
+        augmentDataFailureHandler: function(failedComposite) {
+            this.compositeName = failedComposite.label;
+            this.compositeType = failedComposite.augmentation;
+            this.compositeProperties = failedComposite.composite;
+        },
+
         /** Return a simple object representation of this Property */
         toJSON: function() {
             var jsonified = {};
             jsonified.contact_type = this.contactType;
             jsonified.contact_email = this.contactEmail;
             jsonified.contact_phone = this.contactPhone;
-            jsonified.profile_json = this.profileJSON;
-            jsonified.field_name = this.fieldName;
             jsonified.comments = this.comments;
+            jsonified.compositeName = this.compositeName;
+            jsonified.compositeType = this.compositeType;
+            jsonified.compositeProperties = this.compositeProperties;
             return jsonified;
         }
     });

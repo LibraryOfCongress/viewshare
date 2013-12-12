@@ -211,8 +211,8 @@ define(
          * This is useful for other models or views that need to bubble
          * up an augmentDataFailure event.
          */
-        publishAugmentDataFailure: function(failure) {
-            this.Observer('augmentDataFailure').publish(failure);
+        publishAugmentDataFailure: function(failedComposite) {
+            this.Observer('augmentDataFailure').publish(failedComposite);
         }
 
     });

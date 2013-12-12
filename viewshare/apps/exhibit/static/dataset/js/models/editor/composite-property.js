@@ -111,8 +111,7 @@ define(
                     setTimeout(this.augmentDataSuccess.bind(this), 5000);
                 } else {
                     // Server has failed gracefully unable to connect to Akara
-                    this.Observer('augmentDataFailure').publish(
-                        {status: textStatus, error: successJSON});
+                    this.augmentDataFailure(xhr, textStatus);
                 }
             } else {
                 // something unexpected happened
@@ -131,8 +130,7 @@ define(
          */
         augmentStatusFailure: function(jqxhr, textStatus, error) {
             if (this.statusFailureCountdown === 1) {
-                this.Observer('augmentDataFailure').publish(
-                    {status: textStatus, error: error});
+                    this.augmentDataFailure(jqxhr, textStatus, error);
             } else if (this.statusFailureCountdown === undefined) {
                 this.statusFailureCountdown = 2;
                 setTimeout(this.augmentDataSuccess.bind(this), 5000);
@@ -144,9 +142,7 @@ define(
 
         /** Failed while sending property attributes to the server */
         augmentDataFailure: function(jqxhr, textStatus, error) {
-            this.Observer('augmentDataFailure').publish(
-                {status: textStatus, error: error}
-            );
+            this.Observer('augmentDataFailure').publish(this);
         },
 
         /**

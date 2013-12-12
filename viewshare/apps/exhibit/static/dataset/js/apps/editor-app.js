@@ -32,6 +32,9 @@ define(
         var augmentationError = new AugmentationSupportIssue({
             email: ''
         });
+        properties.Observer('augmentDataFailure').subscribe(
+            augmentationError.augmentDataFailureHandler.bind(augmentationError)
+        );
         var augmentationErrorView = new AugmentationSupportIssueView({
             $el: undefined,
             model: augmentationError
