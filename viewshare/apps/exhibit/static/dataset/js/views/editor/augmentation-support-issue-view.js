@@ -42,13 +42,13 @@ define(
             this.$el.find('a').on('click', this.showFormHandler.bind(this));
             this.$el.find('#augCreateIssue').on(
                 'click', this.submitIssueHandler.bind(this));
-            this.$contactInput = this.$el.find('#augContactInput')
+            this.$contactInput = this.$el.find('#augContactInput');
             this.$contactInput.on('change', this.changeContactHandler.bind(this));
-            this.$emailInput = this.$el.find('#augEmailInput')
+            this.$emailInput = this.$el.find('#augEmailInput');
             this.$emailInput.on('change', this.changeEmailHandler.bind(this));
-            this.$phoneInput = this.$el.find('#augPhoneInput')
+            this.$phoneInput = this.$el.find('#augPhoneInput');
             this.$phoneInput.on('change', this.changePhoneHandler.bind(this));
-            this.$commentsInput = this.$el.find('#augCommentsInput')
+            this.$commentsInput = this.$el.find('#augCommentsInput');
             this.$commentsInput.on('change', this.changeCommentsHandler.bind(this));
         },
 

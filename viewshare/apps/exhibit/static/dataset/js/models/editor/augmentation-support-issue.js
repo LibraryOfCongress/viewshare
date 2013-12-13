@@ -9,9 +9,9 @@ define(['jquery', 'observer'], function ($, Observer) {
      * @param {string} options.contactEmail - contact's email address
      * @param {string} options.contactPhone - contact's phone number
      * @param {string} options.comments - additional comments
-     * @param {string} options.compositeName - name of failed augmentation
-     * @param {string} options.compositeType - type of failed augmentation
-     * @param {array} options.compositeProperties - composites of
+     * @param {string} options.label - name of failed augmentation
+     * @param {string} options.type - type of failed augmentation
+     * @param {array} options.composite - composites of
      * failed augmentation
      */
     var AugmentationSupportIssueModel = function(options) {
@@ -25,9 +25,9 @@ define(['jquery', 'observer'], function ($, Observer) {
             this.contactEmail = options.contactEmail;
             this.contactPhone = options.contactPhone;
             this.comments = options.comments;
-            this.compositeName = options.compositeName;
-            this.compositeType = options.compositeType;
-            this.compositeProperties = options.compositeProperties;
+            this.label = options.label;
+            this.type = options.type;
+            this.composite = options.composite;
         },
 
         /** Send this Property's attributes to the server to be saved */
@@ -57,9 +57,9 @@ define(['jquery', 'observer'], function ($, Observer) {
         },
 
         augmentDataFailureHandler: function(failedComposite) {
-            this.compositeName = failedComposite.label;
-            this.compositeType = failedComposite.augmentation;
-            this.compositeProperties = failedComposite.composite;
+            this.label = failedComposite.label;
+            this.type = failedComposite.type;
+            this.composite = failedComposite.composite;
         },
 
         /** Return a simple object representation of this Property */
@@ -69,9 +69,9 @@ define(['jquery', 'observer'], function ($, Observer) {
             jsonified.contact_email = this.contactEmail;
             jsonified.contact_phone = this.contactPhone;
             jsonified.comments = this.comments;
-            jsonified.compositeName = this.compositeName;
-            jsonified.compositeType = this.compositeType;
-            jsonified.compositeProperties = this.compositeProperties;
+            jsonified.label = this.label;
+            jsonified.type = this.type;
+            jsonified.composite = this.composite;
             return jsonified;
         }
     });

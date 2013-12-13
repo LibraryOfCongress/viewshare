@@ -1,22 +1,22 @@
-import logging
+import json
 from urllib2 import urlopen
 from urlparse import urljoin
 from django.conf import settings
 from django.core.cache import cache
 from django.core.urlresolvers import reverse
+from django.http import HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, render
 from django.template import loader, RequestContext
 from django.views.generic import View
 
 from viewshare.apps.support.backends import get_support_backend
-from viewshare.utilities import get_site_url, get_user
+from viewshare.utilities import get_site_url
 
+from viewshare.apps.upload.models import DataSource
 from viewshare.apps.upload.transform import AKARA_URL_PREFIX
 
 from viewshare import __version__ as viewshare_version
 from viewshare.apps.support import forms
-
-logger = logging.getLogger(__name__)
 
 AKARA_VERSION_URL = getattr(settings, "AKARA_VERSION_URL",
                             urljoin(AKARA_URL_PREFIX,
@@ -37,6 +37,7 @@ def cache_akara_version():
         version = "Unknown"
     cache.set("akara_version", version, 60)
     return version
+
 
 class SupportFormView(View):
     """
@@ -64,7 +65,11 @@ class SupportFormView(View):
         return render(request, self.create_template, {'form': form})
 
     def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
+        try:
+            json_post = json.loads(request.body)
+        except ValueError:
+            return HttpResponseBadRequest('Not a JSON document')
+        form = self.form_class(json_post)
         if form.is_valid():
             return self.create_issue(request, form, *args, **kwargs)
         return render(request, self.create_template, {'form': form})
@@ -80,7 +85,7 @@ class SupportFormView(View):
                 viewshare_version,
                 get_akara_version(),
                 AKARA_URL_PREFIX,)
-        system_info = '%s %s - Freemix %s - Akara %s - Akara Root %s' % info
+        system_info = '%s - Viewshare %s - Akara %s - Akara Root %s' % info
 
         return dict(form.cleaned_data, **{
             'submitting_user_name': request.user.username,
@@ -118,20 +123,19 @@ class AugmentationIssueView(SupportFormView):
     tracker = "augmentation"
 
     def issue_subject(self, context):
-        return "%s requests augmentation diagnosis for %s" % (
-            context.get("submitting_user_name"),
-            context.get("dataset")
-        )
+        return "%s requests augmentation diagnosis" % (
+            context.get("submitting_user_name"))
 
     def generate_context(self, request, form, *args, **kwargs):
-        support = get_user(settings.SUPPORT_USER)
-
-        profile_json = form.cleaned_data.get("profile_json")
-
-        profile = parse_profile_json(support, profile_json)
+        augmented_field_label = form.cleaned_data.get("label")
+        augmented_field_type = form.cleaned_data.get("type")
+        augmented_field_composite = form.cleaned_data.get("composite")
 
         c = super(AugmentationIssueView, self).generate_context(request, form)
-        return dict(c, **{"dataset": get_site_url(profile.get_absolute_url())})
+        return dict(c, **{
+            "augmented_field_label": augmented_field_label,
+            "augmented_field_type": augmented_field_type,
+            "augmented_field_composite": augmented_field_composite})
 
 
 class DataLoadIssueView(SupportFormView):
@@ -164,5 +168,3 @@ class DataLoadUploadIssueView(DataLoadIssueView):
     def issue_subject(self, context):
         username = context.get("submitting_user_name")
         return "%s requests data upload support" % username
-
-
