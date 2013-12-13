@@ -7,7 +7,7 @@
 {% load compress %}
 {% load humanize %}
 {% load require %}
-{% block head_title %}{% blocktrans %}Layout{% endblocktrans %}{% endblock %}
+{% block head_title %}{% blocktrans %}Build{% endblocktrans %}{% endblock %}
 
 {% block rtab_id %}id="builder_tab"{% endblock %}
 {% block body_class %}attraction{% endblock %}
@@ -95,7 +95,7 @@
           <div class="btn-toolbar pull-right">
             <div class="btn-group" >
               <a class="btn btn-small btn-primary" id="edit_button" href="{% url 'exhibit_property_editor' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Edit" %}</a>
-              <button class="btn btn-small btn-primary" id="builder_button" data-toggle="collapse" data-target="#build">{% trans "Layout" %}</button>
+              <button class="btn btn-small btn-primary" id="builder_button" data-toggle="collapse" data-target="#build">{% trans "Build" %}</button>
               <button class="btn btn-small btn-primary" id="preview_button" data-toggle="collapse" data-target="#preview">{% trans "Preview" %}</button>
             </div>
             <div class="exhibit-actions btn-group">

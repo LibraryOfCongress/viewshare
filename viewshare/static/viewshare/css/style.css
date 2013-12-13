@@ -545,69 +545,6 @@ ul.responses li.thread-8 {
     margin: 10px 10px 10px 10px;
 }
 
-/* facet and widget edit */
-
-.widget-edit-dialog .view-facet-option .view-facet-label {
-    display:block;		    
-}
-
-.widget-edit-dialog .facet-properties, .widget-edit-dialog .facet-preview {
-     height: 500px;		
-     overflow: auto;
-}
-
-.widget-edit-dialog .view-widget-option .view-widget-label {
-    display:block;		    
-}
-
-.widget-edit-dialog .view-properties, .widget-edit-dialog .view-preview {
-     height: 800px;		
-     overflow: auto;
-}
-
-.widget-edit-dialog .view-edit-body #view-preview {
-     height: 800px;		
-     overflow: auto;
-}
-
-.widget-edit-dialog .widget-edit-nav {
-     max-width: 120px;
-     float:left;
-}		    
-
-.widget-edit-dialog .widget-edit-settings {
-     width: 520px;
-     float:left;
-}		    
-
-.widget-edit-dialog .widget-edit-preview {
-  padding-left: 640px;
-}		    
-
-.view-widget-option-scatter-plot i {
- margin-left: 5px;
-}
-
-.view-properties .accordion-inner {
-  padding: 0px 0px;
-  margin-left: -20px;
-  border-top: none;
-}
-
-.view-properties .accordion-heading .accordion-toggle {
-  padding: 0px 0px;
-}
-
-.view-properties .accordion-group {
-  border: none;
-}
-
-.view-properties .lens-settings-label {
-    padding-bottom: 0px;
-    padding-top: 5px;
-    margin-bottom: 20px;
-    margin-left: -10px;
-}
 
 /* profile */
 
