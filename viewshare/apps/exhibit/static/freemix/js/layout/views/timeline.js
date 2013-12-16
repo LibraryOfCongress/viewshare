@@ -25,15 +25,9 @@ define(["jquery",
         this._setupSelectPropertyHandler(config, template, top_band, "topBandUnit");
         this._setupSelectPropertyHandler(config, template, bottom_band, "bottomBandUnit");
 
-
-        var db = Freemix.exhibit.database;
-
-        var dates = db.getPropertiesWithTypes(this.propertyTypes);
-        var colors = db.getAllPropertyObjects();
-
-        this._setupPropertySelect(config, template, start, "startDate", dates);
-        this._setupPropertySelect(config, template, end, "endDate", dates, true);
-        this._setupPropertySelect(config, template, color, "colorKey", colors, true);
+        this._setupPropertySelect(config, template, start, "startDate", this.propertyTypes);
+        this._setupPropertySelect(config, template, end, "endDate", this.propertyTypes, true);
+        this._setupPropertySelect(config, template, color, "colorKey", [], true);
         this._setupLensEditor(config, template);
 
 

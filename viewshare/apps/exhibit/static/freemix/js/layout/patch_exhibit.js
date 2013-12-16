@@ -15,9 +15,8 @@ define(["jquery", "scripts/data/database/local"],
 
     LocalImpl.prototype.getPropertiesWithTypes = function(types) {
         var index = this._freemix_type_index || {};
-        var db = this;
         if ($.isEmptyObject(index)) {
-           $.each(this.getAllPropertyObjects(), function(inx,prop) {
+           $.each(this.getPropertyObjects(), function(inx,prop) {
                var type = prop.getValueType();
                index[type] = index[type] || [];
                index[type].push(prop);
@@ -30,8 +29,8 @@ define(["jquery", "scripts/data/database/local"],
         }));
     };
 
-    LocalImpl.prototype.getFilteredProperties = function(filter) {
-        filter = filter || filtered_properties;
+    LocalImpl.prototype.getFilteredProperties = function(f) {
+        var filter = (f || []).concat(filtered_properties);
         return $.map(this.getAllProperties(), function(key, index) {
             if (filter.indexOf(key) != -1) {
                 return null;
@@ -40,12 +39,12 @@ define(["jquery", "scripts/data/database/local"],
         });
     };
 
-    LocalImpl.prototype.getAllPropertyObjects = function() {
+
+
+    LocalImpl.prototype.getPropertyObjects = function(properties) {
         var database = this;
-        return $.map(database.getAllProperties(),function(key, index) {
-            if (filtered_properties.indexOf(key) != -1) {
-                return null;
-            }
+        properties = properties || this.getFilteredProperties();
+        return $.map(properties,function(key, index) {
             return database.getProperty(key);
         });
     };

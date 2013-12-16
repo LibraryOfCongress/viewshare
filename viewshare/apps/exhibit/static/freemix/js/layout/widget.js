@@ -1,7 +1,10 @@
 define(["jquery",
         "freemix/js/widget",
-        "ui.multiselect"],
-    function ($, Widget) {
+        "freemix/js/freemix",
+        "ui.multiselect",
+        "freemix/js/exhibit_utilities",
+        "layout/patch_exhibit"],
+function ($, Widget, Freemix) {
     "use strict";
 
     function make_option(property_name, selected) {
@@ -15,18 +18,62 @@ define(["jquery",
         return option;
     }
 
-    Widget.prototype._setupPropertySelect = function(config, template, selector, key, collection, nullable) {
-        this._populatePropertySelect(selector, collection, nullable);
+    Widget.prototype._setupPropertySelect = function(config, template, selector, key, types, nullable, exclude_other_types) {
+        this._populatePropertySelect(selector, types, nullable, exclude_other_types);
         this._setupSelectPropertyHandler(config, template, selector, key);
     };
 
-    Widget.prototype._populatePropertySelect = function(selector, collection, nullable) {
-        $.each(collection, function(inx, value) {
-            var option = $("<option></option>");
-            option.attr("value", value.getID());
-            option.text(value.getLabel());
-            selector.append(option);
-        });
+    Widget.prototype._populatePropertySelect = function(selector, types, nullable, exclude_other_types) {
+        var optgroup;
+        var filter = [];
+        var db = Freemix.exhibit.database;
+
+        if (types.length > 0) {
+            for (var inx = 0 ; inx < types.length ; inx++) {
+                var type = types[inx];
+                var collection = db.getPropertiesWithTypes([type]);
+                optgroup = $("<optgroup>");
+                optgroup.attr("label", type);
+
+                if (collection.length > 0) {
+
+                    $.each(collection, function(inx, value) {
+                        var option = $("<option></option>");
+                        option.attr("value", value.getID());
+                        option.text(value.getLabel());
+                        optgroup.append(option);
+                        filter.push(value.getID());
+                    });
+                }
+
+                selector.append(optgroup);
+            }
+
+            if (!exclude_other_types) {
+                var filtered = db.getPropertyObjects(db.getFilteredProperties(filter));
+                if (filtered.length > 0) {
+                    optgroup = $("<optgroup>");
+                    optgroup.attr("label", "others");
+                    $.each(filtered, function(inx, value) {
+                        var option = $("<option></option>");
+                        option.attr("value", value.getID());
+                        option.text(value.getLabel());
+                        optgroup.append(option);
+                        filter.push(value.getID());
+                    });
+                    selector.append(optgroup);
+                }
+            }
+        } else {
+            var collection = db.getPropertyObjects();
+            $.each(collection, function(inx, value) {
+                var option = $("<option></option>");
+                option.attr("value", value.getID());
+                option.text(value.getLabel());
+                selector.append(option);
+            });
+        }
+
 
         if (nullable) {
             selector.prepend("<option value=''></option>");
@@ -45,7 +92,7 @@ define(["jquery",
             template.trigger(view.refreshEvent);
          }).val(config[key]);
 
-        if (!selector.val()) {
+        if (!selector.val() && selector.get(0).options.length > 0) {
            selector.get(0).options[0].selected = true;
         }
     };
@@ -98,9 +145,5 @@ define(["jquery",
     };
 
     Widget.prototype.propertyTypes = ["text", "image", "currency", "url", "location", "date", "number"];
-
-    Widget.prototype.isAvailable = function() {
-        return Freemix.exhibit.database.getPropertiesWithTypes(this.propertyTypes).length > 0;
-    };
 
 });

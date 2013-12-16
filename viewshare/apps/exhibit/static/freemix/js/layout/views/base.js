@@ -37,7 +37,7 @@ define(["jquery",
            
         });
 
-        template.bind(this.refreshEvent, function() {
+        template.off(this.refreshEvent).bind(this.refreshEvent, function() {
             model.updatePreview(template.find(".widget-preview-body"), config);
         });
 
@@ -154,8 +154,7 @@ define(["jquery",
     BaseView.prototype._setupMultiPropertySortEditor = function(config, template) {
         var sort = template.find("#sort_property");
         var order = template.find("#sort_order");
-        var props = Freemix.exhibit.database.getAllPropertyObjects();
-        this._populatePropertySelect(sort, props, true);
+        this._populatePropertySelect(sort, [], true);
         this._setupSelectMultiPropertyHandler(config, template, sort, "orders");
         this._setupSelectMultiPropertyHandler(config, template, order, "directions");
     };

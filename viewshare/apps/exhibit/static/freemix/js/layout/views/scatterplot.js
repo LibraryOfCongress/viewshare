@@ -19,13 +19,11 @@ define(["jquery",
         this._setupViewForm(config, template);
         this._setupLabelEditor(config, template);
 
-        var numbers = Freemix.exhibit.database.getPropertiesWithTypes(["number"]);
-
         var xaxis = template.find("#xaxis_property");
         var yaxis = template.find("#yaxis_property");
 
-        this._setupPropertySelect(config, template, xaxis, "xaxis", numbers);
-        this._setupPropertySelect(config, template, yaxis, "yaxis", numbers);
+        this._setupPropertySelect(config, template, xaxis, "xaxis", ["number"]);
+        this._setupPropertySelect(config, template, yaxis, "yaxis", ["number"]);
         xaxis.change();
         yaxis.change();
 

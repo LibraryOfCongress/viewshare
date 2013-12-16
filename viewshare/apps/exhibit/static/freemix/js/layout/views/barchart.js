@@ -15,11 +15,11 @@ define(["jquery",
     View.prototype.setupEditor = function(config, template) {
         this._setupViewForm(config, template);
         this._setupLabelEditor(config, template);
-        var props = Freemix.exhibit.database.getAllPropertyObjects();
+        var props = Freemix.exhibit.database.getPropertyObjects();
 
         var property_list = template.find("#property_list");
         //this._setupPropertyMultiSelect(config, template, property_list, "properties", true);
-        this._setupPropertySelect(config, template, property_list, "grouping", props)
+        this._setupPropertySelect(config, template, property_list, "grouping", [])
         property_list.change();
 
         this._setupLensEditor(config, template);

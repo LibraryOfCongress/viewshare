@@ -24,15 +24,13 @@ define(["jquery", "display/lenses/base"],
 
     BaseLens.prototype._setupTitlePropertyEditor = function(config) {
         config = config||this.config;
-        var links = Freemix.exhibit.database.getPropertiesWithTypes(["image", "url"]);
-        var titles = Freemix.exhibit.database.getAllPropertyObjects();
         var content = this.getEditor();
         var title = content.find("#title_property");
         var title_link = content.find("#title_link_property");
 
-        this._setupPropertySelect(config, content, title, "title", titles, true);
+        this._setupPropertySelect(config, content, title, "title", [], true);
         title.change(function() {
-             if (title.val() && links.length > 0) {
+             if (title.val() && title_link.get(0).options.length > 0) {
                  title_link.removeAttr("disabled");
              } else {
                  title_link.attr("disabled", true);
@@ -41,10 +39,9 @@ define(["jquery", "display/lenses/base"],
              }
         });
 
-        if (links.length > 0) {
-             this._setupPropertySelect(config, content, title_link, "titleLink", links, true);
-        } else {
-             title_link.attr("disabled", true);
+        this._setupPropertySelect(config, content, title_link, "titleLink", ["image", "url"], true);
+        if (title_link.get(0).options.length == 0) {
+            title_link.attr("disabled", true);
         }
         title.change();
         title_link.change();

@@ -17,10 +17,8 @@ define(["jquery",
 
         this._setupLabelEditor(config, template);
 
-        var props = Freemix.exhibit.database.getAllPropertyObjects();
-
         var sort = template.find("#sort_property");
-        this._setupPropertySelect(config, template, sort, "sortProperty", props, true);
+        this._setupPropertySelect(config, template, sort, "sortProperty", [], true);
 
         var sort_order = template.find("#sort_order");
         sort_order.val(config.asc.toString());

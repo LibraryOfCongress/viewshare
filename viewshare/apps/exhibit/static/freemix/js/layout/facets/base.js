@@ -74,7 +74,7 @@ define(["jquery",
            model.config = config;
            template.trigger("edit-widget");
         });
-        template.bind("update-preview", function() {
+        template.off("update-preview").bind("update-preview", function() {
             model.updatePreview(template.find(".widget-preview-body"), config);
         });
         template.trigger("update-preview");
@@ -132,7 +132,7 @@ define(["jquery",
     BaseFacet.prototype._generatePropertyList = function(types) {
         var properties = [];
         var database = Freemix.exhibit.database;
-        var proplist = types? database.getPropertiesWithTypes(types) : database.getAllPropertyObjects();
+        var proplist = types? database.getPropertiesWithTypes(types) : database.getPropertyObjects();
         $.each(proplist, function(inx, prop) {
             properties.push(getExpressionCount(expression(prop.getID()), prop.getLabel()));
         });

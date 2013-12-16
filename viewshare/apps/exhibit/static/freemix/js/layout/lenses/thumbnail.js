@@ -16,7 +16,7 @@ define(["jquery", "display/lenses/thumbnail"],
         var image = content.find("#image_property");
 
         // Set up image property selector
-        this._setupPropertySelect(image, "image", images);
+        this._setupPropertySelect(image, "image", ["image"]);
         this._setupTitlePropertyEditor();
         image.change();
     };

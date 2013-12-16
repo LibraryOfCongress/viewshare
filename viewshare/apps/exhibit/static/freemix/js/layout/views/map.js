@@ -22,12 +22,11 @@ define(["jquery",
 
         var db = Freemix.exhibit.database;
         var latlng = template.find("#latlng_property");
-        var points = db.getPropertiesWithTypes(["location"]);
-        this._setupPropertySelect(config, template, latlng, "latlng", points);
+        this._setupPropertySelect(config, template, latlng, "latlng", ['location']);
         latlng.change();
 
         var color = template.find("#color_property");
-        this._setupPropertySelect(config, template, color, "colorKey", Freemix.exhibit.database.getAllPropertyObjects(), true);
+        this._setupPropertySelect(config, template, color, "colorKey", [], true);
         color.change();
 
         var zoom = template.find("#zoom_level");
