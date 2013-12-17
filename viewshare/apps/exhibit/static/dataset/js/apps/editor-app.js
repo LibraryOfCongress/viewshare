@@ -19,18 +19,20 @@ define(
     ) {
     'use strict';
     var demo = function() {
-        var data_url = $("link[rel='exhibit/data']").attr("href");
-        var prop_url = $("link[rel='freemix/property_list']").attr("href");
+        var dataURL = $("link[rel='exhibit/data']").attr("href");
+        var propURL = $("link[rel='freemix/property_list']").attr("href");
+        var exhibitSlug = $("link[rel='exhibit/slug']").attr("href");
         var properties = new PropertyCollection({
-            dataURL: data_url,
-            propertiesURL: prop_url});
+            dataURL: dataURL,
+            propertiesURL: propURL});
         var notificationView = new NotificationView({$el: $('#notifications')});
         var editor = new EditorView({
             model: properties,
             $el: $('#editor')});
         var augmentModal = new ModalAugmentView({model: properties});
         var augmentationError = new AugmentationSupportIssue({
-            email: ''
+            email: '',
+            exhibitSlug: exhibitSlug
         });
         properties.Observer('augmentDataFailure').subscribe(
             augmentationError.augmentDataFailureHandler.bind(augmentationError)

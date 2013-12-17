@@ -1,4 +1,5 @@
 import json
+import uuid
 from urllib2 import urlopen
 from urlparse import urljoin
 from django.conf import settings
@@ -9,14 +10,13 @@ from django.shortcuts import get_object_or_404, render
 from django.template import loader, RequestContext
 from django.views.generic import View
 
-from viewshare.apps.support.backends import get_support_backend
-from viewshare.utilities import get_site_url
-
-from viewshare.apps.upload.models import DataSource
-from viewshare.apps.upload.transform import AKARA_URL_PREFIX
-
 from viewshare import __version__ as viewshare_version
 from viewshare.apps.support import forms
+from viewshare.apps.support.backends import get_support_backend
+from viewshare.apps.exhibit.models import DraftExhibit
+from viewshare.apps.upload.models import DataSource
+from viewshare.apps.upload.transform import AKARA_URL_PREFIX
+from viewshare.utilities import get_site_url, get_user
 
 AKARA_VERSION_URL = getattr(settings, "AKARA_VERSION_URL",
                             urljoin(AKARA_URL_PREFIX,
@@ -127,6 +127,23 @@ class AugmentationIssueView(SupportFormView):
             context.get("submitting_user_name"))
 
     def generate_context(self, request, form, *args, **kwargs):
+        exhibit_slug = form.cleaned_data.get("exhibit_slug")
+        # get Exhibit associated with this augmentation issue
+        exhibit = DraftExhibit.objects.get(slug=exhibit_slug)
+        # check that current user has access to this exhibit
+        if exhibit.owner.username != request.user.username:
+            return HttpResponseBadRequest()
+        # copy the exhibit for the support user
+        support = get_user(settings.SUPPORT_USER)
+        new_slug = str(uuid.uuid4())
+        exhibit.pk = None
+        exhibit.id = None
+        exhibit.owner = support
+        exhibit.slug = new_slug
+        exhibit.save()
+        old_exhibit = DraftExhibit.objects.get(slug=exhibit_slug)
+        old_exhibit.duplicate_properties(exhibit)
+
         augmented_field_label = form.cleaned_data.get("label")
         augmented_field_type = form.cleaned_data.get("type")
         augmented_field_composite = form.cleaned_data.get("composite")
@@ -135,7 +152,11 @@ class AugmentationIssueView(SupportFormView):
         return dict(c, **{
             "augmented_field_label": augmented_field_label,
             "augmented_field_type": augmented_field_type,
-            "augmented_field_composite": augmented_field_composite})
+            "augmented_field_composite": augmented_field_composite,
+            "exhibit_url": reverse(
+                'exhibit_property_editor', kwargs={
+                    'owner': support.username, 'slug': new_slug})
+        })
 
 
 class DataLoadIssueView(SupportFormView):

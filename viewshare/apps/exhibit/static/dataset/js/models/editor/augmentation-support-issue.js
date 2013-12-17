@@ -5,6 +5,7 @@ define(['jquery', 'observer'], function ($, Observer) {
     /**
      * Contains the data needed to create a support issue
      * in the event of an augmentation error
+     * @param {string} options.exhibitSlug - slug of problematic exhibit
      * @param {string} options.contactType - 'email'|'phone'
      * @param {string} options.contactEmail - contact's email address
      * @param {string} options.contactPhone - contact's phone number
@@ -21,6 +22,7 @@ define(['jquery', 'observer'], function ($, Observer) {
 
     $.extend(AugmentationSupportIssueModel.prototype, {
         initialize: function(options) {
+            this.exhibitSlug = options.exhibitSlug;
             this.contactType = options.contactType || 'email';
             this.contactEmail = options.contactEmail;
             this.contactPhone = options.contactPhone;
@@ -65,6 +67,7 @@ define(['jquery', 'observer'], function ($, Observer) {
         /** Return a simple object representation of this Property */
         toJSON: function() {
             var jsonified = {};
+            jsonified.exhibit_slug = this.exhibitSlug;
             jsonified.contact_type = this.contactType;
             jsonified.contact_email = this.contactEmail;
             jsonified.contact_phone = this.contactPhone;

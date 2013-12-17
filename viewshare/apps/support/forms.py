@@ -172,3 +172,6 @@ class AugmentationIssueForm(SupportIssueForm):
                                    "Any additional information about your "
                                    "data or the issue you are experiencing"
                                    " that could be helpful"))
+    exhibit_slug = forms.SlugField(required=True,
+                                label="Exhibit Slug",
+                                help_text=_("Slug for problematic Exhibit"))

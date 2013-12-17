@@ -128,6 +128,23 @@ class Exhibit(TimeStampedModel):
             "items": [records[key] for key in records.keys()]
         }
 
+    def duplicate_properties(self, new_exhibit):
+        """
+        Duplicate self.properties for ''new_exhibit''
+        """
+        from .serializers import ExhibitPropertyListSerializer
+        data = ExhibitPropertyListSerializer(self,
+                                             queryset=self.properties,
+                                             draft=True).data
+        out = ExhibitPropertyListSerializer(new_exhibit, data=data)
+        out.save()
+
+        query = PropertyData.objects.filter(exhibit_property__exhibit=self)
+        for t in query.values_list("exhibit_property__name", "json"):
+            p = new_exhibit.properties.get(name=t[0])
+            PropertyData(exhibit_property=p, json=json.loads(t[1])).save()
+        return new_exhibit
+
 
 class PublishedExhibit(Exhibit):
     """
@@ -162,17 +179,7 @@ class PublishedExhibit(Exhibit):
         if not created:
             return draft
 
-        from .serializers import ExhibitPropertyListSerializer
-        data = ExhibitPropertyListSerializer(self,
-                                             queryset=self.properties,
-                                             draft=True).data
-        out = ExhibitPropertyListSerializer(draft, data=data)
-        out.save()
-
-        query = PropertyData.objects.filter(exhibit_property__exhibit=self)
-        for t in query.values_list("exhibit_property__name", "json"):
-            p = draft.properties.get(name=t[0])
-            PropertyData(exhibit_property=p, json=json.loads(t[1])).save()
+        draft = self.duplicate_properties(draft)
         return draft
 
     def save(self, force_insert=False, force_update=False, using=None,
