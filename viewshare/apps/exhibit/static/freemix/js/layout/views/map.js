@@ -20,7 +20,6 @@ define(["jquery",
         this._setupViewForm(config, template);
         this._setupLabelEditor(config, template);
 
-        var db = Freemix.exhibit.database;
         var latlng = template.find("#latlng_property");
         this._setupPropertySelect(config, template, latlng, "latlng", ['location']);
         latlng.change();

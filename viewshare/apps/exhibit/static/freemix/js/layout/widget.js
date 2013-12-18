@@ -19,62 +19,72 @@ function ($, Widget, Freemix) {
     }
 
     Widget.prototype._setupPropertySelect = function(config, template, selector, key, types, nullable, exclude_other_types) {
-        this._populatePropertySelect(selector, types, nullable, exclude_other_types);
+        this._populatePropertySelect(selector, types, nullable);
         this._setupSelectPropertyHandler(config, template, selector, key);
     };
 
-    Widget.prototype._populatePropertySelect = function(selector, types, nullable, exclude_other_types) {
-        var optgroup;
+    function sorter(a,b) {
+        if (a.getLabel() < b.getLabel()) return -1;
+        if (a.getLabel() > b.getLabel()) return 1;
+        return 0;
+    }
+
+    Widget.prototype._generatePropertyList = function(types) {
         var filter = [];
-        var db = Freemix.exhibit.database;
+        var database = Freemix.exhibit.database;
 
-        if (types.length > 0) {
-            for (var inx = 0 ; inx < types.length ; inx++) {
-                var type = types[inx];
-                var collection = db.getPropertiesWithTypes([type]);
-                optgroup = $("<optgroup>");
-                optgroup.attr("label", type);
-
-                if (collection.length > 0) {
-
-                    $.each(collection, function(inx, value) {
-                        var option = $("<option></option>");
-                        option.attr("value", value.getID());
-                        option.text(value.getLabel());
-                        optgroup.append(option);
-                        filter.push(value.getID());
-                    });
-                }
-
-                selector.append(optgroup);
-            }
-
-            if (!exclude_other_types) {
-                var filtered = db.getPropertyObjects(db.getFilteredProperties(filter));
-                if (filtered.length > 0) {
-                    optgroup = $("<optgroup>");
-                    optgroup.attr("label", "others");
-                    $.each(filtered, function(inx, value) {
-                        var option = $("<option></option>");
-                        option.attr("value", value.getID());
-                        option.text(value.getLabel());
-                        optgroup.append(option);
-                        filter.push(value.getID());
-                    });
-                    selector.append(optgroup);
-                }
-            }
-        } else {
-            var collection = db.getPropertyObjects();
-            $.each(collection, function(inx, value) {
-                var option = $("<option></option>");
-                option.attr("value", value.getID());
-                option.text(value.getLabel());
-                selector.append(option);
-            });
+        var result = {
+            order: []
+        }
+        if ((types ||[]).length == 0) {
+            types = this.propertyTypes;
         }
 
+        for (var inx = 0 ; inx < types.length ; inx++) {
+            var type = types[inx];
+            result[type] = database.getPropertiesWithTypes([type]);
+            if (result[type].length > 0) {
+                result[type].sort(sorter);
+                filter = filter.concat($.map(result[type], function(v,i) {
+                    return v.getID();
+                }));
+                result["order"].push(type);
+            }
+        }
 
+        var filtered = database.getPropertyObjects(database.getFilteredProperties(filter));
+        filtered.sort(sorter);
+        result["others"] = filtered;
+        return result;
+    };
+
+    Widget.prototype._propertyRenderer = function(prop) {
+        return prop.getID();
+    }
+
+    Widget.prototype._buildOptionGroup = function(label, properties) {
+        var optgroup = $("<optgroup>");
+        optgroup.attr("label", label);
+        for (var inx = 0 ; inx < properties.length ; inx++) {
+            var prop = properties[inx];
+            var option = $("<option>");
+            option.attr("value", this._propertyRenderer(prop));
+            option.text(prop.getLabel());
+            optgroup.append(option);
+        }
+        return optgroup;
+    }
+
+    Widget.prototype._populatePropertySelect = function(selector, types, nullable) {
+        var properties = this._generatePropertyList(types);
+        for (var inx = 0 ; inx < properties.order.length ; inx++) {
+            var type = properties.order[inx];
+            selector.append(this._buildOptionGroup(type + " properties", properties[type]));
+        }
+
+        if (properties.others.length > 0) {
+            selector.append(this._buildOptionGroup("other properties", properties.others));
+        }
         if (nullable) {
             selector.prepend("<option value=''></option>");
         }

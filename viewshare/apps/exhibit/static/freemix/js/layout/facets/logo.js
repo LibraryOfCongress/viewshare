@@ -7,19 +7,20 @@ define(["jquery", "display/facets/logo", "exhibit"],
     Facet.prototype.template_name = "logo-facet-editor";
     Facet.prototype.icon_class = "fa fa-picture-o fa-3x";
 
-    Facet.prototype.setupEditor = function(config, template) {
+            
+    Facet.prototype._validate = function(config, template) {
+        if (config.src && config.src.length > 0) {
+            template.find("#widget_save_button").removeAttr("disabled").removeClass("disabled");
+            template.find(".help-inline").addClass("hidden").parent(".control-group").removeClass("warning");
 
-        function validate() {
-            if (config.src && config.src.length > 0) {
-                template.find("#widget_save_button").removeAttr("disabled").removeClass("disabled");
-                template.find(".help-inline").addClass("hidden").parent(".control-group").removeClass("warning");
-
-            } else {
-                template.find("#widget_save_button").attr("disabled", "disabled").addClass("disabled");
-                template.find(".help-inline").removeClass("hidden").parent(".control-group").addClass("warning");
-            }
-            template.trigger("update-preview");
+        } else {
+            template.find("#widget_save_button").attr("disabled", "disabled").addClass("disabled");
+            template.find(".help-inline").removeClass("hidden").parent(".control-group").addClass("warning");
         }
+        template.trigger(this.refreshEvent);
+    };
+            
+    Facet.prototype.setupEditor = function(config, template) {
 
         function updateSlider() {
             var slider = $("#logo-facet-slider", template);
@@ -44,10 +45,10 @@ define(["jquery", "display/facets/logo", "exhibit"],
         var alt = template.find("#id_alt");
         var href = template.find("#id_href");
         var size = template.find("#logo-facet-size");
-
+        var facet = this;
         src.change(function (event) {
             config.src = $(event.target).val();
-            validate();
+            facet._validate(config, template);
             updateSlider();
         });
 
@@ -55,13 +56,13 @@ define(["jquery", "display/facets/logo", "exhibit"],
 
         alt.change(function (event) {
             config.alt = $(event.target).val();
-            validate();
+            facet._validate(config, template);
         });
         alt.val(config.alt);
 
         href.change(function (event) {
             config.href = $(event.target).val();
-            validate();
+            facet._validate(config, template);
         });
         href.val(config.href);
 
@@ -72,7 +73,7 @@ define(["jquery", "display/facets/logo", "exhibit"],
         size.change(function (event) {
             config.width = $(event.target).val();
             slider.slider("value", config.width);
-            validate();
+            facet._validate(config, template);
         });
 
 
@@ -81,11 +82,11 @@ define(["jquery", "display/facets/logo", "exhibit"],
             slide:function (event, ui) {
                 size.val(ui.value);
                 config.width = ui.value;
-                validate();
+            facet._validate(config, template);
                 return true;
             }});
 
-        validate();
+        facet._validate(config, template);
         updateSlider();
 
     };

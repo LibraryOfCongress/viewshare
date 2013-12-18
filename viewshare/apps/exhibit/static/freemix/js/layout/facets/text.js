@@ -5,7 +5,6 @@ define(["jquery",
         function ($, Facet, Exhibit) {
         "use strict"
 
-    Facet.prototype.thumbnail = "/static/freemix/img/text-facet.png";
     Facet.prototype.icon_class = "fa fa-font fa-3x";
 
     Facet.prototype.label = "Text";
@@ -25,7 +24,7 @@ define(["jquery",
             .val(config.text || "")
             .keyup(function () {
                 config.text = $(this).val();
-                template.trigger("update-preview");
+                template.trigger(facet.refreshEvent);
             });
     };
 

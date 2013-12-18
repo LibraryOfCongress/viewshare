@@ -11,12 +11,11 @@ define(["jquery", "display/facets/search", "exhibit"],
 
     Facet.prototype.setupEditor = function(config, template) {
         var facet = this;
-
         var label = template.find("#facet_name");
         label.val(config.name);
         label.change(function() {
             config.name = label.val();
-            template.trigger("update-preview");
+            template.trigger(facet.refreshEvent);
         });
 
     };

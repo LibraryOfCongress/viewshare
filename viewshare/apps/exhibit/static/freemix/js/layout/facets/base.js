@@ -11,6 +11,9 @@ define(["jquery",
 
     var expression = function(property){return "." + property;};
 
+    BaseFacet.prototype.refreshEvent = "refresh-preview.facet";
+
+
     BaseFacet.prototype.facetClass = Exhibit.ListFacet;
 
     BaseFacet.prototype.findContainer = function() {
@@ -74,71 +77,15 @@ define(["jquery",
            model.config = config;
            template.trigger("edit-widget");
         });
-        template.off("update-preview").bind("update-preview", function() {
+        template.off(this.refreshEvent).bind(this.refreshEvent, function() {
             model.updatePreview(template.find(".widget-preview-body"), config);
         });
-        template.trigger("update-preview");
+        template.trigger(this.refreshEvent);
     };
 
-
-    function isFacetCandidate(prop) {
-        return (prop.values > 1 && prop.values + prop.missing !== Freemix.exhibit.database.getAllItemsCount());
+    BaseFacet.prototype._propertyRenderer = function(prop) {
+        return "." + prop.getID();
     }
-
-    function simpleSort(a, b) {
-        if (a.missing === b.missing) {
-            return a.values - b.values;
-        } else {
-            return a.missing - b.missing;
-        }
-    }
-
-    function sorter(a, b) {
-        var aIsCandidate = isFacetCandidate(a);
-        var bIsCandidate = isFacetCandidate(b);
-
-        if ((aIsCandidate && bIsCandidate) || (!aIsCandidate && !bIsCandidate)) {
-            return simpleSort(a, b);
-        }
-        return bIsCandidate ? 1: -1;
-    }
-
-    var expressionCache = {};
-
-    function getExpressionCount(expression, name) {
-            var label = name || expression;
-
-            var expressionCount = expressionCache[expression];
-            if (!expressionCount) {
-                var database = Freemix.exhibit.database;
-                var items = database.getAllItems();
-
-                var facet_cache = new Exhibit.FacetUtilities.Cache(database,
-                Exhibit.Collection.createAllItemsCollection("default", database),
-                Exhibit.ExpressionParser.parse(expression));
-
-                var counts = facet_cache.getValueCountsFromItems(items);
-                var missing = facet_cache.countItemsMissingValue(items);
-                expressionCount = {
-                    expression: expression,
-                    values: counts.entries.length,
-                    missing: missing
-                };
-                expressionCache[expression] = expressionCount;
-            }
-            return $.extend({}, expressionCount, {label: label});
-        }
-
-    BaseFacet.prototype._generatePropertyList = function(types) {
-        var properties = [];
-        var database = Freemix.exhibit.database;
-        var proplist = types? database.getPropertiesWithTypes(types) : database.getPropertyObjects();
-        $.each(proplist, function(inx, prop) {
-            properties.push(getExpressionCount(expression(prop.getID()), prop.getLabel()));
-        });
-        properties.sort(sorter);
-        return properties;
-    };
 
     return BaseFacet;
 

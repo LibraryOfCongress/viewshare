@@ -19,7 +19,7 @@ define(["jquery", "display/facets/numeric", "exhibit"],
 
         function updateSlider() {
             var slider = template.find("#range_interval_slider");
-            var input = template.find("$#range_interval");
+            var input = template.find("#range_interval");
             var database = Freemix.getBuilderExhibit().getUIContext().getDatabase();
             var path = Exhibit.ExpressionParser.parse(config.expression).getPath();
 
@@ -54,7 +54,7 @@ define(["jquery", "display/facets/numeric", "exhibit"],
         }
 
         function clampInterval(base) {
-            var input = template.find("$#range_interval");
+            var input = template.find("#range_interval");
             var range = input.data("range");
             if (config.interval < range.min) {
 
@@ -65,31 +65,20 @@ define(["jquery", "display/facets/numeric", "exhibit"],
             input.val(config.interval);
         }
 
-
         var select = template.find("#facet_property");
-        var properties = this._generatePropertyList(facet.propertyTypes);
-
-        $.each(properties, function () {
-            var option = "<option value='" + this.expression + "'>" + this.label + "</option>";
-            select.append(option);
-        });
-        if (config.expression) {
-            select.val(config.expression);
-        } else {
-            select.get(0).options[0].selected = true;
-            config.expression = select.val();
-        }
-        select.change(function () {
+        this._setupPropertySelect(config, template, select, "expression", this.propertyTypes);
+        select.off('change').change(function () {
             config.expression = $(this).val();
             updateSlider();
-            template.trigger("update-preview");
+            template.trigger(facet.refreshEvent);
         });
+
 
         var label = template.find("#facet_name");
         label.val(config.name);
         label.change(function () {
             config.name = label.val();
-            template.trigger("update-preview");
+            template.trigger(facet.refreshEvent);
         });
 
         var interval = template.find("#range_interval");
@@ -99,7 +88,7 @@ define(["jquery", "display/facets/numeric", "exhibit"],
         interval.change(function (event) {
             config.interval = parseInt($(event.target).val());
             slider.slider("value", config.interval);
-            template.trigger("update-preview");
+            template.trigger(facet.refreshEvent);
 
         });
 
@@ -107,10 +96,13 @@ define(["jquery", "display/facets/numeric", "exhibit"],
             slide: function (event, ui) {
                 interval.val(ui.value);
                 config.interval = ui.value;
-                template.trigger("update-preview");
+                template.trigger(facet.refreshEvent);
                 return true;
             }
         });
+
+        select.change();
+
 
     };
 
