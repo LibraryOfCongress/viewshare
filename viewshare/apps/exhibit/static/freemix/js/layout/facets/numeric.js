@@ -52,15 +52,16 @@ define(["jquery", "display/facets/numeric", "exhibit"],
 
         }
 
-        function clampInterval(base) {
+        function clampInterval(base, range) {
             var input = template.find("#range_interval");
             var range = input.data("range");
-            if (config.interval < range.min) {
+            if (config.interval < range.min || isNaN(config.interval)) {
 
                 base = base || range.min;
                 config.interval = base;
             }
-            config.interval = Math.min(config.interval, range.max);
+            var interval = Math.min(config.interval, range.max);
+            config.interval = interval;
             input.val(config.interval);
         }
 
@@ -85,7 +86,9 @@ define(["jquery", "display/facets/numeric", "exhibit"],
 
         interval.val(config.interval);
         interval.change(function (event) {
-            config.interval = parseInt($(event.target).val());
+            var interval = parseInt($(event.target).val());
+            config.interval =interval;
+
             slider.slider("value", config.interval);
             template.trigger(facet.refreshEvent);
 
