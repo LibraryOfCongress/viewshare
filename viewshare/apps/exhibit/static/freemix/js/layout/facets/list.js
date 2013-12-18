@@ -1,7 +1,6 @@
 define(["jquery", "display/facets/list"],
         function ($, Facet) {
 
-    Facet.prototype.thumbnail = "/static/freemix/img/list-facet.png";
     Facet.prototype.label = "List";
     Facet.prototype.propertyTypes = ["date", "number", "text", "currency"];
     Facet.prototype.icon_class = "fa fa-list-alt fa-3x";

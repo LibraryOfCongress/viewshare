@@ -4,7 +4,6 @@ define(["jquery", "display/facets/numeric", "exhibit"],
 
     Facet.prototype.facetClass = Exhibit.NumericRangeFacet;
     Facet.prototype.propertyTypes = ["number", "currency"];
-    Facet.prototype.thumbnail = "/static/freemix/img/numeric-facet.png";
     Facet.prototype.icon_class = "fa fa-tasks fa-3x";
 
     Facet.prototype.label = "Range";

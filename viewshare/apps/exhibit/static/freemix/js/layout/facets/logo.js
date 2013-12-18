@@ -2,7 +2,6 @@ define(["jquery", "display/facets/logo", "exhibit"],
         function ($, Facet, Exhibit) {
         "use strict"
 
-    Facet.prototype.thumbnail = "/static/freemix/img/logo-facet.png";
     Facet.prototype.label = "Logo";
     Facet.prototype.template_name = "logo-facet-editor";
     Facet.prototype.icon_class = "fa fa-picture-o fa-3x";

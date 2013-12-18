@@ -8,7 +8,6 @@ define(["jquery",
 
     View.prototype.label = "Map";
 
-    View.prototype.thumbnail = "/static/freemix/img/map-icon.png";
     View.prototype.icon_class = "fa fa-globe fa-3x";
 
     View.prototype.viewClass = OLMapView;

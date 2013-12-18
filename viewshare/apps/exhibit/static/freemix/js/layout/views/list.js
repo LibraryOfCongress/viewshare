@@ -3,7 +3,6 @@ define(["jquery",
         "scripts/ui/views/tile-view"],
         function ($, View, TileView) {
         "use strict"
-    View.prototype.thumbnail = "/static/freemix/img/list-icon.png";
     View.prototype.icon_class = "fa fa-list fa-3x";
     View.prototype.label = "List";
     View.prototype.viewClass = TileView;

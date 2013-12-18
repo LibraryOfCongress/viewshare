@@ -5,7 +5,6 @@ define(["jquery",
         "use strict"
 
     View.prototype.label = "Timeline";
-    View.prototype.thumbnail = "/static/freemix/img/timeline-icon.png";
     View.prototype.propertyTypes = ["date"];
     View.prototype.viewClass = TimelineView;
     View.prototype.template_name = "timeline-view-template";

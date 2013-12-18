@@ -3,7 +3,6 @@ define(["jquery", "display/facets/search", "exhibit"],
         "use strict"
 
     Facet.prototype.facetClass = Exhibit.TextSearchFacet;
-    Facet.prototype.thumbnail = "/static/freemix/img/search-facet.png";
     Facet.prototype.icon_class = "fa fa-search fa-3x";
 
     Facet.prototype.label = "Search";

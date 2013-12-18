@@ -5,7 +5,6 @@ define(["jquery",
         "use strict"
 
     View.prototype.label = "Bar Chart";
-    View.prototype.thumbnail = "/static/freemix/img/piechart-icon.png";
     View.prototype.icon_class = "fa fa-bar-chart-o fa-3x";
 
     View.prototype.viewClass = BarChartView;

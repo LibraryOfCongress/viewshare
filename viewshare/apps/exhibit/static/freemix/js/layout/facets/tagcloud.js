@@ -5,7 +5,6 @@ define(["jquery", "display/facets/tagcloud", "exhibit"],
     Facet.prototype.facetClass = Exhibit.CloudFacet;
     Facet.prototype.propertyTypes = ["date", "number", "text", "currency"];
 
-    Facet.prototype.thumbnail = "/static/freemix/img/cloud-facet.png";
     Facet.prototype.icon_class = "fa fa-tags fa-3x";
 
     Facet.prototype.label = "Tag Cloud";
