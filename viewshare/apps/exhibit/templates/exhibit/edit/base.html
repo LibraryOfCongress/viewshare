@@ -94,7 +94,7 @@
         <div class="span6">
           <div class="btn-toolbar pull-right">
             <div class="btn-group" >
-              <a class="btn btn-small btn-primary" id="edit_button" href="{% url 'exhibit_property_editor' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Edit" %}</a>
+              <a class="btn btn-small btn-primary" id="edit_button" rel="{{ exhibit_profile_url }}" href="{% url 'exhibit_property_editor' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Edit" %}</a>
               <button class="btn btn-small btn-primary" id="builder_button" data-toggle="collapse" data-target="#build">{% trans "Build" %}</button>
               <button class="btn btn-small btn-primary" id="preview_button" data-toggle="collapse" data-target="#preview">{% trans "Preview" %}</button>
             </div>
