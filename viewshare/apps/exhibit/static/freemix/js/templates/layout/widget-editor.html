@@ -1,0 +1,58 @@
+<div class="widget-edit-dialog widget-editor">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 id="editor-title">{{ title }}</h3>
+    </div>
+
+    <div class="modal-body">
+
+        <div class="design-widget">
+
+            <div class="widget-edit-nav">
+                <div class="design-widget-options tabbable tabs-left">
+                    <ul class="nav nav-tabs">
+                        {{#each widgets }}
+                        <li id="{{ key }}">
+                            <a href="#" >
+                              <span class="widget-option-list widget-option">
+                                <i class="{{ icon_class }}"></i><span class="widget-label">{{ label }}</span>
+                              </span>
+                            </a>
+                        </li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="widget-edit-settings">
+              <div class="widget-edit-settings-body well">
+
+                <!-- inject view-edit body here -->
+
+              </div>
+            </div>
+
+            <div class="widget-edit-preview">
+              <div class="container-fluid">
+                <div class="row-fluid">
+
+		  <div class="span12 well">
+		    <legend>Preview</legend>
+                    <div class="widget-preview-body">
+		    
+                    <!-- inject view-preview body here -->
+		    
+                    </div>
+		  </div>
+                </div>  <!-- row-fluid -->
+              </div> <!-- container-fluid -->
+	      
+            </div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button id="widget_save_button" class="btn btn-primary">Save</button>
+    </div>
+</div>

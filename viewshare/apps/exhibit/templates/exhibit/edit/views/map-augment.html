@@ -1,0 +1,32 @@
+{% load i18n %}
+
+<!-- script type="text/template" class="record-view" id="map-augment-template" -->
+
+  <form id="view-augmentation-form" class="form">
+    <fieldset>                  
+      
+      <div class="container-fluid">          
+	<div class="row-fluid">          
+	  
+	  <div class="control-group">
+	    <label class="control-label" for="new-property-name">New Property Name</label>
+	    <div class="controls">
+	      <input type="text" id="new-property-name" />
+	    </div>
+	  </div>
+
+        <div class="control-group">
+          <label class="control-label" for="property_list">{% trans "Available Properties" %}</label>
+          <div class="controls">
+            <select id="property_list" multiple="multiple"></select>
+          </div>
+        </div>	  
+	  
+	  <button type="submit" class="btn btn-primary">Create Property</button>			  
+	</div> <!-- end-row-fluid -->
+      </div> <!-- end-container-fluid -->
+      
+    </fieldset>
+  </form>
+  
+<!-- /script -->

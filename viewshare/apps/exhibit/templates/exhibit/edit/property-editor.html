@@ -6,6 +6,10 @@
 {% load i18n %}
 {% load require %}
 
+{% block head_data %}
+    {{ block.super }}
+    <link rel="freemix/property_list" href="{% url 'draft_exhibit_property_list' owner=exhibit.owner.username slug=exhibit.slug %}"/>
+{% endblock %}
 
 {% block body %}
 <div class="exhibit_edit">
@@ -48,8 +52,8 @@
                 <div class="btn-toolbar pull-right">
                   <div class="btn-group" >
                     <a class="btn btn-small btn-primary active" id="edit_button" href="{% url 'exhibit_property_editor' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Edit" %}</a>
-                    <a class="btn btn-small btn-primary" id="edit_button" href="{% url 'exhibit_edit' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Layout" %}</a>
-                    <button class="btn btn-small btn-primary" id="preview_button" data-toggle="collapse" data-target="#preview">{% trans "Preview" %}</button>
+                    <a class="btn btn-small btn-primary" id="edit_button" href="{% url 'exhibit_edit' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Build" %}</a>
+                    <button class="btn btn-small btn-primary disabled" id="preview_button" data-toggle="collapse" data-target="#preview">{% trans "Preview" %}</button>
                   </div>
                   <div class="exhibit-actions btn-group">
                     <button class="btn btn-small" id="save_button">{% trans "Save" %}</button>

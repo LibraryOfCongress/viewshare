@@ -15,7 +15,7 @@ define(
     ) {
     'use strict';
     var demo = function() {
-        var data_url = $("link[rel='exhibit/data']").attr("href");
+        var data_url = $("link[rel='exhibit-data']").attr("href");
         var prop_url = $("link[rel='freemix/property_list']").attr("href");
         var properties = new PropertyCollection({
             dataURL: data_url,

@@ -3,7 +3,13 @@
 {% url 'shared_exhibit_display' slug=slug as display_url %}
 
 {%  blocktrans %}
-<div class="shared-link-notice">Your <a href="{{ display_url }}">shared link</a> has been successfully created. Copy the following link to share with others.</div>
+<div class="shared-link-notice">
+  <span class="notice-icon">
+    <i class="fa fa-link fa-2x"></i>
+  </span>
+  <span class="view-label">Copy the following <a href="{{ display_url }}">link</a> to share with others.</span>
+</div>
+
 {% endblocktrans %}
 
 <div>

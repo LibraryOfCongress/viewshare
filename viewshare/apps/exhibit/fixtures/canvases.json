@@ -9,7 +9,7 @@
          "slug": "three-column",
          "title": "Three Columns",
          "enabled": true,
-         "thumbnail": "exhibit/img/facet-both-s.png"
+         "thumbnail": "freemix/img/facet-both-s.png"
     }
 },
 
@@ -23,7 +23,7 @@
          "slug": "two-column-left",
          "title": "Two Columns Left",
          "enabled": true,
-         "thumbnail": "exhibit/img/facet-left-s.png"
+         "thumbnail": "freemix/img/facet-left-s.png"
     }
 },
 {
@@ -36,7 +36,7 @@
          "slug": "two-column-right",
          "title": "Two Columns Right",
          "enabled": true,
-         "thumbnail": "exhibit/img/facet-right-s.png"
+         "thumbnail": "freemix/img/facet-right-s.png"
     }
 },    
 {
@@ -49,7 +49,7 @@
          "slug": "one-column",
          "title": "One Column",
          "enabled": true,
-         "thumbnail": "exhibit/img/facet-top-s.png"
+         "thumbnail": "freemix/img/facet-top-s.png"
     }
 }
 ]

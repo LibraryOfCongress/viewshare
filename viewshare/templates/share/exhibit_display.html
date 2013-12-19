@@ -14,7 +14,7 @@
 
 {% block head_data %}
     {{ block.super }}
-    <link rel="exhibit/data" href="{{ data_url }}"/>
+    <link rel="exhibit-data" href="{{ data_url }}"/>
     <link rel="freemix/exhibit_profile" href="{% url 'shared_exhibit_profile_json' slug=object.slug %}"/>
 {% endblock %}
 
@@ -41,7 +41,7 @@
   <ul class="exhibit_list_items">
     <li class="exhibit_list_item result_set_item clearfix shared-key {% if exhibit.is_public %}public{% else %}private{% endif %}">
 
-      <div class="exhibit-title">{{exhibit.title}}</div>
+      <div class="exhibit-title"><i class="fa fa-desktop fa-2x"></i> {{exhibit.title}}</div>
 
       {% if exhibit.description %}
       <div class="exhibit-description">

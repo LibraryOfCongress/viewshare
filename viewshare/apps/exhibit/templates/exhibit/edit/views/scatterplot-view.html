@@ -6,25 +6,16 @@
         
         <fieldset>
           
-            <div class="container-fluid">
-
-              <div class="row-fluid">
-
-                <div class="span8">
-
-                  <legend class="freemix-fieldset-legend">{% trans "Scatter Plot View Settings" %}</legend>
-
-                </div>
-
-              </div> <!-- end row -->
-
-            </div> <!-- end container -->
-
           <div class="container-fluid">          
+
+	    <div class="row-fluid">
+	      <legend class="view-settings-label">{% trans "Scatter Plot View Settings" %}</legend>
+	    </div>
+
             
             <div class="row-fluid">          
               
-              <div class="span5 view-variables">
+              <div class="view-variables">
                 
                 <div class="control-group">
                   <label class="control-label" for="view_label_input">{% trans "Label" %}</label>
@@ -36,25 +27,24 @@
                   </div>
                 </div>
                 
-                <div class="control-group">
-                  <label class="control-label" for="xaxis_property">{% trans "X Axis" %}</label>
+                <div class="control-group input-append">
+                  <label class="control-label" for="xaxis_property">{% trans "X Axis" %} <a class="augment" href = ""><i class="fa fa-plus-square fa-lg"></i></a></label>
                   <div class="controls">
-                    <select id="xaxis_property"></select>
+                    <select class="input-medium" id="xaxis_property"></select>
                   </div>
                 </div>
                 
-                <div class="control-group">
-                  <label class="control-label" for="yaxis_property">{% trans "Y Axis" %}</label>
+                <div class="control-group input-append">
+                  <label class="control-label" for="yaxis_property">{% trans "Y Axis" %} <a class="augment" href = ""><i class="fa fa-plus-square fa-lg"></i></a></label>
                   <div class="controls">
-                    <select id="yaxis_property"></select>
+                    <select class="input-medium" id="yaxis_property"></select>
                   </div>
                 </div>
 
+		<legend class="lens-settings-label">{% trans "Lens Settings" %}</legend>
 
                 <div class="control-group">
-                  <label class="control-label" for="lens_editor">{% trans "Lens" %}</label>
                   <div id="lens_editor">
-
                   </div>
                 </div>
               </div> <!-- end view-variables -->

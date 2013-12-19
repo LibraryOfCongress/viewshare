@@ -111,7 +111,7 @@ class Migration(SchemaMigration):
             'slug': ('django.db.models.fields.SlugField', [], {'db_index': 'True', 'max_length': '50', 'blank': 'True'}),
             'thumbnail': ('django.db.models.fields.files.ImageField', [], {'default': "'static/images/thumbnails/three-column/smoothness.png'", 'max_length': '100'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
-            'url': ('django.db.models.fields.URLField', [], {'default': "'/static/exhibit/css/smoothness/smoothness.css'", 'max_length': '100'})
+            'url': ('django.db.models.fields.URLField', [], {'default': "'/static/freemix/css/smoothness/smoothness.css'", 'max_length': '100'})
         }
     }
 

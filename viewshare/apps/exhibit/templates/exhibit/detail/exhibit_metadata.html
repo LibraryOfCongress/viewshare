@@ -13,7 +13,12 @@
   <div class="row-fluid">
 
     <div class="span4">
-      <div class="view_avatar"></div>
+      <div class="view_avatar">
+	<span class="fa-stack fa-4x">
+	  <i class="fa fa-desktop fa-stack-2x"></i>
+	  <i class="fa fa-list fa-stack-1x app-offset-lg"></i>
+	  </span>
+      </div>
     </div>
 
     <div class="span8">
@@ -45,9 +50,9 @@
     <div class="span10">
       <div class="exhibit-acls">
 	{% if object.is_public %}
-	<div class="public"><span class="public-icon"></span>{% trans "This view is public" %}</div>
+	<div class="public"><span class="public-icon"><i class="fa fa-unlock-alt fa-lg"></i></span><span class="view-label">{% trans "This view is public" %}</span></div>
 	{% else %}
-	<div class="private"><span class="private-icon"></span>{% trans "This view is private" %}</div>
+	<div class="private"><span class="private-icon"><i class="fa fa-lock fa-lg"></i></span><span class="view-label">{% trans "This view is private" %}</span></div>
 	{% endif %}
       </div>
     </div>
@@ -61,7 +66,7 @@
 	{% endif %}
 	<div class="profile-actions">
           <div class="profile-links btn-group">
-	    <a href="#editExhibitModal" role="button" data-toggle="modal" rel="{% url 'exhibit_edit_form' owner=object.owner slug=object.slug %}" id="detail_edit_button" class="btn btn-small"><i class="icon-edit"></i>{% trans " Edit" %}</a>
+	    <a href="#editExhibitModal" role="button" data-toggle="modal" rel="{% url 'exhibit_edit_form' owner=object.owner slug=object.slug %}" id="detail_edit_button" class="btn btn-small"><i class="fa fa-edit fa-lg"></i>{% trans " Edit" %}</a>
 	  </div>
 	</div>
       </div>

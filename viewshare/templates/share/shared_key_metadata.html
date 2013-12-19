@@ -7,16 +7,22 @@
   <div class="row-fluid">
     <div class="span12">
       <div class="shared-key-label">
-	<a href="{{ display_url }}">
-          {% if key.label %}
-          {{ key.label }}
-          {% else %}
-          {{ key.slug }}
-          {% endif %}
-	</a>
+	<span class="notice-icon">
+	  <i class="fa fa-link fa-2x"></i>
+	</span>
+	<span class="view-label">
+	  <a href="{{ display_url }}">
+            {% if key.label %}
+            {{ key.label }}
+            {% else %}
+            {{ key.slug }}
+            {% endif %}
+	  </a>
+	</span>
       </div>
     </div>
   </div>
+
   <div class="row-fluid">
     <div class="span12">
       <div class="shared-key-prose">{% trans "Copy the following link to share with others." %}</div>
@@ -24,7 +30,7 @@
 
       <div class="shared-key-metadata">
 	{% trans "Created"%}
-	<div class="key-created-on">{{key.created|date:"N j, Y"}}</div>
+	<span class="key-created-on">{{key.created|date:"N j, Y"}}</span>
 	{% trans "by" %}
 	<span class="exhibit-creator">
 	  <a href="{% url 'profile_detail' exhibit.owner.username %}">{{exhibit.owner.username}}</a>

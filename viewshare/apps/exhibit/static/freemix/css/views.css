@@ -10,6 +10,7 @@
 
 .exhibit-list-table td.exhibit-label {
     font-weight: bold;
+    width: 20%;
     min-width: 20%;
     padding-right: 0.2em;
 }

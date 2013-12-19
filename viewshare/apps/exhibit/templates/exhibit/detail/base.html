@@ -17,7 +17,7 @@
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/views.css"/>
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/editor.css"/>
 <link href="{{STATIC_URL}}freemix/css/inspector.css" rel="stylesheet" type="text/css" media="screen,projection" />
-<link href="{{STATIC_URL}}exhibit/css/embed.css" rel="stylesheet" type="text/css" media="screen,projection" />
+<link href="{{STATIC_URL}}freemix/css/embed.css" rel="stylesheet" type="text/css" media="screen,projection" />
 
 {% endcompress %}
 {% endblock %}
@@ -25,7 +25,7 @@
 {% block freemix_js %}
     {{ block.super }}
     <script type="text/javascript" src="{{ STATIC_URL }}freemix/js/lib/jquery.form.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}exhibit/js/detail.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}freemix/js/detail.js"></script>
 
     {% if can_share %}
     {% compress js %}<script type="text/javascript" src="{{ STATIC_URL }}share/js/share_dialog.js"></script>{% endcompress %}

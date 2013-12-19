@@ -39,9 +39,11 @@ requirejs.config({
         "i18n": "lib/i18n",
         "ext": "extensions",
         "exlib": "lib",
-        "fmlib": "freemix/js/lib",
-        "fmexlib": "exhibit/js/lib",
-        "openlayers": "simile/exhibit/extensions/openlayers/lib/OpenLayers"
+        "openlayers": "simile/exhibit/extensions/openlayers/lib/OpenLayers",
+        "text": 'freemix/js/lib/text',
+        "display": "freemix/js/display"
+
+
     },
     "shim": {
         "exlib/jquery": {
@@ -69,7 +71,7 @@ requirejs.config({
         "freemix/js/lib/jquery": {
             "exports": "jQuery"
         },
-        "exhibit/js/lib/creole": {
+        "freemix/js/lib/creole": {
             "exports": "Parse"
         },
         "openlayers": {
@@ -80,28 +82,27 @@ requirejs.config({
 
 require(["simile/exhibit/exhibit-api"], function() {
     require([
-        "exhibit/js/display",
+        "display/display",
         "freemix/js/patch_exhibit",
 
-        "exhibit/js/lenses/list",
-        "exhibit/js/lenses/thumbnail",
-        "exhibit/js/views/list",
-        "exhibit/js/views/map",
-        "exhibit/js/views/piechart",
-        "exhibit/js/views/barchart",
-        "exhibit/js/views/scatterplot",
-        "exhibit/js/views/table",
-        "exhibit/js/views/timeline",
-        "exhibit/js/views/thumbnail",
+        "display/lenses/list",
+        "display/lenses/thumbnail",
+        "display/views/list",
+        "display/views/map",
+        "display/views/piechart",
+        "display/views/barchart",
+        "display/views/scatterplot",
+        "display/views/table",
+        "display/views/timeline",
+        "display/views/thumbnail",
 
-        "exhibit/js/facets/search",
-        "exhibit/js/facets/list",
-        "exhibit/js/facets/tagcloud",
-        "exhibit/js/facets/slider",
-        "exhibit/js/facets/numeric",
-        "exhibit/js/facets/logo",
-        "exhibit/js/lib/creole",
-        "exhibit/js/facets/text",
+        "display/facets/search",
+        "display/facets/list",
+        "display/facets/tagcloud",
+        "display/facets/slider",
+        "display/facets/numeric",
+        "display/facets/logo",
+        "display/facets/text",
     ], function(initialize) {
         initialize();
     });

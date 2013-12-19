@@ -21,7 +21,7 @@ class Migration(SchemaMigration):
             ('thumbnail', self.gf('django.db.models.fields.files.ImageField')(default='static/images/thumbnails/three-column/smoothness.png', max_length=100)),
             ('description', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
             ('title', self.gf('django.db.models.fields.CharField')(max_length=255)),
-            ('url', self.gf('django.db.models.fields.URLField')(default='/static/exhibit/css/smoothness/smoothness.css', max_length=100)),
+            ('url', self.gf('django.db.models.fields.URLField')(default='/static/freemix/css/smoothness/smoothness.css', max_length=100)),
             ('enabled', self.gf('django.db.models.fields.BooleanField')(default=True)),
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('slug', self.gf('django_extensions.db.fields.AutoSlugField')(populate_from='title', allow_duplicates=False, max_length=50, separator=u'-', blank=True, overwrite=False)),

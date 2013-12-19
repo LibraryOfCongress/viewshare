@@ -136,10 +136,13 @@ color: black;
     min-width: 3em;
 }
 
-.facet-header .label {
+.facet-header .view-label {
     font-weight: bold;
 }
 
+.facet-header i {
+ padding: 4px 4px 4px 4px;
+}
 
 
 .facet-body {
@@ -610,7 +613,7 @@ a.identify-type-selector:hover {
     opacity: 0.9;
     padding: 1px;
     margin: 4px;
-    width: 120px;
+    width: 100px;
 }
 
 form.uniForm .ctrlHolder.multiselect ul li {
@@ -878,6 +881,16 @@ padding-left: 8px;
 padding-right: 8px;
 }
 
+.widget-label, .view-label {
+padding-left: 8px;
+padding-right: 8px;
+}
+
+ul.view-set li.view .view-label {
+padding-left: 8px;
+padding-right: 8px;
+}
+
 ul.view-set li.view .icon-move {
  cursor:move;
 }
@@ -886,7 +899,7 @@ ul.view-set li.view .icon-remove {
  cursor:no-drop;
 }
 
-.facet-preview .facet-edit-body, .view-preview .view-edit-body {
+.widget-preview .edit-body {
 padding: 15px 10px 0px 0px;
 }
 
@@ -1017,23 +1030,76 @@ padding-right: 0px;
   margin-top: -22px;
 }
 
+div.simileAjax-bubble-container {
+    z-index: 10000 !important;
+}
+
+
 /* Expand widget editor modal full-screen */
 
 .widget-editor {
     /*display: block;*/
-    width: 100% !important;
-    left: 0 !important;
-    margin: 0 !important;
-    height: 100% !important;
-    margin-top: 0 !important;
-    top: 0!important;
-
+    width: 96% !important;
+    left: 1% !important;
+    margin: 1% !important;
+    height: 920px !important;
+    margin-top: 1% !important;
+    top: 1% !important;
 }
 
 .widget-editor .modal-body {
-    max-height: 800px !important;
+    max-height: 740px !important; 
+    width: 101% !important;
+    overflow: hidden; 
 }
 
-div.simileAjax-bubble-container {
-    z-index: 10000 !important;
+.widget-editor .modal-header {
+   width: 100% !important;
 }
+
+.widget-editor .modal-footer {
+  width: 100% !important;
+  background-color: #FFFFFF;
+}
+
+/* facet and widget edit settings */
+
+.widget-edit-dialog .widget-edit-nav {
+     max-width: 120px;
+     float:left;
+}		    
+
+.widget-edit-dialog .widget-edit-settings-body {
+     width: 480px !important;
+     float: left;
+}		    
+
+.widget-edit-dialog .widget-edit-preview {
+  padding-left: 640px !important;
+}		    
+
+
+.widget-edit-preview .widget-preview-body {
+  height: 640px !important;
+  max-height: 640px !important;
+  overflow: auto;
+}
+
+ .widget-edit-settings .widget-edit-settings-body {
+  height: 700px !important;
+  max-height: 700px !important;
+}
+
+
+.widget-option-list .widget-label {
+  display: block;
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.widget-option-list i.fa-rotate-90 {
+  margin-left: 3px;  /* left adjust rotated vector graphics */
+}
+

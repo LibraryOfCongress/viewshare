@@ -21,13 +21,14 @@
     <link href="{{STATIC_URL}}viewshare/css/style.css" rel="stylesheet" type="text/css" media="screen,projection" />
     <link href="{{STATIC_URL}}viewshare/css/lc.css" rel="stylesheet" type="text/css" media="screen,projection" />
     <link href="{{STATIC_URL}}viewshare/css/base.css" rel="stylesheet" type="text/css" media="screen,projection" />
+    <link href="{{STATIC_URL}}viewshare/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="screen,projection" />
     {%endcompress %}
 {% endblock head_css %}
 
 {% block login %}
     {% if user.is_authenticated %}
 
-    <li><a href="{% url 'profile_detail' user.username %}"><i class="icon-home"></i> {{ user.username }}</a></li><li class="divider-vertical"></li>
+    <li><a href="{% url 'profile_detail' user.username %}"><i class="fa fa-home fa-lg"></i> {{ user.username }}</a></li><li class="divider-vertical"></li>
 
     <li class="dropdown">
       <a id="nav-users" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">{% trans "Users" %} <b class="caret"></b></a>
@@ -62,7 +63,7 @@
         <li><a href="{% url 'profile_detail' 'Guide' %}">Ask the Guide</a></li>
       </ul>
     </li><li class="divider-vertical"></li>
-    {% if user.is_staff %}<li><a href="/admin/" target="_blank"><i class="icon-cog"></i> {% trans "Admin" %}</a></li><li class="divider-vertical"></li>{% endif %}
+    {% if user.is_staff %}<li><a href="/admin/" target="_blank"><i class="fa fa-cogs fa-lg"></i> {% trans "Admin" %}</a></li><li class="divider-vertical"></li>{% endif %}
     <li><a href="{% url 'acct_logout' %}">{% trans "Logout" %}</a></li>
     {% else %}
     <li><a href="{% url 'acct_login' %}">{% trans "Login" %}</a></li><li class="divider-vertical"></li>
