@@ -198,6 +198,14 @@ REQUIRE_STANDALONE_MODULES = {
         'editor-main': {
             'out': 'editor-built.js',
             'build_profile': 'editor-build.js'
+        },
+        'exhibit-layout-main': {
+            'out': 'exhibit-layout-built.js',
+            'build_profile': 'exhibit-layout-build.js'
+        },
+        'exhibit-display-main': {
+            'out': 'exhibit-display-built.js',
+            'build_profile': 'exhibit-display-build.js'
         }
 }
 
