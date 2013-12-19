@@ -31,6 +31,7 @@ define(
             this.$emailInput = undefined;
             this.$phoneInput = undefined;
             this.$commentsInput = undefined;
+            this.animateDuration = 200;
         },
 
         /** Compile the template we will use to render the View */
@@ -49,12 +50,16 @@ define(
             this.$phoneInput = this.$el.find('#augPhoneInput');
             this.$phoneInput.on('change', this.changePhoneHandler.bind(this));
             this.$commentsInput = this.$el.find('#augCommentsInput');
-            this.$commentsInput.on('change', this.changeCommentsHandler.bind(this));
+            this.$commentsInput.on(
+                'change', this.changeCommentsHandler.bind(this));
         },
 
         /* Show the initally hidden support issue form */
         showFormHandler: function() {
-            this.$el.find('#augmentationIssue').show();
+            this.$el.find('#augmentationIssue').show(
+                this.animateDuration, function() {
+                    this.displayContactTypeInput();
+                }.bind(this));
         },
 
         /* submit this.model to the server */
@@ -62,9 +67,13 @@ define(
             this.model.postAugmentationIssue();
         },
 
-        /* Update AugmentationSupportIssue model's contact value */
+        /**
+         * Update AugmentationSupportIssue model's contact value and display
+         * related input field
+         */
         changeContactHandler: function() {
             this.model.contactType = this.$contactInput.val();
+            this.displayContactTypeInput();
         },
 
         /* Update AugmentationSupportIssue model's email value */
@@ -80,6 +89,21 @@ define(
         /* Update AugmentationSupportIssue model's comments value */
         changeCommentsHandler: function() {
             this.model.comments = this.$commentsInput.val();
+        },
+
+        /* Display the appropriate input fields for this view's $contactType */
+        displayContactTypeInput: function() {
+            if (this.model.contactType === 'email') {
+                this.$el.find('#augPhone').hide(
+                    this.animateDuration, function() {
+                        this.$el.find('#augEmail').show(this.animateDuration);
+                    }.bind(this));
+            } else {
+                this.$el.find('#augEmail').hide(
+                    this.animateDuration, function() {
+                        this.$el.find('#augPhone').show(this.animateDuration);
+                    }.bind(this));
+            }
         },
 
         /** Remove event bindings, child views, and DOM elements */
