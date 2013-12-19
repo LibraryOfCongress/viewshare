@@ -41,7 +41,7 @@ define(["jquery",
             model.updatePreview(template.find(".widget-preview-body"), config);
         });
 
-        template.trigger(this.refreshEvent);
+        this.triggerChange(config, template);
         
     };
 
@@ -145,7 +145,7 @@ define(["jquery",
         label.val(config.name);
         label.change(function() {
             config.name = $(this).val();
-            template.trigger(view.refreshEvent);
+            view.triggerChange(config, template);
         });
     };
 
@@ -170,7 +170,7 @@ define(["jquery",
             } else {
                 config[key] = [];
             }
-            template.trigger(view.refreshEvent);
+            view.triggerChange(config, template);
         });
 
         if (config[key] && config[key].length > 0) {
@@ -195,7 +195,7 @@ define(["jquery",
         lens.initializeEditor(selector);
         selector.off(lens.refreshEvent).on(lens.refreshEvent, function() {
             config.lens = lens.config;
-            template.trigger(view.refreshEvent);
+            view.triggerChange(config, template);
         });
     };
 

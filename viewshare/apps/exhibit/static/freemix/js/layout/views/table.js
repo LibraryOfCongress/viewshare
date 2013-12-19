@@ -23,7 +23,7 @@ define(["jquery",
         sort_order.val(config.asc.toString());
         sort_order.change(function (e) {
             config.asc = $(this).val() === 'true';
-            template.trigger(view.refreshEvent);
+            view.triggerChange(config, template);
         });
 
 

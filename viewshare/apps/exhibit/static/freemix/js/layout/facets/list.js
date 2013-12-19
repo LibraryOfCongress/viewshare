@@ -18,7 +18,7 @@ define(["jquery", "display/facets/list"],
         label.val(config.name);
         label.change(function() {
             config.name = label.val();
-            template.trigger(facet.refreshEvent);
+            facet.triggerChange(config, template);
         });
     }
 

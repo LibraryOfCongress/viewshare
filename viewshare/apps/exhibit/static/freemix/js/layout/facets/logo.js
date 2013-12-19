@@ -6,18 +6,10 @@ define(["jquery", "display/facets/logo", "exhibit"],
     Facet.prototype.template_name = "logo-facet-editor";
     Facet.prototype.icon_class = "fa fa-picture-o fa-3x";
 
-            
-    Facet.prototype._validate = function(config, template) {
-        if (config.src && config.src.length > 0) {
-            template.find("#widget_save_button").removeAttr("disabled").removeClass("disabled");
-            template.find(".help-inline").addClass("hidden").parent(".control-group").removeClass("warning");
 
-        } else {
-            template.find("#widget_save_button").attr("disabled", "disabled").addClass("disabled");
-            template.find(".help-inline").removeClass("hidden").parent(".control-group").addClass("warning");
-        }
-        template.trigger(this.refreshEvent);
-    };
+    Facet.prototype.isValid = function(config) {
+        return (config.src && config.src.length > 0);
+    }
             
     Facet.prototype.setupEditor = function(config, template) {
 
@@ -47,7 +39,7 @@ define(["jquery", "display/facets/logo", "exhibit"],
         var facet = this;
         src.change(function (event) {
             config.src = $(event.target).val();
-            facet._validate(config, template);
+            facet.triggerChange(config, template);
             updateSlider();
         });
 
@@ -55,13 +47,13 @@ define(["jquery", "display/facets/logo", "exhibit"],
 
         alt.change(function (event) {
             config.alt = $(event.target).val();
-            facet._validate(config, template);
+            facet.triggerChange(config, template);
         });
         alt.val(config.alt);
 
         href.change(function (event) {
             config.href = $(event.target).val();
-            facet._validate(config, template);
+            facet.triggerChange(config, template);
         });
         href.val(config.href);
 
@@ -72,7 +64,7 @@ define(["jquery", "display/facets/logo", "exhibit"],
         size.change(function (event) {
             config.width = $(event.target).val();
             slider.slider("value", config.width);
-            facet._validate(config, template);
+            facet.triggerChange(config, template);
         });
 
 
@@ -81,11 +73,11 @@ define(["jquery", "display/facets/logo", "exhibit"],
             slide:function (event, ui) {
                 size.val(ui.value);
                 config.width = ui.value;
-            facet._validate(config, template);
+            facet.triggerChange(config, template);
                 return true;
             }});
 
-        facet._validate(config, template);
+        facet.triggerChange(config, template);
         updateSlider();
 
     };

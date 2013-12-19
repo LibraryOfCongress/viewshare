@@ -20,7 +20,7 @@ define(["jquery", "display/facets/slider", "exhibit"],
         label.val(config.name);
         label.change(function() {
           config.name = label.val();
-          template.trigger(facet.refreshEvent);
+          facet.triggerChange(config, template);
         });
     };
 

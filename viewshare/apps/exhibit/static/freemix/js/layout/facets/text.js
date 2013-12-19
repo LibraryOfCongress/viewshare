@@ -24,7 +24,7 @@ define(["jquery",
             .val(config.text || "")
             .keyup(function () {
                 config.text = $(this).val();
-                template.trigger(facet.refreshEvent);
+                facet.triggerChange(config, template);
             });
     };
 

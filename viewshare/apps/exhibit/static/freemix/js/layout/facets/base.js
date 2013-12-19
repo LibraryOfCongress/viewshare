@@ -80,7 +80,7 @@ define(["jquery",
         template.off(this.refreshEvent).bind(this.refreshEvent, function() {
             model.updatePreview(template.find(".widget-preview-body"), config);
         });
-        template.trigger(this.refreshEvent);
+        this.triggerChange(config, template);
     };
 
     BaseFacet.prototype._propertyRenderer = function(prop) {

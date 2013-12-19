@@ -91,7 +91,7 @@ function ($, Widget, Freemix) {
     };
 
     Widget.prototype._setupSelectPropertyHandler = function(config, template, selector, key) {
-        var view = this;
+        var widget = this;
         selector.change(function() {
             var value = $(this).val();
             if (value && value !== ( "" || undefined)) {
@@ -99,7 +99,9 @@ function ($, Widget, Freemix) {
             } else {
                 config[key] = undefined;
             }
-            template.trigger(view.refreshEvent);
+            widget.triggerChange(config, template);
+
+
          }).val(config[key]);
 
         if (!selector.val() && selector.get(0).options.length > 0) {
@@ -108,7 +110,7 @@ function ($, Widget, Freemix) {
     };
 
     Widget.prototype._setupPropertyMultiSelect = function(config, template, selector, key, default_all) {
-        var view = this;
+        var widget = this;
         var value = config[key] || [];
         var inx;
 
@@ -128,8 +130,7 @@ function ($, Widget, Freemix) {
 
         selector.parent().on('change', 'select', function() {
             config[key] = $(this).val() || [];
-            template.trigger(view.refreshEvent);
-
+            widget.triggerChange(config, template);
         });
         selector.multiselect({width: 460, height: 250, sortable: true});
 
@@ -153,6 +154,20 @@ function ($, Widget, Freemix) {
     Widget.prototype.remove = function() {
         this.findWidget().remove();
     };
+
+    Widget.prototype.triggerChange = function(config, template) {
+        if (this.isValid(config)) {
+            template.find("#widget_save_button").removeAttr("disabled").removeClass("disabled");
+
+        } else {
+            template.find("#widget_save_button").attr("disabled", "disabled").addClass("disabled");
+        }
+        template.trigger(this.refreshEvent);
+    }
+
+    Widget.prototype.isValid = function() {
+        return true;
+    }
 
     Widget.prototype.propertyTypes = ["text", "image", "currency", "url", "location", "date", "number"];
 

@@ -70,7 +70,7 @@ define(["jquery", "display/facets/numeric", "exhibit"],
         select.off('change').change(function () {
             config.expression = $(this).val();
             updateSlider();
-            template.trigger(facet.refreshEvent);
+            facet.triggerChange(config, template);
         });
 
 
@@ -78,7 +78,7 @@ define(["jquery", "display/facets/numeric", "exhibit"],
         label.val(config.name);
         label.change(function () {
             config.name = label.val();
-            template.trigger(facet.refreshEvent);
+            facet.triggerChange(config, template);
         });
 
         var interval = template.find("#range_interval");
@@ -90,7 +90,7 @@ define(["jquery", "display/facets/numeric", "exhibit"],
             config.interval =interval;
 
             slider.slider("value", config.interval);
-            template.trigger(facet.refreshEvent);
+            facet.triggerChange(config, template);
 
         });
 
@@ -98,7 +98,7 @@ define(["jquery", "display/facets/numeric", "exhibit"],
             slide: function (event, ui) {
                 interval.val(ui.value);
                 config.interval = ui.value;
-                template.trigger(facet.refreshEvent);
+                facet.triggerChange(config, template);
                 return true;
             }
         });
