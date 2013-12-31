@@ -365,7 +365,6 @@ class UploadTransaction(DataTransaction):
         from viewshare.apps.exhibit import serializers
         source = self.source.get_concrete()
         try:
-
             result = source.refresh()
         except:
             self.failure("Transformation failed")

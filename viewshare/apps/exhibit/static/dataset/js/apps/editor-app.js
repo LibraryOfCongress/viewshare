@@ -2,32 +2,44 @@
 define(
     [
         'jquery',
+        'models/augmentation-support-issue',
         'models/property-collection',
+        'views/augmentation-support-issue-view',
         'views/editor-view',
         'views/modal-augment-view',
         'views/notification-view'
     ], function (
         $,
+        AugmentationSupportIssue,
         PropertyCollection,
+        AugmentationSupportIssueView,
         EditorView,
         ModalAugmentView,
         NotificationView
     ) {
     'use strict';
     var demo = function() {
-        var data_url = $("link[rel='exhibit-data']").attr("href");
-        var prop_url = $("link[rel='freemix/property_list']").attr("href");
+        var dataURL = $("link[rel='exhibit/data']").attr("href");
+        var propURL = $("link[rel='freemix/property_list']").attr("href");
+        var exhibitSlug = $("link[rel='exhibit/slug']").attr("href");
         var properties = new PropertyCollection({
-            dataURL: data_url,
-            propertiesURL: prop_url
-        });
+            dataURL: dataURL,
+            propertiesURL: propURL});
         var notificationView = new NotificationView({$el: $('#notifications')});
         var editor = new EditorView({
             model: properties,
-            $el: $('#editor')
+            $el: $('#editor')});
+        var augmentModal = new ModalAugmentView({model: properties});
+        var augmentationError = new AugmentationSupportIssue({
+            email: '',
+            exhibitSlug: exhibitSlug
         });
-        var augmentModal = new ModalAugmentView({
-            model: properties
+        properties.Observer('augmentDataFailure').subscribe(
+            augmentationError.augmentDataFailureHandler.bind(augmentationError)
+        );
+        var augmentationErrorView = new AugmentationSupportIssueView({
+            $el: undefined,
+            model: augmentationError
         });
         // set up notifications
         notificationView.addSubscription(
@@ -35,34 +47,41 @@ define(
             'loadFailure',
             'error',
             'There was a server error while loading the data. Please try again later.',
-            'Data Error!'
-        );
+            'Data Error!');
         notificationView.addSubscription(
             properties,
-            'augmentFailure',
+            'augmentDataFailure',
             'error',
-            'There was a server error during the data augmentation. Please try again later.',
-            'Augmentation Error!'
-        );
+            augmentationErrorView,
+            'Augmentation Error!',
+            false);
         properties.Observer('loadSuccess').subscribe(function() {
             // set up notificationView's PropertyModel subscriptions
             var i;
             for (i = 0; i < properties.properties.length; ++i) {
-                notificationView.addSubscription(
-                    properties.properties[i],
-                    'updatePropertySuccess',
-                    'success',
-                    'Your change has been saved to a draft on the server.',
-                    'Data saved successfully!');
-                notificationView.addSubscription(
-                    properties.properties[i],
-                    'updatePropertyError',
-                    'error',
-                    'Changes you made were not able to save to the server.',
-                    'There was a problem!');
+                addPropertyNotifications(
+                    notificationView, properties.properties[i]);
             }
         });
+        properties.Observer('newProperty').subscribe(function(newProperty) {
+            addPropertyNotifications(notificationView, newProperty);
+        });
         properties.load();
+    };
+
+    var addPropertyNotifications = function(notificationView, property) {
+        notificationView.addSubscription(
+            property,
+            'updatePropertySuccess',
+            'success',
+            'Your change has been saved to a draft on the server.',
+            'Data saved successfully!');
+        notificationView.addSubscription(
+            property,
+            'updatePropertyError',
+            'error',
+            'Changes you made were not able to save to the server.',
+            'There was a problem!');
     };
 
     return demo;

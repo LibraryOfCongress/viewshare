@@ -1,8 +1,10 @@
-import json
+import logging
 from django import forms
 from django.forms import widgets
 from django.utils.translation import ugettext_lazy as _
 from . import models
+
+LOGGER = logging.getLogger(__name__)
 
 
 class SupportIssueForm(forms.Form):
@@ -149,20 +151,27 @@ class AugmentationIssueForm(SupportIssueForm):
     Requires that the `profile_json` field be populated with a JSON
     snapshot of the dataset
     """
-    profile_json = forms.CharField(required=True, widget=widgets.HiddenInput)
-    field_name = forms.CharField(required=False,
-                                 label="Augmented Field",
-                                 help_text=_("Enter a label to highlight"
-                                             " a particular field"))
+    from viewshare.apps.exhibit.models import VALUE_TYPES
+
+    label = forms.CharField(required=True,
+                            label="Augmented Field",
+                            help_text=_("Enter a label to highlight"
+                                        " a particular field"))
+    type = forms.ChoiceField(required=False,
+                             label="Augmentation Type",
+                             help_text=_("Type of augmentation"),
+                             choices=[(k, v) for k, v in
+                                      VALUE_TYPES.iteritems()])
+    composite = forms.CharField(required=False,
+                                label="Composites",
+                                help_text=_("The other fields which comprise"
+                                            " this new field"))
     comments = forms.CharField(required=False, widget=widgets.Textarea,
                                label=_("Additional Comments"),
                                help_text=_(
                                    "Any additional information about your "
                                    "data or the issue you are experiencing"
                                    " that could be helpful"))
-
-    def clean_profile_json(self):
-        try:
-            return json.loads(self.cleaned_data.get("profile_json"))
-        except:
-            raise forms.ValidationError(_("Invalid profile description"))
+    exhibit_slug = forms.SlugField(required=True,
+                                label="Exhibit Slug",
+                                help_text=_("Slug for problematic Exhibit"))
