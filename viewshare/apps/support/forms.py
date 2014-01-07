@@ -1,7 +1,11 @@
+from urlparse import urlparse
 import logging
+
 from django import forms
+from django.core.urlresolvers import resolve, Resolver404
 from django.forms import widgets
 from django.utils.translation import ugettext_lazy as _
+
 from . import models
 
 LOGGER = logging.getLogger(__name__)
@@ -172,6 +176,30 @@ class AugmentationIssueForm(SupportIssueForm):
                                    "Any additional information about your "
                                    "data or the issue you are experiencing"
                                    " that could be helpful"))
-    exhibit_slug = forms.SlugField(required=True,
-                                label="Exhibit Slug",
-                                help_text=_("Slug for problematic Exhibit"))
+    editor_url = forms.URLField(required=True,
+                                label="Editor URL",
+                                help_text=_("URL to editor of "
+                                            "problematic Exhibit"))
+    exhibit_slug = forms.CharField(required=False)
+    exhibit_owner = forms.CharField(required=False)
+
+    def clean(self):
+        """
+        Use the cleaned 'editor_url' field to set cleaned_data for
+        the 'owner' and 'slug' fields.
+        """
+        cleaned_data = super(AugmentationIssueForm, self).clean()
+        editor_url = cleaned_data.get("editor_url")
+        url_error_msg = "Invalid editor URL."
+        try:
+            view_name, args, kwargs = resolve(urlparse(editor_url)[2])
+            owner = kwargs.get("owner")
+            slug = kwargs.get("slug")
+            if owner and slug:
+                cleaned_data["exhibit_owner"] = owner
+                cleaned_data["exhibit_slug"] = slug
+            else:
+                self.add_error("editor_url", url_error_msg)
+        except Resolver404:
+            self.add_error("editor_url", url_error_msg)
+        return cleaned_data

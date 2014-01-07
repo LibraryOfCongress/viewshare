@@ -128,8 +128,11 @@ class AugmentationIssueView(SupportFormView):
 
     def generate_context(self, request, form, *args, **kwargs):
         exhibit_slug = form.cleaned_data.get("exhibit_slug")
+        exhibit_owner = form.cleaned_data.get("exhibit_owner")
         # get Exhibit associated with this augmentation issue
-        exhibit = DraftExhibit.objects.get(slug=exhibit_slug)
+        exhibit = DraftExhibit.objects.get(
+            slug=exhibit_slug,
+            owner__username=exhibit_owner)
         # check that current user has access to this exhibit
         if exhibit.owner.username != request.user.username:
             return HttpResponseBadRequest()

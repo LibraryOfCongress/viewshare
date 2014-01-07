@@ -21,7 +21,7 @@ define(
     var demo = function() {
         var dataURL = $("link[rel='exhibit/data']").attr("href");
         var propURL = $("link[rel='freemix/property_list']").attr("href");
-        var exhibitSlug = $("link[rel='exhibit/slug']").attr("href");
+        var editorURL = window.location.href;
         var properties = new PropertyCollection({
             dataURL: dataURL,
             propertiesURL: propURL});
@@ -32,7 +32,7 @@ define(
         var augmentModal = new ModalAugmentView({model: properties});
         var augmentationError = new AugmentationSupportIssue({
             email: '',
-            exhibitSlug: exhibitSlug
+            editorURL: editorURL
         });
         properties.Observer('augmentDataFailure').subscribe(
             augmentationError.augmentDataFailureHandler.bind(augmentationError)
