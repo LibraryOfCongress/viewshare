@@ -200,6 +200,9 @@ class DatasetProfileEditView(OwnerSlugPermissionMixin, View):
             "profileurl": reverse('dataset_profile_json', kwargs=ds_kwargs),
             "cancel_url": reverse('dataset_summary', kwargs=ds_kwargs),
             "save_url": reverse('dataset_edit', kwargs=ds_kwargs),
+            "dataset_transaction_status_url": reverse(
+                "datasource_transaction_status",
+                kwargs={"uuid": dataset.source.uuid})
         }
 
         user = self.request.user
