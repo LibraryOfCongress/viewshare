@@ -303,7 +303,9 @@ class DraftExhibitView(View):
 
 class DraftExhibitPropertiesListView(DraftExhibitView, BaseJSONView):
     def get_doc(self):
-        qs = self.get_parent_object().properties.all()
+        # Return ExhibitProperty models that have PropertyData
+        qs = self.get_parent_object().properties\
+                .filter(data__isnull=False).all()
         serializer = ExhibitPropertyListSerializer(self.get_parent_object(),
                                                    queryset=qs)
         return json.dumps({"properties": serializer.data})
@@ -484,23 +486,29 @@ class DraftExhibitPropertyDataStatusView(DraftExhibitView):
         }
         transaction = get_object_or_404(AugmentTransaction, **lookup)
 
-        if not transaction.status in (models.TX_STATUS["failure"],
-                                      models.TX_STATUS["success"]):
-            return HttpResponse()
-        if transaction.result:
+        still_running_statuses = (models.TX_STATUS["pending"],
+                                  models.TX_STATUS["scheduled"],
+                                  models.TX_STATUS["running"])
+        if transaction.status == models.TX_STATUS["success"]:
             body = json.dumps(transaction.result)
+            response = HttpResponse(body, status=201)
+            data_url = reverse('draft_exhibit_property_data',
+                               kwargs={
+                               'owner': self.kwargs["owner"],
+                               'slug': self.kwargs["slug"],
+                               'property': self.kwargs["property"]
+                               })
+            response["Location"] = data_url
+            response["Content-Type"] = "application/json"
+            response["Expires"] = 0
+        elif transaction.status in still_running_statuses:
+            response = HttpResponse("{}")
+            response["Content-Type"] = "application/json"
         else:
-            body = '{}'
-        response = HttpResponse(body, status=201)
-        data_url = reverse('draft_exhibit_property_data',
-                           kwargs={
-                           'owner': self.kwargs["owner"],
-                           'slug': self.kwargs["slug"],
-                           'property': self.kwargs["property"]
-                           })
-        response["Location"] = data_url
-        response["Content-Type"] = "application/json"
-        response["Expires"] = 0
+            # transction has failed or been cancelled
+            body = json.dumps(transaction.result)
+            response = HttpResponse(body)
+            response["Content-Type"] = "application/json"
         return response
 
 

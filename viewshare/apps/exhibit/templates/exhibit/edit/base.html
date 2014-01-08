@@ -20,7 +20,7 @@
 
 
 {% block head_data %}
-    <link rel="exhibit-data" href="{% url 'draft_exhibit_all_data' owner=exhibit.owner slug=exhibit.slug %}"/>
+    <link rel="exhibit/data" href="{% url 'draft_exhibit_all_data' owner=exhibit.owner slug=exhibit.slug %}"/>
     <link rel="freemix/exhibit_profile" href="{{ exhibit_profile_url }}"/>
 {% endblock %}
 

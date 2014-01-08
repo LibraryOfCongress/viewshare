@@ -37,11 +37,18 @@ define([
          * @return {func} notificationFunc - The function to be fired
          * on 'eventName'. This is used for removeSubscription.
          */
-        addSubscription: function(observable, eventName, notificationLevel, message, lead) {
-            var notificationFunc = this.addNotification.bind(
-                this, notificationLevel, message, lead);
-                observable.Observer(eventName).subscribe(notificationFunc);
-                return notificationFunc;
+        addSubscription: function(
+            observable,
+            eventName,
+            notificationLevel,
+            message,
+            lead,
+            shouldFade
+        ) {
+            var notificationFunc = this.renderNotification.bind(
+                this, notificationLevel, message, lead, shouldFade);
+            observable.Observer(eventName).subscribe(notificationFunc);
+            return notificationFunc;
         },
 
         /** Remove a notification subscription
@@ -57,11 +64,22 @@ define([
         /**
          * Add a visual notification to the DOM
          * @param {string} notificationLevel - 'alert'|'info'|'error'
-         * @param {string} message - text to display in notification
+         * @param {string|object} message - text or instance of a View
+         * to display in the notification
          * @param {string} lead - (optional) lead text to display in bold
          */
-        addNotification: function(notificationLevel, message, lead) {
-            var notification, status = 'alert';
+        renderNotification: function(
+            notificationLevel,
+            message,
+            lead,
+            shouldFade
+        ) {
+            var editorAlert, notification, notificationMessage, isView;
+            var status = 'alert';
+            lead = lead || '';
+            if (typeof shouldFade !== 'boolean') {
+                shouldFade = true;
+            }
             if (notificationLevel === 'info') {
                 status = 'alert alert-info editor-notification';
             } else if (notificationLevel === 'error') {
@@ -69,23 +87,35 @@ define([
             } else if (notificationLevel === 'success') {
                 status = 'alert alert-success editor-notification';
             }
+            isView = typeof message.render === 'function';
+            if (isView) {
+                // this is a View that we'd like to render but we have to
+                // do it after the notification has been added to the dom
+                notificationMessage = '';
+            } else {
+                notificationMessage = message;
+            }
             notification = this.template({
                 status: status,
-                message: message,
+                message: notificationMessage,
                 lead: lead
             });
-            /* this.$el.prepend(notification); */
+            this.$el.append(notification);
+            if (isView) {
+                message.$el = this.$el.find('#notificationMsg');
+                message.render();
+            }
 
-            this.$el.empty().append(notification);
-
-            var editorAlert = this.$el.find(".editor-notification");
-
-            window.setTimeout(function () {
-                editorAlert.fadeOut(2000, "linear",
-                                    function() { 
-                                        editorAlert.remove();
-                                    });
-            }, 4000);
+            if (shouldFade === true) {
+                window.setTimeout(function () {
+                    this.$el.children().fadeOut(
+                        2000,
+                        "linear",
+                        function() {
+                            this.$el.empty();
+                        }.bind(this));
+                    }.bind(this), 4000);
+            }
         },
 
         /** Remove event bindings, child views, and DOM elements.
@@ -99,4 +129,3 @@ define([
 
     return NotificationView;
 });
-

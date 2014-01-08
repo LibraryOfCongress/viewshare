@@ -27,6 +27,7 @@ define(
 
     $.extend(ListAugmentView.prototype, {
         initialize: function(options) {
+            this.propertyCollection = options.propertyCollection;
             this.propertyOptions = options.propertyCollection.toOptions();
             this.$el = options.$el;
             this.newPatternProperty = new PatternPropertyModel({
@@ -38,6 +39,8 @@ define(
                 composite: [],
                 property_url: options.propertyCollection.propertiesURL
             });
+            this.newPatternProperty.Observer('augmentDataFailure')
+                .subscribe(this.augmentDataFailureHandler.bind(this));
         },
 
         /** Compile the template we will use to render the View */
@@ -73,6 +76,15 @@ define(
             this.newPatternProperty.delimiter = newDelimiter;
             this.newPatternProperty.augmentation = 'delimited-list';
             this.newPatternProperty.pattern = null;
+        },
+
+        /**
+         * Bubble up the 'augmentDataFailure' event from our
+         * newCompositeProperty to anything that might be interested
+         * (notificationView for example).
+         */
+        augmentDataFailureHandler: function(failure) {
+            this.propertyCollection.publishAugmentDataFailure(failure);
         },
 
         render: function() {

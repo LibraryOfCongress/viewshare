@@ -204,6 +204,15 @@ define(
             }
             this.properties.push(newProperty);
             this.Observer('newProperty').publish(newProperty);
+        },
+
+        /**
+         * Helper method used to trigger an 'augmentDataFailure' event.
+         * This is useful for other models or views that need to bubble
+         * up an augmentDataFailure event.
+         */
+        publishAugmentDataFailure: function(failedComposite) {
+            this.Observer('augmentDataFailure').publish(failedComposite);
         }
 
     });

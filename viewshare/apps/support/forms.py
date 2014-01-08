@@ -1,8 +1,14 @@
-import json
+from urlparse import urlparse
+import logging
+
 from django import forms
+from django.core.urlresolvers import resolve, Resolver404
 from django.forms import widgets
 from django.utils.translation import ugettext_lazy as _
+
 from . import models
+
+LOGGER = logging.getLogger(__name__)
 
 
 class SupportIssueForm(forms.Form):
@@ -149,20 +155,51 @@ class AugmentationIssueForm(SupportIssueForm):
     Requires that the `profile_json` field be populated with a JSON
     snapshot of the dataset
     """
-    profile_json = forms.CharField(required=True, widget=widgets.HiddenInput)
-    field_name = forms.CharField(required=False,
-                                 label="Augmented Field",
-                                 help_text=_("Enter a label to highlight"
-                                             " a particular field"))
+    from viewshare.apps.exhibit.models import VALUE_TYPES
+
+    label = forms.CharField(required=True,
+                            label="Augmented Field",
+                            help_text=_("Enter a label to highlight"
+                                        " a particular field"))
+    type = forms.ChoiceField(required=False,
+                             label="Augmentation Type",
+                             help_text=_("Type of augmentation"),
+                             choices=[(k, v) for k, v in
+                                      VALUE_TYPES.iteritems()])
+    composite = forms.CharField(required=False,
+                                label="Composites",
+                                help_text=_("The other fields which comprise"
+                                            " this new field"))
     comments = forms.CharField(required=False, widget=widgets.Textarea,
                                label=_("Additional Comments"),
                                help_text=_(
                                    "Any additional information about your "
                                    "data or the issue you are experiencing"
                                    " that could be helpful"))
+    editor_url = forms.URLField(required=True,
+                                label="Editor URL",
+                                help_text=_("URL to editor of "
+                                            "problematic Exhibit"))
+    exhibit_slug = forms.CharField(required=False)
+    exhibit_owner = forms.CharField(required=False)
 
-    def clean_profile_json(self):
+    def clean(self):
+        """
+        Use the cleaned 'editor_url' field to set cleaned_data for
+        the 'owner' and 'slug' fields.
+        """
+        cleaned_data = super(AugmentationIssueForm, self).clean()
+        editor_url = cleaned_data.get("editor_url")
+        url_error_msg = "Invalid editor URL."
         try:
-            return json.loads(self.cleaned_data.get("profile_json"))
-        except:
-            raise forms.ValidationError(_("Invalid profile description"))
+            view_name, args, kwargs = resolve(urlparse(editor_url)[2])
+            owner = kwargs.get("owner")
+            slug = kwargs.get("slug")
+            if owner and slug:
+                cleaned_data["exhibit_owner"] = owner
+                cleaned_data["exhibit_slug"] = slug
+            else:
+                self.add_error("editor_url", url_error_msg)
+        except Resolver404:
+            self.add_error("editor_url", url_error_msg)
+        return cleaned_data
