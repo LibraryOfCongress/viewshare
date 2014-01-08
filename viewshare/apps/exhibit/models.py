@@ -35,31 +35,6 @@ VALUE_TYPES = {
     "number": "number"
 }
 
-
-class Canvas(TitleSlugDescriptionModel):
-    """
-    A reference to a template that contains the HTML for an Exhibit canvas
-    """
-
-    location = models.CharField(_('location'), unique=True, max_length=100,
-                                help_text=_("Example: "
-                                            "'exhibit/canvas/"
-                                            "three-column.html'"))
-
-    thumbnail = models.URLField(_('thumbnail'))
-
-    enabled = models.BooleanField(_('enabled'), null=False, default=True)
-
-    def get_html(self):
-        return render_to_string(self.location, {})
-
-    def __unicode__(self):
-        return self.title
-
-    class Meta:
-        verbose_name_plural = "Canvases"
-
-
 def create_default_exhibit_profile():
     return {
         "facets": {},
@@ -77,8 +52,6 @@ def create_default_exhibit_profile():
 class Exhibit(TimeStampedModel):
 
     profile = JSONField()
-
-    canvas = models.ForeignKey(Canvas)
 
     owner = models.ForeignKey(User, null=True)
 
@@ -168,7 +141,6 @@ class PublishedExhibit(Exhibit):
         defaults = {
             'slug': self.slug,
             'profile': self.profile,
-            'canvas': self.canvas,
             'owner': self.owner,
             'is_draft': True,
         }
@@ -235,7 +207,6 @@ class DraftExhibit(Exhibit):
             'slug': self.slug})
 
     def publish(self):
-        self.parent.canvas = self.canvas
         self.parent.profile = self.profile
 
         self.parent.properties.all().delete()

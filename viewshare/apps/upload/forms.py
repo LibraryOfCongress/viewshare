@@ -17,11 +17,9 @@ class DataSourceForm(forms.ModelForm):
         instance = super(DataSourceForm, self).save(commit=False)
 
         if not hasattr(instance, 'exhibit'):
-            canvas = exhibit_models.Canvas.objects.all()[0]
             owner = self.user
             slug = str(uuid.uuid4())
             instance.exhibit = exhibit_models.DraftExhibit.objects.create(
-                canvas=canvas,
                 owner=owner,
                 slug=slug,
                 profile={}

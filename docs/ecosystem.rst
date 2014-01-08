@@ -60,9 +60,7 @@ Custom apps
     * viewshare.apps.augment
         * Stores and provides augmentation patterns for dataset cells. For example, a DataSet data cell may contain a list of values separated by a comma. This app provides a pattern that recognizes comma separated data and parses it accordingly.
     * freemix.exhibit
-        * An Exhibit is a visualization of a DataSet. An Exhibit consists of a Theme and a Canvas:
-            * Theme - color scheme of the Exhibit
-            * Canvas - layout of the Exhibit e.g. "A view container with a facet container to the left"
+        * An Exhibit is a visualization of a DataSet.
     * viewshare.apps.share
         * Allows an Exhibit owner to generate a unique obfuscated URL for their Exhibit.
 

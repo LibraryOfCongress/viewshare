@@ -197,8 +197,6 @@ class EmbeddedExhibitView(View):
 
         metadata = exhibit.profile
 
-        canvas = exhibit.canvas
-        canvas_html = render_to_string(canvas.location, {}).replace("\n", " ")
         data = exhibit.merge_data()
         link_url = reverse("exhibit_display", kwargs={
             'owner': owner,
@@ -211,8 +209,7 @@ class EmbeddedExhibitView(View):
             "description": json.dumps(exhibit.description),
             "metadata": json.dumps(metadata),
             "where": where,
-            "permalink": link_url,
-            "canvas": canvas_html})
+            "permalink": link_url})
         response['Content-Type'] = "application/javascript"
         response['Cache-Control'] = "no-cache, must-revalidate, public"
         return response
@@ -261,20 +258,6 @@ class PublishedExhibitListView(OwnerListView):
     model = models.PublishedExhibit
 
     related = ("owner", "owner__profile")
-
-
-class CanvasListView(ListView):
-    template_name = "exhibit/canvas_list.html"
-
-    def get_queryset(self):
-        return models.Canvas.objects.filter(enabled=True)
-
-    def get_context_data(self, **kwargs):
-        kwargs = super(CanvasListView, self).get_context_data(**kwargs)
-        kwargs["base_url"] = reverse("exhibit_create_editor",
-                                     kwargs={"owner": self.kwargs["owner"],
-                                             "slug": self.kwargs["slug"]})
-        return kwargs
 
 
 # Draft Editor Views
@@ -547,7 +530,6 @@ class DraftExhibitUpdateView(DraftExhibitView):
                                  kwargs=params)
 
         data_urls = exhibit.properties.get_data_urls()
-        canvas = exhibit.canvas
 
         if not self.check_perms():
             raise Http404()
@@ -556,7 +538,6 @@ class DraftExhibitUpdateView(DraftExhibitView):
             "exhibit_profile_url": profile_url,
             "dataset_properties": properties_url,
             "data_urls": data_urls,
-            "canvas": canvas,
             "owner": request.user.username,
             "exhibit": exhibit
         }
@@ -674,13 +655,11 @@ class PropertyEditorView(DraftExhibitView):
                                  kwargs=params)
 
         data_urls = exhibit.properties.get_data_urls()
-        canvas = exhibit.canvas
         context = {
             "exhibit_profile_url": profile_url,
             "dataset_properties": properties_url,
             "cancel_url": self.exhibit.get_absolute_url(),
             "data_urls": data_urls,
-            "canvas": canvas,
             "owner": request.user.username,
             "exhibit": exhibit
         }
