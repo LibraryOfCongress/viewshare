@@ -3,5 +3,6 @@
   "preserveLicenseComments": false,
   "wrap": false,
   "optimize": "uglify2",
-  "generateSourceMaps": true
+  "generateSourceMaps": true,
+  findNestedDependencies: true
 }

@@ -1,17 +1,15 @@
-var _base = "/static/";
 
 requirejs.config({
-    "baseUrl": _base,
-//    "urlArgs": "bust=" + new Date().valueOf(),
+    "baseUrl": "/static/",
     "config": {
         "exhibit": {
-            "prefix": _base + "simile/exhibit/",
+            "prefix": "/static/simile/exhibit/",
             "bundle": true,
             "autoCreate": false
         },
         "timeline": {
-            "prefix": _base + "simile/timeline/",
-            "ajax": _base + "simile/ajax/",
+            "prefix": "/static/simile/timeline/",
+            "ajax": "/static/simile/ajax/",
             "bundle": true
         },
         "ajax": {
@@ -19,19 +17,19 @@ requirejs.config({
         },
         "ext/time/time-extension": {
             "bundle": true,
-            "prefix": _base + "simile/exhibit/extensions/time/"
+            "prefix": "/static/simile/exhibit/extensions/time/"
         },
         "ext/map/map-extension": {
             "bundle": true,
-            "prefix": _base + "simile/exhibit/extensions/map/"
+            "prefix": "/static/simile/exhibit/extensions/map/"
         },
         "ext/openlayers/openlayers-extension": {
             "bundle": true,
-            "prefix": _base + "simile/exhibit/extensions/openlayers/"
+            "prefix": "/static/simile/exhibit/extensions/openlayers/"
         },
         "ext/flot/flot-extension": {
             "bundle": true,
-            "prefix": _base + "simile/exhibit/extensions/flot/"
+            "prefix": "/static/simile/exhibit/extensions/flot/"
         }
     },
     "paths": {
@@ -45,7 +43,6 @@ requirejs.config({
         "jquery-ui": "freemix/js/lib/jquery-ui",
         "ui.multiselect": "freemix/js/lib/ui.multiselect",
         "bootstrap": "freemix/js/lib/bootstrap",
-//        "jquery": 'freemix/js/lib/jquery',
         "jquery.cookie": "freemix/js/lib/jquery.cookie",
         "jquery.csrf": "freemix/js/lib/jquery.csrf",
         "jquery.highlight": "freemix/js/lib/jquery.highlight",
@@ -128,7 +125,8 @@ requirejs.config({
 });
 
 require(["simile/exhibit/exhibit-api"], function() {
-    require([
+
+    require(["jquery",
         "layout/editor",
         "layout/patch_exhibit",
         "freemix/js/patch_exhibit",
@@ -161,7 +159,8 @@ require(["simile/exhibit/exhibit-api"], function() {
         "jquery.form",
         "jquery.uuid",
         "jquery.json"
-    ], function(initialize) {
+    ], function($,initialize) {
+        $(document).trigger("scriptsLoaded.exhibit");
         initialize();
     });
 });

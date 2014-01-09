@@ -1,4 +1,4 @@
-define(["jquery", "exhibit", "display/views/registry", "ext/openlayers/openlayers-extension"],
+define(["jquery", "exhibit", "display/views/registry", "ext/openlayers/openlayers-extension", "openlayers"],
     function ($, Exhibit, ViewRegistry, MapExtension) {
         "use strict";
 

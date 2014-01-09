@@ -19,7 +19,7 @@ define(
     ) {
     'use strict';
     var demo = function() {
-        var dataURL = $("link[rel='exhibit/data']").attr("href");
+        var dataURL = $("link[rel='exhibit-data']").attr("href");
         var propURL = $("link[rel='freemix/property_list']").attr("href");
         var editorURL = window.location.href;
         var properties = new PropertyCollection({
