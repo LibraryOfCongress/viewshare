@@ -27,6 +27,7 @@ define(
        initialize: function(options) {
            this.model = options.model;
            this.$el = options.$el;
+           this.deleteModalView = undefined;
            // subscribe to model events
            this.model.Observer('loadDataSuccess').subscribe(
                this.render.bind(this)
@@ -70,17 +71,17 @@ define(
 
        /** Event handler for when the delete button is clicked */
        showDeleteModalHandler: function(event) {
-           var deleteModalView = new ModalView({
-               header: 'Delete ' + this.model.value + '?',
-               body: '<strong>Warning:</strong> This row of data will be deleted and cannot be recovered. Are you sure you want to delete this column?',
+           this.deleteModalView = new ModalView({
+               header: 'Delete "' + this.model.label + '"?',
+               body: '<div class="alert alert-warning"><strong>Warning:</strong> This row of data will be deleted and cannot be recovered. Are you sure you want to delete this column?</div>',
                buttonText: 'Delete Property',
                buttonFunction: this.deleteProperty.bind(this)
            });
-           deleteModalView.$el.on('hide.bs.modal', function (e) {
+           this.deleteModalView.$el.on('hide.bs.modal', function (e) {
                this.destroy();
-           }.bind(deleteModalView));
-           deleteModalView.render();
-           deleteModalView.$el.modal('show');
+           }.bind(this.deleteModalView));
+           this.deleteModalView.render();
+           this.deleteModalView.$el.modal('show');
            return false;
        },
 
@@ -146,6 +147,9 @@ define(
 
        /** Delete this.model and call destroy */
        deleteProperty: function() {
+           var animateDuration = 200;
+           this.deleteModalView.$el.modal('hide');
+           this.$el.hide(animateDuration);
            this.model.deleteProperty();
            this.destroy();
        },

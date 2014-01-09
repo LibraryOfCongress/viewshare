@@ -189,18 +189,16 @@ define(
             return errors;
         },
 
-        /** Return a simple object representation of this Property */
-        toJSON: function() {
-            return {
-                id: this._id,
-                valueType: this.type,
-                label: this.label
-            };
-        },
-
         /** Attempt to load data for this property from the server */
         deleteProperty: function() {
-            console.log("Hook up delete on the backend")
+            var xhr = $.ajax({
+                type: "DELETE",
+                url: this.propertyURL,
+                data: JSON.stringify(this.toJSON())
+            })
+            .done(this.updatePropertySuccess.bind(this))
+            .fail(this.updatePropertyError.bind(this));
+            return xhr;
         },
 
         /**
@@ -216,6 +214,15 @@ define(
             this.Observer('deletePropertyError').publish(
                 {status: textStatus, error: error});
         },
+
+        /** Return a simple object representation of this Property */
+        toJSON: function() {
+            return {
+                id: this._id,
+                valueType: this.type,
+                label: this.label
+            };
+        }
     });
 
     return PropertyModel;
