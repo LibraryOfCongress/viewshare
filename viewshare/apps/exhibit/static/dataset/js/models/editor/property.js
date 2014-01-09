@@ -196,7 +196,26 @@ define(
                 valueType: this.type,
                 label: this.label
             };
-        }
+        },
+
+        /** Attempt to load data for this property from the server */
+        deleteProperty: function() {
+            console.log("Hook up delete on the backend")
+        },
+
+        /**
+         * Load data for this model from successful JSON response
+         * @param {object} dataJSON - values for this property
+         */
+        deletePropertySuccess: function(dataJSON) {
+            this.Observer('deletePropertySuccess').publish(this);
+        },
+
+        /** Failed while deleting this property on the server */
+        deletePropertyError: function(jqxhr, textStatus, error) {
+            this.Observer('deletePropertyError').publish(
+                {status: textStatus, error: error});
+        },
     });
 
     return PropertyModel;
