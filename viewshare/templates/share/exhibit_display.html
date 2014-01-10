@@ -62,11 +62,33 @@
 <div id="contents" class="freemix-themeable">
 
   <div id="canvas">
-      {% include exhibit.canvas.location %}
+    <div xmlns:ex="http://simile.mit.edu/2006/11/exhibit#">
+
+      <div class="exhibit-wrap">
+        <div class="row-fluid">
+          <div class="span12">
+            <div id="top-facets" class="facet-container facet-container-horizontal"></div>
+          </div>
+        </div>
+
+        <div class="row-fluid">
+          <div class="span2">
+            <div id="left-facets" class="facet-container"></div>
+          </div>
+
+          <div class="span8">
+            <div id="views" class="view-container view-default"></div>
+          </div>
+
+          <div class="span2">
+            <div id="right-facets" class="facet-container"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
-
 </div>
-
 <div class="ui-helper-hidden">
   <div id="templates">
   </div>

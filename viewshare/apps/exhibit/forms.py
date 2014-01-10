@@ -36,7 +36,6 @@ class CreateExhibitForm(forms.ModelForm):
     def save(self, commit=True):
         instance = super(CreateExhibitForm, self).save(commit=False)
         instance.owner = self.draft.owner
-        instance.canvas = self.draft.canvas
         instance.save()
 
         try:

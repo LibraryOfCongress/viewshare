@@ -33,9 +33,7 @@ class SharedExhibitDisplayView(DetailView):
     def get_object(self, queryset=None):
         if queryset is None:
             queryset = self.get_queryset()
-        queryset = queryset.select_related("exhibit__theme",
-                                           "exhibit__canvas",
-                                           "exhibit__owner")
+        queryset = queryset.select_related("exhibit__owner")
         obj = get_object_or_404(queryset, slug=self.kwargs.get("slug"))
         return obj
 

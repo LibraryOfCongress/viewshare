@@ -83,7 +83,7 @@ class PublishedExhibitView(OwnerSlugPermissionMixin, DetailView):
 
 class PublishedExhibitDisplayView(PublishedExhibitView):
 
-    select_related = ("owner", "canvas")
+    select_related = ("owner", )
 
     def delete(self, request, *args, **kwargs):
         exhibit = self.get_object()
