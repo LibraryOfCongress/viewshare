@@ -1035,59 +1035,162 @@ div.simileAjax-bubble-container {
 }
 
 
-/* Expand widget editor modal full-screen */
 
-.widget-editor {
-    /*display: block;*/
-    width: 96% !important;
-    left: 1% !important;
-    margin: 1% !important;
-    height: 920px !important;
+/* widget edit modal */
+
+.widget-editor-modal {
+    width: 960px !important;
+    height: 660px !important;
+    margin-left: -480px;
+    min-height: 660px !important;
+    top: 10%;
+    left: 50%;
+  
+ }
+
+.widget-editor-modal .modal-body {
+    height: 100% !important; 
+    min-height: 100% !important;
+    max-height: 100% !important;
+    width: 99% !important;
+    position: absolute;
+}
+
+/* Expand view editor modal full-screen */
+
+.full-screen-modal {
+    width: 98% !important;
+    height: 96% !important;
+    min-height: 760px !important;
+    margin: 0;
     margin-top: 1% !important;
     top: 1% !important;
+    bottom: 1% !important;
+    left: 1% !important;
+    position: absolute; 
 }
 
-.widget-editor .modal-body {
-    max-height: 740px !important; 
-    width: 101% !important;
-    overflow: hidden; 
+.full-screen-modal .modal-body {
+    height: 100% !important; 
+    min-height: 100% !important;
+    max-height: 100% !important;
+    width: 99% !important;
+    position: absolute;
 }
 
-.widget-editor .modal-header {
-   width: 100% !important;
+.full-screen-modal .modal-header {
+   width: 98% !important;
 }
 
-.widget-editor .modal-footer {
-  width: 100% !important;
+.full-screen-modal .modal-footer {
+  width: 98% !important;
   background-color: #FFFFFF;
+
 }
 
-/* facet and widget edit settings */
+/* view / widget side nav bar */
 
 .widget-edit-dialog .widget-edit-nav {
      max-width: 120px;
      float:left;
 }		    
 
-.widget-edit-dialog .widget-edit-settings-body {
+/* layout view modal / full-screen modal settings */
+
+.full-screen-modal .widget-edit-dialog .widget-edit-settings-body {
      width: 480px !important;
      float: left;
 }		    
 
-.widget-edit-dialog .widget-edit-preview {
+.full-screen-modal .widget-edit-dialog .widget-edit-preview {
   padding-left: 640px !important;
 }		    
 
-
-.widget-edit-preview .widget-preview-body {
-  height: 640px !important;
-  max-height: 640px !important;
+.full-screen-modal .widget-preview-body {
+  height: 600px !important; 
+  max-height: 600px !important; 
   overflow: auto;
 }
 
- .widget-edit-settings .widget-edit-settings-body {
-  height: 700px !important;
-  max-height: 700px !important;
+.full-screen-modal .widget-edit-settings-body {
+  height: 640px !important; 
+  max-height: 640px !important; 
+  overflow: auto;
+}
+
+/* minor text adjustments */
+
+.full-screen-modal .widget-edit-settings-body legend {
+ font-size: 120%;
+ padding: 0 0 0 0;
+ margin-bottom: 10px;
+ line-height: 30px;
+ margin-left: -20px;
+ color: slategrey;
+ font-weight: bold;
+ }
+
+.full-screen-modal .widget-edit-preview legend {
+ font-size: 120%;
+ padding: 0 0 0 0;
+ margin-bottom: 20px;
+ line-height: 30px;
+ color: slategrey;
+ font-weight: bold;
+ }
+
+.widget-editor-modal .widget-edit-settings-body legend {
+ font-size: 120%;
+ padding: 0 0 0 0;
+ margin-bottom: 10px;
+ line-height: 30px;
+ color: slategrey;
+ font-weight: bold;
+ }
+
+.widget-editor-modal .widget-edit-preview legend {
+ font-size: 120%;
+ padding: 0 0 0 0;
+ margin-bottom: 20px;
+ line-height: 30px;
+ color: slategrey;
+ font-weight: bold;
+ }
+
+/* minor tweaks to widget layout */
+
+.widget-editor-modal textarea {
+  width: 95%;
+  height: 400px;
+}
+
+.widget-editor-modal .ui-slider {
+  width: 80%;
+}
+
+
+/* layout widget modal settings */
+
+
+.widget-editor-modal .widget-edit-dialog .widget-edit-settings-body {
+     width: 320px !important;
+     float: left;
+}		    
+
+.widget-editor-modal .widget-edit-dialog .widget-edit-preview {
+  padding-left: 480px !important;
+}		    
+
+.widget-editor-modal .widget-preview-body {
+  height: 490px !important; 
+  max-height: 490px !important; 
+  overflow: auto;
+}
+
+.widget-editor-modal .widget-edit-settings-body {
+  height: 540px !important; 
+  max-height: 540px !important; 
+  overflow: auto;
 }
 
 
