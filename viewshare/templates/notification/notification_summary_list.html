@@ -30,7 +30,13 @@
   
 {% else %}
 {% url 'notification_notices' as notices_url %}
-<p class="center">{% blocktrans %}You have no unseen <a href="{{ notices_url }}">notices</a>.{% endblocktrans %}</p>
+<div class="alert alert-info">
+<div class="row-fluid">
+<div class="span12">
+{% blocktrans %}You have no unseen <a href="{{ notices_url }}">notices</a>.{% endblocktrans %}
+</div>
+</div>
+</div>
 {% endif %}
   
 {% if queryset %}
