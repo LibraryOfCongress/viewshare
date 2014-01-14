@@ -189,6 +189,32 @@ define(
             return errors;
         },
 
+        /** Attempt to load data for this property from the server */
+        deleteProperty: function() {
+            var xhr = $.ajax({
+                type: "DELETE",
+                url: this.propertyURL,
+                data: JSON.stringify(this.toJSON())
+            })
+            .done(this.deletePropertySuccess.bind(this))
+            .fail(this.deletePropertyError.bind(this));
+            return xhr;
+        },
+
+        /**
+         * Load data for this model from successful JSON response
+         * @param {object} dataJSON - values for this property
+         */
+        deletePropertySuccess: function(dataJSON) {
+            this.Observer('deletePropertySuccess').publish(this);
+        },
+
+        /** Failed while deleting this property on the server */
+        deletePropertyError: function(jqxhr, textStatus, error) {
+            this.Observer('deletePropertyError').publish(
+                {status: textStatus, error: error});
+        },
+
         /** Return a simple object representation of this Property */
         toJSON: function() {
             return {

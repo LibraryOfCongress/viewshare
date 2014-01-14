@@ -3,10 +3,12 @@ define(
     [
        'handlebars',
        'jquery',
+        'views/modal-view',
        'text!templates/property.html'
     ], function (
         Handlebars,
         $,
+        ModalView,
         propertyTemplate
     ) {
    'use strict';
@@ -25,6 +27,7 @@ define(
        initialize: function(options) {
            this.model = options.model;
            this.$el = options.$el;
+           this.deleteModalView = undefined;
            // subscribe to model events
            this.model.Observer('loadDataSuccess').subscribe(
                this.render.bind(this)
@@ -66,6 +69,22 @@ define(
            return false;
        },
 
+       /** Event handler for when the delete button is clicked */
+       showDeleteModalHandler: function(event) {
+           this.deleteModalView = new ModalView({
+               header: 'Delete "' + this.model.label + '"?',
+               body: '<div class="alert alert-warning"><strong>Warning:</strong> This data will be deleted and cannot be recovered. Are you sure you want to delete this property?</div>',
+               buttonText: 'Delete Property',
+               buttonFunction: this.deleteProperty.bind(this)
+           });
+           this.deleteModalView.$el.on('hide.bs.modal', function (e) {
+               this.destroy();
+           }.bind(this.deleteModalView));
+           this.deleteModalView.render();
+           this.deleteModalView.$el.modal('show');
+           return false;
+       },
+
        /** Re-render the value of the PropertyModel */
        renderValue: function() {
            var animateDuration = 200;
@@ -87,6 +106,7 @@ define(
        /** Add this view to the DOM */
        render: function(args) {
            this.$el.html(this.template({
+               id: this.model.id(),
                label: this.label(),
                type: this.type(),
                value: this.value(),
@@ -97,6 +117,8 @@ define(
                'change', this.changeLabelHandler.bind(this));
            this.$el.find('.types select').on(
                'change', this.changeTypeHandler.bind(this));
+           this.$el.find('#delete-' + this.model.id()).on(
+               'click', this.showDeleteModalHandler.bind(this));
            return this;
        },
 
@@ -123,12 +145,23 @@ define(
                return selected;
        },
 
+       /** Delete this.model and call destroy */
+       deleteProperty: function() {
+           var animateDuration = 200;
+           this.deleteModalView.$el.modal('hide');
+           this.$el.hide(animateDuration);
+           this.model.deleteProperty();
+           this.destroy();
+       },
+
        /** Remove event bindings, child views, and DOM elements */
        destroy: function() {
-           var inputs = this.$el.find('.name input'),
-           types = this.$el.find('.types select');
+           var inputs = this.$el.find('.name input');
+           var types = this.$el.find('.types select');
+           var deleteBtn = this.$el.find('#delete-' + this.model.id());
            inputs.off('change');
            types.off('change');
+           deleteBtn.off('click');
            this.model.Observer('changeCurrentItem').unsubscribe(
                this.changeValueHandler);
            this.$el.empty();

@@ -29,39 +29,6 @@
     </table>
   </div>
 </div>
-
-<!-- table edit modals ... move to separate file? -->
-
-<div id="deleteEditorRowModal" class="delete_editor_row_dialog modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myEditorDeleteRowModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3 id="myDeleteModalLabel">Delete Row of Data</h3>
-  </div>
-  
-  <div class="modal-body">
-    <div class="delete_exhibit_form alert alert-warning">
-      <p><strong>Warning:</strong> This row of data will be deleted and cannot be recovered. Are you sure you want to delete?</p>
-    </div>
-  </div>
-  
-  <div class="modal-footer">
-    <a href="#" class='button_link ok-button btn btn-small btn-warning' title='OK'>Delete</a>
-    <a href="#" class='button_link negative-button cancel-button btn btn-small btn-primary' data-dismiss="modal" class="close" title='Cancel'>Cancel</a>
-  </div>
-</div>
-
-<!-- change javascript to remove row from table and data from Exhibit database -->
-<!-- set 'this' via rel in modal trigger button (mirror other modal paterns). If 'delete' selected in modal extract rel and remove row from display -->
-
-<script type="text/javascript">
-  function deleteRow(r) 
-  {
-  var i=r.parentNode.parentNode.rowIndex;
-  document.getElementById('editor-table').deleteRow(i);
-  }
-</script>
-
-
 {{ else }}
 <div class="alert alert-block">
   <h4>Warning!</h2>
