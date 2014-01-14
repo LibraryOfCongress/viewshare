@@ -2,6 +2,10 @@
 {% load announcements_tags %}
 {% load compress %}
 {% load i18n %}
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +16,7 @@
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
   <script>
     if (!window.jQuery) {
-      document.write('<script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.js"><\/script>');
+      document.write('<script type="text/javascript" src="{{STATIC_PREFIX}}freemix/js/lib/jquery.js"><\/script>');
     }
   </script>
   {% endblock %}
@@ -81,12 +85,12 @@
   </div> <!-- /.container-fluid -->
   {% block base_scripts %}
   {% compress js %}
-  <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.highlight.js"></script>
-  <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.csrf.js"></script>
-  <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/jquery.cookie.js"></script>
-  <script type="text/javascript" src="{{STATIC_URL}}freemix/js/lib/bootstrap.js"></script>
-  <script type="text/javascript" src="{{STATIC_URL}}viewshare/js/compatible.js"></script>
-  <script type="text/javascript" src="{{STATIC_URL}}viewshare/js/ui.js"></script>
+  <script type="text/javascript" src="{{STATIC_PREFIX}}freemix/js/lib/jquery.highlight.js"></script>
+  <script type="text/javascript" src="{{STATIC_PREFIX}}freemix/js/lib/jquery.csrf.js"></script>
+  <script type="text/javascript" src="{{STATIC_PREFIX}}freemix/js/lib/jquery.cookie.js"></script>
+  <script type="text/javascript" src="{{STATIC_PREFIX}}freemix/js/lib/bootstrap.js"></script>
+  <script type="text/javascript" src="{{STATIC_PREFIX}}viewshare/js/compatible.js"></script>
+  <script type="text/javascript" src="{{STATIC_PREFIX}}viewshare/js/ui.js"></script>
   {% endcompress %}
   {% endblock base_scripts %}
   {% block extra_scripts %}{% endblock %}

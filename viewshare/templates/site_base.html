@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 {% load url from future %}
-
-
+{% load static %}
 {% load i18n %}
-{% load viewshare_helpers %}
 {% load compress %}
 {% load cache %}
+
+{% get_static_prefix as STATIC_PREFIX %}
+
+
 
 {% block rss_feeds %}
     <link href="/feeds/latest_views/" type="application/rss+xml" rel="alternate" title="Latest Data View RSS News Feed" />
@@ -16,12 +18,12 @@
 
 {% block head_css %}
     {% compress css %}
-    <link href="{{STATIC_URL}}freemix/css/bootstrap.css" rel="stylesheet" type="text/css" media="screen,projection" />
-    <link href="{{STATIC_URL}}freemix/css/bootstrap-responsive.css" rel="stylesheet" type="text/css" media="screen,projection" />
-    <link href="{{STATIC_URL}}viewshare/css/style.css" rel="stylesheet" type="text/css" media="screen,projection" />
-    <link href="{{STATIC_URL}}viewshare/css/lc.css" rel="stylesheet" type="text/css" media="screen,projection" />
-    <link href="{{STATIC_URL}}viewshare/css/base.css" rel="stylesheet" type="text/css" media="screen,projection" />
-    <link href="{{STATIC_URL}}viewshare/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="screen,projection" />
+    <link href="{{STATIC_PREFIX}}freemix/css/bootstrap.css" rel="stylesheet" type="text/css" media="screen,projection" />
+    <link href="{{STATIC_PREFIX}}freemix/css/bootstrap-responsive.css" rel="stylesheet" type="text/css" media="screen,projection" />
+    <link href="{{STATIC_PREFIX}}viewshare/css/style.css" rel="stylesheet" type="text/css" media="screen,projection" />
+    <link href="{{STATIC_PREFIX}}viewshare/css/lc.css" rel="stylesheet" type="text/css" media="screen,projection" />
+    <link href="{{STATIC_PREFIX}}viewshare/css/base.css" rel="stylesheet" type="text/css" media="screen,projection" />
+    <link href="{{STATIC_PREFIX}}viewshare/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="screen,projection" />
     {%endcompress %}
 {% endblock head_css %}
 
@@ -84,7 +86,7 @@
 </span>
 
 <span class="sponsornav right">
-    <span class="sponsor">{{ SITE_NAME }} is a service provided by <a href="http://loc.gov/" title="Library of Congress"><img id="lc-logo" src="{{ STATIC_URL }}images/lc-logo.png" /></a></span>
+    <span class="sponsor">{{ SITE_NAME }} is a service provided by <a href="http://loc.gov/" title="Library of Congress"><img id="lc-logo" src="{{ STATIC_PREFIX }}images/lc-logo.png" /></a></span>
  </span>
 </div>
 
