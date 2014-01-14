@@ -73,7 +73,7 @@ define(
        showDeleteModalHandler: function(event) {
            this.deleteModalView = new ModalView({
                header: 'Delete "' + this.model.label + '"?',
-               body: '<div class="alert alert-warning"><strong>Warning:</strong> This row of data will be deleted and cannot be recovered. Are you sure you want to delete this column?</div>',
+               body: '<div class="alert alert-warning"><strong>Warning:</strong> This data will be deleted and cannot be recovered. Are you sure you want to delete this property?</div>',
                buttonText: 'Delete Property',
                buttonFunction: this.deleteProperty.bind(this)
            });

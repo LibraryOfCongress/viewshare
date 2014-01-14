@@ -74,14 +74,26 @@ define(
             property,
             'updatePropertySuccess',
             'success',
-            'Your change has been saved to a draft on the server.',
+            'Changes to "' + property.label + '" have been saved to the server.',
             'Data saved successfully!');
         notificationView.addSubscription(
             property,
             'updatePropertyError',
             'error',
-            'Changes you made were not able to save to the server.',
-            'There was a problem!');
+            'Changes to "' + property.label + '" were not able to be saved. Please try again later.',
+            "We're experiencing service issues.");
+        notificationView.addSubscription(
+            property,
+            'deletePropertySuccess',
+            'success',
+            '"' + property.label + '" has been deleted.',
+            'Property deleted successfully!');
+        notificationView.addSubscription(
+            property,
+            'deletePropertyError',
+            'error',
+            'Changes to "' + property.label + '" were not able to be saved. Please try again later.',
+            "We're experiencing service issues.");
     };
 
     return demo;

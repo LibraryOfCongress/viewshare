@@ -196,8 +196,8 @@ define(
                 url: this.propertyURL,
                 data: JSON.stringify(this.toJSON())
             })
-            .done(this.updatePropertySuccess.bind(this))
-            .fail(this.updatePropertyError.bind(this));
+            .done(this.deletePropertySuccess.bind(this))
+            .fail(this.deletePropertyError.bind(this));
             return xhr;
         },
 
