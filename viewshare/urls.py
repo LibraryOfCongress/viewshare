@@ -13,9 +13,6 @@ from viewshare.utilities import feeds
 
 admin.autodiscover()
 
-# override context-less 500
-handler500 = 'viewshare.utilities.views.server_error'
-
 urlpatterns = patterns('',
 
     (r'^account/', include('viewshare.apps.account.urls')),
