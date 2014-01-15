@@ -1,19 +1,16 @@
-{% load i18n %}
-<script type="text/template"  id="tagcloud-facet-editor">
-
   <form>
     <fieldset>
-      <legend>{% trans "TagCloud Settings" %}</legend>
+      <legend>TagCloud Settings</legend>
       
       <div class="control-group">
-        <label class="control-label" for="facet_name">{% trans "Title" %}:</label>
+        <label class="control-label" for="facet_name">Title:</label>
         <div class="controls">
           <input id="facet_name" class="textinput" type="text" name="facet_name"/>
         </div>
       </div>
 
       <div class="control-group">
-        <label class="control-label" for="facet_property">{% trans "Property" %}:</label>
+        <label class="control-label" for="facet_property">Property:</label>
         <div class="controls">
           <select id="facet_property"></select>
         </div>
@@ -21,5 +18,3 @@
       
     </fieldset>
   </form>
-
-</script>

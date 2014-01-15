@@ -1,5 +1,6 @@
-define(["jquery", "display/facets/tagcloud", "exhibit"],
-        function ($, Facet, Exhibit) {
+define(["jquery", "handlebars", "display/facets/tagcloud", "exhibit",
+        "text!templates/layout/facets/tagcloud-facet-editor.html"],
+        function ($, Handlebars, Facet, Exhibit, template_html) {
         "use strict"
 
     Facet.prototype.facetClass = Exhibit.CloudFacet;
@@ -8,7 +9,7 @@ define(["jquery", "display/facets/tagcloud", "exhibit"],
     Facet.prototype.icon_class = "fa fa-tags fa-3x";
 
     Facet.prototype.label = "Tag Cloud";
-    Facet.prototype.template_name = "tagcloud-facet-editor";
+    Facet.prototype.template = Handlebars.compile(template_html);
     Facet.prototype.setupEditor = function(config, template) {
         var facet = this;
         var property = template.find("#facet_property");

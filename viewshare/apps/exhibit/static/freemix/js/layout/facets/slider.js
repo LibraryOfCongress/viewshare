@@ -1,5 +1,6 @@
-define(["jquery", "display/facets/slider", "exhibit"],
-        function ($, Facet, Exhibit) {
+define(["jquery", "handlebars", "display/facets/slider", "exhibit",
+        "text!templates/layout/facets/slider-facet-editor.html"],
+        function ($, Handlebars, Facet, Exhibit, template_html) {
         "use strict"
 
     Facet.prototype.facetClass = Exhibit.SliderFacet;
@@ -8,7 +9,7 @@ define(["jquery", "display/facets/slider", "exhibit"],
     Facet.prototype.icon_class = "fa fa-trello fa-3x";
 
     Facet.prototype.label = "Slider";
-    Facet.prototype.template_name = "slider-facet-editor";
+    Facet.prototype.template = Handlebars.compile(template_html);
 
     Facet.prototype.setupEditor = function(config, template) {
         var facet = this;

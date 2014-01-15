@@ -1,14 +1,16 @@
 define(["jquery",
+        "handlebars",
         "display/facets/text",
         "exhibit",
+        "text!templates/layout/facets/text-facet-editor.html",
         "freemix/js/lib/creole"],
-        function ($, Facet, Exhibit) {
+        function ($, Handlebars, Facet, Exhibit, template_html) {
         "use strict"
 
     Facet.prototype.icon_class = "fa fa-font fa-3x";
 
     Facet.prototype.label = "Text";
-    Facet.prototype.template_name="text-facet-editor";
+    Facet.prototype.template = Handlebars.compile(template_html);
 
     Facet.prototype.refresh = function () {
         var facet = this;

@@ -1,7 +1,9 @@
 define(["jquery",
         "display/views/scatterplot",
-        "ext/flot/scripts/scatterplot-view"],
-        function ($, View, ScatterPlotView) {
+        "ext/flot/scripts/scatterplot-view",
+        "handlebars",
+        "text!templates/layout/views/scatterplot-view.html"],
+        function ($, View, ScatterPlotView, Handlebars, template_html) {
         "use strict"
 
     View.prototype.propertyTypes = ["number", "currency"];
@@ -11,7 +13,7 @@ define(["jquery",
 
     View.prototype.viewClass = ScatterPlotView;
 
-    View.prototype.template_name = "scatterplot-view-template";
+    View.prototype.template = Handlebars.compile(template_html);
 
     View.prototype.setupEditor = function (config, template) {
 

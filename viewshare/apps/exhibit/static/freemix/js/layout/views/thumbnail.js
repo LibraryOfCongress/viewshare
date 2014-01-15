@@ -1,7 +1,9 @@
 define(["jquery",
         "display/views/thumbnail",
-        "scripts/ui/views/thumbnail-view"],
-        function ($, View, ThumbnailView) {
+        "scripts/ui/views/thumbnail-view",
+        "handlebars",
+        "text!templates/layout/views/thumbnail-view.html"],
+        function ($, View, ThumbnailView, Handlebars, template_html) {
         "use strict"
 
     View.prototype.label = "Gallery";
@@ -9,7 +11,7 @@ define(["jquery",
     View.prototype.icon_class = "fa fa-camera-retro fa-3x";
 
     View.prototype.viewClass = ThumbnailView;
-    View.prototype.template_name = "thumbnail-view-template";
+    View.prototype.template = Handlebars.compile(template_html);
 
     View.prototype._setupTitlePropertyEditor = function(config, template) {
         config = config||this.config;

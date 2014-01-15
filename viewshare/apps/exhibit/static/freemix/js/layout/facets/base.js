@@ -66,7 +66,7 @@ define(["jquery",
     BaseFacet.prototype.showEditor = function(template){
         var model = this;
         var config = $.extend(true, {}, model.config);
-        var form = Freemix.getTemplate(this.template_name);
+        var form = $(this.template());
         template.find(".widget-edit-settings-body").empty().append(form);
 
         form.submit(function() {return false;});

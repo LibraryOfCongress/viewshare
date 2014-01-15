@@ -1,31 +1,28 @@
-{% load i18n %}
-<script type="text/template"  id="logo-facet-editor">
-
   <form>
     <fieldset>
-      <legend>{% trans "Logo Settings" %}</legend>
+      <legend>Logo Settings</legend>
 
       <div class="control-group">
-        <label class="control-label" for="id_src">{% blocktrans %}Image&nbsp;URL:{% endblocktrans %}</label>
+        <label class="control-label" for="id_src">Image&nbsp;URL:</label>
         <div class="controls">
           <input id="id_src" class="textinput" type="text"  name="src"/>
           <span class='help-inline '>Enter a valid image URL.</span>
         </div>
       </div>
       <div class="control-group">
-        <label class="control-label" for="id_alt">{% blocktrans %}Alternate&nbsp;Text:{% endblocktrans %}</label>
+        <label class="control-label" for="id_alt">Alternate&nbsp;Text:</label>
         <div class="controls">
           <input id="id_alt" type="text" name="alt"/>
         </div>
       </div>
       <div class="control-group">
-        <label class="control-label" for="id_href">{% blocktrans %}Destination&nbsp;URL:{% endblocktrans %}</label>
+        <label class="control-label" for="id_href">Destination&nbsp;URL:</label>
         <div class="controls">
           <input id="id_href" class="textinput" type="text"  name="href"/>
         </div>
       </div>
       <div class="control-group slider">
-        <label class="control-label" for="logo-facet-size">{% trans "Dimension" %}:</label>
+        <label class="control-label" for="logo-facet-size">Dimension:</label>
         <div class="controls">
           <div id="logo-facet-slider"></div>
 
@@ -35,6 +32,3 @@
 
     </fieldset>
   </form>
-
-
-</script>
