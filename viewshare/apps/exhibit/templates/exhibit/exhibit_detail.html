@@ -74,7 +74,7 @@
 		<div class="span2">
 		  <div class="pull-right">
 		    <div class="widget-links btn-group">
-		      <a class="exhibit_clone btn btn-small btn-info" href="#todo">{% trans "Refresh" %}</a>
+		      <a class="exhibit_clone btn btn-small btn-info" href="{% url 'update_datasource' slug=exhibit.slug owner=exhibit.owner.username %}">{% trans "Refresh" %}</a>
 		    </div>
 		  </div>
 		</div>
