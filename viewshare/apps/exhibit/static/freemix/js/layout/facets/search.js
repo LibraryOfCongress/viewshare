@@ -1,12 +1,13 @@
-define(["jquery", "display/facets/search", "exhibit"],
-        function ($, Facet, Exhibit) {
+define(["jquery", "handlebars", "display/facets/search", "exhibit",
+        "text!templates/layout/facets/search-facet-editor.html"],
+        function ($, Handlebars, Facet, Exhibit, template_html) {
         "use strict"
 
     Facet.prototype.facetClass = Exhibit.TextSearchFacet;
     Facet.prototype.icon_class = "fa fa-search fa-3x";
 
     Facet.prototype.label = "Search";
-    Facet.prototype.template_name = "search-facet-editor";
+    Facet.prototype.template = Handlebars.compile(template_html);
 
     Facet.prototype.setupEditor = function(config, template) {
         var facet = this;

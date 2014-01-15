@@ -1,5 +1,6 @@
-define(["jquery", "display/facets/numeric", "exhibit"],
-        function ($, Facet, Exhibit) {
+define(["jquery", "handlebars", "display/facets/numeric", "exhibit",
+        "text!templates/layout/facets/numeric-facet-editor.html"],
+        function ($, Handlebars, Facet, Exhibit, template_html) {
         "use strict"
 
     Facet.prototype.facetClass = Exhibit.NumericRangeFacet;
@@ -7,7 +8,7 @@ define(["jquery", "display/facets/numeric", "exhibit"],
     Facet.prototype.icon_class = "fa fa-tasks fa-3x";
 
     Facet.prototype.label = "Range";
-    Facet.prototype.template_name = "numeric-facet-editor";
+    Facet.prototype.template = Handlebars.compile(template_html);
 
     Facet.prototype.setupEditor = function (config, template) {
         var facet = this;

@@ -1,14 +1,16 @@
 define(["jquery",
         "display/views/barchart",
-        "ext/flot/scripts/barchart-view"],
-        function ($, View, BarChartView) {
+        "ext/flot/scripts/barchart-view",
+        "handlebars",
+        "text!templates/layout/views/barchart-view.html"],
+        function ($, View, BarChartView, Handlebars, template_html) {
         "use strict"
 
     View.prototype.label = "Bar Chart";
     View.prototype.icon_class = "fa fa-bar-chart-o fa-3x";
 
     View.prototype.viewClass = BarChartView;
-    View.prototype.template_name = "barchart-view-template";
+    View.prototype.template = Handlebars.compile(template_html);
 
     // Display the view's UI.
     View.prototype.setupEditor = function(config, template) {

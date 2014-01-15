@@ -1,13 +1,15 @@
 define(["jquery",
         "display/views/timeline",
-        "ext/time/scripts/timeline-view"],
-        function ($, View, TimelineView) {
+        "ext/time/scripts/timeline-view",
+        "handlebars",
+        "text!templates/layout/views/timeline-view.html"],
+        function ($, View, TimelineView, Handlebars, template_html) {
         "use strict"
 
     View.prototype.label = "Timeline";
     View.prototype.propertyTypes = ["date"];
     View.prototype.viewClass = TimelineView;
-    View.prototype.template_name = "timeline-view-template";
+    View.prototype.template = Handlebars.compile(template_html);
     View.prototype.icon_class = "fa fa-align-center fa-3x";
 
 

@@ -1,9 +1,9 @@
-define(["jquery", "display/facets/logo", "exhibit"],
-        function ($, Facet, Exhibit) {
+define(["jquery", "handlebars", "display/facets/logo", "exhibit", "text!templates/layout/facets/logo-facet-editor.html"],
+        function ($, Handlebars, Facet, Exhibit, template_html) {
         "use strict"
 
     Facet.prototype.label = "Logo";
-    Facet.prototype.template_name = "logo-facet-editor";
+    Facet.prototype.template = Handlebars.compile(template_html);
     Facet.prototype.icon_class = "fa fa-picture-o fa-3x";
 
 

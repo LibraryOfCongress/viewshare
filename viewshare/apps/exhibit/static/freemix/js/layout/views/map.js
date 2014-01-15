@@ -1,7 +1,9 @@
 define(["jquery",
         "display/views/map",
-        "ext/openlayers/scripts/openlayers-view"],
-        function ($, View, OLMapView) {
+        "ext/openlayers/scripts/openlayers-view",
+        "handlebars",
+        "text!templates/layout/views/map-view.html"],
+        function ($, View, OLMapView, Handlebars, template_html) {
         "use strict"
 
     View.prototype.propertyTypes = ["location"];
@@ -12,7 +14,7 @@ define(["jquery",
 
     View.prototype.viewClass = OLMapView;
 
-    View.prototype.template_name = "map-view-template";
+    View.prototype.template = Handlebars.compile(template_html);
 
     View.prototype.setupEditor = function (config, template) {
 

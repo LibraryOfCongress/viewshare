@@ -1,14 +1,16 @@
 define(["jquery",
         "display/views/piechart",
-        "ext/flot/scripts/piechart-view"],
-        function ($, View, PiechartView) {
+        "ext/flot/scripts/piechart-view",
+        "handlebars",
+        "text!templates/layout/views/piechart-view.html"],
+        function ($, View, PiechartView, Handlebars, template_html) {
         "use strict"
 
     View.prototype.label = "Pie Chart";
     View.prototype.icon_class = "fa fa-adjust fa-3x";
 
     View.prototype.viewClass = PiechartView;
-    View.prototype.template_name = "piechart-view-template";
+    View.prototype.template = Handlebars.compile(template_html);
 
     // Display the view's UI.
     View.prototype.setupEditor = function(config, template) {

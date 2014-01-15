@@ -1,17 +1,17 @@
-define(["jquery", "display/lenses/thumbnail"],
-        function ($, Lens) {
+define(["jquery", "handlebars", "display/lenses/thumbnail", "text!templates/layout/lenses/thumbnail-lens.html"],
+        function ($, Handlebars, Lens, template_html) {
     "use strict";
 
     Lens.propertyTypes = ["image"];
     Lens.label = "Thumbnail";
+
+    Lens.prototype.template = Handlebars.compile(template_html);
     Lens.prototype.initializeEditor = function(editor, preview) {
         this._editor = $(editor || "#lens_navigator #lens_detail");
         this._preview = $(preview || "#lens_navigator .lens-preview .lens-preview-pane");
-        var root = Freemix.getTemplate("thumbnail-lens-template");
+        var root = $(this.template);
         var content = this.getEditor();
         content.find("#lens_details").empty().append(root);
-
-        var images = Freemix.exhibit.database.getPropertiesWithTypes(["image"]);
 
         var image = content.find("#image_property");
 

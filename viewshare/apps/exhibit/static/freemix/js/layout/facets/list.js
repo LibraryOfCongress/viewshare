@@ -1,11 +1,12 @@
-define(["jquery", "display/facets/list"],
-        function ($, Facet) {
+define(["jquery", "handlebars", "display/facets/list",
+        "text!templates/layout/facets/list-facet-editor.html"],
+        function ($, Handlebars, Facet, template_html) {
 
     Facet.prototype.label = "List";
     Facet.prototype.propertyTypes = ["date", "number", "text", "currency"];
     Facet.prototype.icon_class = "fa fa-list-alt fa-3x";
 
-    Facet.prototype.template_name="list-facet-editor";
+    Facet.prototype.template = Handlebars.compile(template_html);
 
     Facet.prototype.setupEditor = function(config, template) {
         var facet = this;
