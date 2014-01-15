@@ -7,7 +7,24 @@
 <div id="about-box" class="info-section widget-well">
 
   <div class="widget-header">
-    <h2>View</h2>
+    <div class="row-fluid">
+      <div class="span10">
+	<h2>{% blocktrans %}View{% endblocktrans %}</h2>
+      </div>
+      <div class="span2">
+	<div class="pull-right">
+	  <div class="widget-links btn-group">
+
+	    {% if request.user.is_authenticated %}
+	    
+	    <a class="exhibit_clone btn btn-small btn-info" href="{% url 'exhibit_clone' slug=exhibit.slug owner=exhibit.owner.username %}">{% trans "Clone" %}</a>
+	    
+	    {% endif %}
+
+	  </div>
+	</div>
+      </div>
+    </div>
   </div>
 
   <div class="row-fluid">
