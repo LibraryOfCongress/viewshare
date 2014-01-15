@@ -76,6 +76,9 @@ urlpatterns = patterns('',
         login_required(views.DraftExhibitPropertyDataStatusView.as_view()),
         name='draft_exhibit_property_status'),
 
+    url(r'^(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/clone/$',
+        login_required(views.PublishedExhibitCloneView.as_view()),
+        name='exhibit_clone'),
 
 )
 
