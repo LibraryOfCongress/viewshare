@@ -81,7 +81,8 @@ class ReferenceDataSource(DataSource):
 
     referenced = models.ForeignKey(PublishedExhibit,
                                    related_name="references")
-
+    def refresh(self):
+        return self.referenced.merge_data()
 
 def source_upload_path(instance, filename):
     exhibit = instance.exhibit

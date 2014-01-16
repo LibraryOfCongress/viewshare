@@ -11,7 +11,8 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.views.generic.base import View
 from django.views.generic.edit import CreateView, UpdateView
-from viewshare.apps.exhibit.models import TX_STATUS
+import uuid
+from viewshare.apps.exhibit.models import TX_STATUS, DraftExhibit
 
 from viewshare.apps.upload.transform import AkaraTransformClient
 from viewshare.apps.upload import forms, conf
@@ -353,9 +354,11 @@ class JSONPrepView(CreateView):
 
 
 class ExhibitCloneView(View):
-
+    """
+    Copy an existing exhibit into a new one and set up a transaction to copy
+    it's data over
+    """
     def get_object(self, queryset=None):
-        user = self.request.user
         owner = self.kwargs["owner"]
         slug = self.kwargs["slug"]
         exhibit = get_object_or_404(models.PublishedExhibit,
@@ -365,4 +368,27 @@ class ExhibitCloneView(View):
         return exhibit
 
     def get(self, request, *args, **kwargs):
-        return HttpResponse("OK")
+        exhibit = self.get_object()
+
+        if not self.request.user.has_perm('exhibit.can_view', exhibit):
+            raise Http404
+        owner = request.user
+        slug = str(uuid.uuid4())
+        clone = DraftExhibit.objects.create(
+            owner=owner,
+            slug=slug,
+            profile=exhibit.profile
+        )
+        clone.save()
+
+        source = models.ReferenceDataSource(exhibit=clone, referenced=exhibit)
+        source.save()
+
+        upload_transaction = models.UploadTransaction(source=source)
+        upload_transaction.schedule()
+
+        response_url = reverse("upload_transaction_status",
+                               kwargs={"owner": owner.username,
+                                       "slug": slug})
+
+        return HttpResponseRedirect(response_url)
