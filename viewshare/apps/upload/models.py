@@ -366,41 +366,49 @@ class UploadTransaction(DataTransaction):
         source = self.source.get_concrete()
         try:
             result = source.refresh()
-        except:
+        except Exception:
+            self.logger.debug("Transformation failed", exc_info=True)
             self.failure("Transformation failed")
             return
 
         error = None
         data_profile = result.get("data_profile", [])
+        property_doc = result.get("properties", {})
         exhibit = self.source.exhibit.get_draft()
 
-        if len(data_profile):
+        if len(property_doc):
+            profile = property_doc
 
+        elif len(data_profile):
             properties = data_profile.get("properties", [])
             profile = self.legacy_data_profile_to_new(properties)
-            ser = serializers.ExhibitPropertyListSerializer(exhibit,
-                                                            data=profile,
-                                                            draft=True)
 
-            data = result.get("items", [])
-            data_ser = serializers.ExhibitDataSerializer(exhibit,
-                                                         data=data)
-            if not len(data):
-                error = "<ul><li>No Data</li></ul>"
-            elif ser.is_valid() and data_ser.is_valid():
-                ser.save()
-                data_ser.save()
+        else:
+            profile = {}
+        ser = serializers.ExhibitPropertyListSerializer(exhibit,
+                                                        data=profile,
+                                                        draft=True)
 
-                # If this is a new exhibit, ensure that there is a profile
-                if not len(exhibit.profile.keys()):
-                    exhibit.save_basic_profile()
-            else:
-                error = "<ul class='property-load-errors'>"
-                for e in ser.errors:
-                    error += "<li>%s</li>" % e
-                for e in data_ser.errors:
-                    error += "<li>%s</li>" % e
-                error += "</ul>"
+        data = result.get("items", [])
+        data_ser = serializers.ExhibitDataSerializer(exhibit,
+                                                     data=data)
+        if not len(data):
+            error = "<ul><li>No Data</li></ul>"
+        elif  ser.is_valid() and data_ser.is_valid():
+
+            ser.save()
+            data_ser.save()
+
+            # If this is a new exhibit, ensure that there is a profile
+            if not len(exhibit.profile.keys()):
+                exhibit.save_basic_profile()
+        else:
+            error = "<ul class='property-load-errors'>"
+            for e in ser.errors:
+                error += "<li>%s</li>" % e
+            for e in data_ser.errors:
+                error += "<li>%s</li>" % e
+            error += "</ul>"
 
         if not error:
             self.success('Upload transformation complete')

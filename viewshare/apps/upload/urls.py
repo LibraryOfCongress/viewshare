@@ -65,4 +65,9 @@ urlpatterns = patterns('',
         login_required(views.UpdateDataSourceView.as_view()),
         name="update_datasource"),
 
+
+    url(r'^clone/(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/$',
+        login_required(views.ExhibitCloneView.as_view()),
+        name='exhibit_clone'),
+
 )

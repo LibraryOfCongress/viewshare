@@ -350,3 +350,19 @@ class JSONPrepView(CreateView):
             logger.error("Error loading JSON analysis of %s: %s" % (url, ex))
             result = ()
         return JSONResponse(result)
+
+
+class ExhibitCloneView(View):
+
+    def get_object(self, queryset=None):
+        user = self.request.user
+        owner = self.kwargs["owner"]
+        slug = self.kwargs["slug"]
+        exhibit = get_object_or_404(models.PublishedExhibit,
+                                    owner__username=owner,
+                                    slug=slug)
+
+        return exhibit
+
+    def get(self, request, *args, **kwargs):
+        return HttpResponse("OK")
