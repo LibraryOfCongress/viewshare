@@ -91,7 +91,7 @@ class ModeratedRegistrationAdmin(RegistrationAdmin):
         mimetype = "text/csv"
         content_disposition = 'attachment; filename=%s' % self.csv_file_name
 
-        response = HttpResponse(mimetype=mimetype)
+        response = HttpResponse(content_type=mimetype)
         response['Content-Disposition'] = content_disposition
 
         writer = csv.writer(response)
