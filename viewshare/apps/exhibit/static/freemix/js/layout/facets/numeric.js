@@ -1,6 +1,8 @@
 define(["jquery", "handlebars", "display/facets/numeric", "exhibit",
+        "scripts/data/database/range-index",
+        "scripts/util/date-time",
         "text!templates/layout/facets/numeric-facet-editor.html"],
-        function ($, Handlebars, Facet, Exhibit, template_html) {
+        function ($, Handlebars, Facet, Exhibit, RangeIndex, DateTime, template_html) {
         "use strict"
 
     Facet.prototype.facetClass = Exhibit.NumericRangeFacet;
@@ -25,8 +27,28 @@ define(["jquery", "handlebars", "display/facets/numeric", "exhibit",
 
             var propertyID = path.getLastSegment().property;
             var property = database.getProperty(propertyID);
-            var rangeIndex = property.getRangeIndex();
-
+            if (!property._builderRangeIndex) {
+                property._builderRangeIndex = new RangeIndex(
+                    database.getAllItems(),
+                    function(item, f) {
+                        database.getObjects(item, property.getID(), null, null).visit(function(value) {
+                            if (property.getValueType() === "date") {
+                                if (typeof value !== "undefined" && value !== null && !(value instanceof Date)) {
+                                    value = DateTime.parseIso8601DateTime(value);
+                                }
+                            } else if (typeof value !== "number") {
+                                value = parseFloat(value);
+                            }
+                            if (value instanceof Date) {
+                                f(value.getTime());
+                            } else if (!isNaN(value)) {
+                                f(value);
+                            }
+                        });
+                    }
+                )
+            }
+            var rangeIndex = property._builderRangeIndex;
             var delta = rangeIndex.getMax() - rangeIndex.getMin();
 
 
