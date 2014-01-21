@@ -20,6 +20,50 @@ from viewshare.apps.upload import models
 from viewshare.utilities.views import JSONResponse
 
 
+logger = logging.getLogger(__name__)
+
+
+class DataSourceRegistry:
+    _registry = {}
+
+    @classmethod
+    def register(cls, model_class, form_class, form_template, detail_template):
+        key = model_class.__name__
+        cls._registry[key] = (model_class, form_class, form_template, detail_template)
+
+    @classmethod
+    def create_view(cls, model_class):
+        key = model_class.__name__
+        entry = cls._registry.get(key)
+        return CreateDataSourceView.as_view(model_class=entry[0],
+                                            form_class=entry[1],
+                                            template_name=entry[2])
+
+    @classmethod
+    def get_value(cls, instance, index):
+        key = instance.__class__.__name__
+        if key not in cls._registry:
+            return None
+        return cls._registry[key][index]
+
+    @classmethod
+    def get_form_class(cls, instance):
+        return cls.get_value(instance, 1)
+
+    @classmethod
+    def get_form(cls, instance):
+        form_class = cls.get_form_class(instance)
+        return form_class(instance=instance)
+
+    @classmethod
+    def get_form_template(cls, instance):
+        return cls.get_value(instance, 2)
+
+    @classmethod
+    def get_detail_template(cls, instance):
+        return cls.get_value(instance, 3)
+
+
 class CreateDataSourceView(CreateView):
     model_class = None
     form_class = None
@@ -218,49 +262,6 @@ class FileDataSourceDownloadView(View):
         return response
 
 
-class DataSourceRegistry:
-    _registry = {}
-
-    @classmethod
-    def register(cls, model_class, form_class, form_template, detail_template):
-        key = model_class.__name__
-        cls._registry[key] = (model_class, form_class, form_template, detail_template)
-
-    @classmethod
-    def create_view(cls, model_class):
-        key = model_class.__name__
-        entry = cls._registry.get(key)
-        return CreateDataSourceView.as_view(model_class=entry[0],
-                                            form_class=entry[1],
-                                            template_name=entry[2])
-
-    @classmethod
-    def get_value(cls, instance, index):
-        key = instance.__class__.__name__
-        if key not in cls._registry:
-            return None
-        return cls._registry[key][index]
-
-    @classmethod
-    def get_form_class(cls, instance):
-        return cls.get_value(instance, 1)
-
-    @classmethod
-    def get_form(cls, instance):
-        form_class = cls.get_form_class(instance)
-        return form_class(instance=instance)
-
-    @classmethod
-    def get_form_template(cls, instance):
-        return cls.get_value(instance, 2)
-
-    @classmethod
-    def get_detail_template(cls, instance):
-        return cls.get_value(instance, 3)
-
-
-logger = logging.getLogger(__name__)
-
 DataSourceRegistry.register(models.ContentDMDataSource,
                             forms.ContentDMDataSourceForm,
                             "upload/cdm_datasource_form.html",
@@ -315,7 +316,6 @@ DataSourceRegistry.register(models.ReferenceDataSource,
                             forms.ReferenceDataSourceForm,
                             "upload/reference_datasource_form.html",
                             "upload/reference_datasource_item.html")
-create_reference_url_view = DataSourceRegistry.create_view(models.ReferenceDataSource)
 
 
 class OAISetListView(View):
