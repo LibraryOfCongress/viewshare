@@ -75,7 +75,7 @@ class UpdateDataSourceView(UpdateView):
                                "slug": exhibit.slug})
 
     def get_context_data(self, **kwargs):
-        context = super(UpdateDataSourceView, self).get_context_data()
+        context = super(UpdateDataSourceView, self).get_context_data(**kwargs)
         failure = self.object.transactions.filter(is_complete=False,
                                                   status=TX_STATUS["failure"])
         if failure.exists():
