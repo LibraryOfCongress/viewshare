@@ -125,6 +125,8 @@ class UpdateDataSourceView(UpdateView):
         if failure.exists():
             context["show_error"] = True
             context["source"] = self.object
+
+        context["is_update"] = True
         return context
 
 
