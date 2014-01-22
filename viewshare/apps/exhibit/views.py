@@ -674,3 +674,7 @@ class PropertyEditorView(DraftExhibitView):
         context["can_delete"] = user.has_perm("exhibit.can_delete", exhibit)
         return render(request, self.template_name, context)
 
+
+class PublishedExhibitCloneView(View):
+    def get(self, request, *args, **kwargs):
+        return HttpResponse("TODO")

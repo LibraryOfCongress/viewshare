@@ -1,6 +1,9 @@
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from viewshare.apps.exhibit import models
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class Serializer(object):
@@ -489,10 +492,21 @@ class ExhibitDataSerializer(Serializer):
             prop_names.remove(p.name)
 
         # Create any new properties, then save the data
-        if len(prop_names):
-            for name in prop_names:
-                prop = models.ExhibitProperty(name=name,
-                                              label=name,
-                                              value_type="text").save()
-                models.PropertyData(exhibit_property=prop,
-                                    json=self._data[name]).save()
+        for name in prop_names:
+            logger.debug("Creating property %s for %s/%s" % (
+                name, self.exhibit.owner.username, self.exhibit.slug))
+            prop = models.ExhibitProperty(exhibit=self.exhibit,
+                                          name=name,
+                                          label=name,
+                                          value_type="text")
+            prop.save()
+            logger.debug("Saving property data for %s in %s/%s" % (
+                name,
+                self.exhibit.owner.username,
+                self.exhibit.slug
+            ))
+            val = {
+                "exhibit_property": prop,
+                "json": self._data[name]
+            }
+            models.PropertyData(**val).save()

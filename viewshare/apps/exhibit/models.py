@@ -508,7 +508,9 @@ class DataTransaction(TimeStampedModel):
             self.save()
             self.do_run()
         except Exception as ex:
-            self.failure("Transformation failed")
+            self.logger.debug("Transaction failed for %s" % self.tx_id,
+                              exc_info=True)
+            self.failure("Transaction failed")
         return self
 
     def failure(self, message):

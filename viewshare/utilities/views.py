@@ -32,7 +32,7 @@ class UserHomeView(RedirectView):
 
 class PlainTextResponse(TemplateResponse):
     def __init__(self, *args, **kwargs):
-        kwargs['mimetype'] = 'text/plain'
+        kwargs['content_type'] = 'text/plain'
         super(PlainTextResponse, self).__init__(*args, **kwargs)
 
 
@@ -81,7 +81,7 @@ class JSONResponse(HttpResponse):
             content = json.dumps(data, indent=indent)
             mime = ("text/javascript" if settings.DEBUG
                     else "application/json")
-        super(JSONResponse, self).__init__(content=content, mimetype=mime)
+        super(JSONResponse, self).__init__(content=content, content_type=mime)
 
 
 class OwnerSlugPermissionMixin:

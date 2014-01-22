@@ -14,7 +14,7 @@ def transform_datasource(transaction_id):
     from .models import UploadTransaction
     tx = UploadTransaction.objects.get(tx_id=transaction_id)
     tx.run()
-    return tx
+    # return tx
 
 
 @periodic_task(run_every=crontab(hour='*/4'))
