@@ -5,7 +5,6 @@ define(["jquery",
 
     var config = {
         type:"list",
-        name: "List",
         expression:"",
         showMissing:true,
         sortDirection:"forward",
