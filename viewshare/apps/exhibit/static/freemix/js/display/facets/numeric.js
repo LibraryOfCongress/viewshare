@@ -4,8 +4,7 @@ define(["jquery",
         "use strict";
 
 
-        var config = {
-        name: "Range",
+    var config = {
         type:"NumericRange",
         interval:10
     };
@@ -15,7 +14,7 @@ define(["jquery",
         var result = $("<div data-ex-role='facet' data-ex-facet-class='NumericRange'  class='exhibit-facet'></div>");
         result.attr("data-ex-expression", config.expression);
         if (config.name && config.name.length > 0) {
-            result.attr("data-ex-facetLabel", config.name);
+            result.attr("data-ex-facet-label", config.name);
         }
         if (config.interval && config.interval > 0) {
             result.attr("data-ex-interval", config.interval);
