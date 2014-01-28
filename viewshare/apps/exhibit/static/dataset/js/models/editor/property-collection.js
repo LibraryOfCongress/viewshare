@@ -106,38 +106,19 @@ define(
             // publish notification that all properties have loaded their data
             $.when.apply(null, loadDataPromises).done(function() {
                 // build an array of sorted, unique property item ids
-                var compare, item, itemId, j, k;
+                var item, j, i, set = {};
                 this.itemIds = [];
+                // create an object (working as a set) of item ids
                 for (i = 0; i < this.properties.length; ++i) {
                     for (j = 0; j < this.properties[i].items.length; j++) {
                         item = this.properties[i].items[j];
-                        if (this.itemIds.length === 0) {
+                        if (!set.hasOwnProperty(item.id)) {
+                            set[item.id] = true;
                             this.itemIds.push(item.id);
-                        } else {
-                            for (k = 0; k < this.itemIds.length; k++) {
-                                itemId = this.itemIds[k];
-                                compare = itemId.localeCompare(item.id);
-                                if (compare < 0) {
-                                    // itemId < item.id
-                                    if (k === this.itemIds.length - 1) {
-                                        // We're at the last iteration
-                                        this.itemIds.push(item.id);
-                                    } else {
-                                        continue;
-                                    }
-                                } else if (compare > 0) {
-                                    // itemId > item.id
-                                    this.itemIds.splice(k, 0, item.id);
-                                    break;
-                                } else {
-                                    // itemId == item.id
-                                    break;
-                                }
-
-                            }
                         }
                     }
                 }
+                this.itemIds.sort();
                 this.changeCurrentRecord(0);
                 this.Observer('allLoadDataSuccess').publish();
             }.bind(this));
