@@ -1,24 +1,23 @@
 /*global define */
-define(
-    [
-        'handlebars',
-        'jquery',
-        'text!templates/modal-augment.html',
-        'views/list-augment-view',
-        'views/map-augment-view',
-        'views/modal-view',
-        'views/timeline-augment-view',
-        'bootstrap',
-        'jquery.csrf'
-    ], function (
-        Handlebars,
-        $,
-        modalAugmentTemplate,
-        ListAugmentView,
-        MapAugmentView,
-        ModalView,
-        TimelineAugmentView
-    ) {
+define([
+    'handlebars',
+    'jquery',
+    'text!templates/modal-augment.html',
+    'views/list-augment-view',
+    'views/map-augment-view',
+    'views/modal-view',
+    'views/timeline-augment-view',
+    'bootstrap',
+    'jquery.csrf'
+], function (
+    Handlebars,
+    $,
+    modalAugmentTemplate,
+    ListAugmentView,
+    MapAugmentView,
+    ModalView,
+    TimelineAugmentView
+) {
     'use strict';
     /**
      * Specialized ModalView which displays modal used to add augmented
@@ -84,7 +83,7 @@ define(
         },
 
         /** Handle the 'Create Property' button click by augmenting data */
-        createProperty: function(event) {
+        createProperty: function() {
             var activeTab = this.$el.find('.tab-content .active');
             var errorList = this.$el.find('#augment-errors');
             var errors = {};

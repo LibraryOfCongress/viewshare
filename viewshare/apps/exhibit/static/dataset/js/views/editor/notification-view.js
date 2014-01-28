@@ -1,13 +1,13 @@
 /*global define */
 define([
-       'handlebars',
-       'jquery',
-       'text!templates/notification.html'
-    ], function (
-        Handlebars,
-        $,
-        notificationTemplate
-    ) {
+    'handlebars',
+    'jquery',
+    'text!templates/notification.html'
+], function (
+    Handlebars,
+    $,
+    notificationTemplate
+) {
     'use strict';
     /**
      * View to display notifications. Any model that publishes an event that
@@ -33,7 +33,8 @@ define([
 
         /** Create a visual notification on a specified observable's event
          * @param {object} observable - Object that extends observer.js
-         * @param {string} eventName - Name of the event NotificationView will handle
+         * @param {string} eventName - Name of the event NotificationView
+         * will handle
          * @return {func} notificationFunc - The function to be fired
          * on 'eventName'. This is used for removeSubscription.
          */
@@ -53,7 +54,8 @@ define([
 
         /** Remove a notification subscription
          * @param {object} observable - Object that extends observer.js
-         * @param {string} eventName - Name of the event NotificationView will handle
+         * @param {string} eventName - Name of the event NotificationView
+         * will handle
          * @param {func} notificationFunc - Function that was returned
          * from addSubscription
          */
@@ -74,7 +76,7 @@ define([
             lead,
             shouldFade
         ) {
-            var editorAlert, notification, notificationMessage, isView;
+            var notification, notificationMessage, isView;
             var status = 'alert';
             lead = lead || '';
             if (typeof shouldFade !== 'boolean') {
@@ -110,11 +112,11 @@ define([
                 window.setTimeout(function () {
                     this.$el.children().fadeOut(
                         2000,
-                        "linear",
+                        'linear',
                         function() {
                             this.$el.empty();
                         }.bind(this));
-                    }.bind(this), 4000);
+                }.bind(this), 4000);
             }
         },
 

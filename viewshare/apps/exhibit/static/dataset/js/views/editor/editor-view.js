@@ -1,20 +1,19 @@
 /*global define */
-define(
-    [
-        'handlebars',
-        'jquery',
-        'views/property-view',
-        'views/record-nav-view',
-        'views/view-interface',
-        'text!templates/editor.html'
-    ], function (
-        Handlebars,
-        $,
-        PropertyView,
-        RecordNavView,
-        ViewInterface,
-        editorTemplate
-    ) {
+define([
+    'handlebars',
+    'jquery',
+    'views/property-view',
+    'views/record-nav-view',
+    'views/view-interface',
+    'text!templates/editor.html'
+], function (
+    Handlebars,
+    $,
+    PropertyView,
+    RecordNavView,
+    ViewInterface,
+    editorTemplate
+) {
     'use strict';
     /**
      * High-level view of properties that can be edited
@@ -76,14 +75,15 @@ define(
 
         /** Add a new Property to the DOM */
         addProperty: function(newPropertyModel) {
-            var nameInput, newProperty, propertyEl;
+            var compare, nameInput, newProperty, propertyEl;
             var newPropertyEl = $('<tr></tr>');
             var propertiesEl = this.$el.find('#properties tr');
             var propertyTr = null;
             for (var i = 0; i < propertiesEl.length; i++) {
                 propertyEl = $(propertiesEl[i]);
                 nameInput = propertyEl.find('td.name input');
-                if (nameInput.val().localeCompare(newPropertyModel.label) >= 0) {
+                compare = nameInput.val().localeCompare(newPropertyModel.label);
+                if (compare >= 0) {
                     propertyTr = propertyEl;
                     break;
                 }
@@ -93,7 +93,7 @@ define(
                 $el: newPropertyEl
             });
             this.propertyViews.push(newProperty);
-            newPropertyEl.css( "display", "none" );
+            newPropertyEl.css( 'display', 'none' );
             if (propertyTr == null) {
                 $(propertiesEl[propertiesEl.length - 1]).after(newPropertyEl);
             } else {
@@ -110,6 +110,7 @@ define(
 
         /** Remove event bindings, child views, and DOM elements */
         destroy: function() {
+            var i;
             // remove model events
             this.model.Observer('loadSuccess').unsubscribe(this.render);
             this.model.Observer('newProperty').unsubscribe(this.addProperty);

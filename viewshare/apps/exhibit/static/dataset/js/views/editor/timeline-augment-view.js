@@ -1,22 +1,22 @@
 /*global define */
-define(
-    [
-        'handlebars',
-        'jquery',
-        'models/composite-property',
-        'text!templates/timeline-augment.html'
-    ], function (
-        Handlebars,
-        $,
-        CompositePropertyModel,
-        timelineAugmentTemplate
-    ) {
+define([
+    'handlebars',
+    'jquery',
+    'models/composite-property',
+    'text!templates/timeline-augment.html'
+], function (
+    Handlebars,
+    $,
+    CompositePropertyModel,
+    timelineAugmentTemplate
+) {
     'use strict';
     /**
      * View that can add a CompositeModel to a RecordCollection. This prepares
      * the RecordCollection to be sent to an Akara server for augmentation.
      * @constructor
-     * @param {object} options.propertyCollection - PropertyCollection we're augmenting
+     * @param {object} options.propertyCollection - PropertyCollection
+     * we're augmenting
      * @param {object} options.$el - container Element object for this view
      */
     var TimelineAugmentView = function(options) {
@@ -52,7 +52,7 @@ define(
         },
 
         /** Event handler when a .selcted input is clicked */
-        changeCompositeHandler: function(event) {
+        changeCompositeHandler: function() {
             var i = 0;
             var selected = this.$el.find('.selected input:checked');
             var composites = [];

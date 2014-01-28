@@ -1,17 +1,16 @@
 /*global define */
-define(
-    [
-        'handlebars',
-        'jquery',
-        'text!templates/modal.html',
-        'views/view-interface',
-        'bootstrap'
-    ], function (
-        Handlebars,
-        $,
-        modalTemplate,
-        ViewInterface
-    ) {
+define([
+    'handlebars',
+    'jquery',
+    'text!templates/modal.html',
+    'views/view-interface',
+    'bootstrap'
+], function (
+    Handlebars,
+    $,
+    modalTemplate,
+    ViewInterface
+) {
     'use strict';
     /**
      * View to display modals.
@@ -34,7 +33,7 @@ define(
                 body: new Handlebars.SafeString(options.body),
                 buttonText: options.buttonText
             }));
-            if (typeof(options.buttonFunction) == 'function') {
+            if (typeof(options.buttonFunction) === 'function') {
                 this.$el.find('#modalButton').on(
                     'click', this, options.buttonFunction);
             }
