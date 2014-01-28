@@ -35,7 +35,7 @@ define(['jquery', 'observer'], function ($, Observer) {
         /** Send this Property's attributes to the server to be saved */
         postAugmentationIssue: function() {
             var xhr = $.ajax({
-                type: "POST",
+                type: 'POST',
                 url: '/support/issue/augmentation/',
                 data: JSON.stringify(this.toJSON())
             })
@@ -46,9 +46,8 @@ define(['jquery', 'observer'], function ($, Observer) {
 
         /**
          * Succeeded in sending property attributes to the server
-         * @param {object} successJSON - values for this property
          */
-        postAugmentationIssueSuccess: function(successJSON) {
+        postAugmentationIssueSuccess: function() {
             this.Observer('postAugmentationIssueSuccess').publish();
         },
 
