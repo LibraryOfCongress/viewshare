@@ -1,15 +1,14 @@
 /*global define */
-define(
-    [
-        'handlebars',
-        'jquery',
-        'text!templates/augmentation-support-issue.html',
-        'jquery.csrf'
-    ], function (
-        Handlebars,
-        $,
-        augmentationSupportIssueTemplate
-    ) {
+define([
+    'handlebars',
+    'jquery',
+    'text!templates/augmentation-support-issue.html',
+    'jquery.csrf'
+], function (
+    Handlebars,
+    $,
+    augmentationSupportIssueTemplate
+) {
     'use strict';
     /**
      * Specialized ModalView which displays modal used to add augmented
@@ -44,7 +43,8 @@ define(
             this.$el.find('#augCreateIssue').on(
                 'click', this.submitIssueHandler.bind(this));
             this.$contactInput = this.$el.find('#augContactInput');
-            this.$contactInput.on('change', this.changeContactHandler.bind(this));
+            this.$contactInput.on('change',
+                                  this.changeContactHandler.bind(this));
             this.$emailInput = this.$el.find('#augEmailInput');
             this.$emailInput.on('change', this.changeEmailHandler.bind(this));
             this.$phoneInput = this.$el.find('#augPhoneInput');

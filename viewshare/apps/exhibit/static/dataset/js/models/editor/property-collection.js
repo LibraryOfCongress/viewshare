@@ -1,20 +1,17 @@
 /*global define */
-define(
-    [
-        'jquery',
-        'observer',
-        'models/composite-property',
-        'models/pattern-property',
-        'models/property',
-        'jquery.csrf'
-    ],
-    function (
-        $,
-        Observer,
-        CompositePropertyModel,
-        PatternPropertyModel,
-        PropertyModel
-    ) {
+define([
+    'jquery',
+    'observer',
+    'models/composite-property',
+    'models/pattern-property',
+    'models/property', 'jquery.csrf'
+], function (
+    $,
+    Observer,
+    CompositePropertyModel,
+    PatternPropertyModel,
+    PropertyModel
+) {
     'use strict';
     /**
      * Represents the collection of Properties in a view
@@ -82,10 +79,12 @@ define(
                         args.augmentation = property.augmentation;
                         args.composite = property.composite;
                         if (property.augmentation === 'composite') {
-                            this.properties.push(new CompositePropertyModel(args));
+                            this.properties.push(
+                                new CompositePropertyModel(args));
                         } else if (['pattern-list', 'delimited-list'].indexOf(
                                 property.augmentation) >= 0) {
-                            this.properties.push(new PatternPropertyModel(args));
+                            this.properties.push(
+                                new PatternPropertyModel(args));
                         }
                     } else {
                         this.properties.push(new PropertyModel(args));
@@ -106,38 +105,19 @@ define(
             // publish notification that all properties have loaded their data
             $.when.apply(null, loadDataPromises).done(function() {
                 // build an array of sorted, unique property item ids
-                var compare, item, itemId, j, k;
+                var item, j, i, set = {};
                 this.itemIds = [];
+                // create an object (working as a set) of item ids
                 for (i = 0; i < this.properties.length; ++i) {
                     for (j = 0; j < this.properties[i].items.length; j++) {
                         item = this.properties[i].items[j];
-                        if (this.itemIds.length === 0) {
+                        if (!set.hasOwnProperty(item.id)) {
+                            set[item.id] = true;
                             this.itemIds.push(item.id);
-                        } else {
-                            for (k = 0; k < this.itemIds.length; k++) {
-                                itemId = this.itemIds[k];
-                                compare = itemId.localeCompare(item.id);
-                                if (compare < 0) {
-                                    // itemId < item.id
-                                    if (k === this.itemIds.length - 1) {
-                                        // We're at the last iteration
-                                        this.itemIds.push(item.id);
-                                    } else {
-                                        continue;
-                                    }
-                                } else if (compare > 0) {
-                                    // itemId > item.id
-                                    this.itemIds.splice(k, 0, item.id);
-                                    break;
-                                } else {
-                                    // itemId == item.id
-                                    break;
-                                }
-
-                            }
                         }
                     }
                 }
+                this.itemIds.sort();
                 this.changeCurrentRecord(0);
                 this.Observer('allLoadDataSuccess').publish();
             }.bind(this));
@@ -146,18 +126,20 @@ define(
 
         /** Signal that the GET request failed */
         loadFailure: function(jqxhr, textStatus, error) {
-            this.Observer('loadFailure').publish({status: textStatus, error: error});
+            this.Observer('loadFailure')
+                .publish({status: textStatus, error: error});
         },
 
         /**
          * Change this._currentRecord by 'delta'. The result will always be
          * 0 <= this._currentRecord < this.records.length
-         * @param delta {integer} - positive/negative number to increment/decrement
+         * @param delta {integer} - positive/negative number to
+         *                          increment/decrement
          */
         changeCurrentRecord: function(delta) {
             var current, i;
             if (this.currentItemIndex === null || this.itemIds === null) {
-                throw {message: "Current item is null. Call this.loadData()"};
+                throw {message: 'Current item is null. Call this.loadData()'};
             }
             current = this.currentItemIndex + delta;
             if (current < 0) {
@@ -200,7 +182,8 @@ define(
         /** Add a new property to this.properties */
         addProperty: function(newProperty) {
             if (this.properties.length > 0) {
-                newProperty.currentItemIndex = this.properties[0].currentItemIndex;
+                newProperty.currentItemIndex = this
+                    .properties[0].currentItemIndex;
             }
             this.properties.push(newProperty);
             this.Observer('newProperty').publish(newProperty);

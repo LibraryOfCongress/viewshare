@@ -1,14 +1,5 @@
 /*global define */
-define(
-    [
-        'jquery',
-        'observer',
-        'jquery.csrf'
-    ],
-    function (
-        $,
-        Observer
-    ) {
+define(['jquery', 'observer', 'jquery.csrf'], function ($, Observer) {
     'use strict';
 
     /**
@@ -58,7 +49,7 @@ define(
         /** Return the current value from this.items. */
         currentItem: function() {
             if (this.currentItemIndex === null) {
-                return {id: null, value: ""};
+                return {id: null, value: ''};
             } else {
                 return this.items[this.currentItemIndex];
             }
@@ -71,7 +62,7 @@ define(
         changeCurrentItem: function(id) {
             this.currentItemIndex = null;
             for (var i = 0; i < this.items.length; i++) {
-                if (this.items[i].id == id) {
+                if (this.items[i].id === id) {
                     this.currentItemIndex = i;
                     break;
                 }
@@ -89,9 +80,8 @@ define(
 
         /**
          * Succeeded in getting property attributes from the server
-         * @param {object} successJSON - values for this property
          */
-        loadPropertySuccess: function(successJSON) {
+        loadPropertySuccess: function() {
             this.Observer('loadPropertySuccess').publish();
         },
 
@@ -104,7 +94,7 @@ define(
         /** Send this Property's attributes to the server to be saved */
         updateProperty: function() {
             var xhr = $.ajax({
-                type: "PUT",
+                type: 'PUT',
                 url: this.propertyURL,
                 data: JSON.stringify(this.toJSON())
             })
@@ -115,9 +105,8 @@ define(
 
         /**
          * Succeeded in sending property attributes to the server
-         * @param {object} successJSON - values for this property
          */
-        updatePropertySuccess: function(successJSON) {
+        updatePropertySuccess: function() {
             this.Observer('updatePropertySuccess').publish();
         },
 
@@ -184,7 +173,8 @@ define(
             } else if (existingNames.indexOf(this.label) >= 0) {
                 errors.name = 'Please enter a unique property name.';
             } else if (this.label.match(/[^\sa-zA-Z0-9]/)) {
-                errors.name = 'Property name can only contain letters, numbers, and spaces.';
+                errors.name = 'Property name can only contain ' +
+                    'letters, numbers, and spaces.';
             }
             return errors;
         },
@@ -192,7 +182,7 @@ define(
         /** Attempt to load data for this property from the server */
         deleteProperty: function() {
             var xhr = $.ajax({
-                type: "DELETE",
+                type: 'DELETE',
                 url: this.propertyURL,
                 data: JSON.stringify(this.toJSON())
             })
@@ -203,9 +193,8 @@ define(
 
         /**
          * Load data for this model from successful JSON response
-         * @param {object} dataJSON - values for this property
          */
-        deletePropertySuccess: function(dataJSON) {
+        deletePropertySuccess: function() {
             this.Observer('deletePropertySuccess').publish(this);
         },
 

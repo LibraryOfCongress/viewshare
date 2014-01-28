@@ -1,39 +1,40 @@
 /*global define */
-define(
-    [
-        'jquery',
-        'models/augmentation-support-issue',
-        'models/property-collection',
-        'views/augmentation-support-issue-view',
-        'views/editor-view',
-        'views/modal-augment-view',
-        'views/notification-view'
-    ], function (
-        $,
-        AugmentationSupportIssue,
-        PropertyCollection,
-        AugmentationSupportIssueView,
-        EditorView,
-        ModalAugmentView,
-        NotificationView
-    ) {
+define([
+    'jquery',
+    'models/augmentation-support-issue',
+    'models/property-collection',
+    'views/augmentation-support-issue-view',
+    'views/editor-view',
+    'views/modal-augment-view',
+    'views/notification-view'
+], function (
+    $,
+    AugmentationSupportIssue,
+    PropertyCollection,
+    AugmentationSupportIssueView,
+    EditorView,
+    ModalAugmentView,
+    NotificationView
+) {
     'use strict';
     var demo = function() {
-        var dataURL = $("link[rel='exhibit-data']").attr("href");
-        var propURL = $("link[rel='freemix/property_list']").attr("href");
+        var dataURL = $('link[rel="exhibit-data"]').attr('href');
+        var propURL = $('link[rel="freemix/property_list"]').attr('href');
         var editorURL = window.location.href;
         var properties = new PropertyCollection({
             dataURL: dataURL,
-            propertiesURL: propURL});
+            propertiesURL: propURL
+        });
         var notificationView = new NotificationView({$el: $('#notifications')});
-        var editor = new EditorView({
-            model: properties,
-            $el: $('#editor')});
-        var augmentModal = new ModalAugmentView({model: properties});
         var augmentationError = new AugmentationSupportIssue({
             email: '',
             editorURL: editorURL
         });
+        new EditorView({
+            model: properties,
+            $el: $('#editor')
+        });
+        new ModalAugmentView({model: properties});
         properties.Observer('augmentDataFailure').subscribe(
             augmentationError.augmentDataFailureHandler.bind(augmentationError)
         );
@@ -46,7 +47,8 @@ define(
             properties,
             'loadFailure',
             'error',
-            'There was a server error while loading the data. Please try again later.',
+            'There was a server error while loading the data. ' +
+                'Please try again later.',
             'Data Error!');
         notificationView.addSubscription(
             properties,
@@ -74,14 +76,16 @@ define(
             property,
             'updatePropertySuccess',
             'success',
-            'Changes to "' + property.label + '" have been saved to the server.',
+            'Changes to "' + property.label +
+                '" have been saved to the server.',
             'Data saved successfully!');
         notificationView.addSubscription(
             property,
             'updatePropertyError',
             'error',
-            'Changes to "' + property.label + '" were not able to be saved. Please try again later.',
-            "We're experiencing service issues.");
+            'Changes to "' + property.label +
+                '" were not able to be saved. Please try again later.',
+            'We are experiencing service issues.');
         notificationView.addSubscription(
             property,
             'deletePropertySuccess',
@@ -92,8 +96,9 @@ define(
             property,
             'deletePropertyError',
             'error',
-            'Changes to "' + property.label + '" were not able to be saved. Please try again later.',
-            "We're experiencing service issues.");
+            'Changes to "' + property.label +
+                '" were not able to be saved. Please try again later.',
+            'We are experiencing service issues.');
     };
 
     return demo;

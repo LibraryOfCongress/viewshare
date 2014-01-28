@@ -1,16 +1,15 @@
 /*global define */
-define(
-    [
-        'handlebars',
-        'jquery',
-        'models/pattern-property',
-        'text!templates/list-augment.html'
-    ], function (
-        Handlebars,
-        $,
-        PatternPropertyModel,
-        listAugmentTemplate
-    ) {
+define([
+    'handlebars',
+    'jquery',
+    'models/pattern-property',
+    'text!templates/list-augment.html'
+], function (
+    Handlebars,
+    $,
+    PatternPropertyModel,
+    listAugmentTemplate
+) {
     'use strict';
     /**
      * View that can add a PatternPropertyModel to a RecordCollection.
@@ -54,7 +53,7 @@ define(
         },
 
         /** Event handler when a .selected input is clicked */
-        changeCompositeHandler: function(event) {
+        changeCompositeHandler: function() {
             var i = 0,
             selected = this.$el.find('.selected input:checked'),
             composites = [];
@@ -65,7 +64,7 @@ define(
         },
 
         /** Modify this.newPatternProperty.pattern based on user action */
-        changePatternHandler: function(event) {
+        changePatternHandler: function() {
             this.newPatternProperty.augmentation = 'pattern-list';
             this.newPatternProperty.delimiter = null;
         },

@@ -1,15 +1,13 @@
 /*global define */
-define(
-    [
-        'jquery',
-        'models/composite-property',
-        'observer'
-    ],
-    function (
-        $,
-        CompositePropertyModel,
-        Observer
-    ) {
+define([
+    'jquery',
+    'models/composite-property',
+    'observer'
+], function (
+    $,
+    CompositePropertyModel,
+    Observer
+) {
     'use strict';
     /**
      * Extends CompositePropertyModel. Represents a property that is created
@@ -32,12 +30,13 @@ define(
         /**
          * Validate that the data in this Model is in a state where it could
          * be sent to a server.
-         * @param {array} propertyNames - names that already exist and should not
-         * be duplicated
+         * @param {array} propertyNames - names that already exist and 
+         * should not be duplicated
          */
         validate: function(propertyNames) {
             var existingNames = propertyNames || [],
-            errors = CompositePropertyModel.prototype.validate.apply(this, [existingNames]);
+            errors = CompositePropertyModel.prototype.validate
+                .apply(this, [existingNames]);
             if (this.delimiter == null && this.pattern == null) {
                 errors.delimiter = 'Please select a delimiter or pattern.';
             }
@@ -46,7 +45,8 @@ define(
 
         /** Return a simple object representation of this Property */
         toJSON: function() {
-            var jsonProperty = CompositePropertyModel.prototype.toJSON.apply(this, []);
+            var jsonProperty = CompositePropertyModel.prototype.toJSON
+                .apply(this, []);
             jsonProperty.delimiter = this.delimiter;
             jsonProperty.pattern = this.pattern;
             if (this.composite.length > 0 && this.source == null) {

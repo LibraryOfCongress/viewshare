@@ -1,15 +1,13 @@
 /*global define */
-define(
-    [
-        'jquery',
-        'models/property',
-        'observer'
-    ],
-    function (
-        $,
-        PropertyModel,
-        Observer
-    ) {
+define([
+    'jquery',
+    'models/property',
+    'observer'
+], function (
+    $,
+    PropertyModel,
+    Observer
+) {
     'use strict';
 
     /**
@@ -34,7 +32,7 @@ define(
         /** Send this Property's attributes to the server to be saved */
         createProperty: function() {
             var xhr = $.ajax({
-                type: "POST",
+                type: 'POST',
                 url: this.propertyURL,
                 data: JSON.stringify(this.toJSON())
             })
@@ -84,7 +82,8 @@ define(
          */
         augmentDataSuccess: function(successJSON) {
             var xhr;
-            if ( successJSON && successJSON.hasOwnProperty('augmentation_status')) {
+            if (successJSON && successJSON
+                    .hasOwnProperty('augmentation_status')) {
                 this.statusURL = successJSON.augmentation_status;
             }
             xhr = $.getJSON(this.statusURL)
@@ -130,7 +129,7 @@ define(
          */
         augmentStatusFailure: function(jqxhr, textStatus, error) {
             if (this.statusFailureCountdown === 1) {
-                    this.augmentDataFailure(jqxhr, textStatus, error);
+                this.augmentDataFailure(jqxhr, textStatus, error);
             } else if (this.statusFailureCountdown === undefined) {
                 this.statusFailureCountdown = 2;
                 setTimeout(this.augmentDataSuccess.bind(this), 5000);
@@ -141,7 +140,7 @@ define(
         },
 
         /** Failed while sending property attributes to the server */
-        augmentDataFailure: function(jqxhr, textStatus, error) {
+        augmentDataFailure: function() {
             this.Observer('augmentDataFailure').publish(this);
         },
 
@@ -153,7 +152,8 @@ define(
         */
         validate: function(propertyNames) {
             var existingNames = propertyNames || [],
-            errors = PropertyModel.prototype.validate.apply(this, [existingNames]);
+            errors = PropertyModel.prototype.validate
+                .apply(this, [existingNames]);
             if (!this.composite.length) {
                 errors.composite = 'Please select at least one property.';
             }

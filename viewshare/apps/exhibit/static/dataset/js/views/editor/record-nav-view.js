@@ -1,14 +1,13 @@
 /*global define */
-define(
-    [
-        'handlebars',
-        'jquery',
-        'text!templates/record-nav.html'
-    ], function (
-        Handlebars,
-        $,
-        recordNavTemplate
-    ) {
+define([
+    'handlebars',
+    'jquery',
+    'text!templates/record-nav.html'
+], function (
+    Handlebars,
+    $,
+    recordNavTemplate
+) {
     'use strict';
     /**
      * Record navigation view that allows a user to change the visible
@@ -43,13 +42,13 @@ define(
         },
 
         /** Event handler to display the previous record */
-        renderPreviousRecord: function(event) {
+        renderPreviousRecord: function() {
             this.model.changeCurrentRecord(-1);
             return false;
         },
 
         /** Event handler to display the next record */
-        renderNextRecord: function(event) {
+        renderNextRecord: function() {
             this.model.changeCurrentRecord(1);
             return false;
         },
