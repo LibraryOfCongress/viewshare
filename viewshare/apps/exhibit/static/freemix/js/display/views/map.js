@@ -19,7 +19,7 @@ define(["jquery", "exhibit", "display/views/registry", "ext/openlayers/openlayer
         var latlng = config.latlng;
         var colorKey = config.colorKey;
         var view = $("<div data-ex-role='view' data-ex-view-class='OLMap'></div>");
-        view.attr("data-ex-osm-url", "http://tile.openstreetmap.org/${z}/${x}/${y}.png");
+        view.attr("data-ex-map-u-r-l", "http://tile.openstreetmap.org/${z}/${x}/${y}.png");
         view.attr("data-ex-view-label", config.name);
         if (latlng) {
             view.attr("data-ex-latlng", '.' + latlng);
