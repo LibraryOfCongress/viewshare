@@ -34,6 +34,10 @@ define(["jquery",
         zoom.change();
 
         this._setupLensEditor(config, template);
+
+        var property_list = template.find("#augment_property_list");
+        this._setupPropertyMultiSelect(config, template, property_list, "properties", true);
+
     };
     return View;
 });

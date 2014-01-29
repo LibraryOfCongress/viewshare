@@ -1,111 +1,161 @@
 <form id="view-setting-form" class="form">
   <fieldset>
-
+    
     <div class="view-variables">
-
+      
       <div class="container-fluid">
+	
+	<div class="accordion" id="accordionView">
+	  
+	  <div class="accordion-group">
 
-        <div class="row-fluid">
-          <legend class="view-settings-label">Map View Settings</legend>
-        </div>
+	    <div class="accordion-heading">
+	      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionView" href="#collapseEdit">
+		<div class="view-settings-label">Map View Settings</div>
+	      </a>
+	    </div>
+	    
+	    <div id="collapseEdit" class="accordion-body collapse in">
+	      
+              <div class="row-fluid">
 
-        <div class="row-fluid">
-
-          <div class="control-group">
-            <label class="control-label" for="view_label_input">Label</label>
-
-            <div class="controls">
-              <div class="input-append">
-                <input type="text" id="view_label_input"/>
+		<div class="control-group">
+		  <label class="control-label" for="view_label_input">Label</label>
+		  
+		  <div class="controls">
+		    <div class="input-append">
+                      <input type="text" id="view_label_input"/>
+		    </div>
+		    <span class="help-inline">Free text title of view</span>
+		  </div>
+		</div>
+		
               </div>
-              <span class="help-inline">Free text title of view</span>
-            </div>
-          </div>
+              <!-- row-fluid -->
+	      
+              <!-- position latlong and zoom side by side -->
+	      
+              <div class="row-fluid">
+		
+		<div class="control-group input-append">
+		  <div class="control">
+		    <label class="control-label" for="latlng_property">Lat / Long <a class="augment" href=""><i
+														class="fa fa-plus-square fa-lg"></i></a></label>
+		    
+		    <div class="controls">
+                      <select class="input-medium" id="latlng_property"></select>
+		    </div>
+		  </div>
+		</div>
+		
+		<div class="control-group input-append">
+		  <div class="control">
+		    <label class="control-label" for="zoom_level">Zoom</label>
+		    
+		    <div class="controls">
+                      <select class="input-medium" id="zoom_level">
+			<option value="">auto</option>
+			<option value="1">1 (Farthest)</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+			<option value="8">8</option>
+			<option value="8">9</option>
+			<option value="10">10 (Nearest)</option>
+                      </select>
+		    </div>
+		  </div>
+		</div>
+		
+		<div class="control-group input-append">
+		  <div class="control">
+		    <label class="control-label" for="color_property">Color Key</label>
+		    
+		    <div class="controls">
+                      <select class="input-medium" id="color_property"></select>
+		    </div>
+		  </div>
+		</div>
 
-        </div>
-        <!-- row-fluid -->
-
-        <!-- position latlong and zoom side by side -->
-
-        <div class="row-fluid">
-
-          <div class="control-group input-append">
-            <div class="control">
-              <label class="control-label" for="latlng_property">Lat / Long <a class="augment" href=""><i
-                      class="fa fa-plus-square fa-lg"></i></a></label>
-
-              <div class="controls">
-                <select class="input-medium" id="latlng_property"></select>
               </div>
-            </div>
-          </div>
+              <!-- end row-fluid -->
+	      
+	      <!-- Lens specific -->
+	      
+	      <div class="lens-variables">
+		
+		<div class="container-fluid">
+		  
+		  <div class="row-fluid">
+		    <legend class="lens-settings-label">Lens Settings</legend>
+		  </div>
+		  
+		  <div class="row-fluid">
+		    
+		    <div class="control-group">
+		      <!-- inject lens editor -->
+		      <div id="lens_editor">
+		      </div>
+		    </div>
+		    
+		  </div>
+		  <!-- end row -->
+	      
+		</div>
+		<!-- end container -->
+	    
+	      </div> <!-- end lens-variables -->
+	      
+	    </div> <!-- end accordion-body -->
+	      
+	  </div> <!-- end accordion-group -->
+	
+	  <div class="accordion-group">
+	  
+	    <div class="accordion-heading">
+	      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionView" href="#collapseAugment">
+		<div class="view-settings-label">Format your Map data</div>
+	      </a>
+	    </div>
+	    
+	    <div id="collapseAugment" class="accordion-body collapse">
+	      
+	      <div class="row-fluid">
+		<div class="prose">
+		  Before you can design your map, we need to convert your data into latitude, longitude coordinates (e.g. "40.1583, -83.074"). Please select the location related properties in your data (e.g. City, State, Zip) to be converted.
+		</div>
+	      </div>
+	      
+	      <div class="row-fluid">
+		<select id="augment_property_list" multiple="multiple">
+		</select>
+	      </div>
+	      <div class="row-fluid">
+		<button id="widget_save_button" class="btn btn-primary">Create location data</button>
+		<button type="button" class="btn" data-dismiss="modal" aria-hidden="true">Do not create location data at this time</button>
+	      </div>
 
-          <div class="control-group input-append">
-            <div class="control">
-              <label class="control-label" for="zoom_level">Zoom</label>
+	      <br />
+	      <div class="row-fluid">
+		<div class="alert alert-info">
+		  NOTE: If you already have a property that has latitude, longitude values (e.g. "40.1583, -83.074") and would like to bypass this step, use the editor to set the appropriate property type to 'location'.
+		</div>
+	      </div>
 
-              <div class="controls">
-                <select class="input-medium" id="zoom_level">
-                  <option value="">auto</option>
-                  <option value="1">1 (Farthest)</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="8">9</option>
-                  <option value="10">10 (Nearest)</option>
-                </select>
-              </div>
-            </div>
-          </div>
+	    </div>
+	    
+	  </div> <!-- end accordion-group -->
+	
+	</div> <!-- end accordion -->
+      
 
-          <div class="control-group input-append">
-            <div class="control">
-              <label class="control-label" for="color_property">Color Key</label>
-
-              <div class="controls">
-                <select class="input-medium" id="color_property"></select>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- end row-fluid -->
-
-      </div>
-      <!-- end container -->
+      </div> <!-- end container-fluid -->
 
     </div>
-    <!-- end view-variables -->
-
-    <!-- Lens specific -->
-
-    <div class="lens-variables">
-
-      <div class="container-fluid">
-
-        <div class="row-fluid">
-          <legend class="lens-settings-label">Lens Settings</legend>
-        </div>
-
-        <div class="row-fluid">
-
-          <div class="control-group">
-            <!-- inject lens editor -->
-            <div id="lens_editor">
-            </div>
-          </div>
-
-        </div>
-        <!-- end row -->
-
-      </div>
-      <!-- end container -->
-
-    </div>
-    <!-- end lens variable -->
-
+    <!-- end view variable -->
+    
   </fieldset>
 </form>
