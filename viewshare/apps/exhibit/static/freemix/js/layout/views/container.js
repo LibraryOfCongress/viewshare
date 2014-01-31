@@ -57,7 +57,7 @@ define(["jquery",
 
         editor.render();
 
-        this._dialog.one("edit-widget", function(evt) {
+        this._dialog.off("edit-widget").one("edit-widget", function(evt) {
             var model = editor.model;
             this.modal("hide");
             container.addView(model);

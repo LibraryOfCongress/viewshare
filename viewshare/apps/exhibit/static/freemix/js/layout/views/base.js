@@ -22,6 +22,7 @@ define(["jquery",
 
         var form = $(this.template());
         template.find(".widget-edit-settings-body").empty().append(form);
+        template.off(this.refreshEvent);
 
         form.submit(function() {return false;});
 
@@ -37,7 +38,7 @@ define(["jquery",
            
         });
 
-        template.off(this.refreshEvent).bind(this.refreshEvent, function() {
+        template.bind(this.refreshEvent, function() {
             model.updatePreview(template.find(".widget-preview-body"), config);
         });
 
@@ -87,7 +88,6 @@ define(["jquery",
 
         $(".view-set>li.view", this.getContainer()).removeClass("active");
         control.addClass("active");
-        this.updatePreview(content, this.config);
         content.prepend(menu_template);
         content.find(".view-menu a").off("click").click(function() {
             var editor = new WidgetEditor({
@@ -106,6 +106,8 @@ define(["jquery",
             });
             return false;
         });
+        this.updatePreview(content, this.config);
+
     };
 
     BaseView.prototype.remove = function() {
