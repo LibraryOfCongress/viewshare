@@ -1,0 +1,31 @@
+<form id="create-property-form" class="form">
+  <fieldset>
+    <div class="row-fluid">
+      <div class="prose">
+        Before you can design your map, we need to convert your data into latitude, longitude coordinates
+        (e.g. "40.1583, -83.074"). Please select the location related properties in your data (e.g. City,
+        State, Zip) to be converted.
+      </div>
+    </div>
+
+    <div class="row-fluid">
+      <select id="augment_property_list" multiple="multiple">
+      </select>
+    </div>
+    <div class="row-fluid">
+      <button id="widget_save_button" class="btn btn-primary">Create location data</button>
+      <button type="button" class="btn" data-dismiss="modal" aria-hidden="true">Do not create location data at
+        this time
+      </button>
+    </div>
+
+    <br/>
+
+    <div class="row-fluid">
+      <div class="alert alert-info">
+        NOTE: If you already have a property that has latitude, longitude values (e.g. "40.1583, -83.074") and
+        would like to bypass this step, use the editor to set the appropriate property type to 'location'.
+      </div>
+    </div>
+  </fieldset>
+</form>

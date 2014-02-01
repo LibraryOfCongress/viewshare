@@ -1,9 +1,13 @@
 define(["jquery",
         "display/views/map",
+        "freemix/js/freemix",
+
         "ext/openlayers/scripts/openlayers-view",
         "handlebars",
-        "text!templates/layout/views/map-view.html"],
-        function ($, View, OLMapView, Handlebars, template_html) {
+        "text!templates/layout/views/map-view.html",
+        "text!templates/layout/views/map-view-settings.html",
+        "./location-property-view"],
+        function ($, View, Freemix, OLMapView, Handlebars, template_html, settings_html, LocationPropertyView) {
         "use strict"
 
     View.prototype.propertyTypes = ["location"];
@@ -17,7 +21,39 @@ define(["jquery",
     View.prototype.template = Handlebars.compile(template_html);
 
     View.prototype.setupEditor = function (config, template) {
+        var view = this;
 
+        var augment = template.find("#collapseAugment");
+        var edit = template.find("#collapseEdit");
+
+        edit.off("show").on("show", function() {
+            var root = $(this);
+            root.append(settings_html);
+            view.renderSettings(config, root);
+
+
+            edit.off("hide").on("hide", function() {
+                root.empty();
+            });
+        });
+        augment.off("show").on("show", function() {
+
+            var location_view = view.renderLocationPropertyView($(this));
+            augment.off("hide").on("hide", function() {
+                location_view.destroy();
+            });
+        });
+
+        var database = Freemix.getBuilderExhibit().getUIContext().getDatabase();
+
+        if (database.getPropertiesWithTypes(["location"]).length > 0) {
+            edit.collapse("show");
+        } else {
+            augment.collapse("show");
+        }
+    };
+
+    View.prototype.renderSettings = function(config, template) {
         this._setupViewForm(config, template);
         this._setupLabelEditor(config, template);
 
@@ -34,10 +70,17 @@ define(["jquery",
         zoom.change();
 
         this._setupLensEditor(config, template);
-
-        var property_list = template.find("#augment_property_list");
-        this._setupPropertyMultiSelect(config, template, property_list, "properties", true);
-
     };
+
+    View.prototype.renderLocationPropertyView = function(root) {
+        var view = new LocationPropertyView({
+            element: root
+        });
+
+        view.render();
+
+        return view;
+    }
+
     return View;
 });

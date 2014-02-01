@@ -37,8 +37,6 @@ requirejs.config({
         "i18n": "lib/i18n",
         "ext": "extensions",
         "exlib": "lib",
-        "fmlib": "freemix/js/lib",
-        "fmexlib": "freemix/js/lib",
         "openlayers": "simile/exhibit/extensions/openlayers/lib/OpenLayers",
         "jquery-ui": "freemix/js/lib/jquery-ui",
         "ui.multiselect": "freemix/js/lib/ui.multiselect",
@@ -52,10 +50,11 @@ requirejs.config({
         "text": 'freemix/js/lib/text',
         "handlebars": "freemix/js/lib/handlebars",
         "templates": "freemix/js/templates",
-        "models": "freemix/js/models",
+//        "models": "freemix/js/models",
         "layout": "freemix/js/layout",
-        "display": "freemix/js/display"
-
+        "display": "freemix/js/display",
+        "models": 'dataset/js/models/editor',
+        "observer": 'dataset/js/observer'
 
 
     },
