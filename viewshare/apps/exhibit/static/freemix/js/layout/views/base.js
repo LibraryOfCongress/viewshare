@@ -88,6 +88,7 @@ define(["jquery",
 
         $(".view-set>li.view", this.getContainer()).removeClass("active");
         control.addClass("active");
+        this.updatePreview(content, this.config);
         content.prepend(menu_template);
         content.find(".view-menu a").off("click").click(function() {
             var editor = new WidgetEditor({
@@ -106,7 +107,6 @@ define(["jquery",
             });
             return false;
         });
-        this.updatePreview(content, this.config);
 
     };
 
