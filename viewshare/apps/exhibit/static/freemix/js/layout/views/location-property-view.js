@@ -1,17 +1,21 @@
-define(["jquery",
-        "handlebars",
-        "text!templates/layout/views/location-property.html",
-        "models/composite-property",
-        "layout/views/property-multiselect-component",
-        "observer",
-        "bootstrap",
-        "jquery.uuid"],
-function($,
-         Handlebars,
-         settings_template,
-         CompositePropertyModel,
-         PropertyMultiselect,
-         Observer
+define([
+    "jquery",
+    "handlebars",
+    "models/composite-property",
+    "layout/views/property-multiselect-component",
+    "observer",
+    "text!templates/layout/views/location-property.html",
+    "text!templates/layout/views/augment-progress.html",
+    "bootstrap",
+    "jquery.uuid"],
+function(
+    $,
+    Handlebars,
+    CompositePropertyModel,
+    PropertyMultiselect,
+    Observer,
+    settings_template,
+    progress_template
 ) {
     "use strict";
 
@@ -23,7 +27,6 @@ function($,
         this.Observer = options.observer;
 
         this.components = [];
-
     }
 
     SettingsView.prototype.template = Handlebars.compile(settings_template);
@@ -77,6 +80,22 @@ function($,
         this.model.createProperty();
     };
 
+    function ProgressView(options) {
+        this.element = options.element;
+        this.model = options.model;
+        this.Observer = options.observer;
+    }
+
+    ProgressView.prototype.template = Handlebars.compile(progress_template);
+
+    ProgressView.prototype.render = function() {
+        this.element.empty();
+        this.element.append(this.template());
+    }
+
+    ProgressView.prototype.destroy = function() {
+
+    }
 
     function CompositePropertyView(options) {
         this.element = options.element;
@@ -119,7 +138,13 @@ function($,
     };
 
     CompositePropertyView.prototype.createPropertySuccessHandler = function() {
-
+        this.component.destroy();
+        this.component = new ProgressView({
+            element: this.element,
+            model: this.model,
+            observer: this.Observer
+        });
+        this.component.render();
     };
 
     CompositePropertyView.prototype.createPropertyFailureHandler = function(status) {
@@ -148,6 +173,8 @@ function($,
         this.model.Observer("augmentDataSuccess").unsubscribe(
             this.augmentDataSuccessHandler.bind(this));
         this.model.Observer("augmentDataFailure").unsubscribe(
+            this.augmentDataFailureHandler.bind(this));
+        this.model.Observer("loadDataSuccess").unsubscribe(
             this.augmentDataFailureHandler.bind(this));
 
         this.component.destroy();
