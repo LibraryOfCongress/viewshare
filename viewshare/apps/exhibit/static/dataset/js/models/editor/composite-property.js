@@ -53,6 +53,9 @@ define([
             if (successJSON.hasOwnProperty('data_url')) {
                 this.dataURL = successJSON.data_url;
             }
+            if (!this.id()) {
+                this.id(successJSON.id);
+            }
             this.Observer('createPropertySuccess').publish();
             augmentXhr = this.augmentData();
             return augmentXhr;
