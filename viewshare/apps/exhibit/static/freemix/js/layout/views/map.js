@@ -27,10 +27,10 @@ define(["jquery",
         var edit = template.find("#collapseEdit");
 
         edit.off("show").on("show", function() {
-            var root = $(this);
+
+            var root = edit;
             root.append(settings_html);
             view.renderSettings(config, root);
-
 
             edit.off("hide").on("hide", function() {
                 root.empty();
@@ -38,8 +38,14 @@ define(["jquery",
         });
         augment.off("show").on("show", function() {
 
-            var location_view = view.renderLocationPropertyView($(this));
+            var location_view = view.renderLocationPropertyView(augment);
+
+            location_view.Observer("cancel").subscribe(function() {
+                edit.collapse("show");
+            });
+
             augment.off("hide").on("hide", function() {
+
                 location_view.destroy();
             });
         });
@@ -74,7 +80,8 @@ define(["jquery",
 
     View.prototype.renderLocationPropertyView = function(root) {
         var view = new LocationPropertyView({
-            element: root
+            element: root,
+            database: Freemix.getBuilderExhibit().getUIContext().getDatabase()
         });
 
         view.render();
