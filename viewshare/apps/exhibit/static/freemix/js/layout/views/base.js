@@ -85,6 +85,7 @@ define(["jquery",
         var control = this.findWidget();
         var view = this;
         var content = this.getContent();
+        content.empty();
 
         $(".view-set>li.view", this.getContainer()).removeClass("active");
         control.addClass("active");
@@ -128,7 +129,11 @@ define(["jquery",
         var preview = $(this.generateExhibitHTML(config));
         target.empty().append(preview);
         var exhibit = Freemix.getBuilderExhibit();
-        this.viewClass.createFromDOM(preview.get(0), null, exhibit.getUIContext());
+        try {
+            this.viewClass.createFromDOM(preview.get(0), null, exhibit.getUIContext());
+        } catch(ex) {
+            console.log(ex);
+        }
     };
 
     BaseView.prototype.display = function() {};
