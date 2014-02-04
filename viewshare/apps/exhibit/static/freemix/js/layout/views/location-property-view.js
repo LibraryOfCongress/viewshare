@@ -16,45 +16,19 @@ function($,
     "use strict";
 
 
-
-
-    function CompositePropertyView(options) {
+    function SettingsView(options) {
         this.element = options.element;
         this.database = options.database;
-        this.model = new CompositePropertyModel({
-            id: undefined,
-            label: undefined,
-            type: 'location',
-            value: [],
-            augmentation: 'composite',
-            composite: [],
-            property_url: "properties/"
-        });
+        this.model = options.model;
+        this.Observer = options.observer;
 
         this.components = [];
 
-        this.Observer = new Observer().Observer;
-    };
+    }
 
-    CompositePropertyView.prototype.template = Handlebars.compile(settings_template);
+    SettingsView.prototype.template = Handlebars.compile(settings_template);
 
-
-    CompositePropertyView.prototype.render = function() {
-        this.renderSettings();
-
-        this.model.Observer.subscribe("createPropertySuccess",
-            this.createPropertySuccessHandler.bind(this));
-        this.model.Observer.subscribe("createPropertyFailure",
-            this.createPropertyFailureHandler.bind(this));
-        this.model.Observer.subscribe("augmentDataSuccess",
-            this.augmentDataSuccessHandler.bind(this));
-        this.model.Observer.subscribe("augmentDataFailure",
-            this.augmentDataFailureHandler.bind(this));
-        this.model.Observer.subscribe("loadDataSuccess",
-            this.loadDataSuccessHandler.bind(this));
-    };
-
-    CompositePropertyView.prototype.renderSettings = function() {
+    SettingsView.prototype.render = function() {
         var model = this.model;
 
         this.element.append(this.template());
@@ -76,10 +50,73 @@ function($,
 
     };
 
-    CompositePropertyView.prototype.renderProgress = function() {
+    SettingsView.prototype.destroy = function() {
+        for (var inx = 0 ; inx < this.components.length ; inx++) {
+            this.components[inx].destroy();
+        }
+        this.components = [];
 
+        this.findCancelButton().off("click", this.cancelButtonHandler.bind(this));
+        this.findCancelButton().off("click", this.saveButtonHandler.bind(this));
+        this.element.empty();
+    }
+
+    SettingsView.prototype.findCancelButton = function() {
+        return this.element.find("#location_augment_cancel_button");
+    }
+
+    SettingsView.prototype.findSaveButton = function() {
+        return this.element.find("#location_augment_save_button");
+    }
+
+    SettingsView.prototype.cancelButtonHandler = function() {
+        this.Observer("cancel").publish();
     };
 
+    SettingsView.prototype.saveButtonHandler = function() {
+        this.model.createProperty();
+    };
+
+
+    function CompositePropertyView(options) {
+        this.element = options.element;
+        this.database = options.database;
+        this.model = new CompositePropertyModel({
+            id: undefined,
+            label: undefined,
+            type: 'location',
+            value: [],
+            augmentation: 'composite',
+            composite: [],
+            property_url: "properties/"
+        });
+
+        this.Observer = new Observer().Observer;
+
+        this.component = new SettingsView({
+            element: this.element,
+            database: this.database,
+            model: this.model,
+            observer: this.Observer
+        });
+    };
+
+
+
+    CompositePropertyView.prototype.render = function() {
+        this.component.render();
+
+        this.model.Observer("createPropertySuccess").subscribe(
+            this.createPropertySuccessHandler.bind(this));
+        this.model.Observer("createPropertyFailure").subscribe(
+            this.createPropertyFailureHandler.bind(this));
+        this.model.Observer("augmentDataSuccess").subscribe(
+            this.augmentDataSuccessHandler.bind(this));
+        this.model.Observer("augmentDataFailure").subscribe(
+            this.augmentDataFailureHandler.bind(this));
+        this.model.Observer("loadDataSuccess").subscribe(
+            this.loadDataSuccessHandler.bind(this));
+    };
 
     CompositePropertyView.prototype.createPropertySuccessHandler = function() {
 
@@ -102,47 +139,18 @@ function($,
 
     };
 
-    CompositePropertyView.prototype.findCancelButton = function() {
-        return this.element.find("#location_augment_cancel_button");
-    }
-
-    CompositePropertyView.prototype.findSaveButton = function() {
-        return this.element.find("#location_augment_save_button");
-    }
-
-    CompositePropertyView.prototype.cancelButtonHandler = function() {
-        this.Observer("cancel").publish();
-    };
-
-    CompositePropertyView.prototype.saveButtonHandler = function() {
-        this.model.createProperty();
-    };
-
-    CompositePropertyView.prototype.destroySettings = function() {
-        for (var inx = 0 ; inx < this.components.length ; inx++) {
-            this.components[inx].destroy();
-        }
-        this.components = [];
-
-        this.findCancelButton().off("click", this.cancelButtonHandler.bind(this));
-        this.findCancelButton().off("click", this.saveButtonHandler.bind(this));
-        this.element.empty();
-    }
-
-
-
     CompositePropertyView.prototype.destroy = function() {
 
-        this.model.Observer.unsubscribe("createPropertySuccess",
+        this.model.Observer("createPropertySuccess").unsubscribe(
             this.createPropertySuccessHandler.bind(this));
-        this.model.Observer.unsubscribe("createPropertyFailure",
+        this.model.Observer("createPropertyFailure").unsubscribe(
             this.createPropertyFailureHandler.bind(this));
-        this.model.Observer.unsubscribe("augmentDataSuccess",
+        this.model.Observer("augmentDataSuccess").unsubscribe(
             this.augmentDataSuccessHandler.bind(this));
-        this.model.Observer.unsubscribe("augmentDataFailure",
+        this.model.Observer("augmentDataFailure").unsubscribe(
             this.augmentDataFailureHandler.bind(this));
 
-        this.destroySettings();
+        this.component.destroy();
     };
 
     return CompositePropertyView;
