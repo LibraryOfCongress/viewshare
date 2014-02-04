@@ -44,7 +44,21 @@ define(["jquery",
                 edit.collapse("show");
             });
 
-            augment.off("hide").on("hide", function() {
+            location_view.Observer("rejectProperty").subscribe(function() {
+                augment.one("hidden", function() {
+                    location_view.destroy();
+                    augment.collapse("show");
+                })
+                augment.collapse("hide");
+            });
+
+            location_view.Observer("acceptProperty").subscribe(function(property) {
+                config.latlng = property.id();
+                edit.collapse("show");
+            });
+
+
+            augment.off("hidden").on("hidden", function() {
 
                 location_view.destroy();
             });

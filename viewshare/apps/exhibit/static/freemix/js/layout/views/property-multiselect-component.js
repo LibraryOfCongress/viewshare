@@ -21,7 +21,6 @@ function($, Freemix) {
 
     View.prototype.addChangeHandler = function(fn) {
         this.listeners.push(fn);
-//        this.element.parent().on('change', 'select', fn);
     }
 
     View.prototype.render = function() {

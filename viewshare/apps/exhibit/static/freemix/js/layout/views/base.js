@@ -133,7 +133,7 @@ define(["jquery",
 
     BaseView.prototype.display = function() {};
 
-    BaseView.prototype.setupEditor = function() {};
+    BaseView.prototype.setupEditor = function(config, template) {};
 
     BaseView.prototype._setupViewForm = function(config, template) {
         template.find("form").submit(function() {return false;});

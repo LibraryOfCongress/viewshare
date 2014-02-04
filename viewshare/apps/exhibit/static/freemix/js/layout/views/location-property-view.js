@@ -109,7 +109,7 @@ function(
     };
 
     ProgressView.prototype.destroy = function() {
-
+        this.element.empty();
     };
 
 
@@ -138,7 +138,7 @@ function(
     };
 
     ErrorView.prototype.destroy = function()  {
-
+        this.element.empty();
     };
 
 
@@ -155,17 +155,33 @@ function(
         this.database = options.database;
     }
 
-    SuccessView.prototype.template = Handlebars.compile(success_template);
+    $.extend(SuccessView.prototype, {
+        template: Handlebars.compile(success_template),
 
-    SuccessView.prototype.render = function() {
-        this.element.empty();
-        this.element.append(this.template());
-    };
+        render: function() {
+            this.element.empty();
+            this.element.append(this.template());
 
-    SuccessView.prototype.destroy = function() {
+            this.element.find("#property_accept_button").on('click', this.acceptButtonHandler.bind(this));
+            this.element.find("#property_cancel_button").on('click', this.cancelButtonHandler.bind(this));
 
-    };
+        },
 
+        destroy: function() {
+            this.element.find("#property_accept_button").off('click', this.acceptButtonHandler.bind(this));
+            this.element.find("#property_cancel_button").off('click', this.cancelButtonHandler.bind(this));
+            this.element.empty();
+        },
+        acceptButtonHandler: function(evt) {
+            this.Observer("acceptProperty").publish(this.model);
+        },
+        cancelButtonHandler: function(evt) {
+            this.model.deleteProperty();
+            this.Observer("rejectProperty").publish(this.model);
+        }
+
+
+    });
 
     /**
      * View for creating a new Composite property and
