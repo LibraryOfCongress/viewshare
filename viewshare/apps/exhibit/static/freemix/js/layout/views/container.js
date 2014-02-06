@@ -51,17 +51,17 @@ define(["jquery",
         var editor = new WidgetEditor({
             "title": "Add View",
             "registry": ViewRegistry,
-            "element": container._dialog,
+            "element": container.getDialog(),
             "switchable": true
         });
 
         editor.render();
 
-        this._dialog.off("edit-widget").one("edit-widget", function(evt) {
+        this.getDialog().off("edit-widget").one("edit-widget", function(evt) {
             var model = editor.model;
             this.modal("hide");
             container.addView(model);
-        }.bind(this._dialog));
+        }.bind(this.getDialog()));
 
     };
 

@@ -38,7 +38,10 @@ define(["jquery",
                             "model": facet
                         });
 
-                        editor.render();
+                        facet.findContainer().getDialog().empty().one("shown", function() {
+                            editor.render();
+                        });
+
                         facet.findContainer().getDialog().modal("show");
                         facet.findContainer().getDialog().one("edit-widget", function() {
                             facet.findContainer().getDialog().modal("hide");

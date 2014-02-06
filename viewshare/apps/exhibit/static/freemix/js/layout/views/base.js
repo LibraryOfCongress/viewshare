@@ -100,7 +100,9 @@ define(["jquery",
                 "model": view
             });
 
-            editor.render();
+            view.findContainer().getDialog().empty().one("shown", function() {
+                editor.render();
+            });
             view.findContainer().getDialog().modal("show");
             view.findContainer().getDialog().one("edit-widget", function() {
                 view.findContainer().getDialog().modal("hide");
@@ -126,7 +128,7 @@ define(["jquery",
 
     BaseView.prototype.updatePreview = function(target, config) {
         config = config || this.config;
-        var preview = $(this.generateExhibitHTML(config));
+        var preview = this.generateExhibitHTML(config);
         target.empty().append(preview);
         var exhibit = Freemix.getBuilderExhibit();
         try {
