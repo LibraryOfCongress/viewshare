@@ -1,5 +1,5 @@
 South>=0.8.4,<2.0
-Django==1.6.1
+Django==1.6.2
 django-localflavor-us==1.1
 pillow==2.1.0
 django-announcements==1.0.2
