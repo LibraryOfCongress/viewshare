@@ -22,6 +22,7 @@ define(["jquery",
 
         var form = $(this.template());
         template.find(".widget-edit-settings-body").empty().append(form);
+        template.off(this.refreshEvent);
 
         form.submit(function() {return false;});
 
@@ -37,7 +38,7 @@ define(["jquery",
            
         });
 
-        template.off(this.refreshEvent).bind(this.refreshEvent, function() {
+        template.bind(this.refreshEvent, function() {
             model.updatePreview(template.find(".widget-preview-body"), config);
         });
 
@@ -84,6 +85,7 @@ define(["jquery",
         var control = this.findWidget();
         var view = this;
         var content = this.getContent();
+        content.empty();
 
         $(".view-set>li.view", this.getContainer()).removeClass("active");
         control.addClass("active");
@@ -98,7 +100,9 @@ define(["jquery",
                 "model": view
             });
 
-            editor.render();
+            view.findContainer().getDialog().empty().one("shown", function() {
+                editor.render();
+            });
             view.findContainer().getDialog().modal("show");
             view.findContainer().getDialog().one("edit-widget", function() {
                 view.findContainer().getDialog().modal("hide");
@@ -106,6 +110,7 @@ define(["jquery",
             });
             return false;
         });
+
     };
 
     BaseView.prototype.remove = function() {
@@ -123,15 +128,19 @@ define(["jquery",
 
     BaseView.prototype.updatePreview = function(target, config) {
         config = config || this.config;
-        var preview = $(this.generateExhibitHTML(config));
+        var preview = this.generateExhibitHTML(config);
         target.empty().append(preview);
         var exhibit = Freemix.getBuilderExhibit();
-        this.viewClass.createFromDOM(preview.get(0), null, exhibit.getUIContext());
+        try {
+            this.viewClass.createFromDOM(preview.get(0), null, exhibit.getUIContext());
+        } catch(ex) {
+            console.log(ex);
+        }
     };
 
     BaseView.prototype.display = function() {};
 
-    BaseView.prototype.setupEditor = function() {};
+    BaseView.prototype.setupEditor = function(config, template) {};
 
     BaseView.prototype._setupViewForm = function(config, template) {
         template.find("form").submit(function() {return false;});

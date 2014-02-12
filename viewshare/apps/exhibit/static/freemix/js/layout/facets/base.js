@@ -38,7 +38,10 @@ define(["jquery",
                             "model": facet
                         });
 
-                        editor.render();
+                        facet.findContainer().getDialog().empty().one("shown", function() {
+                            editor.render();
+                        });
+
                         facet.findContainer().getDialog().modal("show");
                         facet.findContainer().getDialog().one("edit-widget", function() {
                             facet.findContainer().getDialog().modal("hide");
@@ -68,6 +71,7 @@ define(["jquery",
         var config = $.extend(true, {}, model.config);
         var form = $(this.template());
         template.find(".widget-edit-settings-body").empty().append(form);
+        template.off(this.refreshEvent);
 
         form.submit(function() {return false;});
 
@@ -77,7 +81,7 @@ define(["jquery",
            model.config = config;
            template.trigger("edit-widget");
         });
-        template.off(this.refreshEvent).bind(this.refreshEvent, function() {
+        template.bind(this.refreshEvent, function() {
             model.updatePreview(template.find(".widget-preview-body"), config);
         });
         this.triggerChange(config, template);

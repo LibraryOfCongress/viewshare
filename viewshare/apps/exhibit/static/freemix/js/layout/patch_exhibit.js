@@ -14,18 +14,16 @@ define(["jquery", "scripts/data/database/local"],
     ];
 
     LocalImpl.prototype.getPropertiesWithTypes = function(types) {
-        var index = this._freemix_type_index || {};
-        if ($.isEmptyObject(index)) {
-           $.each(this.getPropertyObjects(), function(inx,prop) {
-               var type = prop.getValueType();
-               index[type] = index[type] || [];
-               index[type].push(prop);
-           });
-           this._freemix_type_index = index;
-        }
+        var index = {};
+        $.each(this.getPropertyObjects(), function(inx,prop) {
+            var type = prop.getValueType();
+            index[type] = index[type] || [];
+            index[type].push(prop);
+        });
+
 
         return [].concat($.map(types, function(x) {
-           return index[x];
+            return index[x];
         }));
     };
 

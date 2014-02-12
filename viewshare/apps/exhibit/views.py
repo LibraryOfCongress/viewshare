@@ -580,7 +580,7 @@ class PublishExhibitView(DraftExhibitView):
         if not self.check_perms():
             raise Http404()
 
-        if request.META["CONTENT_TYPE"] == "application/json":
+        if "application/json" in request.META["CONTENT_TYPE"]:
             return self.update_profile(request)
         else:
             return self.publish_form(request)

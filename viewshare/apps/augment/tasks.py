@@ -10,4 +10,3 @@ def augment_property(id):
     # TODO: get the correct AugmentTransaction
     tx = AugmentTransaction.objects.get(id=id)
     tx.run()
-    return tx

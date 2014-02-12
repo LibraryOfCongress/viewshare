@@ -85,6 +85,7 @@ class ExhibitPropertySerializer(Serializer):
                                    kwargs=kwargs)
                 self._data["property_url"] = property_url
                 self._data["data_url"] = data_url
+                self._data["id"] = self.instance.name
 
         return self._data
 
