@@ -111,6 +111,9 @@ define([
                     ViewInterface.Observer('endAugment')
                         .publish({label: newProperty.label});
                 }.bind(this));
+                $.each(this.$el.find('form'), function(index, value) {
+                    value.reset();
+                })
                 return newProperty.createProperty();
             } else {
                 // display client-side form validation errors

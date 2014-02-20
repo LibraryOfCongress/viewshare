@@ -119,7 +119,7 @@ define([
                         function() {
                             this.empty();
                         }.bind(this));
-                }.bind(this.$el.find('#' + this.notificationCount), 4000));
+                }.bind(this.$el.find('#' + this.notificationCount)), 4000);
             }
         },
 
