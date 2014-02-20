@@ -40,6 +40,7 @@ define([
                 header: 'Data Augmentation',
                 body: body,
                 buttonText: 'Create Property',
+                toggleEventName: 'showAugmentModal',
                 buttonFunction: this.createProperty.bind(this)
             }).$el;
             this.listView = {destroy: $.noop};

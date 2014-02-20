@@ -67,7 +67,7 @@ define([
                 }
                 // bind to DOM actions
                 this.$el.find('#add-property').on('click', (function() {
-                    ViewInterface.Observer('showModal').publish();
+                    ViewInterface.Observer('showAugmentModal').publish();
                 }).bind(this));
             }
             return this;

@@ -83,6 +83,7 @@ define([
                     'and cannot be recovered. Are you sure you want to ' +
                     'delete this property?</div>',
                 buttonText: 'Delete Property',
+                toggleEventName: 'showDeleteModal',
                 buttonFunction: this.deleteProperty.bind(this)
             });
             this.deleteModalView.$el.on('hide.bs.modal', function () {
