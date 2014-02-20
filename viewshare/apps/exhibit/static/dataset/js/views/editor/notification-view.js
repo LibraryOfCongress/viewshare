@@ -26,6 +26,7 @@ define([
     $.extend(NotificationView.prototype, {
         initialize: function(options) {
             this.$el = options.$el;
+            this.notificationCount = 0;
         },
 
         /** Compile the template we will use to render the View */
@@ -97,7 +98,9 @@ define([
             } else {
                 notificationMessage = message;
             }
+            this.notificationCount += 1;
             notification = this.template({
+                id: this.notificationCount,
                 status: status,
                 message: notificationMessage,
                 lead: lead
@@ -110,13 +113,13 @@ define([
 
             if (shouldFade === true) {
                 window.setTimeout(function () {
-                    this.$el.children().fadeOut(
+                    this.fadeOut(
                         2000,
                         'linear',
                         function() {
-                            this.$el.empty();
+                            this.empty();
                         }.bind(this));
-                }.bind(this), 4000);
+                }.bind(this.$el.find('#' + this.notificationCount), 4000));
             }
         },
 

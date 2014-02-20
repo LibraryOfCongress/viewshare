@@ -7,6 +7,7 @@ define([
     'views/map-augment-view',
     'views/modal-view',
     'views/timeline-augment-view',
+    'views/view-interface',
     'bootstrap',
     'jquery.csrf'
 ], function (
@@ -16,7 +17,8 @@ define([
     ListAugmentView,
     MapAugmentView,
     ModalView,
-    TimelineAugmentView
+    TimelineAugmentView,
+    ViewInterface
 ) {
     'use strict';
     /**
@@ -102,8 +104,13 @@ define([
             errors = newProperty.validate(this.model.propertyLabels());
             if ($.isEmptyObject(errors)) {
                 this.$el.modal('hide');
-                newProperty.Observer('loadDataSuccess').subscribe(
-                    this.model.addProperty.bind(this.model));
+                ViewInterface.Observer('beginAugment')
+                    .publish({label: newProperty.label});
+                newProperty.Observer('loadDataSuccess').subscribe(function(newProperty) {
+                    this.model.addProperty(newProperty);
+                    ViewInterface.Observer('endAugment')
+                        .publish({label: newProperty.label});
+                }.bind(this));
                 return newProperty.createProperty();
             } else {
                 // display client-side form validation errors
