@@ -3,7 +3,7 @@ define(["jquery",
         "display/facets/text",
         "exhibit",
         "text!templates/layout/facets/text-facet-editor.html",
-        "freemix/js/lib/creole"],
+        "creole"],
         function ($, Handlebars, Facet, Exhibit, template_html) {
         "use strict"
 
