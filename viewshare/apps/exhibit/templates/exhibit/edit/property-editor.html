@@ -55,10 +55,6 @@
                     <a class="btn btn-small btn-primary" id="edit_button" href="{% url 'exhibit_edit' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Build" %}</a>
                     <button class="btn btn-small btn-primary disabled" id="preview_button" data-toggle="collapse" data-target="#preview">{% trans "Preview" %}</button>
                   </div>
-                  <div class="exhibit-actions btn-group">
-                    <button class="btn btn-small" id="save_button">{% trans "Save" %}</button>
-                    <a href="{{ cancel_url }}" class="btn btn-small" id="cancel_button">{% trans "Cancel" %}</a>
-                  </div>
                 </div>
               </div> <!-- span6 -->
             </div> <!-- row-fluid -->
