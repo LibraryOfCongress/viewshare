@@ -74,7 +74,7 @@ class OAIDataSourceForm(DataSourceForm):
 
     class Meta(DataSourceForm.Meta):
         model = models.OAIDataSource
-        fields = ("url", "title", "set", "set_choice", "limit",)
+        fields = ("url", "title", "set", "set_choice",)
         widgets = {
             "title": forms.HiddenInput(),
             "set": forms.HiddenInput()
