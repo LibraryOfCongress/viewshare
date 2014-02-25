@@ -11,20 +11,6 @@
 {% if is_me %}
 {# only show drafts if its me #}
 
-{% if draft_count > 0 %}
-<div class="draftview-section widget-well">
-  <div class="widget-header">
-    <h2>{% blocktrans %}My Drafts{% endblocktrans %}</h2>
-  </div>
-  
-  {% if draft_count > 3 %}
-  <div class="see_all">
-    <a href="">{% trans "See all" %}  {{ draft_count }} draft{{ draft_count|pluralize }}</a>
-  </div>
-  {% endif %}
-</div>
-{% endif %}
-
 {% endif %}
 
 {% if exhibit_count == 0 and is_me %}
