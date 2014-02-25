@@ -107,7 +107,8 @@ define([
             });
             this.$el.append(notification);
             if (isView) {
-                message.$el = this.$el.find('#notificationMsg');
+                message.$el = this.$el.children()
+                    .last().find('#notificationMsg');
                 message.render();
             }
 
@@ -117,7 +118,7 @@ define([
                         2000,
                         'linear',
                         function() {
-                            this.empty();
+                            this.remove();
                         }.bind(this));
                 }.bind(this.$el.find('#' + this.notificationCount)), 4000);
             }

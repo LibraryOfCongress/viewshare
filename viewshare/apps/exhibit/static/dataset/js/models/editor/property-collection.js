@@ -77,12 +77,14 @@ define([
                     }
                     if (property.hasOwnProperty('augmentation')) {
                         args.augmentation = property.augmentation;
-                        args.composite = property.composite;
                         if (property.augmentation === 'composite') {
+                            args.composite = property.composite;
                             this.properties.push(
                                 new CompositePropertyModel(args));
                         } else if (['pattern-list', 'delimited-list'].indexOf(
                                 property.augmentation) >= 0) {
+                            args.composite = property.source
+                            args.source = property.source
                             this.properties.push(
                                 new PatternPropertyModel(args));
                         }

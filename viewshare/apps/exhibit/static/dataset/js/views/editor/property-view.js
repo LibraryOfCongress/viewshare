@@ -174,7 +174,7 @@ define([
             deleteBtn.off('click');
             this.model.Observer('changeCurrentItem')
                 .unsubscribe(this.changeValueHandler);
-            this.$el.empty();
+            this.$el.remove();
         }
     });
 

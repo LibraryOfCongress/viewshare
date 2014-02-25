@@ -49,6 +49,10 @@ define([
                 .apply(this, []);
             jsonProperty.delimiter = this.delimiter;
             jsonProperty.pattern = this.pattern;
+            if (this.composite.length > 0 && this.source == null) {
+                this.source = this.composite[0];
+            }
+            jsonProperty.source = this.source;
             return jsonProperty;
         }
     });
