@@ -255,6 +255,10 @@ LOGGING = {
         'viewshare': {
             'handlers': ['console'],
             'level': 'DEBUG'
+        },
+        'django': {
+            'handlers': ['console'],
+            'level': 'ERROR'
         }
     }
 }
