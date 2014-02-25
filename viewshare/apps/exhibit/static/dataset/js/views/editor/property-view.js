@@ -27,6 +27,7 @@ define([
             this.model = options.model;
             this.$el = options.$el;
             this.deleteModalView = undefined;
+            this.timeoutId = undefined;
             // subscribe to model events
             this.model.Observer('loadDataSuccess').subscribe(
                 this.render.bind(this)
@@ -52,8 +53,11 @@ define([
 
         /** Event handler when a .name input is changed */
         changeLabelHandler: function(event) {
-            this.model.label = event.target.value;
-            return this.model.updateProperty();
+            clearTimeout(this.timeoutId);
+            this.timeoutId = setTimeout(function() {
+                this.model.label = event.target.value;
+                return this.model.updateProperty();
+            }.bind(this), 600);
         },
 
         /** Event handler when a .types input is changed */
@@ -79,6 +83,7 @@ define([
                     'and cannot be recovered. Are you sure you want to ' +
                     'delete this property?</div>',
                 buttonText: 'Delete Property',
+                toggleEventName: 'showDeleteModal',
                 buttonFunction: this.deleteProperty.bind(this)
             });
             this.deleteModalView.$el.on('hide.bs.modal', function () {
@@ -118,7 +123,7 @@ define([
             }));
             // bind to DOM events
             this.$el.find('.name input').on(
-                'change', this.changeLabelHandler.bind(this));
+                'input', this.changeLabelHandler.bind(this));
             this.$el.find('.types select').on(
                 'change', this.changeTypeHandler.bind(this));
             this.$el.find('#delete-' + this.model.id()).on(
@@ -169,7 +174,7 @@ define([
             deleteBtn.off('click');
             this.model.Observer('changeCurrentItem')
                 .unsubscribe(this.changeValueHandler);
-            this.$el.empty();
+            this.$el.remove();
         }
     });
 

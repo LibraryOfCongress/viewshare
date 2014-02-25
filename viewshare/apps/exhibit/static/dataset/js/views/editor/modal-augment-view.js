@@ -7,6 +7,7 @@ define([
     'views/map-augment-view',
     'views/modal-view',
     'views/timeline-augment-view',
+    'views/view-interface',
     'bootstrap',
     'jquery.csrf'
 ], function (
@@ -16,7 +17,8 @@ define([
     ListAugmentView,
     MapAugmentView,
     ModalView,
-    TimelineAugmentView
+    TimelineAugmentView,
+    ViewInterface
 ) {
     'use strict';
     /**
@@ -38,6 +40,7 @@ define([
                 header: 'Data Augmentation',
                 body: body,
                 buttonText: 'Create Property',
+                toggleEventName: 'showAugmentModal',
                 buttonFunction: this.createProperty.bind(this)
             }).$el;
             this.listView = {destroy: $.noop};
@@ -51,6 +54,12 @@ define([
 
         /** Compile the template we will use to render the View */
         template: Handlebars.compile(modalAugmentTemplate),
+
+        augmentSuccessHandler: function(newProperty) {
+            this.model.addProperty(newProperty);
+            ViewInterface.Observer('endAugment')
+                .publish({label: newProperty.label});
+        },
 
         render: function() {
             $('body').append(this.$el);
@@ -70,6 +79,17 @@ define([
             this.listView.render();
             this.mapView.render();
             this.timelineView.render();
+
+            //subscribe to events
+            this.listView.newPatternProperty
+                .Observer('loadDataSuccess')
+                .subscribe(this.augmentSuccessHandler.bind(this));
+            this.mapView.newCompositeProperty
+                .Observer('loadDataSuccess')
+                .subscribe(this.augmentSuccessHandler.bind(this));
+            this.timelineView.newCompositeProperty
+                .Observer('loadDataSuccess')
+                .subscribe(this.augmentSuccessHandler.bind(this));
         },
 
         /** Display a validation error
@@ -102,8 +122,11 @@ define([
             errors = newProperty.validate(this.model.propertyLabels());
             if ($.isEmptyObject(errors)) {
                 this.$el.modal('hide');
-                newProperty.Observer('loadDataSuccess').subscribe(
-                    this.model.addProperty.bind(this.model));
+                ViewInterface.Observer('beginAugment')
+                    .publish({label: newProperty.label});
+                $.each(this.$el.find('form'), function(index, value) {
+                    value.reset();
+                })
                 return newProperty.createProperty();
             } else {
                 // display client-side form validation errors
