@@ -67,7 +67,7 @@ define([
                 }
                 // bind to DOM actions
                 this.$el.find('#add-property').on('click', (function() {
-                    ViewInterface.Observer('showModal').publish();
+                    ViewInterface.Observer('showAugmentModal').publish();
                 }).bind(this));
             }
             return this;
@@ -92,6 +92,10 @@ define([
                 model: newPropertyModel,
                 $el: newPropertyEl
             });
+            if (this.model.properties.length > 0) {
+                newProperty.currentItemIndex = this.model
+                    .properties[0].currentItemIndex;
+            }
             this.propertyViews.push(newProperty);
             newPropertyEl.css( 'display', 'none' );
             if (propertyTr == null) {

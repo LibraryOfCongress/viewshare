@@ -17,7 +17,7 @@
       </select>
     </div>
   </div><!-- /.control-group -->
-  <table class="table table-hover augment-properties">
+  <table class="table table-hover table-condensed augment-properties">
     <caption>Create the list from your existing data.</caption>
     <thead>
       <tr>
@@ -28,8 +28,8 @@
     <tbody id="properties">
       {{#each propertyOptions}}
       <tr>
-        <td class="selected"><input type="radio" name="list-id" value="{{ this.id }}"></td>
-        <td class="name">{{ this.label }}</td>
+        <td class="selected"><input type="radio" id="list-prop-{{this.id}}" name="list-id" value="{{ this.id }}"></td>
+        <td class="name"><label for="list-prop-{{this.id}}">{{ this.label }}</label></td>
       </tr>
       {{/each}}
     </tbody>

@@ -56,7 +56,7 @@ define([
             if (!this.id()) {
                 this.id(successJSON.id);
             }
-            this.Observer('createPropertySuccess').publish();
+            this.Observer('createPropertySuccess').publish(this);
             augmentXhr = this.augmentData();
             return augmentXhr;
         },
