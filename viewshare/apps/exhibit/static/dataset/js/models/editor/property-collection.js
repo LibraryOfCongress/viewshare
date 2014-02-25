@@ -77,12 +77,14 @@ define([
                     }
                     if (property.hasOwnProperty('augmentation')) {
                         args.augmentation = property.augmentation;
-                        args.composite = property.composite;
                         if (property.augmentation === 'composite') {
+                            args.composite = property.composite;
                             this.properties.push(
                                 new CompositePropertyModel(args));
                         } else if (['pattern-list', 'delimited-list'].indexOf(
                                 property.augmentation) >= 0) {
+                            args.composite = property.source
+                            args.source = property.source
                             this.properties.push(
                                 new PatternPropertyModel(args));
                         }
@@ -186,7 +188,27 @@ define([
                     .properties[0].currentItemIndex;
             }
             this.properties.push(newProperty);
+            newProperty.Observer('deletePropertySuccess').subscribe(
+                this.deleteProperty.bind(this));
             this.Observer('newProperty').publish(newProperty);
+        },
+
+        /** Remove a new property to this.properties */
+        deleteProperty: function(deletedProperty) {
+            var i;
+            for (i = 0; i < this.properties.length; i++) {
+                if (this.properties[i].id() === deletedProperty.id()) {
+                    break;
+                }
+            }
+            if (i < this.properties.length) {
+                this.properties.splice(i, 1);
+                this.Observer('deletePropertySuccess')
+                    .publish(deletedProperty);
+            } else {
+                this.Observer('deletePropertyFailure')
+                    .publish(deletedProperty);
+            }
         },
 
         /**

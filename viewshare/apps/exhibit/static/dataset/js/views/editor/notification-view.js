@@ -26,6 +26,7 @@ define([
     $.extend(NotificationView.prototype, {
         initialize: function(options) {
             this.$el = options.$el;
+            this.notificationCount = 0;
         },
 
         /** Compile the template we will use to render the View */
@@ -97,26 +98,29 @@ define([
             } else {
                 notificationMessage = message;
             }
+            this.notificationCount += 1;
             notification = this.template({
+                id: this.notificationCount,
                 status: status,
                 message: notificationMessage,
                 lead: lead
             });
             this.$el.append(notification);
             if (isView) {
-                message.$el = this.$el.find('#notificationMsg');
+                message.$el = this.$el.children()
+                    .last().find('#notificationMsg');
                 message.render();
             }
 
             if (shouldFade === true) {
                 window.setTimeout(function () {
-                    this.$el.children().fadeOut(
+                    this.fadeOut(
                         2000,
                         'linear',
                         function() {
-                            this.$el.empty();
+                            this.remove();
                         }.bind(this));
-                }.bind(this), 4000);
+                }.bind(this.$el.find('#' + this.notificationCount)), 4000);
             }
         },
 

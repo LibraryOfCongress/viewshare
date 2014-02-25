@@ -19,6 +19,8 @@ define([
      * @param {string} options.body - string to use for modal body
      * @param {string} options.buttonText - (optional) string to use for button
      * text in footer
+     * @param {string} options.toggleEventName - name of event to toggle
+     * modal's visibility
      * @param {function} options.buttonFunction - (optional) function to run
      * when button in footer is clicked
      */
@@ -37,8 +39,9 @@ define([
                 this.$el.find('#modalButton').on(
                     'click', this, options.buttonFunction);
             }
+            this.toggleEventName = options.toggleEventName;
             // events
-            ViewInterface.Observer('showModal').subscribe(
+            ViewInterface.Observer(this.toggleEventName).subscribe(
                 this.handleShowModal.bind(this));
         },
         /** Compile the template we will use to render the View */
@@ -54,7 +57,7 @@ define([
 
         /** Remove event bindings, child views, and DOM elements */
         destroy: function() {
-            ViewInterface.Observer('showModal').unsubscribe(
+            ViewInterface.Observer(this.toggleEventName).unsubscribe(
                 this.handleShowModal.bind(this));
             this.$el.remove();
         }

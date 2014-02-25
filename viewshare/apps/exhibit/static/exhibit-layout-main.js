@@ -32,11 +32,18 @@ requirejs.config({
             "prefix": "/static/simile/exhibit/extensions/flot/"
         }
     },
+    "deps": ["nls/de/locale","nls/es/locale","nls/fr/locale","nls/locale","nls/nl/locale","nls/no/locale","nls/pt-br/locale","nls/root/locale","nls/sv/locale","ext/flot/nls/locale","ext/flot/nls/root/locale","ext/map/nls/de/locale","ext/map/nls/es/locale","ext/map/nls/fr/locale","ext/map/nls/locale","ext/map/nls/nl/locale","ext/map/nls/root/locale","ext/map/nls/sv/locale","ext/time/nls/de/locale","ext/time/nls/es/locale","ext/time/nls/fr/locale","ext/time/nls/locale","ext/time/nls/nl/locale","ext/time/nls/root/locale","ext/time/nls/sv/locale"],
     "paths": {
-        "async": "lib/async",
-        "i18n": "lib/i18n",
-        "ext": "extensions",
-        "exlib": "lib",
+        "i18n": "simile/exhibit/lib/i18n",
+        "async": "simile/exhibit/lib/async",
+        "lib": "simile/exhibit/lib",
+        "nls": "simile/exhibit/nls",
+        "ext": "simile/exhibit/extensions",
+        "scripts": "simile/exhibit/scripts",
+        "exhibit": "simile/exhibit/exhibit",
+        "timeline": "simile/exhibit/ext/timeline/api/timeline-bundle",
+        "simile-ajax": "simile/exhibit/ext/ajax/api/simile-ajax-bundle",
+        "jquery": "freemix/js/lib/jquery",
         "openlayers": "simile/exhibit/extensions/openlayers/lib/OpenLayers",
         "jquery-ui": "freemix/js/lib/jquery-ui",
         "ui.multiselect": "freemix/js/lib/ui.multiselect",
@@ -49,39 +56,23 @@ requirejs.config({
         "jquery.json": "freemix/js/lib/jquery.json",
         "text": 'freemix/js/lib/text',
         "handlebars": "freemix/js/lib/handlebars",
+        "creole": "freemix/js/lib/creole",
         "templates": "freemix/js/templates",
-//        "models": "freemix/js/models",
         "layout": "freemix/js/layout",
         "display": "freemix/js/display",
-        "models": 'dataset/js/models/editor',
-        "observer": 'dataset/js/observer'
-
-
+        "models": "dataset/js/models/editor",
+        "observer": "dataset/js/observer"
+    },
+    "map": {
+        "*": {
+            "lib/jquery": "jquery"
+        }
     },
     "shim": {
-        "exlib/jquery": {
-            "exports": "jQuery"
-        },
-        "exlib/json2": {
-            "exports": "JSON"
-        },
-        "exlib/base64": {
-            "exports": "Base64"
-        },
-        "exlib/jquery.history": {
-            "deps": ["exlib/jquery"],
-            "exports": "History"
-        },
-        "exlib/jquery.history.shim": {
-            "deps": ["exlib/jquery.history"]
-        },
-        "exlib/jquery.nouislider": {
-            "deps": ["exlib/jquery"]
-        },
-        "ext/openlayers/lib/openlayers": {
+        "openlayers": {
             "exports": "OpenLayers"
         },
-        "freemix/js/lib/jquery": {
+        "jquery": {
             "exports": "jQuery"
         },
         "jquery-ui": {
@@ -90,11 +81,8 @@ requirejs.config({
         "ui.multiselect": {
             "deps": ["jquery-ui"]
         },
-        "freemix/js/lib/creole": {
+        "creole": {
             "exports": "Parse"
-        },
-        "openlayers": {
-            "exports": "OpenLayers"
         },
         "bootstrap": {
             "deps": ["jquery"]
@@ -119,24 +107,38 @@ requirejs.config({
         },
         "handlebars": {
             "exports": "Handlebars"
+        },
+        "lib/base64": {
+            "exports": "Base64"
+        },
+        "lib/jquery": {
+            "exports": "jQuery"
+        },
+        "lib/jquery.history": {
+            "deps": ["lib/jquery"],
+            "exports": "History"
+        },
+        "lib/jquery.history.shim": {
+            "deps": ["lib/jquery.history"]
+        },
+        "lib/jquery.nouislider": {
+            "deps": ["lib/jquery"]
         }
     }
 });
 
-require(["simile/exhibit/exhibit-api"], function() {
-
-    require(["jquery",
+require(["jquery",
         "layout/editor",
         "layout/patch_exhibit",
         "freemix/js/patch_exhibit",
-
+     
         "layout/widget",
         "layout/facets/container",
         "layout/views/container",
         "layout/facets/base",
         "layout/views/base",
         "layout/lenses/base",
-
+     
         "layout/lenses/list",
         "layout/lenses/thumbnail",
         "layout/views/list",
@@ -147,7 +149,7 @@ require(["simile/exhibit/exhibit-api"], function() {
         "layout/views/table",
         "layout/views/timeline",
         "layout/views/thumbnail",
-
+     
         "layout/facets/search",
         "layout/facets/list",
         "layout/facets/tagcloud",
@@ -161,5 +163,5 @@ require(["simile/exhibit/exhibit-api"], function() {
     ], function($,initialize) {
         $(document).trigger("scriptsLoaded.exhibit");
         initialize();
-    });
-});
+    }
+);

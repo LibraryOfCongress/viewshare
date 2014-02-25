@@ -4,5 +4,6 @@
   "wrap": false,
   "optimize": "uglify2",
   "generateSourceMaps": true,
-  findNestedDependencies: true
+  "findNestedDependencies": true
 }
+

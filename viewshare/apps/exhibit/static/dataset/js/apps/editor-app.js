@@ -1,20 +1,24 @@
 /*global define */
 define([
+    'handlebars',
     'jquery',
     'models/augmentation-support-issue',
     'models/property-collection',
     'views/augmentation-support-issue-view',
     'views/editor-view',
     'views/modal-augment-view',
-    'views/notification-view'
+    'views/notification-view',
+    'views/view-interface'
 ], function (
+    Handlebars,
     $,
     AugmentationSupportIssue,
     PropertyCollection,
     AugmentationSupportIssueView,
     EditorView,
     ModalAugmentView,
-    NotificationView
+    NotificationView,
+    ViewInterface
 ) {
     'use strict';
     var demo = function() {
@@ -67,6 +71,25 @@ define([
         });
         properties.Observer('newProperty').subscribe(function(newProperty) {
             addPropertyNotifications(notificationView, newProperty);
+        });
+        // Show notifications while augmenting data
+        ViewInterface.Observer('beginAugment').subscribe(function(newProperty) {
+            var msg = Handlebars.compile(
+                '"{{label}}" should be ready momentarily.');
+            msg = msg({label: newProperty.label});
+            notificationView.renderNotification(
+                'info',
+                msg,
+                'Augmenting...');
+        });
+        ViewInterface.Observer('endAugment').subscribe(function(newProperty) {
+            var msg = Handlebars.compile(
+                '"{{label}}" is now available to use in the editor.');
+            msg = msg({label: newProperty.label});
+            notificationView.renderNotification(
+                'success',
+                msg,
+                'Augment Successful!');
         });
         properties.load();
     };

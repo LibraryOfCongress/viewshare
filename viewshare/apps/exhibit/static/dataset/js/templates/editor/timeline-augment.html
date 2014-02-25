@@ -5,7 +5,7 @@
       <input type="text" id="new-timeline-property">
     </div>
   </div><!-- /.control-group -->
-  <table class="table table-hover augment-properties">
+  <table class="table table-hover table-condensed augment-properties">
     <caption>Base the new Date/Time field on your existing data</caption>
     <thead>
       <tr>
@@ -16,8 +16,8 @@
     <tbody id="properties">
       {{#each propertyOptions}}
       <tr>
-        <td class="selected"><input type="checkbox" value="{{ this.id }}"></td>
-        <td class="name">{{ this.label }}</td>
+        <td class="selected"><input id="time-prop-{{this.id}} "type="checkbox" value="{{ this.id }}"></td>
+        <td class="name"><label for="time-prop-{{this.id}}">{{ this.label }}</label></td>
       </tr>
       {{/each}}
     </tbody>
