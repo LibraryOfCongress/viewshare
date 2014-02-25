@@ -10,6 +10,7 @@ define(["jquery",
         "layout/save_button",
         "layout/cancel_button",
         "layout/edit_button",
+        "layout/modallinks",
         "text!templates/layout/add-view-button.html",
         "text!templates/layout/add-view-modal.html",
         "text!templates/layout/add-facet-button.html",
@@ -32,6 +33,7 @@ define(["jquery",
              setup_cancel_button,
 
              setup_edit_button,
+             ModalLinksView,
              add_view_button_template,
              add_view_modal_template,
              add_facet_button_template,
@@ -243,6 +245,10 @@ define(["jquery",
         $("#build").on("hide", hideBuilder);
         $("#preview").on("show", showPreview);
         $("#preview").on("hide", hidePreview);
+        var links_view = new ModalLinksView({
+		"selectors": $(".navbar a, #footer a")
+	    });
+	links_view.render();
     }
 
     function display() {
