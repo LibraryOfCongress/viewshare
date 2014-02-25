@@ -55,6 +55,12 @@ define([
         /** Compile the template we will use to render the View */
         template: Handlebars.compile(modalAugmentTemplate),
 
+        augmentSuccessHandler: function(newProperty) {
+            this.model.addProperty(newProperty);
+            ViewInterface.Observer('endAugment')
+                .publish({label: newProperty.label});
+        },
+
         render: function() {
             $('body').append(this.$el);
             // render children
@@ -73,6 +79,17 @@ define([
             this.listView.render();
             this.mapView.render();
             this.timelineView.render();
+
+            //subscribe to events
+            this.listView.newPatternProperty
+                .Observer('loadDataSuccess')
+                .subscribe(this.augmentSuccessHandler.bind(this));
+            this.mapView.newCompositeProperty
+                .Observer('loadDataSuccess')
+                .subscribe(this.augmentSuccessHandler.bind(this));
+            this.timelineView.newCompositeProperty
+                .Observer('loadDataSuccess')
+                .subscribe(this.augmentSuccessHandler.bind(this));
         },
 
         /** Display a validation error
@@ -107,11 +124,6 @@ define([
                 this.$el.modal('hide');
                 ViewInterface.Observer('beginAugment')
                     .publish({label: newProperty.label});
-                newProperty.Observer('loadDataSuccess').subscribe(function(newProperty) {
-                    this.model.addProperty(newProperty);
-                    ViewInterface.Observer('endAugment')
-                        .publish({label: newProperty.label});
-                }.bind(this));
                 $.each(this.$el.find('form'), function(index, value) {
                     value.reset();
                 })
