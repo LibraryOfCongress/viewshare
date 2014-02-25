@@ -35,8 +35,8 @@ define(["jquery", "exhibit"], function($, Exhibit) {
 
     // Register a formatter for the location type -- just duplicate the text formatter for now
     Exhibit.Formatter._LocationFormatter = Exhibit.Formatter._TextFormatter;
-    Exhibit.Formatter._LocationFormatter.format = Exhibit.Formatter._TextFormatter.format;
-    Exhibit.Formatter._LocationFormatter.formatText = Exhibit.Formatter._TextFormatter.formatText;
+//    Exhibit.Formatter._LocationFormatter.format = Exhibit.Formatter._TextFormatter.format;
+//    Exhibit.Formatter._LocationFormatter.formatText = Exhibit.Formatter._TextFormatter.formatText;
     Exhibit.Formatter._constructors.location = Exhibit.Formatter._LocationFormatter;
 
     // Fork the ImageFormatter to
@@ -83,6 +83,55 @@ define(["jquery", "exhibit"], function($, Exhibit) {
         appender(a);
     };
 
+    Exhibit.Formatter._AudioFormatter = function(uiContext) {
+    };
+
+    Exhibit.Formatter._AudioFormatter.prototype.format = function(value, appender) {
+        var audio = $("<audio>");
+        audio.attr("controls", true);
+        var source = $("<source>");
+        source.attr("src", value);
+        audio.html("Audio not supported");
+        audio.prepend(source);
+        appender(audio);
+
+    };
+
+    Exhibit.Formatter._AudioFormatter.prototype.formatText = function(value) {
+        if (Exhibit.params.safe) {
+            value = Util.isUnsafeLink(value.trim()) ? "" : value;
+        }
+        return value;
+    };
+
+    Exhibit.Formatter._constructors.audio = Exhibit.Formatter._AudioFormatter;
+
+    
+    Exhibit.Formatter._VideoFormatter = function(uiContext) {
+    
+    };
+
+    Exhibit.Formatter._VideoFormatter.prototype.format = function(value, appender) {
+        var Video = $("<Video>");
+        Video.attr("controls", true);
+        var source = $("<source>");
+        source.attr("src", value);
+        Video.html("Video not supported");
+        Video.prepend(source);
+        appender(Video);
+
+    };
+
+    Exhibit.Formatter._VideoFormatter.prototype.formatText = function(value) {
+        if (Exhibit.params.safe) {
+            value = Util.isUnsafeLink(value.trim()) ? "" : value;
+        }
+        return value;
+    };
+
+    Exhibit.Formatter._constructors.video = Exhibit.Formatter._VideoFormatter;
+
+    
     // Hide the "Items" tag for item counts
     $("body").on('rendered.exhibit', function(evt, exhibit) {
         var extype = exhibit._database._types['Item'];
