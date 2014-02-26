@@ -8,7 +8,7 @@ define(["jquery",
         "text!templates/layout/views/map-view-settings.html",
         "./location-property-view"],
         function ($, View, Freemix, OLMapView, Handlebars, template_html, settings_html, LocationPropertyView) {
-        "use strict"
+        "use strict";
 
     View.prototype.propertyTypes = ["location"];
 
@@ -32,6 +32,12 @@ define(["jquery",
             root.append(settings_html);
             view.renderSettings(config, root);
 
+            edit.find("a.augment").off("click").on("click",function() {
+                augment.collapse("show");
+                edit.collapse("hide");
+                return false;
+            });
+
             edit.off("hide").on("hide", function() {
                 root.empty();
             });
@@ -41,13 +47,14 @@ define(["jquery",
 
             location_view.Observer("cancel").subscribe(function() {
                 edit.collapse("show");
+                augment.collapse("hide");
             });
 
             location_view.Observer("rejectProperty").subscribe(function() {
                 augment.one("hidden", function() {
                     location_view.destroy();
                     augment.collapse("show");
-                })
+                });
                 augment.collapse("hide");
             });
 
@@ -100,7 +107,7 @@ define(["jquery",
         view.render();
 
         return view;
-    }
+    };
 
     return View;
 });

@@ -199,7 +199,9 @@ function(
 
         exhibitLoadSuccessHandler: function() {
             this.Observer("createProperty").publish(this.model.id());
-            this.Observer("acceptProperty").publish(this.model);
+            setTimeout(function() {
+                this.Observer("acceptProperty").publish(this.model);
+            }.bind(this), 3000);
         },
         exhibitLoadFailureHandler: function() {
             this.swapComponent(new ErrorView({
@@ -315,7 +317,7 @@ function(
                 model: this.model,
                 observer: this.Observer,
                 delete_property: true,
-                message: "Communication error"
+                message: "We were unable to generate any latitude,longitude data based on the properties you have selected."
             }));
         },
 
