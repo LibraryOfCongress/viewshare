@@ -126,20 +126,40 @@ function(
         this.message = options.message
     };
 
-    ErrorView.prototype.template = Handlebars.compile(error_template);
+    $.extend(ErrorView.prototype, {
+        template: Handlebars.compile(error_template),
 
-    ErrorView.prototype.render = function() {
-        this.element.empty();
-        this.element.append(this.template({message: this.message}));
+        render: function() {
+            this.element.empty();
+            this.element.append(this.template({message: this.message}));
+            this.findOkButton().on('click', this.okButtonHandler.bind(this));
+            this.findOkButton().attr('disabled', true);
+            if (this.delete_property) {
+                this.model.Observer('deletePropertySuccess').subscribe(this.deletePropertyHandler.bind(this));
+                this.model.deleteProperty();
+            }
+        },
 
-        if (this.delete_property) {
-            this.model.deleteProperty();
+        destroy: function()  {
+            if (this.delete_property) {
+                this.model.Observer('deletePropertySuccess').subscribe(this.deletePropertyHandler.bind(this));
+            }
+            this.element.empty();
+            this.findOkButton().off('click', this.okButtonHandler.bind(this));
+        },
+
+        deletePropertyHandler: function() {
+            this.findOkButton().removeAttr('disabled');
+        },
+
+        okButtonHandler: function() {
+            this.Observer("rejectProperty").publish(this.model);
+        },
+        findOkButton: function() {
+            return this.element.find("button#property_cancel_button");
         }
-    };
 
-    ErrorView.prototype.destroy = function()  {
-        this.element.empty();
-    };
+    });
 
 
     /**
@@ -160,26 +180,36 @@ function(
 
         render: function() {
             this.element.empty();
-            this.element.append(this.template());
+            this.element.append(this.template({
+                record_count: this.model.items.length,
+                total_count: this.database.getAllItemsCount()
+            }));
+            var property = this.model;
+            var data = {"items": property.items, "properties": {}}
+            data.properties[property._id] = property.toJSON();
 
-            this.element.find("#property_accept_button").on('click', this.acceptButtonHandler.bind(this));
-            this.element.find("#property_cancel_button").on('click', this.cancelButtonHandler.bind(this));
-
+            $(document).on("onAfterLoadingItems.exhibit", this.exhibitLoadSuccessHandler.bind(this));
+            this.database.loadData(data);
         },
 
         destroy: function() {
-            this.element.find("#property_accept_button").off('click', this.acceptButtonHandler.bind(this));
-            this.element.find("#property_cancel_button").off('click', this.cancelButtonHandler.bind(this));
+            $(document).off("onAfterLoadingItems.exhibit", this.exhibitLoadSuccessHandler.bind(this));
             this.element.empty();
         },
-        acceptButtonHandler: function(evt) {
+
+        exhibitLoadSuccessHandler: function() {
+            this.Observer("createProperty").publish(this.model.id());
             this.Observer("acceptProperty").publish(this.model);
         },
-        cancelButtonHandler: function(evt) {
-            this.model.deleteProperty();
-            this.Observer("rejectProperty").publish(this.model);
+        exhibitLoadFailureHandler: function() {
+            this.swapComponent(new ErrorView({
+                element: this.element,
+                model: this.model,
+                observer: this.Observer,
+                delete_property: true,
+                message: "Unable to load the returned data"
+            }));
         }
-
 
     });
 
@@ -257,34 +287,16 @@ function(
         augmentDataSuccessHandler: function(property) {
 
         },
-        exhibitLoadSuccessHandler: function() {
-            this.Observer("createProperty").publish(this.model.id());
-            this.swapComponent(new SuccessView({
-                element: this.element,
-                database: this.database,
-                model: this.model,
-                observer: this.Observer
-            }));
-            $(document).off("onAfterLoadingItems.exhibit", this.exhibitLoadSuccessHandler.bind(this));
-        },
-        exhibitLoadFailureHandler: function() {
-            this.swapComponent(new ErrorView({
-                element: this.element,
-                model: this.model,
-                observer: this.Observer,
-                delete_property: true,
-                message: "Unable to load the returned data"
-            }));
-            $(document).off("onAfterLoadingItems.exhibit", this.exhibitLoadSuccessHandler.bind(this));
 
-        },
         loadDataSuccessHandler: function(property) {
             if (property.items.length > 0) {
-                var data = {"items": property.items, "properties": {}}
-                data.properties[property._id] = property.toJSON();
+                this.swapComponent(new SuccessView({
+                    element: this.element,
+                    database: this.database,
+                    model: this.model,
+                    observer: this.Observer
+                }));
 
-                $(document).on("onAfterLoadingItems.exhibit", this.exhibitLoadSuccessHandler.bind(this));
-                this.database.loadData(data);
             } else {
                 this.swapComponent(new ErrorView({
                     element: this.element,

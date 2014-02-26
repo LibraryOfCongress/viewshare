@@ -128,14 +128,19 @@ define(["jquery",
 
     BaseView.prototype.updatePreview = function(target, config) {
         config = config || this.config;
+        this.resetPreview(target);
         var preview = this.generateExhibitHTML(config);
-        target.empty().append(preview);
+        target.append(preview);
         var exhibit = Freemix.getBuilderExhibit();
         try {
             this.viewClass.createFromDOM(preview.get(0), null, exhibit.getUIContext());
         } catch(ex) {
             console.log(ex);
         }
+    };
+
+    BaseView.prototype.resetPreview = function(target) {
+        target.empty();
     };
 
     BaseView.prototype.display = function() {};

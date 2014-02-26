@@ -37,7 +37,6 @@ define(["jquery",
             });
         });
         augment.off("show").on("show", function() {
-
             var location_view = view.renderLocationPropertyView(augment);
 
             location_view.Observer("cancel").subscribe(function() {
@@ -55,11 +54,11 @@ define(["jquery",
             location_view.Observer("acceptProperty").subscribe(function(property) {
                 config.latlng = property.id();
                 edit.collapse("show");
+                augment.collapse("hide");
             });
 
 
             augment.off("hidden").on("hidden", function() {
-
                 location_view.destroy();
             });
         });

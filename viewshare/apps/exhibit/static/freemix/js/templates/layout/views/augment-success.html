@@ -7,15 +7,15 @@
     <br />
     <div class="row-fluid">
       <div class="prose">
-        The new property has been successfully generated.  The preview pane now shows the new created coordinates displayed on a map.
+        The new property has been successfully generated with {{ record_count }} of {{ total_count }} values.  Now Loading.
       </div>
     </div>
 
     <br />
     <div class="row-fluid">
-      <button id="property_accept_button" class="btn btn-primary">Looks good!</button>
-      <button id="property_cancel_button" class="btn" type="button"  aria-hidden="true">I'd like to add try again
-      </button>
+      <div class="progress progress-striped active">
+        <div class="bar" style="width: 100%;"></div>
+      </div>
     </div>
 
     <br/>
