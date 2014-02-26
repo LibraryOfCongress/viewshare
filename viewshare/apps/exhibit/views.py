@@ -402,6 +402,7 @@ class DraftExhibitPropertyDataView(DraftExhibitView, BaseJSONView):
             raise Http404
 
         result = self.get_doc()
+        tx = None
         if not result:
             prop = get_object_or_404(models.ExhibitProperty,
                                      exhibit=self.get_parent_object(),
@@ -409,7 +410,6 @@ class DraftExhibitPropertyDataView(DraftExhibitView, BaseJSONView):
 
             AugmentTransaction.objects.filter(property=prop).delete()
             tx = AugmentTransaction.objects.create(property=prop)
-            tx.start_transaction()
 
             status_url = reverse('draft_exhibit_property_status',
                                  kwargs={
@@ -428,6 +428,8 @@ class DraftExhibitPropertyDataView(DraftExhibitView, BaseJSONView):
         response["Content-Type"] = "application/json"
         response["Expires"] = 0
         response["Cache-Control"] = self.cache_control_header()
+        if tx is not None:
+            tx.start_transaction()
         return response
 
     def delete(self, request, *args, **kwargs):

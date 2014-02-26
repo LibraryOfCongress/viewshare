@@ -132,7 +132,7 @@ class AugmentTransaction(DataTransaction):
         Start the asynchronous task for this transaction.
         """
         from .tasks import augment_property
-        augment_property.delay(self.id)
+        augment_property.delay(self.tx_id)
 
     def do_run(self):
         """
