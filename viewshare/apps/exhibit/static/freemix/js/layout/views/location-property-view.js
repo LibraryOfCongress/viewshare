@@ -40,6 +40,21 @@ function(
 
     SettingsView.prototype.template = Handlebars.compile(settings_template);
 
+    SettingsView.prototype.property_label = "Coordinates";
+
+    SettingsView.prototype.constructPropertyName = function() {
+        var counter = 1;
+        var label = this.property_label;
+        var database = this.database;
+        var property_names = $.map(database.getAllProperties(), function(p) {
+            return database.getProperty(p).getLabel();
+        });
+        while (property_names.indexOf(label) >= 0) {
+            label = label + " " + (counter + 1);
+        }
+        return label;
+    };
+
     SettingsView.prototype.render = function() {
         var model = this.model;
 
@@ -51,9 +66,10 @@ function(
             value: []
         });
         multiselect.render();
+        var label = this.constructPropertyName();
         multiselect.addChangeHandler(function(val) {
             model.composite = val;
-            model.label = "Coordinates";
+            model.label = label;
         });
         this.components.push(multiselect);
         this.findSaveButton().click(this.saveButtonHandler.bind(this));
