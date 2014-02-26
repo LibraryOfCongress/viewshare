@@ -115,10 +115,10 @@ define(["jquery",
 
     BaseView.prototype.remove = function() {
         var container = this.getContainer();
-        if (container.find(".view-set>li.view").size() > 1) {
+        if (container.find(".view-set>li.view").length > 1) {
             this.findWidget().remove();
             var next = container.find(".view-set>li.view:first");
-            if (next.size() > 0) {
+            if (next.length > 0) {
                 next.data("model").select();
             } else {
                 container.find(".view-content").empty();

@@ -40,7 +40,7 @@
         });
     }
 
-    $(".shared-key-url").live("click", function() {
+    $(".shared-key-url").on("click", function() {
         $(this).select();
     });
 
