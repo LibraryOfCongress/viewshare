@@ -50,7 +50,7 @@ function(
             return database.getProperty(p).getLabel();
         });
         while (property_names.indexOf(label) >= 0) {
-            label = label + " " + (counter + 1);
+            label = this.property_label + " " + (++counter);
         }
         return label;
     };
