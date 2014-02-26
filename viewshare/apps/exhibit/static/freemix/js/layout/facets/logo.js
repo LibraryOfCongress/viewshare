@@ -18,7 +18,7 @@ define(["jquery", "handlebars", "display/facets/logo", "exhibit", "text!template
 
             if (config.src) {
                 var img = template.find("#facet-preview img");
-                img.load(function () {
+                img.on("load", function () {
                     var naturalWidth = img.get(0).naturalWidth;
                     if (!naturalWidth) {
                         naturalWidth = img.get(0).width * 2;

@@ -164,7 +164,7 @@ define(["jquery",
         $(".view-container", Freemix.getBuilder()).each(function() {
             var container = $(this).data("model");
             var selected = container.getSelected();
-            if (selected.size() == 0) {
+            if (selected.length == 0) {
                 selected = container.findWidget().find(".view-set>li:first")
             }
             selected.data("model").select();

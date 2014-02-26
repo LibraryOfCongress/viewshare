@@ -13,12 +13,7 @@
   {% block rss_feeds %}{% endblock %}
   <title>{% if site_name %}{{ site_name }} : {% endif %}{% block head_title %}{% endblock %}</title>
   {% block head_jquery %}
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <script>
-    if (!window.jQuery) {
-      document.write('<script type="text/javascript" src="{{STATIC_PREFIX}}freemix/js/lib/jquery.js"><\/script>');
-    }
-  </script>
+  <script type="text/javascript" src="{{STATIC_PREFIX}}freemix/js/lib/jquery.js"></script>
   {% endblock %}
   {% block head_css %}{% endblock %}
   {% block head_data %}{% endblock %}
