@@ -6,9 +6,41 @@ define(["jquery",
         "handlebars",
         "text!templates/layout/views/map-view.html",
         "text!templates/layout/views/map-view-settings.html",
-        "./location-property-view"],
-        function ($, View, Freemix, OLMapView, Handlebars, template_html, settings_html, LocationPropertyView) {
+        "text!templates/layout/views/location-property.html",
+        "./augmentation/composite-property-view",
+        "./augmentation/composite-settings-view"],
+        function ($,
+                  View,
+                  Freemix,
+                  OLMapView,
+                  Handlebars,
+                  template_html,
+                  settings_html,
+                  augment_settings_html,
+                  CompositePropertyView,
+                  CompositeSettingsView) {
         "use strict";
+
+
+
+    var SettingsView = function(options) {
+        this.initialize.apply(this, [options]);
+    }
+
+    $.extend(SettingsView.prototype, CompositeSettingsView.prototype, {
+        template: Handlebars.compile(augment_settings_html),
+        property_label: "Coordinates"
+    });
+
+    var LocationPropertyView = function(options) {
+        this.initialize.apply(this, [options]);
+    }
+
+    $.extend(LocationPropertyView.prototype, CompositePropertyView.prototype, {
+        property_type: "location",
+        error_message: "We were unable to generate any latitude,longitude data based on the properties you have selected.",
+        SettingsView: SettingsView
+    });
 
     View.prototype.propertyTypes = ["location"];
 
@@ -32,7 +64,8 @@ define(["jquery",
             root.append(settings_html);
             view.renderSettings(config, root);
 
-            edit.find("a.augment").off("click").on("click",function() {
+            edit.find("a.augment").off("click").on("click",function(evt) {
+                evt.preventDefault();
                 augment.collapse("show");
                 edit.collapse("hide");
                 return false;
@@ -43,7 +76,7 @@ define(["jquery",
             });
         });
         augment.off("show").on("show", function() {
-            var location_view = view.renderLocationPropertyView(augment);
+            var location_view = view.renderDatePropertyView(augment);
 
             location_view.Observer("cancel").subscribe(function() {
                 edit.collapse("show");
@@ -98,7 +131,7 @@ define(["jquery",
         this._setupLensEditor(config, template);
     };
 
-    View.prototype.renderLocationPropertyView = function(root) {
+    View.prototype.renderDatePropertyView = function(root) {
         var view = new LocationPropertyView({
             element: root,
             database: Freemix.getBuilderExhibit().getUIContext().getDatabase()

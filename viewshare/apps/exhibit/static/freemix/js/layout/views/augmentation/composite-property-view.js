@@ -2,7 +2,7 @@ define([
     "jquery",
     "handlebars",
     "layout/models/composite-property",
-    "layout/views/property-multiselect-component",
+    "./property-multiselect-component",
     "observer",
     "text!templates/layout/views/location-property.html",
     "text!templates/layout/views/augment-progress.html",
@@ -22,89 +22,6 @@ function(
     success_template
 ) {
     "use strict";
-
-    /**
-     * Composite property settings editor
-     *
-     * @param options
-     * @constructor
-     */
-    function SettingsView(options) {
-        this.element = options.element;
-        this.database = options.database;
-        this.model = options.model;
-        this.Observer = options.observer;
-
-        this.components = [];
-    }
-
-    SettingsView.prototype.template = Handlebars.compile(settings_template);
-
-    SettingsView.prototype.property_label = "Coordinates";
-
-    SettingsView.prototype.constructPropertyName = function() {
-        var counter = 1;
-        var label = this.property_label;
-        var database = this.database;
-        var property_names = $.map(database.getAllProperties(), function(p) {
-            return database.getProperty(p).getLabel();
-        });
-        while (property_names.indexOf(label) >= 0) {
-            label = this.property_label + " " + (++counter);
-        }
-        return label;
-    };
-
-    SettingsView.prototype.render = function() {
-        var model = this.model;
-
-        this.element.append(this.template());
-
-        var multiselect = new PropertyMultiselect({
-            element: this.element.find("#augment_property_list"),
-            database: this.database,
-            value: []
-        });
-        multiselect.render();
-        var label = this.constructPropertyName();
-        multiselect.addChangeHandler(function(val) {
-            model.composite = val;
-            model.label = label;
-        });
-        this.components.push(multiselect);
-        this.findSaveButton().click(this.saveButtonHandler.bind(this));
-
-        this.findCancelButton().click(this.cancelButtonHandler.bind(this));
-
-    };
-
-    SettingsView.prototype.destroy = function() {
-        for (var inx = 0 ; inx < this.components.length ; inx++) {
-            this.components[inx].destroy();
-        }
-        this.components = [];
-
-        this.findCancelButton().off("click", this.cancelButtonHandler.bind(this));
-        this.findCancelButton().off("click", this.saveButtonHandler.bind(this));
-        this.element.empty();
-    }
-
-    SettingsView.prototype.findCancelButton = function() {
-        return this.element.find("#property_create_cancel_button");
-    }
-
-    SettingsView.prototype.findSaveButton = function() {
-        return this.element.find("#property_create_button");
-    }
-
-    SettingsView.prototype.cancelButtonHandler = function() {
-        this.Observer("cancel").publish();
-    };
-
-    SettingsView.prototype.saveButtonHandler = function() {
-        this.model.createProperty();
-    };
-
 
     /**
      * Displays a progress bar
@@ -140,7 +57,7 @@ function(
         this.Observer = options.observer;
         this.delete_property = options.delete_property || false;
         this.message = options.message
-    };
+    }
 
     $.extend(ErrorView.prototype, {
         template: Handlebars.compile(error_template),
@@ -201,11 +118,15 @@ function(
                 total_count: this.database.getAllItemsCount()
             }));
             var property = this.model;
-            var data = {"items": property.items, "properties": {}}
+            var data = {"items": property.items, "properties": {}};
             data.properties[property._id] = property.toJSON();
 
             $(document).on("onAfterLoadingItems.exhibit", this.exhibitLoadSuccessHandler.bind(this));
-            this.database.loadData(data);
+            try {
+                this.database.loadData(data);
+            } catch (ex) {
+                console.log(ex);
+            }
         },
 
         destroy: function() {
@@ -218,6 +139,7 @@ function(
             setTimeout(function() {
                 this.Observer("acceptProperty").publish(this.model);
             }.bind(this), 3000);
+
         },
         exhibitLoadFailureHandler: function() {
             this.swapComponent(new ErrorView({
@@ -240,29 +162,37 @@ function(
      * @constructor
      */
     function CompositePropertyView(options) {
-        this.element = options.element;
-        this.database = options.database;
-        this.model = new CompositePropertyModel({
-            id: undefined,
-            label: undefined,
-            type: 'location',
-            value: [],
-            augmentation: 'composite',
-            composite: [],
-            property_url: "properties/"
-        });
+        this.initialize.apply(this, [options]);
+    }
 
-        this.Observer = new Observer().Observer;
-
-        this.component = new SettingsView({
-            element: this.element,
-            database: this.database,
-            model: this.model,
-            observer: this.Observer
-        });
-    };
 
     $.extend(CompositePropertyView.prototype, {
+
+        initialize: function(options) {
+            this.element = options.element;
+            this.database = options.database;
+            this.model = new CompositePropertyModel({
+                id: undefined,
+                label: undefined,
+                type: this.property_type,
+                value: [],
+                augmentation: 'composite',
+                composite: [],
+                property_url: "properties/"
+            });
+
+            this.Observer = new Observer().Observer;
+
+            this.component = new this.SettingsView({
+                element: this.element,
+                database: this.database,
+                model: this.model,
+                observer: this.Observer
+            });
+        },
+
+        property_type: 'NOT IMPLEMENTED',
+        error_message: 'NOT IMPLEMENTED',
         render: function() {
             this.component.render();
 
@@ -333,7 +263,7 @@ function(
                 model: this.model,
                 observer: this.Observer,
                 delete_property: true,
-                message: "We were unable to generate any latitude,longitude data based on the properties you have selected."
+                message: this.error_message
             }));
         },
 

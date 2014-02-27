@@ -138,10 +138,16 @@ define([
         }
 	    
         SliderFacet._configure(facet, configuration);
-        facet._initializeUI();
-        thisUIContext.getCollection().addFacet(facet);
-        facet.register();
-        
+
+        try {
+            facet._initializeUI();
+            thisUIContext.getCollection().addFacet(facet);
+            facet.register();
+        } catch (ex) {
+            facet.dispose();
+
+            throw ex;
+        }
         return facet;
     };
     

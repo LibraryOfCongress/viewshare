@@ -132,14 +132,21 @@ define(["jquery",
         var preview = this.generateExhibitHTML(config);
         target.append(preview);
         var exhibit = Freemix.getBuilderExhibit();
+
         try {
-            this.viewClass.createFromDOM(preview.get(0), null, exhibit.getUIContext());
+            target.data("preview", this.viewClass.createFromDOM(preview.get(0), null, exhibit.getUIContext()));
         } catch(ex) {
+            target.empty();
             console.log(ex);
         }
     };
 
     BaseView.prototype.resetPreview = function(target) {
+        var preview = target.data("preview");
+        if (preview) {
+            preview.dispose();
+            target.data("preview", null);
+        }
         target.empty();
     };
 
