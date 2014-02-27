@@ -59,11 +59,29 @@ define(["jquery",
     };
 
     BaseFacet.prototype.updatePreview = function(target, config) {
+
         config = config || this.config;
-        var preview = $(this.generateExhibitHTML(config));
-        target.empty().append(preview);
+        this.resetPreview(target);
+        var preview = this.generateExhibitHTML(config);
+        target.append(preview);
         var exhibit = Freemix.getBuilderExhibit();
-        this.facetClass.createFromDOM(preview.get(0), null, exhibit.getUIContext());
+
+        try {
+            target.data("preview", this.facetClass.createFromDOM(preview.get(0), null, exhibit.getUIContext()));
+        } catch(ex) {
+            target.empty();
+            console.log(ex);
+        }
+
+    };
+
+    BaseFacet.prototype.resetPreview = function(target) {
+        var preview = target.data("preview");
+        if (preview) {
+            preview.dispose();
+            target.data("preview", null);
+        }
+        target.empty();
     };
 
     BaseFacet.prototype.showEditor = function(template){
