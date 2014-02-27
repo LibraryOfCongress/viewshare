@@ -206,10 +206,10 @@ margin-left: 10px;
     float: right;
 }
 
-
 .create-facet-button {
-margin-top: 5px;
-}
+  margin-top: 10px;
+  margin-bottom: 3px;
+ }
 
 .view-set .create-view-button .label {
  float: left;
