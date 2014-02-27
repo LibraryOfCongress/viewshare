@@ -95,113 +95,110 @@
 
                     <div class="exhibit-view-extended-display">
 
-                        <div class="row-fluid">
-
-                            <div class="span7">
-
-                                {% if exhibit.description %}
-                                    <div class="exhibit-description">
-                                        {{ exhibit.description }}
-                                    </div>
-                                {% endif %}
-
-                            </div>
-
-                            <div class="span5">
-
-                              <div class="pull-right">
-				<div class="exhibit-acls">
-                                  {% if exhibit.is_public %}
-				  <div class="public"><span class="public-icon"><i class="fa fa-unlock-alt fa-lg"></i></span><span class="view-label">{% trans "This view is public" %}</span></div>
-                                  {% else %}
-				  <div class="private"><span class="private-icon"><i class="fa fa-lock fa-lg"></i></span><span class="view-label">{% trans "This view is private" %}</span></div>
-                                  {% endif %}
-				</div>
-                              </div>
+                      {% if exhibit.description %}
+                      <div class="row-fluid">
+			
+                        <div class="span7">
+			  
+                          <div class="exhibit-description">
+                            {{ exhibit.description }}
+                          </div>
 			      
-                            </div>
-
                         </div>
-                        <!-- row-fluid -->
+                      </div> <!-- row-fluid -->
 
-                        <div class="row-fluid">
+                      {% endif %}
 
-                            <div class="span7">
+                      <div class="row-fluid">
 
-                                <div class="exhibit-metadata">
-                                    {% trans "Created" %}
-                                    <span class="exhibit-modified-data">{{ exhibit.modified|naturalday}}</span>
-                                    {% trans "by" %}
-                                    <span class="exhibit-creator">
-                                      <a href="{% url 'profile_detail' exhibit.owner.username %}">{{ exhibit.owner.username }}</a>
-                                    </span>
-                                </div>
+                        <div class="span7">
+			  
+			  <div class="exhibit-acls">
+                            {% if exhibit.is_public %}
+			    <span class="public"><span class="public-icon"><i class="fa fa-unlock-alt fa-lg"></i></span><span class="view-label">{% trans "This view is public" %}</span></span>
+                            {% else %}
+			    <span class="private"><span class="private-icon"><i class="fa fa-lock fa-lg"></i></span><span class="view-label">{% trans "This view is private" %}</span></span>
+                            {% endif %}
+			    
+			    <span class="exhibit-metadata">
+                              {% trans "and was created" %}
+                              <span class="exhibit-modified-data">{{ exhibit.modified|naturalday}}</span>
+                              {% trans "by" %}
+                              <span class="exhibit-creator">
+				<a href="{% url 'profile_detail' exhibit.owner.username %}">{{ exhibit.owner.username }}</a>
+                              </span>
+                            </span>
 
-                            </div>
-
-                            <div class="span5">
-
-                                <div class="exhibit-actions pull-right">
-
-                                    <div class="exhibit-links btn-group">
-                                        {% if can_inspect %}
-                                            <a class="exhibit_inspect btn btn-small"
-                                               href="{% url 'exhibit_detail' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Inspect" %}</a>
-                                        {% endif %}
-
-                                        {% if can_share %}
-                                            <a class="exhibit_share btn btn-small"
-                                               href="#exhibit-share-form"
-                                               rel="{% url 'shared_key_create_form' owner=exhibit.owner.username slug=exhibit.slug %}"
-                                               data-target="#exhibit-share-form"
-                                               role="button"
-                                               id="exhibit-share-button"
-                                               data-toggle="modal">{% trans "Share" %}</a>
-                                        {% endif %}
-
-                                        {% if can_embed %}
-                                            <a class="exhibit_embed btn btn-small"
-                                               href="#embedModal" role="button"
-                                               data-toggle="modal">{% trans "Embed" %}</a>
-                                        {% endif %}
-
-                                        {% if can_edit %}
-                                            <a class="exhibit_edit btn btn-small"
-                                               href="{% url 'exhibit_edit' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Edit" %}</a>
-                                        {% endif %}
-                                    </div>
-
-                                    {% if can_share %}
-                                        <div id="exhibit-share-form"
-                                             class="modal modal-fit hide fade form-dialog"
-                                             tabindex="-1" role="dialog"
-                                             aria-labelledby="exhibitShareFormLabel"
-                                             aria-hidden="true">
-                                            <div class="modal-header">
-                                                <button type="button"
-                                                        class="close"
-                                                        data-dismiss="modal"
-                                                        aria-hidden="true">×
-                                                </button>
-                                                <h3 id="exhibitShareFormLabel">{% trans "Share View" %}</h3>
-                                            </div>
-                                            <div id="share_exhibit_form_template"
-                                                 class="modal-body">
-                                            </div>
-                                        </div>
-                                    {% endif %}
-
-                                </div>
-
-                            </div>
-                            <!-- span5 -->
-
+			  </div>
                         </div>
-                        <!-- row-fluid -->
-
+			
+                        <div class="span5">
+			  
+                          <div class="exhibit-actions pull-right">
+			    
+                            <div class="exhibit-links btn-group">
+                              {% if can_inspect %}
+                              <a class="exhibit_inspect btn btn-small"
+                                 href="{% url 'exhibit_detail' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Inspect" %}</a>
+                              {% endif %}
+			      
+			      {% if exhibit.is_private %}
+                              {% if can_share %}
+                              <a class="exhibit_share btn btn-small"
+                                 href="#exhibit-share-form"
+                                 rel="{% url 'shared_key_create_form' owner=exhibit.owner.username slug=exhibit.slug %}"
+                                 data-target="#exhibit-share-form"
+                                 role="button"
+                                 id="exhibit-share-button"
+                                 data-toggle="modal">{% trans "Share" %}</a>
+                              {% endif %}
+			      {% endif %}
+			      
+			      {% if exhibit.is_public %}
+                              {% if can_embed %}
+                              <a class="exhibit_embed btn btn-small"
+                                 href="#embedModal" role="button"
+                                 data-toggle="modal">{% trans "Embed" %}</a>
+			      {% endif %}
+                              {% endif %}
+			      
+                              {% if can_edit %}
+                              <a class="exhibit_edit btn btn-small"
+                                 href="{% url 'exhibit_edit' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Build" %}</a>
+                              {% endif %}
+                            </div>
+			    
+                            {% if can_share %}
+                            <div id="exhibit-share-form"
+                                 class="modal modal-fit hide fade form-dialog"
+                                 tabindex="-1" role="dialog"
+                                 aria-labelledby="exhibitShareFormLabel"
+                                 aria-hidden="true">
+                              <div class="modal-header">
+                                <button type="button"
+                                        class="close"
+                                        data-dismiss="modal"
+                                        aria-hidden="true">×
+                                </button>
+                                <h3 id="exhibitShareFormLabel">{% trans "Share View" %}</h3>
+                              </div>
+                              <div id="share_exhibit_form_template"
+                                   class="modal-body">
+                              </div>
+                            </div>
+                            {% endif %}
+			    
+                          </div>
+			  
+                        </div>
+                        <!-- span5 -->
+			
+                      </div>
+                      <!-- row-fluid -->
+		      
                     </div>
                     <!-- exhibit-display -->
-
+		    
                 </div>
                 <!-- accordion-inner -->
 
@@ -244,9 +241,6 @@
 
     <div id="contents" class="freemix-themeable"></div>
 
-    <p class="center">{% trans "Created by" %}
-        <a href="{{ exhibit.owner.get_profile.get_absolute_url }}">{{ exhibit.owner.username }}</a>.
-    </p>
 {% endblock %}
 
 
