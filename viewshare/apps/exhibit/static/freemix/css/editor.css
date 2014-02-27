@@ -1139,6 +1139,7 @@ div.simileAjax-bubble-container {
 .full-screen-modal .widget-edit-dialog .widget-edit-settings-body {
      width: 480px !important;
      float: left;
+     overflow: hidden;
 }		    
 
 .full-screen-modal .widget-edit-dialog .widget-edit-preview {
