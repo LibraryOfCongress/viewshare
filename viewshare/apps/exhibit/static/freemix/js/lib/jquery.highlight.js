@@ -4,14 +4,18 @@
  */
 (function($){
     $.fn.highlight = function() {
-        if ($.browser.msie) {
-            var range = document.body.createTextRange();
-            range.moveToElementText(this.get(0));
+        var doc = document,
+            element = this[0],
+            range,
+            selection;
+        if (doc.body.createTextRange) {
+            range = doc.body.createTextRange();
+            range.moveToElementText(element);
             range.select();
-        } else {
-            var range = document.createRange();
-            range.selectNode(this.get(0));
-            var selection = window.getSelection();
+        } else if (window.getSelection) {
+            selection = window.getSelection();
+            range = document.createRange();
+            range.selectNodeContents(element);
             selection.removeAllRanges();
             selection.addRange(range);
         }
