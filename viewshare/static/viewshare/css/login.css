@@ -11,10 +11,7 @@
 }
 
 .login_request_wrapper {
-  background-image:url(../../images/login_request_bg.png);
-  background-repeat:no-repeat;
-  width:680px;
-  height:1200px;
+  width:600px;
   color:#333;
   margin-left: auto;
   margin-right: auto;
@@ -24,6 +21,11 @@
 .login_text {
   padding: 25px 25px;
 }
+
+.login_request_wrapper .textarea {
+  width: 580px;
+}
+
 
 .login_request_text {
   padding-left: 70px;
@@ -167,7 +169,6 @@ font-size: 70%;
 }
 
 .contact-alert {
-    padding-top: 30px;
     margin-left: auto;
     margin-right: auto;
     text-align:center;
