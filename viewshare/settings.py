@@ -206,6 +206,10 @@ REQUIRE_STANDALONE_MODULES = {
         'exhibit-display-main': {
             'out': 'exhibit-display-built.js',
             'build_profile': 'exhibit-display-build.js'
+        },
+        'embed-main': {
+            'out': 'embed-built.js',
+            'build_profile': 'embed-build.js'
         }
 }
 
