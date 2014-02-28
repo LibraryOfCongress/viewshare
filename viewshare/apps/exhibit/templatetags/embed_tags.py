@@ -8,6 +8,10 @@ from django import template
 from django.template.context import Context
 from django.template.loader import render_to_string
 
+from django.contrib.staticfiles.storage import staticfiles_storage
+from require.conf import settings as require_settings
+from require.helpers import resolve_require_url, resolve_require_module
+
 
 register = template.Library()
 
@@ -88,3 +92,7 @@ def compress(parser, token):
                                node.kind,
                                node.mode,
                                node.name)
+
+@register.simple_tag
+def built_module(module):
+    return staticfiles_storage.url(resolve_require_module(require_settings.REQUIRE_STANDALONE_MODULES[module]["out"]))

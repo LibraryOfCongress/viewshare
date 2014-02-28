@@ -205,8 +205,8 @@ class EmbeddedExhibitView(View):
         link_url = request.build_absolute_uri(link_url)
         response = render(request, self.template_name, {
             "data": json.dumps(data),
-            "title": json.dumps(exhibit.title),
-            "description": json.dumps(exhibit.description),
+            "title": exhibit.title,
+            "description": exhibit.description,
             "metadata": json.dumps(metadata),
             "where": where,
             "permalink": link_url})
