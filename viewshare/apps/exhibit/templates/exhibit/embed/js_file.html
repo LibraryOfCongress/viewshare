@@ -1,1 +1,2 @@
-{% load viewshare_helpers %}lab = lab.script("{% site_url compressed.url %}").wait();
+{% load viewshare_helpers %}{% load embed_tags %}FreemixEmbed.insert('script', 'text/javascript', { 'src': '{% site_url "" %}{% built_module "embed-main" %}' });
+
