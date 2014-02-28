@@ -1,17 +1,16 @@
 <form id="create-property-form" class="form">
   <fieldset>
+    <legend>
+       <i class="fa fa-check-circle fa-lg"></i> New data complete!
+    </legend>
+
+    <br />
     <div class="row-fluid">
-      <div class="prose">
-        The new property has been successfully loaded.  The preview to the right shows the created coordinates.
+      <div class="alert alert-info">
+        The new property has been successfully generated with {{ record_count }} of {{ total_count }} values.
+        Now generating a view. Please stand by.
       </div>
     </div>
 
-    <div class="row-fluid">
-      <button id="property_accept_button" class="btn btn-primary">Looks good</button>
-      <button id="property_cancel_button" type="button"  aria-hidden="true">Try again
-      </button>
-    </div>
-
-    <br/>
   </fieldset>
 </form>

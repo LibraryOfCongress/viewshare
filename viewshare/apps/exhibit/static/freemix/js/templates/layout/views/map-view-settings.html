@@ -1,5 +1,7 @@
 <form id="view-setting-form" class="form">
   <fieldset>
+    <legend>Map View Settings</legend>
+
     <div class="row-fluid">
 
       <div class="control-group">
@@ -17,9 +19,9 @@
     <!-- row-fluid -->
 
     <!-- position latlong and zoom side by side -->
-
+    
     <div class="row-fluid">
-
+      
       <div class="control-group input-append">
         <div class="control">
           <label class="control-label" for="latlng_property">Lat / Long <a class="augment" href=""><i
@@ -30,7 +32,7 @@
           </div>
         </div>
       </div>
-
+      
       <div class="control-group input-append">
         <div class="control">
           <label class="control-label" for="zoom_level">Zoom</label>
@@ -70,25 +72,19 @@
 
     <div class="lens-variables">
 
-      <div class="container-fluid">
+      <legend>Lens Settings</legend>
 
-        <div class="row-fluid">
-          <legend class="lens-settings-label">Lens Settings</legend>
-        </div>
-
-        <div class="row-fluid">
-
-          <div class="control-group">
-            <!-- inject lens editor -->
-            <div id="lens_editor">
-            </div>
+      <div class="row-fluid">
+	
+        <div class="control-group">
+          <!-- inject lens editor -->
+          <div id="lens_editor">
           </div>
-
         </div>
-        <!-- end row -->
-
+	
       </div>
-      <!-- end container -->
+      <!-- end row -->
+	
 
     </div>
     <!-- end lens-variables -->

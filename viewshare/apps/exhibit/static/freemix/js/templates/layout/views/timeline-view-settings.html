@@ -1,0 +1,121 @@
+<form id="view-settings-form" class="form">
+
+  <fieldset>
+
+    <legend class="view-settings-label">Timeline View Settings</legend>
+
+      <div class="row-fluid">
+
+        <div class="control-group">
+          <label class="control-label" for="view_label_input">Label</label>
+
+          <div class="controls">
+            <div class="input-append">
+              <input type="text" id="view_label_input"/>
+            </div>
+            <span class="help-inline">Freetext title of view</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row-fluid">
+
+        <div class="control-group input-append">
+          <label class="control-label" for="start_property">Start Date <a class="augment" href=""><i
+                  class="fa fa-plus-square fa-lg"></i></a></label>
+
+          <div class="controls">
+            <select class="input-medium" id="start_property"></select>
+          </div>
+        </div>
+
+        <div class="control-group input-append">
+          <label class="control-label" for="end_property">End Date <a class="augment" href=""><i
+                  class="fa fa-plus-square fa-lg"></i></a></label>
+
+          <div class="controls">
+            <select class="input-medium" id="end_property"></select>
+          </div>
+        </div>
+
+        <div class="control-group input-append">
+          <label class="control-label" for="color_property">Color Key</label>
+
+          <div class="controls">
+            <select class="input-medium" id="color_property"></select>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row-fluid">
+
+        <div class="control-group input-append">
+          <label class="control-label" for="top-band-unit">Top band time units</label>
+
+          <div class="controls">
+            <select class="input-medium" id="top-band-unit">
+              <option value="">auto</option>
+              <option value="millisecond">millisecond</option>
+              <option value="second">second</option>
+              <option value="minute">minute</option>
+              <option value="hour">hour</option>
+              <option value="day">day</option>
+              <option value="week">week</option>
+              <option value="month">month</option>
+              <option value="year">year</option>
+              <option value="decade">decade</option>
+              <option value="century">century</option>
+              <option value="millennium">millennium</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="control-group input-append">
+          <label class="control-label" for="bottom-band-unit">Bottom band time units</label>
+
+          <div class="controls">
+            <select class="input-medium" id="bottom-band-unit">
+              <option value="">auto</option>
+              <option value="millisecond">millisecond</option>
+              <option value="second">second</option>
+              <option value="minute">minute</option>
+              <option value="hour">hour</option>
+              <option value="day">day</option>
+              <option value="week">week</option>
+              <option value="month">month</option>
+              <option value="year">year</option>
+              <option value="decade">decade</option>
+              <option value="century">century</option>
+              <option value="millennium">millennium</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+
+   <!-- Lens specific -->
+
+    <div class="lens-variables">
+
+      <legend>Lens Settings</legend>
+
+      <div class="row-fluid">
+
+        <div class="control-group">
+          <!-- inject lens editor -->
+          <div id="lens_editor">
+          </div>
+        </div>
+
+      </div>
+      <!-- end row -->
+
+
+    </div>
+    <!-- end lens-variables -->
+
+
+  </fieldset>
+</form>

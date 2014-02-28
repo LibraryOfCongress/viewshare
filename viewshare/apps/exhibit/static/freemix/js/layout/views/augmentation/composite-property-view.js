@@ -2,7 +2,7 @@ define([
     "jquery",
     "handlebars",
     "layout/models/composite-property",
-    "layout/views/property-multiselect-component",
+    "./property-multiselect-component",
     "observer",
     "text!templates/layout/views/location-property.html",
     "text!templates/layout/views/augment-progress.html",
@@ -22,73 +22,6 @@ function(
     success_template
 ) {
     "use strict";
-
-    /**
-     * Composite property settings editor
-     *
-     * @param options
-     * @constructor
-     */
-    function SettingsView(options) {
-        this.element = options.element;
-        this.database = options.database;
-        this.model = options.model;
-        this.Observer = options.observer;
-
-        this.components = [];
-    }
-
-    SettingsView.prototype.template = Handlebars.compile(settings_template);
-
-    SettingsView.prototype.render = function() {
-        var model = this.model;
-
-        this.element.append(this.template());
-
-        var multiselect = new PropertyMultiselect({
-            element: this.element.find("#augment_property_list"),
-            database: this.database,
-            value: []
-        });
-        multiselect.render();
-        multiselect.addChangeHandler(function(val) {
-            model.composite = val;
-            model.label = "Coordinates";
-        });
-        this.components.push(multiselect);
-        this.findSaveButton().click(this.saveButtonHandler.bind(this));
-
-        this.findCancelButton().click(this.cancelButtonHandler.bind(this));
-
-    };
-
-    SettingsView.prototype.destroy = function() {
-        for (var inx = 0 ; inx < this.components.length ; inx++) {
-            this.components[inx].destroy();
-        }
-        this.components = [];
-
-        this.findCancelButton().off("click", this.cancelButtonHandler.bind(this));
-        this.findCancelButton().off("click", this.saveButtonHandler.bind(this));
-        this.element.empty();
-    }
-
-    SettingsView.prototype.findCancelButton = function() {
-        return this.element.find("#property_create_cancel_button");
-    }
-
-    SettingsView.prototype.findSaveButton = function() {
-        return this.element.find("#property_create_button");
-    }
-
-    SettingsView.prototype.cancelButtonHandler = function() {
-        this.Observer("cancel").publish();
-    };
-
-    SettingsView.prototype.saveButtonHandler = function() {
-        this.model.createProperty();
-    };
-
 
     /**
      * Displays a progress bar
@@ -124,22 +57,42 @@ function(
         this.Observer = options.observer;
         this.delete_property = options.delete_property || false;
         this.message = options.message
-    };
+    }
 
-    ErrorView.prototype.template = Handlebars.compile(error_template);
+    $.extend(ErrorView.prototype, {
+        template: Handlebars.compile(error_template),
 
-    ErrorView.prototype.render = function() {
-        this.element.empty();
-        this.element.append(this.template({message: this.message}));
+        render: function() {
+            this.element.empty();
+            this.element.append(this.template({message: this.message}));
+            this.findOkButton().on('click', this.okButtonHandler.bind(this));
+            this.findOkButton().attr('disabled', true);
+            if (this.delete_property) {
+                this.model.Observer('deletePropertySuccess').subscribe(this.deletePropertyHandler.bind(this));
+                this.model.deleteProperty();
+            }
+        },
 
-        if (this.delete_property) {
-            this.model.deleteProperty();
+        destroy: function()  {
+            if (this.delete_property) {
+                this.model.Observer('deletePropertySuccess').subscribe(this.deletePropertyHandler.bind(this));
+            }
+            this.element.empty();
+            this.findOkButton().off('click', this.okButtonHandler.bind(this));
+        },
+
+        deletePropertyHandler: function() {
+            this.findOkButton().removeAttr('disabled');
+        },
+
+        okButtonHandler: function() {
+            this.Observer("rejectProperty").publish(this.model);
+        },
+        findOkButton: function() {
+            return this.element.find("button#property_cancel_button");
         }
-    };
 
-    ErrorView.prototype.destroy = function()  {
-        this.element.empty();
-    };
+    });
 
 
     /**
@@ -160,26 +113,43 @@ function(
 
         render: function() {
             this.element.empty();
-            this.element.append(this.template());
+            this.element.append(this.template({
+                record_count: this.model.items.length,
+                total_count: this.database.getAllItemsCount()
+            }));
+            var property = this.model;
+            var data = {"items": property.items, "properties": {}};
+            data.properties[property._id] = property.toJSON();
 
-            this.element.find("#property_accept_button").on('click', this.acceptButtonHandler.bind(this));
-            this.element.find("#property_cancel_button").on('click', this.cancelButtonHandler.bind(this));
-
+            $(document).on("onAfterLoadingItems.exhibit", this.exhibitLoadSuccessHandler.bind(this));
+            try {
+                this.database.loadData(data);
+            } catch (ex) {
+                console.log(ex);
+            }
         },
 
         destroy: function() {
-            this.element.find("#property_accept_button").off('click', this.acceptButtonHandler.bind(this));
-            this.element.find("#property_cancel_button").off('click', this.cancelButtonHandler.bind(this));
+            $(document).off("onAfterLoadingItems.exhibit", this.exhibitLoadSuccessHandler.bind(this));
             this.element.empty();
         },
-        acceptButtonHandler: function(evt) {
-            this.Observer("acceptProperty").publish(this.model);
-        },
-        cancelButtonHandler: function(evt) {
-            this.model.deleteProperty();
-            this.Observer("rejectProperty").publish(this.model);
-        }
 
+        exhibitLoadSuccessHandler: function() {
+            this.Observer("createProperty").publish(this.model.id());
+            setTimeout(function() {
+                this.Observer("acceptProperty").publish(this.model);
+            }.bind(this), 3000);
+
+        },
+        exhibitLoadFailureHandler: function() {
+            this.swapComponent(new ErrorView({
+                element: this.element,
+                model: this.model,
+                observer: this.Observer,
+                delete_property: true,
+                message: "Unable to load the returned data"
+            }));
+        }
 
     });
 
@@ -192,29 +162,37 @@ function(
      * @constructor
      */
     function CompositePropertyView(options) {
-        this.element = options.element;
-        this.database = options.database;
-        this.model = new CompositePropertyModel({
-            id: undefined,
-            label: undefined,
-            type: 'location',
-            value: [],
-            augmentation: 'composite',
-            composite: [],
-            property_url: "properties/"
-        });
+        this.initialize.apply(this, [options]);
+    }
 
-        this.Observer = new Observer().Observer;
-
-        this.component = new SettingsView({
-            element: this.element,
-            database: this.database,
-            model: this.model,
-            observer: this.Observer
-        });
-    };
 
     $.extend(CompositePropertyView.prototype, {
+
+        initialize: function(options) {
+            this.element = options.element;
+            this.database = options.database;
+            this.model = new CompositePropertyModel({
+                id: undefined,
+                label: undefined,
+                type: this.property_type,
+                value: [],
+                augmentation: 'composite',
+                composite: [],
+                property_url: "properties/"
+            });
+
+            this.Observer = new Observer().Observer;
+
+            this.component = new this.SettingsView({
+                element: this.element,
+                database: this.database,
+                model: this.model,
+                observer: this.Observer
+            });
+        },
+
+        property_type: 'NOT IMPLEMENTED',
+        error_message: 'NOT IMPLEMENTED',
         render: function() {
             this.component.render();
 
@@ -257,34 +235,16 @@ function(
         augmentDataSuccessHandler: function(property) {
 
         },
-        exhibitLoadSuccessHandler: function() {
-            this.Observer("createProperty").publish(this.model.id());
-            this.swapComponent(new SuccessView({
-                element: this.element,
-                database: this.database,
-                model: this.model,
-                observer: this.Observer
-            }));
-            $(document).off("onAfterLoadingItems.exhibit", this.exhibitLoadSuccessHandler.bind(this));
-        },
-        exhibitLoadFailureHandler: function() {
-            this.swapComponent(new ErrorView({
-                element: this.element,
-                model: this.model,
-                observer: this.Observer,
-                delete_property: true,
-                message: "Unable to load the returned data"
-            }));
-            $(document).off("onAfterLoadingItems.exhibit", this.exhibitLoadSuccessHandler.bind(this));
 
-        },
         loadDataSuccessHandler: function(property) {
             if (property.items.length > 0) {
-                var data = {"items": property.items, "properties": {}}
-                data.properties[property._id] = property.toJSON();
+                this.swapComponent(new SuccessView({
+                    element: this.element,
+                    database: this.database,
+                    model: this.model,
+                    observer: this.Observer
+                }));
 
-                $(document).on("onAfterLoadingItems.exhibit", this.exhibitLoadSuccessHandler.bind(this));
-                this.database.loadData(data);
             } else {
                 this.swapComponent(new ErrorView({
                     element: this.element,
@@ -303,7 +263,7 @@ function(
                 model: this.model,
                 observer: this.Observer,
                 delete_property: true,
-                message: "Communication error"
+                message: this.error_message
             }));
         },
 

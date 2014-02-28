@@ -4,6 +4,10 @@
     position: relative;
 }
 
+.facet-container {
+  margin-bottom: 10px;
+}
+
 .columns {
     margin-top: 5px;
 }

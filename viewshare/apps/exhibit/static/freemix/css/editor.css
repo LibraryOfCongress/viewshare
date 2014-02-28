@@ -206,10 +206,10 @@ margin-left: 10px;
     float: right;
 }
 
-
 .create-facet-button {
-margin-top: 5px;
-}
+  margin-top: 10px;
+  margin-bottom: 3px;
+ }
 
 .view-set .create-view-button .label {
  float: left;
@@ -268,6 +268,11 @@ margin-top: 5px;
    max-height: 500px;
    height:500px;
    overflow:auto;
+}
+
+.lens-variables {
+  padding-top: 10px;
+  padding-bottom: 60px;
 }
 
 .lens-preview .lens-preview-pane {
@@ -1088,6 +1093,40 @@ div.simileAjax-bubble-container {
 
 }
 
+/* augmentation in widget display */
+
+.widget-edit-settings .accordion {
+  margin-left: -10px;
+  margin-right: -30px;
+}
+
+.widget-edit-settings .accordion-group {
+   border: none;
+   margin-bottom: 0px;
+   padding-left: -10px;
+   padding-right: 20px;
+}
+
+.widget-edit-settings .accordion-group .accordion-heading {
+   display: none;
+   height: 0px;
+}
+
+.widget-edit-settings #create-property-form  {
+ margin-top: 0px;
+}
+
+.widget-edit-settings #create-property-form legend, .widget-edit-settings #view-setting-form legend {
+ font-size: 120%;
+ padding: 0 0 0 0;
+ line-height: 30px;
+ color: slategrey;
+ font-weight: bold;
+ margin-bottom: 15px;
+ margin-left: 0px;
+}
+
+
 /* view / widget side nav bar */
 
 .widget-edit-dialog .widget-edit-nav {
@@ -1100,10 +1139,11 @@ div.simileAjax-bubble-container {
 .full-screen-modal .widget-edit-dialog .widget-edit-settings-body {
      width: 480px !important;
      float: left;
+     overflow: hidden;
 }		    
 
 .full-screen-modal .widget-edit-dialog .widget-edit-preview {
-  padding-left: 640px !important;
+  padding-left: 650px !important;
 }		    
 
 .full-screen-modal .widget-preview-body {
@@ -1113,8 +1153,8 @@ div.simileAjax-bubble-container {
 }
 
 .full-screen-modal .widget-edit-settings-body {
-  height: 640px !important; 
-  max-height: 640px !important; 
+  height: 650px !important; 
+  max-height: 650px !important; 
   overflow: auto;
 }
 

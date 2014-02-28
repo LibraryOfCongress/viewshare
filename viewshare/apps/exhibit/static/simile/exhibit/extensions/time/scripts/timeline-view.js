@@ -169,19 +169,27 @@ TimelineView.create = function(configuration, containerElmt, uiContext) {
  * @returns {Exhibit.TimelineView}
  */
 TimelineView.createFromDOM = function(configElmt, containerElmt, uiContext) {
+
     var configuration, view;
     configuration = Exhibit.getConfigurationFromDOM(configElmt);
     view = new TimelineView(
         containerElmt !== null ? containerElmt : configElmt, 
         UIContext.createFromDOM(configElmt, uiContext)
     );
-    
-    AccessorsUtilities.createAccessorsFromDOM(configElmt, TimelineView._accessorSpecs, view._accessors);
-    SettingsUtilities.collectSettingsFromDOM(configElmt, view.getSettingSpecs(), view._settings);
-    TimelineView._configure(view, configuration);
-    
-    view._internalValidate();
-    view._initializeUI();
+
+    try {
+        AccessorsUtilities.createAccessorsFromDOM(configElmt, TimelineView._accessorSpecs, view._accessors);
+        SettingsUtilities.collectSettingsFromDOM(configElmt, view.getSettingSpecs(), view._settings);
+        TimelineView._configure(view, configuration);
+
+        view._internalValidate();
+
+        view._initializeUI();
+    } catch (ex) {
+        view.dispose();
+        throw ex;
+    }
+
     return view;
 };
 
