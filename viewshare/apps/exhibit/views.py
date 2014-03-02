@@ -1,3 +1,4 @@
+from django.core.serializers.json import DjangoJSONEncoder
 import json
 
 from django.utils.translation import ugettext_lazy as _
@@ -151,7 +152,8 @@ class PublishedExhibitDataView(PublishedExhibitJSONView):
     TODO: Actually implement X-Accel-Redirect caching
     """
     def get_doc(self):
-        return json.dumps(self.get_parent_object().merge_data())
+        return json.dumps(self.get_parent_object().merge_data(),
+                          cls=DjangoJSONEncoder)
 
 
 class PublishedExhibitDetailView(PublishedExhibitView):
@@ -204,7 +206,7 @@ class EmbeddedExhibitView(View):
         })
         link_url = request.build_absolute_uri(link_url)
         response = render(request, self.template_name, {
-            "data": json.dumps(data),
+            "data": json.dumps(data, cls=DjangoJSONEncoder),
             "title": exhibit.title,
             "description": exhibit.description,
             "metadata": json.dumps(metadata),
@@ -446,7 +448,8 @@ class DraftExhibitAllDataView(DraftExhibitView, BaseJSONView):
     TODO: Actually implement X-Accel-Redirect caching
     """
     def get_doc(self):
-        return json.dumps(self.get_parent_object().merge_data())
+        return json.dumps(self.get_parent_object().merge_data(),
+                          cls=DjangoJSONEncoder)
 
 
 class DraftExhibitPropertyDataStatusView(DraftExhibitView):
