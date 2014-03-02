@@ -182,7 +182,8 @@ JSONPrep.init = function(transform, isURL) {
         if (JSONPrep.isURL) {
             url = $("#id_url").val();
             $("#input-url")
-                .text(url)
+                .text((url.length > 40) ? url.substring(0, 40) + "..." : url)
+                .attr("title", url)
                 .attr("href", url);
             $("#load-url").val(url);
         } else {
