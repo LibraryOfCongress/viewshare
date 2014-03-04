@@ -71,7 +71,9 @@ define(["jquery",
                 return false;
             });
 
-            edit.off("hide").on("hide", function() {
+            edit.off("hidden").on("hidden", function(evt) {
+                evt.preventDefault();
+                evt.stopPropagation();
                 root.empty();
             });
         });
@@ -98,7 +100,10 @@ define(["jquery",
             });
 
 
-            augment.off("hidden").on("hidden", function() {
+            augment.off("hidden").on("hidden", function(evt) {
+                evt.preventDefault();
+                evt.stopPropagation();
+
                 location_view.destroy();
             });
         });
