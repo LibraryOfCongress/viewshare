@@ -397,7 +397,16 @@ define([
         }
 
         makeArgs = function(obj) {
-            return [obj.series.data[obj.dataIndex][2], obj.datapoint[0], obj.datapoint[1]];
+            var i, titles, items;
+            titles = [];
+            var setTitle = function(val) {
+                titles.push(val.text());
+            };
+            items = obj.series.data[obj.dataIndex][3];
+            for (i = 0; i < items.length ; i++) {
+                self.getUIContext().format(items[i], "item", setTitle);
+            }
+            return [titles, obj.datapoint[0], obj.datapoint[1]];
         };
 
         tooltipFormatter = function(args) {
@@ -410,7 +419,7 @@ define([
         };
 
         itemsAccessor = function(obj) {
-            return obj.series.data[obj.dataIndex][2];
+            return obj.series.data[obj.dataIndex][3];
         };
 
         if (settings.hoverEffect && !self._bound) {
