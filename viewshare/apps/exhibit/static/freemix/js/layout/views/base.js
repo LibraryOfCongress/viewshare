@@ -30,11 +30,11 @@ define(["jquery",
         this.setupEditor(config, template);
 
         template.find("#widget_save_button").off("click").click(function() {
-           model.config = config;
-           template.trigger("edit-widget");
+            model.config = config;
+            template.trigger("edit-widget");
 
-           model.findWidget().find("span.view-label").text(model.config.name);
-           model.select();
+            model.findWidget().find("span.view-label").text(model.config.name);
+            model.select();
            
         });
 
@@ -108,6 +108,11 @@ define(["jquery",
                 view.findContainer().getDialog().modal("hide");
                 view.select();
             });
+
+            view.findContainer().getDialog().off("hidden").one("hidden", function(evt) {
+                editor.destroy();
+            });
+
             return false;
         });
 

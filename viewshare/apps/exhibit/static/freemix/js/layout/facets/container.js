@@ -59,6 +59,10 @@ define(["jquery",
             container.addFacet(model);
         }.bind(this._dialog));
 
+        this._dialog.off("hidden").one("hidden", function(evt) {
+            editor.destroy();
+        });
+
     };
 
     return Container;

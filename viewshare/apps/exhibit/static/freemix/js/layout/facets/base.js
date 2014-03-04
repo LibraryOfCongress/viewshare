@@ -47,6 +47,10 @@ define(["jquery",
                             facet.findContainer().getDialog().modal("hide");
                             facet.refresh();
                         });
+                        facet.findContainer().getDialog().off("hidden").one("hidden", function(evt) {
+                            editor.destroy();
+                        });
+
                         return false;
                     }).end();
 

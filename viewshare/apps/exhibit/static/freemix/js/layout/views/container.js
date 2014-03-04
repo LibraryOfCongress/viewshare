@@ -63,6 +63,10 @@ define(["jquery",
             container.addView(model);
         }.bind(this.getDialog()));
 
+        this.getDialog().off("hidden").one("hidden", function(evt) {
+            editor.destroy();
+        });
+
     };
 
     return Container;
