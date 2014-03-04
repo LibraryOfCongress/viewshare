@@ -81,8 +81,9 @@ function($,
     }
 
     WidgetEditor.prototype.destroy = function() {
-        this.element.find("ul.nav a").off("click");
 
+        this.element.find("ul.nav a").off("click");
+        this.model.resetPreview(this.element.find(".widget-preview-body"));
         this.element.empty();
     }
 
