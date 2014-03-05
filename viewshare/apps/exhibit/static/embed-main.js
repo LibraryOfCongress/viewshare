@@ -1,9 +1,9 @@
 
 requirejs.config({
-    "baseUrl": "/static/",
+//    "baseUrl": "/static/",
     "config": {
         "exhibit": {
-	    "prefix": "http://viewshare.org/static/simile/exhibit",
+            "prefix": "http://viewshare.org/static/simile/exhibit",
             "bundle": true,
             "autoCreate": false
         },
@@ -107,11 +107,45 @@ require([
         "display/facets/logo",
         "display/facets/text"
     ], function($, initialize) {
-	$.noConflict(true);
+        var static_url = window.Freemix.staticUrl;
+        requirejs.config({
+                "config": {
+                    "exhibit": {
+                        "prefix": static_url + "simile/exhibit",
+                        "bundle": true,
+                        "autoCreate": false
+                    },
+                    "timeline": {
+                        "prefix": static_url + "simile/timeline/",
+                        "ajax": "http://viewshare.org/static/simile/ajax/",
+                        "bundle": true
+                    },
+                    "ajax": {
+                        "history": false
+                    },
+                    "ext/time/time-extension": {
+                        "bundle": true,
+                        "prefix": static_url + "simile/exhibit/extensions/time/"
+                    },
+                    "ext/map/map-extension": {
+                        "bundle": true,
+                        "prefix": static_url + "simile/exhibit/extensions/map/"
+                    },
+                    "ext/openlayers/openlayers-extension": {
+                        "bundle": true,
+                        "prefix": static_url + "simile/exhibit/extensions/openlayers/"
+                    },
+                    "ext/flot/flot-extension": {
+                        "bundle": true,
+                        "prefix": static_url + "simile/exhibit/extensions/flot/"
+                    }
+                }
+        });
+        $.noConflict(true);
         $(document).trigger("scriptsLoaded.exhibit");
-	var randTmpId = "freemix-embed-shell-" + Math.round(Math.random()*1000);
-	$("#freemix-embed").after('<div id="' + randTmpId + '" class="freemix-embed-shell"><div id="canvas" class="freemix-themeable container-fluid"><div><h1 title="Title">' + window.Freemix.title + '</h1><h2 title="Subtitle">' + window.Freemix.description + '</h2></div></div></div>');
-	$("#" + randTmpId).append('<div class="embed-watermark">See the <a href="' + window.Freemix.permalink + '">original Exhibit</a>, created with and hosted by <a href="' + window.Freemix.home + '">' + window.Freemix.homeName + '</a>.</div>');
+        var randTmpId = "freemix-embed-shell-" + Math.round(Math.random()*1000);
+        $("#freemix-embed").after('<div id="' + randTmpId + '" class="freemix-embed-shell"><div id="canvas" class="freemix-themeable container-fluid"><div><h1 title="Title">' + window.Freemix.title + '</h1><h2 title="Subtitle">' + window.Freemix.description + '</h2></div></div></div>');
+        $("#" + randTmpId).append('<div class="embed-watermark">See the <a href="' + window.Freemix.permalink + '">original Exhibit</a>, created with and hosted by <a href="' + window.Freemix.home + '">' + window.Freemix.homeName + '</a>.</div>');
         initialize(".freemix-embed-shell #canvas");
     }
 );

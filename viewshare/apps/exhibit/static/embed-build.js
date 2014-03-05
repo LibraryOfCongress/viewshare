@@ -4,5 +4,7 @@
   "wrap": false,
   "optimize": "uglify2",
   "generateSourceMaps": false,
-  "findNestedDependencies": true
+  "findNestedDependencies": true,
+  "optimizeAllPluginResources": true
+
 }

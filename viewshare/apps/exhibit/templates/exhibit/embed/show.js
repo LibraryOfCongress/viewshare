@@ -1,4 +1,6 @@
 {% load viewshare_helpers %}
+{% load embed_tags %}
+{% load staticfiles %}
 
 window.Freemix = window.Freemix || {};
 
@@ -16,7 +18,9 @@ window.Freemix.home = "{% site_url %}";
 
 window.Freemix.homeName = "{{ SITE_NAME }}";
 
-window.Freemix.prefix = "{% site_url "" %}{{ STATIC_URL }}";
+window.Freemix.prefix = "{% site_url '' %}";
+
+window.Freemix.staticUrl = window.Freemix.prefix + "{{STATIC_URL}}";
 
 var FreemixEmbed = {};
 
@@ -38,6 +42,6 @@ FreemixEmbed.insertStyle = function(src) {
 };
 
 (function() {
-    {% include "exhibit/embed/js_file.html" %}
-    {% include "exhibit/embed/embed_css.html" %}
+    FreemixEmbed.insert('script', 'text/javascript', {% require_module 'embed-main' %});
+    FreemixEmbed.insertStyle("{% site_url '' %}{% static 'freemix/css/embed.css' %}");
 }());
