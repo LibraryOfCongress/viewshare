@@ -1,3 +1,4 @@
+from decimal import Decimal
 import json
 import logging
 import uuid
@@ -114,7 +115,9 @@ class Exhibit(TimeStampedModel):
         query = PropertyData.objects.filter(exhibit_property__exhibit=self)
         for t in query.values_list("exhibit_property__name", "json"):
             p = new_exhibit.properties.get(name=t[0])
-            PropertyData(exhibit_property=p, json=json.loads(t[1])).save()
+            PropertyData(exhibit_property=p,
+                         json=json.loads(t[1],
+                                         parse_float=Decimal)).save()
         return new_exhibit
 
 
