@@ -1,3 +1,4 @@
+from decimal import Decimal
 import json
 import uuid
 from urllib2 import urlopen
@@ -66,7 +67,8 @@ class SupportFormView(View):
 
     def post(self, request, *args, **kwargs):
         try:
-            json_post = json.loads(request.body)
+            json_post = json.loads(request.body,
+                                   parse_float=Decimal)
         except ValueError:
             return HttpResponseBadRequest('Not a JSON document')
         form = self.form_class(json_post)

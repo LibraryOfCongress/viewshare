@@ -1,3 +1,5 @@
+from decimal import Decimal
+from django.core.serializers.json import DjangoJSONEncoder
 import urllib2
 import json
 from datetime import datetime, timedelta
@@ -259,8 +261,11 @@ class JSONURLDataSource(URLDataSourceMixin, DataSource):
     def get_transform_body(self):
         r = urllib2.urlopen(self.url)
         part1 = r.read()
-        part2 = [(json.loads(self.path), json.loads(self.mapping))]
-        body = "%s\f%s" % (part1, json.dumps(part2))
+        part2 = [(json.loads(self.path,
+                             parse_float=Decimal),
+                  json.loads(self.mapping,
+                             parse_float=Decimal))]
+        body = "%s\f%s" % (part1, json.dumps(part2, cls=DjangoJSONEncoder))
         return body
 
     def __unicode__(self):
@@ -278,8 +283,11 @@ class JSONFileDataSource(file_datasource_mixin, DataSource):
 
     def get_transform_body(self):
         part1 = self.file.read()
-        part2 = [(json.loads(self.path), json.loads(self.mapping))]
-        body = "%s\f%s" % (part1, json.dumps(part2))
+        part2 = [(json.loads(self.path,
+                             parse_float=Decimal),
+                  json.loads(self.mapping,
+                             parse_float=Decimal))]
+        body = "%s\f%s" % (part1, json.dumps(part2, cls=DjangoJSONEncoder))
         return body
 
     def __unicode__(self):
