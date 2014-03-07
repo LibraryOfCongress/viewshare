@@ -1,3 +1,4 @@
+from django.core.serializers.json import DjangoJSONEncoder
 import json
 
 from django.core.urlresolvers import reverse
@@ -77,7 +78,8 @@ class SharedKeyDataJSONView(BaseJSONView):
         key = get_shared_key(self.request, self.args, **self.kwargs)
         exhibit = key.exhibit
 
-        return json.dumps(exhibit.merge_data())
+        return json.dumps(exhibit.merge_data(),
+                          cls=DjangoJSONEncoder)
 shared_key_property_data_json = _lm(SharedKeyDataJSONView.as_view())
 
 

@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 import datetime
+from decimal import Decimal
+from django.core.serializers.json import DjangoJSONEncoder
 from south.db import db
 from south.v2 import DataMigration
 from django.db import models
@@ -22,7 +24,7 @@ class Migration(DataMigration):
         for exhibit in orm.Exhibit.objects.all():
             properties = {}
 
-            data = json.loads(exhibit.data.json)
+            data = json.loads(exhibit.data.json, parse_float=Decimal)
             for record in data["items"]:
                 ex_id = record["id"]
                 label = record["label"]
@@ -39,7 +41,8 @@ class Migration(DataMigration):
                 except orm.ExhibitProperty.DoesNotExist:
                     prop = create_property(orm, exhibit, key)
                 orm.PropertyData(exhibit_property=prop,
-                                        json=json.dumps(properties[key]),
+                                        json=json.dumps(properties[key],
+                                                        cls=DjangoJSONEncoder),
                                         modified=exhibit.modified,
                                         created=exhibit.created).save()
 

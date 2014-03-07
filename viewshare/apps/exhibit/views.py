@@ -1,3 +1,4 @@
+from decimal import Decimal
 from django.core.serializers.json import DjangoJSONEncoder
 import json
 
@@ -299,7 +300,7 @@ class DraftExhibitPropertiesListView(DraftExhibitView, BaseJSONView):
         if not self.check_perms():
             raise Http404()
         try:
-            data = json.loads(request.body)
+            data = json.loads(request.body, parse_float=Decimal)
         except ValueError:
             return HttpResponseBadRequest("Not a JSON document")
         exhibit = self.get_parent_object()
