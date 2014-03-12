@@ -128,6 +128,8 @@ define(["jquery",
         var exhibit = Freemix.getBuilder().data("exhibit");
         if (!exhibit) {
             exhibit = Exhibit.create(Freemix.exhibit.database);
+            $(document).trigger("exhibitConfigured.exhibit", exhibit);
+
             Freemix.getBuilder().data("exhibit", exhibit);
         }
         return exhibit;
@@ -246,13 +248,13 @@ define(["jquery",
         $("#preview").on("show", showPreview);
         $("#preview").on("hide", hidePreview);
         var links_view = new ModalLinksView({
-		"selectors": $(".navbar a, #footer a")
-	    });
-	links_view.render();
+            "selectors": $(".navbar a, #footer a")
+        });
+        links_view.render();
     }
 
     function display() {
-
+        Exhibit.params.persist = false;
         setup_ui();
         setup_save_button();
         setup_cancel_button();
