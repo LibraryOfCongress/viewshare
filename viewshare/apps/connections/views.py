@@ -87,6 +87,8 @@ class ExhibitListConnectionsView(ListView):
         return list
 
     def get_context_data(self, **kwargs):
+        kwargs = super(ExhibitListConnectionsView, self).get_context_data(**kwargs)
+
         kwargs["other_user"] = get_object_or_404(User,
                                             username=self.kwargs.get("username"))
         return kwargs
