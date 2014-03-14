@@ -1,0 +1,22 @@
+{% extends "exhibit/list/base.html" %}
+
+{% load i18n %}
+{% load exhibit_tags %}
+{% load viewshare_helpers %}
+
+{% block head_title %}{% blocktrans %}All Views{% endblocktrans %}{% endblock %}
+{% block extra_scripts %}
+{{block.super}}
+{% include "freemix/js_include/jquery_ui.html" %}
+
+{% endblock %}
+
+
+{% block body %}
+
+<h1>{% blocktrans %}All Views{% endblocktrans %} ({{ object_list.count }})</h1>
+
+<div class="view_details">
+    {% exhibit_list object_list %}
+</div>
+{% endblock %}

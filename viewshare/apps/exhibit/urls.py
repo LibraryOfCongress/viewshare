@@ -32,6 +32,10 @@ urlpatterns = patterns('',
       views.PublishedExhibitListView.as_view(),
       name='exhibit_list_by_owner'),
 
+    url(r'^$',
+        views.AllPublishedExhibitListView.as_view(),
+        name='exhibit_list_all'),
+
     #embed
 
     url(r'^(?P<owner>[a-zA-Z0-9_.-]+)/(?P<slug>[a-zA-Z0-9_.-]+)/embed.js$',

@@ -8,7 +8,6 @@ from django.http import (HttpResponse, Http404, HttpResponseRedirect,
 from django.views.decorators.http import last_modified
 from django.views.generic.base import View
 from django.shortcuts import get_object_or_404, render
-from django.template.loader import render_to_string
 from django.core.urlresolvers import reverse
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
@@ -17,6 +16,7 @@ from django.db.models import Q
 from viewshare.apps.augment.models import AugmentTransaction
 
 from viewshare.apps.exhibit import models, forms, serializers
+from viewshare.apps.exhibit.permissions import PermissionsRegistry
 from viewshare.apps.exhibit.serializers import ExhibitPropertyListSerializer
 
 # Exhibit Profile Views
@@ -261,6 +261,32 @@ class PublishedExhibitListView(OwnerListView):
     model = models.PublishedExhibit
 
     related = ("owner", "owner__profile")
+
+
+class AllPublishedExhibitListView(ListView):
+    """
+    Returns a list of all exhibits on GET.
+    """
+    template_name = "exhibit/list/exhibit_list_all.html"
+
+    def get_queryset(self):
+        vars = self.request.GET
+        sort = vars.get('sort', None)
+        if sort:
+            if sort not in models.PublishedExhibit._meta.get_all_field_names():
+                raise Http404("%s is not a valid sorting field"%sort)
+
+        perm_filter = PermissionsRegistry.get_filter("exhibit.can_view", self.request.user)
+        list = models.PublishedExhibit.objects.all().filter(perm_filter)
+        list = list.select_related("owner")
+        if sort:
+            dir = vars.get('dir', "desc")
+            order_by = (dir=="desc" and "-" or "") + sort
+            list = list.order_by(order_by)
+
+        return list
+
+exhibit_list_all = AllPublishedExhibitListView.as_view()
 
 
 # Draft Editor Views
