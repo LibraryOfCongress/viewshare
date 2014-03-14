@@ -45,7 +45,7 @@
       <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
         <li><a href="{% url 'exhibit_list_by_owner' user.username %}">{% trans "My Views" %}</a></li>
         <li><a href="{% url 'exhibit_list_by_user_connections' user.username %}">{% trans "My connections' Views" %}</a></li>
-        <li><a href="{% url 'profile_detail' user.username %}">{% trans "All Views" %}</a></li>
+        <li><a href="{% url 'exhibit_list_all'%}">{% trans "All Views" %}</a></li>
         <li class="divider"></li>
         <li><a href="{% url 'upload_dataset' %}" class="button_link">{% trans "Create View" %}</a></li>
       </ul>
