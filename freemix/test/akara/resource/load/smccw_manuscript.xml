@@ -1,0 +1,1740 @@
+<?xml-stylesheet type="text/xsl" href="http://www.loc.gov/standards/mods/v3/minerva3.xsl"?>
+<modsCollection xmlns="http://www.loc.gov/mods/v3" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-2.xsd">
+	<mods version="3.2">
+		<titleInfo>
+			<title>Web site of the American Council of Learned Societies</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/msword</internetMediaType>
+			<internetMediaType>application/octet-stream</internetMediaType>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>application/vnd</internetMediaType>
+			<internetMediaType>application/x-javascript</internetMediaType>
+			<internetMediaType>image/bmp</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>text/css</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+			<internetMediaType>text/xml</internetMediaType>
+		</physicalDescription>
+		<abstract>The American Council of Learned Societies Web site provides information on ACLS fellowships and grants; member organizations; program activities; publications; and the latest ACLS news.</abstract>
+		<subject authority="local">
+			<topic>American Council of Learned Societies, ACLS, humanities, social sciences,  fellowships, grants, funding, learned societies, scholarship, scholarly resources, scholars, research, higher education, professional organizations, academic disciplines, scholarly publishing, scholarly communication, scholarly exchange programs, postdoctoral funding</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Manuscript Division Archive of Organizational Web Sites</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000012 http://loc.archive.org/collections/manuscript/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0012.0001</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.acls.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/manuscript/2006*/www.acls.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0012.0001</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Manuscript Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0012.0001</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Association for Diplomatic Studies and Training</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060406</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/msword</internetMediaType>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>text/css</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>
+			</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Manuscript Division Archive of Organizational Web Sites</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000012 http://loc.archive.org/collections/manuscript/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0012.0002</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.adst.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/manuscript/2006*/www.adst.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0012.0002</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Manuscript Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0012.0002</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>American Institute of Aeronautics and Astronautics - Home Page</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/msword</internetMediaType>
+			<internetMediaType>application/octet-stream</internetMediaType>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>application/postscript</internetMediaType>
+			<internetMediaType>application/rtf</internetMediaType>
+			<internetMediaType>application/vnd</internetMediaType>
+			<internetMediaType>application/x-director</internetMediaType>
+			<internetMediaType>application/x-gzip</internetMediaType>
+			<internetMediaType>application/x-java-applet</internetMediaType>
+			<internetMediaType>application/x-javascript</internetMediaType>
+			<internetMediaType>application/x-shockwave-flash</internetMediaType>
+			<internetMediaType>application/x-zip-compressed</internetMediaType>
+			<internetMediaType>image/bmp</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>image/png</internetMediaType>
+			<internetMediaType>image/tiff</internetMediaType>
+			<internetMediaType>no-type</internetMediaType>
+			<internetMediaType>text/css</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+			<internetMediaType>text/plain</internetMediaType>
+			<internetMediaType>text/xml</internetMediaType>
+			<internetMediaType>video/mpeg</internetMediaType>
+			<internetMediaType>video/x-ms-wmv</internetMediaType>
+		</physicalDescription>
+		<abstract>UPCOMING CONFERENCES and  EVENTS</abstract>
+		<subject authority="local">
+			<topic>Aerospace  conferences; Aerospace events; Aerospace announcements; Aerospace articles</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Manuscript Division Archive of Organizational Web Sites</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000012 http://loc.archive.org/collections/manuscript/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0012.0003</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.aiaa.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/manuscript/2006*/www.aiaa.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0012.0003</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Manuscript Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0012.0003</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Ameen Rihani Organization - Home</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng,ara</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>application/vnd</internetMediaType>
+			<internetMediaType>audio/mpeg</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>image/png</internetMediaType>
+			<internetMediaType>text/css</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+			<internetMediaType>text/plain</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>
+			</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Manuscript Division Archive of Organizational Web Sites</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000012 http://loc.archive.org/collections/manuscript/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0012.0004</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.ameenrihani.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/manuscript/2006*/www.ameenrihani.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0012.0004</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Manuscript Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0012.0004</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>© ASLA.org</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/msword</internetMediaType>
+			<internetMediaType>application/octet-stream</internetMediaType>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>application/rtf</internetMediaType>
+			<internetMediaType>application/vnd</internetMediaType>
+			<internetMediaType>application/x-javascript</internetMediaType>
+			<internetMediaType>application/x-shockwave-flash</internetMediaType>
+			<internetMediaType>application/x-zip-compressed</internetMediaType>
+			<internetMediaType>audio/mpeg</internetMediaType>
+			<internetMediaType>audio/wav</internetMediaType>
+			<internetMediaType>audio/x-pn-realaudio</internetMediaType>
+			<internetMediaType>image/bmp</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>image/jpg</internetMediaType>
+			<internetMediaType>image/tiff</internetMediaType>
+			<internetMediaType>text/css</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+			<internetMediaType>text/xml</internetMediaType>
+			<internetMediaType>video/quicktime</internetMediaType>
+			<internetMediaType>video/x-ms-wmv</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>
+			</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Manuscript Division Archive of Organizational Web Sites</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000012 http://loc.archive.org/collections/manuscript/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0012.0005</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.asla.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/manuscript/2006*/www.asla.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0012.0005</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Manuscript Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0012.0005</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Center for International Private Enterprise</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/atom</internetMediaType>
+			<internetMediaType>application/msword</internetMediaType>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>application/vnd</internetMediaType>
+			<internetMediaType>application/x-javascript</internetMediaType>
+			<internetMediaType>application/x-shockwave-flash</internetMediaType>
+			<internetMediaType>audio/x-pn-realaudio</internetMediaType>
+			<internetMediaType>audio/x-realaudio</internetMediaType>
+			<internetMediaType>audio/x-wav</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>image/png</internetMediaType>
+			<internetMediaType>text/css</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+			<internetMediaType>text/plain</internetMediaType>
+			<internetMediaType>text/xml</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>Business Association, US Chamber of Commerce, Corporate governance, Democracy, institution building, development, private Sector, Corruption, Entrepreneurship, Informal, International, Enterprise, free market, trade, WTO</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Manuscript Division Archive of Organizational Web Sites</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000012 http://loc.archive.org/collections/manuscript/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0012.0006</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.cipe.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/manuscript/2006*/www.cipe.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0012.0006</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Manuscript Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0012.0006</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>
+			</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/msword</internetMediaType>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>application/vnd</internetMediaType>
+			<internetMediaType>application/x-javascript</internetMediaType>
+			<internetMediaType>application/x-shockwave-flash</internetMediaType>
+			<internetMediaType>audio/mpeg</internetMediaType>
+			<internetMediaType>audio/x-ms-wma</internetMediaType>
+			<internetMediaType>audio/x-pn-realaudio</internetMediaType>
+			<internetMediaType>image/bmp</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>image/png</internetMediaType>
+			<internetMediaType>no-type</internetMediaType>
+			<internetMediaType>text/css</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+			<internetMediaType>text/plain</internetMediaType>
+			<internetMediaType>text/xml</internetMediaType>
+			<internetMediaType>video/quicktime</internetMediaType>
+			<internetMediaType>video/x-ms-asf</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>
+			</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Manuscript Division Archive of Organizational Web Sites</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000012 http://loc.archive.org/collections/manuscript/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0012.0007</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.civilrights.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/manuscript/2006*/www.civilrights.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0012.0007</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Manuscript Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0012.0007</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>The Frederick A. Cook Society</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>
+			</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Manuscript Division Archive of Organizational Web Sites</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000012 http://loc.archive.org/collections/manuscript/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0012.0008</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.cookpolar.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/manuscript/2006*/www.cookpolar.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0012.0008</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Manuscript Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0012.0008</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Welcome to the Historical Society of the District of Columbia Circuit</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>application/vnd</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>
+			</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Manuscript Division Archive of Organizational Web Sites</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000012 http://loc.archive.org/collections/manuscript/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0012.0009</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.dcchs.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/manuscript/2006*/www.dcchs.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0012.0009</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Manuscript Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0012.0009</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Sigmund Freud-Museum Vienna</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng,ger</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/msword</internetMediaType>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>application/x-javascript</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>text/css</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+			<internetMediaType>text/plain</internetMediaType>
+		</physicalDescription>
+		<abstract>The home page of the Sigmund Freud Museum Vienna offers virtual guided tours through the museum, a biography of Freud, an audio library, a database of quotations and a lot more.</abstract>
+		<subject authority="local">
+			<topic>Sigmund Freud, Anna Freud, Freud, museum, Vienna, psychoanalysis</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Manuscript Division Archive of Organizational Web Sites</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000012 http://loc.archive.org/collections/manuscript/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0012.0010</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.freud-museum.at/e/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/manuscript/2006*/www.freud-museum.at/e/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0012.0010</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Manuscript Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0012.0010</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Freud Museum London</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng,fre,ger,ita,por,spa</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>image/png</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+			<internetMediaType>text/plain</internetMediaType>
+		</physicalDescription>
+		<abstract>Sigmund Freud's last house, now a museum. See his couch, antiquities, library and working environment. The museum has an education programme, research centre and shop.</abstract>
+		<subject authority="local">
+			<topic>Sigmund Freud, psychoanalysis, museum, antiquities, library, research, education and public programme, photograph library, archive, shop</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Manuscript Division Archive of Organizational Web Sites</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000012 http://loc.archive.org/collections/manuscript/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0012.0011</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.freud.org.uk/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/manuscript/2006*/www.freud.org.uk/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0012.0011</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Manuscript Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0012.0011</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Sigmund Freud Archives</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng,ger</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+		</physicalDescription>
+		<abstract>The Sigmund Freud Archives website provides information and access for scholarly use all of Sigmund Freud's psychoanalytic and personal papers, his correspondence, photos, records, memorabilia, etc. A complete finding aid of the materials is accessible on the website.</abstract>
+		<subject authority="local">
+			<topic>Sigmund Freud, psychoanalysis, psychology, Freud papers, Freud writings, Freud memorabilia, Freud Archives, Freud correspondence</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Manuscript Division Archive of Organizational Web Sites</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000012 http://loc.archive.org/collections/manuscript/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0012.0012</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.freudarchives.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/manuscript/2006*/www.freudarchives.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0012.0012</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Manuscript Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0012.0012</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Welcome to the American Studies Association Homepage</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/msword</internetMediaType>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>application/rtf</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>text/css</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+			<internetMediaType>text/plain</internetMediaType>
+			<internetMediaType>video/quicktime</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>
+			</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Manuscript Division Archive of Organizational Web Sites</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000012 http://loc.archive.org/collections/manuscript/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0012.0013</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.georgetown.edu/crossroads/asainfo.html</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/manuscript/2006*/www.georgetown.edu/crossroads/asainfo.html</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0012.0013</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Manuscript Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0012.0013</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>H-NCH</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/msword</internetMediaType>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>application/vnd</internetMediaType>
+			<internetMediaType>application/x-javascript</internetMediaType>
+			<internetMediaType>application/x-java-vm</internetMediaType>
+			<internetMediaType>application/xml</internetMediaType>
+			<internetMediaType>application/x-shockwave-flash</internetMediaType>
+			<internetMediaType>image/bmp</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>image/x-icon</internetMediaType>
+			<internetMediaType>text/css</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+			<internetMediaType>text/plain</internetMediaType>
+			<internetMediaType>text/rtf</internetMediaType>
+			<internetMediaType>text/xml</internetMediaType>
+			<internetMediaType>text/x-perl</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>
+			</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Manuscript Division Archive of Organizational Web Sites</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000012 http://loc.archive.org/collections/manuscript/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0012.0014</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.h-net.org/~nch/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/manuscript/2006*/www.h-net.org/~nch/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0012.0014</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Manuscript Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0012.0014</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>American Historical Association</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/msword</internetMediaType>
+			<internetMediaType>application/octet-stream</internetMediaType>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>application/rtf</internetMediaType>
+			<internetMediaType>application/x-javascript</internetMediaType>
+			<internetMediaType>audio/mpeg</internetMediaType>
+			<internetMediaType>image/bmp</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>image/png</internetMediaType>
+			<internetMediaType>text/css</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+			<internetMediaType>text/plain</internetMediaType>
+			<internetMediaType>text/xml</internetMediaType>
+			<internetMediaType>video/x-ms-wmv</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>
+			</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Manuscript Division Archive of Organizational Web Sites</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000012 http://loc.archive.org/collections/manuscript/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0012.0015</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.historians.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/manuscript/2006*/www.historians.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0012.0015</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Manuscript Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0012.0015</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Society of Woman Geographers</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060406</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>application/x-javascript</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>text/css</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+			<internetMediaType>text/plain</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>
+			</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Manuscript Division Archive of Organizational Web Sites</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000012 http://loc.archive.org/collections/manuscript/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0012.0016</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.iswg.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/manuscript/2006*/www.iswg.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0012.0016</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Manuscript Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0012.0016</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>
+			</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061130</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/msword</internetMediaType>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>application/postscript</internetMediaType>
+			<internetMediaType>application/vnd</internetMediaType>
+			<internetMediaType>application/x-javascript</internetMediaType>
+			<internetMediaType>application/x-shockwave-flash</internetMediaType>
+			<internetMediaType>application/x-zip-compressed</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>text/css</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+			<internetMediaType>text/plain</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>
+			</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Manuscript Division Archive of Organizational Web Sites</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000012 http://loc.archive.org/collections/manuscript/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0012.0017</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.lwv.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/manuscript/2006*/www.lwv.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0012.0017</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Manuscript Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0012.0017</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>The MacDowell Colony</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/msword</internetMediaType>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>application/x-javascript</internetMediaType>
+			<internetMediaType>application/x-shockwave-flash</internetMediaType>
+			<internetMediaType>application/zip</internetMediaType>
+			<internetMediaType>audio/x-pn-realaudio</internetMediaType>
+			<internetMediaType>image/bmp</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>text/css</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+			<internetMediaType>text/plain</internetMediaType>
+			<internetMediaType>video/mpeg</internetMediaType>
+			<internetMediaType>video/quicktime</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>
+			</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Manuscript Division Archive of Organizational Web Sites</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000012 http://loc.archive.org/collections/manuscript/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0012.0018</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.macdowellcolony.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/manuscript/2006*/www.macdowellcolony.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0012.0018</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Manuscript Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0012.0018</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>
+			</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/msword</internetMediaType>
+			<internetMediaType>application/octet</internetMediaType>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>application/vnd</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>no-type</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+			<internetMediaType>text/xml</internetMediaType>
+			<internetMediaType>video/mpeg</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>
+			</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Manuscript Division Archive of Organizational Web Sites</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000012 http://loc.archive.org/collections/manuscript/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0012.0019</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.nacdl.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/manuscript/2006*/www.nacdl.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0012.0019</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Manuscript Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0012.0019</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Navy League</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/msword</internetMediaType>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>application/vnd</internetMediaType>
+			<internetMediaType>application/x-javascript</internetMediaType>
+			<internetMediaType>application/x-shockwave-flash</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>image/png</internetMediaType>
+			<internetMediaType>text/css</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+			<internetMediaType>text/plain</internetMediaType>
+			<internetMediaType>video/quicktime</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>Navy League, Navy League of the United States, Navy League Councils, NLUS, Navy, Naval, SeaPower, Sea Power, Sea Power magazine, Almanac of Sea Power, Sea Services, Sea Cadets, Navy Association, Military, Military Association, USMC, Marine Corps, U.S. Marine Corps, USCG, Coast Guard, U.S. Coast Guard, Associations, Merchant Marine, Navy Ships, Scholarships</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Manuscript Division Archive of Organizational Web Sites</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000012 http://loc.archive.org/collections/manuscript/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0012.0020</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.navyleague.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/manuscript/2006*/www.navyleague.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0012.0020</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Manuscript Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0012.0020</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>NCJW</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060401</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>text/css</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>
+			</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Manuscript Division Archive of Organizational Web Sites</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000012 http://loc.archive.org/collections/manuscript/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0012.0021</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.ncjw.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/manuscript/2006*/www.ncjw.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0012.0021</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Manuscript Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0012.0021</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>
+			</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060830</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/msword</internetMediaType>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>application/vnd</internetMediaType>
+			<internetMediaType>application/x-javascript</internetMediaType>
+			<internetMediaType>application/xml</internetMediaType>
+			<internetMediaType>application/zip</internetMediaType>
+			<internetMediaType>audio/mpeg</internetMediaType>
+			<internetMediaType>audio/x-wav</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>image/png</internetMediaType>
+			<internetMediaType>text/css</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+			<internetMediaType>text/plain</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>
+			</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Manuscript Division Archive of Organizational Web Sites</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000012 http://loc.archive.org/collections/manuscript/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0012.0022</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.nclnet.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/manuscript/2006*/www.nclnet.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0012.0022</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Manuscript Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0012.0022</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>NDI - National Democratic Institute The National Democratic Institute for International Affairs</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061202</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/octet-stream</internetMediaType>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>application/vnd</internetMediaType>
+			<internetMediaType>application/x-javascript</internetMediaType>
+			<internetMediaType>application/x-msmetafile</internetMediaType>
+			<internetMediaType>application/x-shockwave-flash</internetMediaType>
+			<internetMediaType>audio/mpeg</internetMediaType>
+			<internetMediaType>audio/wav</internetMediaType>
+			<internetMediaType>audio/x-mpegurl</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>image/png</internetMediaType>
+			<internetMediaType>text/css</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+			<internetMediaType>text/xml</internetMediaType>
+		</physicalDescription>
+		<abstract>An introduction to the National Democratic Institute for International Affairs.</abstract>
+		<subject authority="local">
+			<topic>Liberia elections, Iraq, Sudan, Madeleine Albright, Madeline Albright, NGO, democracy, international, elections, expand democracy, strengthen democracy, democracy worldwide, democracy practice, democracy practioner, international,
+				international elections, international relations, election monitoring, governance, civic organizations, citizen participation, political party development, democracy technology, accountability, 
+				voter education, civil-military relations, security sector reform, election calendar</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Manuscript Division Archive of Organizational Web Sites</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000012 http://loc.archive.org/collections/manuscript/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0012.0023</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.ndi.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/manuscript/2006*/www.ndi.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0012.0023</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Manuscript Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0012.0023</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>National Endowment for Democracy</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/msword</internetMediaType>
+			<internetMediaType>application/octet-stream</internetMediaType>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>application/vnd</internetMediaType>
+			<internetMediaType>application/x-javascript</internetMediaType>
+			<internetMediaType>application/x-msmetafile</internetMediaType>
+			<internetMediaType>application/x-ms-wmz</internetMediaType>
+			<internetMediaType>audio/mpeg</internetMediaType>
+			<internetMediaType>audio/x-pn-realaudio</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>image/png</internetMediaType>
+			<internetMediaType>text/css</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+			<internetMediaType>text/xml</internetMediaType>
+			<internetMediaType>video/x-ms-wmv</internetMediaType>
+		</physicalDescription>
+		<abstract>The National Endowment for Democracy (NED) is a private, nonprofit organization created in 1983 to strengthen democratic institutions around the world through nongovernmental efforts.</abstract>
+		<subject authority="local">
+			<topic>DemocracyNet, civic education, elections, human rights, international development, nonprofit, democracy building, party development, independent media, economic development, labor, legislatures, rule of law, governance, women, youth</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Manuscript Division Archive of Organizational Web Sites</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000012 http://loc.archive.org/collections/manuscript/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0012.0024</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.ned.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/manuscript/2006*/www.ned.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0012.0024</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Manuscript Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0012.0024</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Home - National Urban League</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/msword</internetMediaType>
+			<internetMediaType>application/octet-stream</internetMediaType>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>application/vnd</internetMediaType>
+			<internetMediaType>application/x-javascript</internetMediaType>
+			<internetMediaType>application/x-shockwave-flash</internetMediaType>
+			<internetMediaType>application/x-zip-compressed</internetMediaType>
+			<internetMediaType>audio/mpeg</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>image/x-icon</internetMediaType>
+			<internetMediaType>text/css</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>
+			</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Manuscript Division Archive of Organizational Web Sites</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000012 http://loc.archive.org/collections/manuscript/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0012.0025</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.nul.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/manuscript/2006*/www.nul.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0012.0025</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Manuscript Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0012.0025</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>The Phi Beta Kappa Society</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/octet-stream</internetMediaType>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>audio/mpeg</internetMediaType>
+			<internetMediaType>audio/x-ms-wax</internetMediaType>
+			<internetMediaType>audio/x-pn-realaudio</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>text/css</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>Phi, Beta, Kappa, Phi Beta Kappa, Honor, Society, Honor society, Liberal arts, Art, Science, Liberal arts and sciences, Association, Education, Washington DC, Undergraduate, Non-profit, Greek, Organization, Key Reporter, Academic, Scholar, National, Academic Society</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Manuscript Division Archive of Organizational Web Sites</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000012 http://loc.archive.org/collections/manuscript/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0012.0026</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.pbk.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/manuscript/2006*/www.pbk.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0012.0026</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Manuscript Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0012.0026</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Sigmund Freud Copyrights</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>
+			</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Manuscript Division Archive of Organizational Web Sites</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000012 http://loc.archive.org/collections/manuscript/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0012.0027</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.sigmundfreudcopyrights.com/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/manuscript/2006*/www.sigmundfreudcopyrights.com/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0012.0027</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Manuscript Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0012.0027</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>The Solidarity Center</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/msword</internetMediaType>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>text/css</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>
+			</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Manuscript Division Archive of Organizational Web Sites</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000012 http://loc.archive.org/collections/manuscript/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0012.0028</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.solidaritycenter.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/manuscript/2006*/www.solidaritycenter.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0012.0028</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Manuscript Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0012.0028</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>The Streit Council</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060601</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/msword</internetMediaType>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>application/vnd</internetMediaType>
+			<internetMediaType>application/x-javascript</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>text/css</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>
+			</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Manuscript Division Archive of Organizational Web Sites</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000012 http://loc.archive.org/collections/manuscript/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0012.0029</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.streitcouncil.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/manuscript/2006*/www.streitcouncil.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0012.0029</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Manuscript Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0012.0029</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Vietnam Veterans Memorial Fund - Home</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060406</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/msword</internetMediaType>
+			<internetMediaType>application/octet-stream</internetMediaType>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>application/postscript</internetMediaType>
+			<internetMediaType>application/vnd</internetMediaType>
+			<internetMediaType>application/x-shockwave-flash</internetMediaType>
+			<internetMediaType>audio/mid</internetMediaType>
+			<internetMediaType>audio/mpeg</internetMediaType>
+			<internetMediaType>audio/wav</internetMediaType>
+			<internetMediaType>audio/x-mpegurl</internetMediaType>
+			<internetMediaType>audio/x-ms-wma</internetMediaType>
+			<internetMediaType>audio/x-pn-realaudio</internetMediaType>
+			<internetMediaType>image/bmp</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>image/png</internetMediaType>
+			<internetMediaType>image/tiff</internetMediaType>
+			<internetMediaType>image/x-icon</internetMediaType>
+			<internetMediaType>text/css</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+			<internetMediaType>video/x-ms-asf</internetMediaType>
+			<internetMediaType>video/x-ms-wmv</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>
+			</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Manuscript Division Archive of Organizational Web Sites</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000012 http://loc.archive.org/collections/manuscript/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0012.0030</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.vvmf.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/manuscript/2006*/www.vvmf.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0012.0030</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Manuscript Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0012.0030</recordIdentifier>
+		</recordInfo>
+	</mods>
+</modsCollection>

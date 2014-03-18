@@ -1,0 +1,927 @@
+<?xml-stylesheet type="text/xsl" href="http://www.loc.gov/standards/mods/v3/minerva3.xsl"?>
+<modsCollection xmlns="http://www.loc.gov/mods/v3" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-2.xsd">
+	<mods version="3.2">
+		<titleInfo>
+			<title>Invincible Cities</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060406</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/x-javascript</internetMediaType>
+			<internetMediaType>application/x-shockwave-flash</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>
+			</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Visual Image Web Sites Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000014 http://loc.archive.org/collections/visual/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0014.0001</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">invinciblecities.camden.rutgers.edu/intro.html</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/visual/2006*/invinciblecities.camden.rutgers.edu/intro.html</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0014.0001</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Prints and Photographs Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0014.0001</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>aka KURDISTAN | INTRODUCTION</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060601</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>audio/x-wav</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>text/css</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>
+			</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Visual Image Web Sites Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000014 http://loc.archive.org/collections/visual/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0014.0002</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.akakurdistan.com/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/visual/2006*/www.akakurdistan.com/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0014.0002</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Prints and Photographs Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0014.0002</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>The Alternative Museum</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20061025</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/octet-stream</internetMediaType>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>application/x-shockwave-flash</internetMediaType>
+			<internetMediaType>audio/mpeg</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>text/css</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+			<internetMediaType>text/plain</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>
+			</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Visual Image Web Sites Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000014 http://loc.archive.org/collections/visual/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0014.0003</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.alternativemuseum.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/visual/2006*/www.alternativemuseum.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0014.0003</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Prints and Photographs Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0014.0003</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Ann Telnaes, Editorial Cartoonist, Pulitzer Prize winner</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>
+			</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Visual Image Web Sites Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000014 http://loc.archive.org/collections/visual/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0014.0004</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.anntelnaes.com/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/visual/2006*/www.anntelnaes.com/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0014.0004</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Prints and Photographs Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0014.0004</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>
+			</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>
+			</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Visual Image Web Sites Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000014 http://loc.archive.org/collections/visual/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0014.0005</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.cs.cmu.edu/~dellaert/aligned/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/visual/2006*/www.cs.cmu.edu/~dellaert/aligned/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0014.0005</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Prints and Photographs Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0014.0005</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>LOGIN</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060601</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>application/x-shockwave-flash</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>
+			</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Visual Image Web Sites Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000014 http://loc.archive.org/collections/visual/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0014.0006</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.glform.com/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/visual/2006*/www.glform.com/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0014.0006</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Prints and Photographs Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0014.0006</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>
+			</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/msword</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>image/png</internetMediaType>
+			<internetMediaType>text/css</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>
+			</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Visual Image Web Sites Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000014 http://loc.archive.org/collections/visual/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0014.0007</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.graphicwitness.org/ineye/index2.htm</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/visual/2006*/www.graphicwitness.org/ineye/index2.htm</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0014.0007</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Prints and Photographs Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0014.0007</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>McKissack and McKissack - Building to Bring Change</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>application/x-javascript</internetMediaType>
+			<internetMediaType>application/x-shockwave-flash</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+		</physicalDescription>
+		<abstract>McKissack and McKissack</abstract>
+		<subject authority="local">
+			<topic>McKissack, M&M, Philadelphia, Architecture, Engineering, Design, Build, Construction Management MBE, WBE, Minority</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Visual Image Web Sites Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000014 http://loc.archive.org/collections/visual/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0014.0008</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.mckissack.com/philadelphia/default.htm</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/visual/2006*/www.mckissack.com/philadelphia/default.htm</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0014.0008</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Prints and Photographs Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0014.0008</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>MICAH WRIGHT</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060830</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>audio/mpeg</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+			<internetMediaType>text/plain</internetMediaType>
+			<internetMediaType>video/mpeg</internetMediaType>
+			<internetMediaType>video/quicktime</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>
+			</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Visual Image Web Sites Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000014 http://loc.archive.org/collections/visual/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0014.0009</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.micahwright.com/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/visual/2006*/www.micahwright.com/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0014.0009</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Prints and Photographs Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0014.0009</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>
+			</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/x-javascript</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>text/css</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>
+			</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Visual Image Web Sites Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000014 http://loc.archive.org/collections/visual/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0014.0010</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.miltonrogovin.com/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/visual/2006*/www.miltonrogovin.com/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0014.0010</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Prints and Photographs Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0014.0010</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Peter Kuper &#149; Illustration</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/x-shockwave-flash</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+			<internetMediaType>text/plain</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>
+			</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Visual Image Web Sites Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000014 http://loc.archive.org/collections/visual/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0014.0011</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.peterkuper.com/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/visual/2006*/www.peterkuper.com/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0014.0011</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Prints and Photographs Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0014.0011</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>The Pritzker Architecture Prize - Current information about the world's most
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				prestigious architecture award</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060406</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>application/postscript</internetMediaType>
+			<internetMediaType>application/x-shockwave-flash</internetMediaType>
+			<internetMediaType>audio/x-pn-realaudio</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>image/tiff</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+		</physicalDescription>
+		<abstract>The Pritzker Architecture Prize World Wide Web Site provides current information about the world's most prestigious architecture award and its Laureates. The Pritzker Architecture Prize World Wide Web Site provides current information about the world's most prestigious architecture award and its Laureates.</abstract>
+		<subject authority="local">
+			<topic>Pritzker Architecture Prize, award, architecture, Hyatt Foundation, Philip Johnson, Luis Barragan,James Stirling,Kevin Roche,Ieoh Ming Pei,Richard Meier,Hans Hollein,Gottfried Boehm,Kenzo Tange,Gordon Bunshaft,Oscar Niemeyer,Frank O. Gehry,Aldo Rossi,Alvaro Siza,  Fumihiko Maki,Christian de Portzamparc,Tadao Ando,Rafael Moneo,Sverre Fehn,Renzo Piano,Sir Norman Foster,Jay Carter Brown,Jensen & Walker, Inc.Art of Architecture Pritzker Architecture Prize, award, architecture, Hyatt Foundation, Philip Johnson, Luis Barragan,James Stirling,Kevin Roche,Ieoh Ming Pei,Richard Meier,Hans Hollein,Gottfried Boehm,Kenzo Tange,Gordon Bunshaft,Oscar Niemeyer,Frank O. Gehry,Aldo Rossi,Alvaro Siza,  Fumihiko Maki,Christian de Portzamparc,Tadao Ando,Rafael Moneo,Sverre Fehn,Renzo Piano,Sir Norman Foster,Jay Carter Brown,Jensen & Walker, Inc.Art of Architecture</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Visual Image Web Sites Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000014 http://loc.archive.org/collections/visual/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0014.0012</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.pritzkerprize.com/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/visual/2006*/www.pritzkerprize.com/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0014.0012</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Prints and Photographs Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0014.0012</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>reichholdarts</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060406</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/x-javascript</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+			<internetMediaType>text/plain</internetMediaType>
+			<internetMediaType>video/quicktime</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>
+			</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Visual Image Web Sites Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000014 http://loc.archive.org/collections/visual/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0014.0013</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.reichholdarts.com/nokia.html</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/visual/2006*/www.reichholdarts.com/nokia.html</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0014.0013</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Prints and Photographs Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0014.0013</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Rafael Viñoly Architects PC > Home Menu</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060406</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>application/x-javascript</internetMediaType>
+			<internetMediaType>application/x-shockwave-flash</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>text/css</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+			<internetMediaType>video/quicktime</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>
+			</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Visual Image Web Sites Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000014 http://loc.archive.org/collections/visual/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0014.0014</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.rvapc.com/ht/hthome.aspx</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/visual/2006*/www.rvapc.com/ht/hthome.aspx</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0014.0014</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Prints and Photographs Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0014.0014</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>The Memory Hole &gt; Photos of Military Coffins (Battlefield and Astronaut Fatalities) at Dover Air Force Base</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060330</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/msword</internetMediaType>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>application/rdf</internetMediaType>
+			<internetMediaType>application/vnd</internetMediaType>
+			<internetMediaType>application/x-javascript</internetMediaType>
+			<internetMediaType>application/xml</internetMediaType>
+			<internetMediaType>application/zip</internetMediaType>
+			<internetMediaType>audio/mpeg</internetMediaType>
+			<internetMediaType>audio/x-pn-realaudio</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>image/png</internetMediaType>
+			<internetMediaType>text/css</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+			<internetMediaType>text/plain</internetMediaType>
+			<internetMediaType>text/rtf</internetMediaType>
+			<internetMediaType>video/mpeg</internetMediaType>
+			<internetMediaType>video/quicktime</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>
+			</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Visual Image Web Sites Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000014 http://loc.archive.org/collections/visual/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0014.0015</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.thememoryhole.org/war/coffin_photos/dover/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/visual/2006*/www.thememoryhole.org/war/coffin_photos/dover/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0014.0015</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Prints and Photographs Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0014.0015</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Van Alen Institute: Projects in Public Architecture</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060406</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>application/pdf</internetMediaType>
+			<internetMediaType>application/x-javascript</internetMediaType>
+			<internetMediaType>application/x-shockwave-flash</internetMediaType>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>image/png</internetMediaType>
+			<internetMediaType>image/x-icon</internetMediaType>
+			<internetMediaType>text/css</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+			<internetMediaType>text/plain</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>
+			</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Visual Image Web Sites Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000014 http://loc.archive.org/collections/visual/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0014.0016</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.vanalen.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/visual/2006*/www.vanalen.org/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0014.0016</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Prints and Photographs Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0014.0016</recordIdentifier>
+		</recordInfo>
+	</mods>
+	<mods version="3.2">
+		<titleInfo>
+			<title>Untitled</title>
+		</titleInfo>
+		<originInfo>
+			<dateCaptured encoding="iso8601" point="start">20060406</dateCaptured>
+			<dateCaptured encoding="iso8601" point="end">20061129</dateCaptured>
+		</originInfo>
+		<language>
+			<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+		</language>
+		<physicalDescription>
+			<internetMediaType>image/gif</internetMediaType>
+			<internetMediaType>image/jpeg</internetMediaType>
+			<internetMediaType>text/html</internetMediaType>
+		</physicalDescription>
+		<abstract>
+		</abstract>
+		<subject authority="local">
+			<topic>
+			</topic>
+		</subject>
+		<relatedItem type="host">
+			<titleInfo>
+				<title>Visual Image Web Sites Archive</title>
+			</titleInfo>
+			<location>
+				<url>http://hdl.loc.gov/loc.natlib/collnatlib.00000014 http://loc.archive.org/collections/visual/</url>
+			</location>
+		</relatedItem>
+		<identifier>hdl:loc.natlib/mrva0014.0017</identifier>
+		<location>
+			<url displayLabel="Active site (if available)">www.wristphotography.com/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://loc.archive.org/visual/2006*/www.wristphotography.com/</url>
+		</location>
+		<location>
+			<url displayLabel="Archived site">http://hdl.loc.gov/loc.natlib/mrva0014.0017</url>
+		</location>
+		<location>
+			<physicalLocation>Library of Congress, Prints and Photographs Division, Washington, DC., 20540</physicalLocation>
+			<physicalLocation authority="marcorg">dcu</physicalLocation>
+		</location>
+		<accessCondition>None</accessCondition>
+		<recordInfo>
+			<recordCreationDate encoding="iso8601">20071005</recordCreationDate>
+			<recordIdentifier source="dlc">mrva0014.0017</recordIdentifier>
+		</recordInfo>
+	</mods>
+</modsCollection>

@@ -17,3 +17,12 @@ django-gravatar2==1.1.3
 
 # Uncomment for uservoice integration
 # pycrypto==2.3
+
+#Added with freemix_akara merge
+python-dateutil
+feedparser
+xlrd
+
+akara==2.0.0a4
+amara==2.0.0a6
+

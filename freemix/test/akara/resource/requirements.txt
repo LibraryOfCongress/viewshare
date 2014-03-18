@@ -1,0 +1,4 @@
+hg+http://foundry.zepheira.com/hg/zen/#egg=zen
+git+http://github.com/zepheira/akara.git#egg=akara
+git+http://github.com/zepheira/amara.git#egg=amara
+
