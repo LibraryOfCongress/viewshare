@@ -15,7 +15,6 @@ django-uni-form==0.8.0
 httplib2==0.7.6
 
 #django-cms depends on the following
-django-reversion==1.6.5
 django-classy-tags==0.3.4.1
 elementtree==1.2.7-20070827-preview
 django-sekizai==0.6.1

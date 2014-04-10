@@ -22,7 +22,6 @@ Third-party Apps
     * mptt
     * menus
     * sekizai
-    * reversion
     * cms.plugins.text
     * cms.plugins.picture
     * cms.plugins.link
