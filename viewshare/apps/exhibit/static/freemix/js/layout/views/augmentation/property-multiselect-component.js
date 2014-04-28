@@ -2,7 +2,7 @@ define(["jquery",
         "freemix/js/freemix",
         "multiselect",
         "bootstrap"],
-function($, Freemix) {
+function($, Freemix, Multiselect) {
     "use strict";
 
     function View(options) {
