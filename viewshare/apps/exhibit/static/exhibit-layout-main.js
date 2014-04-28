@@ -46,7 +46,7 @@ requirejs.config({
         "jquery": "freemix/js/lib/jquery",
         "openlayers": "simile/exhibit/extensions/openlayers/lib/OpenLayers",
         "jquery-ui": "freemix/js/lib/jquery-ui",
-        "ui.multiselect": "freemix/js/lib/ui.multiselect",
+        "multiselect": "freemix/js/lib/multiselect",
         "bootstrap": "freemix/js/lib/bootstrap",
         "jquery.cookie": "freemix/js/lib/jquery.cookie",
         "jquery.csrf": "freemix/js/lib/jquery.csrf",
@@ -78,8 +78,8 @@ requirejs.config({
         "jquery-ui": {
             "deps": ["jquery"]
         },
-        "ui.multiselect": {
-            "deps": ["jquery-ui"]
+        "multiselect": {
+            "deps": ["jquery", "bootstrap"]
         },
         "creole": {
             "exports": "Parse"
