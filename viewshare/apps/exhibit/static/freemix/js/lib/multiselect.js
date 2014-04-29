@@ -4,7 +4,7 @@
 
 define(["jquery",
         "jquery-sortable",
-        "bootstrap.min"],
+        "bootstrap"],
 function($) {
     "use strict";
 

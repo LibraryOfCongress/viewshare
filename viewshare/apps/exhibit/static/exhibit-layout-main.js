@@ -54,6 +54,7 @@ requirejs.config({
         "jquery.form": "freemix/js/lib/jquery.form",
         "jquery.uuid": "freemix/js/lib/jquery.uuid",
         "jquery.json": "freemix/js/lib/jquery.json",
+        "jquery-sortable": "freemix/js/lib/jquery-sortable",
         "text": 'freemix/js/lib/text',
         "handlebars": "freemix/js/lib/handlebars",
         "creole": "freemix/js/lib/creole",
