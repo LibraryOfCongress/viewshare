@@ -22,9 +22,15 @@ function($) {
      *        jQuery event signal sent to container to indicate a change.
      * @param [options.dragTooltip] {String} Default in English, the tooltip
      *        on drag bars to provide a hint on what to do with the bars.
+     * @param [options.maxListHeight] {Numeric} Default to null, force the
+     *        lists to be no taller than so many pixels high each, scroll if so.
+     * @param [options.selectAllText] {String} The label to put on the button
+     *        that selects all options.
+     * @param [options.deselectAllText] {String} The label to put on the button
+     *        that deselects all options.
      */
     var Multiselect = function(container, active, inactive, options) {
-        var self = this, buttons;
+        var self = this, buttons, table;
         this._container = container;
         this._options = $.extend({}, {
             "linker" : "properties",
@@ -40,11 +46,15 @@ function($) {
         buttons = $("<div>")
             .addClass("clearfix multiselect-buttons")
             .appendTo(this._container);
+	table = $("<table><tbody><tr><td></td><td></td></tr></tbody></table>")
+	    .addClass("multiselect-columns")
+	    .appendTo(this._container);
         this._deselectButton = $("<button>")
             .text(this._options.deselectAllText)
             .addClass("pull-right btn btn-small deselecting")
             .appendTo(buttons)
             .on("click", function(evt) {
+		evt.preventDefault();
                 self.deselectAll();
             });
         this._selectButton = $("<button>")
@@ -52,6 +62,7 @@ function($) {
             .addClass("pull-right btn btn-small selecting")
             .appendTo(buttons)
             .on("click", function(evt) {
+		evt.preventDefault();
                 self.selectAll();
             });
         this._selected = $("<ul>")
@@ -59,14 +70,14 @@ function($) {
             .addClass("unstyled")
             .addClass("selected")
             .addClass(this._options.linker)
-            .appendTo(this._container)
+            .appendTo(table.find("td:eq(0)"))
             .data("id", "selected");
         this._deselected = $("<ul>")
             .addClass("sortable")
             .addClass("unstyled")
             .addClass("deselected")
             .addClass(this._options.linker)
-            .appendTo(this._container)
+            .appendTo(table.find("td:eq(1)"))
             .data("id", "deselected");
 
         if (this._options.maxListHeight !== null) {

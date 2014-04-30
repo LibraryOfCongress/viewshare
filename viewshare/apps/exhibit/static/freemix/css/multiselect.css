@@ -20,6 +20,15 @@ div.multiselect-buttons button {
     margin: 0 0 0 4px;
 }
 
+table.multiselect-columns {
+    width: 100%;
+}
+
+table.multiselect-columns td {
+    vertical-align: top;
+    width: 50%;
+}
+
 .sortable li.placeholder {
     position: relative;
     border-top: 2px solid #3a87ad;
@@ -58,6 +67,7 @@ i.actionable {
 }
 
 i.draggable {
+    color: #999;
     cursor: move;
     line-height: 2.5;
     margin: 0 5px;

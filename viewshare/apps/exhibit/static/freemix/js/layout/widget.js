@@ -128,7 +128,7 @@ function ($, Widget, Freemix, Multiselect) {
             }
         }
 
-        this._multiselect = new Multiselect(selector, selected, deselected);
+        this._multiselect = new Multiselect(selector, selected, deselected, {"maxListHeight": 240});
         selector.on('modify.multiselect', function(evt, data) {
             config[key] = data || [];
             widget.triggerChange(config, template);
