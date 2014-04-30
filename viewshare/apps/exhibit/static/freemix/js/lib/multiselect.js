@@ -98,7 +98,7 @@ function($) {
 
         this._container.show();
 
-        $(document).on("click", "i.actionable", function(evt) {
+        $(this._container).on("click", "i.actionable", function(evt) {
             var type = $(evt.currentTarget).parents(".sortable").data("id");
             if (type === "selected") {
                 $(evt.currentTarget).parents("li").appendTo(self._deselected);
@@ -108,7 +108,7 @@ function($) {
             self.onChange($(evt.currentTarget).parents("li"), null);
         });
 
-        this._sortable = $(".sortable").sortable({
+        this._sortable = this._container.find(".sortable").sortable({
             "group": self._options.linker,
             "distance": 5,
             "delay": 2,
@@ -237,6 +237,7 @@ function($) {
      * Empty widget DOM object and remove pointers.
      */
     Multiselect.prototype.destroy = function() {
+        this._container.off('click', 'i.actionable');
         this._container.empty();
         this._container = null;
         this._options = null;
