@@ -42,7 +42,10 @@ function($, Freemix, Multiselect) {
             }
         }
         var view = this;
-        this._multiselect = new Multiselect(selector, selected, deselected, {"maxListHeight": 240});
+        this._multiselect = new Multiselect(selector, selected, deselected, {
+            "maxListHeight": 240,
+            "linker": "properties" + (new Date()).getTime()
+        });
         selector.on('modify.multiselect', function(evt, data) {
             view.value = data || [];
             view.changeHandler();

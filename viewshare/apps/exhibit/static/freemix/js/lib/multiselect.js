@@ -30,7 +30,7 @@ function($) {
      *        that deselects all options.
      */
     var Multiselect = function(container, active, inactive, options) {
-        var self = this, buttons, table;
+        var self = this, buttons, table, dragger, dragf, timeoutID;
         this._container = container;
         this._options = $.extend({}, {
             "linker" : "properties",
@@ -46,15 +46,15 @@ function($) {
         buttons = $("<div>")
             .addClass("clearfix multiselect-buttons")
             .appendTo(this._container);
-	table = $("<table><tbody><tr><td></td><td></td></tr></tbody></table>")
-	    .addClass("multiselect-columns")
-	    .appendTo(this._container);
+        table = $("<table><tbody><tr><td></td><td></td></tr></tbody></table>")
+            .addClass("multiselect-columns")
+            .appendTo(this._container);
         this._deselectButton = $("<button>")
             .text(this._options.deselectAllText)
             .addClass("pull-right btn btn-small deselecting")
             .appendTo(buttons)
             .on("click", function(evt) {
-		evt.preventDefault();
+                evt.preventDefault();
                 self.deselectAll();
             });
         this._selectButton = $("<button>")
@@ -62,7 +62,7 @@ function($) {
             .addClass("pull-right btn btn-small selecting")
             .appendTo(buttons)
             .on("click", function(evt) {
-		evt.preventDefault();
+                evt.preventDefault();
                 self.selectAll();
             });
         this._selected = $("<ul>")
@@ -108,13 +108,56 @@ function($) {
             self.onChange($(evt.currentTarget).parents("li"), null);
         });
 
+        timeoutID = null;
+        dragger = function(container) {
+            var top = container.el.offset().top;
+            var bottom = top + container.el.outerHeight();
+            return function(evt) {
+                var scroller;
+                if (timeoutID !== null) {
+                    window.clearTimeout(timeoutID);
+                    timeoutID = null;
+                }
+                // @@@ scrolling should force the placeholder to move but
+                // does not due to a bug in jQuery-sortable failing to
+                // receive scroll events.
+                // https://github.com/johnny/jquery-sortable/issues/67
+                scroller = function() {
+                    var st = container.el.scrollTop(),
+                        stb = container.el.get(0).scrollHeight,
+                        step;
+                    if (evt.pageY <= top && st > 0) {
+                        step = (st >= 10) ? 10 : st;
+                        container.el.scrollTop(st - step);
+                        timeoutID = window.setTimeout(scroller, 10);
+                        // container.rootGroup.drag(evt);
+                    } else if (evt.pageY >= bottom && st < stb - container.el.outerHeight()) {
+                        container.el.scrollTop(st + 10);
+                        timeoutID = window.setTimeout(scroller, 10);
+                        // container.rootGroup.drag(evt);
+                    } else {
+                        window.clearTimeout(timeoutID);
+                        timeoutID = null;
+                    }
+                };
+                timeoutID = window.setTimeout(scroller, 10);
+            }
+        };
         this._sortable = this._container.find(".sortable").sortable({
             "group": self._options.linker,
-            "distance": 5,
-            "delay": 2,
+            "distance": 0,
+            "delay": 0,
             "handle": "i.draggable",
+            "onDragStart": function(item, container, _super, evt) {
+                dragf = dragger(container);
+                $(document).on("mousemove.sortable touchmove.sortable", dragf);
+                _super(item, container, evt);
+            },
             "onDrop": function(item, container, _super) {
                 self.onChange(item, container);
+                window.clearTimeout(timeoutID);
+                timeoutID = null;
+                $(document).off("mousemove.sortable touchmove.sortable", dragf);
                 _super(item, container);
             },
             "serialize": function(parent, children, parentIsContainer) {
@@ -238,7 +281,10 @@ function($) {
      */
     Multiselect.prototype.destroy = function() {
         this._container.off('click', 'i.actionable');
+        this._sortable.sortable("disable");
+        this._sortable.sortable("destroy");
         this._container.empty();
+        this._sortable = null;
         this._container = null;
         this._options = null;
         this._selected = null;
