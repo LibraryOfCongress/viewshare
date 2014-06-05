@@ -6,18 +6,18 @@ Linux based Installation
 
 Requires:
 
-   * Python 2.6.x
-   * virtualenv 1.4.3+ (easy_install2.6 virtualenv)
+   * Python 2.7.x
+   * virtualenv
    * Linux derivative (e.g. Ubuntu)
    * Web server (e.g. Apache 2.2 - optional)
    * Database (Postgres, MySQL, Oracle - optional)
 
 To build::
 
-   $ virtualenv --no-site-packages --distribute viewshare
+   $ virtualenv viewshare
    $ cd viewshare
    $ source bin/activate
-   $ pip install git+git://loc-recollect.git.sourceforge.net/gitroot/loc-recollect/loc-recollect#egg=viewshare
+   $ pip install -e git+https://github.com/LibraryOfCongress/viewshare.git#egg=viewshare
    $ pip install -r src/viewshare/requirements/requirements.txt
 
 The "example_project" directory provides the starting point for the
@@ -37,7 +37,7 @@ on which the database server resides, and the user credentials.
 
 Then create the database::
 
-   $ cd src/freemix/freemix/
+   $ cd src/viewshare
    $ ./manage.py syncdb --noinput
    $ ./manage.py migrate
    $ ./manage.py createsuperuser
