@@ -1,6 +1,6 @@
 define([
-    "jquery", "exhibit", "./freemix"
-], function($, Exhibit, Freemix) {
+    "jquery", "exhibit", "scripts/util/ui", "./freemix"
+], function($, Exhibit, UIUtilities, Freemix) {
     "use strict";
 
 
@@ -26,18 +26,27 @@ define([
     Freemix.exhibit = {
 
         initializeDatabase: function(data, fDone) {
-
+            UIUtilities.showBusyIndicator();
+            var done = function() {
+                try {
+                    if (fDone) {
+                        fDone();
+                    }
+                } finally {
+                    UIUtilities.hideBusyIndicator();
+                }
+            };
             var database = Freemix.exhibit.database = createDatabase();
 
             if (data.constructor == Array) {
                 if (fDone) {
-                    $(document.body).one("dataload.exhibit", fDone);
+                    $(document.body).one("dataload.exhibit", done);
                 }
                 database._loadLinks(data, database);
 
             } else {
                 database.loadData(data);
-                if (fDone) fDone();
+                done();
             }
             return database;
         },
