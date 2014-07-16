@@ -41,7 +41,9 @@ $(document).ready(function() {
 </div>
 {{ block.super }}
 <div id="spinner">
-  <p><img src="{{STATIC_URL}}images/loading.gif"/></p>
+  <div class="progress progress-striped active">
+    <div class="bar" style="width: 100%;"></div>
+  </div>
   <p>{% blocktrans %}Analyzing JSON, please wait.{% endblocktrans %}</p>
 </div>
 <div id="json-upload">
@@ -81,7 +83,7 @@ $(document).ready(function() {
 		</div>
 	      </div>
             </div>
-	
+
 	  </div>
 	  <div class="span8">
 
@@ -91,7 +93,7 @@ $(document).ready(function() {
 	      </div>
 
 	      <div class="controls">
-	      
+
 		<div class="btn-group">
 		  <button class="btn" id="pager-back">&lt;</button>
 		  <button class="btn disabled" ><span id="pager-current"></span> {% trans "of" %} <span id="pager-total"></span> {% trans "sample items" %}</button>
@@ -100,7 +102,7 @@ $(document).ready(function() {
 
 		<br />
 		<br />
-		
+
 		<div id="item-properties-container">
 		  <table class="table table-condensed table-bordered table-striped">
 		    <thead>
@@ -122,7 +124,7 @@ $(document).ready(function() {
 	</div> <!-- row-fluid -->
 
       </div>
-      
+
     </form>
   </fieldset>
 </div>
