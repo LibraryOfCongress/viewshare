@@ -1,8 +1,8 @@
 define(["jquery",
         "freemix/js/freemix",
-        "ui.multiselect",
+        "multiselect",
         "bootstrap"],
-function($, Freemix) {
+function($, Freemix, Multiselect) {
     "use strict";
 
     function View(options) {
@@ -12,7 +12,6 @@ function($, Freemix) {
 
         this.value = options.value || [];
         this.select_all = (options.select_all && this.value.length == 0)
-
     }
 
     View.prototype.getValue = function() {
@@ -25,44 +24,49 @@ function($, Freemix) {
 
     View.prototype.render = function() {
         var inx;
-        var selector = this.element;
+        var selected = [];
+        var deselected = [];
+
         for (inx = 0 ; inx < this.value.length ; inx++) {
-            selector.append(this.renderOption(this.value[inx], true));
+            selected.push(this.renderOption(this.value[inx]));
         }
 
         var properties = this.database.getFilteredProperties();
         for (inx = 0 ; inx < properties.length ; inx++) {
             if ($.inArray(properties[inx], this.value) < 0) {
-                selector.append(this.renderOption(properties[inx], this.select_all));
+                if (this.select_all) {
+                    selected.push(this.renderOption(properties[inx]));
+                } else {
+                    deselected.push(this.renderOption(properties[inx]));
+                }
             }
         }
         var view = this;
-        selector.parent().on('change', 'select', this.changeHandler.bind(this));
-        selector.multiselect({width: 460, height: 250, sortable: true});
+        this._multiselect = new Multiselect(selector, selected, deselected, {
+            "maxListHeight": 240,
+            "linker": "properties" + (new Date()).getTime()
+        });
+        selector.on('modify.multiselect', function(evt, data) {
+            view.value = data || [];
+            view.changeHandler();
+        });
     }
 
     View.prototype.changeHandler = function() {
-        this.value = this.element.val() || [];
         for (var inx = 0 ; inx < this.listeners.length ; inx++) {
             this.listeners[inx](this.value);
         }
     }
 
-    View.prototype.renderOption = function (property_name, selected) {
-        var property = this.database.getProperty(property_name);
-        var option = $("<option></option>");
-        option.attr("value", property.getID());
-        option.text(property.getLabel());
-        if (selected) {
-            option.attr("selected", "selected");
-        }
-        return option;
+    View.prototype.renderOption = function (property_name) {
+        return this.database.getProperty(property_name);
     }
 
 
     View.prototype.destroy = function() {
-        this.element.parent().off('change', 'select');
-        this.element.multiselect('destroy');
+        this.element.off('modify.multiselect');
+        this._multiselect.destroy();
+        this._multiselect = null;
     }
 
     return View;

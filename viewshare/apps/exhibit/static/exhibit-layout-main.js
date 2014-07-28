@@ -46,7 +46,7 @@ requirejs.config({
         "jquery": "freemix/js/lib/jquery",
         "openlayers": "simile/exhibit/extensions/openlayers/lib/OpenLayers",
         "jquery-ui": "freemix/js/lib/jquery-ui",
-        "ui.multiselect": "freemix/js/lib/ui.multiselect",
+        "multiselect": "freemix/js/lib/multiselect",
         "bootstrap": "freemix/js/lib/bootstrap",
         "jquery.cookie": "freemix/js/lib/jquery.cookie",
         "jquery.csrf": "freemix/js/lib/jquery.csrf",
@@ -54,6 +54,7 @@ requirejs.config({
         "jquery.form": "freemix/js/lib/jquery.form",
         "jquery.uuid": "freemix/js/lib/jquery.uuid",
         "jquery.json": "freemix/js/lib/jquery.json",
+        "jquery-sortable": "freemix/js/lib/jquery-sortable",
         "text": 'freemix/js/lib/text',
         "handlebars": "freemix/js/lib/handlebars",
         "creole": "freemix/js/lib/creole",
@@ -78,8 +79,8 @@ requirejs.config({
         "jquery-ui": {
             "deps": ["jquery"]
         },
-        "ui.multiselect": {
-            "deps": ["jquery-ui"]
+        "multiselect": {
+            "deps": ["jquery", "bootstrap"]
         },
         "creole": {
             "exports": "Parse"

@@ -1,21 +1,14 @@
 define(["jquery",
         "freemix/js/widget",
         "freemix/js/freemix",
-        "ui.multiselect",
+        "multiselect",
         "freemix/js/exhibit_utilities",
         "layout/patch_exhibit"],
-function ($, Widget, Freemix) {
+function ($, Widget, Freemix, Multiselect) {
     "use strict";
 
-    function make_option(property_name, selected) {
-        var property = Freemix.exhibit.database.getProperty(property_name);
-        var option = $("<option></option>");
-        option.attr("value", property.getID());
-        option.text(property.getLabel());
-        if (selected) {
-            option.attr("selected", "selected");
-        }
-        return option;
+    function make_option(property_name) {
+        return Freemix.exhibit.database.getProperty(property_name);
     }
 
     Widget.prototype._setupPropertySelect = function(config, template, selector, key, types, nullable, exclude_other_types) {
@@ -110,30 +103,39 @@ function ($, Widget, Freemix) {
     };
 
     Widget.prototype._setupPropertyMultiSelect = function(config, template, selector, key, default_all) {
+        this._multiselect = null;
         var widget = this;
         var value = config[key] || [];
-        var inx;
+        var selected = [];
+        var deselected = [];
+        var inx, default_all;
 
         if (value.length > 0) {
             default_all = false;
         }
         for (inx = 0 ; inx < value.length ; inx++) {
-            selector.append(make_option(value[inx], true));
+            selected.push(make_option(value[inx]));
         }
 
         var properties = Freemix.exhibit.database.getFilteredProperties();
         for (inx = 0 ; inx < properties.length ; inx++) {
             if ($.inArray(properties[inx], value) < 0) {
-                selector.append(make_option(properties[inx], default_all));
+                if (default_all) {
+                    selected.push(make_option(properties[inx]));
+                } else {
+                    deselected.push(make_option(properties[inx]));
+                }
             }
         }
 
-        selector.parent().on('change', 'select', function() {
-            config[key] = $(this).val() || [];
+        this._multiselect = new Multiselect(selector, selected, deselected, {
+            "maxListHeight": 240,
+            "linker": "properties" + (new Date()).getTime()
+        });
+        selector.on('modify.multiselect', function(evt, data) {
+            config[key] = data || [];
             widget.triggerChange(config, template);
         });
-        selector.multiselect({width: 460, height: 250, sortable: true});
-
     };
 
     Widget.prototype.findWidget = function() {
@@ -152,6 +154,11 @@ function ($, Widget, Freemix) {
     };
 
     Widget.prototype.remove = function() {
+        if (typeof this._multiselect !== "undefined") {
+            this._multiselect.container.off('modify.multiselect');
+            this._multiselect.destroy();
+            this._multiselect = null;
+        }
         this.findWidget().remove();
     };
 
