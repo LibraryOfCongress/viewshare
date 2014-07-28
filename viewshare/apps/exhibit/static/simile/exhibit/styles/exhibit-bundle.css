@@ -12,9 +12,9 @@
 a img {
     border: none;
 }
-a.exhibit-action, 
-a.exhibit-action:link, 
-a.exhibit-action:active, 
+a.exhibit-action,
+a.exhibit-action:link,
+a.exhibit-action:active,
 a.exhibit-action:visited {
 	text-decoration:    none;
 	border-bottom:      1px dotted;
@@ -24,9 +24,9 @@ a.exhibit-action:hover {
 	border-bottom:  1px solid;
 	cursor:         pointer;
 }
-a.exhibit-action-disabled, 
-a.exhibit-action-disabled:link, 
-a.exhibit-action-disabled:active, 
+a.exhibit-action-disabled,
+a.exhibit-action-disabled:link,
+a.exhibit-action-disabled:active,
 a.exhibit-action-disabled:visited {
 	text-decoration:    none;
 	border-bottom:      1px dotted;
@@ -37,9 +37,9 @@ a.exhibit-action-disabled:hover {
 	border-bottom:  1px solid;
 	cursor:         pointer;
 }
-a.exhibit-item, 
-a.exhibit-item:link, 
-a.exhibit-item:active, 
+a.exhibit-item,
+a.exhibit-item:link,
+a.exhibit-item:active,
 a.exhibit-item:visited {
 	text-decoration:    none;
 	border-bottom:      1px dotted red;
@@ -125,7 +125,7 @@ div.exhibit-focusDialog-controls {
     left:       35%;
     right:      35%;
     z-index:    1000;
-    display:    none;
+    /*display:    none;*/
 }
 .exhibit-busyIndicator-content {
     font-size:      120%;
@@ -516,7 +516,7 @@ div.exhibit-facet-header-filterControl {
 div.exhibit-facet-header-filterControl img {
     vertical-align: text-bottom;
 }
-img.exhibit-facet-header-collapse { 
+img.exhibit-facet-header-collapse {
     border: 1px;
     cursor: pointer;
     padding-right: 3px;
@@ -528,7 +528,7 @@ span.exhibit-facet-header-detail {
     color:          #888;
     padding-left:   0.5em;
 }
-    
+
 div.exhibit-facet-body-frame {
     clear:          both;
 }
@@ -575,7 +575,7 @@ div.exhibit-flowingFacet-header {
 span.exhibit-flowingFacet-header-title {
     font-weight:    bold;
 }
-    
+
 div.exhibit-flowingFacet-body {
 }
 div.exhibit-flowingFacet-value {
@@ -627,7 +627,7 @@ span.exhibit-cloudFacet-value-selected {
     text-decoration: underline;
     background:      yellow;
 }
- 
+
 a.exhibit-facet-value-children-toggle {
     padding: 0px 5px;
 }
@@ -653,7 +653,7 @@ div.exhibit-slider-histogram {
     margin: 0 9px;
     position: relative;
 }
-div.exhibit-slider-histogram div { 
+div.exhibit-slider-histogram div {
     background: #999;
 }
 .exhibit-slider-display {

@@ -9,16 +9,13 @@ define(["jquery",
     "use strict";
 
     function run_init(profile) {
-        var data = $("link[rel='exhibit-data']").toArray();
-        var url = $("link[rel='exhibit-data']").attr("href");
-        $.getJSON(url, function(data) {
-            Freemix.exhibit.initializeDatabase(data, function() {
-                if (profile.default_lens) {
-                    LensRegistry.setDefaultLens(LensRegistry.construct(profile.default_lens));
-                }
-                $("#contents").append(generateExhibitHTML(profile));
-                Freemix.exhibit.createExhibit($("#contents"));
-            });
+        var data_urls = $("link[rel='exhibit-data']").toArray();
+        Freemix.exhibit.initializeDatabase(data_urls, function() {
+            if (profile.default_lens) {
+                LensRegistry.setDefaultLens(LensRegistry.construct(profile.default_lens));
+            }
+            $("#contents").append(generateExhibitHTML(profile));
+            Freemix.exhibit.createExhibit($("#contents"));
         });
     }
 
