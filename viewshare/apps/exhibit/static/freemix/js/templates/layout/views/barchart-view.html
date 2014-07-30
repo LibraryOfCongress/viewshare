@@ -2,15 +2,11 @@
 
   <fieldset>
 
-    <div class="container-fluid">
-
-      <div class="row-fluid">
-        <legend class="view-settings-label">Bar Chart View Settings</legend>
-      </div>
+      <legend class="view-settings-label">Bar Chart View Settings</legend>
 
       <div class="row-fluid">
 
-        <div class="span5 view-variables">
+        <div class="view-variables">
 
           <div class="control-group">
             <label class="control-label" for="view_label_input">Label</label>
@@ -26,7 +22,9 @@
           <div class="control-group">
             <label class="control-label" for="property_list">Properties</label>
 
-            <div class="controls" id="property_list"></div>
+            <div class="controls">
+              <select id="property_list"></select>
+            </div>
           </div>
 
           <legend class="lens-settings-label">Lens Settings</legend>
@@ -45,9 +43,6 @@
 
       </div>
       <!-- end row -->
-
-    </div>
-    <!-- end container -->
 
   </fieldset>
 
