@@ -100,4 +100,9 @@
         <script type="text/javascript" src="{% url 'uservoice_options' %}"></script>
         <!--<script type="text/javascript" src="https://cdn.uservoice.com/javascripts/widgets/tab.js"></script>-->
     {% endif %}
+
+    {% if OMNITURE_TRACKING %}
+        <script src='http://cdn.loc.gov/js/global/metrics/sc/v25.2/2.0/s_code.js'></script>
+        <!-- omniture: do not remove this comment, it breaks omniture if it isnt present -->
+    {% endif %}
 {% endblock %}
