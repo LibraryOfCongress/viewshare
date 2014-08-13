@@ -68,7 +68,7 @@ The following settings should be customized on a per-site basis:
 * ANONYMOUS_USERNAME: the user name used by anonymous users, e.g. "guest"
 * ACCOUNT_REQUIRED_EMAIL: require email addresses for new accounts
 * ACCOUNT_EMAIL_VERIFICATION: require an email address verification step for new accounts
-
+* OMNITURE_TRACKING: Set to True to enable the LOC omniture tracking script
 
 Transformation Server
 ---------------------
