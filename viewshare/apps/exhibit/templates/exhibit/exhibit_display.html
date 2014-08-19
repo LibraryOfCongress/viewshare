@@ -59,22 +59,8 @@
 
 {% block head_css %}
     {{ block.super }}
-    {% compress css %}
-        <link rel="stylesheet" type="text/css"
-              href="{{ STATIC_URL }}freemix/css/layout.css"/>
-        <link rel="stylesheet" type="text/css"
-              href="{{ STATIC_URL }}freemix/css/views.css"/>
-        <link rel="stylesheet" type="text/css"
-              href="{{ STATIC_URL }}freemix/css/canvas.css"/>
-        <link href="{{ STATIC_URL }}freemix/css/inspector.css" rel="stylesheet"
-              type="text/css" media="screen,projection"/>
-        <link href="{{ STATIC_URL }}freemix/css/embed-code.css" rel="stylesheet"
-              type="text/css" media="screen,projection"/>
-    {% endcompress %}
-
-    <link rel="stylesheet" type="text/css"
-          href="{{ STATIC_URL }}freemix/css/styles/vanilla.css"/>
-
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/exhibit_display.css"/>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/exhibit_inspect.css" />
 {% endblock %}
 
 {% block body %}
@@ -97,13 +83,13 @@
 
                       {% if exhibit.description %}
                       <div class="row-fluid">
-			
+
                         <div class="span7">
-			  
+
                           <div class="exhibit-description">
                             {{ exhibit.description }}
                           </div>
-			      
+
                         </div>
                       </div> <!-- row-fluid -->
 
@@ -112,14 +98,14 @@
                       <div class="row-fluid">
 
                         <div class="span7">
-			  
+
 			  <div class="exhibit-acls">
                             {% if exhibit.is_public %}
 			    <span class="public"><span class="public-icon"><i class="fa fa-unlock-alt fa-lg"></i></span><span class="view-label">{% trans "This view is public" %}</span></span>
                             {% else %}
 			    <span class="private"><span class="private-icon"><i class="fa fa-lock fa-lg"></i></span><span class="view-label">{% trans "This view is private" %}</span></span>
                             {% endif %}
-			    
+
 			    <span class="exhibit-metadata">
                               {% trans "and was created" %}
                               <span class="exhibit-modified-data">{{ exhibit.modified|naturalday}}</span>
@@ -131,17 +117,17 @@
 
 			  </div>
                         </div>
-			
+
                         <div class="span5">
-			  
+
                           <div class="exhibit-actions pull-right">
-			    
+
                             <div class="exhibit-links btn-group">
                               {% if can_inspect %}
                               <a class="exhibit_inspect btn btn-small"
                                  href="{% url 'exhibit_detail' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Inspect" %}</a>
                               {% endif %}
-			      
+
 			      {% if exhibit.is_private %}
                               {% if can_share %}
                               <a class="exhibit_share btn btn-small"
@@ -153,7 +139,7 @@
                                  data-toggle="modal">{% trans "Share" %}</a>
                               {% endif %}
 			      {% endif %}
-			      
+
 			      {% if exhibit.is_public %}
                               {% if can_embed %}
                               <a class="exhibit_embed btn btn-small"
@@ -161,13 +147,13 @@
                                  data-toggle="modal">{% trans "Embed" %}</a>
 			      {% endif %}
                               {% endif %}
-			      
+
                               {% if can_edit %}
                               <a class="exhibit_edit btn btn-small"
                                  href="{% url 'exhibit_edit' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Build" %}</a>
                               {% endif %}
                             </div>
-			    
+
                             {% if can_share %}
                             <div id="exhibit-share-form"
                                  class="modal modal-fit hide fade form-dialog"
@@ -187,18 +173,18 @@
                               </div>
                             </div>
                             {% endif %}
-			    
+
                           </div>
-			  
+
                         </div>
                         <!-- span5 -->
-			
+
                       </div>
                       <!-- row-fluid -->
-		      
+
                     </div>
                     <!-- exhibit-display -->
-		    
+
                 </div>
                 <!-- accordion-inner -->
 

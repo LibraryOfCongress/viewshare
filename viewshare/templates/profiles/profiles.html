@@ -11,9 +11,7 @@
 
 {% block head_css %}
 {{ block.super }}
-{% compress css %}
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}profiles/css/profile_users.css"/>
-{% endcompress %}
 {% endblock %}
 
 {% block body %}
@@ -29,12 +27,12 @@
         <input type="text" name="search" class="input-medium search-query" id="search" value="{{ search_terms }}" />
         <button type="submit" class="btn">{% trans "Search" %}</button>
       </div>
-         
+
       {% if users.count > 0 %}
 
       <div class="help-inline">
         <span class="sort-label">{% trans "Sort by:" %}</span>
-        
+
         <span class="btn-group">
           {% if order == "name" %}
           <a class="btn btn-small active" href="#">{% trans "Name" %}</a>

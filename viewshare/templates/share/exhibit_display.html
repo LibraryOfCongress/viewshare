@@ -26,14 +26,8 @@
 
 
 {% block head_css %}
-{{block.super}}
-    {% compress css %}
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/layout.css"/>
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/views.css"/>
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/editor.css"/>
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/multiselect.css"/>
-    {% endcompress %}
-
+  {{block.super}}
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/exhibit_edit.css"/>
 {% endblock %}
 
 {% block body %}

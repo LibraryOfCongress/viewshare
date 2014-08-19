@@ -17,14 +17,7 @@
 {% endblock rss_feeds %}
 
 {% block head_css %}
-    {% compress css %}
-    <link href="{{STATIC_PREFIX}}freemix/css/bootstrap.css" rel="stylesheet" type="text/css" media="screen,projection" />
-    <link href="{{STATIC_PREFIX}}freemix/css/bootstrap-responsive.css" rel="stylesheet" type="text/css" media="screen,projection" />
-    <link href="{{STATIC_PREFIX}}viewshare/css/style.css" rel="stylesheet" type="text/css" media="screen,projection" />
-    <link href="{{STATIC_PREFIX}}viewshare/css/lc.css" rel="stylesheet" type="text/css" media="screen,projection" />
     <link href="{{STATIC_PREFIX}}viewshare/css/base.css" rel="stylesheet" type="text/css" media="screen,projection" />
-    <link href="{{STATIC_PREFIX}}viewshare/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="screen,projection" />
-    {%endcompress %}
 {% endblock head_css %}
 
 {% block login %}
