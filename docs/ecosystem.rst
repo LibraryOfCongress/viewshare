@@ -33,7 +33,7 @@ Third-party Apps
     * candidate for elimination
 * notification
     * user notification management
-    * https://github.com/jtauber/django-notification 
+    * https://github.com/jtauber/django-notification
 * pagination
     * Break lists into paged results
     * https://github.com/ericflo/django-pagination
@@ -67,8 +67,6 @@ Custom apps
 * Viewshare specific
     * viewshare.apps.notices
         * User can control email settings for system events like invitations and announcements.
-    * viewshare.apps.collection_catalog
-        * Admin can group Exhibits that have been published on the system into Collections. Collections can be grouped into Projects. Collections can be tagged with Topics and can be attributed to Organizations.
     * viewshare.utilities
         * This is a general, catch-all app to store utilities used throughout the system. Some of the code includes:
             * context processors to add settings values to a ''RequestContext''.
