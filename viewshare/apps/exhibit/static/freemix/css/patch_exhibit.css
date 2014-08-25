@@ -1,7 +1,7 @@
 /* Vanilla Exhibit style */
 
 .exhibit-collectionView-body h1 {
-    font-family: 'Ubuntu', Helvetica, Arial, sans-serif;	
+    font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 2.0em;
     color: grey;
@@ -17,19 +17,15 @@
 }
 
 
-/* include jquery ui match until library removed */
-
-.exhibit-collectionView-group-content .exhibit-title, .exhibit-collectionView-group-content .ui-widget-header, .ui-widget-header {
+.exhibit-collectionView-group-content .exhibit-title, .exhibit-lens-title {
     border: none;
     font-size: 1.3em;
     background: none;
-    color: black; 
-    font-weight: bold; 
-    padding-left: 0px
+    color: black;
+    font-weight: bold;
+    padding-left: 0;
     padding-bottom: 3px;
     border-bottom: 1px solid lightgrey;
-}
-
 }
 
 .exhibit-collectionView-group-count {

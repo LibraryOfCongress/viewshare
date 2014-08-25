@@ -12,21 +12,8 @@
 
 {% block freemix_css %}
     {{ block.super }}
-    {% compress css %}
-        <link rel="stylesheet" type="text/css"
-              href="{{ STATIC_URL }}freemix/css/layout.css"/>
-        <link rel="stylesheet" type="text/css"
-              href="{{ STATIC_URL }}freemix/css/views.css"/>
-        <link rel="stylesheet" type="text/css"
-              href="{{ STATIC_URL }}freemix/css/editor.css"/>
-        <link rel="stylesheet" type="text/css"
-              href="{{ STATIC_URL }}freemix/css/multiselect.css"/>
-        <link href="{{ STATIC_URL }}freemix/css/inspector.css" rel="stylesheet"
-              type="text/css" media="screen,projection"/>
-        <link href="{{ STATIC_URL }}freemix/css/embed-code.css" rel="stylesheet"
-              type="text/css" media="screen,projection"/>
-
-    {% endcompress %}
+    <link href="{{ STATIC_URL }}freemix/css/exhibit_inspect.css" rel="stylesheet"
+          type="text/css" media="screen,projection"/>
 {% endblock %}
 
 {% block freemix_js %}
@@ -67,7 +54,7 @@
 	  {% if request.user.is_authenticated %}
 	  {% if object.source %}
           <div class="sourcedata-section widget-well">
-	    
+
             <div class="widget-header">
 	      <div class="row-fluid">
 		<div class="span10">
@@ -88,28 +75,28 @@
                 {% datasource_list_item object.source %}
               </div>
             </div>
-	      
+
           </div>
           {% endif %}
           {% endif %}
-	  
+
 	  {% if request.user.is_authenticated %}
           <div class="embed-section widget-well">
-	      
+
               <div class="widget-header">
                 <h2>{% blocktrans %}Embed{% endblocktrans %}</h2>
               </div>
-	      
+
               <div class="row-fluid">
                 <div class="span12">
-		  
+
                   <uL class="exhibit_list_items">
                     <li class="exhibit_list_item">
                       <div class="embed-desc">{% blocktrans %}Copy the
                         following and paste it into your page where
                         you'd like your data view to be
                         placed.{% endblocktrans %}</div>
-		      
+
                       <input type="text"
                              value="&lt;script id='freemix-embed' src='{{ exhibit_embed_url }}' type='text/javascript'&gt;&lt;/script&gt;"
                              class="embed-key" readonly="readonly"/>
@@ -120,10 +107,10 @@
 
             </div>
 	    {% endif %}
-	    
+
             {% if can_share %}
             <div class="sharedkey-section widget-well">
-	      
+
               <div class="widget-header">
                 <div class="row-fluid">
                   <div class="span10">

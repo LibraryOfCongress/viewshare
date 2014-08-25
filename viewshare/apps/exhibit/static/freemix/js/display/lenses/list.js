@@ -20,7 +20,7 @@ define(["jquery",
 
         var lens = $("<div class='list-lens' data-ex-role='lens' style='display:none'></div>");
 
-        var title = $("<div class='exhibit-title ui-widget-header'></div>");
+        var title = $("<div class='exhibit-lens-title'></div>");
         if (config.title) {
             var html = $("<span></span>");
             html.attr("data-ex-content", expression(config.title));

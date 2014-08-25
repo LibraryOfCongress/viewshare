@@ -7,9 +7,7 @@
 
 {% block head_css %}
     {{ block.super }}
-    {% compress css %}
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}upload/css/upload.css"/>
-    {% endcompress %}
 {% endblock %}
 
 {% block rtab_id %}id="data_tab"{% endblock %}
