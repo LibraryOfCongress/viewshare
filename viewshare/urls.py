@@ -24,7 +24,6 @@ urlpatterns = patterns('',
     (r'^notices/', include('viewshare.apps.vendor.notification.urls')),
     (r'^admin/', include(admin.site.urls)),
 
-    (r'^catalog/', include('viewshare.apps.collection_catalog.urls')),
     (r'^support/', include('viewshare.apps.support.urls')),
 
     url(r'^profiles/profile/(?P<username>[\w\._-]+)/connections/$',

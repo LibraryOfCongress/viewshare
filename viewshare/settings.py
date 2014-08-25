@@ -133,7 +133,6 @@ INSTALLED_APPS = (
     'viewshare.apps.account',
     'viewshare.apps.discover',
     'viewshare.apps.profiles',
-    'viewshare.apps.collection_catalog',
     'viewshare.apps.connections',
     'viewshare.apps.upload',
 
