@@ -38,7 +38,7 @@
               <a href="/" class="brand">
                 <span id="application-logo"></span>
                 <span id="application-status">{{ SITE_NAME_STATUS }}</span>
-              </a>            
+              </a>
 
               <div class="nav-collapse collapse">
 		<ul class="nav pull-right">
@@ -63,8 +63,8 @@
 	</div>
 	{% endfor %}
 	{% endif %}
-	{% endblock banner %}	
-	
+	{% endblock banner %}
+
         <div id="inner-body">
           {% block body %}
           {% endblock %}
@@ -80,7 +80,6 @@
   </div> <!-- /.container-fluid -->
   {% block base_scripts %}
   {% compress js %}
-  <script type="text/javascript" src="{{STATIC_PREFIX}}freemix/js/lib/jquery.highlight.js"></script>
   <script type="text/javascript" src="{{STATIC_PREFIX}}freemix/js/lib/jquery.csrf.js"></script>
   <script type="text/javascript" src="{{STATIC_PREFIX}}freemix/js/lib/jquery.cookie.js"></script>
   <script type="text/javascript" src="{{STATIC_PREFIX}}freemix/js/lib/bootstrap.js"></script>

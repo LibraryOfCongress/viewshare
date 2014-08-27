@@ -42,7 +42,7 @@ div.olMap {
 }
 
 .hyper-upload p {
-    margin: 1em 0;    
+    margin: 1em 0;
 }
 
 h1 {
@@ -69,7 +69,7 @@ h1 {
   background-position: 10px center;
 }
 
-#embedding-code {
+.embedding-code {
   background-color: white;
 }
 

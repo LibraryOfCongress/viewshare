@@ -39,8 +39,6 @@ This software uses code from the following projects:
  * jquery.bgiframe.min.js (http://brandonaaron.net)
  * jquery.dataTables.js (http://www.datatables.net)
  * jquery.form.js (http://malsup.com/jquery/form/)
- * jquery.highlight.js (http://johannburkard.de/blog/programming/javascript/highlight-javascript-text-higlighting-jquery-plugin.html)
- * jquery.jeditable.js (http://www.appelsiini.net/projects/jeditable)
  * jquery.json.js (http://code.google.com/p/jquery-json/)
  * jquery (http://jquery.com/)
  * jquery UI (http://jqueryui.com/)
@@ -51,7 +49,6 @@ This software uses code from the following projects:
  * pytz (http://pytz.sourceforge.net)
  * Simile (http://simile-widgets.org/)
  * South (http://south.aeracode.org/)
- * ui.multiselect.js (http://www.quasipartikel.at/multiselect/)
 
 
 Please see LICENSE.txt for the licenses that apply to these dependencies.
