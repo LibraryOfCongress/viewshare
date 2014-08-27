@@ -118,7 +118,7 @@ header, .header, #header{
 .dataprofile .tab-contents h1,
 #load h1,
 .dataprofile-viewer h1 {
-    font-family: 'Ubuntu', Helvetica, Arial, sans-serif;	
+    font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 2.0em;
     color: slategrey;
@@ -134,14 +134,14 @@ header, .header, #header{
 }
 
 .freemix-themeable h3 {
-    font-family: 'Ubuntu', Helvetica, Arial, sans-serif;	
+    font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 1.6em;
     color: grey;
 }
 
 .exhibit-title-accordion, .exhibit-title-edit {
-    font-family: 'Ubuntu', Helvetica, Arial, sans-serif;	
+    font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 2.0em;
     background: #F8F8F8;
@@ -230,7 +230,7 @@ font-weight: bold;
 .responsive-list-item {
 }
 
-.embed-key, .shared-key-url {
+.embedding-code, .shared-key-url {
   width: 98%;
 }
 
@@ -261,7 +261,7 @@ font-weight: bold;
 }
 
 .shared-link-notice, .shared_key_list_item {
-    padding-bottom: 10px;		    
+    padding-bottom: 10px;
 }
 
 .shared-link-notice .notice-icon, .shared-key-label .notice-icon {
@@ -313,7 +313,7 @@ height:106px;
 
 #about-box .user_avatar {
   background: url(../../images/user-128.png) center center no-repeat;
-  background-position: center; 
+  background-position: center;
   width: 128px;
   height: 128px;
   margin-top: 10px;
@@ -348,21 +348,21 @@ margin-left: 10px;
   margin-left: 20px;
   margin-top: 20px;
   margin-bottom: 10px;
-  padding:10px;  
+  padding:10px;
   text-align:center;
   width:180px;
   -moz-border-radius:10px;
   -webkit-border-radius:10px;
   -webkit-box-shadow: 0px 0 3px rgba(0,0,0,0.25);
   -moz-box-shadow: 0px 0 3px rgba(0,0,0,0.25);
-  box-shadow: 0px 0 3px rgba(0,0,0,0.25); 
+  box-shadow: 0px 0 3px rgba(0,0,0,0.25);
   width: 85%;
 }
 
 .bubble:after {
   position: absolute;
   display: block;
-  content: "";  
+  content: "";
   border-color: transparent transparent  #eee transparent;
   border-style: solid;
   border-width: 10px;
@@ -393,8 +393,8 @@ padding-left: 10px;
 }
 
 
-#about-box .exhibit-created-by, 
-#about-box .exhibit-created-on, 
+#about-box .exhibit-created-by,
+#about-box .exhibit-created-on,
 #about-box .exhibit-last-modified {
  padding-bottom: 3px;
 }
@@ -455,7 +455,7 @@ padding: 10px 10px 10px 10px;
 
 .private .private-icon {
 /*
-   background: url(../../images/lock.png) 0% 50% no-repeat; 
+   background: url(../../images/lock.png) 0% 50% no-repeat;
    width: 16px;
    height: 16px;
    padding:15px 0px 10px 25px;
@@ -466,7 +466,7 @@ padding: 10px 10px 10px 10px;
 
 .public .public-icon {
 /*
-   background: url(../../images/unlock.png) 0% 50% no-repeat; 
+   background: url(../../images/unlock.png) 0% 50% no-repeat;
    width: 16px;
    height: 16px;
    padding: 15px 0px 10px 25px;
@@ -558,7 +558,7 @@ ul.responses li.thread-8 {
 }
 
 .widget-well .widget-header h2 {
-    font-family: 'Ubuntu', Helvetica, Arial, sans-serif;	
+    font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 1.2em;
     color: slategrey;
@@ -830,7 +830,7 @@ filter: alpha(opacity=50);
 .add-property-name {
   position: absolute;
   top: 10px;
-  left: 0px;	  
+  left: 0px;
   font-weight: bold;
   font-size: 110%;
 }

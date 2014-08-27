@@ -7,18 +7,13 @@
 
 
     function setupEmbed() {
-        if ($("#embed").length) {
-            $('#embed-info-close').click(function() {
-                $('#embed-info').slideUp();
-            });
-            $('.exhibit_embed').click(function(e) {
-                e.preventDefault();
-                $('#embed-info').slideDown();
-                $('#embedding-code').get(0).focus();
-                $('#embedding-code').highlight();
-                return false;
-            });
-        }
+
+        $(".embedding-code").click(function(e) {
+            "use strict";
+            e.preventDefault();
+            $(this).select();
+            return false;
+        });
     }
 
     function setup() {

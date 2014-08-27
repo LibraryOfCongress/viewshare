@@ -26,25 +26,18 @@
     {{ block.super }}
     {% require_module 'exhibit-display-main' %}
 
-    {% compress js %}
-        <script type="text/javascript"
-                src="{{ STATIC_URL }}freemix/js/lib/jquery.highlight.js"></script>
-        <script type="text/javascript"
-                src="{{ STATIC_URL }}freemix/js/detail.js"></script>
+    <script type="text/javascript"
+            src="{{ STATIC_URL }}freemix/js/detail.js"></script>
 
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('#accordion-exhibit').on('shown', function () {
-                    $(".icon-chevron-down").removeClass("icon-chevron-down").addClass("icon-chevron-up");
-                });
-
-                $('#accordion-exhibit').on('hidden', function () {
-                    $(".icon-chevron-up").removeClass("icon-chevron-up").addClass("icon-chevron-down");
-                });
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#accordion-exhibit').on('shown', function () {
+                $(".icon-chevron-down").removeClass("icon-chevron-down").addClass("icon-chevron-up");
+            }).on('hidden', function () {
+                $(".icon-chevron-up").removeClass("icon-chevron-up").addClass("icon-chevron-down");
             });
-        </script>
-
-    {% endcompress %}
+        });
+    </script>
 
     {% if can_share %}
         {% compress js %}
@@ -99,23 +92,29 @@
 
                         <div class="span7">
 
-			  <div class="exhibit-acls">
+                          <div class="exhibit-acls">
                             {% if exhibit.is_public %}
-			    <span class="public"><span class="public-icon"><i class="fa fa-unlock-alt fa-lg"></i></span><span class="view-label">{% trans "This view is public" %}</span></span>
+                            <span class="public">
+                              <span class="public-icon"><i class="fa fa-unlock-alt fa-lg"></i></span>
+                              <span class="view-label">{% trans "This view is public" %}</span>
+                            </span>
                             {% else %}
-			    <span class="private"><span class="private-icon"><i class="fa fa-lock fa-lg"></i></span><span class="view-label">{% trans "This view is private" %}</span></span>
+                            <span class="private">
+                              <span class="private-icon"><i class="fa fa-lock fa-lg"></i></span>
+                              <span class="view-label">{% trans "This view is private" %}</span>
+                            </span>
                             {% endif %}
 
-			    <span class="exhibit-metadata">
+                            <span class="exhibit-metadata">
                               {% trans "and was created" %}
                               <span class="exhibit-modified-data">{{ exhibit.modified|naturalday}}</span>
                               {% trans "by" %}
                               <span class="exhibit-creator">
-				<a href="{% url 'profile_detail' exhibit.owner.username %}">{{ exhibit.owner.username }}</a>
+                                <a href="{% url 'profile_detail' exhibit.owner.username %}">{{ exhibit.owner.username }}</a>
                               </span>
                             </span>
 
-			  </div>
+                          </div>
                         </div>
 
                         <div class="span5">
@@ -128,24 +127,20 @@
                                  href="{% url 'exhibit_detail' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Inspect" %}</a>
                               {% endif %}
 
-			      {% if exhibit.is_private %}
-                              {% if can_share %}
-                              <a class="exhibit_share btn btn-small"
-                                 href="#exhibit-share-form"
-                                 rel="{% url 'shared_key_create_form' owner=exhibit.owner.username slug=exhibit.slug %}"
-                                 data-target="#exhibit-share-form"
-                                 role="button"
-                                 id="exhibit-share-button"
-                                 data-toggle="modal">{% trans "Share" %}</a>
+                              {% if exhibit.is_private and can_share %}
+                                <a class="exhibit_share btn btn-small"
+                                   href="#exhibit-share-form"
+                                   rel="{% url 'shared_key_create_form' owner=exhibit.owner.username slug=exhibit.slug %}"
+                                   data-target="#exhibit-share-form"
+                                   role="button"
+                                   id="exhibit-share-button"
+                                   data-toggle="modal">{% trans "Share" %}</a>
                               {% endif %}
-			      {% endif %}
 
-			      {% if exhibit.is_public %}
-                              {% if can_embed %}
-                              <a class="exhibit_embed btn btn-small"
-                                 href="#embedModal" role="button"
-                                 data-toggle="modal">{% trans "Embed" %}</a>
-			      {% endif %}
+                              {% if exhibit.is_public and can_embed %}
+                                <a class="exhibit_embed btn btn-small"
+                                  href="#embedModal" role="button"
+                                  data-toggle="modal">{% trans "Embed" %}</a>
                               {% endif %}
 
                               {% if can_edit %}
@@ -210,9 +205,10 @@
                 <div class="embed-desc">{% blocktrans %}Copy the following and
                     paste it into your page where you'd like your data view to
                     be placed.{% endblocktrans %}</div>
-                <input type="text" id="embedding-code"
+                <input type="text" class="embedding-code"
                        value="&lt;script id='freemix-embed' src='{{ exhibit_embed_url }}' type='text/javascript'&gt;&lt;/script&gt;"
                        readonly="readonly"/>
+
             </div>
 
             <div class="modal-footer">

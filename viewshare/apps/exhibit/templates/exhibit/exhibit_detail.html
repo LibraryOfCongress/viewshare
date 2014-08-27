@@ -44,8 +44,6 @@
                 {% include "exhibit/detail/exhibit_metadata.html" %}
             </div>
 
-            {% include "exhibit/embed/alert.html" %}
-
         </div>
         <!-- end span4 -->
 
@@ -99,7 +97,8 @@
 
                       <input type="text"
                              value="&lt;script id='freemix-embed' src='{{ exhibit_embed_url }}' type='text/javascript'&gt;&lt;/script&gt;"
-                             class="embed-key" readonly="readonly"/>
+                             class="embedding-code" readonly="readonly"/>
+
                     </li>
                   </ul>
                 </div>
