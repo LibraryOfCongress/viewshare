@@ -7,7 +7,7 @@ define(["jquery",
         "use strict"
     View.prototype.icon_class = "fa fa-list fa-3x";
     View.prototype.label = "List";
-    View.prototype.viewClass = TileView;
+    View.prototype.exhibitClass = TileView;
     View.prototype.template = Handlebars.compile(template_html);
 
     View.prototype.setupEditor = function(config, template) {

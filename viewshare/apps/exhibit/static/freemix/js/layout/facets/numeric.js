@@ -5,8 +5,8 @@ define(["jquery", "handlebars", "display/facets/numeric", "exhibit",
         function ($, Handlebars, Facet, Exhibit, RangeIndex, DateTime, template_html) {
         "use strict"
 
-    Facet.prototype.facetClass = Exhibit.NumericRangeFacet;
-    Facet.prototype.propertyTypes = ["number", "currency"];
+    Facet.prototype.exhibitClass = Exhibit.NumericRangeFacet;
+    Facet.prototype.propertyTypes = ["number", "currency", "datetime"];
     Facet.prototype.icon_class = "fa fa-tasks fa-3x";
 
     Facet.prototype.label = "Range";
@@ -23,39 +23,43 @@ define(["jquery", "handlebars", "display/facets/numeric", "exhibit",
             var slider = template.find("#range_interval_slider");
             var input = template.find("#range_interval");
             var database = Freemix.getBuilderExhibit().getUIContext().getDatabase();
-            var path = Exhibit.ExpressionParser.parse(config.expression).getPath();
+            if (config.expression) {
+                var path = Exhibit.ExpressionParser.parse(config.expression).getPath();
 
-            var propertyID = path.getLastSegment().property;
-            var property = database.getProperty(propertyID);
-            if (!property._builderRangeIndex) {
-                property._builderRangeIndex = new RangeIndex(
-                    database.getAllItems(),
-                    function(item, f) {
-                        database.getObjects(item, property.getID(), null, null).visit(function(value) {
-                            if (property.getValueType() === "date") {
-                                if (typeof value !== "undefined" && value !== null && !(value instanceof Date)) {
-                                    value = DateTime.parseIso8601DateTime(value);
+                var propertyID = path.getLastSegment().property;
+                var property = database.getProperty(propertyID);
+                if (!property._builderRangeIndex) {
+                    property._builderRangeIndex = new RangeIndex(
+                        database.getAllItems(),
+                        function (item, f) {
+                            database.getObjects(item, property.getID(), null, null).visit(function (value) {
+                                if (property.getValueType() === "date") {
+                                    if (typeof value !== "undefined" && value !== null && !(value instanceof Date)) {
+                                        value = DateTime.parseIso8601DateTime(value);
+                                    }
+                                } else if (typeof value !== "number") {
+                                    value = parseFloat(value);
                                 }
-                            } else if (typeof value !== "number") {
-                                value = parseFloat(value);
-                            }
-                            if (value instanceof Date) {
-                                f(value.getTime());
-                            } else if (!isNaN(value)) {
-                                f(value);
-                            }
-                        });
-                    }
-                )
-            }
-            var rangeIndex = property._builderRangeIndex;
-            var delta = rangeIndex.getMax() - rangeIndex.getMin();
+                                if (value instanceof Date) {
+                                    f(value.getTime());
+                                } else if (!isNaN(value)) {
+                                    f(value);
+                                }
+                            });
+                        }
+                    )
+                }
+                var rangeIndex = property._builderRangeIndex;
+                var delta = rangeIndex.getMax() - rangeIndex.getMin();
 
 
-            var max = roundPow10(Math.ceil(delta / 2));
-            var min = Math.max(Math.ceil(delta / 100), 1);
-            if (min > 100) {
-                min = Math.floor(min / 100) * 100;
+                var max = roundPow10(Math.ceil(delta / 2));
+                var min = Math.max(Math.ceil(delta / 100), 1);
+                if (min > 100) {
+                    min = Math.floor(min / 100) * 100;
+                }
+            } else {
+                min = max = NaN;
             }
 
             var base = roundPow10(min);
@@ -89,7 +93,7 @@ define(["jquery", "handlebars", "display/facets/numeric", "exhibit",
         }
 
         var select = template.find("#facet_property");
-        this._setupPropertySelect(config, template, select, "expression", this.propertyTypes);
+        this._setupPropertySelect(config, template, select, "expression", this.propertyTypes, false, true);
         select.off('change').change(function () {
             config.expression = $(this).val();
             updateSlider();
@@ -109,8 +113,7 @@ define(["jquery", "handlebars", "display/facets/numeric", "exhibit",
 
         interval.val(config.interval);
         interval.change(function (event) {
-            var interval = parseInt($(event.target).val());
-            config.interval =interval;
+            config.interval = parseInt($(event.target).val());
 
             slider.slider("value", config.interval);
             facet.triggerChange(config, template);
@@ -129,6 +132,16 @@ define(["jquery", "handlebars", "display/facets/numeric", "exhibit",
         select.change();
 
 
+    };
+
+    Facet.prototype.validate = function(config) {
+        this.errors = [];
+        if (!config.expression) {
+            this.errors.push("This widget requires a property with a type of 'number'");
+        } else if (isNaN(config.interval)) {
+            this.errors.push("Unable to extract a range interval for this property")
+        }
+        return this.errors == 0;
     };
 
     return Facet;

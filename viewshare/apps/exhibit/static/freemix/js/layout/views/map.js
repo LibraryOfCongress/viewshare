@@ -48,7 +48,7 @@ define(["jquery",
 
     View.prototype.icon_class = "fa fa-globe fa-3x";
 
-    View.prototype.viewClass = OLMapView;
+    View.prototype.exhibitClass = OLMapView;
 
     View.prototype.template = Handlebars.compile(template_html);
 

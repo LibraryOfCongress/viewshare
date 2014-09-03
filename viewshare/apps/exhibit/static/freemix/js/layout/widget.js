@@ -1,18 +1,25 @@
-define(["jquery",
+define(["handlebars",
+        "jquery",
         "freemix/js/widget",
         "freemix/js/freemix",
         "multiselect",
+        "text!templates/layout/widget-errors.html",
         "freemix/js/exhibit_utilities",
         "layout/patch_exhibit"],
-function ($, Widget, Freemix, Multiselect) {
+function (Handlebars, $, Widget, Freemix, Multiselect, widget_errors) {
     "use strict";
+
+    var error_template = Handlebars.compile(widget_errors);
 
     function make_option(property_name) {
         return Freemix.exhibit.database.getProperty(property_name);
     }
 
+    Widget.prototype.exhibitClass = null;
+    Widget.prototype.errors = null;
+
     Widget.prototype._setupPropertySelect = function(config, template, selector, key, types, nullable, exclude_other_types) {
-        this._populatePropertySelect(selector, types, nullable);
+        this._populatePropertySelect(selector, types, nullable, exclude_other_types);
         this._setupSelectPropertyHandler(config, template, selector, key);
     };
 
@@ -28,7 +35,7 @@ function ($, Widget, Freemix, Multiselect) {
 
         var result = {
             order: []
-        }
+        };
         if ((types ||[]).length == 0) {
             types = this.propertyTypes;
         }
@@ -44,7 +51,6 @@ function ($, Widget, Freemix, Multiselect) {
                 result["order"].push(type);
             }
         }
-
         var filtered = database.getPropertyObjects(database.getFilteredProperties(filter));
         filtered.sort(sorter);
         result["others"] = filtered;
@@ -53,7 +59,7 @@ function ($, Widget, Freemix, Multiselect) {
 
     Widget.prototype._propertyRenderer = function(prop) {
         return prop.getID();
-    }
+    };
 
     Widget.prototype._buildOptionGroup = function(label, properties) {
         var optgroup = $("<optgroup>");
@@ -66,16 +72,16 @@ function ($, Widget, Freemix, Multiselect) {
             optgroup.append(option);
         }
         return optgroup;
-    }
+    };
 
-    Widget.prototype._populatePropertySelect = function(selector, types, nullable) {
+    Widget.prototype._populatePropertySelect = function(selector, types, nullable, exclude_others) {
         var properties = this._generatePropertyList(types);
         for (var inx = 0 ; inx < properties.order.length ; inx++) {
             var type = properties.order[inx];
             selector.append(this._buildOptionGroup(type + " properties", properties[type]));
         }
 
-        if (properties.others.length > 0) {
+        if (!exclude_others && properties.others.length > 0) {
             selector.append(this._buildOptionGroup("other properties", properties.others));
         }
         if (nullable) {
@@ -108,7 +114,7 @@ function ($, Widget, Freemix, Multiselect) {
         var value = config[key] || [];
         var selected = [];
         var deselected = [];
-        var inx, default_all;
+        var inx;
 
         if (value.length > 0) {
             default_all = false;
@@ -162,19 +168,54 @@ function ($, Widget, Freemix, Multiselect) {
         this.findWidget().remove();
     };
 
-    Widget.prototype.triggerChange = function(config, template) {
-        if (this.isValid(config)) {
-            template.find("#widget_save_button").removeAttr("disabled").removeClass("disabled");
 
-        } else {
-            template.find("#widget_save_button").attr("disabled", "disabled").addClass("disabled");
+    Widget.prototype.updatePreview = function(target, config) {
+        config = config || this.config;
+        this.resetPreview(target);
+
+        this.validate(config);
+
+        if (this.errors.length == 0) {
+            this.renderPreview(target, config);
         }
-        template.trigger(this.refreshEvent);
-    }
 
-    Widget.prototype.isValid = function() {
-        return true;
-    }
+        if (this.errors.length > 0) {
+            target.empty().append(error_template(this));
+        }
+    };
+
+    Widget.prototype.renderPreview = function(target, config) {
+        var preview = this.generateExhibitHTML(config);
+        target.append(preview);
+        var exhibit = Freemix.getBuilderExhibit();
+
+        try {
+            target.data("preview", this.exhibitClass.createFromDOM(preview.get(0), null, exhibit.getUIContext()));
+        } catch(ex) {
+            this.errors.push("Invalid Configuration");
+        }
+    };
+
+
+    Widget.prototype.resetPreview = function(target) {
+        var preview = target.data("preview");
+        if (preview) {
+            preview.dispose();
+            target.data("preview", null);
+        }
+        target.empty();
+    };
+
+
+    Widget.prototype.triggerChange = function(config, template) {
+        template.trigger(this.refreshEvent);
+    };
+
+    Widget.prototype.validate = function(config) {
+        this.errors = [];
+
+        return this.errors.length == 0;
+    };
 
     Widget.prototype.propertyTypes = ["text", "image", "currency", "url", "location", "date", "number"];
 

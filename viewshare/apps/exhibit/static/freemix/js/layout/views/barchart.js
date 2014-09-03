@@ -9,7 +9,7 @@ define(["jquery",
     View.prototype.label = "Bar Chart";
     View.prototype.icon_class = "fa fa-bar-chart-o fa-3x";
 
-    View.prototype.viewClass = BarChartView;
+    View.prototype.exhibitClass = BarChartView;
     View.prototype.template = Handlebars.compile(template_html);
 
     // Display the view's UI.

@@ -14,7 +14,7 @@ define(["jquery",
     BaseFacet.prototype.refreshEvent = "refresh-preview.facet";
 
 
-    BaseFacet.prototype.facetClass = Exhibit.ListFacet;
+    BaseFacet.prototype.exhibitClass = Exhibit.ListFacet;
 
     BaseFacet.prototype.findContainer = function() {
         return this.findWidget().parents(".facet-container").data("model");
@@ -59,34 +59,9 @@ define(["jquery",
     BaseFacet.prototype.refresh = function() {
         this.findWidget().find(".facet-content").empty().append(this.generateExhibitHTML());
         var exhibit = Freemix.getBuilderExhibit();
-        this.facetClass.createFromDOM(this.findWidget().find(".facet-content div").get(0), null, exhibit.getUIContext());
+        this.exhibitClass.createFromDOM(this.findWidget().find(".facet-content div").get(0), null, exhibit.getUIContext());
     };
 
-    BaseFacet.prototype.updatePreview = function(target, config) {
-
-        config = config || this.config;
-        this.resetPreview(target);
-        var preview = this.generateExhibitHTML(config);
-        target.append(preview);
-        var exhibit = Freemix.getBuilderExhibit();
-
-        try {
-            target.data("preview", this.facetClass.createFromDOM(preview.get(0), null, exhibit.getUIContext()));
-        } catch(ex) {
-            target.empty();
-            console.log(ex);
-        }
-
-    };
-
-    BaseFacet.prototype.resetPreview = function(target) {
-        var preview = target.data("preview");
-        if (preview) {
-            preview.dispose();
-            target.data("preview", null);
-        }
-        target.empty();
-    };
 
     BaseFacet.prototype.showEditor = function(template){
         var model = this;
@@ -105,13 +80,19 @@ define(["jquery",
         });
         template.bind(this.refreshEvent, function() {
             model.updatePreview(template.find(".widget-preview-body"), config);
+
+            if (model.errors.length == 0) {
+                template.find("#widget_save_button").removeAttr("disabled").removeClass("disabled");
+            } else {
+                template.find("#widget_save_button").attr("disabled", "disabled").addClass("disabled");
+            }
         });
         this.triggerChange(config, template);
     };
 
     BaseFacet.prototype._propertyRenderer = function(prop) {
         return "." + prop.getID();
-    }
+    };
 
     return BaseFacet;
 

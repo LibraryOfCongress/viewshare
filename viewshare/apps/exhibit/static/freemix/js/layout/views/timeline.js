@@ -44,7 +44,7 @@ define(["jquery",
 
     View.prototype.label = "Timeline";
     View.prototype.propertyTypes = ["date"];
-    View.prototype.viewClass = TimelineView;
+    View.prototype.exhibitClass = TimelineView;
     View.prototype.template = Handlebars.compile(template_html);
     View.prototype.icon_class = "fa fa-align-center fa-3x";
 

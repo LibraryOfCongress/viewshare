@@ -9,7 +9,7 @@ define(["jquery",
     View.prototype.label = "Pie Chart";
     View.prototype.icon_class = "fa fa-adjust fa-3x";
 
-    View.prototype.viewClass = PiechartView;
+    View.prototype.exhibitClass = PiechartView;
     View.prototype.template = Handlebars.compile(template_html);
 
     // Display the view's UI.

@@ -18,7 +18,7 @@ define(["jquery", "handlebars", "display/lenses/list",
         this._setupTitlePropertyEditor(config);
         var property_list = this.getEditor().find("#property_list");
         this._setupPropertyMultiSelect(config, this._editor, property_list, "properties", true);
-        property_list.change();
+        this._multiselect.onChange(null, null);
     };
 
     return Lens;

@@ -11,7 +11,7 @@ define(["jquery",
     View.prototype.label = "Scatter Plot";
     View.prototype.icon_class = "fa fa-building-o fa-rotate-90 fa-3x";
 
-    View.prototype.viewClass = ScatterPlotView;
+    View.prototype.exhibitClass = ScatterPlotView;
 
     View.prototype.template = Handlebars.compile(template_html);
 

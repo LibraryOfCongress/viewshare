@@ -7,9 +7,19 @@ define(["jquery",
         "use strict"
 
     View.prototype.label = "Table";
-    View.prototype.viewClass = TabularView;
+    View.prototype.exhibitClass = TabularView;
     View.prototype.template = Handlebars.compile(template_html);
     View.prototype.icon_class = "fa fa-table fa-3x";
+
+    View.prototype.validate = function(config) {
+        this.errors = [];
+
+        if (config.properties.length == 0) {
+            this.errors.push("Please select properties to display");
+        }
+
+        return this.errors == 0;
+    };
 
     View.prototype.setupEditor = function (config, template) {
         var view = this;
@@ -32,9 +42,10 @@ define(["jquery",
         var property_list = template.find("#property_list");
         this._setupPropertyMultiSelect(config, template, property_list, "properties", true);
 
+        this._multiselect.onChange(null, null);
+
         sort.change();
         sort_order.change();
-        property_list.change();
     };
     return View;
 });

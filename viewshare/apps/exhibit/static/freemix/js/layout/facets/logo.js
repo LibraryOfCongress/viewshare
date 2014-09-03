@@ -6,11 +6,14 @@ define(["jquery", "handlebars", "display/facets/logo", "exhibit", "text!template
     Facet.prototype.template = Handlebars.compile(template_html);
     Facet.prototype.icon_class = "fa fa-picture-o fa-3x";
 
+    Facet.prototype.validate = function(config) {
+        this.errors = [];
+        if (!config.src || config.src.length == 0) {
+            this.errors.push("A source URL is required");
+        }
+        return this.errors == 0;
+    };
 
-    Facet.prototype.isValid = function(config) {
-        return (config.src && config.src.length > 0);
-    }
-            
     Facet.prototype.setupEditor = function(config, template) {
 
         function updateSlider() {
@@ -82,7 +85,7 @@ define(["jquery", "handlebars", "display/facets/logo", "exhibit", "text!template
 
     };
 
-    Facet.prototype.updatePreview = function(target, config) {
+    Facet.prototype.renderPreview = function(target, config) {
         var preview = config.src ? this.generateExhibitHTML(config) : "";
         target.empty().append(preview);
     };
