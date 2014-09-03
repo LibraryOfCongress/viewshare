@@ -17,7 +17,40 @@ define([
      * @param {string} options.model - instance of a PropertyModel
      * @param {object} options.$el - container Element object
      * for this view
-     */
+     */;
+
+    var type_templates = {
+        'url': Handlebars.compile('<a href="{{ value }}">{{ value }}</a>'),
+        'image': Handlebars.compile('<img src="{{ value }}" style="height: 50px" />'),
+        'text': Handlebars.compile('{{value}}'),
+        'video': Handlebars.compile('<Video controls="true"><source src="{{value}}"/>Video not supported</Video>'),
+        'audio': Handlebars.compile('<audio controls="true"><source src="{{value}}"/>Audio not supported</audio>')
+    };
+
+    Handlebars.registerHelper('exhibit_value', function(type, value) {
+
+        var template;
+        var result = "<i>No Value</i>";
+
+        if (type in type_templates) {
+            template = type_templates[type];
+        } else {
+            template = type_templates["text"];
+        }
+
+        if (Array.isArray(value) && value.length > 1) {
+            result = "<ul>";
+            for (var inx in value) {
+                result += "<li>" + template({value: value[inx]}) + "</li>";
+            }
+            result += "</ul>";
+        } else if (value !== null && value !== undefined && value !== "") {
+            result = template({value: value});
+        }
+        return result;
+
+    });
+
     var PropertyView = function(options) {
         this.initialize.apply(this, [options]);
     };
@@ -40,16 +73,7 @@ define([
         /** Compile the template we will use to render the View */
         template: Handlebars.compile(propertyTemplate),
 
-        /** Compile the template we will use to render 'url' values */
-        anchorTemplate: Handlebars
-            .compile('<a href="{{ value }}">{{ value }}</a>'),
-
-        /** Compile the template we will use to render 'image' values */
-        imageTemplate: Handlebars
-            .compile('<img src="{{ value }}" style="height: 50px" />'),
-
-        /** Compile the default template for values */
-        textTemplate: Handlebars.compile('{{ value }}'),
+        value_template: Handlebars.compile("{{{exhibit_value type value}}}"),
 
         /** Event handler when a .name input is changed */
         changeLabelHandler: function(event) {
@@ -99,15 +123,9 @@ define([
             var animateDuration = 200;
             var valueType = this.$el.find(':selected').val();
             var valueEl = this.$el.find('.value');
+
             valueEl.fadeOut(animateDuration, function() {
-                // change rendering for this.model.value on certain types
-                if (valueType === 'image') {
-                    valueEl.html(this.imageTemplate({value: this.value()}));
-                } else if (valueType === 'url') {
-                    valueEl.html(this.anchorTemplate({value: this.value()}));
-                } else {
-                    valueEl.html(this.textTemplate({value: this.value()}));
-                }
+                valueEl.html(this.value_template({type: valueType, value: this.value()}));
                 valueEl.fadeIn(animateDuration);
             }.bind(this));
         },
@@ -121,6 +139,7 @@ define([
                 value: this.value(),
                 selectedType: this.selectedType()
             }));
+            this.renderValue();
             // bind to DOM events
             this.$el.find('.name input').on(
                 'input', this.changeLabelHandler.bind(this));
