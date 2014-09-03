@@ -30,7 +30,7 @@ define(["jquery",
             });
     };
 
-    Facet.prototype.updatePreview = function(target, config) {
+    Facet.prototype.renderPreview = function(target, config) {
         config = config || this.config;
         target.empty().creole(config.text);
     };

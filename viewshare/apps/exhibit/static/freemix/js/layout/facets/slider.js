@@ -3,7 +3,7 @@ define(["jquery", "handlebars", "display/facets/slider", "exhibit",
         function ($, Handlebars, Facet, Exhibit, template_html) {
         "use strict"
 
-    Facet.prototype.facetClass = Exhibit.SliderFacet;
+    Facet.prototype.exhibitClass = Exhibit.SliderFacet;
     Facet.prototype.propertyTypes = ["number", "currency"];
 
     Facet.prototype.icon_class = "fa fa-trello fa-3x";
@@ -14,7 +14,7 @@ define(["jquery", "handlebars", "display/facets/slider", "exhibit",
     Facet.prototype.setupEditor = function(config, template) {
         var facet = this;
         var property = template.find("#facet_property");
-        this._setupPropertySelect(config, template, property, "expression", this.propertyTypes);
+        this._setupPropertySelect(config, template, property, "expression", this.propertyTypes, false, true);
         property.change();
 
         var label = template.find("#facet_name");
@@ -23,6 +23,14 @@ define(["jquery", "handlebars", "display/facets/slider", "exhibit",
           config.name = label.val();
           facet.triggerChange(config, template);
         });
+    };
+
+    Facet.prototype.validate = function(config) {
+        this.errors = [];
+        if (!config.expression) {
+            this.errors.push("This widget requires a property with a type of 'number'");
+        }
+        return this.errors.length == 0;
     };
 
     return Facet;

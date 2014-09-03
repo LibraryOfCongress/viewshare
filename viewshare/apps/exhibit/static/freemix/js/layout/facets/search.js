@@ -3,7 +3,7 @@ define(["jquery", "handlebars", "display/facets/search", "exhibit",
         function ($, Handlebars, Facet, Exhibit, template_html) {
         "use strict"
 
-    Facet.prototype.facetClass = Exhibit.TextSearchFacet;
+    Facet.prototype.exhibitClass = Exhibit.TextSearchFacet;
     Facet.prototype.icon_class = "fa fa-search fa-3x";
 
     Facet.prototype.label = "Search";

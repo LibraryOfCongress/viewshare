@@ -7,14 +7,15 @@ define(["jquery",
         "freemix/js/freemix",
         "text!templates/layout/view-widget.html",
         "text!templates/layout/view-menu.html"
-], function($, Exhibit, BaseView, LensRegistry, ViewRegistry, WidgetEditor, Freemix, widget_template, menu_template) {
+], function($, Exhibit, BaseView, LensRegistry, ViewRegistry,
+            WidgetEditor, Freemix, widget_template, menu_template) {
     "use strict"
 
     BaseView.prototype.refreshEvent = "refresh-preview.view";
 
     BaseView.prototype.propertyTypes = ["text", "image", "currency", "url", "location", "date", "number"];
 
-    BaseView.prototype.viewClass = Exhibit.TileView;
+    BaseView.prototype.exhibitClass = Exhibit.TileView;
 
     BaseView.prototype.showEditor = function(template) {
         var model = this;
@@ -35,15 +36,21 @@ define(["jquery",
 
             model.findWidget().find("span.view-label").text(model.config.name);
             model.select();
-           
+
         });
 
         template.bind(this.refreshEvent, function() {
             model.updatePreview(template.find(".widget-preview-body"), config);
+
+            if (model.errors.length == 0) {
+                template.find("#widget_save_button").removeAttr("disabled").removeClass("disabled");
+            } else {
+                template.find("#widget_save_button").attr("disabled", "disabled").addClass("disabled");
+            }
         });
 
         this.triggerChange(config, template);
-        
+
     };
 
     BaseView.prototype.getContainer = function() {
@@ -131,30 +138,6 @@ define(["jquery",
         }
     };
 
-    BaseView.prototype.updatePreview = function(target, config) {
-        config = config || this.config;
-        this.resetPreview(target);
-        var preview = this.generateExhibitHTML(config);
-        target.append(preview);
-        var exhibit = Freemix.getBuilderExhibit();
-
-        try {
-            target.data("preview", this.viewClass.createFromDOM(preview.get(0), null, exhibit.getUIContext()));
-        } catch(ex) {
-            target.empty();
-            console.log(ex);
-        }
-    };
-
-    BaseView.prototype.resetPreview = function(target) {
-        var preview = target.data("preview");
-        if (preview) {
-            preview.dispose();
-            target.data("preview", null);
-        }
-        target.empty();
-    };
-
     BaseView.prototype.display = function() {};
 
     BaseView.prototype.setupEditor = function(config, template) {};
@@ -174,8 +157,6 @@ define(["jquery",
             view.triggerChange(config, template);
         });
     };
-
-
 
     BaseView.prototype._setupMultiPropertySortEditor = function(config, template) {
         var sort = template.find("#sort_property");

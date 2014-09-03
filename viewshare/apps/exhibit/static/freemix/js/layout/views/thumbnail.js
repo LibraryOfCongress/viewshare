@@ -10,7 +10,7 @@ define(["jquery",
     View.prototype.propertyTypes = ["image"];
     View.prototype.icon_class = "fa fa-camera-retro fa-3x";
 
-    View.prototype.viewClass = ThumbnailView;
+    View.prototype.exhibitClass = ThumbnailView;
     View.prototype.template = Handlebars.compile(template_html);
 
     View.prototype._setupTitlePropertyEditor = function(config, template) {

@@ -3,7 +3,7 @@ define(["jquery", "handlebars", "display/facets/tagcloud", "exhibit",
         function ($, Handlebars, Facet, Exhibit, template_html) {
         "use strict"
 
-    Facet.prototype.facetClass = Exhibit.CloudFacet;
+    Facet.prototype.exhibitClass = Exhibit.CloudFacet;
     Facet.prototype.propertyTypes = ["date", "number", "text", "currency"];
 
     Facet.prototype.icon_class = "fa fa-tags fa-3x";

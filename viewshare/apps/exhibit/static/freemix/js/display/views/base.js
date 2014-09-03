@@ -1,9 +1,8 @@
 define(["jquery",
         "freemix/js/widget",
         "display/lenses/registry",
-        "freemix/js/freemix",
         "freemix/js/exhibit_utilities"],
-    function ($, Widget, LensRegistry, Freemix) {
+    function ($, Widget, LensRegistry) {
     "use strict";
 
     var expression = function(property){return "." + property;};
