@@ -11,14 +11,11 @@ define(["jquery",
         "layout/cancel_button",
         "layout/edit_button",
         "layout/modallinks",
-        "text!templates/layout/add-view-button.html",
-        "text!templates/layout/add-view-modal.html",
+        "text!templates/layout/view-container.html",
         "text!templates/layout/add-facet-button.html",
         "text!templates/layout/add-facet-modal.html",
         "freemix/js/freemix",
-
         "freemix/js/exhibit_utilities",
-        "jquery-ui",
         "bootstrap"],
     function($,
              Exhibit,
@@ -34,15 +31,13 @@ define(["jquery",
 
              setup_edit_button,
              ModalLinksView,
-             add_view_button_template,
-             add_view_modal_template,
+             view_container_template,
              add_facet_button_template,
              add_facet_modal_template,
              Freemix) {
     "use strict";
 
-    var add_view_button = Handlebars.compile(add_view_button_template);
-    var add_view_modal = Handlebars.compile(add_view_modal_template);
+    var view_container = Handlebars.compile(view_container_template);
     var add_facet_button = Handlebars.compile(add_facet_button_template);
     var add_facet_modal = Handlebars.compile(add_facet_modal_template);
 
@@ -82,25 +77,19 @@ define(["jquery",
             var id = $(this).attr("id");
             var viewContainer = new ViewContainer(id);
             var model = $(this).data("model", viewContainer);
-            model.append("<ul class='view-set nav nav-tabs'></ul>");
-            model.append("<div class='view-content'></div>");
-            model.addClass("view-container");
+            model.append(view_container());
 
             var set = model.find(".view-set");
             set.sortable({
-                    // axis: "x",
-                    tolerance: "pointer",
-                    distance: 10,
-                    connectWith: ".view-container>ul",
-                    cancel: "li.create-view, .bt-wrapper",
-                    items: "li:not(.create-view)",
-                    receive: function(event, ui) {
-                        $(ui.item).data("model")._container = undefined;
-                    }
-                });
-            set.append(add_view_button());
+                group: 'views',
+                tolerance: 0,
+                distance: 10,
+                vertical: false,
+                nested: false
+            });
 
-            var dialog =$(add_view_modal()).appendTo('body');
+            var dialog = model.find(".build-view-modal");
+            dialog.appendTo("body");
 
             dialog.modal({
                 show:false
@@ -108,8 +97,7 @@ define(["jquery",
 
             viewContainer._dialog = dialog;
 
-
-            set.find(".create-view-button").click(function() {
+            model.find("button.create-view-button").click(function() {
                 dialog.empty();
                 dialog.append(viewContainer.getPopupContent());
             });

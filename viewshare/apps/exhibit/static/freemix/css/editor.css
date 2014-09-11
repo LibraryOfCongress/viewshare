@@ -68,14 +68,53 @@ font-size: 90%;
 }
 
 .view-set .view {
-    cursor: move;
+    cursor: move !important;
     background: #F8F8F8;
-    opacity: 80%;
+    /*opacity: 0.8;*/
+}
+
+.view-set .view a {
+    cursor: move !important;
+    /*background: #F8F8F8;*/
+    /*opacity: 0.8;*/
+}
+
+.view-set li.placeholder {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+.view-set li.placeholder:before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 5px solid transparent;
+    border-top-color: black;
+    top: -6px;
+    margin-left: -5px;
+    border-bottom: none;
 }
 
 .view-set .view .label {
-background: none;
-color: black;
+  background: none;
+  color: black;
+}
+
+.view-header {
+    display: inline;
+}
+
+body.dragging, body.dragging * {
+  cursor: move !important;
+}
+
+.dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
 }
 
 #add-facet-table {
@@ -126,7 +165,7 @@ color: black;
 .facet-container-horizontal .exhibit-facet,
 .facet-container-horizontal .exhibit-cloudFacet,
 .facet-container-horizontal .facet {
-    display: inline-table;    
+    display: inline-table;
     vertical-align: top;
 }
 
@@ -261,7 +300,7 @@ margin-left: 10px;
 
 /* view variables and preview */
 
-.view-variables .control-group { 
+.view-variables .control-group {
 }
 
 .view-preview .view-preview-pane {
@@ -307,7 +346,7 @@ div.exhibit-toolboxWidget-popup {
 /* dataset table */
 
 .property-list-table {
-    margin-top: 10px; 
+    margin-top: 10px;
     width: 99%;
 }
 
@@ -478,7 +517,7 @@ a.identify-type-selector:hover {
     text-decoration: underline;
 }
 
-/** 
+/**
  * fairly certain these get overridden by the theme
 .freemix-themeable .ui-multiselect .ui-state-default { border: none; position: relative; padding-left: 20px; border-bottom: 1px solid #ccc;}
 .freemix-themeable .ui-multiselect .ui-state-hover { border: none; border-bottom: 1px solid #ccc; }
@@ -637,9 +676,9 @@ ul.field_options li span.field_type_text {
 	margin: 0 auto;
 	clear: both;
 	width: 100%;
-	
+
 	/* Note Firefox 3.5 and before have a bug with border-collapse
-	 * ( https://bugzilla.mozilla.org/show%5Fbug.cgi?id=155955 ) 
+	 * ( https://bugzilla.mozilla.org/show%5Fbug.cgi?id=155955 )
 	 * border-spacing: 0; is one possible option. Conditional-css.com is
 	 * useful for this kind of thing
 	 *
@@ -647,7 +686,7 @@ ul.field_options li span.field_type_text {
 	 * It subtracts one px relative to the other browsers from the first column, and
 	 * adds one to the end...
 	 *
-	 * If you want that effect I'd suggest setting a border-top/left on th/td's and 
+	 * If you want that effect I'd suggest setting a border-top/left on th/td's and
 	 * then filling in the gaps with other borders.
 	 */
 }
@@ -756,8 +795,12 @@ ul.view-set li.view .icon-remove {
  cursor:no-drop;
 }
 
+.create-view-button-pane {
+  border-bottom: 1px solid #ddd;
+}
+
 .widget-preview .edit-body {
-padding: 15px 10px 0px 0px;
+  padding: 15px 10px 0px 0px;
 }
 
 .facet-edit {
@@ -902,11 +945,11 @@ div.simileAjax-bubble-container {
     min-height: 660px !important;
     top: 10%;
     left: 50%;
-  
+
  }
 
 .widget-editor-modal .modal-body {
-    height: 100% !important; 
+    height: 100% !important;
     min-height: 100% !important;
     max-height: 100% !important;
     width: 99% !important;
@@ -924,11 +967,11 @@ div.simileAjax-bubble-container {
     top: 1% !important;
     bottom: 1% !important;
     left: 1% !important;
-    position: absolute; 
+    position: absolute;
 }
 
 .full-screen-modal .modal-body {
-    height: 100% !important; 
+    height: 100% !important;
     min-height: 100% !important;
     max-height: 100% !important;
     width: 99% !important;
@@ -984,7 +1027,7 @@ div.simileAjax-bubble-container {
 .widget-edit-dialog .widget-edit-nav {
      max-width: 120px;
      float:left;
-}		    
+}
 
 /* layout view modal / full-screen modal settings */
 
@@ -992,21 +1035,21 @@ div.simileAjax-bubble-container {
      width: 480px !important;
      float: left;
      overflow: hidden;
-}		    
+}
 
 .full-screen-modal .widget-edit-dialog .widget-edit-preview {
   padding-left: 650px !important;
-}		    
+}
 
 .full-screen-modal .widget-preview-body {
-  height: 600px !important; 
-  max-height: 600px !important; 
+  height: 600px !important;
+  max-height: 600px !important;
   overflow: auto;
 }
 
 .full-screen-modal .widget-edit-settings-body {
-  height: 650px !important; 
-  max-height: 650px !important; 
+  height: 650px !important;
+  max-height: 650px !important;
   overflow: auto;
 }
 
@@ -1066,21 +1109,21 @@ div.simileAjax-bubble-container {
 .widget-editor-modal .widget-edit-dialog .widget-edit-settings-body {
      width: 320px !important;
      float: left;
-}		    
+}
 
 .widget-editor-modal .widget-edit-dialog .widget-edit-preview {
   padding-left: 480px !important;
-}		    
+}
 
 .widget-editor-modal .widget-preview-body {
-  height: 490px !important; 
-  max-height: 490px !important; 
+  height: 490px !important;
+  max-height: 490px !important;
   overflow: auto;
 }
 
 .widget-editor-modal .widget-edit-settings-body {
-  height: 540px !important; 
-  max-height: 540px !important; 
+  height: 540px !important;
+  max-height: 540px !important;
   overflow: auto;
 }
 

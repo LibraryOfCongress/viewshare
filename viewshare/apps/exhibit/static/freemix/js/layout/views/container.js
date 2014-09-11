@@ -34,7 +34,8 @@ define(["jquery",
     };
 
     Container.prototype.addView = function(view) {
-        $('.view-set li.create-view', this.findWidget()).before(view.findWidget());
+//        $('.view-set li.create-view', this.findWidget()).before(view.findWidget());
+        $('.view-set', this.findWidget()).append(view.findWidget());
     };
 
     Container.prototype.getSelected = function() {
