@@ -45,7 +45,6 @@ requirejs.config({
         "simile-ajax": "simile/exhibit/ext/ajax/api/simile-ajax-bundle",
         "jquery": "freemix/js/lib/jquery",
         "openlayers": "simile/exhibit/extensions/openlayers/lib/OpenLayers",
-        "jquery-ui": "freemix/js/lib/jquery-ui",
         "multiselect": "freemix/js/lib/multiselect",
         "bootstrap": "freemix/js/lib/bootstrap",
         "jquery.cookie": "freemix/js/lib/jquery.cookie",
@@ -75,9 +74,6 @@ requirejs.config({
         },
         "jquery": {
             "exports": "jQuery"
-        },
-        "jquery-ui": {
-            "deps": ["jquery"]
         },
         "multiselect": {
             "deps": ["jquery", "bootstrap"]
@@ -132,14 +128,14 @@ require(["jquery",
         "layout/editor",
         "layout/patch_exhibit",
         "freemix/js/patch_exhibit",
-     
+
         "layout/widget",
         "layout/facets/container",
         "layout/views/container",
         "layout/facets/base",
         "layout/views/base",
         "layout/lenses/base",
-     
+
         "layout/lenses/list",
         "layout/lenses/thumbnail",
         "layout/views/list",
@@ -150,7 +146,7 @@ require(["jquery",
         "layout/views/table",
         "layout/views/timeline",
         "layout/views/thumbnail",
-     
+
         "layout/facets/search",
         "layout/facets/list",
         "layout/facets/tagcloud",
