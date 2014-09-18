@@ -11,16 +11,16 @@ define(["jquery",
              Freemix) {
     "use strict";
 
-    var facet_container = Handlebars.compile(facet_container_template);
-
     var Container = function(options) {
         this.id = options.id;
         this.element = options.element;
 
     };
 
+    Container.prototype.template = Handlebars.compile(facet_container_template);
+
     Container.prototype.render = function() {
-        this.element.append(facet_container({id: this.id}));
+        this.element.append(this.template({id: this.id}));
 
         this.element.data("model", this);
         this.element.sortable({
