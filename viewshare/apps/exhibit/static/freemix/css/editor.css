@@ -223,7 +223,7 @@ border-bottom: 1px solid #eeeee;
     opacity: 1;
 }
 
-.freemix-themeable .facet-content.ui-widget-content {
+.freemix-themeable .facet-content {
     border-top: 0;
 }
 
@@ -272,22 +272,19 @@ margin-left: 10px;
 }
 
 
-.facet-container {
+#build .facet-container {
     min-height: 2.5em;
     list-style-type: none;
     position: relative;
+    border: 1px solid #eee;
+
 }
 
-.facet-container .create-facet {
+#build .facet-container .create-facet {
     padding-bottom: 8px;
     text-align: center;
    -moz-border-radius:3px;
    -webkit-border-radius:3px;
-}
-
-/* override jquery ui to make this more inline w/ rest of style */
-.ui-widget-content {
-    border: 1px solid #eee;
 }
 
 .rename-component-buttons {

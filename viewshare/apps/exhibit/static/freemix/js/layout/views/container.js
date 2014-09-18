@@ -46,7 +46,7 @@ define(["jquery",
         return this._dialog;
     };
 
-    Container.prototype.getPopupContent = function() {
+    Container.prototype.setupEditor = function() {
         var container = this;
         this._dialog.empty();
         var editor = new WidgetEditor({

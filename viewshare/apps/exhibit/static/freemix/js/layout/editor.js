@@ -12,8 +12,6 @@ define(["jquery",
         "layout/edit_button",
         "layout/modallinks",
         "text!templates/layout/view-container.html",
-        "text!templates/layout/add-facet-button.html",
-        "text!templates/layout/add-facet-modal.html",
         "freemix/js/freemix",
         "freemix/js/exhibit_utilities",
         "bootstrap"],
@@ -32,54 +30,21 @@ define(["jquery",
              setup_edit_button,
              ModalLinksView,
              view_container_template,
-             add_facet_button_template,
-             add_facet_modal_template,
              Freemix) {
     "use strict";
 
     var view_container = Handlebars.compile(view_container_template);
-    var add_facet_button = Handlebars.compile(add_facet_button_template);
-    var add_facet_modal = Handlebars.compile(add_facet_modal_template);
-
-    $.fn.facetContainer = function(properties) {
-        return this.each(function() {
-            var id = $(this).attr("id");
-            var facetContainer = new FacetContainer(id);
-
-            var w = facetContainer.findWidget();
-            w.sortable({
-               connectWith: ['#build .facet-container'],
-               distance: 10,
-               handle: '.facet-header',
-               items: '.facet'
-            });
-            w.data("model", facetContainer);
-            w.addClass("ui-widget-content").addClass("facet-container");
-            w.append(add_facet_button({"id": id}));
-
-            var dialog =$(add_facet_modal({id: id})).appendTo('body');
-
-            dialog.modal({
-                show:false
-            });
-
-            facetContainer._dialog = dialog;
-
-            w.find(".create-facet").click(function() {
-                facetContainer.getPopupContent();
-            });
-        });
-    };
 
     $.fn.viewContainer = function(properties) {
         return this.each(function() {
 
             var id = $(this).attr("id");
             var viewContainer = new ViewContainer(id);
-            var model = $(this).data("model", viewContainer);
-            model.append(view_container());
+            var root = $(this);
+            root.data("model", viewContainer);
+            root.append(view_container());
 
-            var set = model.find(".view-set");
+            var set = root.find(".view-set");
             set.sortable({
                 group: 'views',
                 tolerance: 0,
@@ -88,7 +53,7 @@ define(["jquery",
                 nested: false
             });
 
-            var dialog = model.find(".build-view-modal");
+            var dialog = root.find(".build-view-modal");
             dialog.appendTo("body");
 
             dialog.modal({
@@ -97,9 +62,8 @@ define(["jquery",
 
             viewContainer._dialog = dialog;
 
-            model.find("button.create-view-button").click(function() {
-                dialog.empty();
-                dialog.append(viewContainer.getPopupContent());
+            root.find("button.create-view-button").click(function() {
+               viewContainer.setupEditor();
             });
         });
     };
@@ -160,6 +124,7 @@ define(["jquery",
             selected.data("model").select();
         });
     }
+
     function build_db() {
         var profile = Freemix.profile;
 
@@ -178,7 +143,16 @@ define(["jquery",
                 });
             });
 
-            $(".facet-container", Freemix.getBuilder()).facetContainer();
+            $(".facet-container", Freemix.getBuilder()).each(function() {
+                var element = $(this);
+                var id = $(this).attr("id");
+                var facetContainer = new FacetContainer({
+                    id: id,
+                    element: element
+                });
+                facetContainer.render();
+            });
+
             $.each(profile.facets, function(key, facets) {
                 $.each(facets, function() {
                     var facet =  FacetRegistry.construct(this.type, this);
