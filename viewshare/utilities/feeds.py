@@ -4,7 +4,7 @@ from django.utils.feedgenerator import Atom1Feed
 from django.core.urlresolvers import reverse
 
 from viewshare.apps.exhibit.permissions import PermissionsRegistry
-from viewshare.apps.exhibit.models import Exhibit
+from viewshare.apps.exhibit.models import PublishedExhibit
 from viewshare.utilities import get_site_url, get_user
 
 
@@ -24,6 +24,7 @@ class ItemMixin:
     def item_author_link(self, item):
         return item.owner.get_absolute_url()
 
+
 class LatestDataViews(ItemMixin, Feed):
     title = "Latest Data Views"
     description = "Latest Data Views"
@@ -33,7 +34,7 @@ class LatestDataViews(ItemMixin, Feed):
         u = AnonymousUser()
         filter = PermissionsRegistry.get_filter('exhibit.can_view', u)
 
-        return Exhibit.objects.filter(filter).order_by('-created')[:10]
+        return PublishedExhibit.objects.filter(filter).order_by('-created')[:10]
 
 
 class AtomLatestDataViews(LatestDataViews):
@@ -63,7 +64,7 @@ class UserDataViews(ItemMixin, Feed):
         u = AnonymousUser()
         filter = PermissionsRegistry.get_filter('exhibit.can_view', u)
 
-        return Exhibit.objects.filter(owner=obj).filter(filter).order_by('-created')[:10]
+        return PublishedExhibit.objects.filter(owner=obj).filter(filter).order_by('-created')[:10]
 
 
 class AtomUserDataViews(UserDataViews):
