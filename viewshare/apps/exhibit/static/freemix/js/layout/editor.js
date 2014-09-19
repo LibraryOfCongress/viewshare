@@ -11,7 +11,6 @@ define(["jquery",
         "layout/cancel_button",
         "layout/edit_button",
         "layout/modallinks",
-        "text!templates/layout/view-container.html",
         "freemix/js/freemix",
         "freemix/js/exhibit_utilities",
         "bootstrap"],
@@ -26,47 +25,10 @@ define(["jquery",
              generateExhibitHTML,
              setup_save_button,
              setup_cancel_button,
-
              setup_edit_button,
              ModalLinksView,
-             view_container_template,
              Freemix) {
     "use strict";
-
-    var view_container = Handlebars.compile(view_container_template);
-
-    $.fn.viewContainer = function(properties) {
-        return this.each(function() {
-
-            var id = $(this).attr("id");
-            var viewContainer = new ViewContainer(id);
-            var root = $(this);
-            root.data("model", viewContainer);
-            root.append(view_container());
-
-            var set = root.find(".view-set");
-            set.sortable({
-                group: 'views',
-                tolerance: 0,
-                distance: 10,
-                vertical: false,
-                nested: false
-            });
-
-            var dialog = root.find(".build-view-modal");
-            dialog.appendTo("body");
-
-            dialog.modal({
-                show:false
-            });
-
-            viewContainer._dialog = dialog;
-
-            root.find("button.create-view-button").click(function() {
-               viewContainer.setupEditor();
-            });
-        });
-    };
 
     Freemix.getBuilder = function() {
         return $("#build");
@@ -119,7 +81,7 @@ define(["jquery",
             var container = $(this).data("model");
             var selected = container.getSelected();
             if (selected.length == 0) {
-                selected = container.findWidget().find(".view-set>li:first")
+                selected = container.element.find(".view-set>li:first")
             }
             selected.data("model").select();
         });
@@ -132,7 +94,15 @@ define(["jquery",
         Freemix.exhibit.initializeDatabase(data, function() {
             LensRegistry.setDefaultLens(LensRegistry.construct(Freemix.profile.default_lens));
 
-            $(".view-container", Freemix.getBuilder()).viewContainer();
+            $(".view-container", Freemix.getBuilder()).each(function() {
+                var element = $(this);
+                var id = $(this).attr("id");
+                var container = new ViewContainer({
+                    id: id,
+                    element: element
+                });
+                container.render();
+            });
             $.each(profile.views, function(key, views) {
                 $.each(views, function() {
                     var view = ViewRegistry.construct(this.type,this);
@@ -146,11 +116,11 @@ define(["jquery",
             $(".facet-container", Freemix.getBuilder()).each(function() {
                 var element = $(this);
                 var id = $(this).attr("id");
-                var facetContainer = new FacetContainer({
+                var container = new FacetContainer({
                     id: id,
                     element: element
                 });
-                facetContainer.render();
+                container.render();
             });
 
             $.each(profile.facets, function(key, facets) {

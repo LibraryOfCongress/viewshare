@@ -102,21 +102,21 @@ define(["jquery",
             var editor = new WidgetEditor({
                 "title": "Add View",
                 "registry": ViewRegistry,
-                "element": view.findContainer().getDialog(),
+                "element": view.findContainer().dialog,
                 "switchable": false,
                 "model": view
             });
 
-            view.findContainer().getDialog().empty().one("shown", function() {
+            view.findContainer().dialog.empty().one("shown", function() {
                 editor.render();
             });
-            view.findContainer().getDialog().modal("show");
-            view.findContainer().getDialog().one("edit-widget", function() {
-                view.findContainer().getDialog().modal("hide");
+            view.findContainer().dialog.modal("show");
+            view.findContainer().dialog.one("edit-widget", function() {
+                view.findContainer().dialog.modal("hide");
                 view.select();
             });
 
-            view.findContainer().getDialog().off("hidden").one("hidden", function(evt) {
+            view.findContainer().dialog.off("hidden").one("hidden", function(evt) {
                 editor.destroy();
             });
 

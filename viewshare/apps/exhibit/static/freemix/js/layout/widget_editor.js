@@ -14,15 +14,14 @@ function($,
         this.registry = options.registry;
         this.element = options.element;
         this.switchable = true;
-        var widgets = this.widgets = [];
 
-        $.each(this.registry.prototypes, function(key, value) {
-            var proto = value.prototype;
-            widgets.push({
-                "key": key,
+        this.widgets = $.map(options.registry.type_order, function(type) {
+            var proto = options.registry.prototypes[type].prototype;
+            return {
+                "key": type,
                 "icon_class": proto.icon_class,
                 "label": proto.label
-            })
+            };
         });
 
         if (options.model) {
@@ -32,7 +31,7 @@ function($,
 
             var key = this.widgets[0].key;
 
-            this.model = new this.registry.prototypes[key]()
+            this.model = new this.registry.prototypes[key]();
             if (!this.model.config.id) {
                 this.model.config.id = $.make_uuid();
             }
@@ -47,7 +46,7 @@ function($,
         var context = {
             title: this.title,
             widgets: this.widgets
-        }
+        };
         el.empty().append(this.template(context));
         var nav = el.find("ul.nav");
         var selected = nav.find("#" + this.model.config.type)

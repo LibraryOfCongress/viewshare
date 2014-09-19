@@ -1,23 +1,24 @@
 define(["jquery",
+        "handlebars",
         "display/facets/registry",
         "layout/widget_editor",
         "text!templates/layout/facet-container.html",
         "freemix/js/freemix",
         "jquery.uuid"],
     function($,
+             Handlebars,
              FacetRegistry,
              WidgetEditor,
-             facet_container_template,
+             template,
              Freemix) {
     "use strict";
 
     var Container = function(options) {
         this.id = options.id;
         this.element = options.element;
-
     };
 
-    Container.prototype.template = Handlebars.compile(facet_container_template);
+    Container.prototype.template = Handlebars.compile(template);
 
     Container.prototype.render = function() {
         this.element.append(this.template({id: this.id}));

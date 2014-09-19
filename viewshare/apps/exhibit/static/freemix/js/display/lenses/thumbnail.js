@@ -1,10 +1,9 @@
 define(["jquery",
-    "freemix/js/freemix",
     "display/lenses/registry",
     "freemix/js/exhibit_utilities",
     "freemix/js/lib/lightbox"
 ],
-    function ($, Freemix, LensRegistry) {
+    function ($, LensRegistry) {
     "use strict";
 
     var config = {

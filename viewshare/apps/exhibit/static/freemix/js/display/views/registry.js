@@ -6,7 +6,11 @@ define(["jquery", "display/views/base"],
 
     };
 
+
+    Registry.prototype.type_order = [];
+
     Registry.prototype.prototypes = {};
+
     Registry.prototype.construct = function (type, config) {
         var Type = this.prototypes[type];
         return new Type(config);
@@ -21,6 +25,7 @@ define(["jquery", "display/views/base"],
         View.prototype.generateExhibitHTML = render_function;
         var type = config.type;
         this.prototypes[type] = View;
+        this.type_order.push(type);
         return View;
     };
 
