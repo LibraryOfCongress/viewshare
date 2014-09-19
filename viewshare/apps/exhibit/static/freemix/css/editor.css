@@ -79,7 +79,7 @@ font-size: 90%;
     /*opacity: 0.8;*/
 }
 
-.view-set li.placeholder {
+.view-set li.placeholder, .facet-set div.placeholder {
     position: relative;
     margin: 0;
     padding: 0;
@@ -96,6 +96,19 @@ font-size: 90%;
     top: -6px;
     margin-left: -5px;
     border-bottom: none;
+}
+
+.facet-set div.placeholder:before {
+      position: absolute;
+      content: "";
+      width: 0;
+      height: 0;
+      margin-top: -5px;
+      left: 5px;
+      top: -4px;
+      border: 5px solid transparent;
+      border-left-color: black;
+      border-right: none;
 }
 
 .view-set .view .label {
@@ -164,7 +177,8 @@ body.dragging, body.dragging * {
 
 .facet-container-horizontal .exhibit-facet,
 .facet-container-horizontal .exhibit-cloudFacet,
-.facet-container-horizontal .facet {
+.facet-container-horizontal .facet,
+.facet-container-horizontal .placeholder {
     display: inline-table;
     vertical-align: top;
 }
@@ -173,6 +187,10 @@ body.dragging, body.dragging * {
 #build .facet {
     margin: 1em;
     min-width: 3em;
+}
+.facet-header {
+    cursor: move !important;
+
 }
 
 .facet-header .view-label {

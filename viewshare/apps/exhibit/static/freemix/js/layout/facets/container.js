@@ -16,6 +16,7 @@ define(["jquery",
     var Container = function(options) {
         this.id = options.id;
         this.element = options.element;
+        this.horizontal = (options.horizontal || this.element.hasClass("facet-container-horizontal"));
     };
 
     Container.prototype.template = Handlebars.compile(template);
@@ -24,13 +25,19 @@ define(["jquery",
         this.element.append(this.template({id: this.id}));
 
         this.element.data("model", this);
-        this.element.sortable({
+        var set = this.element.find(".facet-set");
+
+        set.sortable({
             group: 'facets',
             tolerance: 0,
             distance: 10,
-            nested: false
-
+            nested: false,
+            vertical: !this.horizontal,
+            itemSelector: 'div.facet',
+            handle: ".facet-header",
+            placeholder: '<div class="placeholder"/>'
         });
+
         this.dialog = this.element.find("#addWidgetModal_" + this.id);
         this.dialog.appendTo("body");
 
