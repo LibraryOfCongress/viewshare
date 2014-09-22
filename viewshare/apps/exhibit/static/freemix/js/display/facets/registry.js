@@ -4,7 +4,9 @@ define(["jquery", "display/facets/base"],
 
     var Registry = function() {
         this.prototypes = {};
+        this.type_order = [];
     };
+
     Registry.prototype.construct = function (type, config) {
         var Type = this.prototypes[type];
         return new Type(config);
@@ -19,6 +21,7 @@ define(["jquery", "display/facets/base"],
         Facet.prototype.generateExhibitHTML = render_function;
         var type = config.type;
         this.prototypes[type] = Facet;
+        this.type_order.push(type);
         return Facet;
     };
 

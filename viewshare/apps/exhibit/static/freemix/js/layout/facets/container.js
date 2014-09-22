@@ -1,27 +1,56 @@
 define(["jquery",
+        "handlebars",
         "display/facets/registry",
         "layout/widget_editor",
+        "text!templates/layout/facet-container.html",
         "freemix/js/freemix",
         "jquery.uuid"],
-    function($, FacetRegistry, WidgetEditor, Freemix) {
+    function($,
+             Handlebars,
+             FacetRegistry,
+             WidgetEditor,
+             template,
+             Freemix) {
     "use strict";
 
-    var Container = function(id) {
-        if (id) {
-            this.id = id;
-        }
+    var Container = function(options) {
+        this.id = options.id;
+        this.element = options.element;
+        this.horizontal = (options.horizontal || this.element.hasClass("facet-container-horizontal"));
     };
 
-    Container.prototype.findWidget = function() {
-        if (!this._selector) {
-            this._selector = $(".facet-container#" + this.id, Freemix.getBuilder());
-        }
-        return this._selector;
+    Container.prototype.template = Handlebars.compile(template);
+
+    Container.prototype.render = function() {
+        this.element.append(this.template({id: this.id}));
+
+        this.element.data("model", this);
+        var set = this.element.find(".facet-set");
+
+        set.sortable({
+            group: 'facets',
+            tolerance: 0,
+            distance: 10,
+            nested: false,
+            vertical: !this.horizontal,
+            itemSelector: 'div.facet',
+            handle: ".facet-header",
+            placeholder: '<div class="placeholder"/>'
+        });
+
+        this.dialog = this.element.find("#addWidgetModal_" + this.id);
+        this.dialog.appendTo("body");
+
+        this.dialog.modal({
+            show:false
+        });
+
+        this.element.find(".create-facet").click(this.setupEditor.bind(this));
     };
 
     Container.prototype.serialize = function() {
         var config = [];
-        this.findWidget().find(".facet").each(function() {
+        this.element.find(".facet-set .facet").each(function() {
              var data = $(this).data("model");
              config.push(data.serialize());
         });
@@ -29,7 +58,7 @@ define(["jquery",
     };
 
     Container.prototype.addFacet = function(facet) {
-        facet.findWidget().appendTo(this.findWidget());
+        this.element.find(".facet-set").append(facet.findWidget());
         facet.refresh();
         Freemix.getBuilder().on("freemix.show-builder", function() {
             facet.refresh();
@@ -37,29 +66,25 @@ define(["jquery",
 
     };
 
-    Container.prototype.getDialog = function() {
-        return this._dialog;
-    };
-
-    Container.prototype.getPopupContent = function() {
+    Container.prototype.setupEditor = function() {
         var container = this;
-        this._dialog.empty();
+        this.dialog.empty();
         var editor = new WidgetEditor({
             "title": "Add Widget",
             "registry": FacetRegistry,
-            "element": container._dialog,
+            "element": container.dialog,
             "switchable": true
         });
 
         editor.render();
 
-        this._dialog.off("edit-widget").one("edit-widget", function(evt) {
+        this.dialog.off("edit-widget").one("edit-widget", function(evt) {
             var model = editor.model;
             this.modal("hide");
             container.addFacet(model);
-        }.bind(this._dialog));
+        }.bind(this.dialog));
 
-        this._dialog.off("hidden").one("hidden", function(evt) {
+        this.dialog.off("hidden").one("hidden", function(evt) {
             editor.destroy();
         });
 

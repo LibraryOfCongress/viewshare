@@ -1,6 +1,13 @@
-define(["jquery", "handlebars", "display/facets/logo", "exhibit", "text!templates/layout/facets/logo-facet-editor.html"],
+define(["jquery",
+        "handlebars",
+        "display/facets/logo",
+        "exhibit",
+        "text!templates/layout/facets/logo-facet-editor.html",
+        "lib/jquery.nouislider"],
         function ($, Handlebars, Facet, Exhibit, template_html) {
         "use strict"
+
+
 
     Facet.prototype.label = "Logo";
     Facet.prototype.template = Handlebars.compile(template_html);
@@ -14,22 +21,39 @@ define(["jquery", "handlebars", "display/facets/logo", "exhibit", "text!template
         return this.errors == 0;
     };
 
+    Facet.prototype.previewEvent = "preview-rendered.freemix";
+
     Facet.prototype.setupEditor = function(config, template) {
 
         function updateSlider() {
             var slider = $("#logo-facet-slider", template);
-
+            var size = template.find("#logo-facet-size");
             if (config.src) {
-                var img = template.find("#facet-preview img");
-                img.on("load", function () {
+                var img = template.find(".widget-edit-preview img");
+                img.one("load", function () {
                     var naturalWidth = img.get(0).naturalWidth;
                     if (!naturalWidth) {
                         naturalWidth = img.get(0).width * 2;
                     }
 
-                    slider.slider('option', 'max', naturalWidth);
-                    slider.slider('option', 'value', config.width || img.get(0).width);
+                    if (!isNaN(naturalWidth)) {
+                        slider.noUiSlider({
+                            handles: 1,
+                            range: [0, naturalWidth],
+                            start: [config.width || naturalWidth],
+                            step: 1
+                        }, true);
+                        size.val(config.width || naturalWidth);
+                        slider.attr("disabled", false);
+                        size.attr("disabled", false);
+                    } else {
+                        slider.attr("disabled", true);
+                        size.val("");
+                        size.attr("disabled", true);
+                    }
 
+                }).each(function() {
+                    if (this.complete) $(this).load();
                 });
             }
         }
@@ -66,21 +90,20 @@ define(["jquery", "handlebars", "display/facets/logo", "exhibit", "text!template
         size.val(config.width);
         size.change(function (event) {
             config.width = $(event.target).val();
-            slider.slider("value", config.width);
+            slider.val(config.width);
             facet.triggerChange(config, template);
         });
 
 
-        slider
-            .slider({
-            slide:function (event, ui) {
-                size.val(ui.value);
-                config.width = ui.value;
+        slider.change(function (event) {
+            size.val(Math.floor(slider.val()));
+            config.width = Math.floor(slider.val());
             facet.triggerChange(config, template);
-                return true;
-            }});
-
+            return true;
+        });
         facet.triggerChange(config, template);
+
+        template.find(".widget-preview-body").one(this.previewEvent, updateSlider);
         updateSlider();
 
     };
@@ -88,6 +111,7 @@ define(["jquery", "handlebars", "display/facets/logo", "exhibit", "text!template
     Facet.prototype.renderPreview = function(target, config) {
         var preview = config.src ? this.generateExhibitHTML(config) : "";
         target.empty().append(preview);
+        target.trigger(this.previewEvent);
     };
 
     Facet.prototype.refresh = function() {

@@ -33,21 +33,21 @@ define(["jquery",
                         var editor = new WidgetEditor({
                             "title": "Add Widget",
                             "registry": FacetRegistry,
-                            "element": facet.findContainer().getDialog(),
+                            "element": facet.findContainer().dialog,
                             "switchable": false,
                             "model": facet
                         });
 
-                        facet.findContainer().getDialog().empty().one("shown", function() {
+                        facet.findContainer().dialog.empty().one("shown", function() {
                             editor.render();
                         });
 
-                        facet.findContainer().getDialog().modal("show");
-                        facet.findContainer().getDialog().one("edit-widget", function() {
-                            facet.findContainer().getDialog().modal("hide");
+                        facet.findContainer().dialog.modal("show");
+                        facet.findContainer().dialog.one("edit-widget", function() {
+                            facet.findContainer().dialog.modal("hide");
                             facet.refresh();
                         });
-                        facet.findContainer().getDialog().off("hidden").one("hidden", function(evt) {
+                        facet.findContainer().dialog.off("hidden").one("hidden", function(evt) {
                             editor.destroy();
                         });
 

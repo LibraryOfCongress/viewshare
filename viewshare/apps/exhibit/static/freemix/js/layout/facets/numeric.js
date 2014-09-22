@@ -1,7 +1,8 @@
 define(["jquery", "handlebars", "display/facets/numeric", "exhibit",
         "scripts/data/database/range-index",
         "scripts/util/date-time",
-        "text!templates/layout/facets/numeric-facet-editor.html"],
+        "text!templates/layout/facets/numeric-facet-editor.html",
+        "lib/jquery.nouislider"],
         function ($, Handlebars, Facet, Exhibit, RangeIndex, DateTime, template_html) {
         "use strict"
 
@@ -65,30 +66,35 @@ define(["jquery", "handlebars", "display/facets/numeric", "exhibit",
             var base = roundPow10(min);
             var step = Math.ceil(base / 100);
 
-            input.data("range", {"min": min, "max": max});
+            clampInterval(base, {"min": min, "max": max});
 
-            clampInterval(base);
-
-            slider.slider('option', {
-                max: max,
-                min: min,
-                value: config.interval,
-                step: step
-            });
-
+            if (!isNaN(config.interval)) {
+                slider.noUiSlider({
+                    handles: 1,
+                    range: [min, max],
+                    start: [config.interval],
+                    step: step
+                }, true);
+                slider.attr("disabled", false);
+                interval.attr("disabled", false);
+            } else {
+                slider.attr("disabled", true);
+                interval.attr("disabled", true);
+                interval.val("No valid range");
+            }
 
         }
 
         function clampInterval(base, range) {
             var input = template.find("#range_interval");
-            var range = input.data("range");
             if (config.interval < range.min || isNaN(config.interval)) {
 
                 base = base || range.min;
                 config.interval = base;
             }
-            var interval = Math.min(config.interval, range.max);
-            config.interval = interval;
+
+            config.interval =  isNaN(interval) ? range.max : Math.min(config.interval, range.max);
+
             input.val(config.interval);
         }
 
@@ -115,18 +121,16 @@ define(["jquery", "handlebars", "display/facets/numeric", "exhibit",
         interval.change(function (event) {
             config.interval = parseInt($(event.target).val());
 
-            slider.slider("value", config.interval);
+            slider.val(config.interval);
             facet.triggerChange(config, template);
 
         });
 
-        slider.slider({
-            slide: function (event, ui) {
-                interval.val(ui.value);
-                config.interval = ui.value;
-                facet.triggerChange(config, template);
-                return true;
-            }
+        slider.change(function (event) {
+            interval.val(slider.val());
+            config.interval = slider.val();
+            facet.triggerChange(config, template);
+            return true;
         });
 
         select.change();
