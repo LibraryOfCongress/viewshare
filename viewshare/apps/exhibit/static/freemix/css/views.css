@@ -79,3 +79,11 @@ ol.exhibit-tileView-body > li {
 margin-top: -24px;
 padding-top: 10px;
 }
+
+.exhibit-facet {
+    margin-bottom: 2em;
+}
+
+.exhibit-cloudFacet {
+    margin-bottom: 2em;
+}

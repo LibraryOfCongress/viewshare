@@ -187,10 +187,11 @@ body.dragging, body.dragging * {
 #build .facet {
     margin: 1em;
     min-width: 3em;
+    margin-right: 1.5em;
 }
 .facet-header {
     cursor: move !important;
-
+    width: 100%
 }
 
 .facet-header .view-label {
@@ -204,7 +205,8 @@ body.dragging, body.dragging * {
 
 .facet-body {
     margin: 0;
-    padding: 5px;
+    padding: 3px;
+    width: 100%;
 }
 
 .facet-content > div {
@@ -775,6 +777,10 @@ padding-bottom: 12px;
 
 /* styling tabs */
 
+ul.view-set {
+    border-bottom: 0 !important;
+}
+
 ul.view-set li.view a {
   padding-top: 8px;
   padding-bottom: 8px;
@@ -808,10 +814,6 @@ ul.view-set li.view .icon-move {
 
 ul.view-set li.view .icon-remove {
  cursor:no-drop;
-}
-
-.create-view-button-pane {
-  border-bottom: 1px solid #ddd;
 }
 
 .widget-preview .edit-body {
@@ -855,10 +857,7 @@ background-color: #FFF9EC;
 .view-content {
   background-color: #ffffff;
   margin-top: -20px;
-  border-left: 1px solid #ddd;
-  border-right: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-
+  border: 1px solid #ddd;
 }
 
 .list-view-editor, .map-view-editor, .scatterplot-view-editor, .table-view-editor, .timeline-view-editor, .piechart-view-editor, .thumbnail-view-editor {
