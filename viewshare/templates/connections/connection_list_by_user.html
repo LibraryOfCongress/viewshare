@@ -15,7 +15,7 @@
 
 {% block body %}
 
-<h1>{{ other_user.username }}{% blocktrans %}'s Connections{% endblocktrans %} ({{ object_list.count }})</h1>
+<h1>{{ other_user.username }}{% blocktrans %}'s Connections{% endblocktrans %} ({{ object_list | length }})</h1>
 
 <div class="view_details">
   {% connection_list object_list  %}
