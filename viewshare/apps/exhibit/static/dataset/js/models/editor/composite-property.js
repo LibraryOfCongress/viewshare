@@ -145,6 +145,7 @@ define([
         /** Failed while sending property attributes to the server */
         augmentDataFailure: function() {
             this.Observer('augmentDataFailure').publish(this);
+            this.deleteProperty();
         },
 
         /**
