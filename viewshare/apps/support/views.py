@@ -66,12 +66,7 @@ class SupportFormView(View):
         return render(request, self.create_template, {'form': form})
 
     def post(self, request, *args, **kwargs):
-        try:
-            json_post = json.loads(request.body,
-                                   parse_float=Decimal)
-        except ValueError:
-            return HttpResponseBadRequest('Not a JSON document')
-        form = self.form_class(json_post)
+        form = self.form_class(request.POST)
         if form.is_valid():
             return self.create_issue(request, form, *args, **kwargs)
         return render(request, self.create_template, {'form': form})
@@ -143,6 +138,7 @@ class AugmentationIssueView(SupportFormView):
         new_slug = str(uuid.uuid4())
         exhibit.pk = None
         exhibit.id = None
+        exhibit.parent = None
         exhibit.owner = support
         exhibit.slug = new_slug
         exhibit.save()
@@ -167,8 +163,11 @@ class AugmentationIssueView(SupportFormView):
 class DataLoadIssueView(SupportFormView):
 
     def generate_context(self, request, form, *args, **kwargs):
-        source_id = kwargs["source_id"]
-        source = get_object_or_404(DataSource, uuid=source_id)
+        owner = kwargs["owner"]
+        slug = kwargs["slug"]
+        source = get_object_or_404(DataSource,
+                                   exhibit__owner__username=owner,
+                                   exhibit__slug=slug)
 
         c = super(DataLoadIssueView, self).generate_context(request, form)
         return dict(c, **{"source": source})

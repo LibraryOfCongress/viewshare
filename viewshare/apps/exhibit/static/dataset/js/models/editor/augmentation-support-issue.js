@@ -37,7 +37,7 @@ define(['jquery', 'observer'], function ($, Observer) {
             var xhr = $.ajax({
                 type: 'POST',
                 url: '/support/issue/augmentation/',
-                data: JSON.stringify(this.toJSON())
+                data: this.toJSON()
             })
             .done(this.postAugmentationIssueSuccess.bind(this))
             .fail(this.postAugmentationIssueError.bind(this));
@@ -73,7 +73,7 @@ define(['jquery', 'observer'], function ($, Observer) {
             jsonified.comments = this.comments;
             jsonified.label = this.label;
             jsonified.type = this.type;
-            jsonified.composite = this.composite;
+            jsonified.composite = this.composite.join(",");
             return jsonified;
         }
     });
