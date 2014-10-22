@@ -3,9 +3,15 @@
 
 {% block body %}
 <div id="issue_create_content">
-    <h1>{% trans "Ticket Created" %}</h1>
+  <div class="modal-header">
+    <h3>{% trans "Ticket Created" %}</h3>
+  </div>
+  <div class="modal-body">
     <p>{% blocktrans %}Thank you. A support ticket has been generated and sent to the {{SITE_NAME}} support team.{% endblocktrans %}</p>
-    <input type="button" class="ticket-created" value="{% trans "OK" %}"/>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
 </div>
 
 {% endblock %}

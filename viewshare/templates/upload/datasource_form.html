@@ -41,7 +41,7 @@
           <div class="errorMsg-specific">
           {% block format_error %}{% endblock %}
           </div>
-          <div class="errorMsg-followup">{% trans "If you have a file that you think should work after troubleshooting please <strong><a href='' class='support-link'>Click here to create a support ticket</a></strong>." %}</div>
+          <div class="errorMsg-followup">{% trans "If you have a file that you think should work after troubleshooting please <strong><a href='#support' data-toggle='modal' class='support-link'>Click here to create a support ticket</a></strong>." %}</div>
         </li>
       </ul>
     </div>
@@ -54,23 +54,20 @@
      <fieldset class="upload-form form-well">
 
        <div class="row-fluid">
-	 <div class="span12 well">
-
-	   <form action="{{ form_url }}" method="post" class="uniForm form form-horizontal" {% block uploadform_enctype %}{% endblock %}>
+         <div class="span12 well">
+           <form action="{{ form_url }}" method="post" class="uniForm form form-horizontal" {% block uploadform_enctype %}{% endblock %}>
              {%csrf_token %}
 
              {{ form|crispy }}
 
              <div class="load-actions buttons control-group">
-	       <div class="controls">
-		 <input type="submit" value="{% trans "Upload" %}" class="submit btn btn-primary" />
-		 <a href="{% url 'upload_dataset' %}"><input type="button" value="{% trans "Cancel" %}" class="load-form-cancel negative-button btn btn-danger" /></a>
-	       </div>
+               <div class="controls">
+                 <input type="submit" value="{% trans "Upload" %}" class="submit btn btn-primary" />
+                 <a href="{% url 'upload_dataset' %}"><input type="button" value="{% trans "Cancel" %}" class="load-form-cancel negative-button btn btn-danger" /></a>
+               </div>
              </div>
-
-	   </form>
-
-	 </div>
+           </form>
+         </div>
        </div>
 
      </fieldset>
@@ -78,11 +75,7 @@
      </div> <!-- end upload_form_type -->
 
 {%  if show_error %}
-<div id="support" class="hide"></div>
-<div class="support-spinner progress progress-striped active hide">
-  <div class="bar" style="width: 100%;"></div>
-  <p>{% blocktrans %}Requesting ticket, please be patient.{% endblocktrans %}</p>
-</div>
+<div id="support" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="supported-file-types-label"></div>
 {% endif %}
 
 {% endblock %}
