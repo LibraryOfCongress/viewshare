@@ -1,129 +1,3 @@
-/**
-* TODO: Remove old layout.css styles.
-*
-*
-*
-*/
-
-
-
-/**
- * From http://matthewjamestaylor.com/blog/perfect-3-column.htm
- * and accompanying other layouts.  Parts irrelevant to layout
- * excised, some clear: attributes removed to better fit with
- * embedding.
- */
-
-
-/*
-.colhead {
-	float: left;
-	width: 98%;
-    padding: 0.25em 1%;
-}
-
-.colmask {
-	position: relative;
-	float: left;
-	width: 100%;
-	overflow: hidden;
-}
-
- --- common column settings ---
-
-.colright,
-.colmid,
-.colleft {
-	float: left;
-	width: 100%;
-	position: relative;
-}
-
-.col1,
-.col2,
-.col3 {
-	float: left;
-	position: relative;
-	padding: 0 0 1em 0;
-}
-
---- Three-column settings ---
-.threecol .colmid {
-	right: 25%;
-}
-
-.threecol .colleft {
-	right: 50%;
-}
-
-.threecol .col1 {
-	width: 46%;
-	left: 102%;
-}
-
-.threecol .col2 {
-	width: 21%;
-	left: 31%;
-}
-
-.threecol .col3 {
-	width: 21%;
-	left: 85%;
-}
-
---- Two-column right focus ---
-.leftmenu .colleft {
-    right: 75%;
-}
-
-.leftmenu .col1 {
-    left: 102%;
-    width: 71%;
-}
-
-.leftmenu .col2 {
-    left: 6%;
-    width: 21%;
-}
-
---- Two-column left focus ---
-.rightmenu .colleft {
-    right: 25%;
-}
-
-.rightmenu .col1 {
-    left: 27%;
-    width: 71%;
-}
-
-.rightmenu .col2 {
-    left: 31%;
-    width: 21%;
-}
-
---- Two equal columns ---
-.doublepage .colleft {
-    right: 50%;
-}
-
-.doublepage .col1 {
-    left: 52%;
-    width: 46%;
-}
-
-.doublepage .col2 {
-    left: 56%;
-    width: 46%;
-}
-
---- One-column ---
-.fullpage .col1 {
-    left: 2%;
-    width: 96%;
-}
-
-*/
-
 /*!
  * Bootstrap Responsive v2.3.2
  *
@@ -133,7 +7,7 @@
  *
  * Designed and built with all the love in the world by @mdo and @fat.
  *
- * TODO To be modified for use in Viewshare embeds.
+ * TODO Eventually replace this with a direct link to bootstrap-responsive.css
  *
  */
 
@@ -154,6 +28,7 @@
   clear: both;
 }
 
+
 .hide-text {
   font: 0/0 a;
   color: transparent;
@@ -161,6 +36,8 @@
   background-color: transparent;
   border: 0;
 }
+
+
 
 .input-block-level {
   display: block;
@@ -170,6 +47,7 @@
      -moz-box-sizing: border-box;
           box-sizing: border-box;
 }
+
 
 @-ms-viewport {
   width: device-width;
@@ -273,9 +151,11 @@
   .span10 {
     width: 970px;
   }
+
   .span9 {
     width: 870px;
   }
+
   .span8 {
     width: 770px;
   }
