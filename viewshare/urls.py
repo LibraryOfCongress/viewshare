@@ -63,7 +63,7 @@ except ImportError:
 urlpatterns += patterns('',
 
 
-    #Old help page URLs. OK to use optional trailing slash on redirects; avoid it on template views. 
+    #Old help page URLs. OK to use optional trailing slash on redirects; avoid it on template views.
 
     url(r'^import/?$',
         RedirectView.as_view(url="http://viewshare.uservoice.com/knowledgebase/articles/243875-importing-data-into-viewshare"),
