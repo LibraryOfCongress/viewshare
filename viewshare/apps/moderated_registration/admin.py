@@ -39,6 +39,15 @@ def reason(obj):
 reason.short_description = _("Reason for joining")
 
 
+'''
+Added by ptrourke to track registration dates of new users.
+'''
+def date_joined(obj):
+    return obj.user.date_joined.strftime('%m/%d/%Y %H:%M')
+
+date_joined.short_description=_("Registered")
+
+
 class ModeratedRegistrationAdmin(RegistrationAdmin):
 
     csv_file_name = "registration_profiles.csv"
@@ -46,6 +55,7 @@ class ModeratedRegistrationAdmin(RegistrationAdmin):
     export_fields = ('user',
                      'is_approved',
                      'activation_key',
+                     date_joined,
                      organization,
                      org_type,
                      org_state,

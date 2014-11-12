@@ -62,12 +62,27 @@ except ImportError:
 
 urlpatterns += patterns('',
 
+
+    #Old help page URLs. OK to use optional trailing slash on redirects; avoid it on template views. 
+
+    url(r'^import/?$',
+        RedirectView.as_view(url="http://viewshare.uservoice.com/knowledgebase/articles/243875-importing-data-into-viewshare"),
+        name="import"),
+
+    url(r'^generate-views/?$',
+        RedirectView.as_view(url="http://viewshare.uservoice.com/knowledgebase/articles/244379-generating-views-of-collection-data"),
+        name="generate-views"),
+
+    url(r'^embed-and-share/?$',
+        RedirectView.as_view(url="http://viewshare.uservoice.com/knowledgebase/articles/247273-embed-and-share-your-views"),
+        name="generate-views"),
+
     # Help pages that are linked from templates
     url(r'^about/tos$',
         TemplateView.as_view(template_name="about/tos.html"),
         name="tos"),
 
-    url(r'^screencast$',
+    url(r'^screencast/?$',
         RedirectView.as_view(url="about/screencast"),
         name="screencast_redirect"),
 
@@ -75,39 +90,39 @@ urlpatterns += patterns('',
         TemplateView.as_view(template_name="about/screencast.html"),
         name="screencast"),
 
-    url(r'^about/community/$',
+    url(r'^about/community/?$',
         RedirectView.as_view(url="http://viewshare.uservoice.com"),
         name="community"),
 
-      url(r'^about/community/phay-user-story/$',
+      url(r'^about/community/phay-user-story/?$',
         RedirectView.as_view(url="http://viewshare.uservoice.com/knowledgebase/articles/238997-phay-user-story"),
         name="phay-user-story"),
 
-    url(r'^about/community/dove-user-story/$',
+    url(r'^about/community/dove-user-story/?$',
         RedirectView.as_view(url="http://viewshare.uservoice.com/knowledgebase/articles/239623-desegregation-of-virginia-education-dove-project"),
         name="desegregation-of-virginia-education-dove-project"),
 
-    url(r'^about/community/bpl-user-story/$',
+    url(r'^about/community/bpl-user-story/?$',
         RedirectView.as_view(url="http://viewshare.uservoice.com/knowledgebase/articles/239606-the-brooklyn-collection-s-fulton-street-trade-card"),
         name="the-brooklyn-collection-s-fulton-street-trade-card"),
 
-    url(r'^about/help/$',
+    url(r'^about/help/?$',
         RedirectView.as_view(url="http://viewshare.uservoice.com/knowledgebase"),
         name="help"),
 
-    url(r'^about/faq/$',
+    url(r'^about/faq/?$',
         RedirectView.as_view(url="http://viewshare.uservoice.com/knowledgebase/articles/240426-faq"),
         name="faq"),
 
-    url(r'^about/userguide/$',
+    url(r'^about/userguide/?$',
         RedirectView.as_view(url="http://viewshare.uservoice.com"),
         name="userguide"),
 
-    url(r'^about/user-stories/$',
+    url(r'^about/user-stories/?$',
         RedirectView.as_view(url="http://viewshare.uservoice.com/knowledgebase/articles/238378-overview-user-stories"),
         name="user-stories"),
 
-    url(r'^augment/patterns/$',
+    url(r'^augment/patterns/?$',
         RedirectView.as_view(url="http://viewshare.uservoice.com"),
         name="augment-list-patterns"),
 
