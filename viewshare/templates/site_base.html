@@ -55,7 +55,7 @@
       <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
         <li><a href="{% url 'userguide' %}">User's Guide</a></li>
         <li><a href="http://viewshare.uservoice.com/knowledgebase/articles/240426-faq">FAQ</a></li>
-        <li><a href="{% url 'profile_detail' 'Guide' %}">Ask the Guide</a></li>
+        <li><a href="{% url 'profile_detail' 'guide' %}">Ask the Guide</a></li>
       </ul>
     </li><li class="divider-vertical"></li>
     {% if user.is_staff %}<li><a href="/admin/" target="_blank"><i class="fa fa-cogs fa-lg"></i> {% trans "Admin" %}</a></li><li class="divider-vertical"></li>{% endif %}

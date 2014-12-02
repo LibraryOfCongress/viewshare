@@ -39,3 +39,4 @@ celerybeat.pid
 .idea
 Vagrantfile
 .vagrant
+env
