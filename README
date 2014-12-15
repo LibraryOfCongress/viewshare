@@ -1,88 +1,18 @@
-Viewshare Base README
+About Viewshare
+===============
 
-For UNIX-like systems, including Mac OS X and Linux:
+Viewshare is an open source web application for generating and customizing unique,
+dynamic views through which users can experience cultural heritage digital
+collections. The intended users of Viewshare are individuals managing and
+creating access to digital collections of cultural heritage materials.
 
-Requires:
-* Python 2.6/2.7
-* virtualenv 1.4.3+ (easy_install2.6 virtualenv)
+viewshare.org
+=============
+<viewshare.org> runs an instance of Viewshare. The site is administrated by the
+National Digital Information Infrastructure and Preservation Program at the
+Library of Congress.
 
-To build:
-> virtualenv --no-site-packages --distribute viewshare
-> cd viewshare
-> source bin/activate
-> pip install -e git+git://loc-recollect.git.sourceforge.net/gitroot/loc-recollect/loc-recollect#egg=viewshare
-> pip install -r src/viewshare/requirements/develop.txt
+Installation
+============
 
-To create the database:
-> cd src/viewshare/example_project/
-> manage.py syncdb
-> manage.py migrate
-
-Load default view themes and canvases
-> manage.py loaddata exhibit_themes
-> manage.py loaddata canvases
-
-To run the server on port 8000
-> manage.py runserver
-
-The following should be run at a regular interval:
-> manage.py send_mail
-
-Production deployment has been tested in conjunction with the libraries,
-detailed in requirements/deploy.txt.  Gunicorn in conjunction with the meinheld worker is
-recommended for deployment on Linux.  The eventlet worker can be substituted on other platforms,
-but this configuration has not been tested.  There are currently issues with Gevent's patching
-of DNS in httplib.
-
-For Windows:
-
-Download and run the latest Python 2.6 installer from
-    http://www.python.org/download/
-
-Download and run the latest setuptools installer from
-    http://pypi.python.org/pypi/setuptools#files
-
-Download and run the latest Mercurial and TortoiseHg installer from
-    http://tortoisehg.bitbucket.org/download/index.html
-
-Download and run the latest MinGW installer from
-    http://sourceforge.net/projects/mingw/files/
-The most user-friendly download is labelled "Automated MinGW Installer".
-Make sure to select both g++ and MinGW Make from the options.
-
-Some packages will require C/C++ compilation, which is what MinGW is for.
-In your Windows home directory, create a file called pydistutils.cfg and
-save it with the contents:
-
-[build]
-compiler=mingw32
-
-Set PYTHON_PATH to C:\Python26\ (or wherever you choose to install it),
-and add ";%PYTHON_PATH%\Scripts\;C:\MinGW\bin\" to the Windows PATH
-variable (again depending on where you installed MinGW).
-
-You should now be able to open up the DOS Prompt and run gcc and
-easy_install from the command line (getting normal errors about arguments
-as opposed to unknown commands).
-
-At the prompt, run:
-> easy_install virtualenv
-> virtualenv --no-site-packages --distribute viewshare
-> cd viewshare/Scripts
-> activate.bat
-> cd ..
-> pip install -e git+git://loc-recollect.git.sourceforge.net/gitroot/loc-recollect/loc-recollect#egg=viewshare
-> pip install -r src/viewshare/requirements/requirements.txt
-
-To create the database:
-> cd src/viewshare/example_project/
-> python manage.py syncdb
-> python manage.py migrate
-
-You may get notice of pywin32 not being installed.  This won't get
-in the way of functioning.  It is difficult to overcome as pywin32
-is not currently available in a form easily compatiable with
-virtualenv.
-
-To run the server on port 8000
-> python manage.py runserver
+See docs/installation.rst for installation instructions.

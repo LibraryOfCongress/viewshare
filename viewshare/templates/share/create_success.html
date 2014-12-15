@@ -1,0 +1,24 @@
+{% load i18n %}
+{% load viewshare_helpers %}
+{% url 'shared_exhibit_display' slug=slug as display_url %}
+
+{%  blocktrans %}
+<div class="shared-link-notice">
+  <span class="notice-icon">
+    <i class="fa fa-link fa-2x"></i>
+  </span>
+  <span class="view-label">Copy the following <a href="{{ display_url }}">link</a> to share with others.</span>
+</div>
+
+{% endblocktrans %}
+
+<div>
+  <input type="text" value="{% site_url display_url %}" class="shared-key-url" readonly="readonly"/>
+</div>
+
+<div class="form_block">
+  <div class="btn-group">
+    <button class="btn btn-small btn-primary" data-dismiss="modal" aria-hidden="true">OK</button>
+  </div>
+</div>
+

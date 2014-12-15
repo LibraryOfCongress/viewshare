@@ -1,0 +1,94 @@
+<form id="view-setting-form" class="form">
+  <fieldset>
+    <legend>Map View Settings</legend>
+
+    <div class="row-fluid">
+
+      <div class="control-group">
+        <label class="control-label" for="view_label_input">Label</label>
+
+        <div class="controls">
+          <div class="input-append">
+            <input type="text" id="view_label_input"/>
+          </div>
+          <span class="help-inline">Free text title of view</span>
+        </div>
+      </div>
+
+    </div>
+    <!-- row-fluid -->
+
+    <!-- position latlong and zoom side by side -->
+    
+    <div class="row-fluid">
+      
+      <div class="control-group input-append">
+        <div class="control">
+          <label class="control-label" for="latlng_property">Lat / Long <a class="augment" href=""><i
+                  class="fa fa-plus-square fa-lg"></i></a></label>
+
+          <div class="controls">
+            <select class="input-medium" id="latlng_property"></select>
+          </div>
+        </div>
+      </div>
+      
+      <div class="control-group input-append">
+        <div class="control">
+          <label class="control-label" for="zoom_level">Zoom</label>
+
+          <div class="controls">
+            <select class="input-medium" id="zoom_level">
+              <option value="">auto</option>
+              <option value="1">1 (Farthest)</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="8">9</option>
+              <option value="10">10 (Nearest)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="control-group input-append">
+        <div class="control">
+          <label class="control-label" for="color_property">Color Key</label>
+
+          <div class="controls">
+            <select class="input-medium" id="color_property"></select>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- end row-fluid -->
+
+    <!-- Lens specific -->
+
+    <div class="lens-variables">
+
+      <legend>Lens Settings</legend>
+
+      <div class="row-fluid">
+	
+        <div class="control-group">
+          <!-- inject lens editor -->
+          <div id="lens_editor">
+          </div>
+        </div>
+	
+      </div>
+      <!-- end row -->
+	
+
+    </div>
+    <!-- end lens-variables -->
+
+
+  </fieldset>
+</form>

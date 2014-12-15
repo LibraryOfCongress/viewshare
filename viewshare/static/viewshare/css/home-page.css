@@ -1,0 +1,152 @@
+/* -- superceding whatever is below 'front page viewshare skin' -- */
+/* -- from redesign of front page by Chili                         -- */
+
+h2 {
+    font-size: 1.3em;
+    font-weight: normal;
+    line-height: 1.5em;
+    text-align: center;
+}
+
+.fp-wells {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.fp-widget-well {
+    background: #fff url(../../images/header-background.png) bottom center repeat-x;
+    border: 1px solid #eee;
+    margin-bottom: 1.5em;
+   -moz-border-radius:5px;
+   -webkit-border-radius:5px;
+}
+
+.fp-widget-well .fp-widget-header {
+    background: #F8F8F8;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    margin-left: 3px;
+    margin-right: 3px;
+    height: 40px;
+}
+
+.fp-widget-well h2.fp-widget-header {
+    font-family: 'Ubuntu', Helvetica, Arial, sans-serif;	
+    font-weight: normal;
+    font-size: 1.8em;
+    color: slategrey;
+   -moz-border-top-left-radius:3px;
+   -moz-border-top-right-radius:3px;
+   -webkit-border-top-left-radius:3px;
+   -webkit-border-top-right-radius:3px;
+    margin-top: 0px;
+    padding-left: 10px;
+    margin-top: 3px;
+}
+
+.fp-widget-well .stepblock {
+    height:110px; 
+    margin-top:10px; 
+    padding-left:1.5em; 
+    padding-right:1.5em;
+    padding-bottom: 20px;
+    font-size: 1.3em;
+    line-height: 150%;
+}
+
+.showcased {
+    float: left;
+    width: 28%;
+    text-align: center;
+}
+
+.first-showcased {
+    margin-left: 8%;
+}
+
+.image {
+    float: left;
+    clear: both;
+    background: url(../../images/shadowAlpha.png) no-repeat bottom right !important;
+    background: url(../../images/shadow.gif) no-repeat bottom right;
+    margin: 10px 10px 10px 22px !important;
+}
+
+.image img {
+    display: block;
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #a9a9a9;
+    margin: -6px 6px 6px -6px;
+    padding: 4px;
+}
+
+.thumbnailimage img {
+    width: 200px;
+}
+
+.showcased a {
+    color: #117011;
+}
+
+.linkblock {
+  padding:1.2em 1em 1em 1em
+}
+
+#header #application-logo {
+  display: none;
+}
+
+#header #application-status {
+ display:none;
+}
+
+#front-page-application-logo {
+    width: 300px;
+    height: 71px;
+    background-repeat: no-repeat;
+    background-image: url(../img/viewshare-logo-fp.png);
+    padding-bottom: 20px;
+}
+
+.lead-links .lead-link {
+ padding-bottom: 10px;
+}
+
+.linkblock {
+text-decoration: none; 
+font-size:1.0em;
+font-weight:normal;
+width:245px;
+list-style:none; 
+padding:1em;  
+}
+
+#first
+{background-color:#00993D;color:white; }
+
+#second
+{background-color:#5582A1;color:white; }
+
+#third
+ {background-color:#405777;color:white; }
+
+#homeSlide img {
+ min-height:480px;
+}
+
+#homePage {
+ max-width: 1280px;
+ margin-left: auto;
+ margin-right: auto;
+}
+
+.carousel-indicators li {
+  background-color: #999;
+  background-color: rgba(70,70,70,.25);
+}
+
+.carousel-indicators .active {
+  background-color: #444;
+}

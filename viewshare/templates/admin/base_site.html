@@ -1,6 +1,7 @@
 {% extends "admin/base.html" %}
+{% load url from future %}
+
 {% load i18n %}
-{% load cms_tags %}
 
 {% block title %}{{ title }} | {{ SITE_NAME }} {% trans 'administration' %}{% endblock %}
 
@@ -9,5 +10,5 @@
 {% endblock %}
 
 {% block nav-global %}
-<a href="{% url user_home %}">Home</a>&nbsp;|&nbsp;<a href="{% url front_page %}">Front Page</a>
+<a href="{% url 'user_home' %}">Home</a>&nbsp;|&nbsp;<a href="{% url 'front_page' %}">Front Page</a>
 {% endblock %}

@@ -1,3 +1,4 @@
+{% load url from future %}
 {% load i18n %}
 {% load pagination_tags %}
 {% load profile_tags %}
@@ -11,7 +12,7 @@
         {% if pageable %}{% paginate %}{% endif%}
     {% else %}
 
-      <p class="center">See the <a href="{% url profile_list %}">list of user profiles</a> to start making connections.</p>
+      <p class="center">See the <a href="{% url 'profile_list' %}">list of user profiles</a> to start making connections.</p>
 
     {% endif %}
 

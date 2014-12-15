@@ -1,9 +1,0 @@
-{%  load i18n %}
-{% load uni_form_tags %}
-<form action="{% url dataset_edit_form owner=object.owner slug=object.slug %}" method="post" class="uniForm">
-        {% csrf_token %}
-        {{ form|as_uni_form }}
-        <div class="form_block">
-            <input type="submit" value="{% trans "Update" %}" />
-        </div>
-</form>

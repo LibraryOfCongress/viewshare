@@ -1,14 +1,79 @@
-{% extends "site_base.html" %}
-
+{% load url from future %}
+{% load announcements_tags %}
+{% load compress %}
 {% load i18n %}
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
 
-{% block head_title %}{% trans "Server Error" %}{% endblock %}
 
-{% block body %}
-    <p class="center">
-        {% blocktrans %}
-        We're sorry, but a server error has occurred. We've been notified and
-        will look into it as soon as possible.
-        {%  endblocktrans %}
-    </p>
-{% endblock %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>{% trans "Server Error" %}</title>
+    <script type="text/javascript" src="{{STATIC_PREFIX}}freemix/js/lib/jquery.js"></script>
+    <link href="{{STATIC_PREFIX}}viewshare/css/base.css" rel="stylesheet" type="text/css" media="screen,projection" />
+</head>
+<body>
+  <div class="container-fluid">
+    <!-- fixed header across all application -->
+    <div class="row-fluid">
+      <div id="header">
+        <div id="tabhead" class="navbar navbar-fixed-top">
+          <div class="navbar-inner">
+            <div class="container">
+
+              <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a href="/" class="brand">
+                <span id="application-logo"></span>
+                <span id="application-status">{{ SITE_NAME_STATUS }}</span>
+              </a>
+
+              <div class="nav-collapse collapse">
+                <ul class="nav pull-right">
+
+                </ul>
+              </div>
+            </div><!-- /.container -->
+          </div><!-- /.navbar-inner -->
+        </div><!-- /.navbar -->
+      </div><!-- /.header -->
+    </div><!-- /.row-fluid -->
+
+
+    <div class="container-fluid">
+      <div id="body" class="freemix-themeable">
+
+        <div id="inner-body">
+          <p class="center">
+          {% blocktrans %}
+          We're sorry, but a server error has occurred. We've been notified and
+          will look into it as soon as possible.
+          {%  endblocktrans %}
+        </p>
+        </div>
+      </div><!-- /#body -->
+    </div> <!-- /.container-fluid -->
+
+    <div id="footer">
+    </div>
+  </div> <!-- /.container-fluid -->
+  <script type="text/javascript" src="{{STATIC_PREFIX}}freemix/js/lib/jquery.csrf.js"></script>
+  <script type="text/javascript" src="{{STATIC_PREFIX}}freemix/js/lib/jquery.cookie.js"></script>
+  <script type="text/javascript" src="{{STATIC_PREFIX}}freemix/js/lib/bootstrap.js"></script>
+  <script type="text/javascript" src="{{STATIC_PREFIX}}viewshare/js/compatible.js"></script>
+  <script type="text/javascript" src="{{STATIC_PREFIX}}viewshare/js/ui.js"></script>
+
+    {% if USERVOICE_SETTINGS %}
+        <script type="text/javascript" src="{% url 'uservoice_options' %}"></script>
+        <!--<script type="text/javascript" src="https://cdn.uservoice.com/javascripts/widgets/tab.js"></script>-->
+    {% endif %}
+
+</body>
+</html>
+

@@ -1,0 +1,52 @@
+{% load i18n %}
+
+<div id="deleteSharedKeyModal" class="delete_shared_key_dialog modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myDeleteSharedKeyModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3 id="myDeleteSharedKeyModalLabel">Delete Shared Link</h3>
+  </div>
+
+ <div class="modal-body">
+   <div class="delete_shared_key_form alert alert-warning">
+     <p>{% blocktrans %}Really delete this <a class="shared_key_url">shared link</a>?{% endblocktrans %}</p>
+   </div>
+
+ <div class="modal-footer">
+   <div class="btn-group">
+     <a href="#" class='button_link ok-button btn btn-small btn-danger' title='OK'>Delete</a>
+     <a href="#" class='button_link negative-button cancel-button btn btn-small btn-primary' data-dismiss="modal" class="close" title='Cancel'>Cancel</a>
+   </div>
+ </div>
+
+ <div class='delete_shared_key_failed'>Delete Failed!</div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+    $(".delete_shared_key_dialog .ok-button").click(function(e) {
+        $.ajax({
+            type: "DELETE",
+            url: $(".delete_shared_key_dialog .shared_key_url").attr("href"),
+            success: function(msg) {
+                window.location.reload( true );
+            },
+            error: function(xhr, status, error) {
+                $(".delete_shared_key_failed").hide();
+                $(".delete_shared_key_failed").show();
+
+            }
+        });
+
+        e.preventDefault();
+    });
+
+    $("a.shared_key_delete").click(function(e) {
+        var url = $(this).attr("rel");
+        $(".delete_shared_key_dialog").find("a.shared_key_url").attr("href", url);
+        $(".delete_shared_key_failed").hide();
+        $(".delete_shared_key_dialog").dialog("open");
+        e.preventDefault();
+    });
+});
+</script>

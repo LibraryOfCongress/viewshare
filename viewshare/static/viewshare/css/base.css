@@ -1,0 +1,68 @@
+@import url("bootstrap.css");
+@import url("bootstrap-responsive.css");
+@import url("style.css");
+@import url("lc.css");
+@import url("font-awesome.min.css");
+
+body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    color: #000;
+}
+
+
+a {
+    color: rgb(0, 176, 216);
+}
+
+.homeimage {
+    float: left;
+}
+
+#footer {
+ margin-top: 20px;
+ border-top: 1px solid lightgrey;
+color: grey;
+}
+
+#footer .footernav {
+}
+
+#footer #lc-logo {
+    width: 158px;
+    vertical-align:middle;
+    padding-right: 3px;
+}
+
+#footer #z-logo {
+    width: 72px;
+    vertical-align:bottom;
+    padding-bottom: 3px;
+}
+
+#footer .linknav {
+padding-top: 1px;
+}
+
+#footer .sponspornav {
+text-decoration:none;
+}
+
+#footer .left {
+float: left;
+padding-left: 25px;
+}
+
+#footer .right {
+float: right;
+padding-right: 20px;
+}
+
+#versions {
+opacity:0.0;
+filter: alpha(opacity=0);
+}
+
+.primarydisc {float: right; margin-left:20px;}
+
+.primarydisc p{width: 280px; margin-top: 0px; font-size: 150%;}
+

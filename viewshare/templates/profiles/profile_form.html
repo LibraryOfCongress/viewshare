@@ -1,12 +1,13 @@
-{% load uni_form_tags %}
+{% load url from future %}
+{% load crispy_forms_tags %}
 {% load i18n %}
 
-<form class="uniForm" method="POST" action="{% url profile_edit %}">
-    <fieldset>
-        {% csrf_token %}
-        {{ profile_form|as_uni_form }}
-        <div class="form_block">
-            <input type="submit" value="{% trans "Update" %}" />
-        </div>
-    </fieldset>
+<form class="form-horizontal" method="POST" action="{% url 'profile_edit' %}">
+  <fieldset>
+    {% csrf_token %}
+    {{ profile_form|crispy }}
+  </fieldset>
+  <div class="form_block">        
+    <button type="submit" class="btn btn-primary">{% trans "Update" %}</button>
+  </div>
 </form>

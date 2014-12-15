@@ -1,0 +1,19 @@
+{% load url from future %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% load exhibit_tags %}
+{% load viewshare_helpers %}
+
+<form class="form-horizontal" method="POST" action="{% url 'shared_key_create_form' owner=form.exhibit.owner.username slug=form.exhibit.slug %}">
+  <fieldset>
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {{ form.as_p }}
+  </fieldset>
+  <div class="form_block">
+    <div class="btn-group">
+      <input type="submit" value="{% trans "Save" %}" class="submit btn btn-small btn-primary" />
+      <input type="button" value="{% trans "Cancel" %}" class="shared-key-form-cancel btn btn-small" data-dismiss="modal" aria-hidden="true"> />
+    </div>
+  </div>
+</form>

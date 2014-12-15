@@ -1,19 +1,32 @@
 {% extends "site_base.html" %}
 {% load i18n %}
-{% load uni_form_tags %}
+{% load crispy_forms_tags %}
 
 {% block body %}
-<div id="issue_create_content">
-    <h1>{% trans "Report a Data Loading Problem" %}</h1>
-    <form action="{{request.path}}" method="post" class="uniForm">
+  <div id="issue_create_content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3>{% trans "Report a Data Loading Problem" %}</h3>
+    </div>
+    <form action="{{ request.path }}" method="post" class="uniForm">
+
+      <div class="modal-body">
         <fieldset class="inlineLabels">
-            {%csrf_token%}
-            {{ form|as_uni_form }}
+          {% csrf_token %}
+          {{ form|crispy }}
         </fieldset>
-        <input type="submit" value="Send Report"/>
-        <input type="button" class="cancel-button negative-button" value="{% trans "Cancel" %}"/>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary">{% trans "Send Report" %}</button>
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+      </div>
     </form>
-</div>
+
+    <div class="support-spinner progress progress-striped active hide">
+      <div class="bar" style="width: 100%;"></div>
+      <p>{% blocktrans %}Requesting ticket, please be patient.{% endblocktrans %}</p>
+    </div>
+  </div>
 {% endblock %}
 
 

@@ -1,6 +1,7 @@
 from django import template
+from viewshare.apps.exhibit.models import PublishedExhibit
 from viewshare.apps.vendor.friends.models import Friendship
-from freemix.permissions import PermissionsRegistry
+from viewshare.apps.exhibit.permissions import PermissionsRegistry
 
 
 register = template.Library()
@@ -19,12 +20,10 @@ def connection_list(context, queryset, max_count=10, pageable=True):
 @register.inclusion_tag("profiles/user_counts.html", takes_context=True)
 def user_counts(context, target_user):
     request = context["request"]
-    exhibit_count = target_user.exhibits.filter(PermissionsRegistry.get_filter("exhibit.can_view", request.user)).count()
-    dataset_count = target_user.datasets.filter(PermissionsRegistry.get_filter("dataset.can_view", request.user)).count()
+    exhibit_count = PublishedExhibit.objects.filter(owner=target_user).filter(PermissionsRegistry.get_filter("exhibit.can_view", request.user)).count()
 
     return {
         "target_user": target_user,
         "exhibit_count": exhibit_count,
-        "dataset_count": dataset_count
     }
 

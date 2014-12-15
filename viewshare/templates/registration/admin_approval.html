@@ -1,6 +1,6 @@
 {% extends "admin/base_site.html" %}
 
-{%load freemix_helpers%}
+{%load viewshare_helpers %}
 {% load i18n %}
 
 {% if not is_popup %}
@@ -38,8 +38,8 @@
         <span id="id_email">{{profile.user.email}}</span>
     </div>
 
-    <a href="{% url admin:auth_user_change profile.user.id %}">Edit User</a>&nbsp;|&nbsp;
-    <a href="{% url admin:profiles_profile_change profile.user.get_profile.id %}">Edit User Profile</a>
+    <a href="{% url 'admin:auth_user_change' profile.user.id %}">Edit User</a>&nbsp;|&nbsp;
+    <a href="{% url 'admin:profiles_profile_change' profile.user.get_profile.id %}">Edit User Profile</a>
 
 </fieldset>
 

@@ -1,0 +1,228 @@
+{% extends "site_base.html" %}
+{% load url from future %}
+
+
+{% load i18n %}
+{% load exhibit_tags %}
+{% load viewshare_helpers %}
+{% load compress %}
+{% load humanize %}
+{% load require %}
+
+{% block head_title %}{{ object.title }}{% endblock %}
+
+{% block body_class %}main-attraction{% endblock %}
+{% block head_data %}
+    {{ block.super }}
+
+    <link rel="exhibit-data"
+          href="{% url 'exhibit_data' owner=object.owner.username slug=object.slug %}"/>
+
+    <link rel="freemix/exhibit_profile"
+          href="{% url 'exhibit_profile_json' owner=object.owner.username slug=object.slug %}"/>
+{% endblock %}
+
+{% block extra_scripts %}
+    {{ block.super }}
+    {% require_module 'exhibit-display-main' %}
+
+    <script type="text/javascript"
+            src="{{ STATIC_URL }}freemix/js/detail.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#accordion-exhibit').on('shown', function () {
+                $(".icon-chevron-down").removeClass("icon-chevron-down").addClass("icon-chevron-up");
+            }).on('hidden', function () {
+                $(".icon-chevron-up").removeClass("icon-chevron-up").addClass("icon-chevron-down");
+            });
+        });
+    </script>
+
+    {% if can_share %}
+        {% compress js %}
+            <script type="text/javascript"
+                    src="{{ STATIC_URL }}freemix/js/lib/jquery.form.js"></script>
+            <script type="text/javascript"
+                    src="{{ STATIC_URL }}share/js/share_dialog.js"></script>
+        {% endcompress %}
+    {% endif %}
+{% endblock extra_scripts %}
+
+
+{% block head_css %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/exhibit_display.css"/>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/exhibit_inspect.css" />
+{% endblock %}
+
+{% block body %}
+
+    <div class="accordion" id="accordion-exhibit">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse"
+                   data-parent="#accordion-exhibit" href="#collapseOne">
+                    <div class="exhibit-title-accordion">{{ exhibit.title }} <i
+                            class="icon-chevron-down pull-right"></i></div>
+                </a>
+            </div>
+
+            <div id="collapseOne" class="accordion-body collapse out">
+
+                <div class="accordion-inner">
+
+                    <div class="exhibit-view-extended-display">
+
+                      {% if exhibit.description %}
+                      <div class="row-fluid">
+
+                        <div class="span7">
+
+                          <div class="exhibit-description">
+                            {{ exhibit.description }}
+                          </div>
+
+                        </div>
+                      </div> <!-- row-fluid -->
+
+                      {% endif %}
+
+                      <div class="row-fluid">
+
+                        <div class="span7">
+
+                          <div class="exhibit-acls">
+                            {% if exhibit.is_public %}
+                            <span class="public">
+                              <span class="public-icon"><i class="fa fa-unlock-alt fa-lg"></i></span>
+                              <span class="view-label">{% trans "This view is public" %}</span>
+                            </span>
+                            {% else %}
+                            <span class="private">
+                              <span class="private-icon"><i class="fa fa-lock fa-lg"></i></span>
+                              <span class="view-label">{% trans "This view is private" %}</span>
+                            </span>
+                            {% endif %}
+
+                            <span class="exhibit-metadata">
+                              {% trans "and was created" %}
+                              <span class="exhibit-modified-data">{{ exhibit.modified|naturalday}}</span>
+                              {% trans "by" %}
+                              <span class="exhibit-creator">
+                                <a href="{% url 'profile_detail' exhibit.owner.username %}">{{ exhibit.owner.username }}</a>
+                              </span>
+                            </span>
+
+                          </div>
+                        </div>
+
+                        <div class="span5">
+
+                          <div class="exhibit-actions pull-right">
+
+                            <div class="exhibit-links btn-group">
+                              {% if can_inspect %}
+                              <a class="exhibit_inspect btn btn-small"
+                                 href="{% url 'exhibit_detail' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Inspect" %}</a>
+                              {% endif %}
+
+                              {% if exhibit.is_private and can_share %}
+                                <a class="exhibit_share btn btn-small"
+                                   href="#exhibit-share-form"
+                                   rel="{% url 'shared_key_create_form' owner=exhibit.owner.username slug=exhibit.slug %}"
+                                   data-target="#exhibit-share-form"
+                                   role="button"
+                                   id="exhibit-share-button"
+                                   data-toggle="modal">{% trans "Share" %}</a>
+                              {% endif %}
+
+                              {% if exhibit.is_public and can_embed %}
+                                <a class="exhibit_embed btn btn-small"
+                                  href="#embedModal" role="button"
+                                  data-toggle="modal">{% trans "Embed" %}</a>
+                              {% endif %}
+
+                              {% if can_edit %}
+                              <a class="exhibit_edit btn btn-small"
+                                 href="{% url 'exhibit_edit' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Build" %}</a>
+                              {% endif %}
+                            </div>
+
+                            {% if can_share %}
+                            <div id="exhibit-share-form"
+                                 class="modal modal-fit hide fade form-dialog"
+                                 tabindex="-1" role="dialog"
+                                 aria-labelledby="exhibitShareFormLabel"
+                                 aria-hidden="true">
+                              <div class="modal-header">
+                                <button type="button"
+                                        class="close"
+                                        data-dismiss="modal"
+                                        aria-hidden="true">×
+                                </button>
+                                <h3 id="exhibitShareFormLabel">{% trans "Share View" %}</h3>
+                              </div>
+                              <div id="share_exhibit_form_template"
+                                   class="modal-body">
+                              </div>
+                            </div>
+                            {% endif %}
+
+                          </div>
+
+                        </div>
+                        <!-- span5 -->
+
+                      </div>
+                      <!-- row-fluid -->
+
+                    </div>
+                    <!-- exhibit-display -->
+
+                </div>
+                <!-- accordion-inner -->
+
+            </div>
+            <!-- accordion-body -->
+
+        </div>
+        <!-- accordion-group -->
+
+    </div> <!-- accordion -->
+
+    {% if can_embed %}
+        <div id="embedModal" class="embed-modal modal hide fade" tabindex="-1"
+             role="dialog" aria-labelledby="embedFormLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">×
+                </button>
+                <h3 id="editProfileFormLabel">{% trans "Embed View" %}</h3>
+            </div>
+
+            <div class="modal-body">
+                <div class="embed-desc">{% blocktrans %}Copy the following and
+                    paste it into your page where you'd like your data view to
+                    be placed.{% endblocktrans %}</div>
+                <input type="text" class="embedding-code"
+                       value="&lt;script id='freemix-embed' src='{{ exhibit_embed_url }}' type='text/javascript'&gt;&lt;/script&gt;"
+                       readonly="readonly"/>
+
+            </div>
+
+            <div class="modal-footer">
+                <div class="btn-group">
+                    <a class="btn btn-small btn-primary" role="button"
+                       data-dismiss="modal"
+                       aria-hidden="true">{% trans "Close" %}</a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <div id="contents" class="freemix-themeable"></div>
+
+{% endblock %}
+
+

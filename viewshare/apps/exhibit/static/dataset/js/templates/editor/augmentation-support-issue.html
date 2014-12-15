@@ -1,0 +1,38 @@
+<span>
+  There was an issue augmenting your data. <a href="#">Click here to create a support issue</a> or try again later.
+</span>
+<div id='augmentationIssue' style="display: none">
+  <hr />
+  <form class="form-horizontal">
+    <div class="control-group" id="augContact">
+      <label class="control-label" for="augContactInput">Preferred Contact Method</label>
+      <div class="controls">
+        <select id="augContactInput">
+          <option value="email">Email</option>
+          <option value="phone">Phone</option>
+        </select>
+      </div>
+    </div><!-- /preferred contact -->
+    <div class="control-group" id="augEmail">
+      <label class="control-label" for="augEmailInput">Email</label>
+      <div class="controls">
+        <input type="text" id="augEmailInput" placeholder="you@email.com">
+      </div>
+    </div><!-- /email -->
+    <div class="control-group" id="augPhone">
+      <label class="control-label" for="augPhoneInput">Phone</label>
+      <div class="controls">
+        <input type="text" id="augPhoneInput" placeholder="111-222-3333">
+      </div>
+    </div><!-- /phone -->
+    <div class="control-group" id="augComments">
+      <label class="control-label" for="augCommentsInput">Comments</label>
+      <div class="controls">
+        <textarea id="augCommentsInput"></textarea>
+      </div>
+    </div><!-- /comments -->
+    <div style="padding-left: 180px">
+      <button class="btn btn-success" id="augCreateIssue">Create Issue</button>
+    </div>
+  </form>
+</div>

@@ -1,10 +1,11 @@
+{% load url from future %}
 {% load i18n %}
 
 {% with filename=datasource.get_filename %}
 <div class="datasource_field">
     <span class="datasource_label">File:</span>
     <span class="datasource_value">
-        <a href="{% url file_datasource_file_url uuid=datasource.uuid %}">{{ filename }}</a>
+        <a href="{% url 'file_datasource_file_url' owner=datasource.exhibit.owner.username slug=datasource.exhibit.slug %}">{{ filename }}</a>
     </span>
 </div>
 {% endwith %}

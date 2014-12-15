@@ -1,4 +1,6 @@
 {% extends "site_base.html" %}
+{% load url from future %}
+
 {% load i18n %}
 
 
@@ -12,7 +14,7 @@
 
 	<p>{% blocktrans %}Thank you for your interest in {{ SITE_NAME }}!{% endblocktrans %}</p>
 
-	<p>{% blocktrans %}Your account is now active.{% endblocktrans %} <a href="{% url acct_login %}">{% trans "Click here to log in" %}</a></p>
+	<p>{% blocktrans %}Your account is now active.{% endblocktrans %} <a href="{% url 'acct_login' %}">{% trans "Click here to log in" %}</a></p>
 
       </div>
     </fieldset>

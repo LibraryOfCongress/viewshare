@@ -1,0 +1,53 @@
+<form class="form">
+  <fieldset>
+
+    <div class="container-fluid">
+
+      <div class="row-fluid">
+        <legend class="view-settings-label">Table View Settings</legend>
+      </div>
+
+      <div class="row-fluid">
+
+        <div class="view-variables">
+
+          <div class="control-group">
+            <label class="control-label" for="view_label_input">Label</label>
+
+            <div class="controls">
+              <div class="input-append">
+                <input type="text" id="view_label_input"/>
+              </div>
+              <span class="help-inline">Freetext title of view</span>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="sort_property">Sort By</label>
+
+            <div class="controls">
+              <select class="input-medium" id="sort_property"></select>
+              <select id="sort_order" name="sort_order" class="sort-order input-medium inline">
+                <option value="ascending">Ascending</option>
+                <option value="descending">Descending</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="property_list">Select Columns to Display</label>
+
+            <div class="controls" id="property_list"></div>
+          </div>
+
+        </div>
+        <!-- end view-variables -->
+
+      </div>
+      <!-- end row -->
+
+    </div>
+    <!-- end container -->
+
+  </fieldset>
+</form>

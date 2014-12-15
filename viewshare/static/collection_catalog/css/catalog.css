@@ -1,0 +1,67 @@
+/**
+ *  Catalog styling
+ */
+
+ol {
+    margin-left: 1.5em;
+}
+
+#messages ol > li {
+    padding: 0;
+}
+
+ol.exhibit-tileView-body > li {
+    margin: 1em 5px 2em;
+}
+
+.facets {
+    border-left: 1px solid #a9a9a9;
+    margin: 0px 0px 0px 0px;
+    padding-left: 15px;
+}
+
+.image {
+    float: left;
+    clear: left;
+    background: url(../../images/shadowAlpha.png) no-repeat bottom right !important;
+    background: url(../../images/shadow.gif) no-repeat bottom right;
+    margin: 10px;
+}
+
+.image img {
+    display: block;
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #a9a9a9;
+    margin: -6px 6px 6px -6px;
+    padding: 4px;
+}
+
+.thumbnailimage img {
+    width: 200px;
+}
+
+#navigator {
+    padding: 20px 0px;
+    font-size:  90%;
+}
+
+td {
+    vertical-align: top;
+}
+
+.item-desc {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.ititle {
+    font-size: 130%;
+    padding-top: 5px;	
+    padding-bottom: 15px;	
+}	   
+
+.idesc {
+    padding-top: 5px;	
+    padding-bottom: 5px;	
+}	   

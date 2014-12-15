@@ -7,7 +7,7 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
+
         # Deleting field 'ViewShareRegistrationProfile.org_type'
         db.delete_column('moderated_registration_viewshareregistrationprofile', 'org_type')
 
@@ -22,7 +22,7 @@ class Migration(SchemaMigration):
 
 
     def backwards(self, orm):
-        
+
         # Adding field 'ViewShareRegistrationProfile.org_type'
         db.add_column('moderated_registration_viewshareregistrationprofile', 'org_type', self.gf('django.db.models.fields.CharField')(default='void', max_length=100), keep_default=False)
 
@@ -33,7 +33,7 @@ class Migration(SchemaMigration):
         db.add_column('moderated_registration_viewshareregistrationprofile', 'organization', self.gf('django.db.models.fields.CharField')(default='void', max_length=100), keep_default=False)
 
         # Adding field 'ViewShareRegistrationProfile.org_state'
-        db.add_column('moderated_registration_viewshareregistrationprofile', 'org_state', self.gf('django.contrib.localflavor.us.models.USStateField')(default='', max_length=2, blank=True), keep_default=False)
+        db.add_column('moderated_registration_viewshareregistrationprofile', 'org_state', self.gf('django_localflavor_us.models.USStateField')(default='', max_length=2, blank=True), keep_default=False)
 
 
     models = {

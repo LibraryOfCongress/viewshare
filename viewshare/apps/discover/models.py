@@ -4,7 +4,7 @@ from django.db import models
 from curation.models import CuratedGroup, CuratedItem
 from curation.fields import CuratedForeignKey
 
-from freemix.exhibit.models import Exhibit
+from viewshare.apps.exhibit.models import PublishedExhibit
 
 
 class CuratedExhibitCollection(CuratedGroup):
@@ -43,7 +43,7 @@ class CuratedExhibit(CuratedItem):
             upload_to='discover/curated_exhibits',
             blank=True,
             help_text='Home page: 272x130')
-    exhibit = CuratedForeignKey(Exhibit)
+    exhibit = CuratedForeignKey(PublishedExhibit)
 
     objects = CuratedExhibitManager()
     field_overrides = {'title': 'custom_title'}

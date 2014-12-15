@@ -11,7 +11,6 @@ This software uses code from the following projects:
  * django-announcements (http://code.google.com/p/django-announcements)
  * django-atompub (http://code.google.com/p/django-atompub/)
  * django-classy-tags (https://github.com/ojii/django-classy-tags)
- * django-cms (http://github.com/divio/django-cms/)
  * django-compressor (http://github.com/mintchaos/django_compressor)
  * django-email-confirmation (http://code.google.com/p/django-email-confirmation/)
  * django-extensions (http://code.google.com/p/django-command-extensions/)
@@ -25,7 +24,6 @@ This software uses code from the following projects:
  * django-piston (http://bitbucket.org/jespern/django-piston/wiki/Home)
  * django-registration (https://bitbucket.org/ubernostrum/django-registration)
  * django-robots (http://bitbucket.org/jezdez/django-robots/)
- * django-sekizai (https://github.com/ojii/django-sekizai)
  * django-sorting (http://github.com/directeur/django-sorting/tree/master)
  * django-staticfiles (http://bitbucket.org/jezdez/django-staticfiles/)
  * django-template-utils (http://code.google.com/p/django-template-utils/)
@@ -40,10 +38,7 @@ This software uses code from the following projects:
  * jquery.bgiframe.min.js (http://brandonaaron.net)
  * jquery.dataTables.js (http://www.datatables.net)
  * jquery.form.js (http://malsup.com/jquery/form/)
- * jquery.highlight.js (http://johannburkard.de/blog/programming/javascript/highlight-javascript-text-higlighting-jquery-plugin.html)
- * jquery.jeditable.js (http://www.appelsiini.net/projects/jeditable)
  * jquery.json.js (http://code.google.com/p/jquery-json/)
- * jquery.machineTag.js (http://tagaholic.me/2009/04/14/i-am-machine-tag-and-so-can-you.html)
  * jquery (http://jquery.com/)
  * jquery UI (http://jqueryui.com/)
  * lightbox.js (http://www.huddletogether.com/projects/lightbox/)
@@ -52,9 +47,7 @@ This software uses code from the following projects:
  * Pinax (http://pinaxproject.com/)
  * pytz (http://pytz.sourceforge.net)
  * Simile (http://simile-widgets.org/)
- * simplejson (http://undefined.org/python/#simplejson)
  * South (http://south.aeracode.org/)
- * ui.multiselect.js (http://www.quasipartikel.at/multiselect/)
 
 
 Please see LICENSE.txt for the licenses that apply to these dependencies.

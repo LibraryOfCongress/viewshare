@@ -1,3 +1,3 @@
-{% load i18n %}{% load freemix_helpers %}{% blocktrans %}You are now connected with {% endblocktrans %} {{ invitation.from_user|nicename }}.
+{% load i18n %}{% load viewshare_helpers %}{% blocktrans %}You are now connected with {% endblocktrans %} {{ invitation.from_user.username }}.
 
 {%include "account/disclaimer.txt"%}

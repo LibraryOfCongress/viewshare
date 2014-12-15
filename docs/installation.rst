@@ -6,18 +6,18 @@ Linux based Installation
 
 Requires:
 
-   * Python 2.6.x
-   * virtualenv 1.4.3+ (easy_install2.6 virtualenv)
+   * Python 2.7.x
+   * virtualenv
    * Linux derivative (e.g. Ubuntu)
    * Web server (e.g. Apache 2.2 - optional)
    * Database (Postgres, MySQL, Oracle - optional)
 
 To build::
 
-   $ virtualenv --no-site-packages --distribute viewshare
+   $ virtualenv viewshare
    $ cd viewshare
    $ source bin/activate
-   $ pip install git+git://loc-recollect.git.sourceforge.net/gitroot/loc-recollect/loc-recollect#egg=viewshare
+   $ pip install -e git+https://github.com/LibraryOfCongress/viewshare.git#egg=viewshare
    $ pip install -r src/viewshare/requirements/requirements.txt
 
 The "example_project" directory provides the starting point for the
@@ -37,15 +37,11 @@ on which the database server resides, and the user credentials.
 
 Then create the database::
 
-   $ cd src/freemix/freemix/
+   $ cd src/viewshare
    $ ./manage.py syncdb --noinput
    $ ./manage.py migrate
    $ ./manage.py createsuperuser
 
-And load the default data::
-
-   $ ./manage.py loaddata exhibit_themes
-   $ ./manage.py loaddata canvases
 
 At this point, you can run the site using the included lightweight Web server::
 
@@ -72,7 +68,7 @@ The following settings should be customized on a per-site basis:
 * ANONYMOUS_USERNAME: the user name used by anonymous users, e.g. "guest"
 * ACCOUNT_REQUIRED_EMAIL: require email addresses for new accounts
 * ACCOUNT_EMAIL_VERIFICATION: require an email address verification step for new accounts
-
+* OMNITURE_TRACKING: Set to True to enable the LOC omniture tracking script
 
 Transformation Server
 ---------------------
@@ -82,14 +78,10 @@ providing data transformation and augmentation services.
 
 To install Akara, perform the following steps::
 
-   $ virtualenv --no-site-packages --distribute akara-viewshare
+   $ virtualenv akara-viewshare
    $ cd akara-viewshare
    $ source bin/activate
-   $ pip install html5lib httplib2 python-dateutil simplejson feedparser xlrd
-   $ pip install hg+http://foundry.zepheira.com/hg/zenpub#egg=zen
-   $ pip install git+http://github.com/zepheira/akara.git#egg=akara
-   $ pip install git+http://github.com/zepheira/amara.git#egg=amara
-   $ pip install git+http://github.com/zepheira/freemix-akara.git#egg=freemix-akara
+   $ pip install -r https://raw.githubusercontent.com/zepheira/freemix-akara/master/requirements.txt
 
 Create an akara.conf file with these contents (making the path substitution for ConfigRoot)::
 
@@ -99,33 +91,50 @@ Create an akara.conf file with these contents (making the path substitution for 
        PidFile = "logs/akara.pid"
        ModuleDir = "modules"
        ModuleCache = "caches"
-       MaxServers = 50
-       MinSpareServers = 5
-       MaxSpareServers = 10
-       MaxRequestsPerServer = 1000
+       MaxServers           =   150
+       MinSpareServers      =   5
+       MaxSpareServers      =   10
+       MaxRequestsPerServer =   10
        ErrorLog = "logs/error.log"
        AccessLog = "logs/access.log"
        LogLevel = "INFO"
 
    MODULES = [
+       "akara.demo.cache_proxy",
+       "zen.akamod.geocoding",
        "freemix_akara.load_data",
        "freemix_akara.augment_data",
        "freemix_akara.contentdm",
        "freemix_akara.oai",
    ]
 
-   class augment_data:
+   class geocoding:
+
+       # Comment out the following line for direct geonames
+       geocoder = 'http://purl.org/com/zepheira/services/geocoders/local-geonames'
+
+       ## Uncomment the following two lines for direct geonames,
+       ## substituting a geonames.org username
+       # geocoder = 'http://purl.org/com/zepheira/services/geocoders/geonames-service'
+       # geonames_service_user = '<geonames username>'
+
        geonames_dbfile = Akara.ConfigRoot+'/caches/geonames.sqlite3'
+
+       cache_max_age = 86400
 
    class load_data:
        magic_file_command="file -i -"
        dataload_diagnostics=(not 0)
 
-Install the geo database used by the augmentation service::
+   class cache_proxy:
+       maxlen = { None: 8*24*3600, }
+
+Install the geo cache used by the augmentation service::
 
    $ mkdir caches
    $ cd caches
    $ wget -O caches/geonames.sqlite3 http://dl.dropbox.com/u/19247598/Akara/geonames.sqlite3
+
 
 Then initialize and run Akara::
 

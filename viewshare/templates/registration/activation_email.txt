@@ -1,4 +1,4 @@
-{% load freemix_helpers %}{% load i18n %}{% url registration_activate activation_key as activation_url%}
+{% load viewshare_helpers%}{% load i18n %}{% url 'registration_activate' activation_key as activation_url%}
 
 To activate your {{ SITE_NAME }} account for user '{{profile.user.username}}', click the following link: {%site_url activation_url%}
 

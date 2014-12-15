@@ -1,122 +1,129 @@
 {% extends "site_base.html" %}
 
-
 {% load i18n %}
-
 
 {% block head_title %}Welcome to {{ SITE_NAME }}{% endblock %}
 
-
 {% block head_css %}
 {{block.super}}
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}stylesheets/home-page.css"/>
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}site_theme/css/homepage/base.css"/>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}viewshare/css/home-page.css"/>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}viewshare/css/base.css"/>
 {% endblock %}
-
-
-{% block head_scripts %}
-    <script type="text/javascript" src="{{STATIC_URL}}scripts/jquery.slides.js"></script>
-{% endblock head_scripts %}
-
-
-{% block tab_id %}id="home_tab"{% endblock %}
-
-
-{% block home-tab-selected %} ui-tabs-selected ui-state-active{% endblock %}
-
 
 {% block body %}
-{% if featured_exhibits %}
-<div id="slides">
-  <div class="slides_container">
-  {% for exhibit in featured_exhibits %}
-    <div class="slide">
-      <a href="{{ exhibit.get_absolute_url }}">
-      {% if exhibit.thumbnail %}
-        <img src="{{ exhibit.thumbnail.url }}" />
-      {% else %}
-        <img src="{{ STATIC_URL }}images/slide_holder.png" />
+<div class="container-fluid" id="homePage">
+
+  <div class="row-fluid">
+
+    <div class="span8">
+      
+      {% if featured_exhibits %}
+      <div id="homeSlide" class="carousel slide well">
+	<ol class="carousel-indicators">
+          {% for exhibit in featured_exhibits %}
+          <li data-target="#homeSlide" data-slide-to="{{ forloop.counter0 }}"{% if forloop.counter0 == 0 %} class="active"{% endif %}></li>
+          {% endfor %}
+	</ol>
+	<!-- Carousel items -->
+	<div class="carousel-inner">
+          {% for exhibit in featured_exhibits %}
+          <div class="item{% if forloop.counter0 == 0 %} active{% endif %}">
+            <a href="{{ exhibit.get_absolute_url }}">
+              {% if exhibit.thumbnail %}
+              <img src="{{ exhibit.thumbnail.url }}" />
+              {% else %}
+              <img src="{{ STATIC_URL }}images/slide_holder.png" />
+              {% endif %}
+            </a>
+            <div class="carousel-caption">
+              <p>{{ exhibit.custom_title|safe }}</p>
+            </div>
+          </div><!-- /.item -->
+          {% endfor %}
+	</div><!-- /.carousel-inner -->
+	<!-- Carousel nav -->
+	<a class="carousel-control left" href="#homeSlide" data-slide="prev">&lsaquo;</a>
+	<a class="carousel-control right" href="#homeSlide" data-slide="next">&rsaquo;</a>
+      </div><!-- /#homeSlide -->
+
       {% endif %}
-      </a>
-      <div class="caption">
-        <p>{{ exhibit.custom_title|safe }}</p>
+    </div><!-- /.span8 -->
+
+    <div class="span4">
+
+      <div id="front-page-application-logo"></div>
+      
+      <div class="lead">
+	<strong>{{ SITE_NAME }}</strong> is a <strong>free</strong> platform for generating and customizing views <strong>(interactive maps, timelines, facets, tag clouds)</strong> that allow users to experience your <strong>digital collections</strong>.
+      </div> 
+
+      <div class="lead-links">
+	<div class="lead-link">
+	  <a href="/registration/register/" class="btn btn-large">
+	    <div id="first" class="linkblock">Request Free Account</div>
+	  </a>
+	</div>
+	<div class="lead-link">
+	  <a href="/about/screencast" class="btn btn-large">
+	    <div id="second" class="linkblock">Watch Screencast</div>
+	  </a>
+	</div>
+	<div class="lead-link">
+	  <a href="http://viewshare.uservoice.com/knowledgebase/articles/248044-getting-started" class="btn btn-large">
+	    <div id="third" class="linkblock">Get Started</div>
+	  </a>
+	</div>
       </div>
-    </div><!-- /.slide -->
-  {% endfor %}
-  </div><!-- /#slides_container -->
-  <div class="arrows">
-    <a href="#" class="prev"><img src="{{ STATIC_URL }}images/arrow-prev.png" width="24" height="24" alt="Arrow Prev"></a>
-    <a href="#" class="next"><img src="{{ STATIC_URL }}images/arrow-next.png" width="24" height="24" alt="Arrow Next"></a>
-  </div><!-- /.arrows -->
-</div><!-- /#slides -->
-{% endif %}
-<div class="primarydisc">
-  <p>
-  <strong>{{ SITE_NAME }}</strong> is a <strong>free</strong> platform for generating and customizing views <strong>(interactive maps, timelines, facets, tag clouds)</strong> that allow users to experience your <strong>digital collections</strong>.
-  </p> 
-  <a href="/registration/register/">
-    <div id="first" class="linkblock">Request Free Account</div>
-  </a>
-  <a href="/screencast">
-    <div id="second" class="linkblock">Watch Screencast</div>
-  </a>
-  <a href="http://recollection.zepheira.com/about/help/">
-    <div id="third" class="linkblock">Get Started</div>
-  </a>
-</div><!-- /.primarydisc -->
-<style type="text/css">
-  .linkblock {
-    padding:1.2em 1em 1em 1em
-  }
-</style>
+    </div><!-- /.span3 -->
 
-<div class="action-set first-action-set">
-  <a href="/import"><h3 class="grid_title">Import Collections</h3></a>
-  <div class="stepblock">
-    Ingest collections from <strong>spreadsheets</strong> or <strong><a href="http://www.loc.gov/standards/mods/">MODS</a></strong> records. Upload from your desktop or import them from a URL. 
-  </div>
-</div><!-- /.action-set -->
-<div class="action-set">
-  <a href="generate-views"><h3 class="grid_title">Generate Views</h3></a>
-  <div class="stepblock">
-    Generate distinct interactive visual interfaces to your digital collections, including <strong>maps</strong> and <strong>timelines</strong>, and sophisticated <strong>faceted navigation</strong>.
-  </div>
-</div><!-- /.action-set -->
-<div class="action-set">
-  <a href="/embed-and-share"><h3 class="grid_title">Embed and Share</h3></a>
-  <div class="stepblock">
-    Just <strong>copy-paste to embed</strong> your interface in any webpage. Provide your users with novel and intuitive ways to explore your content    
-  </div>
-</div><!-- /.action-set -->
-{% endblock %}
+  </div><!-- /.row -->
 
 
-{% block final %}
-{{ block.super }}
-<script>
-$(function() {
-  $('#slides').slides({
-    preload: true,
-    preloadImage: '{{ STATIC_URL }}images/loading.gif',
-    play: 10000,
-    pause: 2500,
-    hoverPause: true,
-    animationStart: function(current){
-      $('.caption').animate({
-        bottom:-35
-      }, 100);
-    },
-    animationComplete: function(current){
-      $('.caption').animate({
-        bottom:0
-      }, 200);
-    },
-    slidesLoaded: function() {
-      $('.caption').animate({
-        bottom:0
-      }, 200);
-    }
-  });
-});
-</script>
-{% endblock final %}
+  <div class="row-fluid fp-wells">
+    <div class="span4">
+      <div class="fp-widget-well">
+	<h2 class="fp-widget-header"><a href="http://viewshare.uservoice.com/knowledgebase/articles/243875-importing-data-into-viewshare">Import Collections</a></h2>
+	
+	<div class="stepblock">Ingest collections from <strong>Spreadsheets, JSON, XML <a href="http://www.loc.gov/standards/mods/">MODS</a></strong> or <strong>OAI-PMH</strong> records. Upload from your desktop or import them from the Web.</div>
+	
+      </div>
+    </div><!-- /.span4 -->
+
+    <div class="span4">
+      <div class="fp-widget-well">
+	
+	<h2 class="fp-widget-header"><a href="http://viewshare.uservoice.com/knowledgebase/articles/244379-generating-views-of-collection-data">Generate Views</a></h2>
+
+	<div class="stepblock">
+	  Generate distinct interactive visual interfaces to your digital collections, including <strong>maps</strong> and <strong>timelines</strong>, and sophisticated <strong>faceted navigation</strong>.
+	</div>
+	
+      </div>
+    </div><!-- /.span4 -->
+
+
+    <div class="span4">
+
+      <div class="fp-widget-well">
+	
+	<h2 class="fp-widget-header"><a href="http://viewshare.uservoice.com/knowledgebase/articles/247273-embed-and-share-your-views">Embed and Share</a></h2>
+	
+	<div class="stepblock">
+	  Just <strong>copy-paste to embed</strong> your interface in any webpage. Provide your users with novel and intuitive ways to explore your content.
+	</div>
+	
+      </div>
+    </div><!-- /.span4 -->
+
+  </div><!-- /.row-fluid -->
+
+</div><!-- /.container-fluid -->
+
+{% endblock body %}
+
+
+{% block extra_scripts %}
+  <script>
+  $(function() { $('#homeSlide').carousel(); });
+  </script>
+{% endblock extra_scripts %}
