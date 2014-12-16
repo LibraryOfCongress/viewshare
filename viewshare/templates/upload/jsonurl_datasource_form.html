@@ -1,17 +1,20 @@
 {% extends "upload/datasource_form.html" %}
+{% load url from future %}
+
 
 {% load i18n %}
 
 {% block head_data %}
-<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}stylesheets/json-upload.css" />
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}upload/css/json-upload.css" />
+<link rel="viewshare/json-prep" href="{% url 'json_prep_view' %}" />
 {% endblock %}
 
-{% block head_scripts %}
-<script src="{{STATIC_URL}}scripts/json-upload.js"></script>
+{% block extra_scripts %}
+<script src="{{STATIC_URL}}upload/js/json-upload.js"></script>
 <script>
 $(document).ready(function() {
-    JSONPrep.init("{% url json_prep_view %}", true);
-});
+    var url = $("link[rel='viewshare/json-prep']").attr("href");
+    JSONPrep.init(url, true);});
 </script>
 {% endblock %}
 
@@ -38,7 +41,9 @@ $(document).ready(function() {
 </div>
 {{ block.super }}
 <div id="spinner">
-  <p><img src="{{STATIC_URL}}images/loading.gif"/></p>
+  <div class="progress progress-striped active">
+    <div class="bar" style="width: 100%;"></div>
+  </div>
   <p>{% blocktrans %}Analyzing JSON, please wait.{% endblocktrans %}</p>
 </div>
 <div id="json-upload">
@@ -51,37 +56,75 @@ $(document).ready(function() {
       <input type="hidden" id="load-url" name="url" />
       <input type="hidden" id="load-prop-mapping" name="mapping" value="{}"/>
       <h2>{% trans "From" %} <a id="input-url" target="_new"></a></h2>
-      <p>{% blocktrans %}Select the data collection from the set of lists found below:{% endblocktrans %}</p>
-      <br />
-      <div class="ctrlHolder">
-        <div id="array-options-container">
-          <label for="array-options" class="requiredField">{% trans "Lists" %}</label>
-          <select id="array-options" name="path">
-          </select>
-          <br />
-          <div class="button">
-            <input class="submit" type="submit" value="{% trans "Continue" %}" />
-          </div>
-        </div>
-        <div id="selected-sample-container">
-          <h4>{% blocktrans %}Sample item from selected list{% endblocktrans %}</h4>
-          <button id="pager-back">&lt;</button>
-          <span id="pager-current"></span> {% trans "of" %} <span id="pager-total"></span> {% trans "sample items" %}
-          <button id="pager-forward">&gt;</button>
-          <div id="item-properties-container">
-            <table>
-              <thead>
-                <tr>
-                  <th>{% trans "Property" %}</th>
-                  <th>{% trans "Frequency" %}</th>
-                  <th>{% trans "Item value" %}</th>
-                </tr>
-              </thead>
-              <tbody id="item-properties"></tbody>
-            </table>
-          </div>
-        </div>
+      <div class="alert alert-info">
+	{% blocktrans %}Select the data collection from the set of lists found below:{% endblocktrans %}
       </div>
+      <br />
+
+      <div class="ctrlHolder">
+
+	<div class="row-fluid">
+	  <div class="span3">
+
+            <div id="array-options-container">
+	      <div class="control-group">
+		<label for="array-options" class="control-label requiredField">{% trans "Lists" %}</label>
+		<div class="controls">
+		  <select id="array-options" name="path">
+		  </select>
+		</div>
+	      </div>
+
+	      <div class="control-group">
+		<div class="controls">
+		  <div class="button">
+		    <input class="submit btn btn-primary" type="submit" value="{% trans "Continue" %}" />
+		  </div>
+		</div>
+	      </div>
+            </div>
+
+	  </div>
+	  <div class="span8">
+
+            <div id="selected-sample-container">
+	      <div class="control-group">
+		<label class="control-label">{% blocktrans %}Sample item from selected list{% endblocktrans %}</label>
+	      </div>
+
+	      <div class="controls">
+
+		<div class="btn-group">
+		  <button class="btn" id="pager-back">&lt;</button>
+		  <button class="btn disabled" ><span id="pager-current"></span> {% trans "of" %} <span id="pager-total"></span> {% trans "sample items" %}</button>
+		  <button class="btn" id="pager-forward">&gt;</button>
+		</div>
+
+		<br />
+		<br />
+
+		<div id="item-properties-container">
+		  <table class="table table-condensed table-bordered table-striped">
+		    <thead>
+                      <tr>
+			<th>{% trans "Property" %}</th>
+			<th>{% trans "Frequency" %}</th>
+			<th>{% trans "Item value" %}</th>
+                      </tr>
+		    </thead>
+		    <tbody id="item-properties"></tbody>
+		  </table>
+		</div>
+
+	      </div> <!-- controls -->
+
+            </div>
+
+	  </div> <!-- span8 -->
+	</div> <!-- row-fluid -->
+
+      </div>
+
     </form>
   </fieldset>
 </div>

@@ -14,7 +14,7 @@ downloads
 .pydevproject
 .settings
 lib/python*
-.Python
+.Pythonpl
 include/python*
 *.egg-info
 *.swp
@@ -31,5 +31,11 @@ MANIFEST
 /build/*
 .hg/*
 .hgtags
+*~
+*#
 celerybeat-schedule
 celerybeat.pid
+.python-version
+.idea
+Vagrantfile
+.vagrant

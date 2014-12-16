@@ -2,44 +2,23 @@
 
 {% load i18n %}
 {% load connection_helpers %}
-{% load freemix_helpers %}
+{% load viewshare_helpers %}
 {% load compress %}
 
-{% block head_title %}{{ other_user|nicename }}{% blocktrans %}'s Connections{% endblocktrans %}{% endblock %}
+{% block head_title %}{{ other_user.username }}{% blocktrans %}'s Connections{% endblocktrans %}{% endblock %}
 
 {% block head_css %}
 {{ block.super }}
-{% compress css %}
 
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}stylesheets/profile_users.css"/>
-{% endcompress %}
-{% endblock %}
-
-{% comment %}
- check to see if the friends of the user being inspected is user logged in
- note: need to do logic this way due to template processing pipeline
-{% endcomment %}
-
-{% block yourfriendsprofile-tab-selected %}
-  {% ifequal user.username other_user.username %} ui-tabs-selected ui-state-active{% endifequal %}
-{% endblock %}
-
-{# if user being inspected is not the one logged in, create a hierarchical tab-group for display #}
-
-{% block extra_subnav %}
-{% ifnotequal user.username other_user.username %}
-<li>
-  <ul class="tab-group">
-    <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="">{{ other_user|nicename }}{% blocktrans %}'s Connections{% endblocktrans %}</a></li>
-  </ul>
-</li>
-{% endifnotequal %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}profiles/css/profile_users.css"/>
 {% endblock %}
 
 {% block body %}
 
-<h1>{{ other_user|nicename }}{% blocktrans %}'s Connections{% endblocktrans %}</h1>
+<h1>{{ other_user.username }}{% blocktrans %}'s Connections{% endblocktrans %} ({{ object_list | length }})</h1>
 
-{% connection_list object_list  %}
+<div class="view_details">
+  {% connection_list object_list  %}
+</div>
 
 {% endblock %}

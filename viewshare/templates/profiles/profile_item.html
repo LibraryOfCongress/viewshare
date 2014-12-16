@@ -1,47 +1,65 @@
+{% load url from future %}
 {% load i18n %}
 {% load pagination_tags %}
 {% load humanize %}
-{% load timezone_filters %}
-{% load freemix_helpers %}
+{% load viewshare_helpers %}
 {% load connection_helpers %}
+{% load gravatar %}
 
 <li class="user_profile_entry clearfix result_set_item">
 
-  
   <div class="user_data_entry">
-    <div class="user_top">
-      <a href="{% url profile_detail user.username %}" title="{{ user|nicename }}" class="user_name">
-         <span class="value">{{ user|nicename }}</span>
-      </a>
-      
-      {% if user.get_profile.location %}
-      <span class="user_location">
-	<span class="value">{{ user.get_profile.location }}</span>
-      </span>
-      {% endif %}
+    <div class="row-fluid">
+      <div class="span7">
+	<span class="identicon">
+          {% gravatar user.email|add:"f=t" 28 %}
+	</span>
+
+	<span class="user-name">
+	  <a href="{% url 'profile_detail' user.username %}" title="{{ user.username }}">
+            {{ user.username }}
+	  </a>
+	</span>
+
+	{% if user.get_profile.location %}
+	<span class="user_location">
+	  <span class="value">{{ user.get_profile.location }}</span>
+	</span>
+	{% endif %}
+      </div>
+
+      <div class="span5">
+	<div class="pull-right">
+	  {% user_counts user %}
+	</div>
+      </div>
     </div>
-    
-    {% user_counts user %}
+
     {% if user.get_profile.about %}
-    <div class="user_middle">
-      <div class="user_description">{{ user.get_profile.about|truncatewords:50|linebreaks }}</div>
+    <div class="row-fluid">
+      <div class="span12">
+	<div class="user_description">{{ user.get_profile.about }}</div>
+      </div>
     </div>
     {% endif %}
 
-    <div class="user_bottom">
-      {% if user.date_joined %}
-      <p class="user_joined">
-	<span class="property">{% trans "Joined" %}</span> <span class="value">{{ user.date_joined|date }}</span>
-      </p>
-      {% endif %}
+    {% if user.date_joined %}
+    <div class="row-fluid">
+      <div class="span12">
+	<span class="user-joined">
+	  <span class="property">{% trans "Joined" %}</span> <span class="value">{{ user.date_joined|date }}</span>
+	</span>
 
-      {% if user.last_login %}
-      <p class="user_active">
-	<span class="property">{% trans "Last visited" %}</span> <span class="value">{{ user.last_login|date }}</span>
-      </p>
-      {% endif %}
+	{% if user.last_login %}
+	<span class="user-active">
+	  <span class="divider">-</span>
+	  <span class="property">{% trans "Last visited" %}</span> <span class="value">{{ user.last_login|date }}</span>
+	</span>
+	{% endif %}
+
+      </div>
     </div>
+    {% endif %}
 
-  </div>
-  
+  </div> <!-- end user data -->
 </li>

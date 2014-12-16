@@ -1,78 +1,85 @@
 {% extends "account/base.html" %}
 
 {% load i18n %}
-{% load uni_form_tags %}
+{% load crispy_forms_tags %}
 
 {% block head_title %}{% trans "Account" %}{% endblock %}
 
-{% block acctemail-tab-selected %} ui-tabs-selected ui-state-active{% endblock %}
+{% block head_css %}
+{{ block.super }}
+<link href="{{STATIC_URL}}viewshare/css/settings.css" rel="stylesheet" type="text/css" media="screen,projection" />
+{% endblock %}
 
 {% block body %}
-    <h1>{% trans "Email Addresses" %}</h1>
+<!-- <h1>{% trans "Change Email" %}</h1> -->
+
+<div class="settings_options settings_wrapper">	
+  <div class="settings_text">
     
-    {% if user.emailaddress_set.all %}
-        <table class="email_list">
-            {% for emailaddress in user.emailaddress_set.all %}
-                <tr>
-                    <td>{% if emailaddress.primary %}<b>{{ emailaddress.email }}</b>{% else %}{{ emailaddress.email }}{% endif %}</td>
-                    {% if emailaddress.verified %}
-                        <td>
-                            <span class="verified">{% trans "verified" %}</span>
-                            {% if emailaddress.primary %}
-                                - <span class="primary">{% trans "primary" %}</span>
-                            {% else %}
-                                <form style="display: none;" id="primary_{{ forloop.counter }}" method="post" action="">
-                                    {%csrf_token %}
-                                    <input type="hidden" name="email" value="{{ emailaddress.email }}"/>
-                                    <input type="hidden" name="action" value="primary"/>
-                                </form>
-                                -
-                                <a href="#" onclick="$('#primary_{{ forloop.counter }}').submit();">{% trans "make primary" %}</a>
-                            {% endif %}
-                        </td>
-                    {% else %}
-                        <td>
-                            <span class="unverified">{% trans "unverified" %}</span>
-                            <form style="display: none;" id="send_{{ forloop.counter }}" method="post" action="">
-                                    {%csrf_token %}
-                                
-                                <input type="hidden" name="email" value="{{ emailaddress.email }}"/>
-                                <input type="hidden" name="action" value="send"/>
-                            </form>
-                            -
-                            <a href="#" onclick="$('#send_{{ forloop.counter }}').submit();">{% trans "re-send verification email" %}</a>
-                        </td>
-                    {% endif %}
-                    <td>
-                        {% if emailaddress.primary %}
-                        {% else %}
-                        <form style="display: none;" id="remove_{{ forloop.counter }}" method="post" action="">
-                                    {%csrf_token %}
-                            
-                                <input type="hidden" name="email" value="{{ emailaddress.email }}"/>
-                                <input type="hidden" name="action" value="remove"/>
-                            </form>
-                            <a class="remove" href="#" onclick="$('#remove_{{ forloop.counter }}').submit()">{% trans "remove" %}</a>
-                        {% endif %}
-                    </td>
-                </tr>
-            {% endfor %}
-        </table>
-    {% else %} {# no user.emailaddress_set.all #}
-        <p><span class="warning">{% trans "None" %}</span>. {% trans "You should really add one so you can receive notifications, reset your password if you forget it, etc." %}</p>
-    {% endif %}
-    
-    <h3>{% trans "Add Email Address" %}</h3>
-    
-    <form method="post" action="" class="uniForm">
-        <fieldset class="inlineLabels">
-            {%csrf_token%}
-            {{ add_email_form|as_uni_form }}
-             <div class = "form_block">
-                 <input type="hidden" name="action" value="add"/>
-                 <input type="submit" value="{% trans "Add" %}"/>
+    <form method="post" action="" class="uniForm form form-horizontal">
+      <fieldset>
+        <legend>Change Email Settings</legend>
+
+        {%csrf_token%}
+
+        <br />
+        <div class="row-fluid">
+          <div class="span8 offset2">
+
+            {% if user.email %}
+
+            <div class="control-group">
+                  <label class="control-label">Current Email Address</label>
+              <div class="controls">
+                <span class="email-address">
+                {{ user.email }}
+                </span>
+              </div>
             </div>
-        </fieldset>
+
+            {% else %}
+
+            <div class="alert alert-warning warning">{% trans "No Email on file. You should really add one so you can receive notifications, reset your password if you forget it, etc." %}</div>
+
+            {% endif %}
+
+            {% if outstanding_request %}
+                <div class="alert-success alert">
+                    {% blocktrans %}
+                        An email has been sent to {{ outstanding_request }} for confirmation.
+                    {% endblocktrans %}
+                </div>
+            {% endif %}
+            <div class="control-group">
+              <label class="control-label" for="id_username">New Email Address</label>
+              <div class="controls">
+                <input type="text" id="id_email" placeholder="" name="email" required="true"/>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <div class="controls">
+                <input type="submit" value="{% trans "Change Email" %}" class="btn btn-primary" />
+              </div>
+            </div>
+
+            {% if form.non_field_errors %}
+            <div class="non-field-errors">
+              {% for err in form.non_field_errors %}
+                  <div class="row-fluid">
+                      <div class="span8 offset2">
+                        <div class="alert alert-error">
+                            <p class="center">{{ err }}</p>
+                        </div>
+                      </div>
+                  </div>
+              {% endfor %}
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </fieldset>
     </form>
-    
+  </div>
+</div>
 {% endblock %}

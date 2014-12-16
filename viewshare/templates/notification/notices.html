@@ -1,14 +1,15 @@
 {% extends "messages/base.html" %}
+{% load url from future %}
+
 
 {% load humanize i18n %}
 {% load pagination_tags %}
-{% load timezone_filters %}
 
-{% block head_title %}{% trans "Notices" %}{% endblock %}
+{% block head_title %}{% trans "Messages" %}{% endblock %}
 
 {% block extra_head %}
 {{ block.super }}
-<link rel="alternate" type="application/atom+xml" title="Notices Feed" href="{% url notification_feed_for_user %}" />
+<link rel="alternate" type="application/atom+xml" title="Notices Feed" href="{% url 'notification_feed_for_user' %}" />
 {% endblock %}
 
 {% block notices-tab-selected %} ui-tabs-selected ui-state-active{% endblock %}
@@ -16,35 +17,33 @@
 {% block body %}
 <h1>{% trans "Notices" %}</h1>
 
-  <div class="priority-area">
-    <p>
-     <span class="notice_setting_msg"><a href="{% url notification_notice_settings %}" class="button_link">{% trans "Configure E-Mail Notices" %}</a></span>
-     {% if notices %}
-     <span class="notice_clear"><a href="{% url notification_mark_all_seen %}" class="button_link">{% trans "Mark unseen notices as seen" %}</a></span>
-     {% endif %}
-    </p>
-  </div>
+{% autopaginate notices %}
 
-    {% autopaginate notices %}
+{% if notices %}
+
+{# TODO: get timezone support working with regroup #}
+{% regroup notices by added.date as notices_by_date %}
   
-  {% if notices %}
-  
-  {# TODO: get timezone support working with regroup #}
-  {% regroup notices by added.date as notices_by_date %}
-  
-  {% for date in notices_by_date %}
-  <h2 class="ui-widget-header notice_date">{{ date.grouper|naturalday:_("MONTH_DAY_FORMAT")|capfirst }}</h2>
-  <div class="notice_set">
+{% for date in notices_by_date %}
+<h3 class="notice_date">{{ date.grouper|naturalday:_("MONTH_DAY_FORMAT")|capfirst }}</h3>
+
+<div class="notice_set">
   
   {% for notice in date.list %}
   {% if notice.is_unseen %}
-  <div class="unseen_notice">
+  <div class="unseen_notice notice alert alert-info">
     {% else %}
-    <div class="notice">
+    <div class="notice alert alert-info">
       {% endif %}
-      <span class="notice_type">[{% trans notice.notice_type.display %}]</span>
-      <span class="notice_message">{{ notice.message|safe }}</span>
-      <span class="notice_time">{{ notice.added|localtime:account.timezone|time:"P" }}</span>
+      <div class="row-fluid">
+	<div class="span12">
+	  <div class="notice_block">
+	    <span class="notice_type">[{% trans notice.notice_type.display %}]</span>
+	    <span class="notice_message"><i class="fa fa-info-circle fa-2x"></i></span> <span class="notice-label">{{ notice.message|safe }}</span>
+	    <span class="notice_time">{{ notice.added|date }}</span>
+	  </div>
+	</div>
+      </div>
     </div>
     {% endfor %}
     </div>

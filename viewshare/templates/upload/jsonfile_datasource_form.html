@@ -1,16 +1,22 @@
 {% extends "upload/file_datasource_form.html" %}
+{% load url from future %}
+
 
 {% load i18n %}
 
 {% block head_data %}
-<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}stylesheets/json-upload.css" />
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}upload/css/json-upload.css" />
+<link rel="viewshare/json-prep" href="{% url 'json_prep_view' %}" />
+
 {% endblock %}
 
-{% block head_scripts %}
-<script src="{{STATIC_URL}}scripts/json-upload.js"></script>
+{% block extra_scripts %}
+<script src="{{STATIC_URL}}upload/js/json-upload.js"></script>
+
 <script>
 $(document).ready(function() {
-    JSONPrep.init("{% url json_prep_view %}", false);
+    var url = $("link[rel='viewshare/json-prep']").attr("href");
+    JSONPrep.init(url, false);
 });
 </script>
 {% endblock %}
@@ -38,7 +44,9 @@ $(document).ready(function() {
 </div>
 {{ block.super }}
 <div id="spinner">
-  <p><img src="{{STATIC_URL}}images/loading.gif"/></p>
+  <div class="progress progress-striped active">
+    <div class="bar" style="width: 100%;"></div>
+  </div>
   <p>{% blocktrans %}Analyzing JSON, please wait.{% endblocktrans %}</p>
 </div>
 <div id="json-upload">
@@ -59,16 +67,16 @@ $(document).ready(function() {
           </select>
           <br />
           <div class="button">
-            <input class="submit" type="submit" value="{% trans "Continue" %}" />
+            <input class="submit btn btn-info" type="submit" value="{% trans "Continue" %}" />
           </div>
         </div>
-        <div id="selected-sample-container">
+        <div id="selected-sample-container well">
           <h4>{% blocktrans %}Sample item from selected list{% endblocktrans %}</h4>
           <button id="pager-back">&lt;</button>
           <span id="pager-current"></span> {% trans "of" %} <span id="pager-total"></span> {% trans "sample items" %}
           <button id="pager-forward">&gt;</button>
           <div id="item-properties-container">
-            <table>
+            <table class="table table-striped table-bordered table-condensed">
               <thead>
                 <tr>
                   <th>{% trans "Property" %}</th>

@@ -1,0 +1,65 @@
+/* css used to render list of all users */
+ul.profile_list {
+    margin-left: 0px;
+}
+
+ul.profile_list li {
+    list-style-type: none;
+}
+
+.user_profile_entry {
+    background: #fff url(../../images/header-background.png) left bottom repeat-x;
+    border: 1px solid #eee;
+    line-height: 1.3em;
+    margin: 1em 0;
+    padding: 0.5em 2%;
+}
+
+
+.user_data_entry .user_name {
+   background: transparent url(../../images/user-32.png) top left no-repeat;
+   height: 32px;
+   font-size: 100%;
+   font-weight: bold;
+   position:absolute;
+   padding-top: 5px;
+   margin-top: 0px;
+   padding-left: 40px;
+}
+
+
+.user_data_entry .user-name {
+    font-weight: bold;
+    font-size: 130%;
+    padding-left: 10px;
+    padding-top: 5px;
+}
+
+
+.user_data_entry .user_location {
+    padding: 0 1em;
+    font-size: 0.9em;
+}
+
+.user_data_entry .user_description {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.user_data_entry .user-joined, .user_data_entry .user-active {
+   color: grey;	 
+}
+
+.user-active .divider {
+   padding-left: 3px;
+   padding-right: 3px;
+}
+
+.user_counts .no_data {
+    color: #666;
+}
+
+
+
+
+

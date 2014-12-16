@@ -1,0 +1,50 @@
+/* settings styling */
+
+.settings_wrapper {
+  background-image:url(../../images/settings_bg.png);
+  background-repeat:no-repeat;
+  width:680px;
+  height:450px;
+  color:#333;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+}
+
+.settings_text {
+  padding: 35px 35px;
+}
+
+.settings_text .form-body, .settings_text .form-block,  {
+}
+
+.settings_text .heading {
+ font-size: 1.3em;
+ margin-top: 20px;
+ margin-bottom: 10px;
+ margin-left: -10px;
+ color: grey;
+}
+
+.settings_text .email-address {
+margin-top: 10px;
+}
+
+.settings_text .status {
+ font-size: 1.1em;
+}
+
+.settings_text .verified {
+  color: blue;
+}
+
+.settings_text .unverified {
+  color: red;
+}
+
+.settings_text .control-label {
+ font-weight: bold;
+ color: slategrey;
+ margin-top: -5px;
+}
+

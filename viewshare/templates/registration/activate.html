@@ -1,4 +1,6 @@
 {% extends "site_base.html" %}
+{% load url from future %}
+
 {% load i18n %}
 
 
@@ -10,7 +12,7 @@
     <fieldset>
       <div class="fieldtext">
 
-	<p>{% blocktrans %}This activation key is invalid.{% endblocktrans %} <a href="{% url acct_login %}">{% trans "Click here to log in" %}</a></p>
+	<p>{% blocktrans %}This activation key is invalid.{% endblocktrans %} <a href="{% url 'acct_login' %}">{% trans "Click here to log in" %}</a></p>
 
       </div>
     </fieldset>

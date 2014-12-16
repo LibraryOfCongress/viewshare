@@ -1,27 +1,44 @@
+{% load url from future %}
 {% load i18n %}
 {% load humanize i18n %}
-{% load timezone_filters %}
 {% load pagination_tags %}
 
 <h2>{% trans "Notices" %}({{queryset.count}})</h2>
-        {% if queryset %}
-           {% autopaginate queryset max_count %} 
-        {% for notice in queryset %}
-        {% if notice.unseen %}
-        <div class="unseen_notice">
-          {% else %}
-        <div class="notice">
-          {% endif %}
-          <span class="notice_type">[{% trans notice.notice_type.display %}]</span>
-          <span class="notice_message">{{ notice.message|safe }}</span>
-          <span class="notice_time">{{ notice.added }}</span>
-        </div>
-        {% endfor %}
-          
-        {% else %}
-          {% url notification_notices as notices_url %}
-          <p class="center">{% blocktrans %}You have no unseen <a href="{{ notices_url }}">notices</a>.{% endblocktrans %}</p>
-        {% endif %}
-        {% if queryset %}
-         <div class="see_all"><a href="{% url notification_notices %}">{% trans "See all" %}</a></div>
-        {% endif %}
+
+{% if queryset %}
+{% autopaginate queryset max_count %} 
+
+{% for notice in queryset %}
+
+{% if notice.unseen %}
+<div class="unseen_notice alert alert-success">
+{% else %}
+<div class="notice alert alert-info">
+{% endif %}
+
+<div class="row-fluid">
+<div class="span12">
+<div class="notice_block">
+  <span class="notice_type">[{% trans notice.notice_type.display %}]</span>
+  <span class="notice_message"><i class="fa fa-info-circle fa-2x"></i></span> <span class="notice-label">{{ notice.message|safe }}</span>
+  <span class="notice_time">{{ notice.added }}</span>
+</div>
+</div>
+</div>
+</div>
+{% endfor %}
+  
+{% else %}
+{% url 'notification_notices' as notices_url %}
+<div class="alert alert-info">
+<div class="row-fluid">
+<div class="span12">
+{% blocktrans %}You have no unseen <a href="{{ notices_url }}">notices</a>.{% endblocktrans %}
+</div>
+</div>
+</div>
+{% endif %}
+  
+{% if queryset %}
+<div class="see_all"><a href="{% url 'notification_notices' %}">{% trans "See all" %}</a></div>
+{% endif %}

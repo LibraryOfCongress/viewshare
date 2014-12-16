@@ -1,0 +1,38 @@
+<form class="form-horizontal">
+  <div class="control-group">
+    <label class="control-label" for="new-list-property">New Property Name</label>
+    <div class="controls">
+      <input type="text" id="new-list-property" class="input-xlarge">
+    </div>
+  </div><!-- /.control-group -->
+  <div class="control-group">
+    <label class="control-label" for="new-list-delimiter">Select a pattern</label>
+    <div class="controls">
+      <select id="new-list-delimiter" class="input-xlarge">
+        <option value=""></option>
+        <option value=",">e.g. &quot;bread, flour, milk, cheese&quot;</option>
+        <option value=";">e.g. &quot;bread; flour; milk; cheese&quot;</option>
+        <option value="--">e.g. &quot;bread--flour--milk--cheese&quot;</option>
+        <option value=" ">e.g. &quot;bread flour milk cheese&quot;</option>
+      </select>
+    </div>
+  </div><!-- /.control-group -->
+  <table class="table table-hover table-condensed augment-properties">
+    <caption>Create the list from your existing data.</caption>
+    <thead>
+      <tr>
+        <th>Selected</th>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody id="properties">
+      {{#each propertyOptions}}
+      <tr>
+        <td class="selected"><input type="radio" id="list-prop-{{this.id}}" name="list-id" value="{{ this.id }}"></td>
+        <td class="name"><label for="list-prop-{{this.id}}">{{ this.label }}</label></td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table><!-- /.augment-properties -->
+  <!-- TODO: pattern and delimiter form elements -->
+</form><!-- /.form-horizontal -->

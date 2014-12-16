@@ -17,16 +17,6 @@ Third-party Apps
 * announcements
     * Make site-wide announcements
     * https://github.com/brosner/django-announcements
-* CMS Apps
-    * cms
-    * mptt
-    * menus
-    * sekizai
-    * cms.plugins.text
-    * cms.plugins.picture
-    * cms.plugins.link
-    * cms.plugins.file
-    * cms.plugins.snippet
 * compressor
     * Compresses linked and inline javascript or CSS into a single cached file.
     * https://github.com/jezdez/django_compressor
@@ -37,65 +27,46 @@ Third-party Apps
     * Display sortable data
     * https://github.com/directeur/django-sorting
     * NOTE: Is this being used by users? I see examples of the {% anchor %} templatetag in the templates but don't see these templates on the site
-* emailconfirmation
-    * Confirms that email addresses associated with user accounts are valid
-    * https://github.com/jtauber/django-email-confirmation
 * friends
     * Friendship, contact and invitation management
     * https://github.com/jtauber/django-friends
     * candidate for elimination
 * notification
     * user notification management
-    * https://github.com/jtauber/django-notification 
+    * https://github.com/jtauber/django-notification
 * pagination
     * Break lists into paged results
     * https://github.com/ericflo/django-pagination
-* piston
-    * A framework for creating RESTful APIs
-    * https://bitbucket.org/jespern/django-piston/wiki/Home
 * registration
     * user registration application
     * https://bitbucket.org/ubernostrum/django-registration
-* robots
-    * Manages robots.txt files
-    * https://github.com/jezdez/django-robots
 * south
     * Provides schema and data migrations
     * https://bitbucket.org/andrewgodwin/south/
-* timezones
-    * Deal with timezone localization for users
-    * https://github.com/brosner/django-timezones
-* uni_form
+* django-crispy-forms
     * Build programmatic reusable layouts out of components, having full control of the rendered HTML
-    * https://github.com/pydanny/django-uni-form
-    * NOTE: uni_form is deprecated for django-crispy-forms
+    * http://django-crispy-forms.readthedocs.org/en/latest/
 
 Custom apps
 -----------
 * Freemix specific
     * freemix
-    * freemix.dataset
+    * viewshare.apps.legacy.dataset
         * A DataSet can be thought of as a group of information related to uploaded data. A DataSet contains information about:
             * The raw data that was uploaded to Viewshare
             * Descriptions of the columns in uploaded data
             * Type of data (CSV file, MODS file, etc.)
             * Descriptions of the data properties which are compatible with exhibit and used to visualize the DataSet through SIMILE's Exhibit
-    * freemix.dataset.augment
+    * viewshare.apps.augment
         * Stores and provides augmentation patterns for dataset cells. For example, a DataSet data cell may contain a list of values separated by a comma. This app provides a pattern that recognizes comma separated data and parses it accordingly.
     * freemix.exhibit
-        * An Exhibit is a visualization of a DataSet. An Exhibit consists of a Theme and a Canvas:
-            * Theme - color scheme of the Exhibit
-            * Canvas - layout of the Exhibit e.g. "A view container with a facet container to the left"
-    * freemix.exhibit.share
-        * Allows an Exhibit owner to generate a unique URL for their Exhibit.
+        * An Exhibit is a visualization of a DataSet.
+    * viewshare.apps.share
+        * Allows an Exhibit owner to generate a unique obfuscated URL for their Exhibit.
 
 * Viewshare specific
     * viewshare.apps.notices
         * User can control email settings for system events like invitations and announcements.
-    * viewshare.apps.site_theme
-        * Admin can create or select one of multiple CSS files to be used throughout the site.
-    * viewshare.apps.collection_catalog
-        * Admin can group Exhibits that have been published on the system into Collections. Collections can be grouped into Projects. Collections can be tagged with Topics and can be attributed to Organizations.
     * viewshare.utilities
         * This is a general, catch-all app to store utilities used throughout the system. Some of the code includes:
             * context processors to add settings values to a ''RequestContext''.

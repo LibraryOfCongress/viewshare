@@ -1,0 +1,95 @@
+{% extends "site_base.html" %}
+{% load url from future %}
+
+{% load require %}
+{% load i18n %}
+{% load exhibit_tags %}
+{% load viewshare_helpers %}
+{% load compress %}
+
+{% block head_title %}{{ object.title }}{% endblock %}
+
+{% block rtab_id %}id="builder_tab"{% endblock %}
+{% block body_class %}main-attraction{% endblock %}
+
+{% block head_data %}
+    {{ block.super }}
+    <link rel="exhibit-data" href="{{ data_url }}"/>
+    <link rel="freemix/exhibit_profile" href="{% url 'shared_exhibit_profile_json' slug=object.slug %}"/>
+{% endblock %}
+
+{% block extra_scripts %}
+    {{ block.super }}
+    {% include "freemix/js_include/jquery_ui.html" %}
+    {% require_module 'exhibit-display-main' %}
+{% endblock extra_scripts %}
+
+
+{% block head_css %}
+  {{block.super}}
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/exhibit_edit.css"/>
+{% endblock %}
+
+{% block body %}
+
+<div class="exhibit_display">
+  <ul class="exhibit_list_items">
+    <li class="exhibit_list_item result_set_item clearfix shared-key {% if exhibit.is_public %}public{% else %}private{% endif %}">
+
+      <div class="exhibit-title"><i class="fa fa-desktop fa-2x"></i> {{exhibit.title}}</div>
+
+      {% if exhibit.description %}
+      <div class="exhibit-description">
+	{{ exhibit.description }}
+      </div>
+      {% endif %}
+
+      {% url 'shared_exhibit_display' slug=object.slug as display_url %}
+
+      <div class="exhibit-left exhibit-metadata">
+        {% trans "This view was shared by"%} <span class="exhibit-creator">{{exhibit.owner.username}}</span>.
+      </div>
+
+    </li>
+  </ul>
+</div>
+
+<div id="contents" class="freemix-themeable">
+
+  <div id="canvas">
+    <div xmlns:ex="http://simile.mit.edu/2006/11/exhibit#">
+
+      <div class="exhibit-wrap">
+        <div class="row-fluid">
+          <div class="span12">
+            <div id="top-facets" class="facet-container facet-container-horizontal"></div>
+          </div>
+        </div>
+
+        <div class="row-fluid">
+          <div class="span2">
+            <div id="left-facets" class="facet-container"></div>
+          </div>
+
+          <div class="span8">
+            <div id="views" class="view-container view-default"></div>
+          </div>
+
+          <div class="span2">
+            <div id="right-facets" class="facet-container"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="ui-helper-hidden">
+  <div id="templates">
+  </div>
+</div>
+
+{% endblock %}
+
+
+

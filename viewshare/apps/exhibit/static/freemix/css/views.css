@@ -1,0 +1,89 @@
+/* Generic */
+.exhibit-list-table {
+    width: 100%;
+}
+
+.exhibit-list-table td {
+    padding: 0.5em 0 !important;
+    border: 0 none !important;
+}
+
+.exhibit-list-table td.exhibit-label {
+    font-weight: bold;
+    width: 20%;
+    min-width: 20%;
+    padding-right: 0.2em;
+}
+
+.exhibit-ui-protection div.exhibit-title {
+    width: 100%;
+    padding: 0.3em;
+}
+
+
+/* Tile view */
+ol.exhibit-tileView-body > li {
+    margin-bottom: 1.0em;
+}
+
+/* Lightbox image view */
+.dialog-thumb img {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+.dialog-thumb {
+    /* Fix for IE max-width bug */
+    width: 100px;
+    height: 100px;
+}
+
+/* Table view - set as bootstrap classes */
+
+/* Timeline / Map view */
+#clear-color {
+    cursor: pointer;
+    font-weight: normal;
+    text-decoration: underline;
+}
+
+
+.exhibit-thumbnailView-body div.image-thumbnail {
+    float:      left;
+    width:      170px;
+    height:     200px;
+    border:     1px solid #BCB79E;
+    /*background: #EEE9E9;*/
+    padding:    1em;
+    margin:     0.5em;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+.exhibit-thumbnailView-body img.image-thumbnail {
+    max-width: 170px;
+    max-height: 150px;
+}
+.exhibit-thumbnailView-body .name {
+    font-weight: bold;
+}
+
+.facet-content div.exhibit-text-facet input {
+    width: 90%;
+    min-width: 0;
+}
+/* remove spurious banner on top of editing pane */
+
+.exhibit_display {
+margin-top: -24px;
+padding-top: 10px;
+}
+
+.exhibit-facet {
+    margin-bottom: 2em;
+}
+
+.exhibit-cloudFacet {
+    margin-bottom: 2em;
+}

@@ -2,10 +2,10 @@
 
 {% load i18n %}
 {% load exhibit_tags %}
-{% load freemix_helpers %}
+{% load viewshare_helpers %}
 
-{% block head_title %}{{other_user|nicename}}{% blocktrans %}'s Connections' Data Views{% endblocktrans %}{% endblock %}
-{% block head_scripts %}
+{% block head_title %}{{other_user.username}}{% blocktrans %}'s Connections' Data Views{% endblocktrans %}{% endblock %}
+{% block extra_scripts %}
 {{block.super}}
 {% include "freemix/js_include/jquery_ui.html" %}
 {% endblock %}
@@ -17,19 +17,14 @@
 
 {% block body %}
 
-<h1>{% ifequal user.username username %}
-    {% blocktrans %}Your Connections' Data Views{% endblocktrans %}
-    {% else %}
-    {{other_user|nicename}}{% blocktrans %}'s Connections' Data Views{% endblocktrans %}
-    {% endifequal %}
-</h1>
+<h1>{{other_user.username}}{% blocktrans %}'s Connections' Views{% endblocktrans %} ({{ object_list.count }})</h1>
 
 <div class="view_details">
   <p>
     {% ifequal user.username username %}
     {% blocktrans %}Your connections have{% endblocktrans %}
     {% else %}
-    {{ other_user|nicename }}{% blocktrans %}'s connections have{% endblocktrans %}
+    {{ other_user.username }}{% blocktrans %}'s connections have{% endblocktrans %}
     {% endifequal %}
     {{object_list.count}} {% trans "data view" %}{{ object_list.count|pluralize }}.
   </p>

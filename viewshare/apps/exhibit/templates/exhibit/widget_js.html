@@ -1,0 +1,42 @@
+{% load compress %}
+
+{% if editor %}{% compress js %}
+
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/../../static/freemix/js/editor/patch_exhibit.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/../../static/freemix/js/editor/widget.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/../../static/freemix/js/editor/lenses/base.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/../../static/freemix/js/editor/views/base.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/../../static/freemix/js/editor/facets/base.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/../../static/freemix/js/editor/views/container.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/../../static/freemix/js/editor/facets/container.js"></script>
+
+{% endcompress %}{% endif %}
+
+{% if editor %}{% compress js %}
+
+
+    {# Lenses #}
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/../../static/freemix/js/editor/lenses/list.js"></script>
+
+    {# Views #}
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/../../static/freemix/js/editor/views/map.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/../../static/freemix/js/editor/views/list.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/../../static/freemix/js/editor/views/scatterplot.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/../../static/freemix/js/editor/views/table.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/../../static/freemix/js/editor/views/timeline.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/../../static/freemix/js/editor/views/piechart.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/../../static/freemix/js/editor/views/thumbnail.js"></script>
+
+
+    {# Facets #}
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/../../static/freemix/js/editor/facets/search.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/../../static/freemix/js/editor/facets/list.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/../../static/freemix/js/editor/facets/tagcloud.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/../../static/freemix/js/editor/facets/slider.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/../../static/freemix/js/editor/facets/numeric.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/../../static/freemix/js/editor/facets/logo.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/../../static/freemix/js/editor/facets/text.js"></script>
+
+    <script type="text/javascript" src="{{STATIC_URL}}freemix/js/../../static/freemix/js/editor.js"></script>
+
+{% endcompress %}{% endif %}

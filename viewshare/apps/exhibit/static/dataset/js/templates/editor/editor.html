@@ -1,0 +1,37 @@
+{{#if propertyCount }}
+
+<div class="table table-editor-controls">
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="btn-toolbar pull-right">
+	<span id="record-nav"></span>
+	<div class="btn-group">
+	  <a id="add-property" class="btn btn-small btn-info profile-actions" style="margin-left: 5px" href="#"><i class="icon-plus"></i> Add Property</a>
+	</div>
+      </div> <!-- /btn-toolbar -->
+    </div>
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span12">
+    <table id="editor-table" class="table table-editor table-condensed table-hover">
+      <thead>
+	<tr>
+          <th class="table-header-action span1"></th>
+          <th class="table-header-label span3">Label</th>
+          <th class="table-hedaer-types span1">Type</th>
+          <th class="table-header-values span7">Value</th>
+	</tr>
+      </thead>
+      <tbody id="properties">
+      </tbody>
+    </table>
+  </div>
+</div>
+{{ else }}
+<div class="alert alert-block">
+  <h4>Warning!</h2>
+This data source contains no records! <a href="{{ refreshURL }}">Click here</a> to refresh the data source.
+</div>
+{{/if}}

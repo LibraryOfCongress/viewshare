@@ -1,0 +1,29 @@
+<form id="create-property-form" class="form">
+  <fieldset>
+    <legend>
+       <i class="fa fa-info-circle fa-lg"></i> Format your data
+    </legend>
+    <div class="row-fluid">
+      <div class="prose">
+        Before you can design your timeline, we need to convert your data into a standardized date format
+        (e.g. ISO 8601 "2014-03-17"). Please select the date / time related property in your data to be converted.
+      </div>
+    </div>
+    <br />
+    <div class="row-fluid" id="augment_property_list"</div>
+    <br />
+    <div class="row-fluid">
+      <button id="property_create_button" class="btn btn-primary">Create timeline data</button>
+      <button id="property_create_cancel_button" type="button" class="btn" aria-hidden="true">Do not create new data at
+        this time
+      </button>
+    </div>
+    <br />
+    <div class="row-fluid">
+      <div class="alert alert-info">
+        NOTE: If you already have a property that has standardized date values (e.g. ISO 8601 "2014-03-17" year-month-day) and
+        would like to bypass this step, use the editor to set the appropriate property type to 'date/time'.
+      </div>
+    </div>
+  </fieldset>
+</form>

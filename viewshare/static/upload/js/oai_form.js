@@ -31,7 +31,7 @@
     }
 
     function setupUrlRefreshButton() {
-        var button = $("<button id='refresh_button'>Load Sets</button>").click(function(evt) {
+        var button = $(" <button id='refresh_button' class='btn'>Load Sets</button>").click(function(evt) {
             evt.preventDefault();
             refreshSetList();
             return false;

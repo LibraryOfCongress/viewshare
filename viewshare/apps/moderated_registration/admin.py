@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import patterns, url
+from django.conf.urls import patterns, url
 from django.contrib import admin
 from . import models
 
@@ -39,6 +39,15 @@ def reason(obj):
 reason.short_description = _("Reason for joining")
 
 
+'''
+Added by ptrourke to track registration dates of new users.
+'''
+def date_joined(obj):
+    return obj.user.date_joined.strftime('%m/%d/%Y %H:%M')
+
+date_joined.short_description=_("Registered")
+
+
 class ModeratedRegistrationAdmin(RegistrationAdmin):
 
     csv_file_name = "registration_profiles.csv"
@@ -46,6 +55,7 @@ class ModeratedRegistrationAdmin(RegistrationAdmin):
     export_fields = ('user',
                      'is_approved',
                      'activation_key',
+                     date_joined,
                      organization,
                      org_type,
                      org_state,
@@ -91,7 +101,7 @@ class ModeratedRegistrationAdmin(RegistrationAdmin):
         mimetype = "text/csv"
         content_disposition = 'attachment; filename=%s' % self.csv_file_name
 
-        response = HttpResponse(mimetype=mimetype)
+        response = HttpResponse(content_type=mimetype)
         response['Content-Disposition'] = content_disposition
 
         writer = csv.writer(response)
@@ -115,7 +125,7 @@ class ModeratedRegistrationAdmin(RegistrationAdmin):
         registration_profile = get_object_or_404(ds, id=id)
 
         args = getattr(request, request.method)
-        ds = models.ModeratedRegistrationProfile.objects
+        ds = models.ViewShareRegistrationProfile.objects
         if "reject" in args:
             ds.reject_profile(registration_profile)
             return HttpResponseRedirect("../../")
@@ -132,7 +142,7 @@ class ModeratedRegistrationAdmin(RegistrationAdmin):
     def get_urls(self):
         urls = super(ModeratedRegistrationAdmin, self).get_urls()
 
-        return  patterns('',
+        return patterns('',
             url(r'^(?P<id>[\d]+)/moderate/$$',
                 self.admin_site.admin_view(self.approval_view),
                 name="approve_users"),

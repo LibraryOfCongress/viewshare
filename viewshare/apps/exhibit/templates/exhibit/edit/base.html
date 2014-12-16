@@ -1,0 +1,151 @@
+{% extends "site_base.html" %}
+{% load url from future %}
+
+{% load i18n %}
+{% load viewshare_helpers %}
+{% load exhibit_tags %}
+{% load compress %}
+{% load humanize %}
+{% load require %}
+{% block head_title %}{% blocktrans %}Build{% endblocktrans %}{% endblock %}
+
+{% block rtab_id %}id="builder_tab"{% endblock %}
+{% block body_class %}attraction{% endblock %}
+
+{% block subnav %}
+
+{% endblock %}
+
+{% block head_jquery %}{% endblock %}
+
+
+{% block head_data %}
+    <link rel="exhibit-data" href="{% url 'draft_exhibit_all_data' owner=exhibit.owner slug=exhibit.slug %}"/>
+    <link rel="freemix/exhibit_profile" href="{{ exhibit_profile_url }}"/>
+{% endblock %}
+
+{% block head_css %}
+  {{block.super}}
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}freemix/css/exhibit_edit.css"/>
+{% endblock head_css %}
+
+{% block base_scripts %}{% endblock %}
+{% block extra_scripts %}
+    {{ block.super }}
+
+    {% require_module 'exhibit-layout-main' %}
+
+{% endblock extra_scripts %}
+
+{% block body %}
+
+<div class="exhibit_edit">
+
+  <br />
+  <div class="accordion" id="accordion-exhibit">
+
+    <div class="accordion-group">
+
+      <div class="accordion-heading">
+        <div class="accordion-toggle">
+          {% if exhibit.parent %}
+          <div class="exhibit-title-accordion">{{exhibit.parent.title}} </div>
+          {% else %}
+          <div class="exhibit-title-accordion">New View</div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div id="collapseOne" class="accordion-body">
+
+  <div class="accordion-inner">
+
+    <div class="exhibit-view-extended-display">
+
+          {% if exhibit.parent.description %}
+      <div class="row-fluid">
+        <div class="span12">
+          <div class="exhibit-description exhibit-long-description">
+            {{ exhibit.parent.description }}
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      <div class="row-fluid">
+        <div class="span6">
+          <div class="exhibit-metadata">
+            {% trans "Last Modified"%}
+            <span class="exhibit-modified-data">{{exhibit.modified|naturalday}}</span>
+            {% trans "by" %}
+            <span class="exhibit-creator">
+	      <a href="{% url 'profile_detail' exhibit.owner.username %}">{{exhibit.owner.username}}</a>
+	    </span>
+          </div>
+        </div>
+        <div class="span6">
+          <div class="btn-toolbar pull-right">
+            <div class="btn-group" >
+              <a class="btn btn-small" id="edit_button" rel="{{ exhibit_profile_url }}" href="{% url 'exhibit_property_editor' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Edit" %}</a>
+              <button class="btn btn-small" id="builder_button" data-toggle="collapse" data-target="#build">{% trans "Build" %}</button>
+              <button class="btn btn-small" id="preview_button" data-toggle="collapse" data-target="#preview">{% trans "Preview" %}</button>
+            </div>
+            <div class="exhibit-actions btn-group">
+              <button class="btn btn-small" id="save_button" rel="{% url 'exhibit_publish' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Save" %}</button>
+              <div id="publish-exhibit-modal" class="publish-exhibit-dialog modal modal-fit hide fade" tabindex="-1" role="dialog" aria-labelledby="publish-exhibit-modal-label" aria-hidden="true">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h3 id="publish-exhibit-modal-label">{% trans "Publish View" %}</h3>
+                </div>
+                <div id="publish-exhibit-form-template" class="modal-body">
+                </div>
+              </div>
+              <button class="btn btn-small" id="cancel_button" rel="{% url 'exhibit_edit' owner=exhibit.owner.username slug=exhibit.slug %}">{% trans "Cancel" %}</button>
+            </div>
+          </div>
+        </div> <!-- span6 -->
+      </div> <!-- row-fluid -->
+
+    </div> <!-- exhibit-display -->
+
+  </div> <!-- accordion-inner -->
+
+      </div> <!-- accordion-body -->
+
+    </div> <!-- accordion-group -->
+
+  </div> <!-- accordion -->
+
+  <div id="contents">
+    <div id="build" class="collapse">
+      <div id="canvas">
+        <div xmlns:ex="http://simile.mit.edu/2006/11/exhibit#">
+
+          <div class="exhibit-wrap">
+            <div class="row-fluid">
+              <div class="span12">
+                <div id="top-facets" class="facet-container facet-container-horizontal"></div>
+              </div>
+            </div>
+
+            <div class="row-fluid">
+              <div class="span2">
+                <div id="left-facets" class="facet-container"></div>
+              </div>
+
+              <div class="span8">
+                <div id="views" class="view-container view-default"></div>
+              </div>
+
+              <div class="span2">
+                <div id="right-facets" class="facet-container"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="preview" class="collapse"></div>
+  </div>
+</div> <!-- exhibit_edit -->
+{% endblock body %}

@@ -1,0 +1,29 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}
+{% trans "Terms of Service" %}
+{% endblock %}
+
+{% block head_css %}
+{{block.super}}
+
+{% endblock %}
+
+{% block body %}
+
+<h1>ViewShare.org Screencast </h1>
+  <p><strong>Welcome to ViewShare.org  </strong><br/>
+    The screencast below was recorded using the previous version of Viewshare.
+    </p>
+
+<div style="text-align: center;">
+<video width="800" height="468" autoplay>
+  <source src="/media/cms_page_media/13/viewshare%20video2.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+    </div>
+
+{% endblock %}
+

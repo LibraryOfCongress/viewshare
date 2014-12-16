@@ -38,6 +38,7 @@ viewshare_settings = settings_processor(
     'CONTACT_EMAIL',
     'SITE_NAME',
     'SITE_NAME_STATUS',
-    'USERVOICE_SETTINGS'
+    'USERVOICE_SETTINGS',
+    'OMNITURE_TRACKING'
 )
 

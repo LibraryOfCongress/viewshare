@@ -1,9 +1,14 @@
 from django.contrib import admin
-from viewshare.apps.account.models import Account, PasswordReset
+from viewshare.apps.account import models
 
-admin.site.register(Account)
 
 class PasswordResetAdmin(admin.ModelAdmin):
     list_display = ('user', 'temp_key', 'timestamp', 'reset')
 
-admin.site.register(PasswordReset, PasswordResetAdmin)
+admin.site.register(models.PasswordReset, PasswordResetAdmin)
+
+
+class EmailConfirmationAdmin(admin.ModelAdmin):
+    list_display = ('user', 'temp_key', 'timestamp', 'email')
+
+admin.site.register(models.EmailConfirmation, EmailConfirmationAdmin)

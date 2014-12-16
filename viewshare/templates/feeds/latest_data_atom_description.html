@@ -1,6 +1,7 @@
-{% load freemix_helpers %}
+{% load url from future %}
+{% load viewshare_helpers %}
 
 {{ obj.description }}
 <br>
-created by <a href="{% url profile_detail username=obj.owner %}">{{ obj.owner|nicename }}</a>
+created by <a href="{% url 'profile_detail' username=obj.owner %}">{{ obj.owner.username }}</a>
 <br>

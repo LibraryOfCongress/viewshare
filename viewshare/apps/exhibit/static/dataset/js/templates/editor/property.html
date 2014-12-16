@@ -1,0 +1,22 @@
+<td class="action">
+<a id="delete-{{ id }}" class="btn btn-mini btn-warning" href="#deleteEditorRowModal" role="button" data-toggle="modal" rel="deleteRow(this)"><i class="icon-remove"></i></a>
+
+</td>
+<td class="name">
+  <input type="text" class="input-large" value="{{ label }}">
+</td>
+<td class="types">
+  <select class="input-medium">
+    <option value="text"{{#if selectedType.text}} selected{{/if}}>Text</option>
+    <option value="url"{{#if selectedType.url}} selected{{/if}}>URL</option>
+    <option value="image"{{#if selectedType.image}} selected{{/if}}>Image</option>
+    <option value="date"{{#if selectedType.date}} selected{{/if}}>Date/Time</option>
+    <option value="location"{{#if selectedType.location}} selected{{/if}}>Location</option>
+    <option value="number"{{#if selectedType.number}} selected{{/if}}>Number</option>
+    <option value="audio"{{#if selectedType.audio}} selected{{/if}}>Audio URL</option>
+
+    <option value="video"{{#if selectedType.video}} selected{{/if}}>Video URL</option>
+  </select>
+</td>
+<td class="value">
+</td>

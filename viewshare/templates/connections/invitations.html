@@ -1,64 +1,113 @@
 {% extends "messages/base.html" %}
+{% load url from future %}
+
 
 {% load i18n %}
-{% load freemix_helpers %}
+{% load viewshare_helpers %}
 
 {% block head_title %}{% trans "Invitations" %}{% endblock %}
 
 {% block invitations-tab-selected %} ui-tabs-selected ui-state-active{% endblock %}
 
 {% block body %}
-    <h1>{% trans "Invitations" %}</h1>
-    
-    <h2 class="ui-widget-header invitation_header">{% trans "Requests Received" %}</h2>
 
-    <div class="invitation_set">
-    {% if invites_received %}
-        <table class="invitation_list">
-            {% for invitation in invites_received %}
-                {% ifequal invitation.status "2" %}
-                    <tr>
-                        <td colspan="3" class="friendship_request">
-                            <p>From <a href="{% url profile_detail invitation.from_user.username %}">{{ invitation.from_user|nicename }}</a>
-                                ({{ invitation.sent }}):</p>
-                            <p class="invitation_message">{{ invitation.message }}</p>
-                            <form method="post" action="">
-                                {% csrf_token %}
-                                <input type="hidden" name="invitation" value="{{ invitation.id }}"/>
-                                <input type="hidden" name="action" value="accept"/>
-                                <input type="submit" value="{% trans 'Accept' %}" />
-                            </form>
-                        </td>
-                    </tr>
-                {% else %}
-                    <tr>
-                        <td class="user"><a href="{% url profile_detail invitation.from_user.username %}">{{ invitation.from_user|nicename }}</a></td>
-                        <td class="date">{{ invitation.sent }}</td>
-                        <td class="invitation_{{ invitation.status }}">{{ invitation.get_status_display }}</td>
-                    </tr>
-                {% endifequal %}        
-            {% endfor %}
-        </table>
-    {% else %}
-        <p class="center">{% trans "No invitations received." %}</p>
-    {% endif %}
-    </div>    
-    
-    <h2 class="ui-widget-header invitation_header">{% trans "Requests Sent" %}</h2>
-    <div class="invitation_set">
-    {% if invites_sent %}
-        <table class="invitation_list">
-            {% for invitation in invites_sent %}
-                <tr>
-                    <td class="user"><a href="{% url profile_detail invitation.to_user.username %}">{{ invitation.to_user|nicename }}</a></td>
-                    <td class="date">{{ invitation.sent }}</td>
-                    <td class="invitation_{{ invitation.status }}">{{ invitation.get_status_display }}</td>
-                </tr>
-            {% endfor %}
-        </table>
-    {% else %}
-        <p class="center">{% trans "No invitations sent." %}</p>
-    {% endif %}
+<h1>{% trans "Invitations" %}</h1>
+
+<h3 class="invitation-header">{% trans "Requests Received" %}</h3>
+
+<div class="invitation_set">
+
+  {% if invites_received %}
+
+  <div class="invitation_list">
+
+    {% for invitation in invites_received %}
+    {% ifequal invitation.status "2" %}
+
+    <div class="invitation alert alert-info friendship_request">
+      <div class="invitation-item row-fluid">
+	<div class="span8">
+	    {% blocktrans %}From{% endblocktrans %} <a href="{% url 'profile_detail' invitation.from_user.username %}">{{ invitation.from_user.username }}</a> {% blocktrans %}on{% endblocktrans %} {{ invitation.sent }}
+	</div>
+	<div class="span4">
+	  <div class="pull-right">
+            {# <div class="invitation_message">{{ invitation.message }}</div> #}
+
+            <form method="post" action="">
+              {% csrf_token %}
+              <input type="hidden" name="invitation" value="{{ invitation.id }}"/>
+              <input type="hidden" name="action" value="accept"/>
+              <input type="submit" class="btn btn-small" value="{% trans 'Accept' %}" />
+            </form>
+	  </div>
+	</div>
+      </div>
     </div>
-    
+
+    {% else %}
+
+    <div class="invitation alert alert-info">
+      <div class="invitation-item row-fluid">
+	<div class="span12">
+	  {% blocktrans %}You have {% endblocktrans %}<span class="invitation_{{ invitation.status }}">{{ invitation.get_status_display }}</span>{% blocktrans %} the invitation to connect from {% endblocktrans %}<span class="user"><a href="{% url 'profile_detail' invitation.from_user.username %}">{{ invitation.from_user.username }}</a></span>{% blocktrans %} on {% endblocktrans %}<span class="date">{{ invitation.sent }}</span>
+	</div>
+      </div>
+    </div>
+
+    {% endifequal %}
+
+    {% endfor %}
+
+  </div>
+
+  {% else %}
+
+  <div class="invitation">
+    <div class="invitation-item row-fluid">
+      <div class="span12">
+	<div class="alert alert-info message">{% trans "No invitations received." %}</div>
+      </div>
+    </div>
+  </div>
+
+  {% endif %}
+
+</div>
+
+<h3 class="invitation-header">{% trans "Requests Sent" %}</h3>
+
+<div class="invitation_set">
+
+  {% if invites_sent %}
+
+  {% for invitation in invites_sent %}
+
+  <div class="invitation alert alert-info">
+    <div class="invitation-item row-fluid">
+      <div class="span12">
+	{% blocktrans %}An invitation to connect was sent to {% endblocktrans %}
+	<span class="user"><a href="{% url 'profile_detail' invitation.to_user.username %}">{{ invitation.to_user.username }}</a></span>
+	{% blocktrans %} on {% endblocktrans %}
+	<span class="date">{{ invitation.sent }}</span>
+	{# <span class="invitation_{{ invitation.status }}">{{ invitation.get_status_display }}</span> #}
+      </div>
+    </div>
+  </div>
+
+  {% endfor %}
+
+  {% else %}
+
+  <div class="invitation">
+    <div class="invitation-item row-fluid">
+      <div class="span12">
+	<div class="alert alert-info message">{% trans "No invitations have been sent at this time." %}</div>
+      </div>
+    </div>
+  </div>
+
+  {% endif %}
+
+</div>
+
 {% endblock %}

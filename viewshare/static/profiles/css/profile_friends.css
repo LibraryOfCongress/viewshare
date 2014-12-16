@@ -1,0 +1,67 @@
+/* css used to render friends list of users on the profile page */
+
+ul.connection_list {
+    margin-left: 0px;
+    list-style-type: none;
+}
+
+.user_profile_entry {
+    padding: 5px 5px 5px 10px;
+}
+
+.user_data_entry .user-name {
+    font-weight: bold;
+    font-size: 130%;
+    padding-left: 10px;
+}
+
+div.user_data_entry .user_counts .user_datasets,
+div.user_data_entry .user_counts .user_exhibits {
+    display: inline;
+}
+
+div.user_data_entry .user_description {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+div.user_data_entry .user_bottom {
+    display: none;
+}
+
+.profile_left_panel {
+    float: left;
+    width: 56px;
+}
+
+.profile_right_panel {
+    float: right;
+    width: 75%;
+}
+
+/* remove option to include any sort of message in connection request */
+
+#div_id_message {
+    display: none;
+}
+ 
+/* styling connections */
+
+.user_profile_entry .user_data_entry {
+}
+
+.user_friends .user_profile_entry .user_data_entry {
+padding-top: 5px;
+}
+
+.user_friends .user_profile_entry .user_data_entry .user_location {
+ display: none;
+}
+
+.connection-section .user-joined, .connection-section .user-active {
+ display:none;
+}
+
+.connection-section .user_data_entry {
+ margin-bottom: -25px;
+}

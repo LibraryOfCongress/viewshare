@@ -4,6 +4,7 @@ from imp import find_module
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+REQUIRE_DEBUG = DEBUG
 
 ADMINS = (
 # ('Your Name', 'your_email@domain.com'),
@@ -13,9 +14,6 @@ MEDIA_URL = '/media/'
 
 STATIC_ROOT = path.join(path.dirname(__file__), '..', "static")
 STATIC_URL = '/static/'
-
-CMS_MEDIA_ROOT = path.join(STATIC_ROOT, 'cms/')
-CMS_MEDIA_URL = path.join(STATIC_URL, 'cms/')
 
 FILE_UPLOAD_PATH = path.join(path.dirname(__file__), '..', "upload")
 
@@ -32,6 +30,7 @@ DATABASES = {
         'PASSWORD': '', # Not used with sqlite3.
         'HOST': '', # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '', # Set to empty string for default. Not used with sqlite3.
+        'ATOMIC_REQUESTS': True,
     }
 }
 
@@ -75,16 +74,13 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'pagination.middleware.PaginationMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
-    'cms.middleware.page.CurrentPageMiddleware',
-    'cms.middleware.user.CurrentUserMiddleware',
-    'cms.middleware.toolbar.ToolbarMiddleware',
 
     )
 
 ROOT_URLCONF = 'viewshare.urls'
 
 AUTHENTICATION_BACKENDS = (
-    'freemix.permissions.RegistryBackend',
+    'viewshare.apps.exhibit.permissions.RegistryBackend',
     'django.contrib.auth.backends.ModelBackend',
     )
 
@@ -98,12 +94,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     "viewshare.utilities.context_processors.viewshare_settings",
     "viewshare.apps.vendor.notification.context_processors.notification",
-    "viewshare.apps.vendor.announcements.context_processors.site_wide_announcements",
-    "viewshare.apps.account.context_processors.account",
     "viewshare.apps.connections.context_processors.invitations",
-    "cms.context_processors.media",
-    'sekizai.context_processors.sekizai',
-
     )
 
 INSTALLED_APPS = (
@@ -114,48 +105,34 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.humanize',
-    'django.contrib.markup',
+    #'django.contrib.markup',
     'django.contrib.admin',
 
     # external
     'djcelery',
-    'emailconfirmation',
     'django_extensions',
     'pagination',
-    'timezones',
-    'uni_form',
-    'django_sorting',
+    'crispy_forms',
     'compressor',
     'south',
-
-    # CMS stuff
-    'cms',
-    'mptt',
-    'menus',
-    'sekizai',
-    'cms.plugins.text',
-    'cms.plugins.picture',
-    'cms.plugins.link',
-    'cms.plugins.file',
-    'cms.plugins.snippet',
+    'require',
+    'django_gravatar',
 
     # Freemix specific
-    'freemix',
-    'freemix.dataset',
-    'freemix.exhibit',
-    'freemix.dataset.augment',
-    'freemix.exhibit.share',
+    'viewshare.utilities',
+    'viewshare.apps.legacy.dataset',
+    'viewshare.apps.exhibit',
+    'viewshare.apps.augment',
+    'viewshare.apps.share',
 
     # Viewshare specific
     'viewshare.apps.vendor.notification',
     'viewshare.apps.vendor.friends',
-    'viewshare.apps.vendor.announcements',
+    'announcements',
 
     'viewshare.apps.account',
     'viewshare.apps.discover',
     'viewshare.apps.profiles',
-    'viewshare.apps.site_theme',
-    'viewshare.apps.collection_catalog',
     'viewshare.apps.connections',
     'viewshare.apps.upload',
 
@@ -169,9 +146,7 @@ INSTALLED_APPS = (
 
 module_path = lambda m: path.abspath(find_module(m)[1])
 
-STATICFILES_DIRS = (
-    ('', path.join(module_path('viewshare'), 'static')),
-)
+STATICFILES_DIRS = (path.join(module_path('viewshare'), 'static'),)
 
 ABSOLUTE_URL_OVERRIDES = {
     "auth.user": lambda o: "/profiles/profile/%s/" % o.username,
@@ -212,11 +187,36 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
     )
 
-# django-cms
-CMS_TEMPLATES = (
-    ('template.html', 'Front Page Template'),
-    ('about/template.html', 'About Page Template'),
-    )
+STATICFILES_STORAGE = 'require.storage.OptimizedStaticFilesStorage'
+
+REQUIRE_BASE_URL = '.'
+
+REQUIRE_JS = 'freemix/js/lib/require.js'
+
+REQUIRE_STANDALONE_MODULES = {
+        'editor-main': {
+            'out': 'editor-built.js',
+            'build_profile': 'editor-build.js'
+        },
+        'exhibit-layout-main': {
+            'out': 'exhibit-layout-built.js',
+            'build_profile': 'exhibit-layout-build.js'
+        },
+        'exhibit-display-main': {
+            'out': 'exhibit-display-built.js',
+            'build_profile': 'exhibit-display-build.js'
+        },
+        'embed-main': {
+            'out': 'embed-built.js',
+            'build_profile': 'embed-build.js'
+        }
+}
+
+REQUIRE_DEBUG = DEBUG
+
+CRISPY_TEMPLATE_PACK = 'bootstrap'
+
+GRAVATAR_DEFAULT_IMAGE = 'identicon'
 
 CACHES = {
     'default': {
@@ -224,13 +224,13 @@ CACHES = {
     }
 }
 
-import logging
+# Validate the request's Host header and protect
+# against host-poisoning attacks
+ALLOWED_HOSTS = ('viewshare.org', )
 
-logging.basicConfig(
-    level=logging.DEBUG,
-    format='%(asctime)s %(levelname)s %(message)s',
-)
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+CELERY_ALWAYS_EAGER = True
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -258,6 +258,10 @@ LOGGING = {
         'viewshare': {
             'handlers': ['console'],
             'level': 'DEBUG'
+        },
+        'django': {
+            'handlers': ['console'],
+            'level': 'ERROR'
         }
     }
 }

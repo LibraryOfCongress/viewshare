@@ -1,22 +1,13 @@
 {% extends "site_base.html" %}
 
+
 {% load i18n %}
 {% load compress %}
 
-{% load i18n %}
 
 {% block head_css %}
     {{ block.super }}
-    {% compress css %}
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}upload/css/upload.css"/>
-    {% endcompress %}
-{% endblock %}
-
-{%  block head_scripts %}
-    {{ block.super }}
-    {% include "freemix/js_include/jquery_ui.html" %}
-
-    <script type="text/javascript" src="{{ STATIC_URL }}upload/js/upload.js"></script>
 {% endblock %}
 
 {% block rtab_id %}id="data_tab"{% endblock %}
@@ -29,7 +20,10 @@
 
 
 <div id="load">
-  <h1 id="upload-label">{% trans "Load Your Data" %}</h1>
+
+  <h1 id="upload-label">{% trans "Create a View" %}</h1>
+
+  <div class="upload-caption">Upload any of the following data types to create a view</div>
 
     <ul class="upload-options">
 
@@ -37,8 +31,8 @@
 	<div class="title">{% trans "Simple Spreadsheets" %}</div>
         <div class="desc">{% trans "Simple rectangular spreadsheets in CSV or Microsoft Excel format." %}</div>
         <ul class="sources">
-          <li class="web"><a href="{% url url_transform %}">From the web</a></li>
-          <li class="filesystem"><a href="{% url file_transform %}">From a file on your computer</a></li>
+          <li class="web"><a href="{% url 'url_transform' %}">From the web</a></li>
+          <li class="filesystem"><a href="{% url 'file_transform' %}">From a file on your computer</a></li>
         </ul>
       </li>
 
@@ -46,8 +40,8 @@
         <div class="title">{% trans "XML MODS file" %}</div>
 	<div class="desc">{% trans "An XML file conforming to the Metadata Object Description Schema (MODS) schema." %}</div>
         <ul class="sources">
-          <li class="web"><a href="{% url mods_url_transform %}">From the web</a></li>
-          <li class="filesystem"><a href="{% url mods_file_transform %}">From a file on your computer</a></li>
+          <li class="web"><a href="{% url 'mods_url_transform' %}">From the web</a></li>
+          <li class="filesystem"><a href="{% url 'mods_file_transform' %}">From a file on your computer</a></li>
         </ul>
       </li>
 
@@ -55,33 +49,28 @@
         <div class="title">{% trans "JSON data" %}</div>
         <div class="desc">{% trans "Data collections represented within a JSON list." %}</div>
         <ul class="sources">
-          <li class="web"><a href="{% url json_url_transform %}">From the web</a></li>
+          <li class="web"><a href="{% url 'json_url_transform' %}">From the web</a></li>
         </ul>
       </li>
 
       <li class="option" id="upload-oai">
-        <div class="title">{% trans "OAI " %}<a href="{% url oai_transform %}">{% trans "Open Archives Initiative" %}</a> {% trans "end point (Beta)" %}</div>
+        <div class="title">{% trans "OAI " %}<a href="{% url 'oai_transform' %}">{% trans "Open Archives Initiative" %}</a> {% trans "end point (Beta)" %}</div>
         <div class="desc">{% trans "The Open Archives Initiative develops and promotes interoperability standards that aim to facilitate the efficient dissemination of content." %}</div>
       </li>
 
       <li class="option" id="upload-contentdm">
-        <div class="title">{% trans "A " %}<a href="{% url cdm_transform %}">{% trans "ContentDM database" %}</a> {% trans "(Beta)" %}</div>
+        <div class="title">{% trans "A " %}<a href="{% url 'cdm_transform' %}">{% trans "ContentDM database" %}</a> {% trans "(Beta)" %}</div>
         <div class="desc">{% trans "Digital Collection Management Software from OCLC." %}</div>
       </li>
 
 
     </ul>
 
-    <div id="systemMsg">
-      <ul id="system_messages" class="messages">
-	<li class="infoMsg">See <a class="supported-file-types" href="#supported-file-types">Supported Data Source Types</a> if you don't know or don't see the format you are trying to load. 
-	</li>
-      </ul>
+    <div class="alert alert-info">
+        See <a class="supported-file-types" data-toggle="modal" href="#supported-file-types">Supported Data Source Types</a> if you don't know or don't see the format you are trying to load.
     </div>
 
-    <div id="supported-file-types" class="ui-helper-hidden" title="{% trans "Supported Data Source Types" %}">
       {% include "upload/supported.html" %}
-    </div>
 
 </div>
 

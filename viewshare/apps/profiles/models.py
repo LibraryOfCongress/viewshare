@@ -20,8 +20,7 @@ class Profile(models.Model):
 
     website = models.URLField(_('website'),
                               null=True,
-                              blank=True,
-                              verify_exists=False)
+                              blank=True)
 
     organization = models.CharField(_("Organization"),
                                     max_length=100,
