@@ -23,7 +23,6 @@ This software uses code from the following projects:
  * django-pagination (http://django-pagination.googlecode.com/)
  * django-piston (http://bitbucket.org/jespern/django-piston/wiki/Home)
  * django-registration (https://bitbucket.org/ubernostrum/django-registration)
- * django-reversion (http://code.google.com/p/django-reversion/)
  * django-robots (http://bitbucket.org/jezdez/django-robots/)
  * django-sorting (http://github.com/directeur/django-sorting/tree/master)
  * django-staticfiles (http://bitbucket.org/jezdez/django-staticfiles/)

@@ -1,7 +1,10 @@
-gunicorn==0.13.4
-greenlet==0.3.1
-eventlet==0.9.16
+gunicorn==18.0
+greenlet==0.4.2
+gevent==1.0
 mysql-python==1.2.3
 python-memcached==1.48
 
+pycrypto==2.6
+raven
+librabbitmq==1.0.1
 -r requirements.txt
