@@ -80,6 +80,7 @@
   </div> <!-- /.container-fluid -->
   {% block base_scripts %}
   {% compress js %}
+  <script type="text/javascript" src="{{STATIC_PREFIX}}viewshare/js/polyfill.js"></script>
   <script type="text/javascript" src="{{STATIC_PREFIX}}freemix/js/lib/jquery.csrf.js"></script>
   <script type="text/javascript" src="{{STATIC_PREFIX}}freemix/js/lib/jquery.cookie.js"></script>
   <script type="text/javascript" src="{{STATIC_PREFIX}}freemix/js/lib/bootstrap.js"></script>
