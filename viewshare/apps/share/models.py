@@ -55,6 +55,7 @@ class Base57Field(UUIDField):
         return uuid_value
 
     def pre_save(self, model_instance, add):
+        #I want to skip UUIDField's pre_save and go straight to CharField's
         value = super(UUIDField, self).pre_save(model_instance, add)
         if self.auto and add and value is None:
             value = force_unicode(self.create_uuid())
