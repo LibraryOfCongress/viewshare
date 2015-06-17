@@ -57,6 +57,8 @@ define(["jquery"], function($) {
         $(document).bind('keyup', close);
         var closeHtml = $('<p class="embed-lightbox-control"><a href="#">close</a></p>').bind('click', close);
 
+        // Slight changes to handle images that are larger than the window/document view.
+
         var document_height;
         var document_width;
         var image_height;
@@ -67,7 +69,6 @@ define(["jquery"], function($) {
         document_width =  $(document).width();
         image_height = img.height;
         image_width= img.width;
-
 
         image_ratio= 1;
 
@@ -85,7 +86,6 @@ define(["jquery"], function($) {
             image_height = Math.floor(image_width * image_ratio);
         }
 
-
         backdropHtml.appendTo('body').bind('click', close);
         dialogHtml.append(imgHtml);
         dialogHtml.prepend(closeHtml);
@@ -98,7 +98,7 @@ define(["jquery"], function($) {
 
         var h = dialogHtml.outerHeight();
         if (h < image_height) { //img.height
-            h = image_height; //img.height
+            h = image_height + 8; //img.height
         }
 
         var top_coord = Math.floor($(document).scrollTop() + ($(window).height() - h) / 2);
@@ -108,7 +108,7 @@ define(["jquery"], function($) {
         dialogHtml.css('left', "50%");
         var w = dialogHtml.outerWidth();
         if (w < image_width) { //img.width
-            w = image_width; //img.width
+            w = image_width + 8; //img.width
         }
 
         var margin_left_coord = Math.floor(w / 2 * -1);
