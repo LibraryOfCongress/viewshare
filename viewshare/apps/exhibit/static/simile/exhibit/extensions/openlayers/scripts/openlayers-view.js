@@ -919,7 +919,7 @@ define([
 	        self._map.zoomTo(settings.zoom);
         }
 
-        if (typeof bounds !== "undefined" && bounds !== null && settings.zoom === null && settings.center === null) {
+        if (typeof bounds !== "undefined" && bounds !== null && settings.center === null) {
             self._map.setCenter(bounds.getCenterLonLat());
         }
 

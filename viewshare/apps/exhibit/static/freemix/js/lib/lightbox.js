@@ -56,6 +56,36 @@ define(["jquery"], function($) {
         };
         $(document).bind('keyup', close);
         var closeHtml = $('<p class="embed-lightbox-control"><a href="#">close</a></p>').bind('click', close);
+
+        // Slight changes to handle images that are larger than the window/document view.
+
+        var document_height;
+        var document_width;
+        var image_height;
+        var image_width;
+        var image_ratio;
+
+        document_height= $(document).height();
+        document_width =  $(document).width();
+        image_height = img.height;
+        image_width= img.width;
+
+        image_ratio= 1;
+
+        if (image_width > 0) {
+            image_ratio = image_height / image_width
+        }
+
+        if (image_height > document_height){
+            image_height = document_height - 20;
+            image_width = Math.floor(image_height / image_ratio);
+
+        } else if (image_width > document_width)
+        {
+            image_width = document_width - 20;
+            image_height = Math.floor(image_width * image_ratio);
+        }
+
         backdropHtml.appendTo('body').bind('click', close);
         dialogHtml.append(imgHtml);
         dialogHtml.prepend(closeHtml);
@@ -67,17 +97,22 @@ define(["jquery"], function($) {
             .css('zIndex', zIndex+1);
 
         var h = dialogHtml.outerHeight();
-        if (h < img.height) {
-            h += img.height;
+        if (h < image_height) { //img.height
+            h = image_height + 8; //img.height
         }
-        dialogHtml.css('top', Math.floor($(document).scrollTop() + ($(window).height() - h) / 2));
+
+        var top_coord = Math.floor($(document).scrollTop() + ($(window).height() - h) / 2);
+
+        dialogHtml.css('top', top_coord);
 
         dialogHtml.css('left', "50%");
         var w = dialogHtml.outerWidth();
-        if (w < img.width) {
-            w += img.width;
+        if (w < image_width) { //img.width
+            w = image_width + 8; //img.width
         }
-        dialogHtml.css('margin-left', Math.floor(w / 2 * -1));
+
+        var margin_left_coord = Math.floor(w / 2 * -1);
+        dialogHtml.css('margin-left', margin_left_coord);
     };
 
     $(document).ready(function() {
