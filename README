@@ -6,11 +6,15 @@ dynamic views through which users can experience cultural heritage digital
 collections. The intended users of Viewshare are individuals managing and
 creating access to digital collections of cultural heritage materials.
 
-viewshare.org
+Development on Viewshare ceased in 2018.
+
+The Viewshare Web Site
 =============
-<viewshare.org> runs an instance of Viewshare. The site is administrated by the
-National Digital Information Infrastructure and Preservation Program at the
-Library of Congress.
+The National Digital Information Infrastructure and Preservation Program at the
+Library of Congress formerly hosted an instance of viewshare on a public website.
+NDIIPP is no longer an active program at the Library, and the Viewshare service was
+retired in March of 2018. For more information about Viewshare, see 
+https://labs.loc.gov/work/experiments/viewshare/
 
 Installation
 ============
