@@ -1,5 +1,5 @@
 South>=0.8.4,<2.0
-Django==1.6.2
+Django==2.2.28
 django-localflavor-us==1.1
 # pillow==2.1.0 # See unix.stackexchange.com 105265
 -e git+https://github.com/python-imaging/Pillow.git#egg=Pillow
