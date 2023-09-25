@@ -1,6 +1,6 @@
 gunicorn==18.0
 greenlet==0.4.2
-gevent==1.0
+gevent==23.9.1
 mysql-python==1.2.3
 python-memcached==1.48
 
